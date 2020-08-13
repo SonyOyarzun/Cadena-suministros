@@ -6,6 +6,10 @@ import { asyncComponent } from 'react-async-component';
 import {Route} from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom'
 
+//importacion de react
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 //importacion a html
 import Head from './import/Head'
 import Foot from './import/Foot'
@@ -23,7 +27,7 @@ class App extends Component {
 
               <div className="container">
 
-              <Route path="/Producto" component={Producto} />
+             
 
 
               </div>
