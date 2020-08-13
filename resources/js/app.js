@@ -15,7 +15,7 @@ import Head from './import/Head'
 import Foot from './import/Foot'
 
 import NavBar from './components/NavBar'
-import Producto from './components/Producto'
+import Usuario from './components/Usuario'
 
 class App extends Component {
     render() {
@@ -27,7 +27,7 @@ class App extends Component {
 
               <div className="container">
 
-             
+             <Usuario/>
 
 
               </div>
