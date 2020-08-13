@@ -1,15 +1,10 @@
 import React, { Component, Fragment } from 'react';
-//import { render } from 'react-dom';
+import { render } from 'react-dom';
 import ReactDOM from 'react-dom';
 import {NavLink, withRouter}  from 'react-router-dom';
 
 
 class NavBar extends React.Component {
-
-  getNavLinkClass = (path) => {
-          return this.props.location.pathname === path ? 'active' : '';
-      }
-
 
     render() {
         return (
