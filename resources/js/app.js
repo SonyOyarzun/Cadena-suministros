@@ -1,16 +1,37 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes React and other helpers. It's a great starting point while
- * building robust, powerful web applications using React + Laravel.
- */
 
-require('./bootstrap');
+import React, { Component, Fragment } from 'react';
+import { render } from 'react-dom';
 
-/**
- * Next, we will create a fresh React component instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import { asyncComponent } from 'react-async-component';
+import {Route} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom'
 
-require('./components/Example');
-require('./components/User');
+//importacion a html
+import Head from './import/Head'
+import Foot from './import/Foot'
+
+import NavBar from './components/NavBar'
+import Producto from './components/Producto'
+
+class App extends Component {
+    render() {
+        return (
+            <BrowserRouter>
+            <div>
+              <Head/>
+              <NavBar/>
+
+              <div className="container">
+
+              <Route path="/Producto" component={Producto} />
+
+
+              </div>
+             <Foot/>
+            </div>
+          </BrowserRouter>
+        )
+    }
+}
+
+render(<App/>, document.getElementById('app'));
