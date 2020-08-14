@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
 import ReactDOM from 'react-dom';
+
+//Dependencias necesarias para single page
 import {NavLink,Link, withRouter}  from 'react-router-dom';
 import { Redirect } from 'react-router';
 

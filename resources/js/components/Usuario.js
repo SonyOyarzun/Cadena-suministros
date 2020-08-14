@@ -1,23 +1,33 @@
-import React, { Component, useState, useRef} from 'react';
+import React, { Component, useState, useRef,useEffect} from 'react';
 import ReactDOM from 'react-dom'
 
 import { Button, Card,Table,Row, Col} from 'react-bootstrap';
+import axios from 'axios'
 
-export default function Usuario() {
-        
-  const [show, setShow] = useState(false);
-  const [target, setTarget] = useState(null);
-  const ref = useRef(null);
+const baseUrl = "http://localhost:8000";
 
+class Usuario extends Component {
+    
+    constructor(props){
+      super(props);
+      this.state = {
+        producto:[]
+      }
+    }
+    
+    componentDidMount(){
 
-  const handleClick = (event) => {
-    setShow(!show);
-    setTarget(event.target);
-  };
-  
+      axios.get(baseUrl+'Cadena-suministros/HomeController/index').then(response=>{
+        this.setState({producto:response.data})
+      }).catch(error=>{
+        alert("Error "+error)
+      })
+   }
 
-  return (
-<div>
+render() {
+        return (
+         
+         <div>
 <Row>
 <Col>
 
@@ -33,18 +43,13 @@ export default function Usuario() {
   <thead>
     <tr>
       <th>#</th>
-      <th>First Name</th>
+      <th>name</th>
       <th>Last Name</th>
       <th>Username</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
+     {this.renderList()}
   </tbody>
 </Table>
     
@@ -54,7 +59,33 @@ export default function Usuario() {
 </Col>
 </Row>
 </div>
-  );
+                
+         
+        );
+    }
+
+renderList(){
+
+      return this.state.producto.map((data)=>{
+
+          return (
+          <tr>
+            <td>{data.titulo}</td>
+            <td>{data.descripcion}</td>
+            <td>{data.precio}</td>
+          </tr>
+        )
+
+      })
+
+    }
+  
 }
 
+export default Usuario;
 
+
+
+if (document.getElementById('root')) {
+    ReactDOM.render(<Usuario />, document.getElementById('root'));
+}

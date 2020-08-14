@@ -36,7 +36,7 @@ class App extends Component {
               <Head/>
               <NavBar/>
 
-              <Container fluid >
+              <Container fluid style={styles.padding}>
 
               <Route path="/Usuario" component={Usuario} />
               <Route path="/Departamento" component={Departamento} />

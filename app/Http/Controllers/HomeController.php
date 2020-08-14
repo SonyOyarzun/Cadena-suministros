@@ -23,10 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data = [
+                    "john", "doe"
+                ];
+                return view("home")->with("data", json_encode($data));
     }
+
     
-    public function show () {
-        return view('react');
-    }
+
 }
