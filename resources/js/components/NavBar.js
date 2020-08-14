@@ -33,18 +33,18 @@ class NavBar extends Component {
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link href="#home">Inicio</Nav.Link>
-      <Nav.Link href="/Usuario">Traza</Nav.Link>
+      <Nav.Link onClick={()=>this.handleLink("home")}>Inicio</Nav.Link>
+      <Nav.Link onClick={()=>this.handleLink("Traza")}>Traza</Nav.Link>
       <NavDropdown title="Administración" id="basic-nav-dropdown">
         <NavDropdown.Item onClick={()=>this.handleLink("Usuario")}>Usuarios</NavDropdown.Item>
-        <NavDropdown.Item onClick={()=>this.handleLink("Producto")}>Productos</NavDropdown.Item>
       </NavDropdown>
-      <NavDropdown title="Distribución" id="basic-nav-dropdown"> 
-        <NavDropdown.Item href="/Producto">Productos</NavDropdown.Item>
-        <NavDropdown.Item href="/Envio">Envio</NavDropdown.Item>
-        <NavDropdown.Item href="/Recepcion">Recepcion</NavDropdown.Item>
+      <NavDropdown title="Distribución" id="basic-nav-dropdown">
+        <NavDropdown.Item onClick={()=>this.handleLink("Pedido")}>Pedidos</NavDropdown.Item>
+        <NavDropdown.Item onClick={()=>this.handleLink("Producto")}>Productos</NavDropdown.Item>
+        <NavDropdown.Item onClick={()=>this.handleLink("Envio")}>Envio</NavDropdown.Item>
+        <NavDropdown.Item onClick={()=>this.handleLink("Recepcion")}>Recepcion</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="/notificacion">Notificaciones</NavDropdown.Item>
+        <NavDropdown.Item onClick={()=>this.handleLink("Notificaciones")}>Notificaciones</NavDropdown.Item>
       </NavDropdown>
     </Nav>
     <Form inline>
