@@ -51226,7 +51226,9 @@ var NavBar = /*#__PURE__*/function (_Component) {
         onClick: function onClick() {
           return _this2.handleLink("Notificaciones");
         }
-      }, "Notificaciones"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Form"], {
+      }, "Notificaciones")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Nav"].Link, {
+        href: "logout"
+      }, "Salir")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Form"], {
         inline: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["FormControl"], {
         type: "text",
@@ -51311,14 +51313,18 @@ var Usuario = /*#__PURE__*/function (_Component) {
   _createClass(Usuario, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get(baseUrl + 'Cadena-suministros/HomeController/index').then(function (response) {
-        _this2.setState({
-          producto: response.data
-        });
-      })["catch"](function (error) {
-        alert("Error " + error);
+      axios__WEBPACK_IMPORTED_MODULE_3___default()({
+        method: 'get',
+        url: 'home',
+        headers: {
+          'Authorization': 'Bearer ' + this.user.api_token
+        }
+      }).then(function (response) {
+        //handle success
+        console.log(response);
+      })["catch"](function (response) {
+        //handle error
+        console.log(response);
       });
     }
   }, {

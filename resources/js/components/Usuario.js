@@ -17,11 +17,20 @@ class Usuario extends Component {
     
     componentDidMount(){
 
-      axios.get(baseUrl+'Cadena-suministros/HomeController/index').then(response=>{
-        this.setState({producto:response.data})
-      }).catch(error=>{
-        alert("Error "+error)
-      })
+axios({
+    method: 'get',
+    url: 'home',
+    headers: { 'Authorization' : 'Bearer '+ this.user.api_token},
+    })
+    .then(function (response) {
+        //handle success
+        console.log(response);
+    })
+    .catch(function (response) {
+        //handle error
+        console.log(response);
+    });
+     
    }
 
 render() {

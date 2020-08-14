@@ -1,3 +1,9 @@
+@extends('layouts.app')
+
+@section('content')
+@guest
+
+@else
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -13,4 +19,6 @@
         <script src="{{mix('js/app.js')}}" ></script>
     </body>
 </html>
+@endguest
+@endsection
 

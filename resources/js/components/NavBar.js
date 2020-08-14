@@ -48,7 +48,9 @@ class NavBar extends Component {
         <NavDropdown.Divider />
         <NavDropdown.Item onClick={()=>this.handleLink("Notificaciones")}>Notificaciones</NavDropdown.Item>
       </NavDropdown>
+      <Nav.Link href='logout'>Salir</Nav.Link>
     </Nav>
+    
     <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
       <Button variant="outline-success">Search</Button>
