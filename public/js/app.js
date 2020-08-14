@@ -51315,9 +51315,10 @@ var Usuario = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       axios__WEBPACK_IMPORTED_MODULE_3___default()({
         method: 'get',
-        url: 'home',
+        url: 'https://datos.gob.cl/api/action/datastore_search?resource_id=a60f93af-6a8a-45b6-85ff-267f5dd37ad6&limit=5',
         headers: {
-          'Authorization': 'Bearer ' + this.user.api_token
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
         }
       }).then(function (response) {
         //handle success

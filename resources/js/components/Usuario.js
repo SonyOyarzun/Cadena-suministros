@@ -19,8 +19,11 @@ class Usuario extends Component {
 
 axios({
     method: 'get',
-    url: 'home',
-    headers: { 'Authorization' : 'Bearer '+ this.user.api_token},
+    url: 'https://datos.gob.cl/api/action/datastore_search?resource_id=a60f93af-6a8a-45b6-85ff-267f5dd37ad6&limit=5',
+    headers: { 
+     'Access-Control-Allow-Origin': '*',
+     'Content-Type': 'application/json',
+            },
     })
     .then(function (response) {
         //handle success
