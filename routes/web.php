@@ -17,6 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Route::get('/{path?}', [
+//    'uses' => 'HomeController@show',
+//    'as' => 'home',
+//    'where' => ['path' => '.*']
+//]);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

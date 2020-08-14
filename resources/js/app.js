@@ -7,6 +7,7 @@ import {Route} from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom'
 
 //importacion de react
+import { Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -16,6 +17,16 @@ import Foot from './import/Foot'
 
 import NavBar from './components/NavBar'
 import Usuario from './components/Usuario'
+import Departamento from './components/Departamento'
+
+  const styles = {
+    padding: {
+        paddingTop: "10vh",
+        paddingBottom: "10vh",
+        paddingRight: "10vw",
+        paddingLeft: "10vw"
+    }
+}
 
 class App extends Component {
     render() {
@@ -25,12 +36,13 @@ class App extends Component {
               <Head/>
               <NavBar/>
 
-              <div className="container">
+              <Container fluid >
 
-             <Usuario/>
+              <Route path="/Usuario" component={Usuario} />
+              <Route path="/Departamento" component={Departamento} />
 
-
-              </div>
+              </Container>
+              
              <Foot/>
             </div>
           </BrowserRouter>

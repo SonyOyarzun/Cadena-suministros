@@ -1,7 +1,7 @@
 import React, { Component, useState, useRef} from 'react';
 import ReactDOM from 'react-dom'
 
-import { Button, Card, Container,Table,Row, Col} from 'react-bootstrap';
+import { Button, Card,Table,Row, Col} from 'react-bootstrap';
 
 export default function Usuario() {
         
@@ -15,17 +15,9 @@ export default function Usuario() {
     setTarget(event.target);
   };
   
-  const styles = {
-    padding: {
-        paddingTop: "10vh",
-        paddingBottom: "10vh",
-        paddingRight: "10vw",
-        paddingLeft: "10vw"
-    }
-}
 
   return (
-<Container fluid style={styles.padding}>
+<div>
 <Row>
 <Col>
 
@@ -61,7 +53,7 @@ export default function Usuario() {
 
 </Col>
 </Row>
-</Container>
+</div>
   );
 }
 
