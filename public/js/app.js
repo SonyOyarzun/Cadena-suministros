@@ -86515,7 +86515,7 @@ var Usuario = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       axios__WEBPACK_IMPORTED_MODULE_3___default()({
         method: 'get',
-        url: 'home',
+        url: '/usuario',
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json'
@@ -86525,7 +86525,7 @@ var Usuario = /*#__PURE__*/function (_Component) {
         console.log(response);
       })["catch"](function (response) {
         //handle error
-        console.log(response);
+        console.log(response.data);
       });
     }
   }, {

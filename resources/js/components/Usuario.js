@@ -18,7 +18,7 @@ class Usuario extends Component {
 
 axios({
     method: 'get',
-    url: 'home',
+    url: '/usuario',
     headers: { 
      'Access-Control-Allow-Origin': '*',
      'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ axios({
     })
     .catch(function (response) {
         //handle error
-        console.log(response);
+        console.log(response.data);
     });
      
    }

@@ -26,7 +26,7 @@ class HomeController extends Controller
         $data = [
                     "john", "doe"
                 ];
-                return view("home")->with("data", json_encode($data));
+        return view("home")->with("data", json_encode($data));
     }
 
     

@@ -17,9 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('home');
+});
+
+//Route::get('usuario', ['as' => 'usuario', 'uses' => 'UsuarioController@index']);
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/usuario', 'UsuarioController@index');  
+
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
