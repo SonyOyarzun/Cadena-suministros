@@ -64,9 +64,18 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            
+            #back{
+                background: url('img/cadena.gif');
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 100vh;
+                width: 100%;
+            }
         </style>
     </head>
-    <body>
+    <body id="back">
         <div id="root"></div>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>

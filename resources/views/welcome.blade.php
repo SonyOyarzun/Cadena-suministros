@@ -82,9 +82,7 @@
                 height: 100vh;
                 width: 100%;
             }
-            #head{
-               background-color: wheat;
-            }
+            
         </style>
     </head>
     <body id="back">
