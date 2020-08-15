@@ -2,29 +2,45 @@ import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom'
 
 
-class Foot extends Component {
-
-    render() {
-        return (
-
-<div>
-
-<div className="navbar navbar-default navbar-fixed-bottom" >
-    <div className="container">
-      <p className="navbar-text pull-left"> 2019 - Evaluacion de Desempeño -
-           <span> Owl Evaluation </span>
-      </p>
-   </div>
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossOrigin="anonymous"></script>
-
-</div>
-
-        )
-    }
+var style = {
+    backgroundColor: "#F8F8F8",
+    borderTop: "1px solid #E7E7E7",
+    textAlign: "center",
+    padding: "20px",
+    position: "fixed",
+    left: "0",
+    bottom: "0",
+    height: "60px",
+    width: "100%",
 }
 
-export default Foot;
+var phantom = {
+  display: 'block',
+  padding: '20px',
+  height: '60px',
+  width: '100%',
+}
+
+function children(){
+
+        return(
+          <div>
+ huhuhu
+          </div>
+        )
+
+
+    }
+
+function Footer({ children }) {
+    return (
+        <div>
+            <div style={phantom} />
+            <div style={style}>
+                { children }
+            </div>
+        </div>
+    )
+}
+
+export default Footer

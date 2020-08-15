@@ -61,6 +61,15 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            
+            #logo{              
+            position: absolute;                
+            display:block;
+            }
+            
+             #back{
+            margin-top: 300px;                
+            }
         </style>
     </head>
     <body>
@@ -78,22 +87,12 @@
                     @endauth
                 </div>
             @endif
-
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+         
+                     <img id='back' src="{{URL::asset('img/cadenas.jpg')}}" alt="profile Pic" height="100%" width="100%">
+                     <img id='logo' src="{{URL::asset('img/logo.png')}}">
+              
+  
             </div>
         </div>
     </body>

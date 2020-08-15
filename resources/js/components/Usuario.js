@@ -16,7 +16,7 @@ class Usuario extends Component {
     componentDidMount(){
 
       axios.get('usuario').then(response=>{
-        console.log(response.data[0])  
+    //    console.log(response.data[0])  
         this.setState({usuarios:response.data})
       }).catch(error=>{
         alert("Error "+error)
@@ -26,12 +26,14 @@ class Usuario extends Component {
 
     render() {
         return (
-          <div className="container">
-            <br/>
-            <h3>Laravel y React APIRest</h3>
-            <hr/>
-
-            <table className="table table-bordered order-table ">
+                
+<Card>
+  <Card.Body>
+    <Card.Title>Lista de Usuarios</Card.Title>
+    <Card.Text>
+      Seleccione un usuario para editar sus caracteristicas.
+    </Card.Text>
+    <Table>
               <thead>
                 <tr>
                   <th>id</th>
@@ -42,9 +44,9 @@ class Usuario extends Component {
               <tbody id="bodytable">
                   {this.renderList()}
               </tbody>
-            </table>
-
-          </div>
+    </Table>
+  </Card.Body>
+</Card>
         );
     }
 
