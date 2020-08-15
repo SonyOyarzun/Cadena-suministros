@@ -4,6 +4,10 @@ import ReactDOM from 'react-dom'
 import { Button, Card,Table,Row, Col} from 'react-bootstrap';
 import axios from 'axios'
 
+//importar modals
+import EditarUsuario from './modals/EditarUsuario'
+
+
 class User extends Component {
 
     constructor(props){
@@ -16,7 +20,7 @@ class User extends Component {
     componentDidMount(){
 
       axios.get('user').then(response=>{
-    //    console.log(response.data[0])  
+        console.log(response.data[0])  
         this.setState({usuarios:response.data})
       }).catch(error=>{
         alert("Error "+error)
@@ -39,6 +43,8 @@ class User extends Component {
                   <th>id</th>
                   <th>Nombre</th>
                   <th>Mail</th>
+                  <th>Rol</th>
+                  <th>Accion</th>
                 </tr>
               </thead>
               <tbody id="bodytable">
@@ -59,6 +65,8 @@ class User extends Component {
             <td>{data.id}</td>
             <td>{data.name}</td>
             <td>{data.email}</td>
+            <td>{data.role}</td>
+            <td><EditarUsuario/></td>        
           </tr>
         )
 
