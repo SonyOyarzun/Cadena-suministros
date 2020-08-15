@@ -5,7 +5,10 @@ import { Button, Card,Table,Row, Col} from 'react-bootstrap';
 import axios from 'axios'
 
 //importar modals
-import EditarUsuario from './modals/EditarUsuario'
+import EditUser from './modals/EditUser'
+import NewUser from './modals/NewUser'
+import PassUser from './modals/PassUser'
+import DeleteUser from './modals/DeleteUser'
 
 
 class User extends Component {
@@ -66,7 +69,11 @@ class User extends Component {
             <td>{data.name}</td>
             <td>{data.email}</td>
             <td>{data.role}</td>
-            <td><EditarUsuario id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/></td>        
+            <td>
+            <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>
+            <PassUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>
+            <DeleteUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>
+            </td>        
           </tr>
         )
 

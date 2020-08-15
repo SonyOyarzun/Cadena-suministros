@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 
 
-function EditarUsuario(props) {
+function DeleteUser(props) {
 
   const [show, setShow] = useState(false);
 
@@ -34,9 +34,9 @@ return (
   </Form.Group>
   <Form.Group controlId="exampleForm.ControlSelect1">
     <Form.Label>Role</Form.Label>
-    <Form.Control as="select">
-      <option>Productor</option>
-      <option>Distribuidor</option> 
+    <Form.Control as="select" defaultValue={props.role}>
+      <option value="P">Productor</option>
+      <option value="D">Distribuidor</option> 
     </Form.Control>
   </Form.Group>
   <Form.Group controlId="exampleForm.ControlTextarea1">
@@ -61,4 +61,4 @@ return (
 
 }    
 
-export default EditarUsuario;
+export default DeleteUser;
