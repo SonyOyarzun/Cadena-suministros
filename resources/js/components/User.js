@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { Button, Card,Table,Row, Col} from 'react-bootstrap';
 import axios from 'axios'
 
-class Usuario extends Component {
+class User extends Component {
 
     constructor(props){
       super(props);
@@ -15,7 +15,7 @@ class Usuario extends Component {
 
     componentDidMount(){
 
-      axios.get('usuario').then(response=>{
+      axios.get('user').then(response=>{
     //    console.log(response.data[0])  
         this.setState({usuarios:response.data})
       }).catch(error=>{
@@ -71,4 +71,4 @@ if (document.getElementById('usuario')) {
     ReactDOM.render(<Producto />, document.getElementById('usuario'));
 }
 
-export default Usuario;
+export default User;

@@ -16,7 +16,7 @@ import Head from './import/Head'
 import Foot from './import/Foot'
 
 import NavBar from './components/NavBar'
-import Usuario from './components/Usuario'
+import User from './components/User'
 import Departamento from './components/Departamento'
 
   const styles = {

@@ -86042,7 +86042,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _import_Head__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./import/Head */ "./resources/js/import/Head.js");
 /* harmony import */ var _import_Foot__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./import/Foot */ "./resources/js/import/Foot.js");
 /* harmony import */ var _components_NavBar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/NavBar */ "./resources/js/components/NavBar.js");
-/* harmony import */ var _components_Usuario__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Usuario */ "./resources/js/components/Usuario.js");
+/* harmony import */ var _components_User__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/User */ "./resources/js/components/User.js");
 /* harmony import */ var _components_Departamento__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Departamento */ "./resources/js/components/Departamento.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -86108,7 +86108,7 @@ var App = /*#__PURE__*/function (_Component) {
         style: styles.padding
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/Usuario",
-        component: _components_Usuario__WEBPACK_IMPORTED_MODULE_9__["default"]
+        component: Usuario
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/Departamento",
         component: _components_Departamento__WEBPACK_IMPORTED_MODULE_10__["default"]
@@ -86402,7 +86402,7 @@ var NavBar = /*#__PURE__*/function (_Component) {
         id: "basic-nav-dropdown"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["NavDropdown"].Item, {
         onClick: function onClick() {
-          return _this2.handleLink("Usuario");
+          return _this2.handleLink("User");
         }
       }, "Usuarios")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["NavDropdown"], {
         title: "Distribuci\xF3n",
@@ -86450,10 +86450,10 @@ NavBar = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Nav
 
 /***/ }),
 
-/***/ "./resources/js/components/Usuario.js":
-/*!********************************************!*\
-  !*** ./resources/js/components/Usuario.js ***!
-  \********************************************/
+/***/ "./resources/js/components/User.js":
+/*!*****************************************!*\
+  !*** ./resources/js/components/User.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -86493,15 +86493,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var Usuario = /*#__PURE__*/function (_Component) {
-  _inherits(Usuario, _Component);
+var User = /*#__PURE__*/function (_Component) {
+  _inherits(User, _Component);
 
-  var _super = _createSuper(Usuario);
+  var _super = _createSuper(User);
 
-  function Usuario(props) {
+  function User(props) {
     var _this;
 
-    _classCallCheck(this, Usuario);
+    _classCallCheck(this, User);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -86510,12 +86510,12 @@ var Usuario = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  _createClass(Usuario, [{
+  _createClass(User, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('usuario').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('user').then(function (response) {
         //    console.log(response.data[0])  
         _this2.setState({
           usuarios: response.data
@@ -86542,14 +86542,14 @@ var Usuario = /*#__PURE__*/function (_Component) {
     }
   }]);
 
-  return Usuario;
+  return User;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 if (document.getElementById('usuario')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Producto, null), document.getElementById('usuario'));
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Usuario);
+/* harmony default export */ __webpack_exports__["default"] = (User);
 
 /***/ }),
 
