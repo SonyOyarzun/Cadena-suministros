@@ -1,24 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-@guest
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
 
-@else
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel React application</title>
-        <link href="{{mix('css/app.css')}}" rel="stylesheet" type="text/css">
-    </head>
-    <body>
-    <h2 style="text-align: center"> Laravel and React application </h2>
-        <div id="root"></div>
-        <script src="{{mix('js/app.js')}}" ></script>
-    </body>
-</html>
-@endguest
+                <div class="panel-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                            <div id="root"></div>
+                            <script src="{{mix('js/app.js')}}" ></script>
+                        </div>
+                    @endif
+
+                    You are logged in!
+                    
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+
+@extends('layouts.app')
+
+
 

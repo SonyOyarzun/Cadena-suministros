@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import { Button, Card,Table,Row, Col} from 'react-bootstrap';
 import axios from 'axios'
 
-const baseUrl = "http://localhost:8000";
 
 class Usuario extends Component {
     
@@ -19,7 +18,7 @@ class Usuario extends Component {
 
 axios({
     method: 'get',
-    url: 'https://datos.gob.cl/api/action/datastore_search?resource_id=a60f93af-6a8a-45b6-85ff-267f5dd37ad6&limit=5',
+    url: 'home',
     headers: { 
      'Access-Control-Allow-Origin': '*',
      'Content-Type': 'application/json',
