@@ -3,7 +3,6 @@ import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
 
 import { asyncComponent } from 'react-async-component';
-import {Route} from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom'
 
 //importacion de react
@@ -16,8 +15,7 @@ import Head from './import/Head'
 import Foot from './import/Foot'
 
 import NavBar from './components/NavBar'
-import User from './components/User'
-import Departamento from './components/Departamento'
+import Routes from './components/Routes'
 
   const styles = {
     padding: {
@@ -39,8 +37,7 @@ class App extends Component {
 
               <Container fluid style={styles.padding}>
 
-              <Route path="/Usuario" component={Usuario} />
-              <Route path="/Departamento" component={Departamento} />
+              <Routes/>
 
               </Container>
               

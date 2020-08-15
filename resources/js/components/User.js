@@ -67,8 +67,8 @@ class User extends Component {
     }
 }
 
-if (document.getElementById('usuario')) {
-    ReactDOM.render(<Producto />, document.getElementById('usuario'));
+if (document.getElementById('user')) {
+    ReactDOM.render(<User/>, document.getElementById('user'));
 }
 
 export default User;
