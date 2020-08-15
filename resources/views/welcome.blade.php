@@ -61,38 +61,45 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-            
+
             #logo{              
-            position: absolute;                
-            display:block;
+                position: absolute;
+                top:  70%;
+                left: 35%;
             }
-            
-             #back{
-            margin-top: 300px;                
+
+            #back{
+                background: url('img/cadena.gif');
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 100vh;
+                width: 100%;
+            }
+            #head{
+               background-color: wheat;
             }
         </style>
     </head>
-    <body>
+    <body id="back">
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                    <a style="color:white" href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a style="color:white" href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                        <a style="color:white" href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
                 </div>
             @endif
             <div class="content">
-         
-                     <img id='back' src="{{URL::asset('img/cadenas.jpg')}}" alt="profile Pic" height="100%" width="100%">
+
                      <img id='logo' src="{{URL::asset('img/logo.png')}}">
               
-  
             </div>
         </div>
     </body>
