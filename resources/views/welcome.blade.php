@@ -64,8 +64,14 @@
 
             #logo{              
                 position: absolute;
-                top:  70%;
-                left: 35%;
+                margin-left:auto;
+                margin-right:auto;
+                left:0;
+                right:0;
+                margin-top: auto;
+                margin-bottom:auto;
+                top: 0;
+                bottom: 0;
             }
 
             #back{
@@ -96,11 +102,11 @@
                     @endauth
                 </div>
             @endif
-            <div class="content">
+<!--            <div class="content">
 
                      <img id='logo' src="{{URL::asset('img/logo.png')}}">
               
-            </div>
+            </div>-->
         </div>
     </body>
 </html>
