@@ -66,7 +66,7 @@ class User extends Component {
             <td>{data.name}</td>
             <td>{data.email}</td>
             <td>{data.role}</td>
-            <td><EditarUsuario/></td>        
+            <td><EditarUsuario id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/></td>        
           </tr>
         )
 

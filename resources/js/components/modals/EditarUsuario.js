@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 
 
-function EditarUsuario() {
+function EditarUsuario(props) {
 
   const [show, setShow] = useState(false);
 
@@ -27,32 +27,21 @@ return (
         
 <Form>
   <Form.Group controlId="exampleForm.ControlInput1">
-    <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="name@example.com" />
+    <Form.Label>Nombre</Form.Label>
+    <Form.Control type="email" placeholder="name@example.com" value={props.name}/>
+    <Form.Label>Mail</Form.Label>
+    <Form.Control type="email" placeholder="name@example.com" value={props.email}/>
   </Form.Group>
   <Form.Group controlId="exampleForm.ControlSelect1">
-    <Form.Label>Example select</Form.Label>
+    <Form.Label>Role</Form.Label>
     <Form.Control as="select">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </Form.Control>
-  </Form.Group>
-  <Form.Group controlId="exampleForm.ControlSelect2">
-    <Form.Label>Example multiple select</Form.Label>
-    <Form.Control as="select" multiple>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+      <option>Productor</option>
+      <option>Distribuidor</option> 
     </Form.Control>
   </Form.Group>
   <Form.Group controlId="exampleForm.ControlTextarea1">
-    <Form.Label>Example textarea</Form.Label>
-    <Form.Control as="textarea" rows="3" />
+    <Form.Label>Ruta</Form.Label>
+    <Form.Control as="textarea" rows="3" value={props.path}/>
   </Form.Group>
 </Form>
     
