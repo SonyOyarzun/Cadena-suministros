@@ -10,7 +10,8 @@ import NewUser from './modals/NewUser'
 import PassUser from './modals/PassUser'
 import DeleteUser from './modals/DeleteUser'
 
-import TableUser from './TableUser'
+//import TableUser from './TableUser'
+import TableX from './TableX'
 
 
 class User extends Component {
@@ -48,7 +49,7 @@ console.log(usuarios)
      <Card.Text>
       Seleccione un usuario para editar sus caracteristicas.
      </Card.Text>
-     <TableUser arreglo={usuarios}/>
+     <TableX/>
   </Card.Body>
 </Card>
         );

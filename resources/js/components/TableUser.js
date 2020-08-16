@@ -6,7 +6,8 @@ export default function TableUser(props) {
   console.log('despues arreglo')
   console.log(props.arreglo)
 
-  const [datatable, setDatatable] = React.useState({
+ // const [datatable, setDatatable] = React.useState({
+   const data={
     columns: [
       {
         label: 'ID',
@@ -47,7 +48,8 @@ export default function TableUser(props) {
       ),
       
     ],
-  });
+  }
+  //});
 
 //console.log(datatable)
 
@@ -58,10 +60,12 @@ export default function TableUser(props) {
         label: 'ID',
         field: 'badge',
       },
-      ...datatable.columns,
+    //  ...datatable.columns,
+    ...data.columns,
     ],
     rows: [
-      ...datatable.rows.map((row, order) => ({
+     // ...datatable.rows.map((row, order) => ({
+      data.rows.map((row, order) => ({
         ...row,
         badge: (
           <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
