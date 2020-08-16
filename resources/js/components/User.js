@@ -16,7 +16,7 @@ class User extends Component {
                <Card.Text>
                 Seleccione un usuario para editar sus caracteristicas.
                </Card.Text>
-               <User/>
+               <TableUser/>
             </Card.Body>
           </Card>
           </div>
