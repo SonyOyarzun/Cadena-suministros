@@ -52,7 +52,7 @@ return (
         
 <Form>
 <Form.Group controlId="editUserForm.id">
-    <Form.Label>ID</Form.Label>
+    <Form.Label srOnly >ID</Form.Label>
     <Form.Control type="hidden" placeholder="ID" value={props.id}/>
   </Form.Group>
   <Form.Group controlId="editUserForm.name">
