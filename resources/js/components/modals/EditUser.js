@@ -14,6 +14,16 @@ function EditUser(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //const [process, setProcess] = useState(0);
+
+ process = () => {
+  
+  
+  alert(document.getElementById('editUserForm.email').value)
+
+}
+
+
 return (
     <div>
       <Button variant="primary" onClick={handleShow}>
@@ -27,20 +37,22 @@ return (
         <Modal.Body>
         
 <Form>
-  <Form.Group controlId="exampleForm.ControlInput1">
-    <Form.Label>Nombre</Form.Label>
-    <Form.Control type="email" placeholder="name@example.com" value={props.name}/>
+  <Form.Group controlId="editUserForm.email">
     <Form.Label>Mail</Form.Label>
     <Form.Control type="email" placeholder="name@example.com" value={props.email}/>
   </Form.Group>
-  <Form.Group controlId="exampleForm.ControlSelect1">
+  <Form.Group controlId="editUserForm.name">
+    <Form.Label>Nombre</Form.Label>
+    <Form.Control type="text" placeholder="nombre completo" value={props.name}/>
+  </Form.Group>
+  <Form.Group controlId="eeditUserForm.role">
     <Form.Label>Role</Form.Label>
     <Form.Control as="select" defaultValue={props.role}>
       <option value="P">Productor</option>
       <option value="D">Distribuidor</option> 
     </Form.Control>
   </Form.Group>
-  <Form.Group controlId="exampleForm.ControlTextarea1">
+  <Form.Group controlId="editUserForm.path">
     <Form.Label>Ruta</Form.Label>
     <Form.Control as="textarea" rows="3" value={props.path}/>
   </Form.Group>
@@ -51,7 +63,7 @@ return (
           <Button variant="secondary" onClick={handleClose}>
             Cerrar
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={process}>
             Guardar Datos
           </Button>
         </Modal.Footer>
