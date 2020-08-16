@@ -18,7 +18,7 @@ function EditUser(props) {
  const process = () => {
     
   axios({
-    method: 'post',
+    method: 'put',
     url: '/user/edit/{'+ document.getElementById('editUserForm.id').value+'}',
     data: {
       name:  document.getElementById('editUserForm.email').value,
