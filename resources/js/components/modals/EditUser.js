@@ -21,15 +21,14 @@ function EditUser(props) {
     method: 'put',
     url: '/user/edit/{'+ document.getElementById('editUserForm.id').value+'}',
     data: {
-      name:  document.getElementById('editUserForm.email').value,
+      name:  document.getElementById('editUserForm.name').value,
       email: document.getElementById('editUserForm.email').value,
-      role:  document.getElementById('editUserForm.email').value,
-      path:  document.getElementById('editUserForm.email').value
+      role:  document.getElementById('editUserForm.role').value,
+      path:  document.getElementById('editUserForm.path').value
     }
   })
   .then((response) => {
     console.log(response);
-    console.log(data);
   }, (error) => {
     console.log(error);
   });
