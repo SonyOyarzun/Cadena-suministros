@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
+use Illuminate\Database\Eloquent\Model;
 
 class UserController extends Controller
 {
@@ -40,11 +41,11 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         
-        $user = User::find($id);
+        $user = new User;
         $user->name  = $request->name;
-        $user->email = $request->emal;
+        $user->email = $request->email;
         $user->role  = $request->role;
-      //  $user->save();
+        $user->save();
 
         return print $user;
 
