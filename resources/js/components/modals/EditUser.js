@@ -53,17 +53,17 @@ return (
 <Form>
 <Form.Group controlId="editUserForm.id">
     <Form.Label>ID</Form.Label>
-    <Form.Control type="number" placeholder="ID" value={props.id}/>
-  </Form.Group>
-  <Form.Group controlId="editUserForm.email">
-    <Form.Label>Mail</Form.Label>
-    <Form.Control type="email" placeholder="name@example.com" value={props.email}/>
+    <Form.Control type="hidden" placeholder="ID" value={props.id}/>
   </Form.Group>
   <Form.Group controlId="editUserForm.name">
     <Form.Label>Nombre</Form.Label>
     <Form.Control type="text" placeholder="nombre completo" value={props.name}/>
   </Form.Group>
-  <Form.Group controlId="eeditUserForm.role">
+  <Form.Group controlId="editUserForm.email">
+    <Form.Label>Mail</Form.Label>
+    <Form.Control type="email" placeholder="name@example.com" value={props.email}/>
+  </Form.Group>
+  <Form.Group controlId="editUserForm.role">
     <Form.Label>Role</Form.Label>
     <Form.Control as="select" defaultValue={props.role}>
       <option value="P">Productor</option>

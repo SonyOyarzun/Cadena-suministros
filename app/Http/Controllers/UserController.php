@@ -41,10 +41,10 @@ class UserController extends Controller
     {
         
         $user = User::find($id);
-      //  $user->name = $request->name;
-     //   $user->email = $request->emal;
-     //   $user->role = $request->role;
-    //    $user->save();
+        $user->name  = $request->name;
+        $user->email = $request->emal;
+        $user->role  = $request->role;
+      //  $user->save();
 
         return print $user;
 
