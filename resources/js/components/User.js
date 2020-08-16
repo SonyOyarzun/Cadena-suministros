@@ -1,7 +1,7 @@
 import React, { Component, useState, useRef,useEffect} from 'react';
 import ReactDOM from 'react-dom'
 
-import { Button, Card,Table,Row, Col} from 'react-bootstrap';
+import { Button, Card,Table,Row, Col, ButtonGroup} from 'react-bootstrap';
 import axios from 'axios'
 
 //importar modals
@@ -9,6 +9,8 @@ import EditUser from './modals/EditUser'
 import NewUser from './modals/NewUser'
 import PassUser from './modals/PassUser'
 import DeleteUser from './modals/DeleteUser'
+
+import TableUser from './TableUser'
 
 
 class User extends Component {
@@ -23,7 +25,7 @@ class User extends Component {
     componentDidMount(){
 
       axios.get('user').then(response=>{
-        console.log(response.data[0])  
+  //      console.log(response.data[0])  
         this.setState({usuarios:response.data})
       }).catch(error=>{
         alert("Error "+error)
@@ -32,28 +34,21 @@ class User extends Component {
     }
 
     render() {
+//se recibe la variable del state y se envia al componente        
+const { usuarios } = this.state;
+
+console.log('antes')
+console.log(usuarios)
+
         return (
-                
+         
 <Card>
   <Card.Body>
     <Card.Title>Lista de Usuarios</Card.Title>
-    <Card.Text>
+     <Card.Text>
       Seleccione un usuario para editar sus caracteristicas.
-    </Card.Text>
-    <Table>
-              <thead>
-                <tr>
-                  <th>id</th>
-                  <th>Nombre</th>
-                  <th>Mail</th>
-                  <th>Rol</th>
-                  <th>Accion</th>
-                </tr>
-              </thead>
-              <tbody id="bodytable">
-                  {this.renderList()}
-              </tbody>
-    </Table>
+     </Card.Text>
+     <TableUser arreglo={usuarios}/>
   </Card.Body>
 </Card>
         );
@@ -70,9 +65,11 @@ class User extends Component {
             <td>{data.email}</td>
             <td>{data.role}</td>
             <td>
+            <ButtonGroup color="primary" aria-label="outlined primary button group">
             <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>
             <PassUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>
             <DeleteUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>
+            </ButtonGroup>
             </td>        
           </tr>
         )
