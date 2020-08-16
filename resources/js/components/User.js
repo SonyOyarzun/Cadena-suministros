@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import {Card} from 'react-bootstrap';
 
-import TableUser from './TableUser'
+import TableUser from './tables/TableUser'
 
 class User extends Component {
 

@@ -6,11 +6,11 @@ import axios from 'axios'
 import { MDBDataTableV5, MDBBadge } from 'mdbreact';
 
 //importar modals
-import EditUser from './modals/EditUser'
-import NewUser from './modals/NewUser'
-import PassUser from './modals/PassUser'
-import DeleteUser from './modals/DeleteUser'
-import ProductUser from './modals/ProductUser'
+import EditUser from '../modals/EditUser'
+import NewUser from '../modals/NewUser'
+import PassUser from '../modals/PassUser'
+import DeleteUser from '../modals/DeleteUser'
+import ProductUser from '../modals/ProductUser'
 
 
 class TableUser extends Component {
