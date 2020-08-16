@@ -14,14 +14,28 @@ function EditUser(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  //const [process, setProcess] = useState(0);
 
- process = () => {
-  
-  
-  alert(document.getElementById('editUserForm.email').value)
+ const process = () => {
+    
+  axios({
+    method: 'post',
+    url: '/user',
+    data: {
+      name:  document.getElementById('editUserForm.email').value,
+      email: document.getElementById('editUserForm.email').value,
+      role:  document.getElementById('editUserForm.email').value,
+      path:  document.getElementById('editUserForm.email').value
+    }
+  })
+  .then((response) => {
+    console.log(response);
+  }, (error) => {
+    console.log(error);
+  });
+
 
 }
+
 
 
 return (
