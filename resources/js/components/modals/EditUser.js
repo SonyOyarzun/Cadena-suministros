@@ -9,6 +9,8 @@ import { MDBIcon } from "mdbreact";
 
 function EditUser(props) {
 
+  console.log(props.state)
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -30,6 +32,7 @@ function EditUser(props) {
   })
   .then((response) => {
     console.log(response);
+    props.state=response;
   }, (error) => {
     console.log(error);
   });
