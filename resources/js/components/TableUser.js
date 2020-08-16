@@ -3,8 +3,8 @@ import { MDBDataTableV5, MDBBadge } from 'mdbreact';
 
 export default function TableUser(props) {
 
-  console.log('despues arreglo')
-  console.log(props.arreglo)
+  //console.log('despues arreglo')
+  //console.log(props.arreglo)
 
  // const [datatable, setDatatable] = React.useState({
    const data={

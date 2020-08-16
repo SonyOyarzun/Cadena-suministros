@@ -4,80 +4,102 @@ import ReactDOM from 'react-dom'
 import { Button, Card,Table,Row, Col, ButtonGroup} from 'react-bootstrap';
 import axios from 'axios'
 
+//import datable
+import { MDBDataTable, MDBNavLink } from 'mdbreact';
+
 //importar modals
 import EditUser from './modals/EditUser'
 import NewUser from './modals/NewUser'
 import PassUser from './modals/PassUser'
 import DeleteUser from './modals/DeleteUser'
 
-//import TableUser from './TableUser'
-import TableX from './TableX'
-
 
 class User extends Component {
 
-    constructor(props){
-      super(props);
-      this.state = {
-        usuarios:[]
-      }
+   
+  constructor(props){
+    super(props);
+    this.state = {
+        users:[]
     }
+  }
 
-    componentDidMount(){
+  componentDidMount(){
 
-      axios.get('user').then(response=>{
-  //      console.log(response.data[0])  
-        this.setState({usuarios:response.data})
-      }).catch(error=>{
-        alert("Error "+error)
-      })
+    axios.get('user').then(response=>{
+      this.setState({users:response.data})
+    }).catch(error=>{
+      alert("Error "+error)
+    })
 
-    }
+  }
 
-    render() {
-//se recibe la variable del state y se envia al componente        
-const { usuarios } = this.state;
 
-console.log('antes')
-console.log(usuarios)
+render() {
 
-        return (
-         
-<Card>
-  <Card.Body>
-    <Card.Title>Lista de Usuarios</Card.Title>
-     <Card.Text>
-      Seleccione un usuario para editar sus caracteristicas.
-     </Card.Text>
-     <TableX/>
-  </Card.Body>
-</Card>
-        );
-    }
+    const data = {
+        columns: [
+            {
+              label: 'ID',
+              field: 'id',
+              width: 150,
+              attributes: {
+                'aria-controls': 'DataTable',
+                'aria-label': 'ID',
+              },
+            },
+             {
+              label: 'Nombre',
+              field: 'name',
+              width: 150,
+            },
+            {
+              label: 'Email',
+              field: 'email',
+              width: 200,
+            },
+            {
+              label: 'Rol',
+              field: 'role',
+              sort: 'asc',
+              width: 100,
+            }
+          ],
+        rows: [
+            ...this.state.users.map((data, i) => (
+                {
+                    id: data.id,
+                    name: data.name,
+                    email: data.email,
+                    role: data.role
 
-    renderList(){
+                }
+            ))
+        ]
+    };
 
-      return this.state.usuarios.map(data =>{
+    console.log(data,'data2')
+    return (
+        <div>
+            <section className="tanning">
+                <div className="container">
+                    <h1>Customer Details</h1>
+                    <div className="introductory_details customer-table">
+                        <MDBDataTable
+                            className='cust-table'
+                            responsive
+                            bordered
+                            hover
+                            btn
+                            data={data}
+                        />
+                    </div>
+                </div>
+            </section>
+        </div>
+    )
+}
 
-        return(
-          <tr key={data.id}>
-            <td>{data.id}</td>
-            <td>{data.name}</td>
-            <td>{data.email}</td>
-            <td>{data.role}</td>
-            <td>
-            <ButtonGroup color="primary" aria-label="outlined primary button group">
-            <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>
-            <PassUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>
-            <DeleteUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>
-            </ButtonGroup>
-            </td>        
-          </tr>
-        )
-
-      })
-
-    }
 }
 
 if (document.getElementById('user')) {

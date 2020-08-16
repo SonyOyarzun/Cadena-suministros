@@ -1,84 +1,70 @@
 import React, { Component } from 'react'
 import { MDBDataTable, MDBNavLink } from 'mdbreact';
 
-export default class Testing extends Component {
-    constructor(props) {
+export default class TableX extends Component {
+    
+    constructor(props){
         super(props);
-
         this.state = {
-            show: false,
-            users: []
-        };
-    }
+            users:[]
+        }
+      }
+  
+      componentDidMount(){
+  
+        axios.get('user').then(response=>{
+          this.setState({users:response.data})
+        }).catch(error=>{
+          alert("Error "+error)
+        })
+  
+      }
 
-    componentDidMount() {
-        fetch("https://jsonplaceholder.typicode.com/users")
-            .then(res => res.json())
-            .then(data => {
-                console.log(data, "data")
-                let dataFromApi = data.map(user => {
-                    return {
-                        maindId: user.id,
-                        username: user.name,
-                        email: user.email
-                    }
-                })
-                this.setState({
-                    users: dataFromApi
-                });
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
 
     render() {
 
         const data = {
             columns: [
                 {
-                    label: 'NAME',
-                    field: 'name11',
-                    sort: 'asc',
-                    width: 150
+                  label: 'ID',
+                  field: 'id',
+                  width: 150,
+                  attributes: {
+                    'aria-controls': 'DataTable',
+                    'aria-label': 'ID',
+                  },
+                },
+                 {
+                  label: 'Nombre',
+                  field: 'name',
+                  width: 150,
                 },
                 {
-                    label: 'USERNAME',
-                    field: 'username',
-                    sort: 'asc',
-                    width: 270
+                  label: 'Email',
+                  field: 'email',
+                  width: 200,
                 },
                 {
-                    label: 'EMAIL',
-                    field: 'email',
-                    sort: 'asc',
-                    width: 200
-                },
-                {
-                    label: 'PHONE',
-                    field: 'phone',
-                    sort: 'asc',
-                    width: 100
-                },
-                {
-                    label: 'City',
-                    field: 'city',
-                    sort: 'asc',
-                    width: 150
+                  label: 'Rol',
+                  field: 'role',
+                  sort: 'asc',
+                  width: 100,
                 }
-            ],
+              ],
             rows: [
-                this.state.users.map((data, i) => (
+                ...this.state.users.map((data, i) => (
                     {
-                        name: <MDBNavLink key={i} className="link-new" to="/manageCustomers/customerDetails">{data.name}</MDBNavLink>,
-                        username: 'tiger_22',
-                        email: 'tiger@yhaoo.com',
-                        phone: '1234567',
-                        city: 'Delhi'
+                        id: data.id,
+                        name: data.name,
+                        email: data.email,
+                        role: data.role
+
                     }
                 ))
             ]
         };
+
+        console.log(data,'data2')
         return (
             <div>
                 <section className="tanning">
