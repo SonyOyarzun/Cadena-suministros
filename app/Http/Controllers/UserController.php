@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
+
 use App\User;
-use Illuminate\Database\Eloquent\Model;
 
 class UserController extends Controller
 {
@@ -38,16 +38,22 @@ class UserController extends Controller
 
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         
-        $user = new User;
-        $user->name  = $request->name;
-        $user->email = $request->email;
-        $user->role  = $request->role;
-        $user->save();
-
-        return print $user;
+          $user = User::findOrFail($request->id);
+          if ($user == null) {
+            // User not found, show 404 or whatever you want to do
+            // example:
+            return 'Usuario no encontrado';
+          } else {
+            $user->name  = $request->name;
+            $user->email = $request->email;
+            $user->role  = $request->role;
+            $user->save();
+            return 'Usuario Actualizado';
+           }
+  
 
     }
 

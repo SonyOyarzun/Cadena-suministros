@@ -27,7 +27,7 @@ Route::get('/home', function () {
 Auth::routes();
 
 Route::get('/user', 'UserController@index');  
-Route::put('/user/edit/{id}', 'UserController@update');  
+Route::put('/user/edit/', 'UserController@update');  
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 

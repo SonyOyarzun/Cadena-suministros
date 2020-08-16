@@ -19,8 +19,9 @@ function EditUser(props) {
     
   axios({
     method: 'put',
-    url: '/user/edit/{'+ document.getElementById('editUserForm.id').value+'}',
+    url: '/user/edit/',
     data: {
+      id:    document.getElementById('editUserForm.id').value,
       name:  document.getElementById('editUserForm.name').value,
       email: document.getElementById('editUserForm.email').value,
       role:  document.getElementById('editUserForm.role').value,
