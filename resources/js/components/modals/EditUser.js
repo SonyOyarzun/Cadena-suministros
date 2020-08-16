@@ -19,7 +19,7 @@ function EditUser(props) {
     
   axios({
     method: 'post',
-    url: '/user',
+    url: '/user/edit/{'+ document.getElementById('editUserForm.id').value+'}',
     data: {
       name:  document.getElementById('editUserForm.email').value,
       email: document.getElementById('editUserForm.email').value,
@@ -29,6 +29,7 @@ function EditUser(props) {
   })
   .then((response) => {
     console.log(response);
+    console.log(data);
   }, (error) => {
     console.log(error);
   });
@@ -51,6 +52,10 @@ return (
         <Modal.Body>
         
 <Form>
+<Form.Group controlId="editUserForm.id">
+    <Form.Label>ID</Form.Label>
+    <Form.Control type="number" placeholder="ID" value={props.id}/>
+  </Form.Group>
   <Form.Group controlId="editUserForm.email">
     <Form.Label>Mail</Form.Label>
     <Form.Control type="email" placeholder="name@example.com" value={props.email}/>

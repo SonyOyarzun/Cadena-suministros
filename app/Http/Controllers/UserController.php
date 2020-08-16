@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-
+use App\User;
 
 class UserController extends Controller
 {
@@ -37,19 +37,13 @@ class UserController extends Controller
 
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $product    = $request->id;
-        $quantity   = $request->quantity;
-        $send       = $request->send;
-
-                DB::table('user')->insert([
-                    'id' => $send,
-                    'name' => $product,
-                    'mail' => $quantity,
-                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]);
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->emal;
+        $user->role = $request->role;
+        $user->save();
 
     }
 
