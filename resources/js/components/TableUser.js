@@ -1,80 +1,104 @@
-import React from 'react';
-import { MDBDataTableV5, MDBBadge } from 'mdbreact';
+import React, { Component} from 'react';
 
-export default function TableUser(props) {
+import axios from 'axios'
 
-  //console.log('despues arreglo')
-  //console.log(props.arreglo)
+//import datable
+import { MDBDataTable, MDBNavLink } from 'mdbreact';
 
- // const [datatable, setDatatable] = React.useState({
-   const data={
-    columns: [
-      {
-        label: 'ID',
-        field: 'id',
-        width: 150,
-        attributes: {
-          'aria-controls': 'DataTable',
-          'aria-label': 'ID',
-        },
-      },
-       {
-        label: 'Nombre',
-        field: 'name',
-        width: 150,
-      },
-      {
-        label: 'Email',
-        field: 'email',
-        width: 200,
-      },
-      {
-        label: 'Rol',
-        field: 'role',
-        sort: 'asc',
-        width: 100,
-      }
-    ],
-    rows: [
-        
-      ...props.arreglo.map((row, order) => 
-      (
-        {
-        name: 'row.name',
-        email:'row.email',
-        role: 'row.role',
-        }
-      )
-      ),
-      
-    ],
+//importar modals
+import EditUser from './modals/EditUser'
+import NewUser from './modals/NewUser'
+import PassUser from './modals/PassUser'
+import DeleteUser from './modals/DeleteUser'
+
+
+class TableUser extends Component {
+
+   
+  constructor(props){
+    super(props);
+    this.state = {
+        users:[]
+    }
   }
-  //});
 
-//console.log(datatable)
+  componentDidMount(){
+
+    axios.get('user').then(response=>{
+      this.setState({users:response.data})
+    }).catch(error=>{
+      alert("Error "+error)
+    })
+
+  }
 
 
-  const badgesData = {
-    columns: [
-      {
-        label: 'ID',
-        field: 'badge',
-      },
-    //  ...datatable.columns,
-    ...data.columns,
-    ],
-    rows: [
-     // ...datatable.rows.map((row, order) => ({
-      data.rows.map((row, order) => ({
-        ...row,
-        badge: (
-          <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
-            ID: {order + 1}
-          </MDBBadge>
-        ),
-      })),
-    ],
-  };
+render() {
 
-  return <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={badgesData} sortRows={['badge']} />;
+    const data = {
+        columns: [
+            {
+              label: 'ID',
+              field: 'id',
+              width: 150,
+              attributes: {
+                'aria-controls': 'DataTable',
+                'aria-label': 'ID',
+              },
+            },
+             {
+              label: 'Nombre',
+              field: 'name',
+              width: 150,
+            },
+            {
+              label: 'Email',
+              field: 'email',
+              width: 200,
+            },
+            {
+              label: 'Rol',
+              field: 'role',
+              sort: 'asc',
+              width: 100,
+            }
+          ],
+        rows: [
+            ...this.state.users.map((data, i) => (
+                {
+                    id: data.id,
+                    name: data.name,
+                    email: data.email,
+                    role: data.role
+
+                }
+            ))
+        ]
+    };
+
+    console.log(data,'data2')
+    return (
+        <div>
+            <section className="tanning">
+                <div className="container">
+                    <h1>Customer Details</h1>
+                    <div className="introductory_details customer-table">
+                        <MDBDataTable
+                            className='cust-table'
+                            responsive
+                            bordered
+                            hover
+                            btn
+                            data={data}
+                        />
+                    </div>
+                </div>
+            </section>
+        </div>
+    )
 }
+
+}
+
+
+export default TableUser;
