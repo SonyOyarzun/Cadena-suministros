@@ -29,7 +29,6 @@ function PassUser(props) {
     })
       .then((response) => {
         console.log(response);
-     //   alert(response.data)
       }, (error) => {
         console.log(error);
       });
@@ -54,6 +53,10 @@ function PassUser(props) {
         <Modal.Body>
 
           <Form>
+          <Form.Group controlId="editUserForm.id">
+              <Form.Label srOnly>ID</Form.Label>
+              <Form.Control type='hidden' placeholder="ID" defaultValue={props.id} />
+            </Form.Group>
             <Form.Group controlId="editUserForm.pass">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control type="Password" rows="3" />
