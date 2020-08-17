@@ -28,6 +28,7 @@ Auth::routes();
 
 Route::get('/user', 'UserController@index');  
 Route::put('/user/edit/', 'UserController@update');  
+Route::post('/user/new/', 'UserController@create');  
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 

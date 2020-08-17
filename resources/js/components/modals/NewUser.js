@@ -52,7 +52,7 @@ function NewUser(props) {
   return (
     <div>
   
-      <MDBBtn tag="a" size="sm" floating gradient="blue" onClick={handleShow}>
+      <MDBBtn tag="a" size="sm" gradient="blue" onClick={handleShow}>
         <MDBIcon icon="edit" />
       </MDBBtn>
    
@@ -64,14 +64,14 @@ function NewUser(props) {
 
           <Form>
             <Form.Group controlId="editUserForm.message">
-            </Form.Group>
+            </Form.Group> 
             <Form.Group controlId="editUserForm.id">
               <Form.Label srOnly>ID</Form.Label>
               <Form.Control type='hidden' placeholder="ID" />
             </Form.Group>
             <Form.Group controlId="editUserForm.name">
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" placeholder="nombre completo"  />
+              <Form.Control type="text" placeholder="nombre completo"/>
             </Form.Group>
             <Form.Group controlId="editUserForm.email">
               <Form.Label>Mail</Form.Label>

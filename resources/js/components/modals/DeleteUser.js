@@ -1,9 +1,9 @@
-import React, { Component, Fragment, useState } from 'react';
-import { render } from 'react-dom';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
+
+//Material Bootstrap
 import { MDBIcon } from "mdbreact";
 
 function DeleteUser(props) {
@@ -13,15 +13,35 @@ function DeleteUser(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-return (
+
+  const process = () => {
+
+    axios({
+      method: 'delete',
+      url: '/user/delete/',
+      data: {
+        id: document.getElementById('editUserForm.id').value,
+      }
+    })
+      .then((response) => {
+        console.log(response);
+        alert(response.data)
+      }, (error) => {
+        console.log(error);
+      });
+
+  }
+
+
+
+  return (
     <div>
       <Button variant="primary" onClick={handleShow}>
-       <MDBIcon far icon="trash-alt" />
-      </Button>
+        <MDBIcon far icon="edit" />
+      </Button> 
     </div>
   )
+}
 
-
-}    
 
 export default DeleteUser;

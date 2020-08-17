@@ -22,19 +22,18 @@ class UserController extends Controller
 
     }
 
-    public function insert(Request $request)
+    public function create(Request $request)
     {
-        $product    = $request->id;
-        $quantity   = $request->quantity;
-        $send       = $request->send;
-
-                DB::table('user')->insert([
-                    'id' => $send,
-                    'name' => $product,
-                    'mail' => $quantity,
-                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]);
+        
+            $user = new User;
+ 
+            $user->name  = $request->name;
+            $user->email = $request->email;
+            $user->role  = $request->role;
+            $user->pass  = $request->pass;
+        //  $user->save();
+          return user;
+         
 
     }
 
@@ -43,8 +42,7 @@ class UserController extends Controller
         
           $user = User::findOrFail($request->id);
           if ($user == null) {
-            // User not found, show 404 or whatever you want to do
-            // example:
+
             return 'Usuario no encontrado';
           } else {
             $user->name  = $request->name;
