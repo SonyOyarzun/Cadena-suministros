@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
-import { MDBIcon } from "mdbreact";
+import { MDBIcon,MDBBtn } from "mdbreact";
 
 function PassUser(props) {
 
@@ -14,52 +14,70 @@ function PassUser(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-return (
+  const process = () => {
+
+    if(document.getElementById('editUserForm.pass').value == 
+    document.getElementById('editUserForm.confirmPass').value){
+
+    axios({
+      method: 'put',
+      url: '/user/pass/',
+      data: {
+        id: document.getElementById('editUserForm.id').value,
+        pass: document.getElementById('editUserForm.pass').value
+      }
+    })
+      .then((response) => {
+        console.log(response);
+     //   alert(response.data)
+      }, (error) => {
+        console.log(error);
+      });
+
+    }else{
+      alert('Las contraseñas no coinciden')
+    }
+
+  }
+
+  return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
-       <MDBIcon fab icon="expeditedssl" />
-      </Button>
+
+      <MDBBtn tag="a" size="sm" gradient="blue" onClick={handleShow}>
+      <MDBIcon icon="key" />
+      </MDBBtn>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Editar Usuario</Modal.Title>
+          <Modal.Title>Cambiar Contraseña</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        
-<Form>
-  <Form.Group controlId="exampleForm.ControlInput1">
-    <Form.Label>Nombre</Form.Label>
-    <Form.Control type="email" placeholder="name@example.com" value={props.name}/>
-    <Form.Label>Mail</Form.Label>
-    <Form.Control type="email" placeholder="name@example.com" value={props.email}/>
-  </Form.Group>
-  <Form.Group controlId="exampleForm.ControlSelect1">
-    <Form.Label>Role</Form.Label>
-    <Form.Control as="select" defaultValue={props.role}>
-      <option value="P">Productor</option>
-      <option value="D">Distribuidor</option> 
-    </Form.Control>
-  </Form.Group>
-  <Form.Group controlId="exampleForm.ControlTextarea1">
-    <Form.Label>Ruta</Form.Label>
-    <Form.Control as="textarea" rows="3" value={props.path}/>
-  </Form.Group>
-</Form>
-    
+
+          <Form>
+            <Form.Group controlId="editUserForm.pass">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control type="Password" rows="3" />
+            </Form.Group>
+            <Form.Group controlId="editUserForm.confirmPass">
+              <Form.Label>Repita Contraseña</Form.Label>
+              <Form.Control type="Password" rows="3" />
+            </Form.Group>
+          </Form>
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Cerrar
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
+      </Button>
+          <Button variant="primary" onClick={process}>
             Guardar Datos
-          </Button>
+      </Button>
         </Modal.Footer>
       </Modal>
     </div>
   )
 
 
-}    
+}
 
 export default PassUser;

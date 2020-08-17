@@ -21,13 +21,12 @@ Route::get('/home', function () {
     return view('home');
 });
 
-//Route::get('usuario', ['as' => 'usuario', 'uses' => 'UsuarioController@index']);
-
 
 Auth::routes();
 
 Route::get('/user', 'UserController@index');  
 Route::put('/user/edit/', 'UserController@update');  
+Route::put('/user/pass/', 'UserController@changePass');  
 Route::post('/user/new/', 'UserController@create');  
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
