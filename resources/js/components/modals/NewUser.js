@@ -35,7 +35,7 @@ function NewUser(props) {
     })
       .then((response) => {
         console.log(response);
-        alert(response.data)
+     //   alert(response.data)
       }, (error) => {
         console.log(error);
       });

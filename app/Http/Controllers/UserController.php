@@ -26,15 +26,16 @@ class UserController extends Controller
     {
         
             $user = new User;
- 
             $user->name  = $request->name;
             $user->email = $request->email;
             $user->role  = $request->role;
-            $user->pass  = $request->pass;
-        //  $user->save();
-          return user;
+            $user->path  = $request->path;
+            $user->password  = bcrypt($request->pass);   
+            $user->created_at = now();
+            $user->updated_at = now();
+            $user->save();
+            return "Usuario Creado";
          
-
     }
 
     public function update(Request $request)
@@ -48,6 +49,7 @@ class UserController extends Controller
             $user->name  = $request->name;
             $user->email = $request->email;
             $user->role  = $request->role;
+            $user->path  = $request->path;
             $user->save();
             return 'Usuario Actualizado';
            }
