@@ -95,7 +95,7 @@ class TableUser extends Component {
             name: data.name,
             email: data.email,
             role: data.role,
-            edit: <EditUser users={this.state}/>,
+            edit: <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>,
             pass: <PassUser id={data.id} />,
             delete: <DeleteUser id={data.id} />,
             product: <ProductUser path={data.path} />
@@ -103,6 +103,7 @@ class TableUser extends Component {
         ))
       ]
     };
+
 
     return (
       <div>

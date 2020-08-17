@@ -4,6 +4,8 @@ import { render } from 'react-dom';
 import {Card} from 'react-bootstrap';
 
 import TableUser from './tables/TableUser'
+import NewUser from './modals/NewUser';
+
 
 class User extends Component {
 
@@ -11,10 +13,10 @@ class User extends Component {
         return (
             <div>
             <Card>
+            <NewUser/>
             <Card.Body>
               <Card.Title>Lista de Usuarios</Card.Title>
                <Card.Text>
-                Seleccione un usuario para editar sus caracteristicas.
                </Card.Text>
                <TableUser/>
             </Card.Body>

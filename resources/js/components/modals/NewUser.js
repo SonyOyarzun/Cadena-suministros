@@ -9,15 +9,49 @@ import { MDBIcon } from "mdbreact";
 
 function NewUser(props) {
 
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-return (
+
+  const process = () => {
+
+    if(document.getElementById('editUserForm.pass').value == 
+    document.getElementById('editUserForm.confirmPass').value){
+
+    axios({
+      method: 'post',
+      url: '/user/new/',
+      data: {
+        id: document.getElementById('editUserForm.id').value,
+        name:  document.getElementById('editUserForm.name').value,
+        email: document.getElementById('editUserForm.email').value,
+        role: document.getElementById('editUserForm.role').value,
+        path: document.getElementById('editUserForm.path').value,
+        pass: document.getElementById('editUserForm.pass').value
+      }
+    })
+      .then((response) => {
+        console.log(response);
+        alert(response.data)
+      }, (error) => {
+        console.log(error);
+      });
+
+    }else{
+      alert('Las contraseñas no coinciden')
+    }
+
+  }
+
+
+
+  return (
     <div>
       <Button variant="primary" onClick={handleShow}>
-      <MDBIcon icon="plus" />
+        <MDBIcon far icon="edit" />
       </Button>
 
       <Modal show={show} onHide={handleClose}>
@@ -25,33 +59,49 @@ return (
           <Modal.Title>Editar Usuario</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        
-<Form>
-  <Form.Group controlId="exampleForm.ControlInput1">
-    <Form.Label>Nombre</Form.Label>
-    <Form.Control type="email" placeholder="nombre"/>
-    <Form.Label>Mail</Form.Label>
-    <Form.Control type="email" placeholder="name@example.com"/>
-  </Form.Group>
-  <Form.Group controlId="exampleForm.ControlSelect1">
-    <Form.Label>Role</Form.Label>
-    <Form.Control as="select">
-      <option value="P">Productor</option>
-      <option value="D">Distribuidor</option> 
-    </Form.Control>
-  </Form.Group>
-  <Form.Group controlId="exampleForm.ControlTextarea1">
-    <Form.Label>Ruta</Form.Label>
-    <Form.Control as="textarea" rows="3"/>
-  </Form.Group>
-</Form>
-    
+
+          <Form>
+            <Form.Group controlId="editUserForm.message">
+            </Form.Group>
+            <Form.Group controlId="editUserForm.id">
+              <Form.Label srOnly>ID</Form.Label>
+              <Form.Control type='hidden' placeholder="ID" />
+            </Form.Group>
+            <Form.Group controlId="editUserForm.name">
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control type="text" placeholder="nombre completo"  />
+            </Form.Group>
+            <Form.Group controlId="editUserForm.email">
+              <Form.Label>Mail</Form.Label>
+              <Form.Control type="email" placeholder="name@example.com"  />
+            </Form.Group>
+            <Form.Group controlId="editUserForm.role">
+              <Form.Label>Role</Form.Label>
+              <Form.Control as="select" defaultValue={props.role}>
+                <option value="P">Productor</option>
+                <option value="D">Distribuidor</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="editUserForm.path">
+              <Form.Label>Ruta</Form.Label>
+              <Form.Control as="textarea" rows="3" />
+            </Form.Group>
+            <Form.Group controlId="editUserForm.pass">
+              <Form.Label>Ruta</Form.Label>
+              <Form.Control as="password" rows="3" />
+            </Form.Group>
+            <Form.Group controlId="editUserForm.confirmPass">
+              <Form.Label>Ruta</Form.Label>
+              <Form.Control as="password" rows="3" />
+            </Form.Group>
+          </Form>
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Cerrar
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={process}>
             Guardar Datos
           </Button>
         </Modal.Footer>

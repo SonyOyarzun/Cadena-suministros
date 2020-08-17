@@ -9,42 +9,40 @@ import { MDBIcon } from "mdbreact";
 
 function EditUser(props) {
 
-  console.log(props)
-
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
 
- const process = () => {
-    
-  axios({
-    method: 'put',
-    url: '/user/edit/',
-    data: {
-      id:    document.getElementById('editUserForm.id').value,
-      name:  document.getElementById('editUserForm.name').value,
-      email: document.getElementById('editUserForm.email').value,
-      role:  document.getElementById('editUserForm.role').value,
-      path:  document.getElementById('editUserForm.path').value
-    }
-  })
-  .then((response) => {
-    console.log(response);
-  }, (error) => {
-    console.log(error);
-  });
+  const process = () => {
+
+    axios({
+      method: 'put',
+      url: '/user/edit/',
+      data: {
+        id: document.getElementById('editUserForm.id').value,
+        name: document.getElementById('editUserForm.name').value,
+        email: document.getElementById('editUserForm.email').value,
+        role: document.getElementById('editUserForm.role').value,
+        path: document.getElementById('editUserForm.path').value
+      }
+    })
+      .then((response) => {
+        console.log(response);
+        alert(response.data)
+      }, (error) => {
+        console.log(error);
+      });
+
+  }
 
 
-}
 
-
-
-return (
+  return (
     <div>
       <Button variant="primary" onClick={handleShow}>
-       <MDBIcon far icon="edit" />
+        <MDBIcon far icon="edit" />
       </Button>
 
       <Modal show={show} onHide={handleClose}>
@@ -52,33 +50,35 @@ return (
           <Modal.Title>Editar Usuario</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        
-<Form>
-<Form.Group controlId="editUserForm.id">
-    <Form.Label srOnly >ID</Form.Label>
-    <Form.Control type="hidden" placeholder="ID" defaultValue={props.id}/>
-  </Form.Group>
-  <Form.Group controlId="editUserForm.name">
-    <Form.Label>Nombre</Form.Label>
-    <Form.Control type="text" placeholder="nombre completo"  defaultValue={props.name}/>
-  </Form.Group>
-  <Form.Group controlId="editUserForm.email">
-    <Form.Label>Mail</Form.Label>
-    <Form.Control type="email" placeholder="name@example.com" defaultValue={props.email}/>
-  </Form.Group>
-  <Form.Group controlId="editUserForm.role">
-    <Form.Label>Role</Form.Label>
-    <Form.Control as="select" defaultValue={props.role}>
-      <option value="P">Productor</option>
-      <option value="D">Distribuidor</option> 
-    </Form.Control>
-  </Form.Group>
-  <Form.Group controlId="editUserForm.path">
-    <Form.Label>Ruta</Form.Label>
-    <Form.Control as="textarea" rows="3" defaultValue={props.path}/>
-  </Form.Group>
-</Form>
-    
+
+          <Form>
+            <Form.Group controlId="editUserForm.message">
+            </Form.Group>
+            <Form.Group controlId="editUserForm.id">
+              <Form.Label srOnly>ID</Form.Label>
+              <Form.Control type='hidden' placeholder="ID" defaultValue={props.id} />
+            </Form.Group>
+            <Form.Group controlId="editUserForm.name">
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control type="text" placeholder="nombre completo" defaultValue={props.name} />
+            </Form.Group>
+            <Form.Group controlId="editUserForm.email">
+              <Form.Label>Mail</Form.Label>
+              <Form.Control type="email" placeholder="name@example.com" defaultValue={props.email} />
+            </Form.Group>
+            <Form.Group controlId="editUserForm.role">
+              <Form.Label>Role</Form.Label>
+              <Form.Control as="select" defaultValue={props.role}>
+                <option value="P">Productor</option>
+                <option value="D">Distribuidor</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="editUserForm.path">
+              <Form.Label>Ruta</Form.Label>
+              <Form.Control as="textarea" rows="3" defaultValue={props.path} />
+            </Form.Group>
+          </Form>
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -93,6 +93,6 @@ return (
   )
 
 
-}    
+}
 
 export default EditUser;
