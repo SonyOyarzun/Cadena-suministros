@@ -59,35 +59,30 @@ class UserController extends Controller
 
     public function changePass(Request $request)
     {
-        $product    = $request->id;
-        $quantity   = $request->quantity;
-        $send       = $request->send;
+        $user = User::findOrFail($request->id);
+          if ($user == null) {
 
-                DB::table('user')->insert([
-                    'id' => $send,
-                    'name' => $product,
-                    'mail' => $quantity,
-                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]);
+            return 'Usuario no encontrado';
+          } else {
+            $user->password  = bcrypt($request->pass); 
+            $user->save();
+            return 'Contraseña Actualizada';
+        }
 
     }
 
     public function delete(Request $request)
     {
-        $product = $request->product;
-        $send    = $request->send;
+        $user = User::findOrFail($request->id);
+        if ($user == null) {
 
+          return 'Usuario no encontrado';
+        } else {
+          $user->password  = bcrypt($request->pass); 
+          $user->save();
+          return 'Usuario Eliminado';
+        }
   
-                 if(isset($request->product)){ 
-                 DB::table('lines')->where('id_product', $product)->delete();
-                 }
-               
-                 if(isset($request->send)){ 
-                 DB::table('sends')->where('id', $send)->delete();
-                 }
-            
-        
     }
 
 
