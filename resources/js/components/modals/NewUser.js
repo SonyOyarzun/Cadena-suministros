@@ -47,15 +47,18 @@ function NewUser(props) {
   }
 
 
+  
 
   return (
     <div>
+  
       <MDBBtn tag="a" size="sm" floating gradient="blue" onClick={handleShow}>
         <MDBIcon icon="edit" />
       </MDBBtn>
+   
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Editar Usuario</Modal.Title>
+          <Modal.Title>Nuevo Usuario</Modal.Title>
         </Modal.Header>
         <Modal.Body>
 
@@ -86,12 +89,12 @@ function NewUser(props) {
               <Form.Control as="textarea" rows="3" />
             </Form.Group>
             <Form.Group controlId="editUserForm.pass">
-              <Form.Label>Ruta</Form.Label>
-              <Form.Control as="password" rows="3" />
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control type="Password"  rows="3"/>
             </Form.Group>
             <Form.Group controlId="editUserForm.confirmPass">
-              <Form.Label>Ruta</Form.Label>
-              <Form.Control as="password" rows="3" />
+              <Form.Label>Repita Contraseña</Form.Label>
+              <Form.Control type="Password"  rows="3"/>
             </Form.Group>
           </Form>
 
