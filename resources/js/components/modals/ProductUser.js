@@ -9,10 +9,89 @@ import { MDBIcon } from "mdbreact";
 
 function ProductUser(props) {
 
-  const [show, setShow] = useState(false);
+  const [show, setShow]   =  useState(false);
+  const [users, setUsers] =  useState(false);
+  const handleClose = ()  => setShow(false);
+  const handleShow = ()   => setShow(true);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const process = () => {
+
+    axios.get('user/list/').then(response => {
+      setUsers(response.data)
+    }).catch(error => {
+      alert("Error " + error)
+    })
+
+  }
+
+  const data = {
+    columns: [
+      {
+        label: 'ID',
+        field: 'id',
+        width: 150,
+        attributes: {
+          'aria-controls': 'DataTable',
+          'aria-label': 'ID',
+        },
+      },
+      {
+        label: 'Nombre',
+        field: 'name',
+        width: 150,
+      },
+      {
+        label: 'Email',
+        field: 'email',
+        width: 200,
+      },
+      {
+        label: 'Rol',
+        field: 'role',
+        sort: 'asc',
+        width: 100,
+      },
+      {
+        //      label: 'Editar',
+        field: 'edit',
+        width: 20,
+      },
+      {
+        //      label: 'Contraseña',
+        field: 'pass',
+        width: 20,
+      },
+      {
+        //      label: 'Eliminar',
+        field: 'delete',
+        width: 20,
+      },
+      {
+        //      label: 'Eliminar',
+        field: 'product',
+        width: 20,
+      }
+    ],
+    rows: [
+      ...users.map((data, order) => (
+        {
+          id: (
+            <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
+              ID: {data.id}
+            </MDBBadge>
+          ),
+          name: data.name,
+          email: data.email,
+          role: data.role,
+          edit: <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>,
+          pass: <PassUser id={data.id} />,
+          delete: <DeleteUser id={data.id} />,
+          product: <ProductUser path={data.path} />
+        }
+      ))
+    ]
+  };
+
 
 return (
     <div>
@@ -26,25 +105,14 @@ return (
         </Modal.Header>
         <Modal.Body>
         
-<Form>
-  <Form.Group controlId="exampleForm.ControlInput1">
-    <Form.Label>Nombre</Form.Label>
-    <Form.Control type="email" placeholder="name@example.com" value={props.name}/>
-    <Form.Label>Mail</Form.Label>
-    <Form.Control type="email" placeholder="name@example.com" value={props.email}/>
-  </Form.Group>
-  <Form.Group controlId="exampleForm.ControlSelect1">
-    <Form.Label>Role</Form.Label>
-    <Form.Control as="select" defaultValue={props.role}>
-      <option value="P">Productor</option>
-      <option value="D">Distribuidor</option> 
-    </Form.Control>
-  </Form.Group>
-  <Form.Group controlId="exampleForm.ControlTextarea1">
-    <Form.Label>Ruta</Form.Label>
-    <Form.Control as="textarea" rows="3" value={props.path}/>
-  </Form.Group>
-</Form>
+        <MDBDataTableV5
+          className='cust-table'
+          responsive
+          bordered
+          hover
+          btn
+          data={data}
+        />
     
         </Modal.Body>
         <Modal.Footer>
