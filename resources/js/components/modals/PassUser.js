@@ -23,7 +23,7 @@ function PassUser(props) {
       method: 'put',
       url: '/user/pass/',
       data: {
-        id: document.getElementById('passUserForm.id').value,
+        id:   props.id,
         pass: document.getElementById('passUserForm.pass').value
       }
     })
@@ -54,10 +54,6 @@ function PassUser(props) {
         <Modal.Body>
 
           <Form>
-          <Form.Group controlId="passUserForm.id">
-              <Form.Label srOnly>ID</Form.Label>
-              <Form.Control type='hidden' placeholder="ID" defaultValue={props.id} />
-            </Form.Group>
             <Form.Group controlId="passUserForm.pass">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control type="Password" rows="3" />

@@ -8,11 +8,8 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 
 function DeleteUser(props) {
 
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+console.log(props)
 
   const process = () => {
 
@@ -20,7 +17,7 @@ function DeleteUser(props) {
       method: 'delete',
       url: '/user/delete/',
       data: {
-        id: document.getElementById('id').value,
+        id: props.id,
       }
     })
       .then((response) => {
@@ -38,8 +35,7 @@ function DeleteUser(props) {
     <div>
       <MDBBtn tag="a" size="sm" gradient="blue" onClick={process}>
         <MDBIcon far icon="trash-alt" />
-      </MDBBtn>
-      <input id="id" type="hidden" Value={props.id}/>
+      </MDBBtn>  
     </div>
   )
 }

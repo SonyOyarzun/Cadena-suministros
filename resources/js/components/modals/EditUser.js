@@ -21,11 +21,11 @@ function EditUser(props) {
       method: 'put',
       url: '/user/edit/',
       data: {
-        id: document.getElementById('editUserForm.id').value,
-        name: document.getElementById('editUserForm.name').value,
+        id:    props.id,
+        name:  document.getElementById('editUserForm.name').value,
         email: document.getElementById('editUserForm.email').value,
-        role: document.getElementById('editUserForm.role').value,
-        path: document.getElementById('editUserForm.path').value
+        role:  document.getElementById('editUserForm.role').value,
+        path:  document.getElementById('editUserForm.path').value
       }
     })
       .then((response) => {
@@ -53,10 +53,6 @@ function EditUser(props) {
 
           <Form>
             <Form.Group controlId="editUserForm.message">
-            </Form.Group>
-            <Form.Group controlId="editUserForm.id">
-              <Form.Label srOnly>ID</Form.Label>
-              <Form.Control type='hidden' placeholder="ID" defaultValue={props.id} />
             </Form.Group>
             <Form.Group controlId="editUserForm.name">
               <Form.Label>Nombre</Form.Label>

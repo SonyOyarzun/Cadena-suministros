@@ -73,6 +73,7 @@ class UserController extends Controller
 
     public function delete(Request $request)
     {
+        if($request->id!=1){
         $user = User::findOrFail($request->id);
         if ($user == null) {
 
@@ -80,8 +81,11 @@ class UserController extends Controller
         } else {
           $user->delete();
           return 'Usuario Eliminado';
+        return $request->id;
         }
-  
+        }else{
+          return 'Administrador no puede ser Eliminado'; 
+        }
     }
 
 
