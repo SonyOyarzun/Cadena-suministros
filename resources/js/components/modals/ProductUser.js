@@ -1,28 +1,27 @@
-import React, { Component, Fragment, useState } from 'react';
+import React, { Component, Fragment, useState,useEffect } from 'react';
 import { render } from 'react-dom';
 import ReactDOM from 'react-dom';
 
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
-import { MDBIcon } from "mdbreact";
+import { MDBIcon, MDBDataTableV5, MDBBadge } from "mdbreact";
+import { map } from 'jquery';
 
 function ProductUser(props) {
 
   const [show, setShow]   =  useState(false);
-  const [users, setUsers] =  useState(false);
+  const [users, setUsers] =  useState(new map());
   const handleClose = ()  => setShow(false);
   const handleShow = ()   => setShow(true);
 
-  const process = () => {
-
+  useEffect(() => {
     axios.get('user/list/').then(response => {
       setUsers(response.data)
     }).catch(error => {
       alert("Error " + error)
     })
-
-  }
+  });
 
   const data = {
     columns: [
@@ -73,7 +72,7 @@ function ProductUser(props) {
       }
     ],
     rows: [
-      ...users.map((data, order) => (
+      [...users.keys()].map((data, order) => (
         {
           id: (
             <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
@@ -83,10 +82,6 @@ function ProductUser(props) {
           name: data.name,
           email: data.email,
           role: data.role,
-          edit: <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>,
-          pass: <PassUser id={data.id} />,
-          delete: <DeleteUser id={data.id} />,
-          product: <ProductUser path={data.path} />
         }
       ))
     ]

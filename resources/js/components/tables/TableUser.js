@@ -66,22 +66,22 @@ class TableUser extends Component {
         {
           //      label: 'Editar',
           field: 'edit',
-          width: 50,
+          width: 20,
         },
         {
           //      label: 'Contraseña',
           field: 'pass',
-          width: 50,
+          width: 20,
         },
         {
           //      label: 'Eliminar',
           field: 'delete',
-          width: 50,
+          width: 20,
         },
         {
           //      label: 'Eliminar',
           field: 'product',
-          width: 50,
+          width: 20,
         }
       ],
       rows: [

@@ -25,12 +25,11 @@ function NewUser(props) {
       method: 'post',
       url: '/user/new/',
       data: {
-        id: document.getElementById('newUserForm.id').value,
         name:  document.getElementById('newUserForm.name').value,
         email: document.getElementById('newUserForm.email').value,
-        role: document.getElementById('newUserForm.role').value,
-        path: document.getElementById('newUserForm.path').value,
-        pass: document.getElementById('newUserForm.pass').value
+        role:  document.getElementById('newUserForm.role').value,
+        path:  document.getElementById('newUserForm.path').value,
+        pass:  document.getElementById('newUserForm.pass').value
       }
     })
       .then((response) => {
@@ -65,10 +64,6 @@ function NewUser(props) {
           <Form>
             <Form.Group controlId="newUserForm.message">
             </Form.Group> 
-            <Form.Group controlId="newUserForm.id">
-              <Form.Label srOnly>ID</Form.Label>
-              <Form.Control type='hidden' placeholder="ID" />
-            </Form.Group>
             <Form.Group controlId="newUserForm.name">
               <Form.Label>Nombre</Form.Label>
               <Form.Control type="text" placeholder="nombre completo"/>
