@@ -78,8 +78,7 @@ class UserController extends Controller
 
           return 'Usuario no encontrado';
         } else {
-          $user->password  = bcrypt($request->pass); 
-          $user->save();
+          $user->delete();
           return 'Usuario Eliminado';
         }
   

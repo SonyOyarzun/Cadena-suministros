@@ -16,15 +16,15 @@ function PassUser(props) {
 
   const process = () => {
 
-    if(document.getElementById('editUserForm.pass').value == 
-    document.getElementById('editUserForm.confirmPass').value){
+    if(document.getElementById('passUserForm.pass').value == 
+    document.getElementById('passUserForm.confirmPass').value){
 
     axios({
       method: 'put',
       url: '/user/pass/',
       data: {
-        id: document.getElementById('editUserForm.id').value,
-        pass: document.getElementById('editUserForm.pass').value
+        id: document.getElementById('passUserForm.id').value,
+        pass: document.getElementById('passUserForm.pass').value
       }
     })
       .then((response) => {
@@ -43,8 +43,9 @@ function PassUser(props) {
     <div>
 
       <MDBBtn tag="a" size="sm" gradient="blue" onClick={handleShow}>
-      <MDBIcon icon="key" />
+      <MDBIcon  icon="key" />
       </MDBBtn>
+
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -53,15 +54,15 @@ function PassUser(props) {
         <Modal.Body>
 
           <Form>
-          <Form.Group controlId="editUserForm.id">
+          <Form.Group controlId="passUserForm.id">
               <Form.Label srOnly>ID</Form.Label>
               <Form.Control type='hidden' placeholder="ID" defaultValue={props.id} />
             </Form.Group>
-            <Form.Group controlId="editUserForm.pass">
+            <Form.Group controlId="passUserForm.pass">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control type="Password" rows="3" />
             </Form.Group>
-            <Form.Group controlId="editUserForm.confirmPass">
+            <Form.Group controlId="passUserForm.confirmPass">
               <Form.Label>Repita Contraseña</Form.Label>
               <Form.Control type="Password" rows="3" />
             </Form.Group>

@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
-import { MDBIcon } from "mdbreact";
+import { MDBIcon, MDBBtn } from "mdbreact";
 
 function EditUser(props) {
 
@@ -41,9 +41,9 @@ function EditUser(props) {
 
   return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
-        <MDBIcon far icon="edit" />
-      </Button>
+      <MDBBtn tag="a" size="sm" gradient="blue" onClick={handleShow}>
+       <MDBIcon far icon="edit" />
+      </MDBBtn>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

@@ -24,10 +24,11 @@ Route::get('/home', function () {
 
 Auth::routes();
 
-Route::get('/user', 'UserController@index');  
+Route::get('/user/list/', 'UserController@index');  
 Route::put('/user/edit/', 'UserController@update');  
 Route::put('/user/pass/', 'UserController@changePass');  
 Route::post('/user/new/', 'UserController@create');  
+Route::delete('/user/delete/', 'UserController@delete');  
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 

@@ -25,7 +25,7 @@ class TableUser extends Component {
 
   componentDidMount() {
 
-    axios.get('user').then(response => {
+    axios.get('user/list/').then(response => {
       this.setState({ users: response.data })
     }).catch(error => {
       alert("Error " + error)

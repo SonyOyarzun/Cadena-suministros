@@ -18,19 +18,19 @@ function NewUser(props) {
 
   const process = () => {
 
-    if(document.getElementById('editUserForm.pass').value == 
-    document.getElementById('editUserForm.confirmPass').value){
+    if(document.getElementById('newUserForm.pass').value == 
+    document.getElementById('newUserForm.confirmPass').value){
 
     axios({
       method: 'post',
       url: '/user/new/',
       data: {
-        id: document.getElementById('editUserForm.id').value,
-        name:  document.getElementById('editUserForm.name').value,
-        email: document.getElementById('editUserForm.email').value,
-        role: document.getElementById('editUserForm.role').value,
-        path: document.getElementById('editUserForm.path').value,
-        pass: document.getElementById('editUserForm.pass').value
+        id: document.getElementById('newUserForm.id').value,
+        name:  document.getElementById('newUserForm.name').value,
+        email: document.getElementById('newUserForm.email').value,
+        role: document.getElementById('newUserForm.role').value,
+        path: document.getElementById('newUserForm.path').value,
+        pass: document.getElementById('newUserForm.pass').value
       }
     })
       .then((response) => {
@@ -63,36 +63,36 @@ function NewUser(props) {
         <Modal.Body>
 
           <Form>
-            <Form.Group controlId="editUserForm.message">
+            <Form.Group controlId="newUserForm.message">
             </Form.Group> 
-            <Form.Group controlId="editUserForm.id">
+            <Form.Group controlId="newUserForm.id">
               <Form.Label srOnly>ID</Form.Label>
               <Form.Control type='hidden' placeholder="ID" />
             </Form.Group>
-            <Form.Group controlId="editUserForm.name">
+            <Form.Group controlId="newUserForm.name">
               <Form.Label>Nombre</Form.Label>
               <Form.Control type="text" placeholder="nombre completo"/>
             </Form.Group>
-            <Form.Group controlId="editUserForm.email">
+            <Form.Group controlId="newUserForm.email">
               <Form.Label>Mail</Form.Label>
               <Form.Control type="email" placeholder="name@example.com"  />
             </Form.Group>
-            <Form.Group controlId="editUserForm.role">
+            <Form.Group controlId="newUserForm.role">
               <Form.Label>Role</Form.Label>
               <Form.Control as="select" defaultValue={props.role}>
                 <option value="P">Productor</option>
                 <option value="D">Distribuidor</option>
               </Form.Control>
             </Form.Group>
-            <Form.Group controlId="editUserForm.path">
+            <Form.Group controlId="newUserForm.path">
               <Form.Label>Ruta</Form.Label>
               <Form.Control as="textarea" rows="3" />
             </Form.Group>
-            <Form.Group controlId="editUserForm.pass">
+            <Form.Group controlId="newUserForm.pass">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control type="Password"  rows="3"/>
             </Form.Group>
-            <Form.Group controlId="editUserForm.confirmPass">
+            <Form.Group controlId="newUserForm.confirmPass">
               <Form.Label>Repita Contraseña</Form.Label>
               <Form.Control type="Password"  rows="3"/>
             </Form.Group>

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 
 //Material Bootstrap
-import { MDBIcon } from "mdbreact";
+import { MDBIcon, MDBBtn } from "mdbreact";
 
 function DeleteUser(props) {
 
@@ -20,7 +20,7 @@ function DeleteUser(props) {
       method: 'delete',
       url: '/user/delete/',
       data: {
-        id: document.getElementById('editUserForm.id').value,
+        id: document.getElementById('id').value,
       }
     })
       .then((response) => {
@@ -36,9 +36,10 @@ function DeleteUser(props) {
 
   return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
-        <MDBIcon far icon="edit" />
-      </Button> 
+      <MDBBtn tag="a" size="sm" gradient="blue" onClick={process}>
+        <MDBIcon far icon="trash-alt" />
+      </MDBBtn>
+      <input id="id" type="hidden" Value={props.id}/>
     </div>
   )
 }
