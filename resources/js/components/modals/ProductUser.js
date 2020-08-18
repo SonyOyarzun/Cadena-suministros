@@ -11,19 +11,21 @@ import { map } from 'jquery';
 function ProductUser(props) {
 
   const [show, setShow]   =  useState(false);
-  const [users, setUsers] =  useState(false);
+  const [users, setUsers] =  useState(null);
   const handleClose = ()  => setShow(false);
   const handleShow = ()   => setShow(true);
 
+  useEffect(() => {
+    axios.get('user/list/').then(response => {
+      setUsers(response.data)
+      console.log(response)
+    }).catch(error => {
+      alert("Error " + error)
+    })
+  },[]);
 
-  const response = axios.get('user/list/').then(response => {
-    setUsers(response.data)
-    console.log(response)
-  }).catch(error => {
-    alert("Error " + error)
-  })
+  console.log(users)
 
-  console.log(response)
 
   const data = {
     columns: [
@@ -74,7 +76,7 @@ function ProductUser(props) {
       }
     ],
     rows: [
-      ...response.map((data, order) => (
+      [...users.keys()].map((data, order) => (
         {
           id: (
             <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
