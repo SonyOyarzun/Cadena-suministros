@@ -9,7 +9,6 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 function DeleteUser(props) {
 
 
-console.log(props)
 
   const process = () => {
 
