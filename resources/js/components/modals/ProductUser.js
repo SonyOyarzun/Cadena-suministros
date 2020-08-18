@@ -1,30 +1,31 @@
-import React, { Component, Fragment, useState,useEffect } from 'react';
+import React, { Component, Fragment, useState, useEffect } from 'react';
 import { render } from 'react-dom';
 import ReactDOM from 'react-dom';
 
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
-import { MDBIcon, MDBDataTableV5, MDBBadge } from "mdbreact";
+import { MDBIcon, MDBDataTableV5, MDBBadge, MDBBtn } from "mdbreact";
 import { map } from 'jquery';
 
 function ProductUser(props) {
 
-  const [show, setShow]   =  useState(false);
-  const [users, setUsers] =  useState(null);
-  const handleClose = ()  => setShow(false);
-  const handleShow = ()   => setShow(true);
+  const [show, setShow] = useState(false);
+  const [users, setUsers] = useState([]);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     axios.get('user/list/').then(response => {
-      setUsers(response.data)
+        setUsers(response.data);
       console.log(response)
     }).catch(error => {
       alert("Error " + error)
     })
-  },[]);
+  }, []);
 
-  console.log(users)
+
+  //console.log("usuarios",users)
 
 
   const data = {
@@ -76,7 +77,7 @@ function ProductUser(props) {
       }
     ],
     rows: [
-      [...users.keys()].map((data, order) => (
+      ...users.map((data, order) => (
         {
           id: (
             <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
@@ -92,27 +93,27 @@ function ProductUser(props) {
   };
 
 
-return (
+  return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
-       <MDBIcon far icon="edit" />
-      </Button>
+      <MDBBtn tag="a" size="sm" gradient="blue" onClick={handleShow}>
+        <MDBIcon icon="cart-arrow-down" />
+      </MDBBtn>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Editar Usuario</Modal.Title>
+          <Modal.Title>Productos Disponibles</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        
-        <MDBDataTableV5
-          className='cust-table'
-          responsive
-          bordered
-          hover
-          btn
-          data={data}
-        />
-    
+
+          <MDBDataTableV5
+            className='cust-table'
+            responsive
+            bordered
+            hover
+            btn
+            data={data}
+          />
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -127,6 +128,6 @@ return (
   )
 
 
-}    
+}
 
 export default ProductUser;
