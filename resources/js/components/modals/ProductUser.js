@@ -16,7 +16,7 @@ function ProductUser(props) {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    axios.get('user/list/').then(response => {
+    axios.get(props.path).then(response => {
         setUsers(response.data);
       console.log(response)
     }).catch(error => {
