@@ -32,3 +32,6 @@ Route::delete('/user/delete/', 'UserController@delete');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+Route::group(['middleware' => ['cors']], function () {
+    //Rutas a las que se permitirá acceso
+});
