@@ -32,7 +32,7 @@ function ProductUser(props) {
   }, []);
 
 
-  //console.log("usuarios",users)
+  console.log("usuarios",Object.keys(users))
 
 
   const data = {
@@ -84,16 +84,16 @@ function ProductUser(props) {
       }
     ],
     rows: [
-      ...users.map((data, order) => (
+      ...Object.keys(users).map((data, order) => (
         {
           id: (
             <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
-              ID: {data.id}
+              ID: {users.data}
             </MDBBadge>
           ),
-          name: data.name,
-          email: data.email,
-          role: data.role,
+          name: users.data,
+          email: users.data,
+          role: users.data,
         }
       ))
     ]
