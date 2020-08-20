@@ -23,3 +23,4 @@ module.exports = app => {
   // const {REACT_APP_API_ETHERSCAN_PROXY, REACT_APP_API_ETHERSCAN_BASE_URL} = process.env;
   // app.use(REACT_APP_API_ETHERSCAN_PROXY, REACT_APP_API_ETHERSCAN_BASE_URL);      
 };
+

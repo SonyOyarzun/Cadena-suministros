@@ -16,7 +16,7 @@ function ProductUser(props) {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    axios.get(props.path,{
+    axios.get('/json-api',{
       headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Credentials": "true",

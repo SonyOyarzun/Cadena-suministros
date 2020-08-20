@@ -35,3 +35,5 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::group(['middleware' => ['cors']], function () {
     //Rutas a las que se permitirá acceso
 });
+
+Route::get('json-api', 'ApiController@index');
