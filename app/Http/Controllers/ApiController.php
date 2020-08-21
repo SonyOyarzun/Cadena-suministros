@@ -15,7 +15,7 @@ class ApiController extends Controller
     	$statusCode = $response->getStatusCode();
 		$body = $response->getBody()->getContents();
 	}catch(\Exception $e){
-		return "error";
+		return $e;
 	}
 		return $body;
     }

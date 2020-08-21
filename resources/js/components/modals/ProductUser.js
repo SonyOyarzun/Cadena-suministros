@@ -26,8 +26,9 @@ function ProductUser(props) {
     "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers",
   }
 
+  //json-api
   useEffect(() => {
-    axios.get('json-api',{
+    axios.get('/user/list/',{
       params,
       headers
     }).then(response => {
@@ -39,7 +40,47 @@ function ProductUser(props) {
   }, []);
 
   console.log("usuarios.data :", products)
-  console.log("atributos :", Object(products))
+  //console.log("keys :", Object.keys(products))
+
+ 
+/*
+const arr = [];
+const arr2 = [];
+  Object.keys(products).forEach(function(key) {
+    arr.push(products[key]);
+  })
+
+  console.log('push',arr)
+
+*/
+
+   /*
+  for(var propName in arr) {
+
+    console.log("Nombre propiedad: ", propName, " y sus valores son: ", arr[propName])
+
+ 
+    for(var propName2 in arr[propName]) {
+
+      console.log("Nombre propiedad2: ", propName2, " y sus valores2 son: ", arr[propName][propName2])
+  
+  }
+
+
+}
+*/
+
+
+Object.keys(products).map((key, order) => (
+
+  Object.keys(products[key]).map((key2, order2) => (
+    console.log('propiedades :'+key2,products[key][key2])
+    ))
+  
+))
+
+
+
 
 
   const data = {
@@ -91,16 +132,16 @@ function ProductUser(props) {
       }
     ],
     rows: [
-      ...Object(products).map((data, order) => (
+      ...Object.keys(products).map((data, order) => (
         {
           id: (
             <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
-              ID:{data.id}
+              ID:{products[data]}
             </MDBBadge>
           ),
-          name:   data.name,
-          email:  data.email,
-          role:   data.role,
+          name:   products[data],
+          email:  products[data],
+          role:   products[data],
         }
       ))
     ]
