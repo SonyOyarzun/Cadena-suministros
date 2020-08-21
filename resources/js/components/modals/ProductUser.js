@@ -11,28 +11,35 @@ import { map } from 'jquery';
 function ProductUser(props) {
 
   const [show, setShow] = useState(false);
-  const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const params = {
+    "path": props.path,
+  }
+
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
+    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers",
+  }
+
   useEffect(() => {
-    axios.get('/json-api',{
-      headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": "true",
-      "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
-      "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers",
-      }
+    axios.get('json-api',{
+      params,
+      headers
     }).then(response => {
-        setUsers(response.data);
-      console.log(response)
+      setProducts(response.data);
+      console.log(response.data)
     }).catch(error => {
       alert("Error " + error)
     })
   }, []);
 
-
-  console.log("usuarios",Object.keys(users))
+  console.log("usuarios.data :", products)
+  console.log("atributos :", Object(products))
 
 
   const data = {
@@ -84,16 +91,16 @@ function ProductUser(props) {
       }
     ],
     rows: [
-      ...Object.keys(users).map((data, order) => (
+      ...Object(products).map((data, order) => (
         {
           id: (
             <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
-              ID: {users.data}
+              ID:{data.id}
             </MDBBadge>
           ),
-          name: users.data,
-          email: users.data,
-          role: users.data,
+          name:   data.name,
+          email:  data.email,
+          role:   data.role,
         }
       ))
     ]
