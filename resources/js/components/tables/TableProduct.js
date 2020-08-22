@@ -35,6 +35,7 @@ class TableUser extends Component {
   }
 
 
+
   render() {
 
     let columns = []
@@ -43,14 +44,21 @@ class TableUser extends Component {
 
 
     Object.keys(this.state.products).map((key, row) => (
-      console.log('row:',row),
+      console.log('row:',row,'key1 :',key),
     
       Object.keys(this.state.products[key]).map((key2, col) => (
-        console.log('row:',row,' col:',col,),
-        columns = {...columns, label:key2},
+        console.log('row:',row,' col:',col,'key2 :',key2),
+       
+        columns.push({label:key2}),
         rows[key2]=this.state.products[key][key2]
         ))
     ))
+
+    Array.prototype.unique=function(a){
+      return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0
+    });
+
+    columns.unique()
 
     data = { 
       columns,
@@ -68,7 +76,7 @@ class TableUser extends Component {
           bordered
           hover
           btn
-          data={this.data}
+          data={data}
         />
 
       </div>
