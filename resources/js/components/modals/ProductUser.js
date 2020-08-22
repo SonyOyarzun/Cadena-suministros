@@ -78,27 +78,15 @@ let columns = []
 let rows    = []
 Object.keys(products).map((key, order) => (
   Object.keys(products[key]).map((key2, order2) => (
-    columns.push('label:'+key2),
-    rows.push(key2+':'+products[key][key2])
+    columns.push(key),
+    columns[key]=key2,
+  //  rows.push(key2+' :'+products[key][key2])
+    rows[key2]=products[key][key2]
     ))
   
 ))
 
 
-rows: [
-  ...Object.keys(products).map((data, order) => (
-    {
-      id: (
-        <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
-          ID:{products[data]}
-        </MDBBadge>
-      ),
-      name:   products[data],
-      email:  products[data],
-      role:   products[data],
-    }
-  ))
-]
 
   columns = columns.unique()
   const data = { 
