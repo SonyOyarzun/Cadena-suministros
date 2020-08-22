@@ -42,7 +42,7 @@ class TableUser extends Component {
     let rows = []
     let prop = "";
    // let data = {}
-
+    let json = ""
 
     Object.keys(this.state.products).map((key, row) => (
     //  console.log('row:',row,'key1 :',key),
@@ -54,14 +54,19 @@ class TableUser extends Component {
         columns.push({
           label: key2,
           field: key2,
-        })
-        
+        }),
+        json = JSON.stringify("{"+key2+":"+this.state.products[key][key2]+"}"),
+     //   json = JSON.stringify("{"+key2+":"+this.state.products[key][key2]+"}"),
+        console.log('hola :',JSON.parse(json))
 
        // rows[key2]=this.state.products[key][key2]
-        )),
-        rows.push(
-          JSON.parse({id :    this.state.products[key][prop]}),
-        )
+      ))
+ 
+    //    rows.push(json
+       //   JSON.parse("{\"name\":\"+"+this.state.products[key][prop]+'}'),
+    //     JSON.parse("{\"name\":\"alan\",\"age\":34}"),
+  //  JSON.parse("{\"+key2+\":\"alan\"}"),
+   //     )
     ))
 
 /*
@@ -153,6 +158,8 @@ const data = {
     ]
 
 */
+
+//console.log(JSON.parse("{\"name\":\"alan\",\"age\":34}" ))
 
     //crea un function para arrays llamado unique
     Array.prototype.unique=function(a){
