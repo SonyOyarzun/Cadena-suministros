@@ -9,12 +9,13 @@ import { MDBDataTableV5, MDBBadge } from 'mdbreact';
 
 
 
-class User extends Component {
+class Product extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      products: [],
+      content: {}
     }
 
     const params = {
@@ -31,7 +32,7 @@ class User extends Component {
     let columns = []
     let rows    = []
 
-    content = {};
+  
 
   }
 
