@@ -108,7 +108,7 @@ class TableUser extends Component {
       ]
     };
 
-    console.log('dataJSON',data)
+    console.log('dataJSON: user',data)
 
     return (
       <div>

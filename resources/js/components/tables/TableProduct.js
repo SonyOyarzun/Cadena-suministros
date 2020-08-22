@@ -1,4 +1,4 @@
-import React, { Component, ButtonGroup } from 'react';
+import React, { Component,PropTypes, ButtonGroup } from 'react';
 
 import axios from 'axios'
 
@@ -40,68 +40,98 @@ class TableUser extends Component {
 
     let columns = []
     let rows = []
-    let data = {}
-/*
+   // let data = {}
+
 
     Object.keys(this.state.products).map((key, row) => (
-      console.log('row:',row,'key1 :',key),
+    //  console.log('row:',row,'key1 :',key),
     
       Object.keys(this.state.products[key]).map((key2, col) => (
-        console.log('row:',row,' col:',col,'key2 :',key2),
+   //     console.log('row:',row,' col:',col,'key2 :',key2),
        
-        columns.push({label:key2,field: key2,}),
-        rows[key2]=this.state.products[key][key2]
+        columns.push({
+          label: key2,
+          field: key2,
+        }),
+        rows.push(
+          {}
+        )
+
+       // rows[key2]=this.state.products[key][key2]
         ))
     ))
-*/
 
-    columns= [
-      {
-        label: 'ID',
-        field: 'id',
-        width: 150,
-        attributes: {
-          'aria-controls': 'DataTable',
-          'aria-label': 'ID',
-        },
+/*
+const data = {
+  columns: [
+    {
+      label: 'ID',
+      field: 'id',
+      width: 150,
+      attributes: {
+        'aria-controls': 'DataTable',
+        'aria-label': 'ID',
       },
+    },
+    {
+      label: 'Nombre',
+      field: 'name',
+      width: 150,
+    },
+    {
+      label: 'Email',
+      field: 'email',
+      width: 200,
+    },
+    {
+      label: 'Rol',
+      field: 'role',
+      sort: 'asc',
+      width: 100,
+    },
+    {
+      //      label: 'Editar',
+      field: 'edit',
+      width: 20,
+    },
+    {
+      //      label: 'Contraseña',
+      field: 'pass',
+      width: 20,
+    },
+    {
+      //      label: 'Eliminar',
+      field: 'delete',
+      width: 20,
+    },
+    {
+      //      label: 'Eliminar',
+      field: 'product',
+      width: 20,
+    }
+  ],
+  rows: [
+    ...Object.keys(this.state.products).map((key, order) => (
+       Object.keys(this.state.products[key]).map((key2, order2) => (
       {
-        label: 'Nombre',
-        field: 'name',
-        width: 150,
-      },
-      {
-        label: 'Email',
-        field: 'email',
-        width: 200,
-      },
-      {
-        label: 'Rol',
-        field: 'role',
-        sort: 'asc',
-        width: 100,
-      },
-      {
-        //      label: 'Editar',
-        field: 'edit',
-        width: 20,
-      },
-      {
-        //      label: 'Contraseña',
-        field: 'pass',
-        width: 20,
-      },
-      {
-        //      label: 'Eliminar',
-        field: 'delete',
-        width: 20,
-      },
-      {
-        //      label: 'Eliminar',
-        field: 'product',
-        width: 20,
+        key2: (
+          <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
+            ID: {rows[key2]=this.state.products[key][key2]}
+          </MDBBadge>
+        ),
+        name:  rows[key2]=this.state.products[key][key2],
+        email: rows[key2]=this.state.products[key][key2],
+        role:  rows[key2]=this.state.products[key][key2]
+,
       }
-    ]
+      ))
+    ))
+  ]
+};
+
+*/
+   /*
+    console.log('products',this.state.products)
 
     rows= [
      {...this.state.products.map((data, order) => (
@@ -119,7 +149,7 @@ class TableUser extends Component {
      }
     ]
 
-
+*/
 
     //crea un function para arrays llamado unique
     Array.prototype.unique=function(a){
@@ -128,12 +158,12 @@ class TableUser extends Component {
 
     //columns.unique()
 
-    data = { 
+    let data = { 
       columns,
       rows
     };
 
-    console.log('dataJSON',data)
+    console.log('dataJSON: product',data)
 
     return (
       <div>
