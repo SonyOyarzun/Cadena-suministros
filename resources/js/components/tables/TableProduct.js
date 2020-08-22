@@ -21,10 +21,31 @@ class TableUser extends Component {
     this.state = {
       users: []
     }
-    this.handleLink = this.handleLink.bind(this);
+
   }
 
   componentDidMount() {
+/*
+    axios.get('user/list/').then(response => {
+      this.setState({ users: response.data })
+    }).catch(error => {
+      alert("Error " + error)
+    })
+
+
+Object.keys(products).map((key, row) => (
+  console.log('row:',row),
+
+  Object.keys(products[key]).map((key2, col) => (
+    console.log('row:',row,' col:',col,),
+ // columns = {...columns, label:key2},
+    rows[key2]=products[key][key2]
+    ))
+*/
+  }
+
+
+  render() {
 
     axios.get('user/list/').then(response => {
       this.setState({ users: response.data })
@@ -32,16 +53,15 @@ class TableUser extends Component {
       alert("Error " + error)
     })
 
-  }
 
-  handleLink(path) {
-    this.props.history.push(path);
-  }
+    let columns = []
+    let rows = []
+    let data = {}
 
-  render() {
-
-    const data = {
-   
+    data = { 
+      columns,
+      rows
+    };
 
     console.log('dataJSON',data)
 
@@ -54,7 +74,7 @@ class TableUser extends Component {
           bordered
           hover
           btn
-          data={data}
+          data={this.data}
         />
 
       </div>
