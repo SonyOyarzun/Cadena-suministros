@@ -12,26 +12,16 @@ import PassUser from '../modals/PassUser'
 import DeleteUser from '../modals/DeleteUser'
 import ProductUser from '../modals/ProductUser'
 
+import {NavLink,Link, withRouter}  from 'react-router-dom';
 import { Button, Navbar ,Nav, NavDropdown,Form,FormControl} from 'react-bootstrap';
 class TableUser extends Component {
 
-/*
   constructor(props) {
     super(props);
     this.state = {
       users: []
     }
-
     this.handleLink = this.handleLink.bind(this);
-  }
-*/
-  constructor(props) {
-    super(props);
-    this.handleLink = this.handleLink.bind(this);
-
-    this.state = {
-      users: []
-    }
   }
 
   componentDidMount() {
@@ -138,5 +128,5 @@ class TableUser extends Component {
 
 }
 
-
-export default TableUser;
+export default withRouter(TableUser);
+//export default TableUser;
