@@ -40,6 +40,7 @@ class TableUser extends Component {
 
     let columns = []
     let rows = []
+    let prop = "";
    // let data = {}
 
 
@@ -49,19 +50,18 @@ class TableUser extends Component {
       Object.keys(this.state.products[key]).map((key2, col) => (
    //     console.log('row:',row,' col:',col,'key2 :',key2),
        
+        prop=key2,
         columns.push({
           label: key2,
           field: key2,
-        }),
-        rows.push({
-          id :    key2,
-          name:   key2,
-          email:  key2,
-          role:   key2,
         })
+        
 
        // rows[key2]=this.state.products[key][key2]
-        ))
+        )),
+        rows.push(
+          JSON.parse({id :    this.state.products[key][prop]}),
+        )
     ))
 
 /*
