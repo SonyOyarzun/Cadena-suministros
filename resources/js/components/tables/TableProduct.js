@@ -53,9 +53,12 @@ class TableUser extends Component {
           label: key2,
           field: key2,
         }),
-        rows.push(
-          {}
-        )
+        rows.push({
+          id :    key2,
+          name:   key2,
+          email:  key2,
+          role:   key2,
+        })
 
        // rows[key2]=this.state.products[key][key2]
         ))
