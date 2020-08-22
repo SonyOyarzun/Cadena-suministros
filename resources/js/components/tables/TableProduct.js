@@ -19,44 +19,38 @@ class TableUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      products: []
     }
 
   }
 
   componentDidMount() {
-/*
+
     axios.get('user/list/').then(response => {
-      this.setState({ users: response.data })
+      this.setState({ products: response.data })
     }).catch(error => {
       alert("Error " + error)
     })
 
-
-Object.keys(products).map((key, row) => (
-  console.log('row:',row),
-
-  Object.keys(products[key]).map((key2, col) => (
-    console.log('row:',row,' col:',col,),
- // columns = {...columns, label:key2},
-    rows[key2]=products[key][key2]
-    ))
-*/
   }
 
 
   render() {
 
-    axios.get('user/list/').then(response => {
-      this.setState({ users: response.data })
-    }).catch(error => {
-      alert("Error " + error)
-    })
-
-
     let columns = []
     let rows = []
     let data = {}
+
+
+    Object.keys(this.state.products).map((key, row) => (
+      console.log('row:',row),
+    
+      Object.keys(this.state.products[key]).map((key2, col) => (
+        console.log('row:',row,' col:',col,),
+        columns = {...columns, label:key2},
+        rows[key2]=this.state.products[key][key2]
+        ))
+    ))
 
     data = { 
       columns,
