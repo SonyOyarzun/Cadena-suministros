@@ -76,11 +76,13 @@ const arr2 = [];
 
 let columns = []
 let rows    = []
-Object.keys(products).map((key, order) => (
-  Object.keys(products[key]).map((key2, order2) => (
-    columns.push(key),
-    columns[key]=key2,
+Object.keys(products).map((key, row) => (
+
+
+  //columns['label']=products[key],
+  Object.keys(products[key]).map((key2, col) => (
   //  rows.push(key2+' :'+products[key][key2])
+  columns = {...columns, label:key2},
     rows[key2]=products[key][key2]
     ))
   
@@ -88,7 +90,7 @@ Object.keys(products).map((key, order) => (
 
 
 
-  columns = columns.unique()
+  //columns = columns.unique()
   const data = { 
     columns,
     rows
