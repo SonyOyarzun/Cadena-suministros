@@ -12,12 +12,23 @@ import PassUser from '../modals/PassUser'
 import DeleteUser from '../modals/DeleteUser'
 import ProductUser from '../modals/ProductUser'
 
-
+import { Button, Navbar ,Nav, NavDropdown,Form,FormControl} from 'react-bootstrap';
 class TableUser extends Component {
 
-
+/*
   constructor(props) {
     super(props);
+    this.state = {
+      users: []
+    }
+
+    this.handleLink = this.handleLink.bind(this);
+  }
+*/
+  constructor(props) {
+    super(props);
+    this.handleLink = this.handleLink.bind(this);
+
     this.state = {
       users: []
     }
@@ -33,6 +44,9 @@ class TableUser extends Component {
 
   }
 
+  handleLink(path) {
+    this.props.history.push(path);
+  }
 
   render() {
 
@@ -98,7 +112,7 @@ class TableUser extends Component {
             edit: <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>,
             pass: <PassUser id={data.id} />,
             delete: <DeleteUser id={data.id} />,
-            product: <ProductUser path={data.path} />
+            product: <Nav.Link onClick={()=>this.handleLink("Product")}>P</Nav.Link>
           }
         ))
       ]

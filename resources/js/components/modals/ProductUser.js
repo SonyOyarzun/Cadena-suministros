@@ -44,54 +44,25 @@ function ProductUser(props) {
   }, []);
 
   console.log("usuarios.data :", products)
-  //console.log("keys :", Object.keys(products))
 
- 
-/*
-const arr = [];
-const arr2 = [];
-  Object.keys(products).forEach(function(key) {
-    arr.push(products[key]);
-  })
-
-  console.log('push',arr)
-
-*/
-
-   /*
-  for(var propName in arr) {
-
-    console.log("Nombre propiedad: ", propName, " y sus valores son: ", arr[propName])
-
- 
-    for(var propName2 in arr[propName]) {
-
-      console.log("Nombre propiedad2: ", propName2, " y sus valores2 son: ", arr[propName][propName2])
-  
-  }
-
-
-}
-*/
 
 let columns = []
 let rows    = []
+
 Object.keys(products).map((key, row) => (
+  console.log('row:',row),
 
 
-  //columns['label']=products[key],
   Object.keys(products[key]).map((key2, col) => (
-  //  rows.push(key2+' :'+products[key][key2])
-  columns = {...columns, label:key2},
+    console.log('row:',row,' col:',col,),
+ // columns = {...columns, label:key2},
     rows[key2]=products[key][key2]
     ))
   
 ))
 
 
-
-  //columns = columns.unique()
-  const data = { 
+  let data = { 
     columns,
     rows
   };
