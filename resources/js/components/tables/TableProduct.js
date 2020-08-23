@@ -26,8 +26,10 @@ class TableUser extends Component {
 
   componentDidMount() {
 
-    axios.get('user/list/').then(response => {
-      this.setState({ products: response.data })
+    axios.get('json-api').then(response => {
+      this.setState({ products: response.data})
+     // console.log(response.data.result.links)
+      console.log(response.data)
     }).catch(error => {
       alert("Error " + error)
     })
