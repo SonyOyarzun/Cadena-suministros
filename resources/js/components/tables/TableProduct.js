@@ -1,19 +1,11 @@
-import React, { Component,PropTypes, ButtonGroup } from 'react';
-
+import React, { Component } from 'react';
+import {NavLink,Link, withRouter}  from 'react-router-dom';
 import axios from 'axios'
 
 //import datable
 import { MDBDataTableV5, MDBBadge } from 'mdbreact';
 
-//importar modals
-import EditUser from '../modals/EditUser'
-import NewUser from '../modals/NewUser'
-import PassUser from '../modals/PassUser'
-import DeleteUser from '../modals/DeleteUser'
-import ProductUser from '../modals/ProductUser'
 
-import {NavLink,Link, withRouter}  from 'react-router-dom';
-import { Button, Navbar ,Nav, NavDropdown,Form,FormControl} from 'react-bootstrap';
 class TableUser extends Component {
 
   constructor(props) {
@@ -32,17 +24,11 @@ class TableUser extends Component {
       "path": data,
     }
 
-    console.log('router data',{
-      params
-    })
-
     axios.get('json-api',{
       params
     })
     .then(response => {
       this.setState({ products: response.data})
-     // console.log(response.data.result.links)
-      console.log(response.data)
     }).catch(error => {
       alert("Error " + error)
     })
@@ -53,7 +39,6 @@ class TableUser extends Component {
 
   render() {
 
-
     let columns = []
     let preRows = []
     let rows = []
@@ -63,24 +48,18 @@ class TableUser extends Component {
   
       preRows = [],
       Object.keys(this.state.products[key]).map((key2, col) => (
-      {...Object.keys(this.state.products[key]).length> count &&
-        
+      {...count < Object.keys(this.state.products[key]).length &&
         columns.push({
           label: key2,
           field: key2,
-        })
-
+        }),
       },
-      
+    //  console.log('contador :',count,' limite',Object.keys(this.state.products[key]).length,' col:',columns),
           preRows[key2]=this.state.products[row][key2],
-          console.log('pre :',row,col,preRows) 
+          count = count + 1
       )),
-      console.log('push :',preRows),
-      rows.push(preRows),
+      rows.push(preRows)
       
-
-      console.log(rows),  
-      count = count + 1
     ))
 
 
@@ -110,4 +89,3 @@ class TableUser extends Component {
 }
 
 export default withRouter(TableUser);
-//export default TableUser;

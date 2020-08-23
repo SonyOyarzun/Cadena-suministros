@@ -111,8 +111,6 @@ class TableUser extends Component {
       ]
     };
 
-    console.log('dataJSON: user',data)
-
     return (
       <div>
 
@@ -132,4 +130,3 @@ class TableUser extends Component {
 }
 
 export default withRouter(TableUser);
-//export default TableUser;
