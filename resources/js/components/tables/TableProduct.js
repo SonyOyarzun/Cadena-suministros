@@ -44,27 +44,29 @@ class TableUser extends Component {
 
     Object.keys(this.state.products).map((key, row) => (
   
+      preRows = [],
       Object.keys(this.state.products[key]).map((key2, col) => (
 
         columns.push({
           label: key2,
           field: key2,
         }),
-          preRows[key2]=this.state.products[key][key2]
+          preRows[key2]=this.state.products[row][key2],
+          console.log('pre :',row,col,preRows) 
       )),
+      console.log('push :',preRows),
       rows.push(preRows),
+      
+
       console.log(rows)   
     ))
-
-
-    rows.push(JSON.stringify({columns}))
 
     let data = { 
       columns,
       rows
     };
 
-    console.log('dataJSON: product',data)
+   // console.log('dataJSON: product',data)
 
     return (
       <div>
