@@ -39,134 +39,25 @@ class TableUser extends Component {
   render() {
 
     let columns = []
+    let preRows = []
     let rows = []
-    let prop = "";
-   // let data = {}
-    let json = ""
 
     Object.keys(this.state.products).map((key, row) => (
-    //  console.log('row:',row,'key1 :',key),
-    
+  
       Object.keys(this.state.products[key]).map((key2, col) => (
-   //     console.log('row:',row,' col:',col,'key2 :',key2),
-       
-        prop=key2,
+
         columns.push({
           label: key2,
           field: key2,
         }),
-        json = JSON.stringify("{"+key2+":"+this.state.products[key][key2]+"}"),
-     //   json = JSON.stringify("{"+key2+":"+this.state.products[key][key2]+"}"),
-        console.log('hola :',JSON.parse(json))
-
-       // rows[key2]=this.state.products[key][key2]
-      ))
- 
-    //    rows.push(json
-       //   JSON.parse("{\"name\":\"+"+this.state.products[key][prop]+'}'),
-    //     JSON.parse("{\"name\":\"alan\",\"age\":34}"),
-  //  JSON.parse("{\"+key2+\":\"alan\"}"),
-   //     )
+          preRows[key2]=this.state.products[key][key2]
+      )),
+      rows.push(preRows),
+      console.log(rows)   
     ))
 
-/*
-const data = {
-  columns: [
-    {
-      label: 'ID',
-      field: 'id',
-      width: 150,
-      attributes: {
-        'aria-controls': 'DataTable',
-        'aria-label': 'ID',
-      },
-    },
-    {
-      label: 'Nombre',
-      field: 'name',
-      width: 150,
-    },
-    {
-      label: 'Email',
-      field: 'email',
-      width: 200,
-    },
-    {
-      label: 'Rol',
-      field: 'role',
-      sort: 'asc',
-      width: 100,
-    },
-    {
-      //      label: 'Editar',
-      field: 'edit',
-      width: 20,
-    },
-    {
-      //      label: 'Contraseña',
-      field: 'pass',
-      width: 20,
-    },
-    {
-      //      label: 'Eliminar',
-      field: 'delete',
-      width: 20,
-    },
-    {
-      //      label: 'Eliminar',
-      field: 'product',
-      width: 20,
-    }
-  ],
-  rows: [
-    ...Object.keys(this.state.products).map((key, order) => (
-       Object.keys(this.state.products[key]).map((key2, order2) => (
-      {
-        key2: (
-          <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
-            ID: {rows[key2]=this.state.products[key][key2]}
-          </MDBBadge>
-        ),
-        name:  rows[key2]=this.state.products[key][key2],
-        email: rows[key2]=this.state.products[key][key2],
-        role:  rows[key2]=this.state.products[key][key2]
-,
-      }
-      ))
-    ))
-  ]
-};
 
-*/
-   /*
-    console.log('products',this.state.products)
-
-    rows= [
-     {...this.state.products.map((data, order) => (
-        {
-          id: (
-            <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
-              ID: {data.id}
-            </MDBBadge>
-          ),
-          name: data.name,
-          email: data.email,
-          role: data.role,
-        }
-        ))
-     }
-    ]
-
-*/
-
-//console.log(JSON.parse("{\"name\":\"alan\",\"age\":34}" ))
-
-    //crea un function para arrays llamado unique
-    Array.prototype.unique=function(a){
-      return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0
-    });
-
-    //columns.unique()
+    rows.push(JSON.stringify({columns}))
 
     let data = { 
       columns,
