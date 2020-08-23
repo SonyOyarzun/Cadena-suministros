@@ -26,7 +26,20 @@ class TableUser extends Component {
 
   componentDidMount() {
 
-    axios.get('json-api').then(response => {
+    const { data } = this.props.location
+
+    const params = {
+      "path": data,
+    }
+
+    console.log('router data',{
+      params
+    })
+
+    axios.get('json-api',{
+      params
+    })
+    .then(response => {
       this.setState({ products: response.data})
      // console.log(response.data.result.links)
       console.log(response.data)

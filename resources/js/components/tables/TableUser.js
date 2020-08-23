@@ -34,8 +34,11 @@ class TableUser extends Component {
 
   }
 
-  handleLink(path) {
-    this.props.history.push(path);
+  handleLink(path,data) {
+    this.props.history.push({
+      pathname: path,
+      data: data // your data array of objects
+    })
   }
 
   render() {
@@ -102,7 +105,7 @@ class TableUser extends Component {
             edit: <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>,
             pass: <PassUser id={data.id} />,
             delete: <DeleteUser id={data.id} />,
-            product: <Nav.Link onClick={()=>this.handleLink("Product")}>P</Nav.Link>
+            product: <Button onClick={()=>this.handleLink("Product",data.path)}/>
           }
         ))
       ]
