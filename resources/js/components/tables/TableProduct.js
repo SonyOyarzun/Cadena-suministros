@@ -5,9 +5,7 @@ import axios from 'axios';
 //import datable
 import { MDBDataTableV5, MDBBadge } from 'mdbreact';
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-// or
-//import { CircularProgress } from '@material-ui/core';
+
 
 
 class TableUser extends Component {

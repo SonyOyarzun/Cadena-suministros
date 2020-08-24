@@ -13,6 +13,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 //importacion a html
 import Head from './import/Head'
@@ -52,7 +54,7 @@ class App extends Component {
       const { loading } = this.state;
     
       if(loading) { // if your component doesn't have to wait for an async action, remove this block 
-        return "Cargando..."; // render null when app is not ready
+        return <CircularProgress/>; // render null when app is not ready
       }else{
 
         return (
