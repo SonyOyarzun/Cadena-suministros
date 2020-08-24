@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import {NavLink,Link, withRouter}  from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
 
 //import datable
 import { MDBDataTableV5, MDBBadge } from 'mdbreact';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
+// or
+//import { CircularProgress } from '@material-ui/core';
 
 
 class TableUser extends Component {
@@ -29,6 +33,7 @@ class TableUser extends Component {
     })
     .then(response => {
       this.setState({ products: response.data})
+      document.getElementById('stanby').innerHTML= <CircularProgress/>
     }).catch(error => {
       alert("Error " + error)
     })
@@ -72,6 +77,7 @@ class TableUser extends Component {
 
     return (
       <div>
+      <div id="stanby"></div>
 
         <MDBDataTableV5
           className='cust-table'
