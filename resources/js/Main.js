@@ -43,7 +43,6 @@ class App extends Component {
 
   componentDidMount() {
     // this simulates an async action, after which the component will render the content
-    console.log(this.state.loading) 
     demoAsyncCall().then(() => this.setState({ loading: false }));
    
   }
@@ -53,7 +52,7 @@ class App extends Component {
       const { loading } = this.state;
     
       if(loading) { // if your component doesn't have to wait for an async action, remove this block 
-        return null; // render null when app is not ready
+        return "Cargando..."; // render null when app is not ready
       }else{
 
         return (
@@ -79,7 +78,6 @@ class App extends Component {
 
 
 function demoAsyncCall() {
-
   return new Promise((resolve) => setTimeout(() => resolve(), 2500));
 }
 
