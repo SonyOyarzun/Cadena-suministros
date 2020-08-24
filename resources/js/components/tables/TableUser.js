@@ -3,7 +3,7 @@ import React, { Component, ButtonGroup } from 'react';
 import axios from 'axios'
 
 //import datable
-import { MDBDataTableV5, MDBBadge } from 'mdbreact';
+import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon } from 'mdbreact';
 
 //importar modals
 import EditUser from '../modals/EditUser'
@@ -14,6 +14,7 @@ import ProductUser from '../modals/ProductUser'
 
 import {NavLink,Link, withRouter}  from 'react-router-dom';
 import { Button, Navbar ,Nav, NavDropdown,Form,FormControl} from 'react-bootstrap';
+
 class TableUser extends Component {
 
   constructor(props) {
@@ -22,15 +23,28 @@ class TableUser extends Component {
       users: []
     }
     this.handleLink = this.handleLink.bind(this);
+    this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
   }
 
-  componentDidMount() {
+  getData(){
 
     axios.get('user/list/').then(response => {
       this.setState({ users: response.data })
     }).catch(error => {
       alert("Error " + error)
     })
+
+  }
+
+  alert(){
+
+alert('casi')
+
+  }
+
+  componentDidMount() {
+
+    this.getData()
 
   }
 
@@ -71,25 +85,21 @@ class TableUser extends Component {
           width: 100,
         },
         {
-          //      label: 'Editar',
+          label: '',
           field: 'edit',
-          width: 20,
-        },
+        }, 
         {
-          //      label: 'Contraseña',
+          label: '',
           field: 'pass',
-          width: 20,
         },
         {
-          //      label: 'Eliminar',
+          label: '',
           field: 'delete',
-          width: 20,
         },
         {
-          //      label: 'Eliminar',
+          label: '',
           field: 'product',
-          width: 20,
-        }
+        },
       ],
       rows: [
         ...this.state.users.map((data, order) => (
@@ -99,13 +109,17 @@ class TableUser extends Component {
                 ID: {data.id}
               </MDBBadge>
             ),
-            name: data.name,
-            email: data.email,
-            role: data.role,
-            edit: <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path}/>,
-            pass: <PassUser id={data.id} />,
-            delete: <DeleteUser id={data.id} />,
-            product: <Button onClick={()=>this.handleLink("Product",data.path)}/>
+            name:   data.name,
+            email:  data.email,
+            role:   data.role,
+            edit:   <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path} getData={this.getData}/>,
+            pass:   <PassUser id={data.id} />,
+            delete: <DeleteUser id={data.id} getData={this.getData}/>,
+            product:<MDBBtn tag="a" size="sm" gradient="blue" onClick={process} onClick={()=>this.handleLink("Product",data.path)}>
+                    <MDBIcon icon="shopping-cart"/>
+                    </MDBBtn> 
+            
+           
           }
         ))
       ]
@@ -113,13 +127,14 @@ class TableUser extends Component {
 
     return (
       <div>
-
+        <div><NewUser getData={this.getData}/></div>
         <MDBDataTableV5
           className='cust-table'
           responsive
           bordered
           hover
           btn
+          sortable={false}
           data={data}
         />
 

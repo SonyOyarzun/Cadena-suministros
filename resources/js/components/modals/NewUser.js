@@ -34,6 +34,7 @@ function NewUser(props) {
     })
       .then((response) => {
         console.log(response);
+        props.getData()
      //   alert(response.data)
       }, (error) => {
         console.log(error);
@@ -51,9 +52,7 @@ function NewUser(props) {
   return (
     <div>
   
-      <MDBBtn tag="a" size="sm" gradient="blue" onClick={handleShow}>
-        <MDBIcon icon="edit" />
-      </MDBBtn>
+      <MDBBtn color="primary" outline rounded onClick={handleShow}>Nuevo Usuario</MDBBtn>
    
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

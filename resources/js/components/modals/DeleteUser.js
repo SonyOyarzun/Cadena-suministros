@@ -22,6 +22,7 @@ function DeleteUser(props) {
       .then((response) => {
         console.log(response);
         alert(response.data)
+        props.getData()
       }, (error) => {
         console.log(error);
       });
