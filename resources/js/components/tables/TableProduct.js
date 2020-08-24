@@ -33,7 +33,6 @@ class TableUser extends Component {
     })
     .then(response => {
       this.setState({ products: response.data})
-      document.getElementById('stanby').innerHTML= <CircularProgress/>
     }).catch(error => {
       alert("Error " + error)
     })
