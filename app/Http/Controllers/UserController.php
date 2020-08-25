@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,11 +12,9 @@ class UserController extends Controller
 {
     public function index()
     {
-       $users=
-               DB::table('users')
-                ->get();
-        
-           return json_encode($users);
+           $user = User::all();
+          
+           return json_encode($user);
 
     }
 

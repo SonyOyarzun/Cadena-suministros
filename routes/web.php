@@ -36,4 +36,5 @@ Route::group(['middleware' => ['cors']], function () {
     //Rutas a las que se permitirá acceso
 });
 
-Route::get('json-api', 'ApiController@index');
+Route::get('json-api', 'ApiController@product');
+Route::get('json-api/my', 'ApiController@myProduct');

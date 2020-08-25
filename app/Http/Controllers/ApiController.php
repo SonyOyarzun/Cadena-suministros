@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+
 class ApiController extends Controller
 {
 	
-    public function index(Request $request)
+    public function product(Request $request)
     {
 	
 	try{		
@@ -17,11 +21,34 @@ class ApiController extends Controller
     	$statusCode = $response->getStatusCode();
 		$body = $response->getBody()->getContents();
 	}catch(\Exception $e){
-		return $e;
+		return json_encode($e);
 	}
 		return $body;
 
 	}
+
+	public function myProduct()
+    {
+		$id=Auth::id();
+		$user = User::findOrFail($id);
+		
+	if($user!=null){	
+
+	try{		
+    	$client = new Client();
+		$response = $client->request('GET', $user->path);
+    	$statusCode = $response->getStatusCode();
+		$body = $response->getBody()->getContents();
+	}catch(\Exception $e){
+		return json_encode($e);
+	}
+		return $body;
+
+	}else{
+		return json_encode("Usuario Desconocido");
+	}
+
+}
 	
 
 
