@@ -9,6 +9,7 @@ export default function WithMultipleCheckboxes() {
   const [products, setProducts] = useState([]);
   
   useEffect(() => {
+ 
     axios.get('json-api/my')
     .then(response => {
       setProducts(response.data);
@@ -16,6 +17,7 @@ export default function WithMultipleCheckboxes() {
     }).catch(error => {
       alert("Error " + error)
     })
+  
   }, []);
   
 
@@ -43,38 +45,48 @@ export default function WithMultipleCheckboxes() {
       
     ))
 
+    let data = { 
+      columns,
+      rows
+    };
+   
+ 
+    const [datatable, setDatatable] = React.useState({})
 
+    const updateData = (data) => {
+      if (datatable === {}) {
+        alert('lol')
+        setDatatable({...data});
+        
+      }
+  
+    };
+  
 
-  const [datatable, setDatatable] = useState({
-    columns,
-    rows
-  });
    console.log(datatable)
+
   const [checkbox1, setCheckbox1] = useState([]);
 
   const showLogs2 = (e) => {
     setCheckbox1(e);
   };
 
+ 
+
   return (
     <>
-      <MDBDataTableV5
-        hover
-        entriesOptions={[5, 20, 25]}
-        entries={5}
-        pagesAmount={4}
-        data={datatable}
-        checkbox
-        headCheckboxID='id6'
-        bodyCheckboxID='checkboxes6'
-        getValueCheckBox={(e) => {
-          showLogs2(e);
-        }}
-        getValueAllCheckBoxes={(e) => {
-          showLogs2(e);
-        }}
-        multipleCheckboxes
-      />
+        {updateData()}
+        <MDBDataTableV5
+          className='cust-table'
+          responsive
+          bordered
+          hover
+          btn
+          entriesOptions={[5, 10, 15]}
+          entries={5}
+          data={datatable}
+        />
+
 
       
     </>
@@ -96,4 +108,23 @@ export default function WithMultipleCheckboxes() {
           </p>
         )}
       </Result>
+
+
+      <MDBDataTableV5
+        hover
+        entriesOptions={[5, 20, 25]}
+        entries={5}
+        pagesAmount={4}
+        data={data}
+        checkbox
+        headCheckboxID='id6'
+        bodyCheckboxID='checkboxes6'
+        getValueCheckBox={(e) => {
+          showLogs2(e);
+        }}
+        getValueAllCheckBoxes={(e) => {
+          showLogs2(e);
+        }}
+        multipleCheckboxes
+      />
  */

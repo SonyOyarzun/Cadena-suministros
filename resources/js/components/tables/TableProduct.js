@@ -82,6 +82,8 @@ class TableUser extends Component {
           bordered
           hover
           btn
+          entriesOptions={[5, 10, 15]}
+          entries={5}
           data={data}
         />
 
