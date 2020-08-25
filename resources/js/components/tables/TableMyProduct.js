@@ -18,9 +18,14 @@ export default function WithMultipleCheckboxes() {
       alert("Error " + error)
     })
   
+    const data = assign()
+
+    updateData(data)
+
   }, []);
   
 
+const assign = () =>{
 
     let columns = []
     let preRows = []
@@ -49,17 +54,16 @@ export default function WithMultipleCheckboxes() {
       columns,
       rows
     };
+
+    return data
    
+  }
  
     const [datatable, setDatatable] = React.useState({})
 
     const updateData = (data) => {
-      if (datatable === {}) {
-        alert('lol')
         setDatatable({...data});
-        
-      }
-  
+        alert('update')
     };
   
 
@@ -75,7 +79,6 @@ export default function WithMultipleCheckboxes() {
 
   return (
     <>
-        {updateData()}
         <MDBDataTableV5
           className='cust-table'
           responsive
