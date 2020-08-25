@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState, useEffect } from 'react';
+import React, { Component, Fragment, useState, useEffect, useCallback } from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
 import Result from '../Result';
 
@@ -7,24 +7,29 @@ import { map } from 'jquery';
 export default function WithMultipleCheckboxes() {
 
   const [products, setProducts] = useState([]);
+  const [datatable, setDatatable] = React.useState({})
+  const [checkbox1, setCheckbox1] = useState([]);
+  let columns = []
+  let preRows = []
+  let rows = []
+  let data = []
+  let count = 0
 
   useEffect(() => {
 
     axios.get('json-api/my')
       .then(response => {
         setProducts(response.data);
-        console.log(response.data)
+     //   console.log(response.data)
       }).catch(error => {
         alert("Error " + error)
       })
-
+  
+      createJson
+  
   }, []);
 
-
-  let columns = []
-  let preRows = []
-  let rows = []
-  let count = 0
+  const createJson = (
 
   Object.keys(products).map((key, row) => (
 
@@ -45,25 +50,41 @@ export default function WithMultipleCheckboxes() {
 
   ))
 
-  let data = {
+  /*
+  data = {
     columns,
     rows
-  };
-
-
-  console.log('data', data)
-
-  const [datatable, setDatatable] = React.useState([])
-
-  if (data == {}) {
-    datatable.push(data)
   }
+*/
+  
+
+);
+
+
+
+setDatatable({
+  columns,
+  rows
+})
+
+
+
+  //console.log('data', data)
+
+  
+
+
+  
+  //setDatatable([...datatable,JSON.stringify(columns)])
+  
+  
+  
 
 
 
   console.log('datatable', datatable)
 
-  const [checkbox1, setCheckbox1] = useState([]);
+
 
   const showLogs2 = (e) => {
     setCheckbox1(e);
