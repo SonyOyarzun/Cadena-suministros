@@ -7,67 +7,61 @@ import { map } from 'jquery';
 export default function WithMultipleCheckboxes() {
 
   const [products, setProducts] = useState([]);
-  
-  useEffect(() => {
- 
-    axios.get('json-api/my')
-    .then(response => {
-      setProducts(response.data);
-      console.log(response.data)
-    }).catch(error => {
-      alert("Error " + error)
-    })
-  
-    const data = assign()
 
-    updateData(data)
+  useEffect(() => {
+
+    axios.get('json-api/my')
+      .then(response => {
+        setProducts(response.data);
+        console.log(response.data)
+      }).catch(error => {
+        alert("Error " + error)
+      })
 
   }, []);
-  
 
-const assign = () =>{
 
-    let columns = []
-    let preRows = []
-    let rows = []
-    let count = 0
+  let columns = []
+  let preRows = []
+  let rows = []
+  let count = 0
 
-    Object.keys(products).map((key, row) => (
-  
-      preRows = [],
-      Object.keys(products[key]).map((key2, col) => (
-      {...count < Object.keys(products[key]).length &&
+  Object.keys(products).map((key, row) => (
+
+    preRows = [],
+    Object.keys(products[key]).map((key2, col) => (
+      {
+        ...count < Object.keys(products[key]).length &&
         columns.push({
           label: key2,
           field: key2,
         }),
       },
-    //  console.log('contador :',count,' limite',Object.keys(this.state.products[key]).length,' col:',columns),
-          preRows[key2]=products[row][key2],
-          count = count + 1
-      )),
-      rows.push(preRows)
-      
-    ))
+      //  console.log('contador :',count,' limite',Object.keys(this.state.products[key]).length,' col:',columns),
+      preRows[key2] = products[row][key2],
+      count = count + 1
+    )),
+    rows.push(preRows)
 
-    let data = { 
-      columns,
-      rows
-    };
+  ))
 
-    return data
-   
+  let data = {
+    columns,
+    rows
+  };
+
+
+  console.log('data', data)
+
+  const [datatable, setDatatable] = React.useState([])
+
+  if (data == {}) {
+    datatable.push(data)
   }
- 
-    const [datatable, setDatatable] = React.useState({})
 
-    const updateData = (data) => {
-        setDatatable({...data});
-        alert('update')
-    };
-  
 
-   console.log(datatable)
+
+  console.log('datatable', datatable)
 
   const [checkbox1, setCheckbox1] = useState([]);
 
@@ -75,23 +69,23 @@ const assign = () =>{
     setCheckbox1(e);
   };
 
- 
+
 
   return (
     <>
-        <MDBDataTableV5
-          className='cust-table'
-          responsive
-          bordered
-          hover
-          btn
-          entriesOptions={[5, 10, 15]}
-          entries={5}
-          data={datatable}
-        />
+      <MDBDataTableV5
+        className='cust-table'
+        responsive
+        bordered
+        hover
+        btn
+        entriesOptions={[5, 10, 15]}
+        entries={5}
+        data={datatable}
+      />
 
 
-      
+
     </>
   );
 }
