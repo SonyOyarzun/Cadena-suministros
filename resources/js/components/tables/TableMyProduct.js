@@ -7,13 +7,17 @@ import { map } from 'jquery';
 export default function WithMultipleCheckboxes() {
 
   const [products, setProducts] = useState([]);
-  const [datatable, setDatatable] = React.useState({})
+  const [datatable, setDatatable] = React.useState([])
   const [checkbox1, setCheckbox1] = useState([]);
   let columns = []
   let preRows = []
   let rows = []
   let data = []
   let count = 0
+
+  
+  
+  
 
   useEffect(() => {
 
@@ -48,24 +52,20 @@ export default function WithMultipleCheckboxes() {
     )),
     rows.push(preRows)
 
-  ))
+  )),
 
-  /*
+  
   data = {
     columns,
     rows
   }
-*/
+
   
 
 );
 
 
 
-setDatatable({
-  columns,
-  rows
-})
 
 
 
@@ -78,11 +78,16 @@ setDatatable({
   //setDatatable([...datatable,JSON.stringify(columns)])
   
   
+  const handleClick = (e) => {
+    //  setDatatable({columns,rows})
+    setDatatable(data)
+    console.log('datatable', datatable)
   
+    }
 
 
 
-  console.log('datatable', datatable)
+ 
 
 
 
@@ -94,15 +99,23 @@ setDatatable({
 
   return (
     <>
-      <MDBDataTableV5
-        className='cust-table'
-        responsive
-        bordered
+    <button onClick={handleClick}>Text</button>
+    <MDBDataTableV5
         hover
-        btn
-        entriesOptions={[5, 10, 15]}
+        entriesOptions={[5, 20, 25]}
         entries={5}
+        pagesAmount={4}
         data={datatable}
+        checkbox
+        headCheckboxID='id6'
+        bodyCheckboxID='checkboxes6'
+        getValueCheckBox={(e) => {
+          showLogs2(e);
+        }}
+        getValueAllCheckBoxes={(e) => {
+          showLogs2(e);
+        }}
+        multipleCheckboxes
       />
 
 
@@ -128,21 +141,5 @@ setDatatable({
       </Result>
 
 
-      <MDBDataTableV5
-        hover
-        entriesOptions={[5, 20, 25]}
-        entries={5}
-        pagesAmount={4}
-        data={data}
-        checkbox
-        headCheckboxID='id6'
-        bodyCheckboxID='checkboxes6'
-        getValueCheckBox={(e) => {
-          showLogs2(e);
-        }}
-        getValueAllCheckBoxes={(e) => {
-          showLogs2(e);
-        }}
-        multipleCheckboxes
-      />
+      
  */
