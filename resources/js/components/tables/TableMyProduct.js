@@ -1,15 +1,29 @@
 import React, { Component, Fragment, useState, useEffect, useCallback } from 'react';
 import { MDBDataTableV5, MDBInput, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import _default from 'react-bootstrap/esm/CardColumns';
 
 export default function WithMultipleCheckboxes() {
 
   const [products, setProducts] = useState([]);
+  const [checked, setChecked] = useState(['checkbox0']);
   let columns = []
   let preRows = []
   let rows = []
   let data = []
   let count = 0
 
+
+  const toggleCheck = e => {
+    let checkedArr = checked;
+    checkedArr.filter(name => name === e.target.id)[0] 
+      ? checkedArr = checkedArr.filter(name => name !== e.target.id)
+      : checkedArr.push(e.target.id);
+      setChecked({checkedArr})
+  };
+
+  const isChecked = id => checked.filter(name => name === id)[0] ? true : false
+
+console.log(checked)
 
   useEffect(() => {
 
@@ -36,7 +50,7 @@ export default function WithMultipleCheckboxes() {
     Object.keys(products).map((key, row) => (
 
       preRows = [],
-      preRows['check'] = <input label=" " type="checkbox" id={'checkbox'+row} />,
+      preRows['check'] = <input label=" " type="checkbox" id={'checkbox'+row}  onChange={toggleCheck} checked={isChecked('checkbox'+row)} defaultcheck='false' />,
 
       Object.keys(products[key]).map((key2, col) => (
         {
@@ -63,7 +77,7 @@ export default function WithMultipleCheckboxes() {
 
   );
 
-  console.log(data)
+  //console.log(data)
 
   return (
     <>

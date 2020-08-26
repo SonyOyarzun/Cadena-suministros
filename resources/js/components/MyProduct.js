@@ -5,7 +5,7 @@ import {Card} from 'react-bootstrap';
 
 
 import TableMyProduct from './tables/TableMyProduct'
-import Prueba from './prueba'
+//import Prueba from './prueba'
 
 
 class Product extends Component {
