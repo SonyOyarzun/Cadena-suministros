@@ -5,7 +5,7 @@ import _default from 'react-bootstrap/esm/CardColumns';
 export default function WithMultipleCheckboxes() {
 
   const [products, setProducts] = useState([]);
-  const [checked, setChecked] = useState(['checkbox0']);
+  const [checked, setChecked] = useState(['checkbox0'],['checkbox1'],['checkbox2'],['checkbox3'],['checkbox4'],);
   let columns = []
   let preRows = []
   let rows = []
@@ -18,7 +18,7 @@ export default function WithMultipleCheckboxes() {
     checkedArr.filter(name => name === e.target.id)[0] 
       ? checkedArr = checkedArr.filter(name => name !== e.target.id)
       : checkedArr.push(e.target.id);
-      setChecked({checkedArr})
+      setChecked([...checkedArr])
   };
 
   const isChecked = id => checked.filter(name => name === id)[0] ? true : false
@@ -50,7 +50,7 @@ console.log(checked)
     Object.keys(products).map((key, row) => (
 
       preRows = [],
-      preRows['check'] = <input label=" " type="checkbox" id={'checkbox'+row}  onChange={toggleCheck} checked={isChecked('checkbox'+row)} defaultcheck='false' />,
+      preRows['check'] = <input label=" " type="checkbox" id={'checkbox'+row}  onClick={toggleCheck} checked={isChecked('checkbox'+row)} defaultChecked />,
 
       Object.keys(products[key]).map((key2, col) => (
         {
