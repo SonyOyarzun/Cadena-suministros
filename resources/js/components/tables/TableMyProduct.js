@@ -1,145 +1,94 @@
 import React, { Component, Fragment, useState, useEffect, useCallback } from 'react';
-import { MDBDataTableV5 } from 'mdbreact';
-import Result from '../Result';
-
-import { map } from 'jquery';
+import { MDBDataTableV5, MDBInput, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 export default function WithMultipleCheckboxes() {
 
   const [products, setProducts] = useState([]);
-  const [datatable, setDatatable] = React.useState([])
-  const [checkbox1, setCheckbox1] = useState([]);
   let columns = []
   let preRows = []
   let rows = []
   let data = []
   let count = 0
 
-  
-  
-  
 
   useEffect(() => {
 
     axios.get('json-api/my')
       .then(response => {
         setProducts(response.data);
-     //   console.log(response.data)
+        //   console.log(response.data)
       }).catch(error => {
         alert("Error " + error)
       })
-  
-      createJson
-  
+
+    createJson
+
   }, []);
 
   const createJson = (
 
-  Object.keys(products).map((key, row) => (
+    columns.push({
+      check: 'check',
+      label: '',
+      field: 'check',
+    }),
 
-    preRows = [],
-    Object.keys(products[key]).map((key2, col) => (
-      {
-        ...count < Object.keys(products[key]).length &&
-        columns.push({
-          label: key2,
-          field: key2,
-        }),
-      },
-      //  console.log('contador :',count,' limite',Object.keys(this.state.products[key]).length,' col:',columns),
-      preRows[key2] = products[row][key2],
-      count = count + 1
+    Object.keys(products).map((key, row) => (
+
+      preRows = [],
+      preRows['check'] = <input label=" " type="checkbox" id={'checkbox'+row} />,
+
+      Object.keys(products[key]).map((key2, col) => (
+        {
+          ...count < Object.keys(products[key]).length &&
+          columns.push({
+            label: key2,
+            field: key2,
+          }),
+        },
+        //  console.log('contador :',count,' limite',Object.keys(this.state.products[key]).length,' col:',columns),
+        preRows[key2] = products[row][key2],
+        count = count + 1
+      )),
+      rows.push(preRows)
+
     )),
-    rows.push(preRows)
 
-  )),
+    
 
-  
-  data = {
-    columns,
-    rows
-  }
-
-  
-
-);
-
-
-
-
-
-
-  //console.log('data', data)
-
-  
-
-
-  
-  //setDatatable([...datatable,JSON.stringify(columns)])
-  
-  
-  const handleClick = (e) => {
-    //  setDatatable({columns,rows})
-    setDatatable(data)
-    console.log('datatable', datatable)
-  
+    data = {
+      columns,
+      rows
     }
 
+  );
 
-
- 
-
-
-
-  const showLogs2 = (e) => {
-    setCheckbox1(e);
-  };
-
-
+  console.log(data)
 
   return (
     <>
-    <button onClick={handleClick}>Text</button>
-    <MDBDataTableV5
-        hover
-        entriesOptions={[5, 20, 25]}
+   <MDBDataTableV5
+        className='cust-table'
+        responsive
+        entriesOptions={[5, 10, 15]}
         entries={5}
         pagesAmount={4}
-        data={datatable}
-        checkbox
-        headCheckboxID='id6'
-        bodyCheckboxID='checkboxes6'
-        getValueCheckBox={(e) => {
-          showLogs2(e);
-        }}
-        getValueAllCheckBoxes={(e) => {
-          showLogs2(e);
-        }}
-        multipleCheckboxes
+        bordered
+        hover
+        btn
+        sortable={false}
+        data={data}
       />
-
-
-
     </>
   );
 }
 
 /**
- * <Result>
-        {' '}
-        {checkbox1 && (
-          <p>
-            {JSON.stringify(
-              checkbox1.map((e) => {
-                console.log(e);
-                delete e.checkbox;
-                return e;
-              }) && checkbox1
-            )}
-          </p>
-        )}
-      </Result>
-
-
-      
+ * 
+ 
+ * 
+  <MDBTable btn fixed>
+    <MDBTableHead columns={data.columns} />
+    <MDBTableBody rows={data.rows} />
+   </MDBTable>
  */

@@ -8,10 +8,12 @@ import { BrowserRouter } from 'react-router-dom'
 //importacion de react
 import { Container } from 'react-bootstrap';
 //import 'bootstrap/dist/css/bootstrap.min.css';
+
 //import Material Bootstrap
+import 'mdbreact/dist/css/mdb.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
-import 'mdbreact/dist/css/mdb.css';
+
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 

@@ -6,6 +6,7 @@ import {Card} from 'react-bootstrap';
 import TableProduct from './tables/TableProduct'
 
 
+
 class Product extends Component {
 
     render() {
