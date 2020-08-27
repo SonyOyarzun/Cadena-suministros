@@ -5,7 +5,8 @@ import _default from 'react-bootstrap/esm/CardColumns';
 export default function WithMultipleCheckboxes() {
 
   const [products, setProducts] = useState([]);
-  const [checked, setChecked] = useState(['checkbox0'],['checkbox1'],['checkbox2'],['checkbox3'],['checkbox4'],);
+  const [checked, setChecked] = useState(['checkbox0']);
+  const [checkbox, setCheckbox] = useState([]);
   let columns = []
   let preRows = []
   let rows = []
@@ -21,9 +22,12 @@ export default function WithMultipleCheckboxes() {
       setChecked([...checkedArr])
   };
 
+
+
   const isChecked = id => checked.filter(name => name === id)[0] ? true : false
 
 console.log(checked)
+console.log(checkbox)
 
   useEffect(() => {
 
@@ -87,8 +91,19 @@ for(var i=0; inputElements[i]; ++i){
 }
 */
 
+
+
 const click = e => {
-  console.log(document.querySelector('.box:checked').value)
+  if(confirm("Press a button!")){
+  let checkedArr = checked;
+  checkedArr.filter(name => name === e.target.id)[0] 
+    ? checkedArr = checkedArr.filter(name => name !== e.target.id)
+    : checkedArr.push(e.target.value);
+    setCheckbox([...checkedArr])
+  }else{
+    setCheckbox([])
+  }
+  console.log('checkbox ',checkbox)
 };
 
   return (
