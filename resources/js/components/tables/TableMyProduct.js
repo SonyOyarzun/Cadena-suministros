@@ -132,6 +132,7 @@ export default function WithMultipleCheckboxes() {
       })
     console.log(txSigned);
     // Check console for the transaction's status
+    //http://docs.bigchaindb.com/en/latest/query.html
 
   }
 
