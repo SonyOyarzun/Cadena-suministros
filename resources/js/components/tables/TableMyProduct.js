@@ -50,7 +50,7 @@ console.log(checked)
     Object.keys(products).map((key, row) => (
 
       preRows = [],
-      preRows['check'] = <input label=" " type="checkbox" id={'checkbox'+row}  onClick={toggleCheck} checked={isChecked('checkbox'+row)} defaultChecked />,
+      preRows['check'] = <input label=" " value={JSON.stringify(products[key])} type="checkbox" id={'checkbox'+row} className="box" onClick={toggleCheck} checked={isChecked('checkbox'+row)} defaultChecked />,
 
       Object.keys(products[key]).map((key2, col) => (
         {
@@ -76,11 +76,24 @@ console.log(checked)
     }
 
   );
+/*
+let checkedValue = null; 
+let inputElements = document.getElementsByClassName('box');
+for(var i=0; inputElements[i]; ++i){
+      if(inputElements[i].checked){
+           checkedValue = inputElements[i].value;
+           break;
+      }
+}
+*/
 
-  //console.log(data)
+const click = e => {
+  console.log(document.querySelector('.box:checked').value)
+};
 
   return (
     <>
+    <button onClick={click}/>
    <MDBDataTableV5
         className='cust-table'
         responsive
