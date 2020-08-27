@@ -5,7 +5,7 @@ import _default from 'react-bootstrap/esm/CardColumns';
 export default function WithMultipleCheckboxes() {
 
   const [products, setProducts] = useState([]);
-  const [checked, setChecked] = useState(['checkbox0']);
+  const [checked, setChecked] = useState([]);
   const [checkbox, setCheckbox] = useState([]);
   let columns = []
   let preRows = []
@@ -54,7 +54,7 @@ console.log(checkbox)
     Object.keys(products).map((key, row) => (
 
       preRows = [],
-      preRows['check'] = <input label=" " value={JSON.stringify(products[key])} type="checkbox" id={'checkbox'+row} className="box" onClick={toggleCheck} checked={isChecked('checkbox'+row)} defaultChecked />,
+      preRows['check'] = <input label=" " value={JSON.stringify(products[key])} type="checkbox" id={'checkbox'+row} className="box" onClick={toggleCheck} checked={isChecked('checkbox'+row)} defaultChecked='false' />,
 
       Object.keys(products[key]).map((key2, col) => (
         {
@@ -94,17 +94,13 @@ for(var i=0; inputElements[i]; ++i){
 
 
 const click = e => {
-  if(confirm("Press a button!")){
-  let checkedArr = checked;
-  checkedArr.filter(name => name === e.target.id)[0] 
-    ? checkedArr = checkedArr.filter(name => name !== e.target.id)
-    : checkedArr.push(e.target.value);
-    setCheckbox([...checkedArr])
-  }else{
-    setCheckbox([])
-  }
-  console.log('checkbox ',checkbox)
-};
+
+    Object.keys(checked).map((key, row) => (
+      console.log(document.getElementById(checked[key]).value)
+    ))
+  //  setCheckbox([...boxArr])
+
+}
 
   return (
     <>
