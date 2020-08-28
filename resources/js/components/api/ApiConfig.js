@@ -18,12 +18,13 @@ class ApiConfig extends Component {
     })
       .then((response) => {
         console.log(response.data);
-        this.setState({ config: response.data })
+        this.setState({ config: response.data[0] })
       }, (error) => {
         console.log(error);
       });
 
   }
+
 
 
   render() {
@@ -38,11 +39,11 @@ class ApiConfig extends Component {
                 <div className="text-center">
                   <h3 className="dark-grey-text mb-5"><strong>Configuracion</strong></h3>
                 </div>
-                <MDBInput label="Ruta de API"           value={this.state.config} validate error="wrong" success="right"/>
-                <MDBInput label="Ruta de Transacciones" value={this.state.config} validate error="wrong" success="right"/>
-                <MDBInput label="Puertos"               value={this.state.config} validate error="wrong" success="right"/>
-                <MDBInput label="Ruta de logo"          value={this.state.config} validate error="wrong" success="right"/>
-                <MDBInput label="Ruta de fondo"         value={this.state.config} validate error="wrong" success="right"/>
+                <MDBInput label="Ruta de API"           value={this.state.config.path}        validate error="wrong" success="right"/>
+                <MDBInput label="Ruta de Transacciones" value={this.state.config.transaction} validate error="wrong" success="right"/>
+                <MDBInput label="Puertos"               value={this.state.config.port}        validate error="wrong" success="right"/>
+                <MDBInput label="Ruta de logo"          value={this.state.config.logotype}    validate error="wrong" success="right"/>
+                <MDBInput label="Ruta de fondo"         value={this.state.config.background}  validate error="wrong" success="right"/>
                 <div className="text-center pt-3 mb-3">
                   <MDBBtn type="button" gradient="blue" rounded className="btn-block z-depth-1a">Actualizar</MDBBtn>
                 </div>
