@@ -28,6 +28,10 @@ function Send(props) {
 
   const sendTransaction = e => {
 
+    const transaction = props.getData
+
+    console.log(transaction)
+
     const BigchainDB = require('bigchaindb-driver')
     //const API_PATH = 'http://192.168.99.100:9984/api/v1/'
     //https://test.ipdb.io/api/v1/transactions/63b1c9f795448346b501f20b259edea95627033403cb7ab20a3e53668912ee47
@@ -39,7 +43,7 @@ function Send(props) {
     // Construct a transaction payload
     const tx = BigchainDB.Transaction.makeCreateTransaction(
       // Data JSON
-      { array },
+      { transaction },
 
       // Metadata contains information about the transaction itself
       // (can be `null` if not needed)

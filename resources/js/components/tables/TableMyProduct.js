@@ -17,6 +17,14 @@ export default function WithMultipleCheckboxes() {
   let array = []
   let count = 0
 
+  const getDataCheckbox = e => {
+    Object.keys(checked).map((key, row) => (
+      array.push(JSON.parse(document.getElementById(checked[key]).value))
+    ))
+    setCheckbox(array)
+    console.log('Checked ',checkbox)
+  }
+
 
   const toggleCheck = e => {
     let checkedArr = checked;
@@ -24,6 +32,7 @@ export default function WithMultipleCheckboxes() {
       ? checkedArr = checkedArr.filter(name => name !== e.target.id)
       : checkedArr.push(e.target.id);
     setChecked([...checkedArr])
+    getDataCheckbox()
   };
 
   const isChecked = id => checked.filter(name => name === id)[0] ? true : false
@@ -81,18 +90,10 @@ export default function WithMultipleCheckboxes() {
   );
 
 
-  const confirm = e => {
-
-    Object.keys(checked).map((key, row) => (
-      array.push(JSON.parse(document.getElementById(checked[key]).value))
-    )),
-      window.confirm('¿Desea enviar estos productos al destinatario ?') &&
-      console.log(array)
-  }
-
+ 
   return (
     <>
-      <Send transaction={array} onClick={confirm}/>
+      <Send getData={checkbox} />
       <MDBDataTableV5
         className='cust-table'
         responsive
