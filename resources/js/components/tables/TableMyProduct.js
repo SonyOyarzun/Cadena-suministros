@@ -5,7 +5,7 @@ import _default from 'react-bootstrap/esm/CardColumns';
 //import api
 import Send from '../api/Send'
 
-export default function WithMultipleCheckboxes() {
+export default function TableMyProduct() {
 
   const [products, setProducts] = useState([]);
   const [checked, setChecked] = useState([]);

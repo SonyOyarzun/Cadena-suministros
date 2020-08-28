@@ -12,5 +12,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call(UserSeeder::class);
+         $this->call(ApiSeeder::class);
     }
 }
+
+//php artisan migrate:refresh --seed

@@ -6,31 +6,9 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 
 function Send(props) {
 
-  const getConfig = () => {
-
-    axios({
-      method: 'get',
-      url: '/user/',
-      data: {
-        id: props.id,
-      }
-    })
-      .then((response) => {
-        console.log(response);
-        alert(response.data)
-        props.getData()
-      }, (error) => {
-        console.log(error);
-      });
-
-  }
-
-
   const sendTransaction = e => {
 
     const transaction = props.getData
-
-    console.log(transaction)
 
     const BigchainDB = require('bigchaindb-driver')
     //const API_PATH = 'http://192.168.99.100:9984/api/v1/'

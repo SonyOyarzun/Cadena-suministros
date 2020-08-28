@@ -39,6 +39,7 @@ class NavBar extends Component {
               <Nav.Link onClick={() => this.handleLink("Traza")}>Traza</Nav.Link>
               <NavDropdown title="Administración" id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={() => this.handleLink("User")}>Usuarios</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => this.handleLink("ApiConfig")}>Configuracion</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Distribución" id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={() => this.handleLink("MyProduct")}>Mis Productos</NavDropdown.Item>

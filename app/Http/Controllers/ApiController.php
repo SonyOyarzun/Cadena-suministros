@@ -48,7 +48,30 @@ class ApiController extends Controller
 		return json_encode("Usuario Desconocido");
 	}
 
-}
+	}
+
+	public function config()
+    {
+		$id=Auth::id();
+		$user = User::findOrFail($id);
+		
+	if($user!=null){	
+
+	try{		
+    	$client = new Client();
+		$response = $client->request('GET', $user->path);
+    	$statusCode = $response->getStatusCode();
+		$body = $response->getBody()->getContents();
+	}catch(\Exception $e){
+		return json_encode($e);
+	}
+		return $body;
+
+	}else{
+		return json_encode("Usuario Desconocido");
+	}
+
+	}
 	
 
 

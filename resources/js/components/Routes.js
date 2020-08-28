@@ -7,6 +7,7 @@ import {Route} from 'react-router-dom';
 import User from './User'
 import Product from './Product'
 import MyProduct from './MyProduct'
+import ApiConfig from './api/ApiConfig'
 
 class Routes extends Component {
 
@@ -18,6 +19,8 @@ class Routes extends Component {
 <Route path="/User"         component={User}        />
 <Route path="/Product"      component={Product}     />
 <Route path="/MyProduct"    component={MyProduct}   />
+
+<Route path="/ApiConfig"    component={ApiConfig}   />
 
 </div>
 
