@@ -2,7 +2,8 @@ import React, { Component, Fragment, useState, useEffect, useCallback } from 're
 import { MDBDataTableV5, MDBInput, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import _default from 'react-bootstrap/esm/CardColumns';
 
-//import BigchainDB from 'bigchaindb-driver';
+//import api
+import Send from '../api/Send'
 
 export default function WithMultipleCheckboxes() {
 
@@ -13,6 +14,7 @@ export default function WithMultipleCheckboxes() {
   let preRows = []
   let rows = []
   let data = []
+  let array = []
   let count = 0
 
 
@@ -24,8 +26,6 @@ export default function WithMultipleCheckboxes() {
     setChecked([...checkedArr])
   };
 
-
-
   const isChecked = id => checked.filter(name => name === id)[0] ? true : false
 
   console.log(checked)
@@ -36,7 +36,7 @@ export default function WithMultipleCheckboxes() {
     axios.get('json-api/my')
       .then(response => {
         setProducts(response.data);
-        //   console.log(response.data)
+
       }).catch(error => {
         alert("Error " + error)
       })
@@ -66,15 +66,12 @@ export default function WithMultipleCheckboxes() {
             field: key2,
           }),
         },
-        //  console.log('contador :',count,' limite',Object.keys(this.state.products[key]).length,' col:',columns),
         preRows[key2] = products[row][key2],
         count = count + 1
       )),
       rows.push(preRows)
 
     )),
-
-
 
     data = {
       columns,
@@ -86,59 +83,16 @@ export default function WithMultipleCheckboxes() {
 
   const confirm = e => {
 
-    let array = []
     Object.keys(checked).map((key, row) => (
       array.push(JSON.parse(document.getElementById(checked[key]).value))
     )),
       window.confirm('¿Desea enviar estos productos al destinatario ?') &&
       console.log(array)
-
-    const BigchainDB = require('bigchaindb-driver')
-    //const API_PATH = 'http://192.168.99.100:9984/api/v1/'
-    //https://test.ipdb.io/api/v1/transactions/63b1c9f795448346b501f20b259edea95627033403cb7ab20a3e53668912ee47
-    const API_PATH = 'https://test.ipdb.io/api/v1/'
-
-    // Create a new keypair.
-    const alice = new BigchainDB.Ed25519Keypair()
-
-    // Construct a transaction payload
-    const tx = BigchainDB.Transaction.makeCreateTransaction(
-      // Data JSON
-      { array },
-
-      // Metadata contains information about the transaction itself
-      // (can be `null` if not needed)
-      { what: 'Envio de Productos' },
-
-      // A transaction needs an output
-      [BigchainDB.Transaction.makeOutput(
-        BigchainDB.Transaction.makeEd25519Condition(alice.publicKey))
-      ],
-      alice.publicKey
-    )
-
-    // Sign the transaction with private keys
-    const txSigned = BigchainDB.Transaction.signTransaction(tx, alice.privateKey)
-
-    // Send the transaction off to BigchainDB
-    let conn = new BigchainDB.Connection(API_PATH)
-
-    conn.postTransactionCommit(txSigned)
-      .then(res => {
-        const elem = document.getElementById('lastTransaction');
-        elem.href = API_PATH + 'transactions/' + txSigned.id;
-        elem.innerText = txSigned.id;
-        console.log('Transaction', txSigned.id, 'accepted');
-      })
-    console.log(txSigned);
-    // Check console for the transaction's status
-    //http://docs.bigchaindb.com/en/latest/query.html
-
   }
 
   return (
     <>
-      <button onClick={confirm} />
+      <Send transaction={array} onClick={confirm}/>
       <MDBDataTableV5
         className='cust-table'
         responsive
@@ -154,13 +108,3 @@ export default function WithMultipleCheckboxes() {
     </>
   );
 }
-
-/**
- *
-
- *
-  <MDBTable btn fixed>
-    <MDBTableHead columns={data.columns} />
-    <MDBTableBody rows={data.rows} />
-   </MDBTable>
- */

@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-//Componentes de Bootstap
-import { Button, Modal, Card, Form } from 'react-bootstrap';
-
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
 

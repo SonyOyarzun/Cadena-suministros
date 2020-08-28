@@ -10,10 +10,10 @@ import EditUser from '../modals/EditUser'
 import NewUser from '../modals/NewUser'
 import PassUser from '../modals/PassUser'
 import DeleteUser from '../modals/DeleteUser'
-import ProductUser from '../modals/ProductUser'
+
 
 import {NavLink,Link, withRouter}  from 'react-router-dom';
-import { Button, Navbar ,Nav, NavDropdown,Form,FormControl} from 'react-bootstrap';
+
 
 class TableUser extends Component {
 
@@ -36,11 +36,6 @@ class TableUser extends Component {
 
   }
 
-  alert(){
-
-alert('casi')
-
-  }
 
   componentDidMount() {
 
@@ -145,3 +140,4 @@ alert('casi')
 }
 
 export default withRouter(TableUser);
+
