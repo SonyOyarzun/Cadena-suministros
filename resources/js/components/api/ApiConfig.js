@@ -3,16 +3,22 @@ import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter,
 
 class ApiConfig extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      config: []
+    }
+  }
+
   componentDidMount(){
 
     axios({
       method: 'get',
-      url: '/user/'
+      url: 'json-api/config'
     })
       .then((response) => {
-        console.log(response);
-        alert(response.data)
-        props.getData()
+        console.log(response.data);
+        this.setState({ config: response.data })
       }, (error) => {
         console.log(error);
       });
@@ -32,11 +38,11 @@ class ApiConfig extends Component {
                 <div className="text-center">
                   <h3 className="dark-grey-text mb-5"><strong>Configuracion</strong></h3>
                 </div>
-                <MDBInput label="Ruta de API"   validate error="wrong" success="right"/>
-                <MDBInput label="Ruta de Transacciones"   validate error="wrong" success="right"/>
-                <MDBInput label="Puertos"       validate error="wrong" success="right"/>
-                <MDBInput label="Ruta de logo"  validate error="wrong" success="right"/>
-                <MDBInput label="Ruta de fondo" validate error="wrong" success="right"/>
+                <MDBInput label="Ruta de API"           value={this.state.config} validate error="wrong" success="right"/>
+                <MDBInput label="Ruta de Transacciones" value={this.state.config} validate error="wrong" success="right"/>
+                <MDBInput label="Puertos"               value={this.state.config} validate error="wrong" success="right"/>
+                <MDBInput label="Ruta de logo"          value={this.state.config} validate error="wrong" success="right"/>
+                <MDBInput label="Ruta de fondo"         value={this.state.config} validate error="wrong" success="right"/>
                 <div className="text-center pt-3 mb-3">
                   <MDBBtn type="button" gradient="blue" rounded className="btn-block z-depth-1a">Actualizar</MDBBtn>
                 </div>

@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Api_config;
 
 class ApiController extends Controller
 {
@@ -52,24 +53,9 @@ class ApiController extends Controller
 
 	public function config()
     {
-		$id=Auth::id();
-		$user = User::findOrFail($id);
-		
-	if($user!=null){	
+		$api = Api_config::get();
 
-	try{		
-    	$client = new Client();
-		$response = $client->request('GET', $user->path);
-    	$statusCode = $response->getStatusCode();
-		$body = $response->getBody()->getContents();
-	}catch(\Exception $e){
-		return json_encode($e);
-	}
-		return $body;
-
-	}else{
-		return json_encode("Usuario Desconocido");
-	}
+		return $api;
 
 	}
 	
