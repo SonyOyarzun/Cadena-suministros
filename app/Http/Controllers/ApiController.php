@@ -58,7 +58,15 @@ class ApiController extends Controller
 		return $api;
 
 	}
-	
+
+	public function editConfig()
+    {
+		$api = Api_config::get();
+
+		return $api;
+
+	}
+
 
 
 }
@@ -70,5 +78,8 @@ http://becasbeneficios.ugm.cl/service.php?acceso_alumno=189567391
 http://becasbeneficios.ugm.cl/service.php?informacion_basica=189567391 
 
 http://becasbeneficios.ugm.cl/service.php?carreras_programas=189567391  
+
+controlador modelo y migration
+php artisan make:model ModelName -m -cr 
 
 */

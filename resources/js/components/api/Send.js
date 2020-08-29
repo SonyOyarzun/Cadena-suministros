@@ -6,9 +6,29 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 
 function Send(props) {
 
+const save = (id_transaction,to) =>{
+  axios({
+    method: 'post',
+    url: '/transaction/new',
+    data: {
+      id:    id_transaction,
+      to:    to,
+    }
+  })
+    .then((response) => {
+      console.log(response);
+      alert(response.data)
+    }, (error) => {
+      console.log(error);
+    });
+}
+
+
   const sendTransaction = e => {
 
     const transaction = props.getData
+
+    const info = props.getData
 
     const BigchainDB = require('bigchaindb-driver')
     //const API_PATH = 'http://192.168.99.100:9984/api/v1/'
@@ -25,7 +45,7 @@ function Send(props) {
 
       // Metadata contains information about the transaction itself
       // (can be `null` if not needed)
-      { what: 'Envio de Productos' },
+      { info: info },
 
       // A transaction needs an output
       [BigchainDB.Transaction.makeOutput(
@@ -42,12 +62,12 @@ function Send(props) {
 
     conn.postTransactionCommit(txSigned)
       .then(res => {
-        const elem = document.getElementById('lastTransaction');
-        elem.href = API_PATH + 'transactions/' + txSigned.id;
-        elem.innerText = txSigned.id;
-        console.log('Transaction', txSigned.id, 'accepted');
+        const elem = API_PATH + 'transactions/' + txSigned.id;
+        console.log('Transaction', txSigned.id, 'accepted', 'URL :',elem);
       })
     console.log(txSigned);
+
+    save(txSigned.id,'2')
     // Check console for the transaction's status
     //http://docs.bigchaindb.com/en/latest/query.html
 
