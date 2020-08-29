@@ -15,6 +15,9 @@ class CreateChainTable extends Migration
     {
         Schema::create('chain', function (Blueprint $table) {
             $table->id();
+            $table->string('transaction');
+            $table->integer('from');
+            $table->integer('to');
             $table->timestamps();
         });
     }
