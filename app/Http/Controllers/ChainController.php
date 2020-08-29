@@ -19,11 +19,13 @@ class ChainController extends Controller
     
     public function create(Request $request)
     {
-        
+            $id=Auth::id();
+
             $chain = new Chain;
             $chain->transaction = $request->transaction;
-            $chain->from        = $request->from;
+            $chain->from        = $id;
             $chain->to          = $request->to;
+            $chain->state       = 'Enviado';
             $chain->created_at = now();
             $chain->updated_at = now();
             $chain->save();
