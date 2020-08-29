@@ -18,7 +18,7 @@ class CreateChainTable extends Migration
             $table->string('transaction');
             $table->integer('from');
             $table->integer('to');
-            $table->string('State');
+            $table->string('state');
             $table->timestamps();
         });
     }

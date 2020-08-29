@@ -21,7 +21,7 @@ class ChainController extends Controller
     {
         
             $chain = new Chain;
-            $chain->transaction = $request->id_transaction;
+            $chain->transaction = $request->transaction;
             $chain->from        = $request->from;
             $chain->to          = $request->to;
             $chain->created_at = now();

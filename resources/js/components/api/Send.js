@@ -11,8 +11,8 @@ const save = (id_transaction,to) =>{
     method: 'post',
     url: 'chain/new',
     data: {
-      id:    id_transaction,
-      to:    to,
+      transaction: id_transaction,
+      to:          to,
     }
   })
     .then((response) => {
@@ -31,20 +31,15 @@ const save = (id_transaction,to) =>{
     const info = props.getData
 
     const BigchainDB = require('bigchaindb-driver')
-    //const API_PATH = 'http://192.168.99.100:9984/api/v1/'
-    //https://test.ipdb.io/api/v1/transactions/63b1c9f795448346b501f20b259edea95627033403cb7ab20a3e53668912ee47
+
     const API_PATH = 'https://test.ipdb.io/api/v1/'
 
-    // Create a new keypair.
     const alice = new BigchainDB.Ed25519Keypair()
 
-    // Construct a transaction payload
     const tx = BigchainDB.Transaction.makeCreateTransaction(
       // Data JSON
       { transaction },
 
-      // Metadata contains information about the transaction itself
-      // (can be `null` if not needed)
       { info: info },
 
       // A transaction needs an output
@@ -64,12 +59,11 @@ const save = (id_transaction,to) =>{
       .then(res => {
         const elem = API_PATH + 'transactions/' + txSigned.id;
         console.log('Transaction', txSigned.id, 'accepted', 'URL :',elem);
+        save(txSigned.id,'2')
       })
     console.log(txSigned);
 
-    save(txSigned.id,'2')
-    // Check console for the transaction's status
-    //http://docs.bigchaindb.com/en/latest/query.html
+
 
   }
 
