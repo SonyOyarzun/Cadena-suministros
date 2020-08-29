@@ -9,7 +9,7 @@ function Send(props) {
 const save = (id_transaction,to) =>{
   axios({
     method: 'post',
-    url: '/transaction/new',
+    url: 'chain/new',
     data: {
       id:    id_transaction,
       to:    to,
