@@ -19,7 +19,7 @@ class TableSend extends Component {
   getData(){
 
     axios.get('chain/list').then(response => {
-  //    this.setState({ sends: response.data })
+      this.setState({ sends: response.data })
   //    console.log(this.state.sends)
       console.log('response :',response.data)
     }).catch(error => {
@@ -81,8 +81,8 @@ class TableSend extends Component {
               
               id: data.id,
               transaction: data.transaction,
-              from: data.from,
-              to: data.to,
+              from: data.fromName,
+              to: data.toName,
               state: data.state,
               updated_at: data.updated_at,
                         
