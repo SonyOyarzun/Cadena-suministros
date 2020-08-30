@@ -36,8 +36,6 @@ class ChainController extends Controller
 
     $chain = new Chain;
     $chain->transaction = $request->transaction;
-    $chain->public      = $request->public;
-    $chain->private     = $request->private;
     $chain->from        = $id;
     $chain->to          = $request->to;
     $chain->state       = 'Enviado';

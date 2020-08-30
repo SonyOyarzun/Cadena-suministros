@@ -28,6 +28,9 @@ const save = (id_transaction,pubkey,privkey,to) =>{
 
   const sendTransaction = e => {
 
+    const publicKey  = ''
+    const privateKey = ''
+
     const transaction = props.getData
 
     const info = props.getData
@@ -36,7 +39,8 @@ const save = (id_transaction,pubkey,privkey,to) =>{
 
     const API_PATH = 'https://test.ipdb.io/api/v1/'
 
-    const alice = new BigchainDB.Ed25519Keypair()
+    //const alice = new BigchainDB.Ed25519Keypair()
+    
 
     const tx = BigchainDB.Transaction.makeCreateTransaction(
       // Data JSON
@@ -53,7 +57,6 @@ const save = (id_transaction,pubkey,privkey,to) =>{
 
     // Sign the transaction with private keys
     const txSigned = BigchainDB.Transaction.signTransaction(tx, alice.privateKey)
-
     // Send the transaction off to BigchainDB
     let conn = new BigchainDB.Connection(API_PATH)
 
@@ -61,11 +64,9 @@ const save = (id_transaction,pubkey,privkey,to) =>{
       .then(res => {
         const elem = API_PATH + 'transactions/' + txSigned.id;
         console.log('Transaction', txSigned.id, 'accepted', 'URL :',elem);
-        save(txSigned.id,alice.publicKey,alice.privateKey,'1')
+        save(txSigned.id,'1')
       })
     console.log(txSigned);
-
-
 
   }
 
