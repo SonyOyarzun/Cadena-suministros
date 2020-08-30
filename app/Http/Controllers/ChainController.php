@@ -12,29 +12,20 @@ class ChainController extends Controller
 {
     public function index()
     {
-    $chain = Chain::get();
 
-    $send  = [];
-    foreach($chains as $chain){
 
-    $from = User::findOrFail($chain->from);
-    $to   = User::findOrFail($chain->from);
+  $chains = Chain::get();
 
-    $send = [
-      "id"          => $chain->id,
-      "transaction" => $chain->id,
-      "from"        => $chain->id,
-      "to"          => $chain->id,
-      "state"       => $chain->id,
-      "updated_at"  => User::findOrFail($chain->from),
-      "created_at"  => User::findOrFail($chain->to),
-    ];
-    }
+  $from = Chain::select('name')
+      ->join('users','users.id','=','chain.from')
+      ->get();
+  $to = Chain::select('name')
+      ->join('users','users.id','=','chain.to')
+      ->get();
 
    
-   
-
-		return 
+ 
+    return $chains;
 
     }
     

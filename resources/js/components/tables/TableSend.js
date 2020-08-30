@@ -5,30 +5,23 @@ import axios from 'axios'
 //import datable
 import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon } from 'mdbreact';
 
-//importar modals
-import EditUser from '../modals/EditUser'
 
-
-
-import {NavLink,Link, withRouter}  from 'react-router-dom';
-
-
-class TableUser extends Component {
+class TableSend extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      sends: []
     }
-    this.handleLink = this.handleLink.bind(this);
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
   }
 
   getData(){
 
     axios.get('chain/list').then(response => {
-      this.setState({ users: response.data })
-      console.log(this.state.users)
+  //    this.setState({ sends: response.data })
+  //    console.log(this.state.sends)
+      console.log('response :',response.data)
     }).catch(error => {
       alert("Error " + error)
     })
@@ -42,12 +35,6 @@ class TableUser extends Component {
 
   }
 
-  handleLink(path,data) {
-    this.props.history.push({
-      pathname: path,
-      data: data // your data array of objects
-    })
-  }
 
   render() {
 
@@ -63,55 +50,50 @@ class TableUser extends Component {
           },
         },
         {
-          label: 'Nombre',
-          field: 'name',
+          label: 'Transaccion',
+          field: 'transaction',
           width: 150,
         },
         {
-          label: 'Email',
-          field: 'email',
+          label: 'De',
+          field: 'from',
           width: 200,
         },
         {
-          label: 'Rol',
-          field: 'role',
+          label: 'Para',
+          field: 'to',
           sort: 'asc',
           width: 100,
         },
         {
-          label: '',
-          field: 'edit',
+          label: 'Estado',
+          field: 'state',
         }, 
         {
-          label: '',
-          field: 'pass',
-        },
-        {
-          label: '',
-          field: 'delete',
-        },
-        {
-          label: '',
-          field: 'product',
+          label: 'Fecha',
+          field: 'updated_at',
         },
       ],
+      
       rows: [
-        ...this.state.users.map((data, order) => (
-          {
-            id: (
-              <MDBBadge pill color='primary' className='p-1 px-2' key={order} searchvalue={order}>
-                ID: {data.id}
-              </MDBBadge>
-            ),
-            name:   data.name,
-            email:  data.email,
-            role:   data.role,
-               
-          }
+        ...this.state.sends.map((data, order) => (
+            {
+              
+              id: data.id,
+              transaction: data.transaction,
+              from: data.from,
+              to: data.to,
+              state: data.state,
+              updated_at: data.updated_at,
+                        
+            }
+          
         ))
       ]
+      
     };
 
+    console.log(data)
     return (
       <div>
         <MDBDataTableV5
@@ -130,5 +112,6 @@ class TableUser extends Component {
 
 }
 
-export default withRouter(TableUser);
+
+export default TableSend;
 
