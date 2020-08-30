@@ -27,6 +27,11 @@ function Send(props) {
   const receiveTransaction = e => {
 
 
+    const pub  = '6ureh2zV5qhChMSvzKCtnddkPzgHbjcJVBG4939uxcXo'
+    const priv = '8DxPa3fRFPoVCx7nC7preaJ3ukRhb3MGFNSbZPpSkkvd'
+    const id   = 'bf10ec6da7a8058285701c76bd40276b455836dac17e115769d34c3a780b9aad'
+    
+
     const transaction = props.getData
 
     const info = props.getData
@@ -47,6 +52,8 @@ function Send(props) {
 
     // Define the asset to store, in this example
     // we store a bicycle with its serial number and manufacturer
+
+    /*
     let assetdata={}
 
     assetdata = {
@@ -68,9 +75,23 @@ function Send(props) {
       ],
       alice.publicKey
     )
+*/
+let assetdata = {}
+const txCreateAliceSimple = driver.Transaction.makeCreateTransaction(
+  assetdata,
+  { 'meta': 'meta' },
+  // A transaction needs an output
+  [driver.Transaction.makeOutput(
+    driver.Transaction.makeEd25519Condition(alice.publicKey))
+  ],
+  alice.publicKey
+)
+
+console.log('tx ',txCreateAliceSimple)
 
     // Sign the transaction with private keys of Alice to fulfill it
-    const txCreateAliceSimpleSigned = driver.Transaction.signTransaction(txCreateAliceSimple, alice.privateKey)
+    const txCreateAliceSimpleSigned = driver.Transaction.signTransaction(id, priv)
+    
     console.log('\n\nPosting signed create transaction for Alice:\n', txCreateAliceSimpleSigned)
 
     conn.postTransactionCommit(txCreateAliceSimpleSigned)
@@ -84,29 +105,15 @@ function Send(props) {
         )
 
         // Sign with alice's private key
-        txTransferBobSigned = driver.Transaction.signTransaction(txTransferBob, alice.privateKey)
+        txTransferBobSigned = driver.Transaction.signTransaction(txTransferBob, priv)
         console.log('\n\nPosting signed transaction to Bob:\n', txTransferBobSigned)
 
         // Post with commit so transaction is validated and included in a block
         return conn.postTransactionCommit(txTransferBobSigned)
       })
 
-      // Second transfer of bicycle from Bob to Chris
-      .then(tx => {
-        const txTransferChris = driver.Transaction.makeTransferTransaction(
-          [{ tx: txTransferBobSigned, output_index: 0 }],
-          [driver.Transaction.makeOutput(driver.Transaction.makeEd25519Condition(chris.publicKey))],
-          { 'newOwner': 'Chris' }
-        )
-
-        // Sign with bob's private key
-        let txTransferChrisSigned = driver.Transaction.signTransaction(txTransferChris, bob.privateKey)
-        console.log('\n\nPosting signed transaction to Chris:\n', txTransferChrisSigned)
-
-        // Post with commit so transaction is validated and included in a block
-        return conn.postTransactionCommit(txTransferChrisSigned)
-      })
-      .then(() => conn.listOutputs(alice.publicKey, true))
+      
+      .then(() => conn.listOutputs(pub, true))
       .then(listSpentOutputs => {
         console.log("\nSpent outputs for Alice: ", listSpentOutputs.length) // Spent outputs: 1
         return conn.listOutputs(alice.publicKey, false)

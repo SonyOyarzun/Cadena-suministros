@@ -86,4 +86,6 @@ https://www.itechempires.com/2019/09/complete-guide-of-using-laravel-6-eloquent-
 
 php artisan migrate:refresh --seed
 
+https://medium.com/@vchaurasia95/basic-operations-in-bigchaindb-using-js-eb530216eaa7
+
 */
