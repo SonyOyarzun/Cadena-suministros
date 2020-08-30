@@ -82,4 +82,8 @@ http://becasbeneficios.ugm.cl/service.php?carreras_programas=189567391
 controlador modelo y migration
 php artisan make:model ModelName -m -cr 
 
+https://www.itechempires.com/2019/09/complete-guide-of-using-laravel-6-eloquent-subquery-enhancements/
+
+php artisan migrate:refresh --seed
+
 */

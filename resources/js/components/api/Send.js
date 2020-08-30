@@ -6,13 +6,15 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 
 function Send(props) {
 
-const save = (id_transaction,to) =>{
+const save = (id_transaction,pubkey,privkey,to) =>{
   axios({
     method: 'post',
     url: 'chain/new',
     data: {
-      transaction: id_transaction,
-      to:          to,
+      transaction:  id_transaction,
+      public:       pubkey,
+      private:      privkey,
+      to:           to,
     }
   })
     .then((response) => {
@@ -59,7 +61,7 @@ const save = (id_transaction,to) =>{
       .then(res => {
         const elem = API_PATH + 'transactions/' + txSigned.id;
         console.log('Transaction', txSigned.id, 'accepted', 'URL :',elem);
-        save(txSigned.id,'2')
+        save(txSigned.id,alice.publicKey,alice.privateKey,'1')
       })
     console.log(txSigned);
 
