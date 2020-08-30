@@ -14,7 +14,9 @@ class ChainController extends Controller
     {
 
 
-  $chains = Chain::get();
+  $chains = Chain::addSelect('k')->get();
+
+ // $chains->addSelect('h');
 
   $from = Chain::select('name')
       ->join('users','users.id','=','chain.from')
