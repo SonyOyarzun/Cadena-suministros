@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
 import { MDBIcon, MDBDataTableV5, MDBBadge, MDBBtn } from "mdbreact";
-import { map } from 'jquery';
+
 
 function ProductUser(props) {
 

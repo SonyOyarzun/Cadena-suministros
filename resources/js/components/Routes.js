@@ -8,6 +8,7 @@ import User from './User'
 import Product from './Product'
 import MyProduct from './MyProduct'
 import ApiConfig from './api/ApiConfig'
+import Send from './Send'
 
 class Routes extends Component {
 
@@ -21,6 +22,8 @@ class Routes extends Component {
 <Route path="/MyProduct"    component={MyProduct}   />
 
 <Route path="/ApiConfig"    component={ApiConfig}   />
+
+<Route path="/Send"         component={Send}        />
 
 </div>
 
