@@ -10,6 +10,7 @@ import { Redirect } from 'react-router';
 import { Button, Navbar, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
 import props from 'prop-types';
 
+import { MDBIcon, MDBBtn } from "mdbreact";
 
 
 
@@ -35,27 +36,22 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link onClick={() => this.handleLink("home")}>Inicio</Nav.Link>
-              <Nav.Link onClick={() => this.handleLink("Traza")}>Traza</Nav.Link>
-              <NavDropdown title="Administración" id="basic-nav-dropdown">
+              <Nav.Link onClick={() => this.handleLink("home")}><MDBIcon icon="home" /> Inicio</Nav.Link>
+              <Nav.Link onClick={() => this.handleLink("Traza")}><MDBIcon icon="barcode" /> Traza</Nav.Link>
+              <NavDropdown title={<><MDBIcon icon="tools" /> Administración</>} id="basic-nav-dropdown-administraciio">
                 <NavDropdown.Item onClick={() => this.handleLink("User")}>Usuarios</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => this.handleLink("ApiConfig")}>Configuracion</NavDropdown.Item>
               </NavDropdown>
-              <NavDropdown title="Distribución" id="basic-nav-dropdown">
+              <NavDropdown title={<><MDBIcon icon="truck-moving" /> Distribución</>} id="basic-nav-dropdown-distribucion">
                 <NavDropdown.Item onClick={() => this.handleLink("MyProduct")}>Mis Productos</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => this.handleLink("Pedido")}>Pedidos</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => this.handleLink("Send")}>Envios</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink("Receive")}>Recepcion</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => this.handleLink("Receive")}>Recepción</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => this.handleLink("Notificaciones")}>Notificaciones</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href='logout'>Salir</Nav.Link>
             </Nav>
-
-            <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              <Button variant="outline-success">Search</Button>
-            </Form>
+            <Nav.Link href='logout'><MDBIcon icon="door-open" /> Salir</Nav.Link>
           </Navbar.Collapse>
         </Navbar>
 

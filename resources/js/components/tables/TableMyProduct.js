@@ -5,7 +5,11 @@ import _default from 'react-bootstrap/esm/CardColumns';
 //import api
 import Send from '../api/Send'
 
+import Load from '../extra/Load'
+
 export default function TableMyProduct() {
+
+  const [loading, setLoading] = useState(true);
 
   const [products, setProducts] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -52,6 +56,8 @@ export default function TableMyProduct() {
 
     createJson
 
+    demoAsyncCall().then(() => setLoading(false));
+
   }, []);
 
   const createJson = (
@@ -89,6 +95,11 @@ export default function TableMyProduct() {
 
   );
 
+ // const { loading } = this.state;
+    
+  if(loading) { // if your component doesn't have to wait for an async action, remove this block 
+    return <Load/>; // render null when app is not ready
+  }else{
 
  
   return (
@@ -108,4 +119,10 @@ export default function TableMyProduct() {
       />
     </>
   );
+
+  }
+}
+
+function demoAsyncCall() {
+  return new Promise((resolve) => setTimeout(() => resolve(), 2500));
 }

@@ -6,14 +6,12 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 
 function Send(props) {
 
-const save = (id_transaction,pubkey,privkey,to) =>{
+const save = (id_transaction,to) =>{
   axios({
     method: 'post',
     url: 'chain/new',
     data: {
       transaction:  id_transaction,
-      public:       pubkey,
-      private:      privkey,
       to:           to,
     }
   })
@@ -28,8 +26,8 @@ const save = (id_transaction,pubkey,privkey,to) =>{
 
   const sendTransaction = e => {
 
-    const publicKey  = ''
-    const privateKey = ''
+    const publicKey  = '5bAAdgeKRpaiQ75onTGaBjkGM6HZ9GiCD2Xhv3pA9Ksq'
+    const privateKey = '9YKU2mvEUe6DMYiCguef6knTwdCvjmykXXHB1VznYLAH'
 
     const transaction = props.getData
 
@@ -50,13 +48,13 @@ const save = (id_transaction,pubkey,privkey,to) =>{
 
       // A transaction needs an output
       [BigchainDB.Transaction.makeOutput(
-        BigchainDB.Transaction.makeEd25519Condition(alice.publicKey))
+        BigchainDB.Transaction.makeEd25519Condition(publicKey))
       ],
-      alice.publicKey
+      publicKey
     )
 
     // Sign the transaction with private keys
-    const txSigned = BigchainDB.Transaction.signTransaction(tx, alice.privateKey)
+    const txSigned = BigchainDB.Transaction.signTransaction(tx,privateKey)
     // Send the transaction off to BigchainDB
     let conn = new BigchainDB.Connection(API_PATH)
 

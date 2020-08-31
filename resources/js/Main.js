@@ -15,15 +15,14 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-
-
 //importacion a html
 import Head from './import/Head'
 import Foot from './import/Foot'
 
 import NavBar from './components/NavBar'
 import Routes from './components/Routes'
+
+import Load from './components/extra/Load'
 
   const styles = {
     padding: {
@@ -56,7 +55,7 @@ class App extends Component {
       const { loading } = this.state;
     
       if(loading) { // if your component doesn't have to wait for an async action, remove this block 
-        return <CircularProgress/>; // render null when app is not ready
+        return <Load/>; // render null when app is not ready
       }else{
 
         return (

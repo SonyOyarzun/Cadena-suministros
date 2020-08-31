@@ -7,13 +7,15 @@ import Receive from '../api/Receive'
 //import datable
 import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon } from 'mdbreact';
 
+import Load from '../extra/Load'
 
 class TableSend extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      sends: []
+      sends: [],
+      loading: true
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
   }
@@ -34,6 +36,8 @@ class TableSend extends Component {
   componentDidMount() {
 
     this.getData()
+
+    demoAsyncCall().then(() => this.setState({ loading: false }));
 
   }
 
@@ -101,6 +105,12 @@ class TableSend extends Component {
     };
 
     console.log(data)
+
+    const { loading } = this.state;
+    
+    if(loading) { // if your component doesn't have to wait for an async action, remove this block 
+      return <Load/>; // render null when app is not ready
+    }else{
     return (
       <div>
         <MDBDataTableV5
@@ -115,10 +125,14 @@ class TableSend extends Component {
 
       </div>
     )
+    }
   }
 
 }
 
+function demoAsyncCall() {
+  return new Promise((resolve) => setTimeout(() => resolve(), 2500));
+}
 
 export default TableSend;
 

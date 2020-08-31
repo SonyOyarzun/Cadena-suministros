@@ -26,10 +26,10 @@ function Send(props) {
 
   const receiveTransaction = e => {
 
+    const publicKey = '5bAAdgeKRpaiQ75onTGaBjkGM6HZ9GiCD2Xhv3pA9Ksq'
+    const privateKey = '9YKU2mvEUe6DMYiCguef6knTwdCvjmykXXHB1VznYLAH'
 
-    const pub = '6ureh2zV5qhChMSvzKCtnddkPzgHbjcJVBG4939uxcXo'
-    const priv = '8DxPa3fRFPoVCx7nC7preaJ3ukRhb3MGFNSbZPpSkkvd'
-    const txCreatedID = 'bf10ec6da7a8058285701c76bd40276b455836dac17e115769d34c3a780b9aad'
+    const txCreatedID = '0aa9ea73a397679a5889be38e325ef231f90ea8997e89afa2a7f9635220f7cef'
 
 
     const transaction = props.getData
@@ -42,41 +42,41 @@ function Send(props) {
     const API_PATH = 'https://test.ipdb.io/api/v1/'
     const conn = new driver.Connection(API_PATH)
 
-    const alice = new driver.Ed25519Keypair()
-
     const newOwner = new driver.Ed25519Keypair()
 
-//pruebas
+    //pruebas
     // Get transaction payload by ID
     conn.getTransaction(txCreatedID)
-        .then((txCreated) => {
-            const createTranfer = BigchainDB.Transaction.
-            makeTransferTransaction(
-                // The output index 0 is the one that is being spent
-                [{
-                    tx: txCreated,
-                    output_index: 0
-                }],
-                [BigchainDB.Transaction.makeOutput(
-                    BigchainDB.Transaction.makeEd25519Condition(
-                        newOwner.publicKey))],
-                {
-                    datetime: new Date().toString(),
-                    value: {
-                        value_eur: '30000000€',
-                        value_btc: '2100',
-                    }
-                }
-            )
-            // Sign with the key of the owner of the painting (Alice)
-            const signedTransfer = BigchainDB.Transaction
-                .signTransaction(createTranfer, alice.privateKey)
-            return conn.postTransactionCommit(signedTransfer)
-        })
-        .then(res => {
-            document.body.innerHTML += '<h3>Transfer Transaction created</h3>'
-            document.body.innerHTML += res.id
-        })
+      .then((txCreated) => {
+        const createTranfer = BigchainDB.Transaction.
+          makeTransferTransaction(
+            // The output index 0 is the one that is being spent
+            [{
+              tx: txCreated,
+              output_index: 0
+            }],
+            [BigchainDB.Transaction.makeOutput(
+              BigchainDB.Transaction.makeEd25519Condition(
+                newOwner.publicKey))],
+            {
+              info: null
+            }
+          )
+        // Sign with the key of the owner of the painting (Alice)
+        const signedTransfer = BigchainDB.Transaction
+          .signTransaction(createTranfer, privateKey)
+        console.log('tx', signedTransfer)
+        conn.postTransactionCommit(signedTransfer)
+      })
+      .then(res => {
+        //    document.body.innerHTML += '<h3>Transfer Transaction created</h3>'
+        //   document.body.innerHTML += res.id
+        console.log('Transfer Transaction created :', res.id)
+      })
+
+
+
+    ////////////////////////
 
 
   }

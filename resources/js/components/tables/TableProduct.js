@@ -5,7 +5,7 @@ import axios from 'axios';
 //import datable
 import { MDBDataTableV5, MDBBadge } from 'mdbreact';
 
-
+import Load from '../extra/Load'
 
 
 class TableUser extends Component {
@@ -13,7 +13,8 @@ class TableUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: []
+      products: [],
+      loading: true
     }
 
   }
@@ -34,6 +35,8 @@ class TableUser extends Component {
     }).catch(error => {
       alert("Error " + error)
     })
+
+    demoAsyncCall().then(() => this.setState({ loading: false }));
 
   }
 
@@ -71,6 +74,11 @@ class TableUser extends Component {
       rows
     };
 
+    const { loading } = this.state;
+    
+    if(loading) { // if your component doesn't have to wait for an async action, remove this block 
+      return <Load/>; // render null when app is not ready
+    }else{
 
     return (
       <div>
@@ -90,7 +98,12 @@ class TableUser extends Component {
       </div>
     )
   }
+}
 
+}
+
+function demoAsyncCall() {
+  return new Promise((resolve) => setTimeout(() => resolve(), 2500));
 }
 
 export default withRouter(TableUser);
