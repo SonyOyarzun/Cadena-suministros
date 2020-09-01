@@ -18,8 +18,8 @@ class UserSeeder extends Seeder
             'path' => 'https://feriados-cl-api.herokuapp.com/feriados',
             'role' => 'P',
             'password' => bcrypt('12345678'),
-            'public'  => '5bAAdgeKRpaiQ75onTGaBjkGM6HZ9GiCD2Xhv3pA9Ksq',
-            'private' => '9YKU2mvEUe6DMYiCguef6knTwdCvjmykXXHB1VznYLAH',
+            'publicKey'  => '5bAAdgeKRpaiQ75onTGaBjkGM6HZ9GiCD2Xhv3pA9Ksq',
+            'privateKey' => '9YKU2mvEUe6DMYiCguef6knTwdCvjmykXXHB1VznYLAH',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

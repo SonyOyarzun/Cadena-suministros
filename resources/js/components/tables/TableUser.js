@@ -33,7 +33,7 @@ class TableUser extends Component {
 
     axios.get('user/list/').then(response => {
       this.setState({ users: response.data })
-      console.log(this.state.users)
+   //   console.log(this.state.users)
     }).catch(error => {
       alert("Error " + error)
     })

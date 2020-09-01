@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
+import { data } from 'jquery';
 
 function NewUser(props) {
 
@@ -18,6 +19,10 @@ function NewUser(props) {
 
   const process = () => {
 
+    const BigchainDB = require('bigchaindb-driver')
+
+    const alice = new BigchainDB.Ed25519Keypair()
+
     if(document.getElementById('newUserForm.pass').value == 
     document.getElementById('newUserForm.confirmPass').value){
 
@@ -29,15 +34,18 @@ function NewUser(props) {
         email: document.getElementById('newUserForm.email').value,
         role:  document.getElementById('newUserForm.role').value,
         path:  document.getElementById('newUserForm.path').value,
-        pass:  document.getElementById('newUserForm.pass').value
+        pass:  document.getElementById('newUserForm.pass').value,
+        publicKey:   alice.publicKey,
+        privateKey:  alice.privateKey
       }
     })
       .then((response) => {
-        console.log(response);
+        console.log('new user :',response);
         props.getData()
-     //   alert(response.data)
+        alert(response.data)
       }, (error) => {
         console.log(error);
+        alert(error)
       });
 
     }else{
@@ -59,10 +67,7 @@ function NewUser(props) {
           <Modal.Title>Nuevo Usuario</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-
           <Form>
-            <Form.Group controlId="newUserForm.message">
-            </Form.Group> 
             <Form.Group controlId="newUserForm.name">
               <Form.Label>Nombre</Form.Label>
               <Form.Control type="text" placeholder="nombre completo"/>
