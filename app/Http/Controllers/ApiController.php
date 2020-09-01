@@ -88,4 +88,6 @@ php artisan migrate:refresh --seed
 
 https://medium.com/@vchaurasia95/basic-operations-in-bigchaindb-using-js-eb530216eaa7
 
+https://www.itsolutionstuff.com/post/react-form-validation-tutorial-exampleexample.html
+
 */
