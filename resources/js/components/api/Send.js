@@ -38,17 +38,23 @@ function Send(props) {
       });
   }
 
+  function isset(variable) {
+    if(typeof(variable) == "undefined" || variable == null)
+        return false;
+    else
+        if(typeof(variable) == "object" && !variable.length) 
+            return false;
+        else
+            return true;
+};
 
   const sendTransaction = e => {
-
 
     const myPublicKey = user.publicKey
     const myPrivateKey = user.privateKey
 
+    if (isset(props.getData) || isset(props.getUserSend.values)) {
 
-
-    if (typeof props.getData !== 'undefined' || typeof props.getUserSend.values !== 'undefined') {
-      console.log('transaction :', props.getData, 'users ', props.getUserSend.values)
       const userSend = props.getUserSend.values
       const transaction = props.getData
 
