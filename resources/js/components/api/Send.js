@@ -41,15 +41,16 @@ const save = (id_transaction,to) =>{
 
   const sendTransaction = e => {
 
-    const publicKey  = user.publicKey
-    const privateKey = user.privateKey
+    const userSend = props.getUserSend
+    const myPublicKey  = user.publicKey
+    const myPrivateKey = user.privateKey
 
     if(props.getData!=null || props.getUserSend!=null){
     const transaction = props.getData
 
     const info = {
       from: user.name,
-      to:   props.getUserSend,
+      to:   userSend.name,
       date: new Date().toString()
     }
 
@@ -68,9 +69,9 @@ const save = (id_transaction,to) =>{
 
       // A transaction needs an output
       [BigchainDB.Transaction.makeOutput(
-        BigchainDB.Transaction.makeEd25519Condition(publicKey))
+        BigchainDB.Transaction.makeEd25519Condition(myPublicKey))
       ],
-      publicKey
+      myPublicKey
     )
 
     // Sign the transaction with private keys
@@ -82,7 +83,7 @@ const save = (id_transaction,to) =>{
       .then(res => {
         const elem = API_PATH + 'transactions/' + txSigned.id;
         console.log('Transaction', txSigned.id, 'accepted', 'URL :',elem);
-        save(txSigned.id,'1')
+        save(txSigned.id,userSend.id)
       })
     console.log(txSigned);
     }else{
