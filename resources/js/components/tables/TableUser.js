@@ -3,7 +3,7 @@ import React, { Component, ButtonGroup } from 'react';
 import axios from 'axios'
 
 //import datable
-import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon } from 'mdbreact';
+import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon, MDBBtnGroup } from 'mdbreact';
 
 //importar modals
 import EditUser from '../modals/EditUser'
@@ -14,7 +14,7 @@ import DeleteUser from '../modals/DeleteUser'
 import Load from '../extra/Load'
 
 
-import {NavLink,Link, withRouter}  from 'react-router-dom';
+import { NavLink, Link, withRouter } from 'react-router-dom';
 
 
 class TableUser extends Component {
@@ -29,11 +29,11 @@ class TableUser extends Component {
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
   }
 
-  getData(){
+  getData() {
 
     axios.get('user/list/').then(response => {
       this.setState({ users: response.data })
-   //   console.log(this.state.users)
+      //   console.log(this.state.users)
     }).catch(error => {
       alert("Error " + error)
     })
@@ -49,7 +49,7 @@ class TableUser extends Component {
 
   }
 
-  handleLink(path,data) {
+  handleLink(path, data) {
     this.props.history.push({
       pathname: path,
       data: data // your data array of objects
@@ -86,20 +86,8 @@ class TableUser extends Component {
           width: 100,
         },
         {
-          label: '',
-          field: 'edit',
-        }, 
-        {
-          label: '',
-          field: 'pass',
-        },
-        {
-          label: '',
-          field: 'delete',
-        },
-        {
-          label: '',
-          field: 'product',
+          label: 'Acciones',
+          field: 'action',
         },
       ],
       rows: [
@@ -110,44 +98,45 @@ class TableUser extends Component {
                 ID: {data.id}
               </MDBBadge>
             ),
-            name:   data.name,
-            email:  data.email,
-            role:   data.role,
-            edit:   <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path} getData={this.getData}/>,
-            pass:   <PassUser id={data.id} />,
-            delete: <DeleteUser id={data.id} getData={this.getData}/>,
-            product:<MDBBtn tag="a" size="sm" gradient="blue" onClick={process} onClick={()=>this.handleLink("Product",data.path)}>
-                    <MDBIcon icon="shopping-cart"/>
-                    </MDBBtn> 
-            
-           
+            name: data.name,
+            email: data.email,
+            role: data.role,
+            action:
+              <MDBBtnGroup className="mr-2">
+                <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path} getData={this.getData} />
+                <PassUser id={data.id} />
+                <DeleteUser id={data.id} getData={this.getData} />
+                <MDBBtn tag="a" size="sm" gradient="blue" onClick={process} onClick={() => this.handleLink("Product", data.path)}>
+                  <MDBIcon icon="shopping-cart" />
+                </MDBBtn>
+              </MDBBtnGroup>
           }
         ))
       ]
     };
 
     const { loading } = this.state;
-    
-      if(loading) { // if your component doesn't have to wait for an async action, remove this block 
-        return <Load/>; // render null when app is not ready
-      }else{
 
-    return (
-      <div>
-        <div><NewUser getData={this.getData}/></div>
-        <MDBDataTableV5
-          className='cust-table'
-          responsive
-          bordered
-          hover
-          btn
-          sortable={false}
-          data={data}
-        />
+    if (loading) { // if your component doesn't have to wait for an async action, remove this block 
+      return <Load />; // render null when app is not ready
+    } else {
 
-      </div>
-    )
-      }
+      return (
+        <div>
+          <div><NewUser getData={this.getData} /></div>
+          <MDBDataTableV5
+            className='cust-table'
+            responsive
+            bordered
+            hover
+            btn
+            sortable={false}
+            data={data}
+          />
+
+        </div>
+      )
+    }
   }
 
 }
