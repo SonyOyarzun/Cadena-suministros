@@ -9,91 +9,93 @@ function Send(props) {
 
 
   useEffect(() => {
-    
+
     axios.get('/user/my')
-    .then(response => {
-      setUser(response.data);
-      console.log(response.data)
-    }).catch(error => {
-      alert("Error " + error)
-    })
-    
+      .then(response => {
+        setUser(response.data);
+        console.log(response.data)
+      }).catch(error => {
+        alert("Error " + error)
+      })
+
   }, []);
 
 
-const save = (id_transaction,to) =>{
-  axios({
-    method: 'post',
-    url: 'chain/new',
-    data: {
-      transaction:  id_transaction,
-      to:           to,
-    }
-  })
-    .then((response) => {
-      console.log(response);
-      alert(response.data)
-    }, (error) => {
-      console.log(error);
-    });
-}
+  const save = (id_transaction, to) => {
+    axios({
+      method: 'post',
+      url: 'chain/new',
+      data: {
+        transaction: id_transaction,
+        to: to,
+      }
+    })
+      .then((response) => {
+        console.log(response);
+        alert(response.data)
+      }, (error) => {
+        console.log(error);
+      });
+  }
 
 
   const sendTransaction = e => {
 
-    const userSend = props.getUserSend
-    const myPublicKey  = user.publicKey
+
+    const myPublicKey = user.publicKey
     const myPrivateKey = user.privateKey
 
-    if(props.getData!=null || props.getUserSend!=null){
-    const transaction = props.getData
 
-    const info = {
-      from: user.name,
-      to:   userSend.name,
-      date: new Date().toString()
-    }
 
-    const BigchainDB = require('bigchaindb-driver')
+    if (typeof props.getData !== 'undefined' || typeof props.getUserSend.values !== 'undefined') {
+      console.log('transaction :', props.getData, 'users ', props.getUserSend.values)
+      const userSend = props.getUserSend.values
+      const transaction = props.getData
 
-    const API_PATH = 'https://test.ipdb.io/api/v1/'
+      const info = {
+        from: user.name,
+        to: userSend.name,
+        date: new Date().toString()
+      }
 
-    //const alice = new BigchainDB.Ed25519Keypair()
-    
+      const BigchainDB = require('bigchaindb-driver')
 
-    const tx = BigchainDB.Transaction.makeCreateTransaction(
-      // Data JSON
-      { transaction },
+      const API_PATH = 'https://test.ipdb.io/api/v1/'
 
-      { info: info },
 
-      // A transaction needs an output
-      [BigchainDB.Transaction.makeOutput(
-        BigchainDB.Transaction.makeEd25519Condition(myPublicKey))
-      ],
-      myPublicKey
-    )
+      const tx = BigchainDB.Transaction.makeCreateTransaction(
+        // Data JSON
+        { transaction },
 
-    // Sign the transaction with private keys
-    const txSigned = BigchainDB.Transaction.signTransaction(tx,privateKey)
-    // Send the transaction off to BigchainDB
-    let conn = new BigchainDB.Connection(API_PATH)
+        { info: info },
 
-    conn.postTransactionCommit(txSigned)
-      .then(res => {
-        const elem = API_PATH + 'transactions/' + txSigned.id;
-        console.log('Transaction', txSigned.id, 'accepted', 'URL :',elem);
-        save(txSigned.id,userSend.id)
-      })
-    console.log(txSigned);
-    }else{
+        // A transaction needs an output
+        [BigchainDB.Transaction.makeOutput(
+          BigchainDB.Transaction.makeEd25519Condition(myPublicKey))
+        ],
+        myPublicKey
+      )
+
+      // Sign the transaction with private keys
+      const txSigned = BigchainDB.Transaction.signTransaction(tx, myPrivateKey)
+      // Send the transaction off to BigchainDB
+      let conn = new BigchainDB.Connection(API_PATH)
+
+      conn.postTransactionCommit(txSigned)
+        .then(res => {
+          const elem = API_PATH + 'transactions/' + txSigned.id;
+          console.log('Transaction', txSigned.id, 'accepted', 'URL :', elem);
+          save(txSigned.id, userSend.id)
+        })
+      console.log(txSigned);
+    } else {
       alert('Debe ingresar productos y destinatario')
     }
   }
 
   return (
     <div>
-     <MDBBtn rounded size="lg" color="info" onClick={sendTransaction}>Realizar Envio <MDBIcon icon="paper-plane" /></MDBBtn>
+      <MDBBtn rounded size="lg" color="info" onClick={sendTransaction}>Realizar Envio <MDBIcon icon="paper-plane" /></MDBBtn>
     </div>
   )
 }

@@ -113,7 +113,7 @@ export default function TableMyProduct() {
 
   const onTagsChange = (event, values) => {
     setUserSend({
-      users: values
+      values
     }, () => {
       // This will output an array of objects
       // given by Autocompelte options property.
