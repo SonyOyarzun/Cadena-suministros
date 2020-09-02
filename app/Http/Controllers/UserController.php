@@ -23,7 +23,26 @@ class UserController extends Controller
   public function create(Request $request)
   {
 
-    try {
+    if (!isset($request->name)) {
+      return "Debe ingresar nombre";
+    } elseif (!isset($request->email)) {
+      return "Debe ingresar mail";
+    } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+      return "Formato mail no valido";
+    } elseif (User::where('email', $request->email)->exists()) {
+      return "Mail ya existe en los registros";
+    } elseif (!isset($request->role)) {
+      return "Debe ingresar role";
+    } elseif (!isset($request->path)) {
+      return "Debe ingresar ruta de api";
+    } elseif (!isset($request->pass)) {
+      return "Debe ingresar contraseña";
+    } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $request->pass)) {
+      return "Contraseña debe Contener: Mayúsculas, números y mas de 8 carácteres";
+    } elseif ($request->pass != $request->confirmPass) {
+      return "Contraseñas no coinciden";
+    } else {
+
       $user = new User;
       $user->name  = $request->name;
       $user->email = $request->email;
@@ -35,12 +54,9 @@ class UserController extends Controller
       $user->created_at = now();
       $user->updated_at = now();
       $user->save();
-    } catch (\Throwable $th) {
-      return $th;
-    }
 
-    //return "Usuario Creado";
-    return $user;
+      return "Usuario Creado";
+    }
   }
 
   public function update(Request $request)
@@ -51,12 +67,27 @@ class UserController extends Controller
 
       return 'Usuario no encontrado';
     } else {
-      $user->name  = $request->name;
-      $user->email = $request->email;
-      $user->role  = $request->role;
-      $user->path  = $request->path;
-      $user->save();
-      return 'Usuario Actualizado';
+
+      if (!isset($request->name)) {
+        return "Debe ingresar nombre";
+      } elseif (!isset($request->email)) {
+        return "Debe ingresar mail";
+      } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+        return "Formato mail no valido";
+      } elseif (!isset($request->role)) {
+        return "Debe ingresar role";
+      } elseif (!isset($request->path)) {
+        return "Debe ingresar ruta de api";
+      } else {
+
+        $user->name  = $request->name;
+        $user->email = $request->email;
+        $user->role  = $request->role;
+        $user->path  = $request->path;
+        $user->save();
+
+        return "Usuario Actualizado";
+      }
     }
   }
 
@@ -66,10 +97,21 @@ class UserController extends Controller
     if ($user == null) {
 
       return 'Usuario no encontrado';
+      
     } else {
-      $user->password  = bcrypt($request->pass);
-      $user->save();
-      return 'Contraseña Actualizada';
+
+      if (!isset($request->pass)) {
+        return "Debe ingresar contraseña";
+      } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $request->pass)) {
+        return "Contraseña debe Contener: Mayúsculas, números y mas de 8 carácteres";
+      } elseif ($request->pass != $request->confirmPass) {
+        return "Contraseñas no coinciden";
+      } else {
+        $user->password  = bcrypt($request->pass);
+        $user->save();
+        return 'Contraseña Actualizada';
+      }
+
     }
   }
 

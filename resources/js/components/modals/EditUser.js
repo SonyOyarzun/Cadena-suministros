@@ -57,11 +57,11 @@ function EditUser(props) {
             </Form.Group>
             <Form.Group controlId="editUserForm.name">
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" placeholder="nombre completo" defaultValue={props.name} />
+              <Form.Control type="text" placeholder="nombre completo" defaultValue={props.name} maxLength="30"/>
             </Form.Group>
             <Form.Group controlId="editUserForm.email">
               <Form.Label>Mail</Form.Label>
-              <Form.Control type="email" placeholder="name@example.com" defaultValue={props.email} />
+              <Form.Control type="email" placeholder="name@example.com" defaultValue={props.email} maxLength="30"/>
             </Form.Group>
             <Form.Group controlId="editUserForm.role">
               <Form.Label>Role</Form.Label>
@@ -72,7 +72,7 @@ function EditUser(props) {
             </Form.Group>
             <Form.Group controlId="editUserForm.path">
               <Form.Label>Ruta</Form.Label>
-              <Form.Control as="textarea" rows="3" defaultValue={props.path} />
+              <Form.Control as="textarea" rows="3" defaultValue={props.path} maxLength="300"/>
             </Form.Group>
           </Form>
 

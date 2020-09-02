@@ -23,45 +23,39 @@ function NewUser(props) {
 
     const alice = new BigchainDB.Ed25519Keypair()
 
-    if(document.getElementById('newUserForm.pass').value == 
-    document.getElementById('newUserForm.confirmPass').value){
-
-    axios({
-      method: 'post',
-      url: '/user/new/',
-      data: {
-        name:  document.getElementById('newUserForm.name').value,
-        email: document.getElementById('newUserForm.email').value,
-        role:  document.getElementById('newUserForm.role').value,
-        path:  document.getElementById('newUserForm.path').value,
-        pass:  document.getElementById('newUserForm.pass').value,
-        publicKey:   alice.publicKey,
-        privateKey:  alice.privateKey
-      }
-    })
-      .then((response) => {
-        console.log('new user :',response);
-        props.getData()
-        alert(response.data)
-      }, (error) => {
-        console.log(error);
-        alert(error)
-      });
-
-    }else{
-      alert('Las contraseñas no coinciden')
-    }
+      axios({
+        method: 'post',
+        url: '/user/new/',
+        data: {
+          name: document.getElementById('newUserForm.name').value,
+          email: document.getElementById('newUserForm.email').value,
+          role: document.getElementById('newUserForm.role').value,
+          path: document.getElementById('newUserForm.path').value,
+          pass: document.getElementById('newUserForm.pass').value,
+          confirmPass: document.getElementById('newUserForm.confirmPass').value,
+          publicKey: alice.publicKey,
+          privateKey: alice.privateKey
+        }
+      })
+        .then((response) => {
+          console.log('new user :', response);
+          props.getData()
+          alert(response.data)
+        }, (error) => {
+          console.log(error);
+          alert(error)
+        });
 
   }
 
 
-  
+
 
   return (
     <div>
-  
+
       <MDBBtn color="primary" outline rounded onClick={handleShow}>Nuevo Usuario</MDBBtn>
-   
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Nuevo Usuario</Modal.Title>
@@ -70,11 +64,11 @@ function NewUser(props) {
           <Form>
             <Form.Group controlId="newUserForm.name">
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" placeholder="nombre completo"/>
+              <Form.Control type="text" placeholder="nombre completo" maxLength="30" />
             </Form.Group>
             <Form.Group controlId="newUserForm.email">
               <Form.Label>Mail</Form.Label>
-              <Form.Control type="email" placeholder="name@example.com"  />
+              <Form.Control type="email" placeholder="name@example.com" maxLength="30"/>
             </Form.Group>
             <Form.Group controlId="newUserForm.role">
               <Form.Label>Role</Form.Label>
@@ -85,15 +79,15 @@ function NewUser(props) {
             </Form.Group>
             <Form.Group controlId="newUserForm.path">
               <Form.Label>Ruta</Form.Label>
-              <Form.Control as="textarea" rows="3" />
+              <Form.Control as="textarea" rows="3" maxLength="300"/>
             </Form.Group>
             <Form.Group controlId="newUserForm.pass">
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="Password"  rows="3"/>
+              <Form.Control type="Password" rows="3" maxLength="12"/>
             </Form.Group>
             <Form.Group controlId="newUserForm.confirmPass">
               <Form.Label>Repita Contraseña</Form.Label>
-              <Form.Control type="Password"  rows="3"/>
+              <Form.Control type="Password" rows="3" maxLength="12"/>
             </Form.Group>
           </Form>
 
@@ -111,6 +105,6 @@ function NewUser(props) {
   )
 
 
-}    
+}
 
 export default NewUser;

@@ -16,26 +16,23 @@ function PassUser(props) {
 
   const process = () => {
 
-    if(document.getElementById('passUserForm.pass').value == 
-    document.getElementById('passUserForm.confirmPass').value){
-
     axios({
       method: 'put',
       url: '/user/pass/',
       data: {
         id:   props.id,
-        pass: document.getElementById('passUserForm.pass').value
+        pass: document.getElementById('passUserForm.pass').value,
+        confirmPass: document.getElementById('passUserForm.confirmPass').value
       }
     })
       .then((response) => {
-        console.log(response);
+    //    console.log(response);
+        alert(response.data)
       }, (error) => {
         console.log(error);
+   //     alert(error.data)
       });
 
-    }else{
-      alert('Las contraseñas no coinciden')
-    }
 
   }
 
@@ -56,11 +53,11 @@ function PassUser(props) {
           <Form>
             <Form.Group controlId="passUserForm.pass">
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="Password" rows="3" />
+              <Form.Control type="Password" rows="3" maxLength="12"/>
             </Form.Group>
             <Form.Group controlId="passUserForm.confirmPass">
               <Form.Label>Repita Contraseña</Form.Label>
-              <Form.Control type="Password" rows="3" />
+              <Form.Control type="Password" rows="3" maxLength="12"/>
             </Form.Group>
           </Form>
 
