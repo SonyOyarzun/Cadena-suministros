@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
-
+import React, { Component, Fragment, useState, useEffect, useCallback } from 'react';
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
 
 
 function Send(props) {
+
+  const [user, setUser] = useState([]);
+
+
+  useEffect(() => {
+    
+    axios.get('/user/my')
+    .then(response => {
+      setUser(response.data);
+      console.log(response.data)
+    }).catch(error => {
+      alert("Error " + error)
+    })
+    
+  }, []);
+
 
 const save = (id_transaction,to) =>{
   axios({
@@ -26,16 +41,16 @@ const save = (id_transaction,to) =>{
 
   const sendTransaction = e => {
 
-    const publicKey  = '5bAAdgeKRpaiQ75onTGaBjkGM6HZ9GiCD2Xhv3pA9Ksq'
-    const privateKey = '9YKU2mvEUe6DMYiCguef6knTwdCvjmykXXHB1VznYLAH'
+    const publicKey  = user.publicKey
+    const privateKey = user.privateKey
 
-    if(props.getData!=null && props.getUserSend!=null){
+    if(props.getData!=null || props.getUserSend!=null){
     const transaction = props.getData
 
     const info = {
-      from: xxx,
+      from: user.name,
       to:   props.getUserSend,
-      date: xxx
+      date: new Date().toString()
     }
 
     const BigchainDB = require('bigchaindb-driver')
@@ -70,6 +85,8 @@ const save = (id_transaction,to) =>{
         save(txSigned.id,'1')
       })
     console.log(txSigned);
+    }else{
+      alert('Debe ingresar productos y destinatario')
     }
   }
 

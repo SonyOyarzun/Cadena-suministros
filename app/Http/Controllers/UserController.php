@@ -20,6 +20,18 @@ class UserController extends Controller
     return json_encode($user);
   }
 
+  public function my()
+  {
+    $id = Auth::id();
+    $user = User::findOrFail($id);
+    if ($user == null) {
+
+      return 'Usuario no encontrado';
+    } else {
+
+    return json_encode($user);
+    }
+  }
   public function create(Request $request)
   {
 

@@ -109,7 +109,17 @@ export default function TableMyProduct() {
 
   );
 
-  console.log('users :', users)
+  //console.log('users :', users)
+
+  const onTagsChange = (event, values) => {
+    setUserSend({
+      users: values
+    }, () => {
+      // This will output an array of objects
+      // given by Autocompelte options property.
+      console.log(users);
+    });
+  }
 
   if (loading) { // if your component doesn't have to wait for an async action, remove this block 
     return <Load />; // render null when app is not ready
@@ -124,12 +134,8 @@ export default function TableMyProduct() {
             <Autocomplete
               id="userToSend"
               options={users}
-              getOptionLabel={(option) => option.name }
-
-              onInputChange={(event, newInputValue) => {
-                setUserSend(newInputValue)
-              }}
-
+              getOptionLabel={option => (option.name)}
+              onChange={onTagsChange}
               style={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="Usuario a enviar" variant="outlined" />}
             /></MDBCol>

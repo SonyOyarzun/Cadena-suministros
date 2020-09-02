@@ -24,6 +24,7 @@ Route::get('/home', function () {
 
 Auth::routes();
 
+Route::get('/user/my/', 'UserController@my');
 Route::get('/user/list/', 'UserController@index');  
 Route::put('/user/edit/', 'UserController@update');  
 Route::put('/user/pass/', 'UserController@changePass');  
