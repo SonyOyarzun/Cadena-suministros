@@ -29,9 +29,14 @@ const save = (id_transaction,to) =>{
     const publicKey  = '5bAAdgeKRpaiQ75onTGaBjkGM6HZ9GiCD2Xhv3pA9Ksq'
     const privateKey = '9YKU2mvEUe6DMYiCguef6knTwdCvjmykXXHB1VznYLAH'
 
+    if(props.getData!=null && props.getUserSend!=null){
     const transaction = props.getData
 
-    const info = props.getData
+    const info = {
+      from: xxx,
+      to:   props.getUserSend,
+      date: xxx
+    }
 
     const BigchainDB = require('bigchaindb-driver')
 
@@ -65,7 +70,7 @@ const save = (id_transaction,to) =>{
         save(txSigned.id,'1')
       })
     console.log(txSigned);
-
+    }
   }
 
   return (
