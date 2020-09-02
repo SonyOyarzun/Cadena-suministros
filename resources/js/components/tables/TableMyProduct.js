@@ -1,5 +1,5 @@
 import React, { Component, Fragment, useState, useEffect, useCallback } from 'react';
-import { MDBDataTableV5, MDBInput, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import { MDBDataTableV5, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
 import _default from 'react-bootstrap/esm/CardColumns';
 
 //import api
@@ -165,7 +165,7 @@ export default function TableMyProduct() {
         alert("Error " + error)
       })
 
-      axios.get('user/list')
+    axios.get('user/list')
       .then(response => {
         setUsers(response.data);
 
@@ -214,7 +214,7 @@ export default function TableMyProduct() {
 
   );
 
- console.log('users :',users,'films :',top100Films)
+  console.log('users :', users, 'films :', top100Films)
 
   if (loading) { // if your component doesn't have to wait for an async action, remove this block 
     return <Load />; // render null when app is not ready
@@ -223,15 +223,17 @@ export default function TableMyProduct() {
 
     return (
       <>
-        <Send getData={checkbox} />
-
-        <Autocomplete
-          id="userSend"
-          options={users}
-          getOptionLabel={(option) => option.name}
-          style={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Usuario a enviar" variant="outlined" />}
-        />
+        <MDBRow>
+          <MDBCol size="6"><Send getData={checkbox} /></MDBCol>
+          <MDBCol size="6">
+            <Autocomplete
+              id="userSend"
+              options={users}
+              getOptionLabel={(option) => option.name}
+              style={{ width: 300 }}
+              renderInput={(params) => <TextField {...params} label="Usuario a enviar" variant="outlined" />}
+            /></MDBCol>
+        </MDBRow>
 
         <MDBDataTableV5
           className='cust-table'
