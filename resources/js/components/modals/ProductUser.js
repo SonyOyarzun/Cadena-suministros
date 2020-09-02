@@ -43,20 +43,15 @@ function ProductUser(props) {
     })
   }, []);
 
-  console.log("usuarios.data :", products)
-
-
 let columns = []
 let rows    = []
 
 Object.keys(products).map((key, row) => (
-  console.log('row:',row),
-
 
   Object.keys(products[key]).map((key2, col) => (
-    console.log('row:',row,' col:',col,),
- // columns = {...columns, label:key2},
+
     rows[key2]=products[key][key2]
+
     ))
   
 ))

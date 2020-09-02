@@ -123,7 +123,9 @@ class TableUser extends Component {
 
       return (
         <div>
-          <div><NewUser getData={this.getData} /></div>
+          <div>
+            <NewUser getData={this.getData} />
+          </div>
           <MDBDataTableV5
             className='cust-table'
             responsive
@@ -133,6 +135,7 @@ class TableUser extends Component {
             sortable={false}
             data={data}
           />
+          
 
         </div>
       )

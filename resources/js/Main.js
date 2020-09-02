@@ -14,6 +14,8 @@ import 'mdbreact/dist/css/mdb.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 
+import { MDBIcon, MDBDataTableV5, MDBBadge, MDBBtn, MDBContainer } from "mdbreact";
+
 
 //importacion a html
 import Head from './import/Head'
@@ -28,8 +30,8 @@ import Load from './components/extra/Load'
     padding: {
         paddingTop: "10vh",
         paddingBottom: "10vh",
-        paddingRight: "10vw",
-        paddingLeft: "10vw"
+        paddingRight: "5vw",
+        paddingLeft: "5vw"
     }
 }
 
@@ -64,11 +66,11 @@ class App extends Component {
               <Head/>
               <NavBar/>
 
-              <Container fluid style={styles.padding}>
+              <MDBContainer fluid style={styles.padding}>
 
               <Routes/>
 
-              </Container>
+              </MDBContainer>
               
              <Foot/>
             </div>

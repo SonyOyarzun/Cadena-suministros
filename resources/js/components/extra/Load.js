@@ -19,7 +19,7 @@ function PassUser(props) {
 
   return (
     <div>
-      <Modal show={show} onHide={handleClose} centered size="sm" aria-labelledby="contained-modal-title-vcenter">
+      <Modal show={show} onHide={handleClose} centered size="sm" aria-labelledby="contained-modal-title-vcenter" backdrop="static">
         <Modal.Body>
 
 <center>

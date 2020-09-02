@@ -54,7 +54,7 @@ function NewUser(props) {
   return (
     <div>
 
-      <MDBBtn color="primary" outline rounded onClick={handleShow}>Nuevo Usuario</MDBBtn>
+      <MDBBtn color="primary" rounded onClick={handleShow}><MDBIcon icon="user-plus" /> Agregar Usuario</MDBBtn>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
