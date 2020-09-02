@@ -226,11 +226,11 @@ export default function TableMyProduct() {
         <Send getData={checkbox} />
 
         <Autocomplete
-          id="combo-box-demo"
+          id="userSend"
           options={users}
           getOptionLabel={(option) => option.name}
           style={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+          renderInput={(params) => <TextField {...params} label="Usuario a enviar" variant="outlined" />}
         />
 
         <MDBDataTableV5
