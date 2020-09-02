@@ -25,6 +25,8 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "@material-ui/core": "^4.11.0",
+        "@material-ui/lab": "^4.0.0-alpha.56",
         "bigchaindb-driver": "^4.1.2",
         "mdbreact": "^4.27.0",
         "prop-types": "^15.7.2",
@@ -36,8 +38,8 @@
     },
     "babel": {
         "presets": [
-          "@babel/preset-env",
-          "@babel/preset-react"
+            "@babel/preset-env",
+            "@babel/preset-react"
         ],
         "plugins": [
             "@babel/plugin-proposal-class-properties"
