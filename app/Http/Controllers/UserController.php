@@ -36,7 +36,7 @@ class UserController extends Controller
   public function search(Request $request)
   {
     
-    $user = User::findOrFail($request->id);
+    //$user = User::findOrFail($request->id);
     /*
     if ($user == null) {
 
@@ -47,7 +47,7 @@ class UserController extends Controller
     }
     */
 
-    return "hola";
+    return $request;
   }
 
   public function create(Request $request)
