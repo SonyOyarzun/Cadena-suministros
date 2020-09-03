@@ -32,7 +32,7 @@ export default function TableMyProduct() {
       array.push(JSON.parse(document.getElementById(checked[key]).value))
     ))
     setCheckbox(array)
-    console.log('Checked :', checkbox,'userSend :',userSend)
+    console.log('Checked :', checkbox, 'userSend :', userSend)
   }
 
 
@@ -129,31 +129,33 @@ export default function TableMyProduct() {
     return (
       <>
         <MDBRow>
-          <MDBCol size="6"><Send getData={checkbox} getUserSend={userSend} /></MDBCol>
-          <MDBCol size="6">
+          <MDBCol size="4"><Send getData={checkbox} getUserSend={userSend} /></MDBCol>
+          <MDBCol size="8">
             <Autocomplete
               id="userToSend"
+              size="lg"
               options={users}
               getOptionLabel={option => (option.name)}
               onChange={onTagsChange}
               style={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="Usuario a enviar" variant="outlined" />}
             />
-            </MDBCol>
+          </MDBCol>
+          <MDBCol size="12">
+            <MDBDataTableV5
+              className='cust-table'
+              responsive
+              entriesOptions={[5, 10, 15]}
+              entries={5}
+              pagesAmount={4}
+              bordered
+              hover
+              btn
+              sortable={false}
+              data={data}
+            />
+          </MDBCol>
         </MDBRow>
-
-        <MDBDataTableV5
-          className='cust-table'
-          responsive
-          entriesOptions={[5, 10, 15]}
-          entries={5}
-          pagesAmount={4}
-          bordered
-          hover
-          btn
-          sortable={false}
-          data={data}
-        />
       </>
     );
 

@@ -101,7 +101,7 @@ function Send(props) {
 
   return (
     <div>
-      <MDBBtn rounded size="lg" color="info" onClick={sendTransaction}>Realizar Envio <MDBIcon icon="paper-plane" /></MDBBtn>
+      <MDBBtn block rounded size="lg" color="info" onClick={sendTransaction}>Realizar Envio <MDBIcon icon="paper-plane" /></MDBBtn>
     </div>
   )
 }
