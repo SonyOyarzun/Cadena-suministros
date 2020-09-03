@@ -138,7 +138,8 @@ export default function TableMyProduct() {
               onChange={onTagsChange}
               style={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="Usuario a enviar" variant="outlined" />}
-            /></MDBCol>
+            />
+            </MDBCol>
         </MDBRow>
 
         <MDBDataTableV5

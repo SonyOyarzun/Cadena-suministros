@@ -37,7 +37,7 @@ class NavBar extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link onClick={() => this.handleLink("home")}><MDBIcon icon="home" /> Inicio</Nav.Link>
-              <Nav.Link onClick={() => this.handleLink("Traza")}><MDBIcon icon="barcode" /> Traza</Nav.Link>
+              <Nav.Link onClick={() => this.handleLink("Trace")}><MDBIcon icon="barcode" /> Traza</Nav.Link>
               <NavDropdown title={<><MDBIcon icon="tools" /> Administración</>} id="basic-nav-dropdown-administraciio">
                 <NavDropdown.Item onClick={() => this.handleLink("User")}>Usuarios</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => this.handleLink("ApiConfig")}>Configuracion</NavDropdown.Item>
