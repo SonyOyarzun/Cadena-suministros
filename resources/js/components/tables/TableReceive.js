@@ -95,7 +95,7 @@ class TableSend extends Component {
               to: data.toName,
               state: data.state,
               updated_at: data.updated_at,
-              action: <Receive sendId={sends.from} receiveId={sends.to} transaction={sends.transaction} />,
+              action: <Receive sendId={data.from} receiveId={data.to} transaction={data.transaction} />,
                         
             }
           

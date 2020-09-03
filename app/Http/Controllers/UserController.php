@@ -35,7 +35,9 @@ class UserController extends Controller
 
   public function search(Request $request)
   {
+    
     $user = User::findOrFail($request->id);
+    /*
     if ($user == null) {
 
       return 'Usuario no encontrado';
@@ -43,6 +45,9 @@ class UserController extends Controller
 
     return json_encode($user);
     }
+    */
+
+    return "hola";
   }
 
   public function create(Request $request)

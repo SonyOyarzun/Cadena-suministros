@@ -12,6 +12,9 @@ function Send(props) {
 
   useEffect(() => {
 
+
+    console.log(props)
+
     const params = {
       "id": props.sendId,
     }
@@ -20,7 +23,7 @@ function Send(props) {
       params
     }).then(response => {
         setUserSend(response.data);
-        console.log(response.data)
+        console.log('send :',response.data)
       }).catch(error => {
         alert("Error " + error)
       })
@@ -35,7 +38,7 @@ function Send(props) {
       })
       .then(response => {
         setUserReceive(response.data);
-        console.log(response.data)
+        console.log('receive :',response.data)
       }).catch(error => {
         alert("Error " + error)
       })
