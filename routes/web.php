@@ -47,3 +47,4 @@ Route::get('json-api/config', 'ApiController@config');
 //rutas complemento de bigchain
 Route::get('chain/list', 'ChainController@index');
 Route::post('chain/new', 'ChainController@create');
+Route::post('chain/receive', 'ChainController@receive');
