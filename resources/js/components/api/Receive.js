@@ -10,7 +10,7 @@ function Send(props) {
   const [userSend, setUserSend] = useState([]);
   const [userReceive, setUserReceive] = useState([]);
 
-  const getUsers = (id) => {
+  const getUserSend = (id) => {
 
     const params = {
       "id": id,
@@ -19,14 +19,30 @@ function Send(props) {
     axios.get('/user/search', {
       params
     }).then(response => {
-      console.log('response :',response.data)
-      return response.data;
+      setUserSend(response.data)
+      console.log('array :',userSend)
+     
     }).catch(error => {
       alert("Error " + error)
     })
-
   }
 
+  const getUserReceive = (id) => {
+
+    const params = {
+      "id": id,
+    }
+
+    axios.get('/user/search', {
+      params
+    }).then(response => {
+      setUserReceive(response.data)
+      console.log('array :',userReceive)
+     
+    }).catch(error => {
+      alert("Error " + error)
+    })
+  }
 
   const save = (id_transaction, to) => {
     axios({
@@ -45,17 +61,17 @@ function Send(props) {
       });
   }
 
+  useEffect(() => {
+ 
+    getUserSend(props.sendId)
+    getUserReceive(props.receiveId)
+
+  }, []);
+
 
 
   const receiveTransaction = e => {
 
-    const sendId = props.sendId
-    const receiveId = props.receiveId
-
-    const userSend = getUsers(sendId)
-    const userReceive = getUsers(receiveId)
-
-    console.log(getUsers(sendId))
     //llaves de quien envia
     const sendPublicKey = userSend.publicKey
     const sendPrivateKey = userSend.privateKey
@@ -63,10 +79,11 @@ function Send(props) {
     //llave de quien recibe
     const receivePublickey = userReceive.publicKey
 
-    console.log('send :', userSend, 'receive :', userReceive)
-
     //id de transaccion
     const txCreatedID = props.transaction
+
+
+    console.log('send :', userSend, 'receive :', userReceive,'transaction :',txCreatedID)
 
     // metadatos de informacion adicional
     const info = null
@@ -78,7 +95,7 @@ function Send(props) {
     const conn = new driver.Connection(API_PATH)
 
 
-
+    console.log(conn.getTransaction(txCreatedID))
     // Get transaction payload by ID
     conn.getTransaction(txCreatedID)
       .then((txCreated) => {
@@ -96,6 +113,7 @@ function Send(props) {
               info: null
             }
           )
+    
         // Sign with the key of the owner of the painting (Alice)
         const signedTransfer = BigchainDB.Transaction
           .signTransaction(createTranfer, sendPrivateKey)
