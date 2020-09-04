@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
-import { data } from 'jquery';
 
 
 function Send(props) {
@@ -82,6 +81,11 @@ function Send(props) {
     //id de transaccion
     const txCreatedID = props.transaction
 
+    const info = {
+      from: userSend.name,
+      to: userReceive.name,
+      date: new Date().toString()
+    }
 
     console.log('send :', userSend, 'receive :', userReceive,'transaction :',txCreatedID)
 
@@ -110,7 +114,7 @@ function Send(props) {
               BigchainDB.Transaction.makeEd25519Condition(
                 receivePublickey))],
             {
-              info: null
+              info: info
             }
           )
     
@@ -120,10 +124,11 @@ function Send(props) {
         console.log('tx', signedTransfer)
         return conn.postTransactionCommit(signedTransfer)
       })
-      .then(res => {
+      .then(tx => {
         //    document.body.innerHTML += '<h3>Transfer Transaction created</h3>'
         //   document.body.innerHTML += res.id
-         console.log('Transfer Transaction created :','https://test.ipdb.io/api/v1/transactions/'+res.id)
+         console.log('Transfer Transaction created :','https://test.ipdb.io/api/v1/transactions/'+tx.id)
+         save(tx.id, props.receiveId)
       })
 
   }
