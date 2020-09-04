@@ -118,12 +118,12 @@ function Send(props) {
         const signedTransfer = BigchainDB.Transaction
           .signTransaction(createTranfer, sendPrivateKey)
         console.log('tx', signedTransfer)
-        conn.postTransactionCommit(signedTransfer)
+        return conn.postTransactionCommit(signedTransfer)
       })
       .then(res => {
         //    document.body.innerHTML += '<h3>Transfer Transaction created</h3>'
         //   document.body.innerHTML += res.id
-        console.log('Transfer Transaction created :', res.id)
+         console.log('Transfer Transaction created :','https://test.ipdb.io/api/v1/transactions/'+res.id)
       })
 
   }
