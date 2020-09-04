@@ -12,9 +12,14 @@ function Send(props) {
 
   const getUsers = (id) => {
 
+    const params = {
+      "id": id,
+    }
+
     axios.get('/user/search', {
-      id: id
+      params
     }).then(response => {
+      console.log('response :',response.data)
       return response.data;
     }).catch(error => {
       alert("Error " + error)
@@ -44,13 +49,13 @@ function Send(props) {
 
   const receiveTransaction = e => {
 
-
     const sendId = props.sendId
     const receiveId = props.receiveId
 
     const userSend = getUsers(sendId)
     const userReceive = getUsers(receiveId)
 
+    console.log(getUsers(sendId))
     //llaves de quien envia
     const sendPublicKey = userSend.publicKey
     const sendPrivateKey = userSend.privateKey
