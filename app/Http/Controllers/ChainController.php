@@ -35,7 +35,8 @@ class ChainController extends Controller
     $id = Auth::id();
 
     $chain = new Chain;
-    $chain->transaction = $request->transaction;
+    $chain->transaction     = $request->transaction;
+    $chain->prevTransaction = $request->transaction;
     $chain->from        = $id;
     $chain->to          = $request->to;
     $chain->state       = 'Enviado';
@@ -43,5 +44,21 @@ class ChainController extends Controller
     $chain->updated_at = now();
     $chain->save();
     return "Transaccion Creada";
+  }
+
+  public function receive(Request $request)
+  {
+    $id = Auth::id();
+
+    $chain = new Chain;
+    $chain->transaction     = $request->transaction;
+    $chain->prevTransaction = $request->prevTransaction;
+    $chain->from        = $request->from;
+    $chain->to          = $id;
+    $chain->state       = 'Recibido';
+    $chain->created_at = now();
+    $chain->updated_at = now();
+    $chain->save();
+    return "Transaccion Recibida";
   }
 }

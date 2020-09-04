@@ -43,13 +43,14 @@ function Send(props) {
     })
   }
 
-  const save = (id_transaction, to) => {
+  const save = (id_transaction,prevId_transaction, from) => {
     axios({
       method: 'post',
       url: 'chain/new',
       data: {
         transaction: id_transaction,
-        to: to,
+        prevTransaction: prevId_transaction,
+        from: from,
       }
     })
       .then((response) => {
@@ -81,16 +82,16 @@ function Send(props) {
     //id de transaccion
     const txCreatedID = props.transaction
 
+    
+
+    console.log('send :', userSend, 'receive :', userReceive,'transaction :',txCreatedID)
+
+    // metadatos de informacion adicional
     const info = {
       from: userSend.name,
       to: userReceive.name,
       date: new Date().toString()
     }
-
-    console.log('send :', userSend, 'receive :', userReceive,'transaction :',txCreatedID)
-
-    // metadatos de informacion adicional
-    const info = null
 
     //conexion a bigchain
     const BigchainDB = require('bigchaindb-driver')
@@ -125,10 +126,8 @@ function Send(props) {
         return conn.postTransactionCommit(signedTransfer)
       })
       .then(tx => {
-        //    document.body.innerHTML += '<h3>Transfer Transaction created</h3>'
-        //   document.body.innerHTML += res.id
          console.log('Transfer Transaction created :','https://test.ipdb.io/api/v1/transactions/'+tx.id)
-         save(tx.id, props.receiveId)
+         save(tx.id,txCreatedID,props.sendId)
       })
 
   }
