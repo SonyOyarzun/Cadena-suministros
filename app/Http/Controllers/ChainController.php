@@ -22,7 +22,6 @@ class ChainController extends Controller
         User::select('name')
           ->whereColumn('chain.to', 'users.id'),
       ])->get();
-      
     } catch (\Throwable $th) {
 
       return $th;
@@ -51,9 +50,9 @@ class ChainController extends Controller
     $id = Auth::id();
 
     Chain::query()
-    ->where('transaction','=',$request->asset)
-    ->update(['state'=>'Recibido']);
-    
+      ->where('transaction', '=', $request->asset)
+      ->update(['state' => 'Recibido']);
+
     $chain = new Chain;
     $chain->transaction     = $request->transaction;
     $chain->asset           = $request->asset;
@@ -63,7 +62,7 @@ class ChainController extends Controller
     $chain->created_at = now();
     $chain->updated_at = now();
     $chain->save();
-    
+
     return "Transaccion Recibida";
   }
 }
