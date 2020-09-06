@@ -53,7 +53,7 @@ function Send(props) {
     const myPublicKey = user.publicKey
     const myPrivateKey = user.privateKey
 
-    if (isset(props.getData) || isset(props.getUserSend)) {
+    if (isset(props.getData) || isset(props.getUserSend)){
 
       const userSend = props.getUserSend.values
       const transaction = props.getData

@@ -50,9 +50,9 @@ class ChainController extends Controller
   {
     $id = Auth::id();
 
-    $prevChain = Chain::select()->where('transaction','=',$request->transaction);
-    $prevChain->state       = 'Recibido';
-    $prevChain->save();
+    Chain::query()
+    ->where('transaction','=',$request->transaction)
+    ->update(['state'=>'Recibido']);
     
     $chain = new Chain;
     $chain->transaction     = $request->transaction;
@@ -63,6 +63,7 @@ class ChainController extends Controller
     $chain->created_at = now();
     $chain->updated_at = now();
     $chain->save();
+    
     return "Transaccion Recibida";
   }
 }

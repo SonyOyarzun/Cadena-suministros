@@ -24,5 +24,17 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
+        DB::table('users')->insert([
+            'name' => 'Prueba',
+            'email' => 'prueba@ciisa.cl',
+            'path' => 'https://feriados-cl-api.herokuapp.com/feriados',
+            'role' => 'P',
+            'password' => bcrypt('12345678'),
+            'publicKey'  => 'H66ANcwb4W81iRHsMReHwJWnPcwyGZCAcWBQDbn6YuqL',
+            'privateKey' => '2RjzmEEXWf51vmhdywNW4aqKjhSyHorYBP4Y2hX3sq4r',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
     }
 }
