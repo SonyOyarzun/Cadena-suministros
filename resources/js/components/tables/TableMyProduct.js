@@ -37,13 +37,17 @@ export default function TableMyProduct() {
 
 
   const toggleCheck = e => {
-    let checkedArr = checked;
+  // multiseleccion  
+  //let checkedArr = checked;
+  let checkedArr = [];
     checkedArr.filter(name => name === e.target.id)[0]
       ? checkedArr = checkedArr.filter(name => name !== e.target.id)
       : checkedArr.push(e.target.id);
     setChecked([...checkedArr])
-    getDataCheckbox()
+   getDataCheckbox()
   };
+
+  
 
   const isChecked = id => checked.filter(name => name === id)[0] ? true : false
 
@@ -85,7 +89,7 @@ export default function TableMyProduct() {
     Object.keys(products).map((key, row) => (
 
       preRows = [],
-      preRows['check'] = <input label=" " value={JSON.stringify(products[key])} type="checkbox" id={'checkbox' + row} className="box" onClick={toggleCheck} checked={isChecked('checkbox' + row)} defaultChecked='false' />,
+      preRows['check'] = <input label=" " value={JSON.stringify(products[key])} type="checkbox" id={'checkbox' + row}  className="box"   onClick={toggleCheck}  checked={isChecked('checkbox' + row)} defaultChecked='false' />,
 
       Object.keys(products[key]).map((key2, col) => (
         {

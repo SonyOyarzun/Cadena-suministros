@@ -55,6 +55,7 @@ function Send(props) {
     })
       .then((response) => {
         console.log(response);
+        props.getData()
         alert(response.data)
       }, (error) => {
         console.log(error);

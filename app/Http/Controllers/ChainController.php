@@ -50,6 +50,10 @@ class ChainController extends Controller
   {
     $id = Auth::id();
 
+    $prevChain = Chain::select()->where('transaction','=',$request->transaction);
+    $prevChain->state       = 'Recibido';
+    $prevChain->save();
+    
     $chain = new Chain;
     $chain->transaction     = $request->transaction;
     $chain->prevTransaction = $request->prevTransaction;
