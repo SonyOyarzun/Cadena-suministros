@@ -51,7 +51,7 @@ class ChainController extends Controller
     $id = Auth::id();
 
     Chain::query()
-    ->where('transaction','=',$request->transaction)
+    ->where('transaction','=',$request->prevTransaction)
     ->update(['state'=>'Recibido']);
     
     $chain = new Chain;
