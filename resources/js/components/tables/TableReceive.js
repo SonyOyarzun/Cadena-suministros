@@ -46,18 +46,13 @@ class TableSend extends Component {
 
   let columns = [
       {
-        label: 'ID',
-        field: 'id',
+        label: 'Transaccion',
+        field: 'transaction',
         width: 150,
         attributes: {
           'aria-controls': 'DataTable',
           'aria-label': 'ID',
         },
-      },
-      {
-        label: 'Transaccion',
-        field: 'transaction',
-        width: 150,
       },
       {
         label: 'De',
@@ -87,8 +82,6 @@ class TableSend extends Component {
     let rows = [
       ...this.state.sends.map((data, order) => (
         {
-
-          id: data.id,
           transaction: data.transaction,
           from: data.fromName,
           to: data.toName,

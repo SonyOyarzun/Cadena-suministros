@@ -14,9 +14,8 @@ class CreateChainTable extends Migration
     public function up()
     {
         Schema::create('chain', function (Blueprint $table) {
-            $table->id();
-            $table->string('transaction');
-            $table->string('prevTransaction');
+            $table->string('transaction')->unique();
+            $table->string('asset');
             $table->integer('from');
             $table->integer('to');
             $table->string('state');
