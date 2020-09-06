@@ -48,3 +48,6 @@ Route::get('json-api/config', 'ApiController@config');
 Route::get('chain/list', 'ChainController@index');
 Route::post('chain/new', 'ChainController@create');
 Route::post('chain/receive', 'ChainController@receive');
+
+//rutas de bigchain
+Route::get('assets', 'BigController@asset');

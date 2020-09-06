@@ -42,6 +42,26 @@ function getStepContent(step) {
 }
 
 export default function VerticalLinearStepper() {
+
+
+  const process = (transaction) => {
+
+    axios({
+      method: 'get',
+      url: '/assets/',
+      data: {
+        transaction: transaction,
+      }
+    })
+      .then((response) => {
+        console.log(response);
+        alert(response.data)
+      }, (error) => {
+        console.log(error);
+      });
+
+  }
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
