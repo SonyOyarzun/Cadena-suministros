@@ -36,8 +36,13 @@ export default function VerticalLinearStepper() {
   function getSteps() {
 
     let array = []
+    
     Object.keys(step).map((key, row) => (
-      array.push(step[row])
+
+      Object.keys(step[key]).map((key2, col) => (
+      array.push(col)
+      ))
+
     ))
   
     console.log('get steps :',array)
@@ -64,7 +69,7 @@ export default function VerticalLinearStepper() {
 
 
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState();
   const steps = getSteps();
 
   return (
@@ -79,9 +84,6 @@ export default function VerticalLinearStepper() {
               <StepLabel>{label}</StepLabel>
               <StepContent>
                 <Typography></Typography>
-                <div className={classes.actionsContainer}>
- 
-                </div>
               </StepContent>
             </Step>
           ))}
