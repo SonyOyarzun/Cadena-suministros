@@ -77,7 +77,7 @@ export default function VerticalLinearStepper() {
 
 
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState();
+  const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
   return (
@@ -86,7 +86,7 @@ export default function VerticalLinearStepper() {
 
         <MDBInput id="id" label="ID TRANSACCION" validate error="wrong" success="right" valueDefault="f0957665d0936c2942903d52f5e2854a5f71e892b8fcf222115c227ccc454f87" />
         <MDBBtn onClick={process}>BUSCAR</MDBBtn>
-        <Stepper activeStep={activeStep}   orientation="vertihcal">
+        <Stepper activeStep={activeStep}   orientation="vertical">
           {steps.map((label, index) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
