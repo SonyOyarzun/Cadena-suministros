@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -7,6 +7,8 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+
+import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon } from 'mdbreact';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,99 +26,67 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getSteps() {
-  return ['Primera entrega', 'Segunda entrega', 'Tercera entrega'];
-}
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return `Producto enviado a durante la fecha...`;
-    case 1:
-      return 'Producto enviado a durante la fecha...';
-    case 2:
-      return `Producto enviado a durante la fecha...`;
-    default:
-      return 'Unknown step';
-  }
-}
+
 
 export default function VerticalLinearStepper() {
 
+  const [step, setStep] = useState([]);
 
-  const process = (transaction) => {
+  function getSteps() {
 
-    axios({
-      method: 'get',
-      url: '/assets/',
-      data: {
-        transaction: transaction,
-      }
-    })
-      .then((response) => {
-        console.log(response);
-        alert(response.data)
-      }, (error) => {
-        console.log(error);
-      });
-
+    let array = []
+    Object.keys(step).map((key, row) => (
+      array.push(step[row])
+    ))
+  
+    console.log('get steps :',array)
+  
+    return array;
   }
+
+  const process = () => {
+
+      const params = {
+        "asset": document.getElementById('id').value,
+      }
+  
+      axios.get('/assets', {
+        params
+      }).then(response => {
+        setStep(response.data)
+        console.log('step :',step)
+       
+      }).catch(error => {
+        alert("Error " + error)
+      })
+    }
+
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
   return (
-    <div className={classes.root}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-            <StepContent>
-              <Typography>{getStepContent(index)}</Typography>
-              <div className={classes.actionsContainer}>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
-                  >
-                    Atras
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finalizar' : 'Siguiente'}
-                  </Button>
+    <MDBCard className={classes.root}>
+      <MDBCardBody className="mx-4">
+
+        <MDBInput id="id" label="ID TRANSACCION" validate error="wrong" success="right" valueDefault="1221dd799971c886bed23dec3055e632ded4463152c96979abc04e7f3b7722a8"/>
+        <MDBBtn onClick={process}>BUSCAR</MDBBtn>
+        <Stepper activeStep={activeStep} orientation="vertical">
+          {steps.map((label, index) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+              <StepContent>
+                <Typography></Typography>
+                <div className={classes.actionsContainer}>
+ 
                 </div>
-              </div>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} className={classes.resetContainer}>
-          <Typography>Consulta finalizada</Typography>
-          <Button onClick={handleReset} className={classes.button}>
-            Volver al inicio
-          </Button>
-        </Paper>
-      )}
-    </div>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+      </MDBCardBody>
+    </MDBCard>
   );
 }
