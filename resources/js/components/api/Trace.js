@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -36,41 +36,44 @@ export default function VerticalLinearStepper() {
   function getSteps() {
 
     let array = []
-    
+
     Object.keys(step).map((key, row) => (
 
-    //  Object.keys(step[key]).map((key2, col) => (
       array.push(step[row]['metadata']['info'])
-   //   ))
 
     ))
 
     let array2 = []
-    Object.keys(array).map((key, row) => (
-        array2.push('De '+key+' para'+key+' en la fecha'+key)
-      ))
-  
-    console.log('get steps :',array2)
-  
+ 
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+    var fecha
+    array.map((data, index) => (
+      fecha = new Date(data.date),
+      array2.push('De ' + data.from + ' para ' + data.to + ' en la fecha ' +  fecha.toLocaleDateString("es-ES", options))
+    ))
+
+    console.log('get steps :', array2)
+
     return array2;
   }
 
   const process = () => {
 
-      const params = {
-        "asset": document.getElementById('id').value,
-      }
-  
-      axios.get('/assets', {
-        params
-      }).then(response => {
-        setStep(response.data)
-        console.log('step :',step)
-       
-      }).catch(error => {
-        alert("Error " + error)
-      })
+    const params = {
+      "asset": document.getElementById('id').value,
     }
+
+    axios.get('/assets', {
+      params
+    }).then(response => {
+      setStep(response.data)
+      console.log('step :', step)
+
+    }).catch(error => {
+      alert("Error " + error)
+    })
+  }
 
 
   const classes = useStyles();
@@ -81,7 +84,7 @@ export default function VerticalLinearStepper() {
     <MDBCard className={classes.root}>
       <MDBCardBody className="mx-4">
 
-        <MDBInput id="id" label="ID TRANSACCION" validate error="wrong" success="right" valueDefault="1221dd799971c886bed23dec3055e632ded4463152c96979abc04e7f3b7722a8"/>
+        <MDBInput id="id" label="ID TRANSACCION" validate error="wrong" success="right" valueDefault="f0957665d0936c2942903d52f5e2854a5f71e892b8fcf222115c227ccc454f87" />
         <MDBBtn onClick={process}>BUSCAR</MDBBtn>
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((label, index) => (
