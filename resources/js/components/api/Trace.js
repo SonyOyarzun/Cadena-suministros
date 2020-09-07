@@ -40,14 +40,19 @@ export default function VerticalLinearStepper() {
     Object.keys(step).map((key, row) => (
 
     //  Object.keys(step[key]).map((key2, col) => (
-      array.push(step[row])
+      array.push(step[row]['metadata']['info'])
    //   ))
 
     ))
+
+    let array2 = []
+    Object.keys(array).map((key, row) => (
+        array2.push('De '+key+' para'+key+' en la fecha'+key)
+      ))
   
-    console.log('get steps :',array)
+    console.log('get steps :',array2)
   
-    return array;
+    return array2;
   }
 
   const process = () => {
