@@ -39,9 +39,9 @@ export default function VerticalLinearStepper() {
     
     Object.keys(step).map((key, row) => (
 
-      Object.keys(step[key]).map((key2, col) => (
-      array.push(col)
-      ))
+    //  Object.keys(step[key]).map((key2, col) => (
+      array.push(step[row])
+   //   ))
 
     ))
   
