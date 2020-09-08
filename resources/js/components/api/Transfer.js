@@ -8,8 +8,6 @@ function Transfer(props) {
 
   const [userSend, setUserSend] = useState([]);
   const [userReceive, setUserReceive] = useState([]);
-
-  console.log('sendId :',props.sendId,' receiveId :',props.receiveId)
     
 
   const getUserSend = (id) => {
@@ -68,10 +66,11 @@ function Transfer(props) {
   
   useEffect(() => {
  
+    console.log('sendId :',props.sendId,' receiveId :',props.receiveId)
     getUserSend(props.sendId)
     getUserReceive(props.receiveId)
 
-  }, []);
+  }, [props.receiveId]);
 
 
 

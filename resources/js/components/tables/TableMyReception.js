@@ -100,7 +100,7 @@ class TableSend extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <Transfer sendId={data.to} receiveId={this.state.userSend.id} transaction={data.transaction} getData={this.getData} />,
+          action: <Transfer sendId={data.from} receiveId={this.state.userSend.id} transaction={data.transaction} getData={this.getData} />,
 
         }
 
