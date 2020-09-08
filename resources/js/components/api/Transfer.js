@@ -44,13 +44,13 @@ function Transfer(props) {
     })
   }
 
-  const save = (id_transaction,asset, from) => {
+  const save = (id_transaction,prevTransaction, from) => {
     axios({
       method: 'post',
       url: 'chain/receive',
       data: {
         transaction: id_transaction,
-        asset: asset,
+        prevTransaction: prevTransaction,
         from: from,
       }
     })
