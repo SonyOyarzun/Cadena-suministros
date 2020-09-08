@@ -4,6 +4,8 @@ import axios from 'axios'
 
 import Transfer from '../api/Transfer'
 
+import Auto from '../extra/AutoComplete'
+
 //import datable
 import { MDBDataTableV5, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
 
@@ -12,7 +14,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import Load from '../extra/Load'
 
-class TableSend extends Component {
+class TableMyReception extends Component {
 
   constructor(props) {
     super(props);
@@ -23,6 +25,7 @@ class TableSend extends Component {
       userSend: []
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
+    this.onTagsChange = this.onTagsChange.bind(this);
   }
 
   getData() {
@@ -35,14 +38,11 @@ class TableSend extends Component {
       alert("Error " + error)
     })
 
-    axios.get('user/list')
-    .then(response => {
-      this.setState({users: response.data});
-      console.log('users :', this.state.users)
-    }).catch(error => {
-      alert("Error " + error)
-    })
+  }
 
+  onTagsChange(event, values){
+    this.setState({ userSend: values })
+    console.log('userSend onChange',this.state.userSend)
   }
 
 
@@ -111,7 +111,6 @@ class TableSend extends Component {
 
     rows = rows.filter(e => e.state == "Recibido")
 
-
     const data = {
       columns,
       rows
@@ -123,10 +122,7 @@ class TableSend extends Component {
 
     console.log('data :', data)
 
-    const onTagsChange = (event, values) => {
-      this.setState({ userSend: values })
-      console.log('userSend onChange',this.state.userSend)
-    }
+  
 
     const { loading } = this.state;
 
@@ -136,15 +132,7 @@ class TableSend extends Component {
       return (
         <MDBRow>
           <MDBCol size="12">
-            <Autocomplete
-              id="userToSend"
-              size="lg"
-              options={this.state.users}
-              getOptionLabel={option => (option.name)}
-              onChange={onTagsChange}
-              style={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Usuario a enviar" variant="outlined" />}
-            />
+            <Auto onTagsChange={this.onTagsChange}/>
           </MDBCol>
           <MDBCol size="12">
             <MDBDataTableV5
@@ -171,5 +159,5 @@ function demoAsyncCall() {
   return new Promise((resolve) => setTimeout(() => resolve(), 2500));
 }
 
-export default TableSend;
+export default TableMyReception;
 

@@ -6,15 +6,14 @@ import Create from '../api/Create'
 
 import Load from '../extra/Load'
 
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Auto from '../extra/AutoComplete'
+
 
 export default function TableMyProduct() {
 
   const [loading, setLoading] = useState(true);
 
   const [products, setProducts] = useState([]);
-  const [users, setUsers] = useState([]);
   const [userSend, setUserSend] = useState();
   const [checked, setChecked] = useState([]);
   const [checkbox, setCheckbox] = useState([]);
@@ -134,15 +133,7 @@ export default function TableMyProduct() {
         <MDBRow>
           <MDBCol size="4"><Create getData={checkbox} getUserSend={userSend} /></MDBCol>
           <MDBCol size="8">
-            <Autocomplete
-              id="userToSend"
-              size="lg"
-              options={users}
-              getOptionLabel={option => (option.name)}
-              onChange={onTagsChange}
-              style={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Usuario a enviar" variant="outlined" />}
-            />
+            <Auto onTagsChange={onTagsChange}/>
           </MDBCol>
           <MDBCol size="12">
             <MDBDataTableV5

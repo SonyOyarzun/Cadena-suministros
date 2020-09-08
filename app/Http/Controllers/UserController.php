@@ -13,10 +13,16 @@ use App\User;
 
 class UserController extends Controller
 {
-  public function index()
+  public function index(Request $request)
   {
+    if(isset($request)){
     $user = User::all();
-
+    }else{
+    $id = Auth::id();  
+    $user = User::query()
+    ->where('id', '!=',$id)
+    ->get();
+    }
     return json_encode($user);
   }
 
@@ -32,6 +38,7 @@ class UserController extends Controller
     return json_encode($user);
     }
   }
+
 
   public function search(Request $request)
   {
