@@ -84,7 +84,7 @@ export default function VerticalLinearStepper() {
     <MDBCard className={classes.root}>
       <MDBCardBody className="mx-4">
 
-        <MDBInput id="id" label="ID TRANSACCION" validate error="wrong" success="right" valueDefault="f0957665d0936c2942903d52f5e2854a5f71e892b8fcf222115c227ccc454f87" />
+        <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="33a89ff938cd968126094a007206b7e5d4a22d622e78295583e10f9a11364da1" />
         <MDBBtn onClick={process}>BUSCAR</MDBBtn>
         <Stepper activeStep={activeStep}   orientation="vertical">
           {steps.map((label, index) => (

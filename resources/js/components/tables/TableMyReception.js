@@ -20,7 +20,7 @@ class TableSend extends Component {
       sends: [],
       loading: true,
       users: [],
-      userSend: ''
+      userSend: []
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
   }
@@ -31,6 +31,14 @@ class TableSend extends Component {
       this.setState({ sends: response.data })
       //    console.log(this.state.sends)
       console.log('response :', response.data)
+    }).catch(error => {
+      alert("Error " + error)
+    })
+
+    axios.get('user/list')
+    .then(response => {
+      this.setState({users: response.data});
+      console.log('users :', response.data)
     }).catch(error => {
       alert("Error " + error)
     })
@@ -92,7 +100,7 @@ class TableSend extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <Transfer sendId={data.to} receiveId={userSend.id} transaction={data.transaction} getData={this.getData} />,
+          action: <Transfer sendId={data.to} receiveId={this.state.userSend.id} transaction={data.transaction} getData={this.getData} />,
 
         }
 
@@ -117,6 +125,7 @@ class TableSend extends Component {
 
     const onTagsChange = (event, values) => {
       this.setState({ userSend: values })
+      console.log('userSend onChange',this.state.userSend)
     }
 
     const { loading } = this.state;
@@ -130,7 +139,7 @@ class TableSend extends Component {
             <Autocomplete
               id="userToSend"
               size="lg"
-              options={this.users}
+              options={this.state.users}
               getOptionLabel={option => (option.name)}
               onChange={onTagsChange}
               style={{ width: 300 }}
