@@ -38,7 +38,7 @@ class TableSend extends Component {
     axios.get('user/list')
     .then(response => {
       this.setState({users: response.data});
-      console.log('users :', response.data)
+      console.log('users :', this.state.users)
     }).catch(error => {
       alert("Error " + error)
     })

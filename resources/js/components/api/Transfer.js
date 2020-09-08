@@ -9,6 +9,9 @@ function Transfer(props) {
   const [userSend, setUserSend] = useState([]);
   const [userReceive, setUserReceive] = useState([]);
 
+  console.log('sendId :',props.sendId,' receiveId :',props.receiveId)
+    
+
   const getUserSend = (id) => {
 
     const params = {
@@ -19,7 +22,7 @@ function Transfer(props) {
       params
     }).then(response => {
       setUserSend(response.data)
-      console.log('array :',userSend)
+      console.log('userSend :',userSend)
      
     }).catch(error => {
       alert("Error " + error)
@@ -36,7 +39,7 @@ function Transfer(props) {
       params
     }).then(response => {
       setUserReceive(response.data)
-      console.log('array :',userReceive)
+      console.log('userReceive :',userReceive)
      
     }).catch(error => {
       alert("Error " + error)
@@ -62,6 +65,7 @@ function Transfer(props) {
       });
   }
 
+  
   useEffect(() => {
  
     getUserSend(props.sendId)
