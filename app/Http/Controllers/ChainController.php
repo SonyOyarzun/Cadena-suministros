@@ -14,6 +14,8 @@ class ChainController extends Controller
   {
     try {
 
+      $id = Auth::id();
+
       $chains = Chain::addSelect([
         'fromName' =>
         User::select('name')
@@ -21,7 +23,7 @@ class ChainController extends Controller
         'toName' =>
         User::select('name')
           ->whereColumn('chain.to', 'users.id'),
-      ])->get();
+      ])->where('to', '=', $id)->get();
     } catch (\Throwable $th) {
 
       return $th;
@@ -35,7 +37,7 @@ class ChainController extends Controller
 
     $chain = new Chain;
     $chain->transaction     = $request->transaction;
-    $chain->prevTransaction = $request->transaction;
+    $chain->prevTransaction = $request->prevTransaction;
     $chain->from        = $id;
     $chain->to          = $request->to;
     $chain->state       = 'Enviado';

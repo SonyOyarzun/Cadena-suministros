@@ -11,19 +11,24 @@ function Auto(props) {
 
     const [users, setUsers] = useState([]);
 
+    const params = {
+        resp: 'no'
+    }
+
+
 
     useEffect(() => {
 
         axios.get('user/list',
-        {data:{
-          resp: 'no'
-        }})
-        .then(response => {
-          setUsers(response.data);
-          console.log('users :', users)
-        }).catch(error => {
-          alert("Error " + error)
-        })
+            {
+                params
+            })
+            .then(response => {
+                setUsers(response.data);
+                console.log('users :', users)
+            }).catch(error => {
+                console.log("Error " + error)
+            })
 
     }, []);
 

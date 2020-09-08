@@ -15,7 +15,7 @@ class UserController extends Controller
 {
   public function index(Request $request)
   {
-    if(isset($request)){
+    if(!isset($request->resp)){
     $user = User::all();
     }else{
     $id = Auth::id();  

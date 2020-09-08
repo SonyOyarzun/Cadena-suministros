@@ -21,12 +21,13 @@ function Create(props) {
   }, []);
 
 
-  const save = (id_transaction, to) => {
+  const save = (id_transaction,prevTransaction, to) => {
     axios({
       method: 'post',
       url: 'chain/new',
       data: {
         transaction: id_transaction,
+        prevTransaction: prevTransaction,
         to: to,
       }
     })
@@ -91,7 +92,7 @@ function Create(props) {
         .then(res => {
           const elem = API_PATH + 'transactions/' + txSigned.id;
           console.log('Transaction', txSigned.id, 'accepted', 'URL :', elem);
-          save(txSigned.id, userSend.id)
+          save(txSigned.id,txSigned.id,userSend.id)
         })
       console.log(txSigned);
     } else {

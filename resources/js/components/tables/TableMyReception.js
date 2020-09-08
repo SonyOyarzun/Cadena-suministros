@@ -100,7 +100,7 @@ class TableMyReception extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <Transfer sendId={data.to}  receiveId={this.state.userSend.id} transaction={data.transaction} getData={this.getData} />,
+          action: <button onClick={save(data.transaction,data.prevTransaction,this.state.userSend.id)}  />,
 
         }
 
@@ -122,6 +122,23 @@ class TableMyReception extends Component {
 
     console.log('data :', data)
 
+    const save = (id_transaction,prevTransaction, to) => {
+      axios({
+        method: 'post',
+        url: 'chain/new',
+        data: {
+          transaction: id_transaction,
+          prevTransaction: prevTransaction,
+          to: to,
+        }
+      })
+        .then((response) => {
+          console.log(response);
+          alert(response.data)
+        }, (error) => {
+          console.log(error);
+        });
+    }
   
 
     const { loading } = this.state;
