@@ -7,6 +7,9 @@ import Transfer from '../api/Transfer'
 //import datable
 import { MDBDataTableV5, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
 
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 import Load from '../extra/Load'
 
 class TableSend extends Component {
@@ -17,7 +20,7 @@ class TableSend extends Component {
       sends: [],
       loading: true,
       users: [],
-      userSend: {}
+      userSend: ''
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
   }
@@ -89,7 +92,7 @@ class TableSend extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <Transfer sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData} />,
+          action: <Transfer sendId={data.to} receiveId={userSend.id} transaction={data.transaction} getData={this.getData} />,
 
         }
 
@@ -113,7 +116,7 @@ class TableSend extends Component {
     console.log('data :', data)
 
     const onTagsChange = (event, values) => {
-      this.setState({ users: values })
+      this.setState({ userSend: values })
     }
 
     const { loading } = this.state;
@@ -127,7 +130,7 @@ class TableSend extends Component {
             <Autocomplete
               id="userToSend"
               size="lg"
-              options={users}
+              options={this.users}
               getOptionLabel={option => (option.name)}
               onChange={onTagsChange}
               style={{ width: 300 }}
