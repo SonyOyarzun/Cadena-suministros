@@ -23,7 +23,7 @@ function Transfer(props) {
       console.log('userSend :',userSend)
      
     }).catch(error => {
-      alert("Error " + error)
+      console.log("Error " + error)
     })
   }
 
@@ -40,7 +40,7 @@ function Transfer(props) {
       console.log('userReceive :',userReceive)
      
     }).catch(error => {
-      alert("Error " + error)
+      console.log("Error " + error)
     })
   }
 
@@ -70,7 +70,7 @@ function Transfer(props) {
     getUserSend(props.sendId)
     getUserReceive(props.receiveId)
 
-  }, [props.receiveId]);
+  }, [props.receiveId]); //equivale a onchange para props
 
 
 
