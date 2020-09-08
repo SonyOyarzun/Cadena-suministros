@@ -44,10 +44,10 @@ class NavBar extends Component {
               </NavDropdown>
               <NavDropdown title={<><MDBIcon icon="truck-moving" /> Distribución</>} id="basic-nav-dropdown-distribucion">
                 <NavDropdown.Item onClick={() => this.handleLink("MyProduct")}>Mis Productos</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink("MyReception")}>Mi Recepción</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => this.handleLink("MyReception")}>Reenviar Productos</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => this.handleLink("Pedido")}>Pedidos</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => this.handleLink("Send")}>Envios Realizados</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink("Receive")}>Recepción</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => this.handleLink("Receive")}>Recibir Productos</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => this.handleLink("Notificaciones")}>Notificaciones</NavDropdown.Item>
               </NavDropdown>

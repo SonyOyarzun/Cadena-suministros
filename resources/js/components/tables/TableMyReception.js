@@ -7,7 +7,7 @@ import Transfer from '../api/Transfer'
 import Auto from '../extra/AutoComplete'
 
 //import datable
-import { MDBDataTableV5, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
+import { MDBDataTableV5, MDBBtn, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -26,6 +26,7 @@ class TableMyReception extends Component {
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
     this.onTagsChange = this.onTagsChange.bind(this);
+    this.save = this.save.bind(this);
   }
 
   getData() {
@@ -54,6 +55,23 @@ class TableMyReception extends Component {
 
   }
 
+  save(id_transaction,prevTransaction, to){
+    axios({
+      method: 'post',
+      url: 'chain/reSend',
+      data: {
+        transaction: id_transaction,
+        prevTransaction: prevTransaction,
+        to: to,
+      }
+    })
+      .then((response) => {
+        console.log(response);
+        alert(response.data)
+      }, (error) => {
+        console.log(error);
+      });
+  }
 
   render() {
 
@@ -100,7 +118,7 @@ class TableMyReception extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <button onClick={save(data.transaction,data.prevTransaction,this.state.userSend.id)}  />,
+          action: <MDBBtn onClick={this.save(data.transaction,data.prevTransaction,this.state.userSend.id)} />,
 
         }
 
@@ -122,23 +140,7 @@ class TableMyReception extends Component {
 
     console.log('data :', data)
 
-    const save = (id_transaction,prevTransaction, to) => {
-      axios({
-        method: 'post',
-        url: 'chain/new',
-        data: {
-          transaction: id_transaction,
-          prevTransaction: prevTransaction,
-          to: to,
-        }
-      })
-        .then((response) => {
-          console.log(response);
-          alert(response.data)
-        }, (error) => {
-          console.log(error);
-        });
-    }
+ 
   
 
     const { loading } = this.state;

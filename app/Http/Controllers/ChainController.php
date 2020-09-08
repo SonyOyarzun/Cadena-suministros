@@ -67,4 +67,16 @@ class ChainController extends Controller
 
     return "Transaccion Recibida";
   }
+
+  public function reSend(Request $request)
+  {
+    Chain::query()
+      ->where('transaction', '=', $request->Transaction)
+      ->update(
+        ['state'  => 'Enviado'],
+        ['from'   => $request->from],
+        ['to'     => $request->to]);
+
+    return "Transaccion Reenviada";
+  }
 }
