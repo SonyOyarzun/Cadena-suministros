@@ -7,7 +7,7 @@ import Transfer from '../api/Transfer'
 import Auto from '../extra/AutoComplete'
 
 //import datable
-import { MDBDataTableV5, MDBBtn, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
+import { MDBDataTableV5, MDBBtn, MDBIcon,MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -118,7 +118,7 @@ class TableMyReception extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <MDBBtn onClick={this.save(data.transaction,data.prevTransaction,this.state.userSend.id)} />,
+          action:  <MDBBtn color="primary" rounded onClick={this.save(data.transaction,data.prevTransaction,this.state.userSend.id)}><MDBIcon icon="user-plus" /></MDBBtn>,
 
         }
 
