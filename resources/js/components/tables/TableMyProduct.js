@@ -3,7 +3,7 @@ import { MDBDataTableV5, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow,
 import _default from 'react-bootstrap/esm/CardColumns';
 
 //import api
-import Send from '../api/Send'
+import Create from '../api/Create'
 
 import Load from '../extra/Load'
 
@@ -133,7 +133,7 @@ export default function TableMyProduct() {
     return (
       <>
         <MDBRow>
-          <MDBCol size="4"><Send getData={checkbox} getUserSend={userSend} /></MDBCol>
+          <MDBCol size="4"><Create getData={checkbox} getUserSend={userSend} /></MDBCol>
           <MDBCol size="8">
             <Autocomplete
               id="userToSend"

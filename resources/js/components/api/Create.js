@@ -3,7 +3,7 @@ import React, { Component, Fragment, useState, useEffect, useCallback } from 're
 import { MDBIcon, MDBBtn } from "mdbreact";
 
 
-function Send(props) {
+function Create(props) {
 
   const [user, setUser] = useState([]);
 
@@ -48,7 +48,7 @@ function Send(props) {
             return true;
 };
 
-  const sendTransaction = e => {
+  const createTransaction = e => {
 
     const myPublicKey = user.publicKey
     const myPrivateKey = user.privateKey
@@ -101,10 +101,10 @@ function Send(props) {
 
   return (
     <div>
-      <MDBBtn block rounded size="lg" color="info" onClick={sendTransaction}>Realizar Envio <MDBIcon icon="paper-plane" /></MDBBtn>
+      <MDBBtn block rounded size="lg" color="info" onClick={createTransaction}>Realizar Envio <MDBIcon icon="paper-plane" /></MDBBtn>
     </div>
   )
 }
 
 
-export default Send;
+export default Create;

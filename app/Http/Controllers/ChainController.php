@@ -51,7 +51,7 @@ class ChainController extends Controller
 
     Chain::query()
       ->where('transaction', '=', $request->asset)
-      ->update(['state' => 'Recibido']);
+      ->update(['state' => 'Transferido']);
 
     $chain = new Chain;
     $chain->transaction     = $request->transaction;

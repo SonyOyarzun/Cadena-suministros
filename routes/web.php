@@ -20,7 +20,11 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 });
-
+/*
+Route::view('/{path?}', 'home')
+     ->where('path', '.*')
+     ->name('home');
+*/
 
 Auth::routes();
 

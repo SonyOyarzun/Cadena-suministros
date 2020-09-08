@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { MDBIcon, MDBBtn } from "mdbreact";
 
 
-function Send(props) {
+function Transfer(props) {
 
   const [userSend, setUserSend] = useState([]);
   const [userReceive, setUserReceive] = useState([]);
@@ -141,4 +141,4 @@ function Send(props) {
 }
 
 
-export default Send;
+export default Transfer;

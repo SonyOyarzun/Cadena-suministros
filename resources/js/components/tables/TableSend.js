@@ -42,21 +42,16 @@ class TableSend extends Component {
 
   render() {
 
-    const data = {
-      columns: [
+
+  let columns = [
         {
-          label: 'ID',
-          field: 'id',
+          label: 'Transaccion',
+          field: 'transaction',
           width: 150,
           attributes: {
             'aria-controls': 'DataTable',
             'aria-label': 'ID',
           },
-        },
-        {
-          label: 'Transaccion',
-          field: 'transaction',
-          width: 150,
         },
         {
           label: 'De',
@@ -77,13 +72,11 @@ class TableSend extends Component {
           label: 'Fecha',
           field: 'updated_at',
         },
-      ],
+      ]
       
-      rows: [
+  let rows = [
         ...this.state.sends.map((data, order) => (
             {
-              
-              id: data.id,
               transaction: data.transaction,
               from: data.fromName,
               to: data.toName,
@@ -94,8 +87,16 @@ class TableSend extends Component {
           
         ))
       ]
-      
-    };
+
+
+        //filtrara solo los que tienen estado Enviado
+
+    rows = rows.filter(e => e.state == "Enviado")
+  
+    const data = {
+      columns,
+      rows
+    }
 
     console.log(data)
     const { loading } = this.state;

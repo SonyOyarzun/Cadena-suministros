@@ -2,7 +2,7 @@ import React, { Component, ButtonGroup } from 'react';
 
 import axios from 'axios'
 
-import Receive from '../api/Receive'
+import Transfer from '../api/Transfer'
 
 //import datable
 import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon } from 'mdbreact';
@@ -87,7 +87,7 @@ class TableSend extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <Receive sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData}/>,
+          action: <Transfer sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData}/>,
 
         }
 
