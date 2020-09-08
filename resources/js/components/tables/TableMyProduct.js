@@ -1,6 +1,5 @@
 import React, { Component, Fragment, useState, useEffect, useCallback } from 'react';
 import { MDBDataTableV5, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
-import _default from 'react-bootstrap/esm/CardColumns';
 
 //import api
 import Create from '../api/Create'

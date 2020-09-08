@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 import User from './User'
 import Product from './Product'
 import MyProduct from './MyProduct'
+import MyReception from './MyReception'
 import ApiConfig from './api/ApiConfig'
 import Trace from './api/Trace'
 import Send from './Send'
@@ -22,6 +23,7 @@ class Routes extends Component {
                 <Route path="/User" component={User} />
                 <Route path="/Product" component={Product} />
                 <Route path="/MyProduct" component={MyProduct} />
+                <Route path="/MyReception" component={MyReception} />
 
                 <Route path="/ApiConfig" component={ApiConfig} />
 

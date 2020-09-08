@@ -96,7 +96,7 @@ class TableSend extends Component {
 
     //filtrara solo los que tienen estado Enviado
 
-    rows = rows.filter(e => e.state == "Enviado")
+    rows = rows.filter(e => e.state == "Recibido")
 
 
     const data = {
