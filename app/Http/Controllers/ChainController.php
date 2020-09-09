@@ -75,7 +75,7 @@ class ChainController extends Controller
     Chain::query()
       ->where('transaction', '=', $request->transaction)
       ->update([
-        'state'  => 'Reenviado',
+        'state'  => 'Enviado',
         'from'   => $id,
         'to'     => $request->to
         ]);
