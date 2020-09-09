@@ -69,6 +69,7 @@ class TableMyReception extends Component {
       })
         .then((response) => {
           console.log(response);
+          this.getData()
           alert(response.data)
         }, (error) => {
           console.log(error);
