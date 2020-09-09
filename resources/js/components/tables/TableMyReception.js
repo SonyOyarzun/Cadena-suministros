@@ -26,7 +26,6 @@ class TableMyReception extends Component {
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
     this.onTagsChange = this.onTagsChange.bind(this);
-    this.save = this.save.bind(this);
   }
 
   getData() {
@@ -55,25 +54,27 @@ class TableMyReception extends Component {
 
   }
 
-  save(id_transaction,prevTransaction, to){
-    axios({
-      method: 'post',
-      url: 'chain/reSend',
-      data: {
-        transaction: id_transaction,
-        prevTransaction: prevTransaction,
-        to: to,
-      }
-    })
-      .then((response) => {
-        console.log(response);
-        alert(response.data)
-      }, (error) => {
-        console.log(error);
-      });
-  }
+  
 
   render() {
+
+    const save = (id_transaction,prevTransaction, to) =>{
+      axios({
+        method: 'post',
+        url: 'chain/reSend',
+        data: {
+          transaction: id_transaction,
+          prevTransaction: prevTransaction,
+          to: to,
+        }
+      })
+        .then((response) => {
+          console.log(response);
+          alert(response.data)
+        }, (error) => {
+          console.log(error);
+        });
+    }
 
     let columns = [
       {
@@ -118,7 +119,7 @@ class TableMyReception extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action:  <MDBBtn color="primary" rounded onClick={this.save(data.transaction,data.prevTransaction,this.state.userSend.id)}><MDBIcon icon="user-plus" /></MDBBtn>,
+          action:  <MDBBtn color="primary" rounded onClick={save(data.transaction,data.prevTransaction,this.state.userSend.id)}><MDBIcon icon="user-plus" /></MDBBtn>,
 
         }
 
@@ -139,8 +140,6 @@ class TableMyReception extends Component {
     //console.log('filter :',arrayFilter)
 
     console.log('data :', data)
-
- 
   
 
     const { loading } = this.state;
