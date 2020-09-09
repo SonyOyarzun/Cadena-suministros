@@ -1,28 +1,23 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
+import Timeline from '@material-ui/lab/Timeline';
+import TimelineItem from '@material-ui/lab/TimelineItem';
+import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
+import TimelineConnector from '@material-ui/lab/TimelineConnector';
+import TimelineContent from '@material-ui/lab/TimelineContent';
+import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import TimelineDot from '@material-ui/lab/TimelineDot';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon } from 'mdbreact';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
+  paper: {
+    padding: '6px 16px',
   },
-  button: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing(2),
-  },
-  resetContainer: {
-    padding: theme.spacing(3),
+  secondaryTail: {
+    backgroundColor: theme.palette.secondary.main,
   },
 }));
 
@@ -32,10 +27,11 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalLinearStepper() {
 
   const [step, setStep] = useState([]);
+  let array = []
 
   function getSteps() {
 
-    let array = []
+    array = []
 
     Object.keys(step).map((key, row) => (
 
@@ -43,19 +39,7 @@ export default function VerticalLinearStepper() {
 
     ))
 
-    let array2 = []
- 
-    var options = { year: 'numeric', month: 'long', day: 'numeric' };
-
-    var fecha
-    array.map((data, index) => (
-      fecha = new Date(data.date),
-      array2.push('De ' + data.from + ' para ' + data.to + ' en la fecha ' +  fecha.toLocaleDateString("es-ES", options))
-    ))
-
-    console.log('get steps :', array2)
-
-    return array2;
+    console.log('get array :', array)
   }
 
   const process = () => {
@@ -80,22 +64,49 @@ export default function VerticalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
+  var options = { year: 'numeric', month: 'long', day: 'numeric' };
+  var time
+
+
   return (
     <MDBCard className={classes.root}>
       <MDBCardBody className="mx-4">
 
-        <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="33a89ff938cd968126094a007206b7e5d4a22d622e78295583e10f9a11364da1" />
+        <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="f201939a08fb850e995224054c78004302292bea5cacec253dbca6ef33d6357f" />
         <MDBBtn onClick={process}>BUSCAR</MDBBtn>
-        <Stepper activeStep={activeStep}   orientation="vertical">
-          {steps.map((label, index) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-              <StepContent>
-                <Typography></Typography>
-              </StepContent>
-            </Step>
+        <Timeline align="alternate">
+          {array.map((label, index) => (
+            time = new Date(label.date),
+            <TimelineItem>
+              <TimelineOppositeContent>
+                <Typography variant="body2" color="textSecondary">
+                  {
+                    time.toLocaleDateString("es-ES", options)
+                  }
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineDot>
+                  {(array.length-1) == index ? (
+                    <i class="fas fa-check-circle"></i>
+                  ) : (
+                      <i class="fas fa-arrow-alt-circle-down"></i>
+                    )}
+                </TimelineDot>
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent>
+                <Paper elevation={3} className={classes.paper}>
+                  <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
+                    <i className="fas fa-truck-moving"></i>
+                  </Typography>
+                  <Typography>Desde :{label.from}  a :{label.to}</Typography>
+                </Paper>
+              </TimelineContent>
+            </TimelineItem>
+
           ))}
-        </Stepper>
+        </Timeline>
       </MDBCardBody>
     </MDBCard>
   );
