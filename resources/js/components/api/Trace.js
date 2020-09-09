@@ -10,7 +10,7 @@ import TimelineDot from '@material-ui/lab/TimelineDot';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import { MDBDataTableV5, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon } from 'mdbreact';
+import { MDBDataTableV5, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalLinearStepper() {
 
   const [step, setStep] = useState([]);
-  
+
   const [products, setProducts] = useState([]);
 
   let array = []
@@ -72,7 +72,7 @@ export default function VerticalLinearStepper() {
   }
 
 
-  
+
   let columns = []
   let preRows = []
   let rows = []
@@ -125,16 +125,6 @@ export default function VerticalLinearStepper() {
         <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="f201939a08fb850e995224054c78004302292bea5cacec253dbca6ef33d6357f" />
         <MDBBtn onClick={process}>BUSCAR</MDBBtn>
 
-        <MDBDataTableV5
-          className='cust-table'
-          responsive
-          bordered
-          hover
-          btn
-          sortable={false}
-          data={data}
-        />
-
         <Timeline align="alternate">
           {array.map((label, index) => (
             time = new Date(label.date),
@@ -148,7 +138,7 @@ export default function VerticalLinearStepper() {
               </TimelineOppositeContent>
               <TimelineSeparator>
                 <TimelineDot>
-                  {(array.length-1) == index ? (
+                  {(array.length - 1) == index ? (
                     <i class="fas fa-check-circle"></i>
                   ) : (
                       <i class="fas fa-arrow-alt-circle-down"></i>
@@ -169,6 +159,22 @@ export default function VerticalLinearStepper() {
           ))}
         </Timeline>
       </MDBCardBody>
+
+      <MDBCardFooter>
+      <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
+                    <i className="fas fa-truck-moving"></i> Producto
+      </Typography>
+        <MDBDataTableV5
+          className='cust-table'
+          responsive
+          bordered
+          hover
+          btn
+          sortable={false}
+          data={data}
+        />
+      </MDBCardFooter>
+
     </MDBCard>
   );
 }
