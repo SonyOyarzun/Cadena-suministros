@@ -25,4 +25,19 @@ class BigController extends Controller
 		}
 			return $body;
 	}
+
+	public function transaction(Request $request)
+	{
+
+		try {
+			$client = new Client();
+			$response = $client->request('GET', 'https://test.ipdb.io/api/v1/transactions/'.$request->asset);
+			$statusCode = $response->getStatusCode();
+			$body = $response->getBody()->getContents();
+		} catch (\Exception $e) {
+			//return json_encode($e->getMessage());
+			return $e->getMessage();
+		}
+			return $body;
+	}
 }

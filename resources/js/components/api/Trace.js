@@ -10,7 +10,7 @@ import TimelineDot from '@material-ui/lab/TimelineDot';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon } from 'mdbreact';
+import { MDBDataTableV5, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon } from 'mdbreact';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalLinearStepper() {
 
   const [step, setStep] = useState([]);
+  
+  const [products, setProducts] = useState([]);
+
   let array = []
 
   function getSteps() {
@@ -57,8 +60,55 @@ export default function VerticalLinearStepper() {
     }).catch(error => {
       alert("Error " + error)
     })
+
+    axios.get('/transaction', {
+      params
+    }).then(response => {
+      setProducts(response.data.asset.data.transaction)
+    }).catch(error => {
+      alert("Error " + error)
+    })
+
   }
 
+
+  
+  let columns = []
+  let preRows = []
+  let rows = []
+  let data = []
+  array = []
+  let count = 0
+
+  const createJson = (
+
+    Object.keys(products).map((key, row) => (
+
+      preRows = [],
+
+      Object.keys(products[key]).map((key2, col) => (
+        {
+          ...count < Object.keys(products[key]).length &&
+          columns.push({
+            label: key2,
+            field: key2,
+          }),
+        },
+        preRows[key2] = products[row][key2],
+        count = count + 1
+      )),
+      rows.push(preRows)
+
+    )),
+
+    data = {
+      columns,
+      rows
+    }
+
+  );
+
+  console.log(data)
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -74,6 +124,17 @@ export default function VerticalLinearStepper() {
 
         <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="f201939a08fb850e995224054c78004302292bea5cacec253dbca6ef33d6357f" />
         <MDBBtn onClick={process}>BUSCAR</MDBBtn>
+
+        <MDBDataTableV5
+          className='cust-table'
+          responsive
+          bordered
+          hover
+          btn
+          sortable={false}
+          data={data}
+        />
+
         <Timeline align="alternate">
           {array.map((label, index) => (
             time = new Date(label.date),
