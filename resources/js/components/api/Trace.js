@@ -64,7 +64,7 @@ export default function VerticalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
-  var options = { year: 'numeric', month: 'long', day: 'numeric' };
+  var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   var time
 
 
@@ -100,7 +100,7 @@ export default function VerticalLinearStepper() {
                   <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                     <i className="fas fa-truck-moving"></i>
                   </Typography>
-                  <Typography>Desde :{label.from}  a :{label.to}</Typography>
+                  <Typography style={{ textAlign: 'center' }}>{label.from} <i class="fas fa-angle-double-right"></i> {label.to}</Typography>
                 </Paper>
               </TimelineContent>
             </TimelineItem>
