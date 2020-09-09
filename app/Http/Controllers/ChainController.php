@@ -70,13 +70,19 @@ class ChainController extends Controller
 
   public function reSend(Request $request)
   {
+    $id = Auth::id();
+    try {
     Chain::query()
-      ->where('transaction', '=', $request->Transaction)
-      ->update(
-        ['state'  => 'Enviado'],
-        ['from'   => $request->from],
-        ['to'     => $request->to]);
-
+      ->where('transaction', '=', $request->transaction)
+      ->update([
+        'state'  => 'Enviado',
+        'from'   => $id,
+        'to'     => $request->to
+        ]);
+    } catch (\Throwable $th) {
+      return $th->getMessage();
+    }
     return "Transaccion Reenviada";
+ // return $request;
   }
 }
