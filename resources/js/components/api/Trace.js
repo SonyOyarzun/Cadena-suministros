@@ -124,7 +124,7 @@ export default function VerticalLinearStepper() {
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>
-            <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="f201939a08fb850e995224054c78004302292bea5cacec253dbca6ef33d6357f" />
+            <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="" />
             <div className="text-center pt-3 mb-3">
               <MDBBtn type="button" onClick={process} gradient="blue" rounded className="btn-block z-depth-1a">Buscar</MDBBtn>
             </div>

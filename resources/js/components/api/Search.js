@@ -150,7 +150,7 @@ export default function Search() {
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>
-            <MDBInput id="id" label="PRODUCTO3" validate error="wrong" success="right" valueDefault="2016-01-01" />
+            <MDBInput id="id" label="PRODUCTO3" validate error="wrong" success="right" valueDefault="" />
             <div className="text-center pt-3 mb-3">
               <MDBBtn type="button" onClick={process} gradient="blue" rounded className="btn-block z-depth-1a">Buscar</MDBBtn>
             </div>
@@ -185,7 +185,7 @@ export default function Search() {
         </MDBCard>
       </MDBCol>
 
-      <Message handleShow={handleShow} handleClose={handleClose} show={show} title={'TRANSACCION'} label={'ID'} value={message}></Message>
+      <Message handleShow={handleShow} handleClose={handleClose} show={show} title={'Transacción'} label={'ID'} value={message}></Message>
 
     </MDBRow>
   );
