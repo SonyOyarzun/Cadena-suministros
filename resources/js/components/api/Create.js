@@ -57,7 +57,7 @@ function Create(props) {
     if (isset(props.getData) || isset(props.getUserSend)){
 
       const userSend = props.getUserSend.values
-      const data = props.getData
+      const transaction = props.getData
 
       const info = {
         from: user.name,
@@ -72,7 +72,7 @@ function Create(props) {
 
       const tx = BigchainDB.Transaction.makeCreateTransaction(
         // Data JSON
-        { data },
+        { transaction },
 
         { info: info },
 
