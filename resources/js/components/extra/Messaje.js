@@ -33,11 +33,11 @@ function PassUser(props) {
 
 
         <Modal.Body>
-
-        <MDBAlert color="success" onHide={true} >
+{copySuccess != '' &&
+        <MDBAlert color="success" >
         {copySuccess}
         </MDBAlert>
-
+}
           <Form.Group controlId="message">
             <Form.Label>{props.label}</Form.Label>
             <Form.Control readOnly type="text" rows="3" maxLength="12" defaultValue={props.value} ref={textRef} />
