@@ -12,6 +12,7 @@ import ApiConfig from './api/ApiConfig'
 import Trace from './api/Trace'
 import Send from './Send'
 import Receive from './Receive';
+import Order from './Order';
 
 class Routes extends Component {
 
@@ -29,6 +30,7 @@ class Routes extends Component {
 
                 <Route path="/Send" component={Send} />
                 <Route path="/Receive" component={Receive} />
+                <Route path="/Order" component={Order} />
 
                 <Route path="/Trace" component={Trace} />
 

@@ -10,7 +10,7 @@ import TimelineDot from '@material-ui/lab/TimelineDot';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import { MDBDataTableV5, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
+import { MDBDataTableV5,MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -118,72 +118,93 @@ export default function VerticalLinearStepper() {
   var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   var time
 
-
   return (
-    <Container>
-      <MDBCard className={classes.root}>
-        <MDBCardHeader>
-          <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="f201939a08fb850e995224054c78004302292bea5cacec253dbca6ef33d6357f" />
-          <MDBBtn onClick={process}>BUSCAR</MDBBtn>
-        </MDBCardHeader>
+    <MDBRow>
+      <MDBCol md="9" lg="7" xl="5" className="mx-auto mt-3">
+        <MDBCard className={classes.root}>
 
-        <MDBCardBody className="mx-4">
-          <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
-          <i class="fas fa-map-marked-alt"></i> Recorrido
-      </Typography>
-          <Timeline align="alternate">
-            {array.map((label, index) => (
-              time = new Date(label.date),
-              <TimelineItem>
-                <TimelineOppositeContent>
-                  <Typography variant="body2" color="textSecondary">
-                    {
-                      time.toLocaleDateString("es-ES", options)
-                    }
-                  </Typography>
-                </TimelineOppositeContent>
-                <TimelineSeparator>
-                  <TimelineDot>
-                    {(array.length - 1) == index ? (
-                      <i class="fas fa-check-circle"></i>
-                    ) : (
-                        <i class="fas fa-arrow-alt-circle-down"></i>
-                      )}
-                  </TimelineDot>
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent>
-                  <Paper elevation={3} className={classes.paper}>
-                    <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
-                      <i className="fas fa-truck-moving"></i>
+          <MDBCardHeader>
+            <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="f201939a08fb850e995224054c78004302292bea5cacec253dbca6ef33d6357f" />
+            <div className="text-center pt-3 mb-3">
+              <MDBBtn type="button" onClick={process} gradient="blue" rounded className="btn-block z-depth-1a">Buscar</MDBBtn>
+            </div>
+          </MDBCardHeader>
+
+          <MDBCardBody className={classes.root}>
+
+          {array.length > 0 ? 
+(
+            <div className="text-center">
+              <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
+                <i class="fas fa-map-marked-alt"></i> Recorrido
+              </Typography>
+            </div>
+)
+:(<></>)
+}
+
+            <Timeline align="alternate">
+              {array.map((label, index) => (
+                time = new Date(label.date),
+                <TimelineItem>
+                  <TimelineOppositeContent>
+                    <Typography variant="body2" color="textSecondary">
+                      {
+                        time.toLocaleDateString("es-ES", options)
+                      }
                     </Typography>
-                    <Typography style={{ textAlign: 'center' }}>{label.from} <i class="fas fa-angle-double-right"></i> {label.to}</Typography>
-                  </Paper>
-                </TimelineContent>
-              </TimelineItem>
+                  </TimelineOppositeContent>
+                  <TimelineSeparator>
+                    <TimelineDot>
+                      {(array.length - 1) == index ? (
+                        <i class="fas fa-check-circle"></i>
+                      ) : (
+                          <i class="fas fa-arrow-alt-circle-down"></i>
+                        )}
+                    </TimelineDot>
+                    <TimelineConnector />
+                  </TimelineSeparator>
+                  <TimelineContent>
+                    <Paper elevation={3} className={classes.paper}>
+                      <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
+                        <i className="fas fa-truck-moving"></i>
+                      </Typography>
+                      <Typography style={{ textAlign: 'center' }}>{label.from} <i class="fas fa-angle-double-right"></i> {label.to}</Typography>
+                    </Paper>
+                  </TimelineContent>
+                </TimelineItem>
 
-            ))}
-          </Timeline>
-        </MDBCardBody>
+              ))}
+            </Timeline>
 
-        <MDBCardFooter>
-          <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
-          <i class="fas fa-map-marked-alt"></i> Producto
-      </Typography>
-          <MDBDataTableV5
-            className='cust-table'
-            responsive
-            bordered
-            hover
-            btn
-            sortable={false}
-            paging={false}
-            searching={false}
-            data={data}
-          />
-        </MDBCardFooter>
+          </MDBCardBody>
 
-      </MDBCard>
-    </Container>
+          <MDBCardFooter className={classes.root}>
+
+{array.length > 0 ? 
+(
+          <div className="text-center">
+              <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
+              <MDBIcon icon="cash-register" /> Producto
+              </Typography>
+            </div>
+)
+:(<></>)
+}
+            <MDBDataTableV5
+              responsive
+              bordered
+              hover
+              btn
+              sortable={false}
+              paging={false}
+              searching={false}
+              data={data}
+            />
+          </MDBCardFooter>
+
+        </MDBCard>
+      </MDBCol>
+    </MDBRow>
   );
 }
