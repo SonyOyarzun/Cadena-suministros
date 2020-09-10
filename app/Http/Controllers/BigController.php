@@ -36,7 +36,7 @@ class BigController extends Controller
 			$body = $response->getBody()->getContents();
 		} catch (\Exception $e) {
 			//return json_encode($e->getMessage());
-			return [];
+			return $e->getMessage();
 		}
 			return $body;
 	}
@@ -51,7 +51,7 @@ class BigController extends Controller
 			$body = $response->getBody()->getContents();
 		} catch (\Exception $e) {
 			//return json_encode($e->getMessage());
-			return [];
+			return $e->getMessage();
 		}
 			return $body;
 	}
