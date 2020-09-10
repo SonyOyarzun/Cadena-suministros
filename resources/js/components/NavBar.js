@@ -38,6 +38,7 @@ class NavBar extends Component {
             <Nav className="mr-auto">
               <Nav.Link onClick={() => this.handleLink("home")}><MDBIcon icon="home" /> Inicio</Nav.Link>
               <Nav.Link onClick={() => this.handleLink("Trace")}><MDBIcon icon="barcode" /> Traza</Nav.Link>
+              <Nav.Link onClick={() => this.handleLink("Search")}><MDBIcon icon="search" /> Buscar TX</Nav.Link>
               <NavDropdown title={<><MDBIcon icon="tools" /> Administración</>} id="basic-nav-dropdown-administraciio">
                 <NavDropdown.Item onClick={() => this.handleLink("User")}>Usuarios</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => this.handleLink("ApiConfig")}>Configuracion</NavDropdown.Item>
@@ -45,8 +46,7 @@ class NavBar extends Component {
               <NavDropdown title={<><MDBIcon icon="truck-moving" /> Distribución</>} id="basic-nav-dropdown-distribucion">
                 <NavDropdown.Item onClick={() => this.handleLink("MyProduct")}>Mis Productos</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => this.handleLink("MyReception")}>Reenviar Productos</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink("Pedido")}>Pedidos</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink("Send")}>Envios Realizados</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => this.handleLink("Order")}>Pedidos</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => this.handleLink("Receive")}>Recibir Productos</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => this.handleLink("Notificaciones")}>Notificaciones</NavDropdown.Item>

@@ -10,6 +10,7 @@ import MyProduct from './MyProduct'
 import MyReception from './MyReception'
 import ApiConfig from './api/ApiConfig'
 import Trace from './api/Trace'
+import Search from './api/Search'
 import Send from './Send'
 import Receive from './Receive';
 import Order from './Order';
@@ -33,6 +34,7 @@ class Routes extends Component {
                 <Route path="/Order" component={Order} />
 
                 <Route path="/Trace" component={Trace} />
+                <Route path="/Search" component={Search} />
 
             </div>
 

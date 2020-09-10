@@ -57,3 +57,4 @@ Route::post('chain/reSend', 'ChainController@reSend');
 //rutas de bigchain
 Route::get('assets', 'BigController@asset');
 Route::get('transaction', 'BigController@transaction');
+Route::get('search', 'BigController@search');
