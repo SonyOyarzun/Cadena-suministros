@@ -10,7 +10,9 @@ import TimelineDot from '@material-ui/lab/TimelineDot';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import { MDBDataTableV5,MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
+import Message from '../extra/Messaje';
+
+import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +28,15 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Search() {
+
+  //Modals
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
+
+  const [message, setMessage] = useState('');
+
+
 
   const [step, setStep] = useState([]);
 
@@ -64,7 +75,12 @@ export default function Search() {
 
   }
 
+  const handleClick = (id) => {
 
+    handleShow()
+    setMessage(id)
+
+  }
 
   let columns = []
   let preRows = []
@@ -78,61 +94,39 @@ export default function Search() {
 
   const createJson = (
 
-    /*
-    Object.keys(products).map((key, row) => (
+    //Busca propiedad transaction, la cual es caracteristica de nuestro diseño
 
-      preRows = [],
-      console.log('key :',key,'products[key]',products[key]),
-      Object.keys(products[key]).map((key2, col) => (
+    products.map((data, index) => (
+
+      {
+        ...data.data.hasOwnProperty('transaction') ? (
+
+          obj = data.data.transaction,
+          objID[index] = data.id
+        ) : (
+            console.log('no encontrada')
+          )
+      }
+    )),
+
+    Object.keys(obj).map((key, row) => (
+
+      preRows = [objID[row]],
+      preRows = { clickEvent: () => handleClick(objID[row]) },
+      Object.keys(obj[key]).map((key2, col) => (
         {
-          ...count < Object.keys(products[key]).length &&
+          ...count < Object.keys(obj[key]).length &&
           columns.push({
             label: key2,
             field: key2,
           }),
         },
-        preRows[key2] = products[row][key2],
-        count = count + 1,
-        console.log('key2 :',key2,'products[key2]',products[key2])
+        preRows[key2] = obj[row][key2],
+        count = count + 1
       )),
       rows.push(preRows)
 
     )),
-
-    */
-
-
-//Busca propiedad transaction, la cual es caracteristica de nuestro diseño
-
-   products.map((data, index) => (
-
-    {...data.data.hasOwnProperty('transaction') ? (
-    
-    obj=data.data.transaction,
-    objID[index]=data.id
-    ):(
-    console.log('no encontrada')
-    )
-    }
-   )),
-
-   Object.keys(obj).map((key, row) => (
-
-    preRows = [objID[row]],
-    Object.keys(obj[key]).map((key2, col) => (
-      {
-        ...count < Object.keys(obj[key]).length &&
-        columns.push({
-          label: key2,
-          field: key2,
-        }),
-      },
-      preRows[key2] = obj[row][key2],
-      count = count + 1
-    )),
-    rows.push(preRows)
-
-  )),
 
     data = {
       columns,
@@ -141,7 +135,7 @@ export default function Search() {
 
   );
 
-  console.log('data  :',data)
+  console.log('data  :', data)
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -162,20 +156,20 @@ export default function Search() {
             </div>
           </MDBCardHeader>
 
-  
+
 
           <MDBCardFooter className={classes.root}>
 
-{array.length > 0 ? 
-(
-          <div className="text-center">
-              <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
-              <MDBIcon icon="cash-register" /> Producto
+            {array.length > 0 ?
+              (
+                <div className="text-center">
+                  <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
+                    <MDBIcon icon="cash-register" /> Producto
               </Typography>
-            </div>
-)
-:(<></>)
-}
+                </div>
+              )
+              : (<></>)
+            }
             <MDBDataTableV5
               responsive
               bordered
@@ -190,6 +184,9 @@ export default function Search() {
 
         </MDBCard>
       </MDBCol>
+
+      <Message handleShow={handleShow} handleClose={handleClose} show={show} title={'TRANSACCION'} label={'ID'} value={message}></Message>
+
     </MDBRow>
   );
 }
