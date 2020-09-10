@@ -72,9 +72,11 @@ export default function Search() {
   let data = []
   array = []
   let count = 0
+  let obj = {}
 
   const createJson = (
 
+    /*
     Object.keys(products).map((key, row) => (
 
       preRows = [],
@@ -94,6 +96,41 @@ export default function Search() {
       rows.push(preRows)
 
     )),
+
+    */
+
+
+
+   products.map((data, index) => (
+
+   obj=data.data
+
+   )),
+
+   Object.keys(obj).map((key, row) => (
+
+    preRows = [],
+    console.log('key :',key,'products[key]',obj[key]),
+
+    {...obj.hasOwnProperty('transaction') &&
+
+    Object.keys(obj[key]).map((key2, col) => (
+      {
+        ...count < Object.keys(obj[key]).length &&
+        columns.push({
+          label: key2,
+          field: key2,
+        }),
+      },
+      preRows[key2] = obj[row][key2],
+      count = count + 1,
+      console.log('key2 :',key2,'products[key2]',obj[key2])
+    )),
+
+    },
+    rows.push(preRows)
+
+  )),
 
     data = {
       columns,
