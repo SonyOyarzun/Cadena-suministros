@@ -56,7 +56,7 @@ export default function Search() {
       params
     }).then(response => {
       setProducts(response.data)
-      console.log('productos :', products)
+      console.log('productos :', response.data)
 
     }).catch(error => {
       alert("Error " + error)
@@ -78,10 +78,10 @@ export default function Search() {
     Object.keys(products).map((key, row) => (
 
       preRows = [],
-      console.log('key :',key,'products[key]',products[key].data.transaction),
-      Object.keys(products[key].data.transaction).map((key2, col) => (
+      console.log('key :',key,'products[key]',products[key]),
+      Object.keys(products[key]).map((key2, col) => (
         {
-          ...count < Object.keys(products[key].data.transaction).length &&
+          ...count < Object.keys(products[key]).length &&
           columns.push({
             label: key2,
             field: key2,
@@ -89,7 +89,7 @@ export default function Search() {
         },
         preRows[key2] = products[row][key2],
         count = count + 1,
-        console.log('key2 :',key2,'products[key2]',products[key2].data.transaction)
+        console.log('key2 :',key2,'products[key2]',products[key2])
       )),
       rows.push(preRows)
 
@@ -102,7 +102,7 @@ export default function Search() {
 
   );
 
-  console.log('data :',data)
+  console.log(data)
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
