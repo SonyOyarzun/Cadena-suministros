@@ -74,6 +74,7 @@ export default function Search() {
   let count = 0
 
   let obj = {}
+  let objID = []
 
   const createJson = (
 
@@ -101,15 +102,14 @@ export default function Search() {
     */
 
 
+//Busca propiedad transaction, la cual es caracteristica de nuestro diseño
 
    products.map((data, index) => (
 
-    console.log('data id:',data.id),
-
     {...data.data.hasOwnProperty('transaction') ? (
     
-    obj=data.data.transaction
-
+    obj=data.data.transaction,
+    objID[index]=data.id
     ):(
     console.log('no encontrada')
     )
@@ -118,8 +118,7 @@ export default function Search() {
 
    Object.keys(obj).map((key, row) => (
 
-    preRows = [],
-    console.log('key :',key,'products[key]',obj[key]),
+    preRows = [objID[row]],
     Object.keys(obj[key]).map((key2, col) => (
       {
         ...count < Object.keys(obj[key]).length &&
@@ -129,17 +128,11 @@ export default function Search() {
         }),
       },
       preRows[key2] = obj[row][key2],
-      count = count + 1,
-      console.log('key2 :',key2,'products[key2]',obj[key2])
+      count = count + 1
     )),
     rows.push(preRows)
 
   )),
-
-  
-   //obj = obj.filter(e => e.state == "Enviado"),
-
-
 
     data = {
       columns,
@@ -148,7 +141,7 @@ export default function Search() {
 
   );
 
-  console.log('data f ',data)
+  console.log('data  :',data)
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -191,7 +184,7 @@ export default function Search() {
               sortable={false}
               paging={false}
               searching={false}
-           //   data={data}
+              data={data}
             />
           </MDBCardFooter>
 
