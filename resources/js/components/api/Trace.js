@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function VerticalLinearStepper() {
+export default function Trace() {
 
   const [step, setStep] = useState([]);
 
