@@ -72,6 +72,7 @@ export default function Search() {
   let data = []
   array = []
   let count = 0
+
   let obj = {}
 
   const createJson = (
@@ -103,17 +104,22 @@ export default function Search() {
 
    products.map((data, index) => (
 
-   obj=data.data
+    console.log('data id:',data.id),
 
+    {...data.data.hasOwnProperty('transaction') ? (
+    
+    obj=data.data.transaction
+
+    ):(
+    console.log('no encontrada')
+    )
+    }
    )),
 
    Object.keys(obj).map((key, row) => (
 
     preRows = [],
     console.log('key :',key,'products[key]',obj[key]),
-
-    {...obj.hasOwnProperty('transaction') &&
-
     Object.keys(obj[key]).map((key2, col) => (
       {
         ...count < Object.keys(obj[key]).length &&
@@ -126,11 +132,14 @@ export default function Search() {
       count = count + 1,
       console.log('key2 :',key2,'products[key2]',obj[key2])
     )),
-
-    },
     rows.push(preRows)
 
   )),
+
+  
+   //obj = obj.filter(e => e.state == "Enviado"),
+
+
 
     data = {
       columns,
@@ -139,7 +148,7 @@ export default function Search() {
 
   );
 
-  console.log(data)
+  console.log('data f ',data)
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
