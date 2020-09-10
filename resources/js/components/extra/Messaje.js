@@ -47,7 +47,7 @@ function PassUser(props) {
 
             document.queryCommandSupported('copy') &&
             <div>
-              <MDBBtn onClick={copyToClipboard}>Copiar</MDBBtn>
+              <MDBBtn type="button" onClick={copyToClipboard} gradient="blue" rounded className="btn-block z-depth-1a">Copiar</MDBBtn>
             </div>
           }
 
