@@ -46,10 +46,6 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important;
   }
 
-  legend {
-    color: ${({ theme }) => theme.text} !important;
-  }
-
    a {
     background-color: ${({ theme }) => theme.body} !important;
     color: ${({ theme }) => theme.text} !important;
