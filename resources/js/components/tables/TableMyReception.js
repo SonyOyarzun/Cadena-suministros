@@ -7,7 +7,7 @@ import Transfer from '../api/Transfer'
 import Auto from '../extra/AutoComplete'
 
 //import datable
-import { MDBDataTableV5, MDBBtn, MDBIcon,MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
+import { MDBDataTableV5, MDBBtn, MDBIcon, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -40,9 +40,9 @@ class TableMyReception extends Component {
 
   }
 
-  onTagsChange(event, values){
+  onTagsChange(event, values) {
     this.setState({ userSend: values })
-    console.log('userSend onChange',this.state.userSend)
+    console.log('userSend onChange', this.state.userSend)
   }
 
 
@@ -54,10 +54,10 @@ class TableMyReception extends Component {
 
   }
 
- 
+
   render() {
 
-    const save = (id_transaction,prevTransaction, to) =>{
+    const save = (id_transaction, prevTransaction, to) => {
       axios({
         method: 'post',
         url: 'chain/reSend',
@@ -119,7 +119,7 @@ class TableMyReception extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action:  <MDBBtn color="primary" rounded onClick={() => { save(data.transaction,data.prevTransaction,this.state.userSend.id) }}><MDBIcon icon="user-plus" /></MDBBtn>,
+          action: <MDBBtn color="primary" rounded onClick={() => { save(data.transaction, data.prevTransaction, this.state.userSend.id) }}><MDBIcon icon="user-plus" /></MDBBtn>,
 
         }
 
@@ -140,7 +140,15 @@ class TableMyReception extends Component {
     //console.log('filter :',arrayFilter)
 
     console.log('data :', data)
-  
+
+    const styles = {
+      border: {
+        height: '100px',
+        paddingTop: "1vh",
+        paddingBottom: "1vh",
+      }
+    }
+
 
     const { loading } = this.state;
 
@@ -148,10 +156,14 @@ class TableMyReception extends Component {
       return <Load />; // render null when app is not ready
     } else {
       return (
-        <MDBRow>
+        <>
+        <MDBRow fluid style={styles.border}>
           <MDBCol size="12">
-            <Auto onTagsChange={this.onTagsChange}/>
+            <Auto onTagsChange={this.onTagsChange} />
           </MDBCol>
+        </MDBRow>
+
+        <MDBRow>
           <MDBCol size="12">
             <MDBDataTableV5
               className='cust-table'
@@ -167,6 +179,8 @@ class TableMyReception extends Component {
             />
           </MDBCol>
         </MDBRow>
+
+        </>
       )
     }
   }

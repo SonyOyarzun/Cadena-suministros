@@ -42,6 +42,13 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important;
   }
 
+  span {
+    color: ${({ theme }) => theme.text} !important;
+  }
+
+  legend {
+    color: ${({ theme }) => theme.text} !important;
+  }
 
    a {
     background-color: ${({ theme }) => theme.body} !important;

@@ -1,5 +1,5 @@
 import React, { Component, Fragment, useState, useEffect, useCallback } from 'react';
-import { MDBDataTableV5, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
+import { MDBDataTableV5,MDBContainer, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
 
 //import api
 import Create from '../api/Create'
@@ -59,7 +59,7 @@ export default function TableMyProduct() {
         setProducts(response.data);
 
       }).catch(error => {
-        alert("Error " + error)
+        console.log("Error " + error)
       })
 
     axios.get('user/list')
@@ -67,7 +67,7 @@ export default function TableMyProduct() {
         setUsers(response.data);
 
       }).catch(error => {
-        alert("Error " + error)
+        console.log("Error " + error)
       })
 
     createJson
@@ -112,6 +112,14 @@ export default function TableMyProduct() {
   );
 
   //console.log('users :', users)
+  const styles = {
+    border: {
+        height       : '100px',
+        paddingTop   : "1vh",
+        paddingBottom: "1vh",
+    }
+}
+
 
   const onTagsChange = (event, values) => {
     setUserSend({
@@ -130,12 +138,15 @@ export default function TableMyProduct() {
 
     return (
       <>
-        <MDBRow>
+      
+        <MDBRow fluid style={styles.border}>
           <MDBCol size="4"><Create getData={checkbox} getUserSend={userSend} /></MDBCol>
           <MDBCol size="8">
             <Auto onTagsChange={onTagsChange}/>
           </MDBCol>
           </MDBRow>
+
+
           <MDBRow>
           <MDBCol size="12">
             <MDBDataTableV5
