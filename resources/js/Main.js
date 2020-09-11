@@ -26,8 +26,6 @@ import Routes from './components/Routes'
 
 import Load from './components/extra/Load'
 
-import Dash from './components/extra/DashBoard'
-
   const styles = {
     padding: {
         paddingTop: "10vh",
