@@ -135,6 +135,8 @@ export default function TableMyProduct() {
           <MDBCol size="8">
             <Auto onTagsChange={onTagsChange}/>
           </MDBCol>
+          </MDBRow>
+          <MDBRow>
           <MDBCol size="12">
             <MDBDataTableV5
               className='cust-table'
