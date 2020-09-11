@@ -48,7 +48,6 @@ class NavBar extends Component {
                 <NavDropdown.Item onClick={() => this.handleLink("MyReception")}>Reenviar Productos</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => this.handleLink("Order")}>Pedidos</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => this.handleLink("Receive")}>Recibir Productos</NavDropdown.Item>
-                <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => this.handleLink("Notificaciones")}>Notificaciones</NavDropdown.Item>
               </NavDropdown>
             </Nav>

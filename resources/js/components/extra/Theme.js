@@ -18,6 +18,28 @@ const GlobalStyles = createGlobalStyle`
       background-image: ${({ theme }) => theme.gradient} !important;
   }
 
+  .dropdown-item {
+    background-image: ${({ theme }) => theme.gradient} !important;
+  }
+  .dropdown-menu {
+    background-image: ${({ theme }) => theme.gradient} !important;
+  }
+
+  .card {
+    background-image: ${({ theme }) => theme.gradient} !important;
+  }
+
+  .btn {
+    background-image: ${({ theme }) => theme.gradient} !important;
+  }
+
+  input {
+    background-image: ${({ theme }) => theme.gradient} !important;
+  }
+
+  .mdb-datatable-length bs-select {
+    background-image: ${({ theme }) => theme.gradient} !important;
+  }
 
 
   table {
