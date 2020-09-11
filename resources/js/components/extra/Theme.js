@@ -15,18 +15,20 @@ const GlobalStyles = createGlobalStyle`
   
   .navbar,
   .navbar-default {
-      background-image: ${({ theme }) => theme.gradient} !important;
+    background-color: ${({ theme }) => theme.body} !important;
   }
 
   .dropdown-item {
-    background-image: ${({ theme }) => theme.gradient} !important;
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text}!important;
   }
   .dropdown-menu {
-    background-image: ${({ theme }) => theme.gradient} !important;
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text}!important;
   }
 
   .card {
-    background-image: ${({ theme }) => theme.gradient} !important;
+    background-color: ${({ theme }) => theme.body} !important;
   }
 
   .btn {
@@ -34,12 +36,28 @@ const GlobalStyles = createGlobalStyle`
   }
 
   input {
-    background-image: ${({ theme }) => theme.gradient} !important;
+    background-color: ${({ theme }) => theme.body} !important;
   }
 
-  .mdb-datatable-length bs-select {
-    background-image: ${({ theme }) => theme.gradient} !important;
+
+   a {
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
   }
+
+  select {
+    background-color: ${({ theme }) => theme.body} !important;
+  }
+
+
+  .modal-content {
+    background-color: ${({ theme }) => theme.body} !important;
+  }
+
+  .foot {
+    background-color: ${({ theme }) => theme.body} !important;
+  }
+
 
 
   table {

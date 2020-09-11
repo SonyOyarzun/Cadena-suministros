@@ -36,7 +36,7 @@ function Footer({ children }) {
     return (
         <div>
             <div style={phantom} />
-            <div style={style}>
+             <div style={style} className='foot'>
                 { children }
             </div>
         </div>
