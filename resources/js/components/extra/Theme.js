@@ -8,11 +8,17 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  div * {
-    font-size: ${({ theme }) => theme.font};
-    color: ${({ theme }) => theme.text};
+  html * {
     font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   }
+
+  
+  .navbar,
+  .navbar-default {
+      background-image: ${({ theme }) => theme.gradient} !important;
+  }
+
+
 
   table {
     border: ${({ theme }) => theme.border};
@@ -22,6 +28,7 @@ const GlobalStyles = createGlobalStyle`
     border-collapse: collapse;
   }
   table td, table th {
+    color: ${({ theme }) => theme.text};
     border: ${({ theme }) => theme.border};
     padding: 3px 2px;
   }
@@ -39,7 +46,7 @@ const GlobalStyles = createGlobalStyle`
   table thead th {
     font-size: 15px;
     font-weight: bold;
-    color: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.text};
     border-left: ${({ theme }) => theme.body};
   }
   table thead th:first-child {
@@ -94,8 +101,8 @@ const Toggle = ({ theme, toggleTheme }) => {
 
     return (
         <ToggleContainer defaultTheme={isDefault} onClick={toggleTheme}>
-            <img src="https://image.flaticon.com/icons/svg/1164/1164954.svg" width="224" height="224" alt="Sun free icon" title="Sun free icon" />
-            <img src="https://image.flaticon.com/icons/svg/2033/2033921.svg" width="224" height="224" alt="Moon free icon" title="Moon free icon" />
+            <img src="https://image.flaticon.com/icons/svg/1164/1164954.svg" width="50" height="50" alt="Sun free icon" title="Sun free icon" />
+            <img src="https://image.flaticon.com/icons/svg/2033/2033921.svg" width="50" height="50" alt="Moon free icon" title="Moon free icon" />
         </ToggleContainer>
     );
 };
@@ -105,8 +112,8 @@ const ToggleContainer = styled.button`
   display: flex;
   justify-content: space-between;
   background: ${({ theme }) => theme.gradient};
-  width: 8rem;
-  height: 4rem;
+  width: 3rem;
+  height: 2rem;
   margin: 0 auto;
   border-radius: 30px;
   border: 2px solid ${({ theme }) => theme.toggleBorder};
@@ -117,7 +124,7 @@ const ToggleContainer = styled.button`
 
   img {
     height: auto;
-    width: 2.5rem;
+    width: 1rem;
     transition: all 0.3s linear;
     
     // sun icon
