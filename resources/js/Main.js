@@ -26,6 +26,8 @@ import Routes from './components/Routes'
 
 import Load from './components/extra/Load'
 
+import Dash from './components/extra/DashBoard'
+
   const styles = {
     padding: {
         paddingTop: "10vh",
@@ -64,10 +66,11 @@ class App extends Component {
             <BrowserRouter>
             <div>
               <Head/>
+             
               <NavBar/>
 
               <MDBContainer fluid style={styles.padding}>
-
+  
               <Routes/>
 
               </MDBContainer>

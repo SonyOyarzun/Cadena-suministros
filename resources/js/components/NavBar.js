@@ -12,7 +12,7 @@ import props from 'prop-types';
 
 import { MDBIcon, MDBBtn } from "mdbreact";
 
-
+import Theme from '../components/extra/Theme'
 
 class NavBar extends Component {
 
@@ -32,7 +32,7 @@ class NavBar extends Component {
       <div>
 
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand as={Link} to='#home'>Cadena de Suministros</Navbar.Brand>
+    <Navbar.Brand as={Link} to='#home'>Cadena de Suministros</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
@@ -52,10 +52,11 @@ class NavBar extends Component {
                 <NavDropdown.Item onClick={() => this.handleLink("Notificaciones")}>Notificaciones</NavDropdown.Item>
               </NavDropdown>
             </Nav>
+            <Theme/>
             <Nav.Link href='logout'><MDBIcon icon="door-open" /> Salir</Nav.Link>
           </Navbar.Collapse>
         </Navbar>
-
+       
       </div>
 
     )

@@ -65,7 +65,7 @@ export default function Trace() {
     axios.get('/transaction', {
       params
     }).then(response => {
-      if(response.data.asset.data.hasOwnProperty('transaction')){
+      if(response.data.asset.data.transaction != null){
       setProducts(response.data.asset.data.transaction)
     }
     }).catch(error => {
