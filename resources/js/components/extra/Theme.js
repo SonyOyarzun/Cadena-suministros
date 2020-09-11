@@ -29,14 +29,17 @@ const GlobalStyles = createGlobalStyle`
 
   .card {
     background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
   }
 
   .btn {
     background-image: ${({ theme }) => theme.gradient} !important;
+    color: ${({ theme }) => theme.text} !important;
   }
 
   input {
     background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
   }
 
 
@@ -47,17 +50,23 @@ const GlobalStyles = createGlobalStyle`
 
   select {
     background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
   }
 
 
   .modal-content {
     background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
   }
 
   .foot {
     background-color: ${({ theme }) => theme.body} !important;
   }
 
+  .badge {
+    background-image: ${({ theme }) => theme.gradient} !important;
+    color: ${({ theme }) => theme.text} !important;
+  }
 
 
   table {
