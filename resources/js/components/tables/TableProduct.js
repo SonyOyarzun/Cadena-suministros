@@ -32,6 +32,7 @@ class TableUser extends Component {
     })
     .then(response => {
       this.setState({ products: response.data})
+      this.setState({ loading: false})
     }).catch(error => {
       alert("Error " + error)
     })
@@ -102,8 +103,5 @@ class TableUser extends Component {
 
 }
 
-function demoAsyncCall() {
-  return new Promise((resolve) => setTimeout(() => resolve(), 2500));
-}
 
 export default withRouter(TableUser);

@@ -3,7 +3,7 @@ import { jsPDF } from "jspdf";
 //import datable
 import { MDBDataTableV5, MDBBtn, MDBIcon, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
 
-import TracePdf from '../api/TracePdf'
+
 import html2canvas from 'html2canvas';
 
 

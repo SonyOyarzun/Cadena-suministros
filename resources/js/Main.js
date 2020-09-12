@@ -47,9 +47,7 @@ class App extends Component {
     }
 
   componentDidMount() {
-    // this simulates an async action, after which the component will render the content
-    demoAsyncCall().then(() => this.setState({ loading: false }));
-   
+    this.setState({loading: false})
   }
   
     render() {
@@ -81,10 +79,5 @@ class App extends Component {
   }
 }
 
-
-
-function demoAsyncCall() {
-  return new Promise((resolve) => setTimeout(() => resolve(), 2500));
-}
 
 render(<App/>, document.getElementById('root'));

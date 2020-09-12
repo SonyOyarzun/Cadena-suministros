@@ -65,14 +65,14 @@ export default function TableMyProduct() {
     axios.get('user/list')
       .then(response => {
         setUsers(response.data);
-
+        setLoading(false);
       }).catch(error => {
         console.log("Error " + error)
       })
 
     createJson
 
-    demoAsyncCall().then(() => setLoading(false));
+
 
   }, []);
 
@@ -169,6 +169,3 @@ export default function TableMyProduct() {
   }
 }
 
-function demoAsyncCall() {
-  return new Promise((resolve) => setTimeout(() => resolve(), 2500));
-}

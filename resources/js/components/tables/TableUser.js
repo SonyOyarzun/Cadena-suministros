@@ -33,6 +33,7 @@ class TableUser extends Component {
 
     axios.get('user/list/').then(response => {
       this.setState({ users: response.data })
+      this.setState({ loading: false })
       //   console.log(this.state.users)
     }).catch(error => {
       alert("Error " + error)
@@ -44,8 +45,6 @@ class TableUser extends Component {
   componentDidMount() {
 
     this.getData()
-
-    demoAsyncCall().then(() => this.setState({ loading: false }));
 
   }
 
@@ -144,9 +143,6 @@ class TableUser extends Component {
 
 }
 
-function demoAsyncCall() {
-  return new Promise((resolve) => setTimeout(() => resolve(), 2500));
-}
 
 export default withRouter(TableUser);
 

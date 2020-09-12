@@ -9,7 +9,7 @@ import Product from './Product'
 import MyProduct from './MyProduct'
 import MyReception from './MyReception'
 import ApiConfig from './api/ApiConfig'
-import Trace from './api/TracePdf'
+import Trace from './api/Trace'
 import Search from './api/Search'
 import Send from './Send'
 import Receive from './Receive';

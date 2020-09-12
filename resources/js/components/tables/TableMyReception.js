@@ -32,6 +32,7 @@ class TableMyReception extends Component {
 
     axios.get('chain/list').then(response => {
       this.setState({ sends: response.data })
+      this.setState({ loading: false })
       //    console.log(this.state.sends)
       console.log('response :', response.data)
     }).catch(error => {
@@ -47,11 +48,7 @@ class TableMyReception extends Component {
 
 
   componentDidMount() {
-
     this.getData()
-
-    demoAsyncCall().then(() => this.setState({ loading: false }));
-
   }
 
 
@@ -187,9 +184,6 @@ class TableMyReception extends Component {
 
 }
 
-function demoAsyncCall() {
-  return new Promise((resolve) => setTimeout(() => resolve(), 2500));
-}
 
 export default TableMyReception;
 
