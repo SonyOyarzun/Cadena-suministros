@@ -84,6 +84,7 @@ export default function Trace() {
       alert("Error " + error)
     })
 
+    if(products!=null){
     html2canvas(document.getElementById('capture'))
     .then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
@@ -91,13 +92,14 @@ export default function Trace() {
         orientation: 'portrait',
       });
       const imgProps = pdf.getImageProperties(imgData);
-    //  const pdfWidth = pdf.internal.pageSize.getWidth();
-    //  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      const pdfWidth = imgProps.width/3;
-      const pdfHeight = imgProps.height/3;
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+   //   const pdfWidth = imgProps.width/3;
+   //   const pdfHeight = imgProps.height/3;
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
       pdf.save('download.pdf');
     })
+  }
 
   }
 
