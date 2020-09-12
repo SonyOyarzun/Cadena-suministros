@@ -8,7 +8,7 @@ import { MDBDataTableV5, MDBBtn, MDBIcon,MDBInput, MDBTable, MDBTableBody, MDBTa
 
 import Load from '../extra/Load'
 
-import Pdf from '../extra/Pdf'
+//import Pdf from '../extra/Pdf'
 
 class TableOrder extends Component {
 
@@ -23,10 +23,10 @@ class TableOrder extends Component {
 
   getData() {
 
-    axios.get('chain/list').then(response => {
+    axios.get('chain/list/').then(response => {
       this.setState({ sends: response.data })
       this.setState({ loading: false })
-      //    console.log(this.state.sends)
+          console.log('sends :',this.state.sends)
       console.log('response :', response.data)
     }).catch(error => {
       alert("Error " + error)
@@ -37,7 +37,6 @@ class TableOrder extends Component {
   componentDidMount() {
 
     this.getData()
-
 
   }
 
@@ -97,7 +96,7 @@ class TableOrder extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <Pdf transaction={data.transaction}/>,
+          action: <button transaction={data.transaction}/>,
         }
 
       ))
