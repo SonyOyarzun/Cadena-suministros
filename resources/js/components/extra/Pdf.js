@@ -77,6 +77,7 @@ export default function Pdf(props) {
 
     ))
 
+    console.log('arrayStep :',arrayStep)
   }
 
   useEffect(() => {
