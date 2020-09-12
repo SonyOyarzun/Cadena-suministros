@@ -27,6 +27,7 @@
     "dependencies": {
         "@material-ui/core": "^4.11.0",
         "@material-ui/lab": "^4.0.0-alpha.56",
+        "@react-pdf/renderer": "^1.6.11",
         "bigchaindb-driver": "^4.1.2",
         "mdbreact": "^4.27.0",
         "prop-types": "^15.7.2",

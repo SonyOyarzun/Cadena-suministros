@@ -15,6 +15,8 @@ import Send from './Send'
 import Receive from './Receive';
 import Order from './Order';
 
+import Pdf from './extra/Pdf';
+
 class Routes extends Component {
 
     render() {
@@ -35,6 +37,8 @@ class Routes extends Component {
 
                 <Route path="/Trace" component={Trace} />
                 <Route path="/Search" component={Search} />
+
+                <Route path="/Pdf" component={Pdf} />
 
             </div>
 
