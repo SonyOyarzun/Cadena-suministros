@@ -8,7 +8,7 @@ import { MDBDataTableV5, MDBBtn, MDBIcon,MDBInput, MDBTable, MDBTableBody, MDBTa
 
 import Load from '../extra/Load'
 
-//import Pdf from '../extra/Pdf'
+import Pdf from '../extra/Pdf'
 
 class TableOrder extends Component {
 
@@ -96,7 +96,7 @@ class TableOrder extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <button transaction={data.transaction}/>,
+          action: <Pdf transaction={data.transaction}/>,
         }
 
       ))

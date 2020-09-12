@@ -1,44 +1,57 @@
-import React, { Component, ButtonGroup , useEffect } from 'react';
-import { jsPDF } from "jspdf";
-//import datable
-import { MDBDataTableV5, MDBBtn, MDBIcon, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
+import React, { PureComponent } from 'react';
+
+//Material Bootstrap
+import { MDBIcon, MDBBtn } from "mdbreact";
+
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { format } from "date-fns";
 
 
-import html2canvas from 'html2canvas';
+// define a generatePDF function that accepts a tickets argument
+const generatePDF = tickets => {
+  // initialize jsPDF
+  const doc = new jsPDF();
+
+  // define the columns we want and their titles
+  const tableColumn = ["Id", "Title", "Issue", "Status", "Closed on"];
+  // define an empty array of rows
+  const tableRows = [];
+
+  // for each ticket pass all its data into an array
+  tickets.forEach(ticket => {
+    const ticketData = [
+      'ticket.id',
+      'ticket.title',
+      'ticket.request',
+      'ticket.status',
+      // called date-fns to format the date on the ticket
+      format(new Date(), "yyyy-MM-dd")
+    ];
+    // push each tickcet's info into a row
+    tableRows.push(ticketData);
+  });
 
 
+  // startY is basically margin-top
+  doc.autoTable(tableColumn, tableRows, { startY: 20 });
+  const date = Date().split(" ");
+  // we use a date string to generate our filename.
+  const dateStr = date[0] + date[1] + date[2] + date[3] + date[4];
+  // ticket title. and margin-top + margin-left
+  doc.text("Closed tickets within the last one month.", 14, 15);
+  // we define the name of our PDF file.
+  doc.save(`report_${dateStr}.pdf`);
+};
 
-const Pdf = () => {
-
-  useEffect(() => {
-
-    html2canvas(document.getElementById('capture'))
-    .then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-      });
-      const imgProps = pdf.getImageProperties(imgData);
-    //  const pdfWidth = pdf.internal.pageSize.getWidth();
-    //  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      const pdfWidth = imgProps.width/3;
-      const pdfHeight = imgProps.height/3;
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save('download.pdf');
-    })
-
-    
-  }, []);
+export default function Pdf() {
 
 
+    return (
+      <MDBBtn tag="a" size="sm" gradient="blue" onClick={()=>generatePDF([])}>
+        <MDBIcon far icon="file-pdf" />
+      </MDBBtn>
+    )
   
-  return (
-    <>
-      <div id="capture">
-       <TracePdf/>
-      </div>
-    </>
-  )
 }
 
-export default Pdf;
