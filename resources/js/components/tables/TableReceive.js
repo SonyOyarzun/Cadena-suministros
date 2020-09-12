@@ -38,8 +38,6 @@ class TableSend extends Component {
 
     this.getData()
 
-    demoAsyncCall().then(() => this.setState({ loading: false }));
-
   }
 
 

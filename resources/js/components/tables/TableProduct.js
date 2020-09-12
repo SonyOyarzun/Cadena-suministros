@@ -37,8 +37,6 @@ class TableUser extends Component {
       alert("Error " + error)
     })
 
-    demoAsyncCall().then(() => this.setState({ loading: false }));
-
   }
 
 
