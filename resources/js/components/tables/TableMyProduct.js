@@ -68,6 +68,7 @@ export default function TableMyProduct() {
         setLoading(false);
       }).catch(error => {
         console.log("Error " + error)
+        setLoading(false);
       })
 
     createJson
