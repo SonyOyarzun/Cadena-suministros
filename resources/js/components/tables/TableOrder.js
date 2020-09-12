@@ -2,13 +2,13 @@ import React, { Component, ButtonGroup } from 'react';
 
 import axios from 'axios'
 
-import { NavLink, Link, withRouter } from 'react-router-dom';
-
 //import datable
 import { MDBDataTableV5, MDBBtn, MDBIcon,MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
 
 
 import Load from '../extra/Load'
+
+import Pdf from '../extra/Pdf'
 
 class TableOrder extends Component {
 
@@ -47,6 +47,8 @@ class TableOrder extends Component {
       data: data // your data array of objects
     })
   }
+
+
  
   render() {
 
@@ -95,9 +97,7 @@ class TableOrder extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <MDBBtn tag="a" size="sm" gradient="blue" onClick={process} onClick={() => this.handleLink("Pdf", data.transaction)}>
-                  <MDBIcon far icon="file-pdf" />
-                  </MDBBtn>,
+          action: <Pdf transaction={data.transaction}/>,
         }
 
       ))
@@ -151,5 +151,5 @@ function demoAsyncCall() {
   return new Promise((resolve) => setTimeout(() => resolve(), 2500));
 }
 
-export default withRouter(TableOrder);
+export default TableOrder;
 

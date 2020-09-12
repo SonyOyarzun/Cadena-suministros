@@ -45,6 +45,9 @@ const GlobalStyles = createGlobalStyle`
   span {
     color: ${({ theme }) => theme.text} !important;
   }
+  p {
+    color: ${({ theme }) => theme.text} !important;
+  }
 
    a {
     background-color: ${({ theme }) => theme.body} !important;
@@ -125,6 +128,11 @@ const GlobalStyles = createGlobalStyle`
     color: #FFFFFF;
     padding: 2px 8px;
     border-radius: 5px;
+  }
+
+  .darkLight {
+    background: ${({ theme }) => theme.text} !important;
+    color: ${({ theme }) => theme.body} !important;
   }
 
 

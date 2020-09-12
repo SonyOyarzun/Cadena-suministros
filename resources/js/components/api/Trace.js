@@ -167,12 +167,12 @@ export default function Trace() {
                     </TimelineDot>
                     <TimelineConnector />
                   </TimelineSeparator>
-                  <TimelineContent>
-                    <Paper elevation={3} className={classes.paper}>
+                  <TimelineContent >
+                    <Paper elevation={3} className={'darkLight'}>
                       <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                         <i className="fas fa-truck-moving"></i>
                       </Typography>
-                      <Typography style={{ textAlign: 'center' }}>{label.from} <i class="fas fa-angle-double-right"></i> {label.to}</Typography>
+                      <Typography className='fromTo' style={{ textAlign: 'center' }}>{label.from} <i class="fas fa-angle-double-right"></i> {label.to}</Typography>
                     </Paper>
                   </TimelineContent>
                 </TimelineItem>

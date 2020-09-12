@@ -27,8 +27,9 @@
     "dependencies": {
         "@material-ui/core": "^4.11.0",
         "@material-ui/lab": "^4.0.0-alpha.56",
-        "@react-pdf/renderer": "^1.6.11",
         "bigchaindb-driver": "^4.1.2",
+        "html2canvas": "^1.0.0-rc.7",
+        "jspdf": "^2.1.1",
         "mdbreact": "^4.27.0",
         "prop-types": "^15.7.2",
         "react-async-component": "^2.0.0",
