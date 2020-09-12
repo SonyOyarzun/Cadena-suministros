@@ -49,6 +49,8 @@ const generatePDF = getdata => {
 
   doc.autoTable(columns, rows, { startY: 65 });
 
+  getSteps();
+
 
   const date = Date().split(" ");
 
@@ -63,15 +65,15 @@ export default function Pdf(props) {
 
   const [products, setProducts] = useState([]);
 
-  let array = []
+  let arrayStep = []
 
   function getSteps() {
 
-    array = []
+    arrayStep = []
 
     Object.keys(step).map((key, row) => (
 
-      array.push(step[row]['metadata']['info'])
+    arrayStep.push(step[row]['metadata']['info'])
 
     ))
 

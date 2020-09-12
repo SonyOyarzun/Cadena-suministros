@@ -31,19 +31,19 @@ export default function Trace() {
 
   const [products, setProducts] = useState([]);
 
-  let array = []
+  let arrayStep = []
 
   function getSteps() {
 
-    array = []
+    arrayStep = []
 
     Object.keys(step).map((key, row) => (
 
-      array.push(step[row]['metadata']['info'])
+      arrayStep.push(step[row]['metadata']['info'])
 
     ))
 
-    console.log('get array :', array)
+    console.log('get array :', arrayStep)
   }
 
   const process = () => {
@@ -80,7 +80,7 @@ export default function Trace() {
   let preRows = []
   let rows = []
   let data = []
-  array = []
+  let array = []
   let count = 0
 
   const createJson = (
@@ -115,7 +115,8 @@ export default function Trace() {
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
+  
+  getSteps();
 
   var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   var time
@@ -135,7 +136,7 @@ export default function Trace() {
 
           <MDBCardBody className={classes.root}>
 
-          {array.length > 0 ? 
+          {arrayStep.length > 0 ? 
 (
             <div className="text-center">
               <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
@@ -147,7 +148,7 @@ export default function Trace() {
 }
 
             <Timeline align="alternate">
-              {array.map((label, index) => (
+              {arrayStep.map((label, index) => (
                 time = new Date(label.date),
                 <TimelineItem>
                   <TimelineOppositeContent>
