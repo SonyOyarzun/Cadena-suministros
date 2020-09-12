@@ -11,7 +11,7 @@ import { propTypes } from 'react-bootstrap/esm/Image';
 
 // define a generatePDF function that accepts a tickets argument
 const generatePDF = getdata => {
-  
+
   let columns = []
   let preRows = []
   let rows = []
@@ -27,27 +27,32 @@ const generatePDF = getdata => {
     preRows = [],
 
     Object.keys(getdata[key]).map((key2, col) => (
-
-      columns[col]=key2,
-      
-      preRows[key2] = getdata[row][key2],
+      columns[col] = key2,
+      preRows[col] = getdata[row][key2],
       count = count + 1
     )),
     rows.push(preRows)
-
   )),
 
-  console.log(columns,rows)
+  console.log(columns, rows)
 
+
+   //titulo
+   doc.text("Registro de Trazabilidad de un Producto", 40, 15);
   // startY is basically margin-top
-  doc.autoTable(columns, rows, { startY: 20 });
+
+  //coordenadas x y de ubicacion de texto
+  doc.text("Producto", 14, 30);
+  doc.autoTable(columns, rows, { startY: 35 });
+
+  doc.text("Recorrido", 14, 60);
+
+  doc.autoTable(columns, rows, { startY: 65 });
+
+
   const date = Date().split(" ");
 
   const dateStr = date[0] + date[1] + date[2] + date[3] + date[4];
-
-  //titulo
-  doc.text("Registro de Trazabilidad de un Producto", 14, 15);
-
   // guardar pdf
   doc.save(`report_${dateStr}.pdf`);
 };
