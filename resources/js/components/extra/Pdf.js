@@ -3,61 +3,13 @@ import React, { useEffect, useState } from 'react';
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
 
+//generar pdf
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+
+//formato fecha
 import { format } from "date-fns";
-import { propTypes } from 'react-bootstrap/esm/Image';
 
-
-// define a generatePDF function that accepts a tickets argument
-const generatePDF = getdata => {
-
-  let columns = []
-  let preRows = []
-  let rows = []
-  let data = []
-  let array = []
-  let count = 0
-
-  // initialize jsPDF
-  const doc = new jsPDF();
-
-  Object.keys(getdata).map((key, row) => (
-
-    preRows = [],
-
-    Object.keys(getdata[key]).map((key2, col) => (
-      columns[col] = key2,
-      preRows[col] = getdata[row][key2],
-      count = count + 1
-    )),
-    rows.push(preRows)
-  )),
-
-  console.log(columns, rows)
-
-
-   //titulo
-   doc.text("Registro de Trazabilidad de un Producto", 40, 15);
-  // startY is basically margin-top
-
-  //coordenadas x y de ubicacion de texto
-  doc.text("Producto", 14, 30);
-  doc.autoTable(columns, rows, { startY: 35 });
-
-  doc.text("Recorrido", 14, 60);
-
-  doc.autoTable(columns, rows, { startY: 65 });
-
-  getSteps();
-
-
-  const date = Date().split(" ");
-
-  const dateStr = date[0] + date[1] + date[2] + date[3] + date[4];
-  // guardar pdf
-  doc.save(`report_${dateStr}.pdf`);
-};
 
 export default function Pdf(props) {
 
@@ -73,11 +25,11 @@ export default function Pdf(props) {
 
     Object.keys(step).map((key, row) => (
 
-    arrayStep.push(step[row]['metadata']['info'])
+      arrayStep.push(step[row]['metadata']['info'])
 
     ))
 
-    console.log('arrayStep :',arrayStep)
+    console.log('arrayStep :', arrayStep)
   }
 
   useEffect(() => {
@@ -92,7 +44,7 @@ export default function Pdf(props) {
       params
     }).then(response => {
       setStep(response.data)
-      console.log('step :', step)
+   //   console.log('step :', step)
 
     }).catch(error => {
       alert("Error " + error)
@@ -102,17 +54,104 @@ export default function Pdf(props) {
       params
     }).then(response => {
       console.log('response pdf :', response.data.asset.data.transaction)
-      //   if(response.data.asset.data.transaction != undefined){
-      setProducts(response.data.asset.data.transaction)
-      console.log('products :', products)
-      //  }
+      if (response.data.asset.data.transaction != undefined) {
+        setProducts(response.data.asset.data.transaction)
+      //  console.log('products :', products)
+      }
     }).catch(error => {
       alert("Error " + error)
     })
 
   }, []);
 
+  const generatePDF = getdata => {
 
+    let columns = []
+    let preRows = []
+    let rows = []
+    let count = 0
+
+    // initialize jsPDF
+    const doc = new jsPDF();
+
+    Object.keys(getdata).map((key, row) => (
+
+      preRows = [],
+
+      Object.keys(getdata[key]).map((key2, col) => (
+        columns[col] = key2,
+        preRows[col] = getdata[row][key2],
+        count = count + 1
+      )),
+      rows.push(preRows)
+    )),
+
+      console.log(columns, rows)
+
+
+    //ubicacion elementos
+    let imgLogo = 10
+    let textTitulo = imgLogo + 30
+    let titleProd = textTitulo + 15
+    let tableProd = titleProd + 10
+    let titleTrace = tableProd + 25
+    let tableTrace = titleTrace + 10
+    let foot = imgLogo + 250
+
+
+
+    let logo = new Image();
+
+    logo.src = '/img/logo.png';
+
+    // x y width height
+    doc.addImage(logo, 'JPEG', 14, imgLogo , 35, 20);
+
+    //titulo
+    doc.text("Registro de Trazabilidad de un Producto", 55, textTitulo);
+    // startY is basically margin-top
+
+    //coordenadas x y de ubicacion de texto
+    doc.text("Producto", 14, titleProd);
+    doc.autoTable(columns, rows, { startY: tableProd });
+
+    doc.text("Recorrido", 14, titleTrace);
+
+    //pie de firmas
+    doc.text("Firma Encargado", 40, foot);
+    doc.text("Firma Solicitante", 120, foot);
+
+
+    const tableColumn = ["De", "Para", "Comentario", "Fecha"];
+    // define an empty array of rows
+    const tableRows = [];
+    // for each ticket pass all its data into an array
+
+    getSteps()
+
+    console.log('v ', arrayStep)
+
+    arrayStep.forEach(arrayStep => {
+      const traceData = [
+        arrayStep.from,
+        arrayStep.to,
+        arrayStep.to,
+        // called date-fns to format the date on the ticket
+        format(new Date(arrayStep.date), "dd-MM-yyyy")
+      ];
+      // push each tickcet's info into a row
+      tableRows.push(traceData);
+    });
+
+    doc.autoTable(tableColumn, tableRows, { startY: tableTrace });
+
+
+    const date = Date().split(" ");
+
+    const dateStr = date[0] + date[1] + date[2] + date[3] + date[4];
+    // guardar pdf
+    doc.save(`report_${dateStr}.pdf`);
+  };
 
   return (
     <MDBBtn tag="a" size="sm" gradient="blue" onClick={() => generatePDF(products)}>
