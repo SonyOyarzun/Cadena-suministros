@@ -96,7 +96,8 @@ export default function Pdf(props) {
     let tableProd = titleProd + 10
     let titleTrace = tableProd + 25
     let tableTrace = titleTrace + 10
-    let foot = imgLogo + 250
+    let ID = imgLogo + 250
+    let QR = ID + 10
 
 
 
@@ -118,8 +119,8 @@ export default function Pdf(props) {
     doc.text("Recorrido", 14, titleTrace);
 
     //pie de firmas
-    doc.text("Firma Encargado", 40, foot);
-    doc.text("Firma Solicitante", 120, foot);
+    doc.text("ID Transacción :"+props.transaction, 14, ID);
+    doc.text("QR", 120, QR);
 
 
     const tableColumn = ["De", "Para", "Comentario", "Fecha"];
