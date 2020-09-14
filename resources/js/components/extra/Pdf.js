@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+//import QRcodeReact, { qrcode } from 'qr-code-react';
 import QRcodeReact, { qrcode } from 'qr-code-react';
 
 //Material Bootstrap
@@ -126,7 +127,8 @@ export default function Pdf(props) {
 
     //crear qr
     let qr = qrcode(1, 'M');
-    qr.addData('jjj');
+    //qr.addData('https://test.ipdb.io/api/v1/transactions?asset_id=&operation=TRANSFER&last_tx=false');
+    qr.addData('false');
     qr.make();
 
 
@@ -178,3 +180,4 @@ export default function Pdf(props) {
 
 }
 
+//https://github.com/davidshimjs/qrcodejs/issues/78
