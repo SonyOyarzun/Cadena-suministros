@@ -11,6 +11,7 @@ import "jspdf-autotable";
 
 //formato fecha
 import { format } from "date-fns";
+import { string } from 'prop-types';
 
 
 export default function Pdf(props) {
@@ -123,25 +124,19 @@ export default function Pdf(props) {
     //pie de firmas
     doc.text("ID Transacción :"+props.transaction, 14, ID);
 
+    //crear qr
     let qr = qrcode(1, 'M');
     qr.addData("Hello World!");
     qr.make();
 
-    let dataUrl = qr.createImgTag(4);
 
-    console.log(dataUrl)
+    //cerar etiqueta y extraer el src
+    let dataUrl = qr.createImg(4).src;
 
-  
-    
-    var m, urls = [], str = qr.createImgTag(4),
-    rex = /<img[^>]+src="?([^"\s]+)"?\s*\/>/g; while ( m = rex.exec( str ) ) 
-    { urls.push( m[1] ); } 
-    console.log( 'url :', urls ); // [ "http://img.javascriptes.com/javascript/one.jpg", "http://img.javascriptes.com/javascript/two.jpg" ] 
+    //console.log('dataUrl :',dataUrl)
 
- 
+    doc.addImage(dataUrl, 'JPEG', 12, QR, 10, 10);
 
-    doc.addImage(urls);
-    //doc.text(dataUrl, 12, QR);
 
 
     const tableColumn = ["De", "Para", "Comentario", "Fecha"];
