@@ -29,7 +29,7 @@ class TableOrder extends Component {
           console.log('sends :',this.state.sends)
       console.log('response :', response.data)
     }).catch(error => {
-      alert("Error " + error)
+      console.log("Error " + error)
     })
 
   }

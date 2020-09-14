@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import QRcodeReact, { qrcode } from 'qr-code-react';
+
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
 
@@ -121,10 +123,14 @@ export default function Pdf(props) {
     //pie de firmas
     doc.text("ID Transacción :"+props.transaction, 14, ID);
 
-    let dataUrl = qr.canvas('http://cyberair.co.uk').toDataURL('image/jpeg');
-    doc.addImage(dataUrl);
+    let qr = qrcode(1, 'M');
+    qr.addData("Hello World!");
+    qr.make();
+
+    let dataUrl = qr.createImg;
+    doc.addImage(dataUrl, 'JPEG', 15, 40, 10, 10);
     
-    doc.text("QR", 120, QR);
+    doc.text("QR", 12, QR);
 
 
     const tableColumn = ["De", "Para", "Comentario", "Fecha"];
