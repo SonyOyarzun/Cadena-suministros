@@ -120,6 +120,10 @@ export default function Pdf(props) {
 
     //pie de firmas
     doc.text("ID Transacción :"+props.transaction, 14, ID);
+
+    let dataUrl = qr.canvas('http://cyberair.co.uk').toDataURL('image/jpeg');
+    doc.addImage(dataUrl);
+    
     doc.text("QR", 120, QR);
 
 

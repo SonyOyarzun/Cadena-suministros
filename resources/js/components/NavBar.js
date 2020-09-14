@@ -36,7 +36,7 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link onClick={() => this.handleLink("Pdf")}><MDBIcon icon="home" /> PDF</Nav.Link>
+              <Nav.Link onClick={() => this.handleLink("Qr")}><MDBIcon icon="home" /> Qr</Nav.Link>
               <Nav.Link onClick={() => this.handleLink("Trace")}><MDBIcon icon="barcode" /> Traza</Nav.Link>
               <Nav.Link onClick={() => this.handleLink("Search")}><MDBIcon icon="search" /> Buscar TX</Nav.Link>
               <NavDropdown title={<><MDBIcon icon="tools" /> Administración</>} id="basic-nav-dropdown-administraciio">
