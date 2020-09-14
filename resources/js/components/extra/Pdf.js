@@ -127,10 +127,21 @@ export default function Pdf(props) {
     qr.addData("Hello World!");
     qr.make();
 
-    let dataUrl = qr.createImg;
-    doc.addImage(dataUrl, 'JPEG', 15, 40, 10, 10);
+    let dataUrl = qr.createImgTag(4);
+
+    console.log(dataUrl)
+
+  
     
-    doc.text("QR", 12, QR);
+    var m, urls = [], str = qr.createImgTag(4),
+    rex = /<img[^>]+src="?([^"\s]+)"?\s*\/>/g; while ( m = rex.exec( str ) ) 
+    { urls.push( m[1] ); } 
+    console.log( 'url :', urls ); // [ "http://img.javascriptes.com/javascript/one.jpg", "http://img.javascriptes.com/javascript/two.jpg" ] 
+
+ 
+
+    doc.addImage(urls);
+    //doc.text(dataUrl, 12, QR);
 
 
     const tableColumn = ["De", "Para", "Comentario", "Fecha"];
