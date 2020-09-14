@@ -34,7 +34,7 @@ function PassUser(props) {
 
         <Modal.Body>
 {copySuccess != '' &&
-        <MDBAlert color="success" >
+        <MDBAlert className='darkLight' >
         {copySuccess}
         </MDBAlert>
 }

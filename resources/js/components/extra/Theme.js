@@ -135,6 +135,9 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.body} !important;
   }
 
+  [onClick] {
+    cursor:pointer;
+}
 
 `;
 

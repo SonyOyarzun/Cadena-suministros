@@ -135,7 +135,7 @@ export default function Pdf(props) {
       const traceData = [
         arrayStep.from,
         arrayStep.to,
-        arrayStep.to,
+        arrayStep.commentary,
         // called date-fns to format the date on the ticket
         format(new Date(arrayStep.date), "dd-MM-yyyy")
       ];

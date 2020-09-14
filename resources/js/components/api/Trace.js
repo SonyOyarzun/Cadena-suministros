@@ -56,7 +56,7 @@ export default function Trace() {
       params
     }).then(response => {
       setStep(response.data)
-      console.log('step :', step)
+      console.log('step :', response.data)
 
     }).catch(error => {
       alert("Error " + error)
@@ -174,6 +174,7 @@ export default function Trace() {
                         <i className="fas fa-truck-moving"></i>
                       </Typography>
                       <Typography className='darkLight' style={{ textAlign: 'center' }}>{label.from} <i class="fas fa-angle-double-right"></i> {label.to}</Typography>
+                      <Typography className='darkLight' style={{ textAlign: 'center' }}>{label.commentary}</Typography>
                     </Paper>
                   </TimelineContent>
                 </TimelineItem>
