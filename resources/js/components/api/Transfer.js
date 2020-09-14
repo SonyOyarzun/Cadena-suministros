@@ -168,7 +168,7 @@ function Transfer(props) {
             Cancelar
       </Button>
           <Button variant="primary" onClick={receiveTransaction}>
-            Realizar Envio
+            Realizar Recepción
       </Button>
         </Modal.Footer>
       </Modal>

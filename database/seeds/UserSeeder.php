@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Prueba',
+            'name' => 'Salcobrand',
             'email' => 'prueba@ciisa.cl',
             'path' => 'https://feriados-cl-api.herokuapp.com/feriados',
             'role' => 'P',
