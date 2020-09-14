@@ -122,20 +122,20 @@ export default function Pdf(props) {
     doc.text("Recorrido", 14, titleTrace);
 
     //pie de firmas
-    doc.text("ID Transacción :"+props.transaction, 14, ID);
+    doc.text("Valide esta transaccion escaneando el codigo QR", 14, ID);
 
     //crear qr
     let qr = qrcode(1, 'M');
-    qr.addData("Hello World!");
+    qr.addData('jjj');
     qr.make();
 
 
     //cerar etiqueta y extraer el src
     let dataUrl = qr.createImg(4).src;
 
-    //console.log('dataUrl :',dataUrl)
+    console.log('dataUrl :',dataUrl)
 
-    doc.addImage(dataUrl, 'JPEG', 12, QR, 10, 10);
+    doc.addImage(dataUrl, 'JPEG', 12, QR, 15, 15);
 
 
 

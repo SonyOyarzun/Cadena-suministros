@@ -16,7 +16,7 @@ import Receive from './Receive';
 import Order from './Order';
 
 import Pdf from './extra/Pdf';
-import Qr from './extra/Qr';
+
 
 class Routes extends Component {
 
@@ -40,7 +40,7 @@ class Routes extends Component {
                 <Route path="/Search" component={Search} />
 
                 <Route path="/Pdf" component={Pdf} />
-                <Route path="/Qr" component={Qr} />
+
 
             </div>
 
