@@ -3,11 +3,18 @@ import React, { useState, useEffect } from 'react';
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
 
+//Componentes de Bootstap
+import { Button, Modal, Card, Form } from 'react-bootstrap';
+
 
 function Transfer(props) {
 
   const [userSend, setUserSend] = useState([]);
   const [userReceive, setUserReceive] = useState([]);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
     
 
   const getUserSend = (id) => {
@@ -94,6 +101,7 @@ function Transfer(props) {
     const info = {
       from: userSend.name,
       to: userReceive.name,
+      commentary: document.getElementById('commentary').value,
       date: new Date().toString()
     }
 
@@ -137,8 +145,33 @@ function Transfer(props) {
   }
 
   return (
-    <div>
-      <MDBBtn rounded size="lg" color="info" onClick={receiveTransaction}><MDBIcon far icon="paper-plane" /></MDBBtn>
+      <div>
+      <MDBBtn className="btn btn-block"  tag="a" size="sm" gradient="blue" onClick={handleShow}>
+      <MDBIcon icon="paper-plane" />
+      </MDBBtn>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Agregar comentario</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+          <Form>
+            <Form.Group controlId="commentary">
+              <Form.Label>Comentario</Form.Label>
+              <Form.Control type="text" rows="3" maxLength="30"/>
+            </Form.Group>
+          </Form>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancelar
+      </Button>
+          <Button variant="primary" onClick={receiveTransaction}>
+            Realizar Envio
+      </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

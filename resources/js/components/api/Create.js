@@ -2,10 +2,17 @@ import React, { Component, Fragment, useState, useEffect, useCallback } from 're
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
 
+//Componentes de Bootstap
+import { Button, Modal, Card, Form } from 'react-bootstrap';
+
 
 function Create(props) {
 
   const [user, setUser] = useState([]);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
 
   useEffect(() => {
@@ -51,6 +58,8 @@ function Create(props) {
 
   const createTransaction = e => {
 
+    console.log(document.getElementById('commentary').value)
+
     const myPublicKey = user.publicKey
     const myPrivateKey = user.privateKey
 
@@ -62,6 +71,7 @@ function Create(props) {
       const info = {
         from: user.name,
         to: userSend.name,
+        commentary: document.getElementById('commentary').value,
         date: new Date().toString()
       }
 
@@ -102,7 +112,32 @@ function Create(props) {
 
   return (
     <div>
-      <MDBBtn block rounded size="lg" color="info" onClick={createTransaction}>Realizar Envio <MDBIcon icon="paper-plane" /></MDBBtn>
+      <MDBBtn className="btn btn-block"  tag="a" size="sm" gradient="blue" onClick={handleShow}>
+      <MDBIcon icon="paper-plane" />
+      </MDBBtn>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Agregar comentario</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+          <Form>
+            <Form.Group controlId="commentary">
+              <Form.Label>Comentario</Form.Label>
+              <Form.Control type="text" rows="3" maxLength="30"/>
+            </Form.Group>
+          </Form>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancelar
+      </Button>
+          <Button variant="primary" onClick={createTransaction}>
+            Realizar Envio
+      </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

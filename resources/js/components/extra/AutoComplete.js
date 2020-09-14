@@ -38,11 +38,10 @@ function Auto(props) {
         <div>
             <Autocomplete
                 id="userToSend"
-                size="lg"
+                className='autocomplete'
                 options={users}
                 getOptionLabel={option => (option.name)}
                 onChange={props.onTagsChange}
-                style={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} label="Usuario a enviar" variant="outlined" />}
             />
         </div>

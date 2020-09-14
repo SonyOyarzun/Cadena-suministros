@@ -139,12 +139,12 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const defaultTheme = {
-    body: '#dee2e6',
+    body: '#f1f1f1',
     border: '#363537',
     font: '1rem',
     text: '#363537',
     toggleBorder: '#fff',
-    gradient: 'linear-gradient(#39598A, #79D7ED)',
+    gradient: 'linear-gradient(#d4d2d2, #FAFAFA)',
 }
 
 const specialTheme = {
