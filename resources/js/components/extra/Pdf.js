@@ -126,9 +126,9 @@ export default function Pdf(props) {
     doc.text("Valide esta transaccion escaneando el codigo QR", 14, ID);
 
     //crear qr
-    let qr = qrcode(1, 'M');
-    //qr.addData('https://test.ipdb.io/api/v1/transactions?asset_id=&operation=TRANSFER&last_tx=false');
-    qr.addData('false');
+    let qr = qrcode(9, 'M');
+    qr.addData('https://test.ipdb.io/api/v1/transactions?asset_id='+props.transaction+'&operation=TRANSFER&last_tx=false');
+    //qr.addData('false');
     qr.make();
 
 

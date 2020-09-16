@@ -57,6 +57,7 @@ export default function TableMyProduct() {
     axios.get('json-api/my')
       .then(response => {
         setProducts(response.data);
+        console.log("response :", response)
 
       }).catch(error => {
         console.log("Error " + error)
