@@ -57,7 +57,7 @@ class ApiController extends Controller
 
 	public function editConfig(Request $request)
 	{
-		$api = Api_config::get();
+		$api = Api_config::findOrFail($request->id);
 		if ($api == null) {
 
 			return 'Api no encontrada';
@@ -87,11 +87,10 @@ class ApiController extends Controller
 				$api->logotype  	= $request->logotype;
 				$api->background  	= $request->background;
 
-			//	$api->save();
+				$api->save();
 
-			//	return "Api Actualizada";
+				return "Api Actualizada";
 
-			return $api;
 			}
 		}
 	}

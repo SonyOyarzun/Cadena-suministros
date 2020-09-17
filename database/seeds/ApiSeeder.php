@@ -13,6 +13,7 @@ class ApiSeeder extends Seeder
     public function run()
     {
        DB::table('api_config')->insert([
+            'id'            => 1,
             'path'          => 'https://test.ipdb.io/api/v1/',
             'transaction'   => 'transactions/',
             'asset'         => 'assets/',

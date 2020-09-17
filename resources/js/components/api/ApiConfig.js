@@ -9,45 +9,47 @@ class ApiConfig extends Component {
       config: []
     }
 
-    this.getData = this.getData.bind(this)
+    this.getData = this.getData.bind(this);
   }
 
   componentDidMount() {
 
     this.getData()
-  
+
   }
 
 
+  getData = () => {
+    axios({
+      method: 'get',
+      url: 'json-api/config'
+    })
+      .then((response) => {
+        console.log(response.data);
+        this.setState({ config: response.data[0] })
+      }, (error) => {
+        console.log(error);
+      });
+
+  }
 
   render() {
 
-    const getData = () => {
-      axios({
-        method: 'get',
-        url: 'json-api/config'
-      })
-        .then((response) => {
-          console.log(response.data);
-          this.setState({ config: response.data[0] })
-        }, (error) => {
-          console.log(error);
-        });
-  
-    }
+
     const process = () => {
 
       axios({
         method: 'put',
         url: 'json-api/editConfig',
         data: {
-          path:         document.getElementById('path').value,
-          transaction:  document.getElementById('transaction').value,
-          asset:        document.getElementById('asset').value,
-          api_port:     document.getElementById('api_port').value,
-          db_port:      document.getElementById('db_port').value,
-          logotype:     document.getElementById('logotype').value,
-          background:   document.getElementById('background').value
+          id: document.getElementById('id').value,
+          path: document.getElementById('path').value,
+          transaction: document.getElementById('transaction').value,
+          asset: document.getElementById('asset').value,
+          api_port: document.getElementById('api_port').value,
+          db_port: document.getElementById('db_port').value,
+          logotype: document.getElementById('logotype').value,
+          background: document.getElementById('background').value
         }
       })
         .then((response) => {
@@ -70,13 +72,68 @@ class ApiConfig extends Component {
               <div className="text-center">
                 <h3 className="dark-grey-text mb-5"><strong>Configuracion</strong></h3>
               </div>
-              <MDBInput id='path' label="Ruta de API" value={this.state.config.path} validate error="wrong" success="right" />
-              <MDBInput id='transaction' label="Ruta de Transacciones" value={this.state.config.transaction} validate error="wrong" success="right" />
-              <MDBInput id='asset' label="Ruta de Assets" value={this.state.config.asset} validate error="wrong" success="right" />
-              <MDBInput id='api_port' label="Puertos Api" value={this.state.config.api_port} validate error="wrong" success="right" />
-              <MDBInput id='db_port' label="Puertos db" value={this.state.config.db_port} validate error="wrong" success="right" />
-              <MDBInput id='logotype' label="Ruta de logo" value={this.state.config.logotype} validate error="wrong" success="right" />
-              <MDBInput id='background' label="Ruta de fondo" value={this.state.config.background} validate error="wrong" success="right" />
+
+              <div className="input-group">
+                <div className="input-group-prepend">
+                </div>
+                <input id='id' type="hidden" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.id} />
+              </div>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon">
+                    Ruta Api
+                  </span>
+                </div>
+                <input id='path' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.path} />
+              </div>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon">
+                    Ruta Transacciones
+                  </span>
+                </div>
+                <input id='transaction' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.transaction} />
+              </div>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon">
+                    Ruta Assets
+                  </span>
+                </div>
+                <input id='asset' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.asset} />
+              </div>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon">
+                    Puerto de Api
+                  </span>
+                </div>
+                <input id='api_port' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.api_port} />
+              </div>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon">
+                    Puerto de DB
+                  </span>
+                </div>
+                <input id='db_port' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.db_port} />
+              </div>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon">
+                    Ruta de Logotipo
+                  </span>
+                </div>
+                <input id='logotype' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.logotype} />
+              </div>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon">
+                    Ruta de Fondo
+                  </span>
+                </div>
+                <input id='background' type="text" className="form-control" placeholder="background" aria-label="Fondo" aria-describedby="basic-addon" defaultValue={this.state.config.background} />
+              </div>
               <div className="text-center pt-3 mb-3">
                 <MDBBtn type="button" gradient="blue" rounded className="btn-block z-depth-1a" onClick={process}>Actualizar</MDBBtn>
               </div>

@@ -14,6 +14,7 @@ class CreateApiConfigTable extends Migration
     public function up()
     {
         Schema::create('api_config', function (Blueprint $table) {
+            $table->id();
             $table->string('path');
             $table->string('transaction');
             $table->string('asset');
