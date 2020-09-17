@@ -12,63 +12,79 @@ use App\Api_config;
 
 class ApiController extends Controller
 {
-	
-    public function product(Request $request)
-    {
-	
-	try{		
-    	$client = new Client();
-		$response = $client->request('GET', $request->path);
-    	$statusCode = $response->getStatusCode();
-		$body = $response->getBody()->getContents();
-	}catch(\Exception $e){
-		return json_encode($e);
-	}
-		return $body;
 
+	public function product(Request $request)
+	{
+
+		try {
+			$client = new Client();
+			$response = $client->request('GET', $request->path);
+			$statusCode = $response->getStatusCode();
+			$body = $response->getBody()->getContents();
+		} catch (\Exception $e) {
+			return json_encode($e);
+		}
+		return $body;
 	}
 
 	public function myProduct()
-    {
-		$id=Auth::id();
+	{
+		$id = Auth::id();
 		$user = User::findOrFail($id);
-		
-	if($user!=null){	
 
-	try{		
-    	$client = new Client();
-		$response = $client->request('GET', $user->path);
-    	$statusCode = $response->getStatusCode();
-		$body = $response->getBody()->getContents();
-	}catch(\Exception $e){
-		return json_encode($e);
-	}
-		return $body;
+		if ($user != null) {
 
-	}else{
-		return json_encode("Usuario Desconocido");
-	}
-
+			try {
+				$client = new Client();
+				$response = $client->request('GET', $user->path);
+				$statusCode = $response->getStatusCode();
+				$body = $response->getBody()->getContents();
+			} catch (\Exception $e) {
+				return json_encode($e);
+			}
+			return $body;
+		} else {
+			return json_encode("Usuario Desconocido");
+		}
 	}
 
 	public function config()
-    {
+	{
 		$api = Api_config::get();
 
 		return $api;
-
 	}
 
-	public function editConfig()
-    {
+	public function editConfig(Request $request)
+	{
 		$api = Api_config::get();
+		if ($api == null) {
 
-		return $api;
+			return 'Api no encontrada';
+		} else {
 
+			if (!isset($request->path)) {
+				return "Debe ingresar ruta";
+			} elseif (!isset($request->transaction)) {
+				return "Debe ingresar ruta de transaction";
+			} elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+				return "Formato mail no valido";
+			} elseif (!isset($request->role)) {
+				return "Debe ingresar role";
+			} elseif (!isset($request->path)) {
+				return "Debe ingresar ruta de api";
+			} else {
+
+				$user->name  = $request->name;
+				$user->email = $request->email;
+				$user->role  = $request->role;
+				$user->path  = $request->path;
+				$user->save();
+
+				return "Usuario Actualizado";
+			}
+		}
 	}
-
-
-
 }
 
 

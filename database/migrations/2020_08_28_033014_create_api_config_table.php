@@ -16,6 +16,7 @@ class CreateApiConfigTable extends Migration
         Schema::create('api_config', function (Blueprint $table) {
             $table->string('path');
             $table->string('transaction');
+            $table->string('asset');
             $table->string('api_port');
             $table->string('db_port');
             $table->string('logotype');
