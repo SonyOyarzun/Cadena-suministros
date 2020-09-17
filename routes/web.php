@@ -46,7 +46,7 @@ Route::group(['middleware' => ['cors']], function () {
 Route::get('json-api', 'ApiController@product');
 Route::get('json-api/my', 'ApiController@myProduct');
 Route::get('json-api/config', 'ApiController@config');
-Route::get('json-api/editConfig', 'ApiController@editConfig');
+Route::put('json-api/editConfig', 'ApiController@editConfig');
 
 
 //rutas complemento de bigchain

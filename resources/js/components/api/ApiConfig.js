@@ -8,27 +8,33 @@ class ApiConfig extends Component {
     this.state = {
       config: []
     }
+
+    this.getData = this.getData.bind(this)
   }
 
   componentDidMount() {
 
-    axios({
-      method: 'get',
-      url: 'json-api/config'
-    })
-      .then((response) => {
-        console.log(response.data);
-        this.setState({ config: response.data[0] })
-      }, (error) => {
-        console.log(error);
-      });
-
+    this.getData()
+  
   }
 
 
 
   render() {
 
+    const getData = () => {
+      axios({
+        method: 'get',
+        url: 'json-api/config'
+      })
+        .then((response) => {
+          console.log(response.data);
+          this.setState({ config: response.data[0] })
+        }, (error) => {
+          console.log(error);
+        });
+  
+    }
     const process = () => {
 
       axios({
@@ -37,6 +43,7 @@ class ApiConfig extends Component {
         data: {
           path:         document.getElementById('path').value,
           transaction:  document.getElementById('transaction').value,
+          asset:        document.getElementById('asset').value,
           api_port:     document.getElementById('api_port').value,
           db_port:      document.getElementById('db_port').value,
           logotype:     document.getElementById('logotype').value,
@@ -45,7 +52,7 @@ class ApiConfig extends Component {
       })
         .then((response) => {
           console.log(response);
-          props.getData()
+          this.getData()
           alert(response.data)
         }, (error) => {
           console.log(error);

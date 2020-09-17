@@ -64,24 +64,34 @@ class ApiController extends Controller
 		} else {
 
 			if (!isset($request->path)) {
-				return "Debe ingresar ruta";
+				return "Debe ingresar ruta de api";
 			} elseif (!isset($request->transaction)) {
 				return "Debe ingresar ruta de transaction";
-			} elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
-				return "Formato mail no valido";
-			} elseif (!isset($request->role)) {
-				return "Debe ingresar role";
-			} elseif (!isset($request->path)) {
-				return "Debe ingresar ruta de api";
+			} elseif (!filter_var($request->asset)) {
+				return "Debe ingresar ruta de asset";
+			} elseif (!isset($request->api_port)) {
+				return "Debe ingresar puerto de api";
+			} elseif (!isset($request->db_port)) {
+				return "Debe ingresar puerto de db";
+			} elseif (!isset($request->logotype)) {
+				return "Debe ingresar ruta de logo";
+			} elseif (!isset($request->background)) {
+				return "Debe ingresar ruta de fondo";
 			} else {
 
-				$user->name  = $request->name;
-				$user->email = $request->email;
-				$user->role  = $request->role;
-				$user->path  = $request->path;
-				$user->save();
+				$api->path  		= $request->path;
+				$api->transaction  	= $request->transaction;
+				$api->asset  		= $request->asset;
+				$api->api_port  	= $request->api_port;
+				$api->db_port  		= $request->db_port;
+				$api->logotype  	= $request->logotype;
+				$api->background  	= $request->background;
 
-				return "Usuario Actualizado";
+			//	$api->save();
+
+			//	return "Api Actualizada";
+
+			return $api;
 			}
 		}
 	}
