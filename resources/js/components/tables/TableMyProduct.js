@@ -10,7 +10,7 @@ import Auto from '../extra/AutoComplete'
 
 export default function TableMyProduct(props) {
 
-  const [userSend, setUserSend] = useState();
+  const [userSend, setUserSend] = useState({});
   const [checked, setChecked] = useState([]);
   const [checkbox, setCheckbox] = useState([]);
   let columns = []
@@ -69,7 +69,7 @@ export default function TableMyProduct(props) {
     Object.keys(props.products).map((key, row) => (
 
       preRows = [],
-      preRows['check'] = <input label=" " value={JSON.stringify(props.products[key])} type="checkbox" id={'checkbox' + row}  className="box"   onChange={toggleCheck}  checked={isChecked('checkbox' + row)} defaultChecked='false' />,
+      preRows['check'] = <input label=" " value={JSON.stringify(props.products[key])} type="checkbox" id={'checkbox' + row}  className="box"   onClick={toggleCheck}  checked={isChecked('checkbox' + row)} defaultChecked='false' />,
 
       Object.keys(props.products[key]).map((key2, col) => (
         {
@@ -118,7 +118,7 @@ export default function TableMyProduct(props) {
       <>
       
         <MDBRow style={styles.border}>
-          <MDBCol size="2"><Create getData={checkbox} getUserSend={userSend} /></MDBCol>
+          <MDBCol size="2"><Create getData={checkbox} getUserSend={userSend} disabled={'true'} /></MDBCol>
           <MDBCol size="4">
             <Auto onTagsChange={onTagsChange}/>
           </MDBCol>

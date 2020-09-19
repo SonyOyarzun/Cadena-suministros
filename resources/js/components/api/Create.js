@@ -5,10 +5,12 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 
 function Create(props) {
 
+  console.log('props ', props)
+
   const [user, setUser] = useState([]);
 
 
-  const getData = e => {
+  useEffect(() => {
 
     axios.get('/user/my')
       .then(response => {
@@ -18,10 +20,9 @@ function Create(props) {
         alert("Error " + error)
       })
 
-  };
+  }, []);
 
-
-  const save = (id_transaction,prevTransaction, to) => {
+  const save = (id_transaction, prevTransaction, to) => {
     axios({
       method: 'post',
       url: 'chain/new',
@@ -40,23 +41,21 @@ function Create(props) {
   }
 
   function isset(variable) {
-    if(typeof(variable) == "undefined" || variable == null)
-        return false;
+    if (typeof (variable) == "undefined" || variable == null)
+      return false;
     else
-        if(typeof(variable) == "object" && !variable.length) 
-            return false;
-        else
-            return true;
-};
+      if (typeof (variable) == "object" && !variable.length)
+        return false;
+      else
+        return true;
+  };
 
   const createTransaction = e => {
 
-    getData()
-
     const myPublicKey = user.publicKey
     const myPrivateKey = user.privateKey
-    console.log('getData ',props.getData,'getUserSend ',props.getUserSend);
-    if (isset(props.getData) && isset(props.getUserSend.hasOwnProperty('values'))){
+    //console.log('getData ',props.getData,'getUserSend ',props.getUserSend);
+    if (isset(props.getData) && props.getUserSend.hasOwnProperty('values')) {
 
       const userSend = props.getUserSend.values
       const transaction = props.getData
@@ -64,7 +63,7 @@ function Create(props) {
       const info = {
         from: user.name,
         to: userSend.name,
-        commentary:'Inicio',
+        commentary: 'Inicio',
         date: new Date().toString()
       }
 
@@ -95,7 +94,7 @@ function Create(props) {
         .then(res => {
           const elem = API_PATH + 'transactions/' + txSigned.id;
           console.log('Transaction', txSigned.id, 'accepted', 'URL :', elem);
-          save(txSigned.id,txSigned.id,userSend.id)
+          save(txSigned.id, txSigned.id, userSend.id)
         })
       console.log(txSigned);
     } else {
@@ -105,12 +104,13 @@ function Create(props) {
 
   return (
     <div>
-      <MDBBtn className="btn btn-block"  tag="a" size="sm" gradient="blue" onClick={createTransaction}>
-      <MDBIcon icon="paper-plane" />
+      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={createTransaction}>
+        <MDBIcon icon="paper-plane" />
       </MDBBtn>
     </div>
   )
 }
+
 
 
 export default Create;
