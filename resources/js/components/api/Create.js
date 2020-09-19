@@ -8,6 +8,7 @@ function Create(props) {
   console.log('props ', props)
 
   const [user, setUser] = useState([]);
+  const [prevent, setPrevent] = useState(false);
 
 
   useEffect(() => {
@@ -52,6 +53,8 @@ function Create(props) {
 
   const createTransaction = e => {
 
+    setPrevent(true)
+
     const myPublicKey = user.publicKey
     const myPrivateKey = user.privateKey
     //console.log('getData ',props.getData,'getUserSend ',props.getUserSend);
@@ -95,16 +98,26 @@ function Create(props) {
           const elem = API_PATH + 'transactions/' + txSigned.id;
           console.log('Transaction', txSigned.id, 'accepted', 'URL :', elem);
           save(txSigned.id, txSigned.id, userSend.id)
+
+          setTimeout(function() {
+            setPrevent(false);
+          }, 5000);
+         
         })
       console.log(txSigned);
+
+      
     } else {
       alert('Debe ingresar productos y destinatario')
+      setPrevent(false);
     }
+    
+
   }
 
   return (
     <div>
-      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={createTransaction}>
+      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={createTransaction}  disabled={prevent}>
         <MDBIcon icon="paper-plane" />
       </MDBBtn>
     </div>
