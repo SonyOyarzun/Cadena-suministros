@@ -144,6 +144,10 @@ const GlobalStyles = createGlobalStyle`
     cursor:pointer;
 }
 
+.autocomplete{
+  color: ${({ theme }) => theme.body} !important;
+}
+
 `;
 
 const defaultTheme = {

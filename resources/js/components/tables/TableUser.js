@@ -133,6 +133,8 @@ class TableUser extends Component {
             btn
             sortable={false}
             data={data}
+            searchingLabel={'buscar'}
+            info={false}
           />
           
 

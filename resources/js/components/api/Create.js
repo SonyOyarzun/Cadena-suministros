@@ -8,7 +8,7 @@ function Create(props) {
   const [user, setUser] = useState([]);
 
 
-  useEffect(() => {
+  const getData = e => {
 
     axios.get('/user/my')
       .then(response => {
@@ -18,7 +18,7 @@ function Create(props) {
         alert("Error " + error)
       })
 
-  }, []);
+  };
 
 
   const save = (id_transaction,prevTransaction, to) => {
@@ -51,10 +51,12 @@ function Create(props) {
 
   const createTransaction = e => {
 
+    getData()
+
     const myPublicKey = user.publicKey
     const myPrivateKey = user.privateKey
-
-    if (isset(props.getData) || isset(props.getUserSend)){
+    console.log('getData ',props.getData,'getUserSend ',props.getUserSend);
+    if (isset(props.getData) && isset(props.getUserSend.hasOwnProperty('values'))){
 
       const userSend = props.getUserSend.values
       const transaction = props.getData

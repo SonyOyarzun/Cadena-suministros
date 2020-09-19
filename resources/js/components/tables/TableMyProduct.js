@@ -4,16 +4,12 @@ import { MDBDataTableV5,MDBContainer, MDBInput, MDBTable, MDBTableBody, MDBTable
 //import api
 import Create from '../api/Create'
 
-import Load from '../extra/Load'
 
 import Auto from '../extra/AutoComplete'
 
 
-export default function TableMyProduct() {
+export default function TableMyProduct(props) {
 
-  const [loading, setLoading] = useState(true);
-
-  const [products, setProducts] = useState([]);
   const [userSend, setUserSend] = useState();
   const [checked, setChecked] = useState([]);
   const [checkbox, setCheckbox] = useState([]);
@@ -24,13 +20,12 @@ export default function TableMyProduct() {
   let array = []
   let count = 0
 
-
-  const getDataCheckbox = e => {
-    Object.keys(checked).map((key, row) => (
-      array.push(JSON.parse(document.getElementById(checked[key]).value))
+  const getDataCheckbox = checkedArr => {
+    Object.keys(checkedArr).map((key, row) => (
+      array.push(JSON.parse(document.getElementById(checkedArr[key]).value))
     ))
     setCheckbox(array)
-    console.log('Checked :', checkbox, 'userSend :', userSend)
+    console.log('Checked :', array, 'userSend :', userSend)
   }
 
 
@@ -41,39 +36,24 @@ export default function TableMyProduct() {
     checkedArr.filter(name => name === e.target.id)[0]
       ? checkedArr = checkedArr.filter(name => name !== e.target.id)
       : checkedArr.push(e.target.id);
-    setChecked([...checkedArr])
-   getDataCheckbox()
+    setChecked(checkedArr)
+   getDataCheckbox(checkedArr)
   };
 
   
 
   const isChecked = id => checked.filter(name => name === id)[0] ? true : false
 
-  console.log(checked)
-  console.log(checkbox)
 
   useEffect(() => {
 
-    axios.get('json-api/my')
-      .then(response => {
-        setProducts(response.data);
-        console.log("response :", response)
-
-      }).catch(error => {
-        console.log("Error " + error)
-      })
-
     axios.get('user/list')
       .then(response => {
-        setUsers(response.data);
-        setLoading(false);
+
       }).catch(error => {
         console.log("Error " + error)
-        setLoading(false);
+
       })
-
-    createJson
-
 
 
   }, []);
@@ -86,20 +66,20 @@ export default function TableMyProduct() {
       field: 'check',
     }),
 
-    Object.keys(products).map((key, row) => (
+    Object.keys(props.products).map((key, row) => (
 
       preRows = [],
-      preRows['check'] = <input label=" " value={JSON.stringify(products[key])} type="checkbox" id={'checkbox' + row}  className="box"   onClick={toggleCheck}  checked={isChecked('checkbox' + row)} defaultChecked='false' />,
+      preRows['check'] = <input label=" " value={JSON.stringify(props.products[key])} type="checkbox" id={'checkbox' + row}  className="box"   onChange={toggleCheck}  checked={isChecked('checkbox' + row)} defaultChecked='false' />,
 
-      Object.keys(products[key]).map((key2, col) => (
+      Object.keys(props.products[key]).map((key2, col) => (
         {
-          ...count < Object.keys(products[key]).length &&
+          ...count < Object.keys(props.products[key]).length &&
           columns.push({
             label: key2,
             field: key2,
           }),
         },
-        preRows[key2] = products[row][key2],
+        preRows[key2] = props.products[row][key2],
         count = count + 1
       )),
       rows.push(preRows)
@@ -127,23 +107,19 @@ export default function TableMyProduct() {
     setUserSend({
       values
     }, () => {
-      // This will output an array of objects
-      // given by Autocompelte options property.
-      console.log(users);
+     // console.log(users);
     });
   }
 
-  if (loading) { // if your component doesn't have to wait for an async action, remove this block 
-    return <Load />; // render null when app is not ready
-  } else {
+
 
 
     return (
       <>
       
-        <MDBRow fluid style={styles.border}>
-          <MDBCol size="4"><Create getData={checkbox} getUserSend={userSend} /></MDBCol>
-          <MDBCol size="8">
+        <MDBRow style={styles.border}>
+          <MDBCol size="2"><Create getData={checkbox} getUserSend={userSend} /></MDBCol>
+          <MDBCol size="4">
             <Auto onTagsChange={onTagsChange}/>
           </MDBCol>
           </MDBRow>
@@ -168,6 +144,5 @@ export default function TableMyProduct() {
       </>
     );
 
-  }
 }
 
