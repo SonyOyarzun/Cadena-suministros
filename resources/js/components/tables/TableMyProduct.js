@@ -138,6 +138,7 @@ export default function TableMyProduct(props) {
               btn
               sortable={false}
               data={data}
+              disableRetreatAfterSorting 
             />
           </MDBCol>
         </MDBRow>
