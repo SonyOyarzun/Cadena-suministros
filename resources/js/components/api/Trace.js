@@ -48,29 +48,45 @@ export default function Trace() {
 
   const process = () => {
 
+    if(document.getElementById('id').value.length>0){
+
     const params = {
       "asset": document.getElementById('id').value,
     }
 
-    axios.get('/assets', {
-      params
-    }).then(response => {
-      setStep(response.data)
-      console.log('step :', response.data)
+    axios.all([
+      axios.get('/assets', {params}),
+      axios.get('/transaction', {params}),
+    ])
+    .then(responseArr => {
+      //this will be executed only when all requests are complete
+      let message = ''
+      if(responseArr[0].hasOwnProperty('data')){
+        if(responseArr[0].data[0].length>0){  
+        setStep(responseArr[0].data)
+        }else{
+          message=message + 'Traza no encontrada \n' 
+        }
+      console.log('Traza: ', responseArr[0].data);
+      }else{
+        message=message + 'Traza no encontrada \n' 
+      }
+      if(responseArr[1].data.hasOwnProperty('asset')){
+      setProducts(responseArr[1].data.asset.data.transaction)
+      console.log('Productos: ', responseArr[1].data.asset.data.transaction);
+      }else{
+        message=message + 'Producto no encontrado \n' 
+      }
 
-    }).catch(error => {
-      alert("Error " + error)
-    })
+     if(message.length>0){
+       alert(message)
+     }
 
-    axios.get('/transaction', {
-      params
-    }).then(response => {
-      if(response.data.asset.data.transaction != null){
-      setProducts(response.data.asset.data.transaction)
-    }
-    }).catch(error => {
-      alert("Error " + error)
-    })
+    });
+
+  }else{
+    alert('Debe ingresar una ID')
+  }
 
   }
 
@@ -205,6 +221,7 @@ export default function Trace() {
               paging={false}
               searching={false}
               data={data}
+              info={false}
             />
           </MDBCardFooter>
 
