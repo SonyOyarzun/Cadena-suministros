@@ -115,4 +115,17 @@ https://medium.com/@vchaurasia95/basic-operations-in-bigchaindb-using-js-eb53021
 
 https://www.itsolutionstuff.com/post/react-form-validation-tutorial-exampleexample.html
 
+
+https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/
+
+axios.all([
+  axios.get('https://api.github.com/users/mapbox'),
+  axios.get('https://api.github.com/users/phantomjs')
+])
+.then(responseArr => {
+  //this will be executed only when all requests are complete
+  console.log('Date created: ', responseArr[0].data.created_at);
+  console.log('Date created: ', responseArr[1].data.created_at);
+});
+
 */

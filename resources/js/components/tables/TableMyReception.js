@@ -155,7 +155,7 @@ class TableMyReception extends Component {
       return (
         <>
         <MDBRow fluid style={styles.border}>
-          <MDBCol size="12">
+          <MDBCol size="4">
             <Auto onTagsChange={this.onTagsChange} />
           </MDBCol>
         </MDBRow>

@@ -66,11 +66,15 @@ export default function Search() {
     axios.get('/search', {
       params
     }).then(response => {
-      setProducts(response.data)
       console.log('productos :', response.data)
+      if (response.data.length > 0){
+        setProducts(response.data)
+      } else {
+        alert('Producto no encontrado')
+      }
 
     }).catch(error => {
-      alert("Error " + error)
+      console.log("Error " + error)
     })
 
   }
