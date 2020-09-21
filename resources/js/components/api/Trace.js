@@ -67,16 +67,19 @@ export default function Trace() {
       ])
         .then(responseArr => {
 
-          console.log('eval: ', responseArr[0]);
-          if (responseArr[0].data[0].hasOwnProperty('metadata')) {
+          
+          if (responseArr[0].data.length>0) {
+
+            console.log('eval: ', responseArr[0].data[0].hasOwnProperty('metadata'));
+            console.log('eval 2: ', responseArr[0].data);
+
+            if (responseArr[0].data[0].hasOwnProperty('metadata')) {
 
             if (responseArr[0].data[0].metadata.hasOwnProperty('info')) {
               setStep(responseArr[0].data)
             } else {
               setStep([])
             }
-
-
 
             if (responseArr[1].data.asset.data.hasOwnProperty('transaction')) {
               setProducts(responseArr[1].data.asset.data.transaction)
@@ -87,12 +90,14 @@ export default function Trace() {
           }else{
             alert('No se encuentra ID')
           }
-
+        }else{
+          alert('No se encuentra ID')
+        }
           setTimeout(function () {
             setPrevent(false);
             setButtonMessage('Buscar');
           }, 2000)
-          console.log('Traza: ', responseArr[0].data[0].metadata);
+          console.log('Traza: ', responseArr[0].data);
           console.log('Productos: ', responseArr[1].data);
 
         });
