@@ -15,6 +15,7 @@ import Message from '../extra/Messaje';
 import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: '6px 16px',
@@ -36,6 +37,8 @@ export default function Search() {
 
   const [message, setMessage] = useState('');
 
+  const [prevent, setPrevent] = useState(false);
+  const [buttonMessage, setButtonMessage] = useState('Buscar');
 
 
   const [step, setStep] = useState([]);
@@ -44,20 +47,28 @@ export default function Search() {
 
   let array = []
 
-  function getSteps() {
+  const getSteps = (step) => {
 
     array = []
 
     Object.keys(step).map((key, row) => (
-
+      
+      {...step[row]['metadata'].hasOwnProperty('info') &&
       array.push(step[row]['metadata']['info'])
+      }
 
     ))
 
     console.log('get array :', array)
+
+
   }
 
   const process = () => {
+
+    if(document.getElementById('id').value.trim().length>0){
+    setPrevent(true)
+    setButtonMessage('Cargando...')
 
     const params = {
       "atribute": document.getElementById('id').value,
@@ -67,15 +78,22 @@ export default function Search() {
       params
     }).then(response => {
       console.log('productos :', response.data)
-      if (response.data.length > 0){
+      if (response.data.length >0){
         setProducts(response.data)
-      } else {
-        alert('Producto no encontrado')
+        getSteps(response.data) 
       }
 
     }).catch(error => {
       console.log("Error " + error)
     })
+
+    setTimeout(function() {
+      setPrevent(false);
+      setButtonMessage('Buscar');
+    }, 5000);
+  }else{
+    alert('Debe ingresar un parametro')
+  }
 
   }
 
@@ -96,22 +114,27 @@ export default function Search() {
   let obj = {}
   let objID = []
 
-  const createJson = (
 
+  const createJson = (
     //Busca propiedad transaction, la cual es caracteristica de nuestro diseño
 
-    products.map((data, index) => (
+    
 
+    products.map((data, index) => (
+  
       {
         ...data.data.hasOwnProperty('transaction') ? (
 
           obj = data.data.transaction,
           objID[index] = data.id
         ) : (
-            console.log('no encontrada')
+            console.log('no encontrada'),
+            columns = [{label: "Busqueda", field: "message"}],
+            rows = [{message: "Sin registros"}]
           )
       }
     )),
+
 
     Object.keys(obj).map((key, row) => (
 
@@ -139,11 +162,12 @@ export default function Search() {
 
   );
 
+
+
   console.log('data  :', data)
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
 
   var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   var time
@@ -156,11 +180,9 @@ export default function Search() {
           <MDBCardHeader>
             <MDBInput id="id" label="Producto" validate error="wrong" success="right" valueDefault="" />
             <div className="text-center pt-3 mb-3">
-              <MDBBtn type="button" onClick={process} gradient="blue" rounded className="btn-block z-depth-1a">Buscar</MDBBtn>
+  <MDBBtn type="button" onClick={process} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{buttonMessage}</MDBBtn>
             </div>
           </MDBCardHeader>
-
-
 
           <MDBCardFooter className={classes.root}>
 
@@ -183,6 +205,7 @@ export default function Search() {
               paging={false}
               searching={false}
               data={data}
+              info={false}
             />
           </MDBCardFooter>
 

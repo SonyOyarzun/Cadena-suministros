@@ -48,7 +48,7 @@ export default function Trace() {
 
   const process = () => {
 
-    if(document.getElementById('id').value.length>0){
+    if(document.getElementById('id').value.trim().length>0){
 
     const params = {
       "asset": document.getElementById('id').value,
@@ -62,7 +62,7 @@ export default function Trace() {
       //this will be executed only when all requests are complete
       let message = ''
       if(responseArr[0].hasOwnProperty('data')){
-        if(responseArr[0].data[0].length>0){  
+        if(responseArr[0].data.length>0){  
         setStep(responseArr[0].data)
         }else{
           message=message + 'Traza no encontrada \n' 
