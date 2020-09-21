@@ -31,6 +31,9 @@ export default function Trace() {
 
   const [products, setProducts] = useState([]);
 
+  const [prevent, setPrevent] = useState(false);
+  const [buttonMessage, setButtonMessage] = useState('Buscar');
+
   let arrayStep = []
 
   function getSteps() {
@@ -49,6 +52,9 @@ export default function Trace() {
   const process = () => {
 
     if(document.getElementById('id').value.trim().length>0){
+
+      setPrevent(true)
+      setButtonMessage('Cargando...')
 
     const params = {
       "asset": document.getElementById('id').value,
@@ -83,6 +89,11 @@ export default function Trace() {
      }
 
     });
+
+    setTimeout(function() {
+      setPrevent(false);
+      setButtonMessage('Buscar');
+    }, 5000);
 
   }else{
     alert('Debe ingresar una ID')
@@ -146,7 +157,7 @@ export default function Trace() {
           <MDBCardHeader>
             <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="" />
             <div className="text-center pt-3 mb-3">
-              <MDBBtn type="button" onClick={process} gradient="blue" rounded className="btn-block z-depth-1a">Buscar</MDBBtn>
+  <MDBBtn type="button" onClick={process} gradient="blue" rounded className="btn-block z-depth-1a">{buttonMessage}</MDBBtn>
             </div>
           </MDBCardHeader>
 
