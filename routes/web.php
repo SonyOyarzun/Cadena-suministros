@@ -20,6 +20,10 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 });
+
+Route::get('/traceUser', function () {
+    return view('traceUser');
+});
 /*
 Route::view('/{path?}', 'home')
      ->where('path', '.*')
