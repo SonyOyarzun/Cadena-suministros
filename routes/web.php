@@ -24,6 +24,13 @@ Route::get('/home', function () {
 Route::get('/traceUser', function () {
     return view('traceUser');
 });
+
+Route::get('/traceUser/{asset}', 'BigController@trace', function () {
+    return view('traceUser');
+});
+
+
+
 /*
 Route::view('/{path?}', 'home')
      ->where('path', '.*')
