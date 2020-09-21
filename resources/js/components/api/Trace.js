@@ -47,10 +47,7 @@ export default function Trace() {
     ))
 
     console.log('get array :', arrayStep)
-    setTimeout(function () {
-      setPrevent(false);
-      setButtonMessage('Buscar');
-    }, 5000)
+
   }
 
   const process = () => {
@@ -70,7 +67,7 @@ export default function Trace() {
       ])
         .then(responseArr => {
 
-          console.log('eval: ', responseArr[0].data);
+          console.log('eval: ', responseArr[0]);
           if (responseArr[0].data[0].hasOwnProperty('metadata')) {
 
             if (responseArr[0].data[0].metadata.hasOwnProperty('info')) {
@@ -86,10 +83,15 @@ export default function Trace() {
             } else {
               setProducts([])
             }
-
+  
           }else{
             alert('No se encuentra ID')
           }
+
+          setTimeout(function () {
+            setPrevent(false);
+            setButtonMessage('Buscar');
+          }, 2000)
           console.log('Traza: ', responseArr[0].data[0].metadata);
           console.log('Productos: ', responseArr[1].data);
 
@@ -157,7 +159,7 @@ export default function Trace() {
           <MDBCardHeader>
             <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="" />
             <div className="text-center pt-3 mb-3">
-              <MDBBtn type="button" onClick={process} gradient="blue" rounded className="btn-block z-depth-1a">{buttonMessage}</MDBBtn>
+              <MDBBtn type="button" onClick={process} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{buttonMessage}</MDBBtn>
             </div>
           </MDBCardHeader>
 
