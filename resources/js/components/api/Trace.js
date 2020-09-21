@@ -10,7 +10,7 @@ import TimelineDot from '@material-ui/lab/TimelineDot';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import { MDBDataTableV5,MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
+import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,57 +47,57 @@ export default function Trace() {
     ))
 
     console.log('get array :', arrayStep)
+    setTimeout(function () {
+      setPrevent(false);
+      setButtonMessage('Buscar');
+    }, 5000)
   }
 
   const process = () => {
 
-    if(document.getElementById('id').value.trim().length>0){
+    if (document.getElementById('id').value.trim().length > 0) {
 
       setPrevent(true)
       setButtonMessage('Cargando...')
 
-    const params = {
-      "asset": document.getElementById('id').value,
+      const params = {
+        "asset": document.getElementById('id').value,
+      }
+
+      axios.all([
+        axios.get('/assets', { params }),
+        axios.get('/transaction', { params }),
+      ])
+        .then(responseArr => {
+
+          console.log('eval: ', responseArr[0].data);
+          if (responseArr[0].data[0].hasOwnProperty('metadata')) {
+
+            if (responseArr[0].data[0].metadata.hasOwnProperty('info')) {
+              setStep(responseArr[0].data)
+            } else {
+              setStep([])
+            }
+
+
+
+            if (responseArr[1].data.asset.data.hasOwnProperty('transaction')) {
+              setProducts(responseArr[1].data.asset.data.transaction)
+            } else {
+              setProducts([])
+            }
+
+          }else{
+            alert('No se encuentra ID')
+          }
+          console.log('Traza: ', responseArr[0].data[0].metadata);
+          console.log('Productos: ', responseArr[1].data);
+
+        });
+
+    } else {
+      alert('Debe ingresar una ID')
     }
-
-    axios.all([
-      axios.get('/assets', {params}),
-      axios.get('/transaction', {params}),
-    ])
-    .then(responseArr => {
-      //this will be executed only when all requests are complete
-      let message = ''
-      if(responseArr[0].hasOwnProperty('data')){
-        if(responseArr[0].data.length>0){  
-        setStep(responseArr[0].data)
-        }else{
-          message=message + 'Traza no encontrada \n' 
-        }
-      console.log('Traza: ', responseArr[0].data);
-      }else{
-        message=message + 'Traza no encontrada \n' 
-      }
-      if(responseArr[1].data.hasOwnProperty('asset')){
-      setProducts(responseArr[1].data.asset.data.transaction)
-      console.log('Productos: ', responseArr[1].data.asset.data.transaction);
-      }else{
-        message=message + 'Producto no encontrado \n' 
-      }
-
-     if(message.length>0){
-       alert(message)
-     }
-
-    });
-
-    setTimeout(function() {
-      setPrevent(false);
-      setButtonMessage('Buscar');
-    }, 5000);
-
-  }else{
-    alert('Debe ingresar una ID')
-  }
 
   }
 
@@ -142,13 +142,13 @@ export default function Trace() {
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  
+
   getSteps();
 
   var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   var time
 
-  
+
   return (
     <MDBRow>
       <MDBCol md="9" lg="7" xl="5" className="mx-auto mt-3">
@@ -157,22 +157,22 @@ export default function Trace() {
           <MDBCardHeader>
             <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="" />
             <div className="text-center pt-3 mb-3">
-  <MDBBtn type="button" onClick={process} gradient="blue" rounded className="btn-block z-depth-1a">{buttonMessage}</MDBBtn>
+              <MDBBtn type="button" onClick={process} gradient="blue" rounded className="btn-block z-depth-1a">{buttonMessage}</MDBBtn>
             </div>
           </MDBCardHeader>
 
           <MDBCardBody className={classes.root}>
 
-          {arrayStep.length > 0 ? 
-(
-            <div className="text-center">
-              <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
-                <i class="fas fa-map-marked-alt"></i> Recorrido
+            {arrayStep.length > 0 ?
+              (
+                <div className="text-center">
+                  <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
+                    <i class="fas fa-map-marked-alt"></i> Recorrido
               </Typography>
-            </div>
-)
-:(<></>)
-}
+                </div>
+              )
+              : (<></>)
+            }
 
             <Timeline align="alternate">
               {arrayStep.map((label, index) => (
@@ -187,7 +187,7 @@ export default function Trace() {
                   </TimelineOppositeContent>
                   <TimelineSeparator>
                     <TimelineDot>
-                      {(array.length - 1) == index ? (
+                      {(array.length) == index ? (
                         <i class="fas fa-check-circle"></i>
                       ) : (
                           <i class="fas fa-arrow-alt-circle-down"></i>
@@ -213,16 +213,16 @@ export default function Trace() {
 
           <MDBCardFooter className={classes.root}>
 
-{array.length > 0 ? 
-(
-          <div className="text-center">
-              <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
-              <MDBIcon icon="cash-register" /> Producto
+            {array.length > 0 ?
+              (
+                <div className="text-center">
+                  <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
+                    <MDBIcon icon="cash-register" /> Producto
               </Typography>
-            </div>
-)
-:(<></>)
-}
+                </div>
+              )
+              : (<></>)
+            }
             <MDBDataTableV5
               responsive
               bordered
