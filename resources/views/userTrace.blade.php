@@ -77,7 +77,7 @@
     </head>
     <body id="back">
         <div id="trace"></div>
-        <script src="{{ asset('js/components/api/UserTrace.js') }}"></script>  
+        <script src="{{ asset('js/app.js') }}"></script>  
     </body>
 </html>
 

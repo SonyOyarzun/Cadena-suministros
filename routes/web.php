@@ -21,22 +21,40 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/traceUser', function () {
-    return view('traceUser');
+//Rutas de Componentes React
+
+Route::get('/Trace',function () {
+    return view('home');
+});
+Route::get('/Trace/{asset}',function () {
+    return view('home');
+});
+/*
+Route::get('/Trace',function () {
+    return view('home');
 });
 
+Route::get('/Trace/{asset}',function () {
+    return view('home');
+});
+*/
+
+Route::get('/userTrace', function () {
+    return view('userTrace');
+});
+/*
 Route::get('/traceUser/{asset}', 'BigController@trace', function () {
     return view('traceUser');
 });
 
-
+*/
 
 /*
 Route::view('/{path?}', 'home')
      ->where('path', '.*')
      ->name('home');
-*/
 
+*/
 Auth::routes();
 
 Route::get('/user/my/', 'UserController@my');

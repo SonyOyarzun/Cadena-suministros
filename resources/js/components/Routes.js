@@ -20,6 +20,9 @@ import Pdf from './extra/Pdf';
 
 class Routes extends Component {
 
+    //para parametros de url
+    //<Route exact path="/Trace/:asset" component={Trace} /> 
+
     render() {
         return (
 
@@ -36,11 +39,11 @@ class Routes extends Component {
                 <Route path="/Receive" component={Receive} />
                 <Route path="/Order" component={Order} />
 
-                <Route path="/Trace" component={Trace} />
+                <Route exact path="/Trace" component={Trace} />
+
                 <Route path="/Search" component={Search} />
 
                 <Route path="/Pdf" component={Pdf} />
-
 
             </div>
 

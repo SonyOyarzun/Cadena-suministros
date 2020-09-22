@@ -13,6 +13,10 @@ import Typography from '@material-ui/core/Typography';
 import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
+
+//parametros desde url
+import { useParams , withRouter } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: '6px 16px',
@@ -25,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function UserTrace() {
+function UserTrace(props) {
 
   const [step, setStep] = useState([]);
 
@@ -33,6 +37,10 @@ function UserTrace() {
 
   const [prevent, setPrevent] = useState(false);
   const [buttonMessage, setButtonMessage] = useState('Buscar');
+
+  const { asset } = useParams();
+  //const { asset } = props
+
 
   let arrayStep = []
 
@@ -145,7 +153,9 @@ function UserTrace() {
 
   );
 
-  console.log(data)
+  console.log('data :',data)
+  console.log('asset :',asset)
+
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -162,7 +172,7 @@ function UserTrace() {
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>
-            <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault="" />
+            <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault={asset} />
             <div className="text-center pt-3 mb-3">
               <MDBBtn type="button" onClick={process} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{buttonMessage}</MDBBtn>
             </div>
@@ -248,5 +258,7 @@ function UserTrace() {
     </MDBRow>
   );
 }
+
+//export default withRouter(UserTrace)
 
 render(<UserTrace/>, document.getElementById('trace'));
