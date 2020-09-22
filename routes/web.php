@@ -22,7 +22,9 @@ Route::get('/home', function () {
 });
 
 //Rutas de Componentes React
-
+Route::get('/Search',function () {
+    return view('home');
+});
 Route::get('/Trace',function () {
     return view('home');
 });
