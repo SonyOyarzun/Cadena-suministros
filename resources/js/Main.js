@@ -62,7 +62,7 @@ class App extends Component {
             <div>
               <Head/>
              
-              <NavBar value={1}/>
+              <NavBar value={3}/>
 
               <MDBContainer fluid style={styles.padding}>
   
