@@ -73,8 +73,8 @@ function NewUser(props) {
             <Form.Group controlId="newUserForm.role">
               <Form.Label>Role</Form.Label>
               <Form.Control as="select" defaultValue={props.role}>
-                <option value="P">Productor</option>
-                <option value="D">Distribuidor</option>
+                <option value="A">Administrador</option>
+                <option value="U">Usuario</option>
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="newUserForm.path">

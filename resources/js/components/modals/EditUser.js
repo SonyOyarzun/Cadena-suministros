@@ -21,11 +21,11 @@ function EditUser(props) {
       method: 'put',
       url: '/user/edit/',
       data: {
-        id:    props.id,
-        name:  document.getElementById('editUserForm.name').value,
+        id: props.id,
+        name: document.getElementById('editUserForm.name').value,
         email: document.getElementById('editUserForm.email').value,
-        role:  document.getElementById('editUserForm.role').value,
-        path:  document.getElementById('editUserForm.path').value
+        role: document.getElementById('editUserForm.role').value,
+        path: document.getElementById('editUserForm.path').value
       }
     })
       .then((response) => {
@@ -43,7 +43,7 @@ function EditUser(props) {
   return (
     <div>
       <MDBBtn tag="a" size="sm" gradient="blue" onClick={handleShow}>
-       <MDBIcon far icon="edit" />
+        <MDBIcon far icon="edit" />
       </MDBBtn>
 
       <Modal show={show} onHide={handleClose}>
@@ -57,22 +57,22 @@ function EditUser(props) {
             </Form.Group>
             <Form.Group controlId="editUserForm.name">
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" placeholder="nombre completo" defaultValue={props.name} maxLength="30"/>
+              <Form.Control type="text" placeholder="nombre completo" defaultValue={props.name} maxLength="30" />
             </Form.Group>
             <Form.Group controlId="editUserForm.email">
               <Form.Label>Mail</Form.Label>
-              <Form.Control type="email" placeholder="name@example.com" defaultValue={props.email} maxLength="30"/>
+              <Form.Control type="email" placeholder="name@example.com" defaultValue={props.email} maxLength="30" />
             </Form.Group>
             <Form.Group controlId="editUserForm.role">
               <Form.Label>Role</Form.Label>
               <Form.Control as="select" defaultValue={props.role}>
-                <option value="P">Productor</option>
-                <option value="D">Distribuidor</option>
+                <option value="A">Administrador</option>
+                <option value="U">Usuario</option>
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="editUserForm.path">
               <Form.Label>Ruta</Form.Label>
-              <Form.Control as="textarea" rows="3" defaultValue={props.path} maxLength="300"/>
+              <Form.Control as="textarea" rows="3" defaultValue={props.path} maxLength="300" />
             </Form.Group>
           </Form>
 

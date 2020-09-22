@@ -41,12 +41,22 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true
+      loading: true,
+      user : []
     }
     }
 
+
+
   componentDidMount() {
-    this.setState({loading: false})
+    axios.get('/user/my/').then(response => {
+      this.setState({ user: response.data })
+      this.setState({ loading: false })
+      //   console.log(this.state.users)
+    }).catch(error => {
+      this.setState({ user: error })
+      this.setState({ loading: false })
+    })
   }
   
     render() {
@@ -62,7 +72,7 @@ class App extends Component {
             <div>
               <Head/>
              
-              <NavBar value={3}/>
+              <NavBar value={this.state.user.role}/>
 
               <MDBContainer fluid style={styles.padding}>
   

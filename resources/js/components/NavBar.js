@@ -41,7 +41,7 @@ class NavBar extends Component {
                 (() => {
                   console.log('value :', this.props.value)
                   switch (this.props.value) {
-                    case 1:
+                    case 'A':
                       console.log(1)
                       return (
                         <>
@@ -61,7 +61,7 @@ class NavBar extends Component {
                         </>
                       )
                       break;
-                    case 2:
+                    case 'U':
                       console.log(2)
                       return (
                         <>

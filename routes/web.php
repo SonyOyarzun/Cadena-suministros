@@ -29,25 +29,6 @@ Route::get('/Trace',function () {
 Route::get('/Trace/{asset}',function () {
     return view('home');
 });
-/*
-Route::get('/Trace',function () {
-    return view('home');
-});
-
-Route::get('/Trace/{asset}',function () {
-    return view('home');
-});
-*/
-
-Route::get('/userTrace', function () {
-    return view('userTrace');
-});
-/*
-Route::get('/traceUser/{asset}', 'BigController@trace', function () {
-    return view('traceUser');
-});
-
-*/
 
 /*
 Route::view('/{path?}', 'home')

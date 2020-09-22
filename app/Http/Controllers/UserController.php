@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
 use App\User;
+use PhpParser\Node\Stmt\TryCatch;
 
 class UserController extends Controller
 {
@@ -28,15 +29,15 @@ class UserController extends Controller
 
   public function my()
   {
-    $id = Auth::id();
-    $user = User::findOrFail($id);
-    if ($user == null) {
+    try {
+      $id = Auth::id();
+      $user = User::findOrFail($id);
 
-      return 'Usuario no encontrado';
-    } else {
-
-    return json_encode($user);
+    } catch (\Throwable $th) {
+      throw $th;
     }
+    return json_encode($user);
+    
   }
 
 
