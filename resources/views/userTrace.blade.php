@@ -64,7 +64,7 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-            
+            /*
             #back{
                 background: url('img/cadena.gif');
                 background-position: center center;
@@ -73,9 +73,12 @@
                 height: 100vh;
                 width: 100%;
             }
+            */
         </style>
     </head>
     <body id="back">
+
+    Hola
         <div id="trace"></div>
         <script src="{{ asset('js/app.js') }}"></script>  
     </body>
