@@ -79,7 +79,7 @@
     <body id="back">
 
     Hola
-        <div id="trace"></div>
+        <div id="root2"></div>
         <script src="{{ asset('js/app.js') }}"></script>  
     </body>
 </html>

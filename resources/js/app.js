@@ -15,7 +15,7 @@ require('./bootstrap');
 
 require('./Main');
 
-require('./components/api/UserTrace');
+require('./Main2');
 
 
 
