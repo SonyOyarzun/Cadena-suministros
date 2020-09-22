@@ -1,4 +1,3 @@
-
 import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
 
@@ -63,7 +62,7 @@ class App extends Component {
             <div>
               <Head/>
              
-              <NavBar/>
+              <NavBar value={1}/>
 
               <MDBContainer fluid style={styles.padding}>
   
@@ -79,5 +78,5 @@ class App extends Component {
   }
 }
 
-
+//export default App
 render(<App/>, document.getElementById('root'));

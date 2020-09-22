@@ -26,35 +26,55 @@ class NavBar extends Component {
   }
 
   render() {
+console.log('value :',this.props.value)
 
     return (
 
       <div>
 
         <Navbar bg="light" expand="lg">
-    <Navbar.Brand as={Link} to='#home'>Cadena de Suministros</Navbar.Brand>
+          <Navbar.Brand as={Link} to='#home'>Cadena de Suministros</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link onClick={() => this.handleLink("Trace")}><MDBIcon icon="barcode" /> Traza</Nav.Link>
-              <Nav.Link onClick={() => this.handleLink("Search")}><MDBIcon icon="search" /> Buscar TX</Nav.Link>
-              <NavDropdown title={<><MDBIcon icon="tools" /> Administración</>} id="basic-nav-dropdown-administraciio">
-                <NavDropdown.Item onClick={() => this.handleLink("User")}>Usuarios</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink("ApiConfig")}>Configuracion</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title={<><MDBIcon icon="truck-moving" /> Distribución</>} id="basic-nav-dropdown-distribucion">
-                <NavDropdown.Item onClick={() => this.handleLink("MyProduct")}>Mis Productos</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink("MyReception")}>Reenviar Productos</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink("Order")}>Pedidos</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink("Receive")}>Recibir Productos</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => this.handleLink("Notificaciones")}>Notificaciones</NavDropdown.Item>
-              </NavDropdown>
+
+              {
+                (() => {
+                  switch (this.props.value) {
+                    case 1:
+                      return
+                      <NavDropdown title={<><MDBIcon icon="tools" /> Administración</>} id="basic-nav-dropdown-administraciio">
+                        <NavDropdown.Item onClick={() => this.handleLink("User")}>Usuarios</NavDropdown.Item>
+                        <NavDropdown.Item onClick={() => this.handleLink("ApiConfig")}>Configuracion</NavDropdown.Item>
+                      </NavDropdown>
+                      break;
+                    case 2:
+                      return
+                      <NavDropdown title={<><MDBIcon icon="truck-moving" /> Distribución</>} id="basic-nav-dropdown-distribucion">
+                        <NavDropdown.Item onClick={() => this.handleLink("MyProduct")}>Mis Productos</NavDropdown.Item>
+                        <NavDropdown.Item onClick={() => this.handleLink("MyReception")}>Reenviar Productos</NavDropdown.Item>
+                        <NavDropdown.Item onClick={() => this.handleLink("Order")}>Pedidos</NavDropdown.Item>
+                        <NavDropdown.Item onClick={() => this.handleLink("Receive")}>Recibir Productos</NavDropdown.Item>
+                        <NavDropdown.Item onClick={() => this.handleLink("Notificaciones")}>Notificaciones</NavDropdown.Item>
+                      </NavDropdown>
+                      break;
+                    default:
+                      return
+                      <>
+                        <Nav.Link onClick={() => this.handleLink("Trace")}><MDBIcon icon="barcode" /> Traza</Nav.Link>
+                        <Nav.Link onClick={() => this.handleLink("Search")}><MDBIcon icon="search" /> Buscar TX</Nav.Link>
+                      </>
+                      break;
+                  }
+                }).call(this)
+              }
+
             </Nav>
-            <Theme/>
+            <Theme />
             <Nav.Link href='logout'><MDBIcon icon="door-open" /> Salir</Nav.Link>
           </Navbar.Collapse>
         </Navbar>
-       
+
       </div>
 
     )
