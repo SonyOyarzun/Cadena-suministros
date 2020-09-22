@@ -16,44 +16,55 @@ class UserController extends Controller
 {
   public function index(Request $request)
   {
-    if(!isset($request->resp)){
-    $user = User::all();
-    }else{
-    $id = Auth::id();  
-    $user = User::query()
-    ->where('id', '!=',$id)
-    ->get();
+    if (!isset($request->resp)) {
+      $user = User::all();
+    } else {
+      $id = Auth::id();
+      $user = User::query()
+        ->where('id', '!=', $id)
+        ->get();
     }
     return json_encode($user);
   }
 
   public function my()
   {
-    try {
-      $id = Auth::id();
-      $user = User::findOrFail($id);
 
-    } catch (\Throwable $th) {
-      throw $th;
+    if (Auth::guest()) {
+
+      return json_encode(['role'=>'0']);
+
+    } else {
+
+      try {
+
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+
+      } catch (\Throwable $th) {
+
+        throw $th;
+        
+      }
+
+      return json_encode($user);
     }
-    return json_encode($user);
     
   }
 
 
   public function search(Request $request)
   {
-    
+
     $user = User::findOrFail($request->id);
-    
+
     if ($user == null) {
 
       return 'Usuario no encontrado';
     } else {
 
-    return json_encode($user);
+      return json_encode($user);
     }
-    
   }
 
   public function create(Request $request)
@@ -133,7 +144,6 @@ class UserController extends Controller
     if ($user == null) {
 
       return 'Usuario no encontrado';
-      
     } else {
 
       if (!isset($request->pass)) {
@@ -147,7 +157,6 @@ class UserController extends Controller
         $user->save();
         return 'Contraseña Actualizada';
       }
-
     }
   }
 

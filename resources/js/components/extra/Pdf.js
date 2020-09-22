@@ -127,7 +127,8 @@ export default function Pdf(props) {
 
     //crear qr
     let qr = qrcode(9, 'M');
-    qr.addData('https://test.ipdb.io/api/v1/transactions?asset_id='+props.transaction+'&operation=TRANSFER&last_tx=false');
+    var URLdomain = window.location.host;
+    qr.addData(URLdomain+'/Trace/'+props.transaction);
     //qr.addData('false');
     qr.make();
 

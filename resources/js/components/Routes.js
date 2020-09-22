@@ -40,6 +40,7 @@ class Routes extends Component {
                 <Route path="/Order" component={Order} />
 
                 <Route exact path="/Trace" component={Trace} />
+                <Route exact path="/Trace/:asset" component={Trace} /> 
 
                 <Route path="/Search" component={Search} />
 
