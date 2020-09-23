@@ -50,10 +50,15 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important;
   }
 
-  span {
-    color: ${({ theme }) => theme.body} !important;
+  span{
+    color: ${({ theme }) => theme.text} !important;
     background-color: ${({ theme }) => theme.text} !important;
   }
+  pagination m-0{
+    color: ${({ theme }) => theme.body} !important;
+    background-color: ${({ theme }) => theme.body} !important;
+  }
+
   p {
     color: ${({ theme }) => theme.text} !important;
   }

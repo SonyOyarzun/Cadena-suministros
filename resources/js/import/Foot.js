@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom'
+import Theme from '../components/extra/Theme'
 
 
 var style = {
@@ -38,6 +39,7 @@ function Footer({ children }) {
             <div style={phantom} />
              <div style={style} className='foot'>
                 { children }
+<Theme/>
             </div>
         </div>
     )

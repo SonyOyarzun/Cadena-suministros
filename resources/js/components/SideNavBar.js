@@ -12,7 +12,6 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import { MDBIcon, MDBBtn } from "mdbreact";
 
-import Theme from './extra/Theme'
 
 class SideNavBar extends Component {
 
@@ -121,23 +120,23 @@ class SideNavBar extends Component {
                 </NavText>
               </NavItem>
 
-              <NavItem eventKey="administracion/configuracion">
+              <NavItem eventKey="buscar/traza">
                 <NavText>
                  <Link className='darkLight-text' to='/Trace'>Traza</Link>
                 </NavText>
               </NavItem>
             </NavItem>
 
-
-            <NavItem eventKey="theme">
-              <NavText>
-              <Theme/>
-            </NavText>
-            </NavItem>
-
-
-  
-
+            <NavItem eventKey="salir">
+            <NavIcon>
+            <a className='darkLight-text' href='/logout'><MDBIcon className='darkLight-text' icon="door-open" style={{ fontSize: '1.75em' }} /></a>
+              </NavIcon>
+                <NavText>
+                 <a className='darkLight-text' href='/logout'>Salir</a>
+                </NavText>
+              </NavItem>
+            
+              
 
           </SideNav.Nav>
         </SideNav>
