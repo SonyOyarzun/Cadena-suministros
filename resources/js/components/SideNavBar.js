@@ -34,8 +34,8 @@ class SideNavBar extends Component {
             // Add your code here
           }}
         >
-          <SideNav.Toggle/>
-          <SideNav.Nav defaultSelected="home">
+          <SideNav.Toggle  className='darkLight-body'/>
+          <SideNav.Nav>
 
             <NavItem eventKey="home">
               <NavIcon>

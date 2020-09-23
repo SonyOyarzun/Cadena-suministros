@@ -71,6 +71,12 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${({ theme }) => theme.body} !important;
     color: ${({ theme }) => theme.text} !important; 
   }
+
+  .sidenav---icon-bar---u1f02{
+    background-color: ${({ theme }) => theme.text} !important;
+    color: ${({ theme }) => theme.body} !important; 
+  }
+
   Strong {
     color: ${({ theme }) => theme.text} !important;
   }
