@@ -21,6 +21,8 @@ import Head from './import/Head'
 import Foot from './import/Foot'
 
 import NavBar from './components/NavBar'
+
+import SideNavBar from './components/SideNavBar'
 import Routes from './components/Routes'
 
 import Load from './components/extra/Load'
@@ -30,7 +32,7 @@ import Load from './components/extra/Load'
         paddingTop: "10vh",
         paddingBottom: "10vh",
         paddingRight: "5vw",
-        paddingLeft: "5vw"
+        paddingLeft: "20vw"
     }
 }
 
@@ -72,7 +74,8 @@ class App extends Component {
             <div>
               <Head/>
              
-              <NavBar value={this.state.user.role}/>
+              
+              <SideNavBar value={this.state.user.role}/>
 
               <MDBContainer fluid style={styles.padding}>
   

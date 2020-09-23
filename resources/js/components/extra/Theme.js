@@ -10,8 +10,7 @@ const GlobalStyles = createGlobalStyle`
 
   html * {
     font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  }
-
+  } 
   
   .navbar,
   .navbar-default {
@@ -43,17 +42,17 @@ const GlobalStyles = createGlobalStyle`
   }
 
   span {
-    background-color: ${({ theme }) => theme.body} !important;
-    color: ${({ theme }) => theme.text} !important;
+    color: ${({ theme }) => theme.body} !important;
+    background-color: ${({ theme }) => theme.text} !important;
   }
   p {
     color: ${({ theme }) => theme.text} !important;
   }
 
    a {
-    background-color: ${({ theme }) => theme.body} !important;
-    color: ${({ theme }) => theme.text} !important;
+    color: ${({ theme }) => theme.body} !important;
   }
+
 
   Strong {
     color: ${({ theme }) => theme.text} !important;
@@ -136,8 +135,24 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .darkLight {
+    background: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
+  }
+
+  .darkLight-text{
+    color: ${({ theme }) => theme.text} !important;
+  }
+
+  .darkLight-body {
+    background: ${({ theme }) => theme.body} !important;
+  }
+
+  .lightDark-text{
+    color: ${({ theme }) => theme.text} !important;
+  }
+
+  .lightDark-body {
     background: ${({ theme }) => theme.text} !important;
-    color: ${({ theme }) => theme.body} !important;
   }
 
   [onClick] {
@@ -147,6 +162,10 @@ const GlobalStyles = createGlobalStyle`
 .autocomplete{
   color: ${({ theme }) => theme.body} !important;
 }
+
+
+
+
 
 `;
 
@@ -253,3 +272,26 @@ export default function Theme() {
     );
 };
 
+/*
+SideNav {
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text}!important;
+  }
+
+  NavItem {
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text}!important;
+  }
+
+  NavIcon {
+    color: ${({ theme }) => theme.text}!important;
+  }
+
+  NavText {
+    color: ${({ theme }) => theme.text}!important;
+  }
+
+  Toggle {
+    color: ${({ theme }) => theme.text}!important;
+  }
+*/
