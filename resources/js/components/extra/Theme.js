@@ -52,22 +52,25 @@ const GlobalStyles = createGlobalStyle`
 
   span{
     color: ${({ theme }) => theme.text} !important;
-    background-color: ${({ theme }) => theme.text} !important;
-  }
-  pagination m-0{
-    color: ${({ theme }) => theme.body} !important;
-    background-color: ${({ theme }) => theme.body} !important;
   }
 
   p {
     color: ${({ theme }) => theme.text} !important;
   }
 
-   a {
-    color: ${({ theme }) => theme.body} !important;
+  div.mdb-datatable div.mdb-dataTables_paginate ul.pagination{
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
   }
 
-
+  .disabled {
+    color: blue !important; 
+    background-color: blue !important;
+  }
+  .page-item {
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important; 
+  }
   Strong {
     color: ${({ theme }) => theme.text} !important;
   }
