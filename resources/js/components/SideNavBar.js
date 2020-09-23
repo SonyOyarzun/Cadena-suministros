@@ -43,7 +43,7 @@ class SideNavBar extends Component {
               <Link to='/home'><MDBIcon className='darkLight' icon="home" style={{ fontSize: '1.75em' }} /></Link>
               </NavIcon>
               <NavText>
-              <Link className='darkLight' to='/home'>Home</Link>
+              <Link className='darkLight-text' to='/home'>Home</Link>
             </NavText>
             </NavItem>
 
@@ -56,13 +56,13 @@ class SideNavBar extends Component {
             </NavText>
               <NavItem eventKey="administracion/usuarios">
                 <NavText>
-                  <Link  to='/User'>Usuarios</Link>
+                  <Link className='darkLight-text' to='/User'>Usuarios</Link>
                 </NavText>
               </NavItem>
 
               <NavItem eventKey="administracion/configuracion">
                 <NavText>
-                  <Link to='/ApiConfig'>Configuración</Link>
+                  <Link className='darkLight-text' to='/ApiConfig'>Configuración</Link>
                 </NavText>
               </NavItem>
             </NavItem>
@@ -76,31 +76,31 @@ class SideNavBar extends Component {
             </NavText>
               <NavItem eventKey="distribucion/usuarios">
                 <NavText>
-                  <Link to='/MyProduct'>Mis Productos</Link>
+                  <Link className='darkLight-text' to='/MyProduct'>Mis Productos</Link>
                 </NavText>
               </NavItem>
 
               <NavItem eventKey="distribucion/reenviar">
                 <NavText>
-                  <Link to='/MyReception'>Reenviar Productos</Link>
+                  <Link className='darkLight-text' to='/MyReception'>Reenviar Productos</Link>
                 </NavText>
               </NavItem>
 
               <NavItem eventKey="distribucion/pedidos">
                 <NavText>
-                  <Link to='/Order'>Pedidos</Link>
+                  <Link className='darkLight-text' to='/Order'>Pedidos</Link>
                 </NavText>
               </NavItem>
 
               <NavItem eventKey="distribucion/recibir">
                 <NavText>
-                  <Link to='/Receive'>Recibir Producto</Link>
+                  <Link className='darkLight-text' to='/Receive'>Recibir Producto</Link>
                 </NavText>
               </NavItem>
 
               <NavItem eventKey="distribucion/notificacion">
                 <NavText>
-                  <Link to='/Notification'>Notificaciones</Link>
+                  <Link className='darkLight-text' to='/Notification'>Notificaciones</Link>
                 </NavText>
               </NavItem>
 
@@ -117,22 +117,27 @@ class SideNavBar extends Component {
 
               <NavItem eventKey="buscar/transaccion">
                 <NavText>
-                <Link to='/Search'>Buscar TX</Link>
+                <Link className='darkLight-text' to='/Search'>Buscar TX</Link>
                 </NavText>
               </NavItem>
 
               <NavItem eventKey="administracion/configuracion">
                 <NavText>
-                 <Link to='/Trace'>Traza</Link>
+                 <Link className='darkLight-text' to='/Trace'>Traza</Link>
                 </NavText>
               </NavItem>
             </NavItem>
 
-            <NavItem eventKey="theme" className="text-center">
-              <NavIcon>
+
+            <NavItem eventKey="theme">
+              <NavText>
               <Theme/>
-              </NavIcon>
+            </NavText>
             </NavItem>
+
+
+  
+
 
           </SideNav.Nav>
         </SideNav>

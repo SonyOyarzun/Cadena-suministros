@@ -12,6 +12,15 @@ const GlobalStyles = createGlobalStyle`
     font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   } 
   
+  .sidenav---sidenav-subnav---1EN61 {
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
+  }
+  .sidenav---sidenav-subnav---1EN61 :hover{
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
+  }
+
   .navbar,
   .navbar-default {
     background-color: ${({ theme }) => theme.body} !important;
