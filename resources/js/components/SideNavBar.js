@@ -34,7 +34,7 @@ class SideNavBar extends Component {
             // Add your code here
           }}
         >
-          <SideNav.Toggle  className='darkLight-body'/>
+          <SideNav.Toggle  className='darkLight'/>
           <SideNav.Nav>
 
             <NavItem eventKey="home">
@@ -51,7 +51,7 @@ class SideNavBar extends Component {
                 <MDBIcon className='darkLight-text' icon="tools" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
-                <label className='darkLight-text'>Administración</label>
+                <p className='darkLight-text'>Administración</p>
             </NavText>
               <NavItem eventKey="administracion/usuarios">
                 <NavText>
@@ -71,7 +71,7 @@ class SideNavBar extends Component {
                 <MDBIcon className='darkLight-text' icon="truck-moving" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
-                 <label className='darkLight-text'>Distribución</label>
+                 <p className='darkLight-text'>Distribución</p>
             </NavText>
               <NavItem eventKey="distribucion/usuarios">
                 <NavText>
@@ -111,7 +111,7 @@ class SideNavBar extends Component {
                 <MDBIcon className='darkLight-text' icon="search" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
-                 <label className='darkLight-text'>Buscar</label>
+                 <p className='darkLight-text'>Buscar</p>
             </NavText>
 
               <NavItem eventKey="buscar/transaccion">

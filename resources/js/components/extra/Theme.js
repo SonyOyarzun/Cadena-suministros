@@ -16,10 +16,14 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${({ theme }) => theme.body} !important;
     color: ${({ theme }) => theme.text} !important;
   }
-  .sidenav---sidenav-subnav---1EN61 :hover{
-    background-color: ${({ theme }) => theme.body} !important;
-    color: ${({ theme }) => theme.text} !important;
+
+  /*Toggle*/
+  .sidenav---icon-bar---u1f02{
+    background-color: ${({ theme }) => theme.text} !important;
+    color: ${({ theme }) => theme.body} !important;  
   }
+
+
 
   .navbar,
   .navbar-default {
@@ -67,14 +71,11 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important;
   }
 
-  div.mdb-datatable div.mdb-dataTables_paginate ul.pagination{
-    background-color: ${({ theme }) => theme.body} !important;
-    color: ${({ theme }) => theme.text} !important;
-  }
 
+  /*Paginacion de tablas*/
   .page-link {
-    background-color: ${({ theme }) => theme.body} !important;
-    color: ${({ theme }) => theme.text} !important; 
+    background-color: ${({ theme }) => theme.text} !important;
+    color: ${({ theme }) => theme.body} !important; 
   }
 
   Strong {
@@ -86,10 +87,7 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important;
   }
 
-  .MuiInputBase-input MuiOutlinedInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense{
-    background-color: ${({ theme }) => theme.body} !important;
-    color: ${({ theme }) => theme.text} !important;
-  }
+
 
   .modal-content {
     background-color: ${({ theme }) => theme.body} !important;

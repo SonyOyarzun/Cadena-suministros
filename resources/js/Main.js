@@ -31,8 +31,8 @@ import Load from './components/extra/Load'
     padding: {
         paddingTop: "10vh",
         paddingBottom: "3vh",
-        paddingRight: "7vw",
-        paddingLeft: "7vw"
+        paddingRight: "10vw",
+        paddingLeft: "10vw"
     }
 }
 
