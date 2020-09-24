@@ -63,6 +63,7 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important;
   }
 
+  /*flechas paginacion*/
   span{
     color: ${({ theme }) => theme.body} !important;
   }

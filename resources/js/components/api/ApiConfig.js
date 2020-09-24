@@ -80,57 +80,57 @@ class ApiConfig extends Component {
               </div>
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon">
+                  <label className="input-group-text" id="basic-addon">
                     Ruta Api
-                  </span>
+                  </label>
                 </div>
                 <input id='path' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.path} />
               </div>
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon">
+                  <label className="input-group-text" id="basic-addon">
                     Ruta Transacciones
-                  </span>
+                  </label>
                 </div>
                 <input id='transaction' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.transaction} />
               </div>
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon">
+                  <label className="input-group-text" id="basic-addon">
                     Ruta Assets
-                  </span>
+                  </label>
                 </div>
                 <input id='asset' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.asset} />
               </div>
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon">
+                  <label className="input-group-text" id="basic-addon">
                     Puerto de Api
-                  </span>
+                  </label>
                 </div>
                 <input id='api_port' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.api_port} />
               </div>
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon">
+                  <label className="input-group-text" id="basic-addon">
                     Puerto de DB
-                  </span>
+                  </label>
                 </div>
                 <input id='db_port' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.db_port} />
               </div>
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon">
+                  <label className="input-group-text" id="basic-addon">
                     Ruta de Logotipo
-                  </span>
+                  </label>
                 </div>
                 <input id='logotype' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.logotype} />
               </div>
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon">
+                  <label className="input-group-text" id="basic-addon">
                     Ruta de Fondo
-                  </span>
+                  </label>
                 </div>
                 <input id='background' type="text" className="form-control" placeholder="background" aria-label="Fondo" aria-describedby="basic-addon" defaultValue={this.state.config.background} />
               </div>
