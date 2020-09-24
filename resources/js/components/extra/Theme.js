@@ -63,16 +63,12 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important;
   }
 
-  .disabled {
-    color: blue !important; 
-    background-color: blue !important;
-  }
-  .page-item {
+  .page-link {
     background-color: ${({ theme }) => theme.body} !important;
     color: ${({ theme }) => theme.text} !important; 
   }
 
-  .sidenav---icon-bar---u1f02{
+  .form-control form-control-sm ml-0 my-1{
     background-color: ${({ theme }) => theme.text} !important;
     color: ${({ theme }) => theme.body} !important; 
   }
