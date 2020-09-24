@@ -49,9 +49,18 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${({ theme }) => theme.body} !important;
     color: ${({ theme }) => theme.text} !important;
   }
+  label {
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
+  }
+
+  .PrivateNotchedOutline-legendLabelled-3 {
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
+  }
 
   span{
-    color: ${({ theme }) => theme.text} !important;
+    color: ${({ theme }) => theme.body} !important;
   }
 
   p {
@@ -68,11 +77,6 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important; 
   }
 
-  .form-control form-control-sm ml-0 my-1{
-    background-color: ${({ theme }) => theme.text} !important;
-    color: ${({ theme }) => theme.body} !important; 
-  }
-
   Strong {
     color: ${({ theme }) => theme.text} !important;
   }
@@ -82,6 +86,10 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text} !important;
   }
 
+  .MuiInputBase-input MuiOutlinedInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense{
+    background-color: ${({ theme }) => theme.body} !important;
+    color: ${({ theme }) => theme.text} !important;
+  }
 
   .modal-content {
     background-color: ${({ theme }) => theme.body} !important;

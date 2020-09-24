@@ -30,9 +30,9 @@ import Load from './components/extra/Load'
   const styles = {
     padding: {
         paddingTop: "10vh",
-        paddingBottom: "10vh",
-        paddingRight: "5vw",
-        paddingLeft: "20vw"
+        paddingBottom: "3vh",
+        paddingRight: "7vw",
+        paddingLeft: "7vw"
     }
 }
 
