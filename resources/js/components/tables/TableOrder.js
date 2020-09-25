@@ -10,6 +10,9 @@ import Load from '../extra/Load'
 
 import Pdf from '../extra/Pdf'
 
+//formato fecha
+import { format } from "date-fns";
+
 class TableOrder extends Component {
 
   constructor(props) {
@@ -50,7 +53,6 @@ class TableOrder extends Component {
 
  
   render() {
-
 
     let columns = [
       {
@@ -95,7 +97,7 @@ class TableOrder extends Component {
           from: data.fromName,
           to: data.toName,
           state: data.state,
-          updated_at: data.updated_at,
+          updated_at: format(new Date(data.updated_at), "dd/MM/yyyy"),
           action: <Pdf transaction={data.transaction}/>,
         }
 
