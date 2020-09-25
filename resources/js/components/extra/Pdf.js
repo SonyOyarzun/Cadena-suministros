@@ -36,6 +36,7 @@ export default function Pdf(props) {
     console.log('arrayStep :', arrayStep)
   }
 
+  /*
   useEffect(() => {
 
     const params = {
@@ -68,7 +69,44 @@ export default function Pdf(props) {
 
   }, []);
 
+  */
+
+ const getData = () => {
+
+  const params = {
+    "asset": props.transaction,
+  }
+
+  console.log('id :', props.transaction)
+
+  axios.get('/assets', {
+    params
+  }).then(response => {
+    setStep(response.data)
+    console.log('step :', step)
+
+  }).catch(error => {
+    console.log("Error " + error)
+  })
+
+  axios.get('/transaction', {
+    params
+  }).then(response => {
+    console.log('response pdf :', response.data.asset.data.transaction)
+    if (response.data.asset.data.transaction != undefined) {
+      setProducts(response.data.asset.data.transaction)
+      console.log('products :', products)
+    }
+  }).catch(error => {
+    console.log("Error " + error)
+  })
+
+ }
+
+
   const generatePDF = getdata => {
+
+    getData();
 
     let columns = []
     let preRows = []
