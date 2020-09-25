@@ -27,26 +27,26 @@ import Routes from './components/Routes'
 
 import Load from './components/extra/Load'
 
-  const styles = {
-    padding: {
-        paddingTop: "10vh",
-        paddingBottom: "3vh",
-        paddingRight: "10vw",
-        paddingLeft: "10vw"
-    }
+const styles = {
+  padding: {
+    paddingTop: "10vh",
+    paddingBottom: "3vh",
+    paddingRight: "10vw",
+    paddingLeft: "10vw"
+  }
 }
 
 
 class App extends Component {
 
-   
+
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      user : []
+      user: []
     }
-    }
+  }
 
 
 
@@ -60,36 +60,67 @@ class App extends Component {
       this.setState({ loading: false })
     })
   }
+
+  render() {
+
+    const { loading } = this.state;
+
+    if (loading) { // if your component doesn't have to wait for an async action, remove this block 
+      return <Load />; // render null when app is not ready
+    } else {
+
+      return (
+        <BrowserRouter>
+          <div>
+            <Head />
+
+            {
+              (() => {
+                console.log('value :', this.props.value)
+                switch (this.state.user.role) {
+                  case 'A':
+                    console.log(1)
+                    return (
+                      <>
+                        <SideNavBar value={this.state.user.role} />
+                      </>
+                    )
+                    break;
+
+                    case 'U':
+                    console.log(2)
+                    return (
+                      <>
+                        <SideNavBar value={this.state.user.role} />
+                      </>
+                    )
+                    break;
+
+                  default:
+                    console.log('default')
+                    return (
+                      <>
+                        <NavBar value={this.state.user.role} />
+                      </>
+                    )
+                    break;
+                  }
+                }).call(this)
+              }
   
-    render() {
+                    <MDBContainer fluid style={styles.padding}>
 
-      const { loading } = this.state;
-    
-      if(loading) { // if your component doesn't have to wait for an async action, remove this block 
-        return <Load/>; // render null when app is not ready
-      }else{
+                      <Routes />
 
-        return (
-            <BrowserRouter>
-            <div>
-              <Head/>
-             
-              
-              <SideNavBar value={this.state.user.role}/>
+                    </MDBContainer>
 
-              <MDBContainer fluid style={styles.padding}>
-  
-              <Routes/>
-
-              </MDBContainer>
-              
-             <Foot/>
-            </div>
-          </BrowserRouter>
-        )
+                      <Foot />
+                      </div>
+        </BrowserRouter>
+      )
     }
   }
 }
 
 //export default App
-render(<App/>, document.getElementById('root'));
+render(<App />, document.getElementById('root'));

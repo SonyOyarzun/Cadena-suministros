@@ -32,7 +32,7 @@ class NavBar extends Component {
       <div>
 
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand as={Link} to='#home'>Cadena de Suministros</Navbar.Brand>
+          <Navbar.Brand className='darkLight' as={Link} to='#home'>Cadena de Suministros</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
@@ -81,8 +81,8 @@ class NavBar extends Component {
                       console.log('default')
                       return (
                         <>
-                          <Nav.Link onClick={() => this.handleLink("Trace")}><MDBIcon icon="barcode" /> Traza</Nav.Link>
-                          <Nav.Link onClick={() => this.handleLink("Search")}><MDBIcon icon="search" /> Buscar TX</Nav.Link>
+                          <Nav.Link><Link className='darkLight-text' to='/Trace'><MDBIcon icon="barcode" />Traza</Link></Nav.Link>
+                          <Nav.Link><Link className='darkLight-text' to='/Search'><MDBIcon icon="search" />Buscar TX</Link></Nav.Link>
                         </>
                       )
                       break;
@@ -91,7 +91,8 @@ class NavBar extends Component {
               }
 
             </Nav>
-            <Theme />
+            <Nav.Link><Link className='darkLight-text' to='/'><MDBIcon icon="" />Quienes Somos?</Link></Nav.Link>
+            <Nav.Link><Link className='darkLight-text' to='/'><MDBIcon icon="" />Como Funciona?</Link></Nav.Link>
             <Nav.Link href='logout'><MDBIcon icon="door-open" /> Salir</Nav.Link>
           </Navbar.Collapse>
         </Navbar>
