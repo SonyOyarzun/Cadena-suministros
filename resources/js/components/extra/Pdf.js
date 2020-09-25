@@ -17,13 +17,10 @@ import { string } from 'prop-types';
 
 export default function Pdf(props) {
 
-  const [step, setStep] = useState([]);
-
-  const [products, setProducts] = useState([]);
 
   let arrayStep = []
 
-  function getSteps() {
+  function getSteps(step) {
 
     arrayStep = []
 
@@ -36,8 +33,10 @@ export default function Pdf(props) {
     console.log('arrayStep :', arrayStep)
   }
 
-  
-  useEffect(() => {
+
+  //useEffect(() => {
+
+  const getData = () => {
 
     const params = {
       "asset": props.transaction,
@@ -45,77 +44,51 @@ export default function Pdf(props) {
 
     console.log('id :', props.transaction)
 
-        axios.all([
-          axios.get('/assets', { params }),
-          axios.get('/transaction', { params }),
-        ])
-          .then(responseArr => {
-  
-            
-            if (responseArr[0].data.length>0) {
-  
-              console.log('eval: ', responseArr[0].data[0].hasOwnProperty('metadata'));
-              console.log('eval 2: ', responseArr[0].data);
-  
-              if (responseArr[0].data[0].hasOwnProperty('metadata')) {
-  
-              if (responseArr[0].data[0].metadata.hasOwnProperty('info')) {
-                setStep(responseArr[0].data)
-              } else {
-                setStep([])
-              }
-  
-              if (responseArr[1].data.asset.data.hasOwnProperty('transaction')) {
-                setProducts(responseArr[1].data.asset.data.transaction)
-              } else {
-                setProducts([])
-              }
-    
-            }else{
-              console.log('No se encuentra ID')
+    axios.all([
+      axios.get('/assets', { params }),
+      axios.get('/transaction', { params }),
+    ])
+      .then(responseArr => {
+
+
+        if (responseArr[0].data.length > 0) {
+
+          console.log('eval: ', responseArr[0].data[0].hasOwnProperty('metadata'));
+          console.log('eval 2: ', responseArr[0].data);
+
+          if (responseArr[0].data[0].hasOwnProperty('metadata')) {
+
+            if (responseArr[0].data[0].metadata.hasOwnProperty('info')) {
+              //  setStep(responseArr[0].data)
+              getSteps(responseArr[0].data)
+            } else {
+              setStep([])
             }
-          }else{
+
+            if (responseArr[1].data.asset.data.hasOwnProperty('transaction')) {
+              //     setProducts(responseArr[1].data.asset.data.transaction)
+              generatePDF(responseArr[1].data.asset.data.transaction)
+            } else {
+              setProducts([])
+            }
+
+          } else {
             console.log('No se encuentra ID')
           }
-          });
-  
+        } else {
+          console.log('No se encuentra ID')
+        }
+      });
 
-  }, []);
-  
-/*
-  useEffect(() => {
-    async function List() {
-      try {
-        setLoading("true");
-        const response = await axios.all([
-          axios.get('/assets', { params }),
-          axios.get('/transaction', { params }),
-        ])
+  }
+  //}, []);
 
-        const json = await response.json();
-        // console.log(json);
-        setResult(
-          json.data.asset.data.transaction.map(data => {
-            console.log(data.asset.data.transaction);
-            return data.asset.data.transaction;
-          })
-        );
-      } catch (error) {
-        setLoading("null");
-      }
-    }
 
-    if (searchBook !== "") {
-      fetchBookList();
-    }
-  }, [searchBook]);
-
-  return [result, loading];
-}
-*/
 
 
   const generatePDF = getdata => {
+
+
 
     let columns = []
     let preRows = []
@@ -157,7 +130,7 @@ export default function Pdf(props) {
     logo.src = '/img/logo.png';
 
     // x y width height
-    doc.addImage(logo, 'JPEG', 14, imgLogo , 35, 20);
+    doc.addImage(logo, 'JPEG', 14, imgLogo, 35, 20);
 
     //titulo
     doc.text("Registro de Trazabilidad de un Producto", 55, textTitulo);
@@ -175,7 +148,7 @@ export default function Pdf(props) {
     //crear qr
     let qr = qrcode(9, 'M');
     var URLdomain = window.location.host;
-    qr.addData(URLdomain+'/Trace/'+props.transaction);
+    qr.addData(URLdomain + '/Trace/' + props.transaction);
     //qr.addData('false');
     qr.make();
 
@@ -183,7 +156,7 @@ export default function Pdf(props) {
     //cerar etiqueta y extraer el src
     let dataUrl = qr.createImg(4).src;
 
-    console.log('dataUrl :',dataUrl)
+    console.log('dataUrl :', dataUrl)
 
     doc.addImage(dataUrl, 'JPEG', 12, QR, 15, 15);
 
@@ -194,17 +167,21 @@ export default function Pdf(props) {
     const tableRows = [];
     // for each ticket pass all its data into an array
 
-    getSteps()
+    //getSteps()
 
     console.log('v ', arrayStep)
+
+    var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    var time
 
     arrayStep.forEach(arrayStep => {
       const traceData = [
         arrayStep.from,
         arrayStep.to,
         arrayStep.commentary,
+        time = new Date(arrayStep.date).toLocaleDateString("es-ES", options)
         // called date-fns to format the date on the ticket
-        format(new Date(arrayStep.date), "dd-MM-yyyy")
+      //  format(new Date(arrayStep.date), "dd-MM-yyyy")
       ];
       // push each tickcet's info into a row
       tableRows.push(traceData);
@@ -221,7 +198,7 @@ export default function Pdf(props) {
   };
 
   return (
-    <MDBBtn tag="a" size="sm" gradient="blue" onClick={() => generatePDF(products)}>
+    <MDBBtn tag="a" size="sm" gradient="blue" onClick={() => getData()}>
       <MDBIcon far icon="file-pdf" />
     </MDBBtn>
   )
