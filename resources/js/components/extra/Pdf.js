@@ -11,7 +11,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 //formato fecha
-import { format } from "date-fns";
+//import { format } from "date-fns";
 import { string } from 'prop-types';
 
 
