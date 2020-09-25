@@ -36,7 +36,7 @@ export default function Pdf(props) {
     console.log('arrayStep :', arrayStep)
   }
 
-  /*
+  
   useEffect(() => {
 
     const params = {
@@ -45,68 +45,77 @@ export default function Pdf(props) {
 
     console.log('id :', props.transaction)
 
-    axios.get('/assets', {
-      params
-    }).then(response => {
-      setStep(response.data)
-   //   console.log('step :', step)
-
-    }).catch(error => {
-      alert("Error " + error)
-    })
-
-    axios.get('/transaction', {
-      params
-    }).then(response => {
-      console.log('response pdf :', response.data.asset.data.transaction)
-      if (response.data.asset.data.transaction != undefined) {
-        setProducts(response.data.asset.data.transaction)
-      //  console.log('products :', products)
-      }
-    }).catch(error => {
-      alert("Error " + error)
-    })
+        axios.all([
+          axios.get('/assets', { params }),
+          axios.get('/transaction', { params }),
+        ])
+          .then(responseArr => {
+  
+            
+            if (responseArr[0].data.length>0) {
+  
+              console.log('eval: ', responseArr[0].data[0].hasOwnProperty('metadata'));
+              console.log('eval 2: ', responseArr[0].data);
+  
+              if (responseArr[0].data[0].hasOwnProperty('metadata')) {
+  
+              if (responseArr[0].data[0].metadata.hasOwnProperty('info')) {
+                setStep(responseArr[0].data)
+              } else {
+                setStep([])
+              }
+  
+              if (responseArr[1].data.asset.data.hasOwnProperty('transaction')) {
+                setProducts(responseArr[1].data.asset.data.transaction)
+              } else {
+                setProducts([])
+              }
+    
+            }else{
+              console.log('No se encuentra ID')
+            }
+          }else{
+            console.log('No se encuentra ID')
+          }
+          });
+  
 
   }, []);
+  
+/*
+  useEffect(() => {
+    async function List() {
+      try {
+        setLoading("true");
+        const response = await axios.all([
+          axios.get('/assets', { params }),
+          axios.get('/transaction', { params }),
+        ])
 
-  */
-
- const getData = () => {
-
-  const params = {
-    "asset": props.transaction,
-  }
-
-  console.log('id :', props.transaction)
-
-  axios.get('/assets', {
-    params
-  }).then(response => {
-    setStep(response.data)
-    console.log('step :', step)
-
-  }).catch(error => {
-    console.log("Error " + error)
-  })
-
-  axios.get('/transaction', {
-    params
-  }).then(response => {
-    console.log('response pdf :', response.data.asset.data.transaction)
-    if (response.data.asset.data.transaction != undefined) {
-      setProducts(response.data.asset.data.transaction)
-      console.log('products :', products)
+        const json = await response.json();
+        // console.log(json);
+        setResult(
+          json.data.asset.data.transaction.map(data => {
+            console.log(data.asset.data.transaction);
+            return data.asset.data.transaction;
+          })
+        );
+      } catch (error) {
+        setLoading("null");
+      }
     }
-  }).catch(error => {
-    console.log("Error " + error)
-  })
 
- }
+    if (searchBook !== "") {
+      fetchBookList();
+    }
+  }, [searchBook]);
+
+  return [result, loading];
+}
+*/
 
 
   const generatePDF = getdata => {
-
-    getData();
 
     let columns = []
     let preRows = []
