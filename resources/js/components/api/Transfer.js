@@ -93,7 +93,27 @@ function Transfer(props) {
 
   const receiveTransaction = (userSend, userReceive, config, transaction) => {
 
+    console.log('transaction asset :', transaction)
     //llaves de quien envia
+
+
+    let asset = null
+
+    switch (transaction.operation) {
+      case 'CREATE':
+        asset = transaction.id
+        console.log('CREATE :', asset)
+        break;
+      case 'TRANSFER':
+        asset = transaction.asset.id
+        console.log('TRANSFER :', asset)
+        break;
+
+      default:
+        break;
+    }
+
+
     const sendPublicKey = userSend.publicKey
     const sendPrivateKey = userSend.privateKey
 
@@ -148,8 +168,8 @@ function Transfer(props) {
       })
       .then(tx => {
         console.log('Transfer Transaction created :', config[0].path + config[0].transaction + tx.id)
-        save(tx.id, transaction.id, props.sendId)
-        
+        save(tx.id, asset, props.sendId)
+
       })
 
 
