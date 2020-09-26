@@ -56,23 +56,22 @@ class ChainController extends Controller
   public function receive(Request $request)
   {
     $id = Auth::id();
-    /*
-    Chain::query()
-      ->where('transaction', '=', $request->prevTransaction)
-      ->update(['state' => 'Transferido']);
-*/
-
-    $chain = new Chain;
-    $chain->transaction     = $request->transaction;
-    $chain->prevTransaction = $request->prevTransaction;
-    $chain->from        = $request->from;
-    $chain->to          = $id;
-    $chain->state       = 'Recibido';
-    $chain->created_at = now();
-    $chain->updated_at = now();
-//    $chain->save();
 
     try {
+
+      Chain::query()
+        ->where('transaction', '=', $request->prevTransaction)
+        ->update(['state' => 'Transferido']);
+
+      $chain = new Chain;
+      $chain->transaction     = $request->transaction;
+      $chain->prevTransaction = $request->prevTransaction;
+      $chain->from        = $request->from;
+      $chain->to          = $id;
+      $chain->state       = 'Recibido';
+      $chain->created_at = now();
+      $chain->updated_at = now();
+      $chain->save();
 
       $api = Api_config::findOrFail(1);
 
@@ -83,16 +82,15 @@ class ChainController extends Controller
       $objDemo->transaction  = $request->transaction;
       $objDemo->date  = date('d-m-yy');
       $objDemo->state     = $chain->state;
-      $objDemo->toTransfer= $userToTranfer->name;
+      $objDemo->toTransfer = $userToTranfer->name;
       $objDemo->receiver  = $receiver->name;
       $objDemo->logotype  = $api->logotype;
-      $objDemo->background= $api->background;
+      $objDemo->background = $api->background;
 
-      Mail::to("sony.oyarzun@gmail.com")->send(new DemoEmail($objDemo));
-      
+      Mail::to($receiver->mail)->send(new DemoEmail($objDemo));
     } catch (\Throwable $th) {
-     // throw $th;
-     return $th->getMessage();
+      // throw $th;
+      return $th->getMessage();
     }
     return "Transaccion Recibida";
   }

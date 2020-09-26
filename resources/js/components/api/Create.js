@@ -11,6 +11,7 @@ function Create(props) {
   const [prevent, setPrevent] = useState(false);
 
 
+
   useEffect(() => {
 
     axios.get('/user/my')
@@ -20,6 +21,23 @@ function Create(props) {
       }).catch(error => {
         alert("Error " + error)
       })
+
+      axios.all([
+        axios.get('/user/my'),
+        axios.get('/transaction'),
+      ])
+      .then(responseArr => {
+
+        responseArr[0].data
+        responseArr[1].data
+      })
+
+      .catch(error => {
+       
+        error[0]
+        error[1]
+      })
+
 
   }, []);
 

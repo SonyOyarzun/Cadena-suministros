@@ -15,6 +15,9 @@ function Transfer(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [prevent, setPrevent] = useState(false);
+  const [message, setMessage] = useState('Realizar Recepción');
     
 
   const getUserSend = (id) => {
@@ -83,6 +86,8 @@ function Transfer(props) {
 
   const receiveTransaction = e => {
 
+    setPrevent(true)
+    setMessage('Cargando...')
     //llaves de quien envia
     const sendPublicKey = userSend.publicKey
     const sendPrivateKey = userSend.privateKey
@@ -111,7 +116,7 @@ function Transfer(props) {
     const API_PATH = 'https://test.ipdb.io/api/v1/'
     const conn = new driver.Connection(API_PATH)
 
-    /*
+    
 
     console.log(conn.getTransaction(txCreatedID))
     // Get transaction payload by ID
@@ -141,11 +146,15 @@ function Transfer(props) {
       .then(tx => {
          console.log('Transfer Transaction created :','https://test.ipdb.io/api/v1/transactions/'+tx.id)
          save(tx.id,txCreatedID,props.sendId)
+         setTimeout(function() {
+          setPrevent(false);
+          setMessage('Realizar Recepción')
+        }, 5000);
       })
 
-      */
+      
 
-     save(1,'abc',props.sendId)
+  
   }
 
   return (
@@ -171,8 +180,8 @@ function Transfer(props) {
           <Button variant="secondary" onClick={handleClose}>
             Cancelar
       </Button>
-          <Button variant="primary" onClick={receiveTransaction}>
-            Realizar Recepción
+          <Button variant="primary" onClick={receiveTransaction} disabled={prevent}>
+            {message}
       </Button>
         </Modal.Footer>
       </Modal>
