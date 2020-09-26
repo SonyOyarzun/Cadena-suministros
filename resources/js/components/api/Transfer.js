@@ -31,6 +31,10 @@ function Transfer(props) {
         console.log(response);
         props.getData()
         alert(response.data)
+        setTimeout(function () {
+          setPrevent(false);
+          setMessage('Realizar Recepción')
+        }, 5000);
       }, (error) => {
         console.log(error);
       });
@@ -43,7 +47,7 @@ function Transfer(props) {
 
       setPrevent(true)
       setMessage('Cargando...')
-      
+
       const paramsSend = {
         "id": props.sendId,
       }
@@ -145,10 +149,7 @@ function Transfer(props) {
       .then(tx => {
         console.log('Transfer Transaction created :', config[0].path + config[0].transaction + tx.id)
         save(tx.id, transaction.id, props.sendId)
-        setTimeout(function () {
-          setPrevent(false);
-          setMessage('Realizar Recepción')
-        }, 5000);
+        
       })
 
 
