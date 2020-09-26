@@ -40,10 +40,11 @@ class DemoEmail extends Mailable
                     ->text('mails.demo_plain')
                     ->with(
                       [
-                            'message_1' => 'Informamos sobre el estado del envio realizado el cual ha sido :',
-                            'message_2' => 'Por el usuario :',
-                            'message_3' => 'Durante la fecha :',
-                            'message_4' => 'Puede consultar mas detalles en el enlace mas abajo',
+                            'message_1' => 'El estado del envio realizado a se encuentra :',
+                            'message_2' => 'Perteneciente a la ID :',
+                            'message_3' => 'Por el usuario :',
+                            'message_4' => 'Durante la fecha :',
+                            'message_5' => 'Puede consultar mas detalles en el enlace mas abajo',
                       ]);
                       /*
                       ->attach(public_path('/images').'/demo.jpg', [

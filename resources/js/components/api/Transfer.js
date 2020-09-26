@@ -97,9 +97,9 @@ function Transfer(props) {
     console.log(props.receiveId,props.sendId)
 
     axios.all([
-      axios.get('/user/search/', {paramsSend}),
-      axios.get('/user/search/', {paramsReceive}),
-      axios.get('/json-api/config'),
+      axios.get('/user/search', {paramsSend}),
+      axios.get('/user/search', {paramsReceive}),
+      axios.get('/json-api/config')
     ])
     .then(responseArr => {
       receiveTransaction(responseArr[0].data,responseArr[1].data,responseArr[2].data)
