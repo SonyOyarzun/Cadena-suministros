@@ -31,10 +31,12 @@ function Transfer(props) {
         console.log(response);
         props.getData()
         alert(response.data)
+
         setTimeout(function () {
           setPrevent(false);
           setMessage('Realizar Recepción')
         }, 5000);
+        
       }, (error) => {
         console.log(error);
       });
