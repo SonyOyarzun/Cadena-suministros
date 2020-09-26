@@ -60,6 +60,7 @@ class ChainController extends Controller
     Chain::query()
       ->where('transaction', '=', $request->prevTransaction)
       ->update(['state' => 'Transferido']);
+*/
 
     $chain = new Chain;
     $chain->transaction     = $request->transaction;
@@ -69,8 +70,8 @@ class ChainController extends Controller
     $chain->state       = 'Recibido';
     $chain->created_at = now();
     $chain->updated_at = now();
-    $chain->save();
-*/
+//    $chain->save();
+
     try {
 
       $api = Api_config::findOrFail(1);
@@ -81,7 +82,8 @@ class ChainController extends Controller
       $objDemo = new \stdClass();
       $objDemo->transaction  = $request->transaction;
       $objDemo->date  = date('d-m-yy');
-      $objDemo->toTranfer = $userToTranfer->name;
+      $objDemo->state     = $chain->state;
+      $objDemo->toTransfer= $userToTranfer->name;
       $objDemo->receiver  = $receiver->name;
       $objDemo->logotype  = $api->logotype;
       $objDemo->background= $api->background;

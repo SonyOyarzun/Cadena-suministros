@@ -323,15 +323,18 @@
                       <div style="font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;text-align:left;color:#797e82;">
                         <p style="margin: 10px 0; text-align: center;">&nbsp;</p>
                     <p style="margin: 10px 0; text-align: center;">
-
-                    {{ $demo->demo_one }}
-                    Por {{ $demo->demo_two }} durante la fecha {{ $testVarOne }}.
-
-                    Gracias :{{ $testVarTwo }}
-
-                    {{ $demo->sender }}
-                    
+                    {{ $message_1 }} {{ $demo->state }}
                     </p>
+                    <p style="margin: 10px 0; text-align: center;">
+                    {{ $message_2 }} {{ $demo->toTransfer }}
+                    </p>
+                    <p style="margin: 10px 0; text-align: center;">
+                    {{ $message_3 }} {{ $demo->date }}
+                    </p>
+                    <p style="margin: 10px 0; text-align: center;">
+                    {{ $message_4 }}
+                    </p>
+
 
 
 
@@ -343,7 +346,7 @@
                       <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
                         <tr>
                           <td align="center" bgcolor="#42a569" role="presentation" style="border:none;border-radius:100px;cursor:auto;padding:15px 25px 15px 25px;background:#42a569;" valign="middle">
-                            <a href="#" style="background:#42a569;color:#ffffff;font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
+                            <a href={{Request::root().'/Trace/'.$demo->transaction}} style="background:#42a569;color:#ffffff;font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
                               <b style="font-weight:700"><i style="font-style:normal"><b style="color:variables.textcolor">Ver Traza Actual</b></i></b>
                             </a>
                           </td>
