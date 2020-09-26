@@ -71,6 +71,9 @@ class ChainController extends Controller
 */
     try {
 
+      $sender   = User::findOrFail($id);
+      $receiver = User::findOrFail($id);
+
       $objDemo = new \stdClass();
       $objDemo->demo_one = 'Demo One Value';
       $objDemo->demo_two = 'Demo Two Value';
