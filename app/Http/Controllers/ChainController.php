@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Mail\DemoEmail;
 use Illuminate\Support\Facades\Mail;
 
+
+use App\Api_config;
 use App\Chain;
 use App\User;
 
@@ -71,16 +73,21 @@ class ChainController extends Controller
 */
     try {
 
+      $api = Api_config::findOrFail(1);
+
       $sender   = User::findOrFail($id);
       $receiver = User::findOrFail($id);
 
       $objDemo = new \stdClass();
-      $objDemo->demo_one = 'Demo One Value';
-      $objDemo->demo_two = 'Demo Two Value';
-      $objDemo->sender = 'SenderUserName';
-      $objDemo->receiver = 'ReceiverUserName';
+      $objDemo->demo_one  = 'Demo One Value';
+      $objDemo->demo_two  = 'Demo Two Value';
+      $objDemo->sender    = $sender  ->name;
+      $objDemo->receiver  = $receiver->name;
+      $objDemo->logotype  = $api->logotype;
+      $objDemo->background= $api->background;
 
       Mail::to("sony.oyarzun@gmail.com")->send(new DemoEmail($objDemo));
+      
     } catch (\Throwable $th) {
      // throw $th;
      return $th->getMessage();

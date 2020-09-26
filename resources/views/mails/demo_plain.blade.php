@@ -10,6 +10,9 @@ Values passed by With method:
  
 testVarOne: {{ $testVarOne }}
 testVarOne: {{ $testVarOne }}
+
+logotype :  {{$demo->logotype  }}
+background :{{$demo->background}}
  
 Thank You,
 {{ $demo->sender }}
