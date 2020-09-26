@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+
+use App\Mail\DemoEmail;
+use Illuminate\Support\Facades\Mail;
+
 use App\Chain;
 use App\User;
 
@@ -50,7 +54,7 @@ class ChainController extends Controller
   public function receive(Request $request)
   {
     $id = Auth::id();
-
+    /*
     Chain::query()
       ->where('transaction', '=', $request->prevTransaction)
       ->update(['state' => 'Transferido']);
@@ -64,7 +68,20 @@ class ChainController extends Controller
     $chain->created_at = now();
     $chain->updated_at = now();
     $chain->save();
+*/
+    try {
 
+      $objDemo = new \stdClass();
+      $objDemo->demo_one = 'Demo One Value';
+      $objDemo->demo_two = 'Demo Two Value';
+      $objDemo->sender = 'SenderUserName';
+      $objDemo->receiver = 'ReceiverUserName';
+
+      Mail::to("sony.oyarzun@gmail.com")->send(new DemoEmail($objDemo));
+    } catch (\Throwable $th) {
+     // throw $th;
+     return $th->getMessage();
+    }
     return "Transaccion Recibida";
   }
 
@@ -72,12 +89,12 @@ class ChainController extends Controller
   {
     $id = Auth::id();
     try {
-    Chain::query()
-      ->where('transaction', '=', $request->transaction)
-      ->update([
-        'state'  => 'Enviado',
-        'from'   => $id,
-        'to'     => $request->to
+      Chain::query()
+        ->where('transaction', '=', $request->transaction)
+        ->update([
+          'state'  => 'Enviado',
+          'from'   => $id,
+          'to'     => $request->to
         ]);
     } catch (\Throwable $th) {
       return $th->getMessage();
@@ -85,3 +102,7 @@ class ChainController extends Controller
     return "Transaccion Reenviada";
   }
 }
+
+
+
+//php artisan make:mail DemoEmail

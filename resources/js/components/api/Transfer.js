@@ -111,6 +111,7 @@ function Transfer(props) {
     const API_PATH = 'https://test.ipdb.io/api/v1/'
     const conn = new driver.Connection(API_PATH)
 
+    /*
 
     console.log(conn.getTransaction(txCreatedID))
     // Get transaction payload by ID
@@ -142,6 +143,9 @@ function Transfer(props) {
          save(tx.id,txCreatedID,props.sendId)
       })
 
+      */
+
+     save(1,'abc',props.sendId)
   }
 
   return (
