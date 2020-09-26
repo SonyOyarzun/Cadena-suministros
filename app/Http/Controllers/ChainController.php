@@ -75,13 +75,13 @@ class ChainController extends Controller
 
       $api = Api_config::findOrFail(1);
 
-      $sender   = User::findOrFail($id);
+      $userToTranfer   = User::findOrFail($request->from);
       $receiver = User::findOrFail($id);
 
       $objDemo = new \stdClass();
-      $objDemo->demo_one  = 'Demo One Value';
-      $objDemo->demo_two  = 'Demo Two Value';
-      $objDemo->sender    = $sender  ->name;
+      $objDemo->transaction  = $request->transaction;
+      $objDemo->date  = date('d-m-yy');
+      $objDemo->toTranfer = $userToTranfer->name;
       $objDemo->receiver  = $receiver->name;
       $objDemo->logotype  = $api->logotype;
       $objDemo->background= $api->background;

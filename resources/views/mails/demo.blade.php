@@ -209,7 +209,7 @@
                         <tbody>
                           <tr>
                             <td style="width:110px;">
-                              <img alt="" height="auto" src={{$demo->logotype}} style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="110" />
+                              <img alt="" height="auto" src={{asset('img/logo.png')}} style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="110" />
                             </td>
                           </tr>
                         </tbody>
@@ -263,7 +263,7 @@
                         <tbody>
                           <tr>
                             <td style="width:300px;">
-                              <img alt="" height="auto" src="http://9pl9.mjt.lu/tplimg/9pl9/b/yvpn/zn8l7.png" style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="300" />
+                              <img alt="" height="auto" src={{$demo->logotype}} style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="300" />
                             </td>
                           </tr>
                         </tbody>
@@ -324,7 +324,7 @@
                         <p style="margin: 10px 0; text-align: center;">&nbsp;</p>
                     <p style="margin: 10px 0; text-align: center;">
 
-                    Informamos sobre el estado del envio realizado el cual ha sido :{{ $demo->demo_one }}
+                    {{ $demo->demo_one }}
                     Por {{ $demo->demo_two }} durante la fecha {{ $testVarOne }}.
 
                     Gracias :{{ $testVarTwo }}
@@ -401,75 +401,14 @@
         <tr>
       
               <td>
-            <![endif]-->
-                      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
-                        <tr>
-                          <td style="padding:4px;">
-                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#42a569;border-radius:6px;width:30;">
-                              <tr>
-                                <td style="font-size:0;height:30;vertical-align:middle;width:30;">
-                                  <a href="[[SHORT_PERMALINK]]" target="_blank">
-                                    <img height="30" src="http://www.mailjet.com/saas-templates-creator/static/img/facebook_white.png" style="border-radius:6px;" width="30" />
-                                  </a>
-                                </td>
-                              </tr>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-                      <!--[if mso | IE]>
-              </td>
-            
-              <td>
-            <![endif]-->
-                      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
-                        <tr>
-                          <td style="padding:4px;">
-                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#42a569;border-radius:6px;width:30;">
-                              <tr>
-                                <td style="font-size:0;height:30;vertical-align:middle;width:30;">
-                                  <a href="[[SHORT_PERMALINK]]" target="_blank">
-                                    <img height="30" src="http://www.mailjet.com/saas-templates-creator/static/img/twitter_white.png" style="border-radius:6px;" width="30" />
-                                  </a>
-                                </td>
-                              </tr>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-                      <!--[if mso | IE]>
-              </td>
-            
-              <td>
-            <![endif]-->
-                      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
-                        <tr>
-                          <td style="padding:4px;">
-                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#42a569;border-radius:6px;width:30;">
-                              <tr>
-                                <td style="font-size:0;height:30;vertical-align:middle;width:30;">
-                                  <a href="[[SHORT_PERMALINK]]" target="_blank">
-                                    <img height="30" src="http://www.mailjet.com/saas-templates-creator/static/img/linkedin_white.png" style="border-radius:6px;" width="30" />
-                                  </a>
-                                </td>
-                              </tr>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
-                      <!--[if mso | IE]>
-              </td>
-            
-          </tr>
-        </table>
       <![endif]-->
                     </td>
                   </tr>
                   <tr>
                     <td align="center" style="font-size:0px;padding:0px 20px 0px 20px;padding-top:0px;padding-bottom:0px;word-break:break-word;">
                       <div style="font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:11px;line-height:22px;text-align:center;color:#797e82;">
-                        <p style="margin: 10px 0;"><a target="_blank" rel="noopener noreferrer" style="color:#42a569" href="#"><span style="color:#42a569">Page 1</span></a><span style="color:#797e82">&nbsp; &nbsp;|&nbsp; &nbsp;</span><a target="_blank" rel="noopener noreferrer" style="color:#42a569" href="#"><span style="color:#42a569">Page 2</span></a><span style="color:#797e82">&nbsp; &nbsp;|&nbsp; &nbsp;</span><a target="_blank" rel="noopener noreferrer" style="color:#42a569" href="#"><span style="color:#42a569">Page 3</span></a></p>
-                        <p style="margin: 10px 0;">C<a target="_blank" rel="noopener noreferrer" style="color:inherit; text-decoration:none" href="[[UNSUB_LINK_EN]]">lick <span style="color:#42a569"><u>here</u></span> to unsubscribe</a>.<br /><span style="font-size:10px">Created by&nbsp;</span><a target="_blank" rel="noopener noreferrer" style="font-size:10px; color:inherit; text-decoration: none" href="https://www.mailjet.com/?utm_source=saas_email_templates&amp;utm_medium=logo_footer_email&amp;utm_campaign=ticket"><span style="color:#42a569"><u>Mailjet</u></span></a></p>
+                       
+                      
                       </div>
                     </td>
                   </tr>
