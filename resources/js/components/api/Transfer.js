@@ -19,7 +19,7 @@ function Transfer(props) {
   const [prevent, setPrevent] = useState(false);
   const [message, setMessage] = useState('Realizar Recepción');
     
-
+/*
   const getUserSend = (id) => {
 
     const params = {
@@ -37,6 +37,7 @@ function Transfer(props) {
     })
   }
 
+  
   const getUserReceive = (id) => {
 
     const params = {
@@ -53,7 +54,7 @@ function Transfer(props) {
       console.log("Error " + error)
     })
   }
-
+*/
   const save = (id_transaction,prevTransaction, from) => {
     axios({
       method: 'post',
@@ -73,7 +74,7 @@ function Transfer(props) {
       });
   }
 
-  
+  /*
   useEffect(() => {
  
     console.log('sendId :',props.sendId,' receiveId :',props.receiveId)
@@ -81,10 +82,42 @@ function Transfer(props) {
     getUserReceive(props.receiveId)
 
   }, [props.receiveId]); //equivale a onchange para props
+*/
+
+  const process = () => {
+
+    const paramsSend = {
+      "id": props.sendId,
+    }
+
+    const paramsReceive = {
+      "id": props.receiveId,
+    }
+
+    console.log(props.receiveId,props.sendId)
+
+    axios.all([
+      axios.get('/user/search/', {paramsSend}),
+      axios.get('/user/search/', {paramsReceive}),
+      axios.get('/json-api/config'),
+    ])
+    .then(responseArr => {
+      receiveTransaction(responseArr[0].data,responseArr[1].data,responseArr[2].data)
+      console.log('send',responseArr[0].data)
+      console.log('receive',responseArr[1].data)
+      console.log('config',responseArr[2].data)
+    })
+
+    .catch(error => {
+      console.log('send', error[0])
+      console.log('receive', error[1])
+      console.log('config', error[2])
+    })
+  }
 
 
 
-  const receiveTransaction = e => {
+  const receiveTransaction = (userSend,userReceive,config) => {
 
     setPrevent(true)
     setMessage('Cargando...')
@@ -113,7 +146,7 @@ function Transfer(props) {
     //conexion a bigchain
     const BigchainDB = require('bigchaindb-driver')
     const driver = require('bigchaindb-driver')
-    const API_PATH = 'https://test.ipdb.io/api/v1/'
+    const API_PATH = config[0].path
     const conn = new driver.Connection(API_PATH)
 
     
@@ -144,7 +177,7 @@ function Transfer(props) {
         return conn.postTransactionCommit(signedTransfer)
       })
       .then(tx => {
-         console.log('Transfer Transaction created :','https://test.ipdb.io/api/v1/transactions/'+tx.id)
+         console.log('Transfer Transaction created :',config[0].path+config[0].transaction+tx.id)
          save(tx.id,txCreatedID,props.sendId)
          setTimeout(function() {
           setPrevent(false);
@@ -180,7 +213,7 @@ function Transfer(props) {
           <Button variant="secondary" onClick={handleClose}>
             Cancelar
       </Button>
-          <Button variant="primary" onClick={receiveTransaction} disabled={prevent}>
+          <Button variant="primary" onClick={process} disabled={prevent}>
             {message}
       </Button>
         </Modal.Footer>

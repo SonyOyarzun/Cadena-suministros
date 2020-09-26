@@ -7,39 +7,30 @@ function Create(props) {
 
   console.log('props ', props)
 
-  const [user, setUser] = useState([]);
   const [prevent, setPrevent] = useState(false);
 
 
 
-  useEffect(() => {
+  //useEffect(() => {
 
-    axios.get('/user/my')
-      .then(response => {
-        setUser(response.data);
-        console.log(response.data)
-      }).catch(error => {
-        alert("Error " + error)
-      })
-
+    const process = () => {
       axios.all([
         axios.get('/user/my'),
-        axios.get('/transaction'),
+        axios.get('/json-api/config'),
       ])
       .then(responseArr => {
-
-        responseArr[0].data
-        responseArr[1].data
+        createTransaction(responseArr[0].data,responseArr[1].data)
+        console.log('my',responseArr[0].data)
+        console.log('config',responseArr[1].data)
       })
 
       .catch(error => {
-       
-        error[0]
-        error[1]
+        console.log('my', error[0])
+        console.log('config', error[1])
       })
+    }
 
-
-  }, []);
+  //}, []);
 
   const save = (id_transaction, prevTransaction, to) => {
     axios({
@@ -69,7 +60,7 @@ function Create(props) {
         return true;
   };
 
-  const createTransaction = e => {
+  const createTransaction = (user,config) => {
 
     setPrevent(true)
 
@@ -88,9 +79,10 @@ function Create(props) {
         date: new Date().toString()
       }
 
+      console.log('path',config.path)
       const BigchainDB = require('bigchaindb-driver')
 
-      const API_PATH = 'https://test.ipdb.io/api/v1/'
+      const API_PATH = config[0].path
 
 
       const tx = BigchainDB.Transaction.makeCreateTransaction(
@@ -113,7 +105,7 @@ function Create(props) {
 
       conn.postTransactionCommit(txSigned)
         .then(res => {
-          const elem = API_PATH + 'transactions/' + txSigned.id;
+          const elem = API_PATH + config[0].transaction + txSigned.id;
           console.log('Transaction', txSigned.id, 'accepted', 'URL :', elem);
           save(txSigned.id, txSigned.id, userSend.id)
 
@@ -135,7 +127,7 @@ function Create(props) {
 
   return (
     <div>
-      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={createTransaction}  disabled={prevent}>
+      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={process}  disabled={prevent}>
         <MDBIcon icon="paper-plane" />
       </MDBBtn>
     </div>
