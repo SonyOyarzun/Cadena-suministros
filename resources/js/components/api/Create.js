@@ -32,13 +32,13 @@ function Create(props) {
 
   //}, []);
 
-  const save = (id_transaction, prevTransaction, to) => {
+  const save = (id_transaction, asset, to) => {
     axios({
       method: 'post',
       url: 'chain/new',
       data: {
         transaction: id_transaction,
-        prevTransaction: prevTransaction,
+        asset: asset,
         to: to,
       }
     })

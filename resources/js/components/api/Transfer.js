@@ -86,6 +86,8 @@ function Transfer(props) {
 
   const process = () => {
 
+    if(document.getElementById('commentary').value.trim().length > 0){
+
     const paramsSend = {
       "id": props.sendId,
     }
@@ -94,30 +96,42 @@ function Transfer(props) {
       "id": props.receiveId,
     }
 
-    console.log(props.receiveId,props.sendId)
+    const paramsTransaction = {
+      "asset": props.transaction,
+    }
+
+    console.log(paramsReceive,paramsSend)
 
     axios.all([
-      axios.get('/user/search', {paramsSend}),
-      axios.get('/user/search', {paramsReceive}),
-      axios.get('/json-api/config')
+      axios.get('/user/search', {params:paramsSend}),
+      axios.get('/user/search', {params:paramsReceive}),
+      axios.get('/json-api/config'),
+      axios.get('transaction', {params:paramsTransaction}),
     ])
     .then(responseArr => {
-      receiveTransaction(responseArr[0].data,responseArr[1].data,responseArr[2].data)
+      receiveTransaction(responseArr[0].data,responseArr[1].data,responseArr[2].data,responseArr[3].data)
       console.log('send',responseArr[0].data)
       console.log('receive',responseArr[1].data)
       console.log('config',responseArr[2].data)
+      console.log('transaction',responseArr[3].data)
     })
 
     .catch(error => {
       console.log('send', error[0])
       console.log('receive', error[1])
       console.log('config', error[2])
+      console.log('transaction', error[3])
     })
+  }else{
+    alert('Debe ingresar un comentario')
+  }
+  
+
   }
 
 
 
-  const receiveTransaction = (userSend,userReceive,config) => {
+  const receiveTransaction = (userSend,userReceive,config,transaction) => {
 
     setPrevent(true)
     setMessage('Cargando...')
@@ -178,7 +192,7 @@ function Transfer(props) {
       })
       .then(tx => {
          console.log('Transfer Transaction created :',config[0].path+config[0].transaction+tx.id)
-         save(tx.id,txCreatedID,props.sendId)
+         save(tx.id,transaction.asset,props.sendId)
          setTimeout(function() {
           setPrevent(false);
           setMessage('Realizar Recepción')

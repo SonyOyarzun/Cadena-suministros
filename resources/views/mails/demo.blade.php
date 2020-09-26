@@ -326,18 +326,17 @@
                     {{ $message_1 }} {{ $demo->state }}
                     </p>
                     <p style="margin: 10px 0; text-align: center;">
-                    {{ $message_2 }} {{ $demo->toTransfer }}
+                    {{ $message_2 }} {{ $demo->transaction }}
                     </p>
                     <p style="margin: 10px 0; text-align: center;">
-                    {{ $message_3 }} {{ $demo->date }}
+                    {{ $message_3 }} {{ $demo->toTransfer }}
                     </p>
                     <p style="margin: 10px 0; text-align: center;">
-                    {{ $message_4 }}
+                    {{ $message_4 }} {{ $demo->date }}
                     </p>
-
-
-
-
+                    <p style="margin: 10px 0; text-align: center;">
+                    {{ $message_5 }}
+                    </p>
                       </div>
                     </td>
                   </tr>

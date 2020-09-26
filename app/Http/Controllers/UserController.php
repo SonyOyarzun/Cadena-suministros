@@ -32,39 +32,35 @@ class UserController extends Controller
 
     if (Auth::guest()) {
 
-      return json_encode(['role'=>'0']);
-
+      return json_encode(['role' => '0']);
     } else {
 
       try {
 
         $id = Auth::id();
         $user = User::findOrFail($id);
-
       } catch (\Throwable $th) {
 
         throw $th;
-        
       }
 
       return json_encode($user);
     }
-    
   }
 
 
   public function search(Request $request)
   {
 
-    $user = User::findOrFail($request->id);
+    try {
+      $user = User::findOrFail($request->id);
+      
+    } catch (\Throwable $th) {
 
-    if ($user == null) {
-
-      return 'Usuario no encontrado';
-    } else {
-
-      return json_encode($user);
+      return $th->getMessage();
+    
     }
+    return json_encode($user);
   }
 
   public function create(Request $request)

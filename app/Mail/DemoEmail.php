@@ -40,7 +40,7 @@ class DemoEmail extends Mailable
                     ->text('mails.demo_plain')
                     ->with(
                       [
-                            'message_1' => 'El estado del envio realizado a se encuentra :',
+                            'message_1' => 'El estado del envio realizado se encuentra :',
                             'message_2' => 'Perteneciente a la ID :',
                             'message_3' => 'Por el usuario :',
                             'message_4' => 'Durante la fecha :',

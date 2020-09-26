@@ -42,8 +42,8 @@ class ChainController extends Controller
     $id = Auth::id();
 
     $chain = new Chain;
-    $chain->transaction     = $request->transaction;
-    $chain->prevTransaction = $request->prevTransaction;
+    $chain->transaction = $request->transaction;
+    $chain->asset       = $request->asset;
     $chain->from        = $id;
     $chain->to          = $request->to;
     $chain->state       = 'Enviado';
@@ -60,12 +60,12 @@ class ChainController extends Controller
     try {
 
       Chain::query()
-        ->where('transaction', '=', $request->prevTransaction)
+        ->where('transaction', '=', $request->asset)
         ->update(['state' => 'Transferido']);
 
       $chain = new Chain;
-      $chain->transaction     = $request->transaction;
-      $chain->prevTransaction = $request->prevTransaction;
+      $chain->transaction = $request->transaction;
+      $chain->asset       = $request->asset;
       $chain->from        = $request->from;
       $chain->to          = $id;
       $chain->state       = 'Recibido';
@@ -79,15 +79,15 @@ class ChainController extends Controller
       $receiver = User::findOrFail($id);
 
       $objDemo = new \stdClass();
-      $objDemo->transaction  = $request->transaction;
-      $objDemo->date  = date('d-m-yy');
-      $objDemo->state     = $chain->state;
-      $objDemo->toTransfer = $userToTranfer->name;
-      $objDemo->receiver  = $receiver->name;
-      $objDemo->logotype  = $api->logotype;
-      $objDemo->background = $api->background;
+      $objDemo->transaction = $chain->asset;
+      $objDemo->date        = date('d-m-yy');
+      $objDemo->state       = $chain->state;
+      $objDemo->toTransfer  = $userToTranfer->name;
+      $objDemo->receiver    = $receiver->name;
+      $objDemo->logotype    = $api->logotype;
+      $objDemo->background  = $api->background;
 
-      Mail::to($receiver->mail)->send(new DemoEmail($objDemo));
+      Mail::to($receiver->email)->send(new DemoEmail($objDemo));
     } catch (\Throwable $th) {
       // throw $th;
       return $th->getMessage();
