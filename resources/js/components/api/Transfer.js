@@ -55,13 +55,13 @@ function Transfer(props) {
     })
   }
 */
-  const save = (id_transaction,prevTransaction, from) => {
+  const save = (id_transaction,asset, from) => {
     axios({
       method: 'post',
       url: 'chain/receive',
       data: {
         transaction: id_transaction,
-        prevTransaction: prevTransaction,
+        asset: asset,
         from: from,
       }
     })
@@ -133,6 +133,7 @@ function Transfer(props) {
 
   const receiveTransaction = (userSend,userReceive,config,transaction) => {
 
+    console.log('asset?',transaction.id)
     setPrevent(true)
     setMessage('Cargando...')
     //llaves de quien envia
@@ -192,7 +193,7 @@ function Transfer(props) {
       })
       .then(tx => {
          console.log('Transfer Transaction created :',config[0].path+config[0].transaction+tx.id)
-         save(tx.id,transaction.asset,props.sendId)
+         save(tx.id,transaction.id,props.sendId)
          setTimeout(function() {
           setPrevent(false);
           setMessage('Realizar Recepción')
