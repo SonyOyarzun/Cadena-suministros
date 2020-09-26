@@ -9,53 +9,15 @@ import { Button, Modal, Card, Form } from 'react-bootstrap';
 
 function Transfer(props) {
 
-  const [userSend, setUserSend] = useState([]);
-  const [userReceive, setUserReceive] = useState([]);
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [prevent, setPrevent] = useState(false);
   const [message, setMessage] = useState('Realizar Recepción');
-    
-/*
-  const getUserSend = (id) => {
 
-    const params = {
-      "id": id,
-    }
 
-    axios.get('/user/search', {
-      params
-    }).then(response => {
-      setUserSend(response.data)
-      console.log('userSend :',userSend)
-     
-    }).catch(error => {
-      console.log("Error " + error)
-    })
-  }
-
-  
-  const getUserReceive = (id) => {
-
-    const params = {
-      "id": id,
-    }
-
-    axios.get('/user/search', {
-      params
-    }).then(response => {
-      setUserReceive(response.data)
-      console.log('userReceive :',userReceive)
-     
-    }).catch(error => {
-      console.log("Error " + error)
-    })
-  }
-*/
-  const save = (id_transaction,asset, from) => {
+  const save = (id_transaction, asset, from) => {
     axios({
       method: 'post',
       url: 'chain/receive',
@@ -74,68 +36,59 @@ function Transfer(props) {
       });
   }
 
-  /*
-  useEffect(() => {
- 
-    console.log('sendId :',props.sendId,' receiveId :',props.receiveId)
-    getUserSend(props.sendId)
-    getUserReceive(props.receiveId)
-
-  }, [props.receiveId]); //equivale a onchange para props
-*/
 
   const process = () => {
 
-    if(document.getElementById('commentary').value.trim().length > 0){
+    if (document.getElementById('commentary').value.trim().length > 0) {
 
-    const paramsSend = {
-      "id": props.sendId,
+      setPrevent(true)
+      setMessage('Cargando...')
+      
+      const paramsSend = {
+        "id": props.sendId,
+      }
+
+      const paramsReceive = {
+        "id": props.receiveId,
+      }
+
+      const paramsTransaction = {
+        "asset": props.transaction,
+      }
+
+      console.log(paramsReceive, paramsSend)
+
+      axios.all([
+        axios.get('/user/search', { params: paramsSend }),
+        axios.get('/user/search', { params: paramsReceive }),
+        axios.get('/json-api/config'),
+        axios.get('transaction', { params: paramsTransaction }),
+      ])
+        .then(responseArr => {
+          receiveTransaction(responseArr[0].data, responseArr[1].data, responseArr[2].data, responseArr[3].data)
+          console.log('send', responseArr[0].data)
+          console.log('receive', responseArr[1].data)
+          console.log('config', responseArr[2].data)
+          console.log('transaction', responseArr[3].data)
+        })
+
+        .catch(error => {
+          console.log('send', error[0])
+          console.log('receive', error[1])
+          console.log('config', error[2])
+          console.log('transaction', error[3])
+        })
+    } else {
+      alert('Debe ingresar un comentario')
     }
 
-    const paramsReceive = {
-      "id": props.receiveId,
-    }
 
-    const paramsTransaction = {
-      "asset": props.transaction,
-    }
-
-    console.log(paramsReceive,paramsSend)
-
-    axios.all([
-      axios.get('/user/search', {params:paramsSend}),
-      axios.get('/user/search', {params:paramsReceive}),
-      axios.get('/json-api/config'),
-      axios.get('transaction', {params:paramsTransaction}),
-    ])
-    .then(responseArr => {
-      receiveTransaction(responseArr[0].data,responseArr[1].data,responseArr[2].data,responseArr[3].data)
-      console.log('send',responseArr[0].data)
-      console.log('receive',responseArr[1].data)
-      console.log('config',responseArr[2].data)
-      console.log('transaction',responseArr[3].data)
-    })
-
-    .catch(error => {
-      console.log('send', error[0])
-      console.log('receive', error[1])
-      console.log('config', error[2])
-      console.log('transaction', error[3])
-    })
-  }else{
-    alert('Debe ingresar un comentario')
   }
-  
-
-  }
 
 
 
-  const receiveTransaction = (userSend,userReceive,config,transaction) => {
+  const receiveTransaction = (userSend, userReceive, config, transaction) => {
 
-    console.log('asset?',transaction.id)
-    setPrevent(true)
-    setMessage('Cargando...')
     //llaves de quien envia
     const sendPublicKey = userSend.publicKey
     const sendPrivateKey = userSend.privateKey
@@ -146,9 +99,7 @@ function Transfer(props) {
     //id de transaccion
     const txCreatedID = props.transaction
 
-    
-
-    console.log('send :', userSend, 'receive :', userReceive,'transaction :',txCreatedID)
+    // console.log('send :', userSend, 'receive :', userReceive,'transaction :',txCreatedID)
 
     // metadatos de informacion adicional
     const info = {
@@ -164,7 +115,7 @@ function Transfer(props) {
     const API_PATH = config[0].path
     const conn = new driver.Connection(API_PATH)
 
-    
+
 
     console.log(conn.getTransaction(txCreatedID))
     // Get transaction payload by ID
@@ -184,7 +135,7 @@ function Transfer(props) {
               info: info
             }
           )
-    
+
         // Sign with the key of the owner of the painting (Alice)
         const signedTransfer = BigchainDB.Transaction
           .signTransaction(createTranfer, sendPrivateKey)
@@ -192,23 +143,23 @@ function Transfer(props) {
         return conn.postTransactionCommit(signedTransfer)
       })
       .then(tx => {
-         console.log('Transfer Transaction created :',config[0].path+config[0].transaction+tx.id)
-         save(tx.id,transaction.id,props.sendId)
-         setTimeout(function() {
+        console.log('Transfer Transaction created :', config[0].path + config[0].transaction + tx.id)
+        save(tx.id, transaction.id, props.sendId)
+        setTimeout(function () {
           setPrevent(false);
           setMessage('Realizar Recepción')
         }, 5000);
       })
 
-      
 
-  
+
+
   }
 
   return (
-      <div>
-      <MDBBtn className="btn btn-block"  tag="a" size="sm" gradient="blue" onClick={handleShow}>
-      <MDBIcon icon="paper-plane" />
+    <div>
+      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={handleShow}>
+        <MDBIcon icon="paper-plane" />
       </MDBBtn>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -219,7 +170,7 @@ function Transfer(props) {
           <Form>
             <Form.Group controlId="commentary">
               <Form.Label>Comentario</Form.Label>
-              <Form.Control type="text" rows="3" maxLength="30"/>
+              <Form.Control type="text" rows="3" maxLength="30" />
             </Form.Group>
           </Form>
 
@@ -230,7 +181,7 @@ function Transfer(props) {
       </Button>
           <Button variant="primary" onClick={process} disabled={prevent}>
             {message}
-      </Button>
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>

@@ -75,8 +75,8 @@ class ChainController extends Controller
 
       $api = Api_config::findOrFail(1);
 
-      $userToTranfer   = User::findOrFail($request->from);
-      $receiver = User::findOrFail($id);
+      $userToTranfer   = User::findOrFail($id);
+      $receiver = User::findOrFail($request->from);
 
       $objDemo = new \stdClass();
       $objDemo->transaction = $chain->asset;
