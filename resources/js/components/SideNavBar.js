@@ -130,9 +130,17 @@ class SideNavBar extends Component {
 
               <NavItem eventKey="buscar/traza">
                 <NavText>
-                  <Link className='darkLight-text' to='/Trace'>Traza</Link>
+                  <Link className='darkLight-text' to='/Trace'>Traza2</Link>
                 </NavText>
               </NavItem>
+
+
+              <NavItem eventKey="buscar/pdf">
+                <NavText>
+                  <Link className='darkLight-text' to='/Pdf'>pdf</Link>
+                </NavText>
+              </NavItem>
+
             </NavItem>
                       </>
                     )
@@ -199,12 +207,6 @@ class SideNavBar extends Component {
               <NavItem eventKey="buscar/traza">
                 <NavText>
                   <Link className='darkLight-text' to='/Trace'>Traza</Link>
-                </NavText>
-              </NavItem>
-
-              <NavItem eventKey="pdf">
-                <NavText>
-                  <Link className='darkLight-text' to='/Pdf'>pdf</Link>
                 </NavText>
               </NavItem>
 
