@@ -39,12 +39,10 @@ class SideNavBar extends Component {
           <SideNav.Nav>
 
             <NavItem eventKey="home">
-              <NavIcon>
-                <Link to='/home'><MDBIcon className='darkLight' icon="home" style={{ fontSize: '1.75em' }} /></Link>
-              </NavIcon>
-              <NavText>
-                <Link className='darkLight-text' to='/home'>Home</Link>
-              </NavText>
+ 
+                <img src="/storage/app/files/logo.PNG" width='65px' height='50px'></img>
+                
+ 
             </NavItem>
 
 {console.log('role',this.props.value)}

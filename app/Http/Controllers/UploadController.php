@@ -18,30 +18,28 @@ class UploadController extends Controller
 	{
 
 		try {
+
 			$validation = $request->validate([
 				'file'  =>  'required|file|image|mimes:jpeg,png,gif,jpg|max:2048'
 			]);
-		
-			
+
 			$file = $validation['file'];
-		
-			
+
+
 			// Generate a file name with extension
-		//	$fileName = 'profile-'.time().'.'.$file->getClientOriginalExtension();
-			$fileName = 'logo.'.$file->getClientOriginalExtension();
-		
+			//	$fileName = 'profile-'.time().'.'.$file->getClientOriginalExtension();
+			$fileName = 'logo.' . $file->getClientOriginalExtension();
+
 			// Save the file
-			$path = $file->storeAs('files', $fileName);
-		
+			$path = $file->storeAs('public/images', $fileName);
+
+			return 'Archivo cargado';
+
 			//dd($path);
 
-			
-			return $fileName;
 
 		} catch (\Throwable $th) {
 			return $th;
 		}
-
-		return 'Archivo Cargado';
 	}
 }

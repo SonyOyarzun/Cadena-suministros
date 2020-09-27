@@ -17,16 +17,6 @@ import { string } from 'prop-types';
 
 export default function Pdf(props) {
 
-  let config = []
-
-  axios.get('json-api/config')
-    .then(response => {
-      console.log('config', response.data)
-      config = response.data
-    }).catch(error => {
-      console.log("Error " + error)
-    })
-
 
   let arrayStep = []
 
@@ -135,33 +125,7 @@ export default function Pdf(props) {
 
 
     let logo = new Image();
-    logo.setAttribute('crossOrigin', 'anonymous');
-
-    logo.src = config[0].logotype;
-
-
-
-
-
-    var img = new Image,
-      //an image that has the proper CORS response header
-      src = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/pie.png",
-      cvs = document.getElementById('myCvs'),
-      ctx = cvs.getContext('2d');
-
-
-    img.crossOrigin = "Anonymous";
-
-
-    img.onload = function () {
-      ctx.drawImage(img, 100, 100);
-      var imgTag = document.getElementById('myImg');
-      var dataURL = cvs.toDataURL();
-      imgTag.src = dataURL;
-    }
-    img.src = src;
-
-    
+    logo.src = "{{ url('storage/app/files/logo.png) }}";
 
 
 
