@@ -65,6 +65,12 @@ class App extends Component {
 
     const { loading } = this.state;
 
+    if (document.getElementById("app")) {
+      const assetPath = document.getElementById("app").getAttribute("assetPath");
+      ReactDOM.render(<Routes assetPath={assetPath} />, 
+        document.getElementById("app"));
+  }
+
     if (loading) { // if your component doesn't have to wait for an async action, remove this block 
       return <Load />; // render null when app is not ready
     } else {

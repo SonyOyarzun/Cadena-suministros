@@ -27,6 +27,10 @@ class SideNavBar extends Component {
 
   render() {
 
+    const path = {
+     url: './public/img/logo.png'
+    }
+
     return (
 
       <div>
@@ -40,7 +44,7 @@ class SideNavBar extends Component {
 
             <NavItem eventKey="home">
  
-                <img src="/storage/app/files/logo.PNG" width='65px' height='50px'></img>
+                <img src={path.url} width='65px' height='50px'></img>
                 
  
             </NavItem>
