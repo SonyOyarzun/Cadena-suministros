@@ -27,9 +27,9 @@ function UploadFile() {
             }
         ).then(function(data) {
           
-            console.log('success');
+            console.log('success',data);
         }.bind(this)).catch(function(data) {
-            console.log('error');
+            console.log('error',data);
         });
         // … do something with the 'content' …
     };
