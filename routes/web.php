@@ -71,3 +71,6 @@ Route::post('chain/reSend', 'ChainController@reSend');
 Route::get('assets', 'BigController@asset');
 Route::get('transaction', 'BigController@transaction');
 Route::get('search', 'BigController@search');
+
+//subir archivo
+Route::post('upload', 'UploadController@uploadFile');
