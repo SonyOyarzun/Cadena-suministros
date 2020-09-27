@@ -24,6 +24,7 @@ class SideNavBar extends Component {
     this.props.history.push(path);
   }
 
+
   render() {
 
     return (
@@ -37,7 +38,7 @@ class SideNavBar extends Component {
           <SideNav.Toggle className='darkLight' />
           <SideNav.Nav>
 
-          <NavItem eventKey="home">
+            <NavItem eventKey="home">
               <NavIcon>
                 <Link to='/home'><MDBIcon className='darkLight' icon="home" style={{ fontSize: '1.75em' }} /></Link>
               </NavIcon>
@@ -46,35 +47,36 @@ class SideNavBar extends Component {
               </NavText>
             </NavItem>
 
-            {
-              (() => {
-                console.log('value :', this.props.value)
-                switch (this.props.value) {
-                  case 'A':
-                    console.log(1)
-                    return (
-                      <>
-                        <NavItem eventKey="administracion">
-                          <NavIcon>
-                            <MDBIcon className='darkLight-text' icon="tools" style={{ fontSize: '1.75em' }} />
-                          </NavIcon>
-                          <NavText>
-                            <p className='darkLight-text'>Administración</p>
-                          </NavText>
-                          <NavItem eventKey="administracion/usuarios">
-                            <NavText>
-                              <Link className='darkLight-text' to='/User'>Usuarios</Link>
-                            </NavText>
-                          </NavItem>
+{console.log('role',this.props.value)}
 
-                          <NavItem eventKey="administracion/configuracion">
-                            <NavText>
-                              <Link className='darkLight-text' to='/ApiConfig'>Configuración</Link>
-                            </NavText>
-                          </NavItem>
-                        </NavItem>
+{this.props.value=='A' &&
 
-                        <NavItem eventKey="distribucion">
+            <NavItem eventKey="administracion">
+
+              <NavIcon>
+                <MDBIcon className='darkLight-text' icon="tools" style={{ fontSize: '1.75em' }} />
+              </NavIcon>
+              <NavText>
+                <a className='darkLight-text'>Administración</a>
+              </NavText>
+              <NavItem eventKey="administracion/usuarios">
+                <NavText>
+                  <Link className='darkLight-text' to='/User'>Usuarios</Link>
+                </NavText>
+              </NavItem>
+              <NavItem eventKey="administracion/configuracion">
+                <NavText>
+                  <Link className='darkLight-text' to='/ApiConfig'>Configuración</Link>
+                </NavText>
+              </NavItem>
+
+            </NavItem>
+
+  }
+
+{(this.props.value=='A' || this.props.value=='U') &&
+
+            <NavItem eventKey="distribucion">
               <NavIcon>
                 <MDBIcon className='darkLight-text' icon="truck-moving" style={{ fontSize: '1.75em' }} />
               </NavIcon>
@@ -112,83 +114,7 @@ class SideNavBar extends Component {
               </NavItem>
 
             </NavItem>
-
-
-            <NavItem eventKey="buscar">
-              <NavIcon>
-                <MDBIcon className='darkLight-text' icon="search" style={{ fontSize: '1.75em' }} />
-              </NavIcon>
-              <NavText>
-                <p className='darkLight-text'>Buscar</p>
-              </NavText>
-
-              <NavItem eventKey="buscar/transaccion">
-                <NavText>
-                  <Link className='darkLight-text' to='/Search'>Buscar TX</Link>
-                </NavText>
-              </NavItem>
-
-              <NavItem eventKey="buscar/traza">
-                <NavText>
-                  <Link className='darkLight-text' to='/Trace'>Traza2</Link>
-                </NavText>
-              </NavItem>
-
-
-              <NavItem eventKey="buscar/pdf">
-                <NavText>
-                  <Link className='darkLight-text' to='/Pdf'>pdf</Link>
-                </NavText>
-              </NavItem>
-
-            </NavItem>
-                      </>
-                    )
-                    break;
-                  case 'U':
-                    console.log(2)
-                    return (
-                      <>
-
-<NavItem eventKey="distribucion">
-              <NavIcon>
-                <MDBIcon className='darkLight-text' icon="truck-moving" style={{ fontSize: '1.75em' }} />
-              </NavIcon>
-              <NavText>
-                <p className='darkLight-text'>Distribución</p>
-              </NavText>
-              <NavItem eventKey="distribucion/usuarios">
-                <NavText>
-                  <Link className='darkLight-text' to='/MyProduct'>Mis Productos</Link>
-                </NavText>
-              </NavItem>
-
-              <NavItem eventKey="distribucion/reenviar">
-                <NavText>
-                  <Link className='darkLight-text' to='/MyReception'>Reenviar Productos</Link>
-                </NavText>
-              </NavItem>
-
-              <NavItem eventKey="distribucion/pedidos">
-                <NavText>
-                  <Link className='darkLight-text' to='/Order'>Pedidos</Link>
-                </NavText>
-              </NavItem>
-
-              <NavItem eventKey="distribucion/recibir">
-                <NavText>
-                  <Link className='darkLight-text' to='/Receive'>Recibir Producto</Link>
-                </NavText>
-              </NavItem>
-
-              <NavItem eventKey="distribucion/notificacion">
-                <NavText>
-                  <Link className='darkLight-text' to='/Notification'>Notificaciones</Link>
-                </NavText>
-              </NavItem>
-
-            </NavItem>
-
+  }
 
             <NavItem eventKey="buscar">
               <NavIcon>
@@ -210,49 +136,27 @@ class SideNavBar extends Component {
                 </NavText>
               </NavItem>
 
+
             </NavItem>
-
-           
-
-
-                      </>
-                    )
-                    break;
-                  default:
-                    console.log('default')
-                    return (
-                      <>
-
-                      </>
-                    )
-                    break;
-                }
-              }).call(this)
-            }
+                  
 
 
-
-          
-
-
-
-            
 
             <NavItem eventKey="salir">
-              <NavIcon>
-                <a className='darkLight-text' href='/logout'><MDBIcon className='darkLight-text' icon="door-open" style={{ fontSize: '1.75em' }} /></a>
-              </NavIcon>
-              <NavText>
-                <a className='darkLight-text' href='/logout'>Salir</a>
-              </NavText>
-            </NavItem>
+            <NavIcon>
+              <a className='darkLight-text' href='/logout'><MDBIcon className='darkLight-text' icon="door-open" style={{ fontSize: '1.75em' }} /></a>
+            </NavIcon>
+            <NavText>
+              <a className='darkLight-text' href='/logout'>Salir</a>
+            </NavText>
+          </NavItem>
 
 
 
           </SideNav.Nav>
         </SideNav>
 
-      </div>
+      </div >
 
     )
   }
