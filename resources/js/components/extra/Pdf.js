@@ -17,6 +17,16 @@ import { string } from 'prop-types';
 
 export default function Pdf(props) {
 
+  let config = []
+
+  axios.get('json-api/config')
+    .then(response => {
+      console.log('config', response.data)
+      config = response.data
+    }).catch(error => {
+      console.log("Error " + error)
+    })
+
 
   let arrayStep = []
 
@@ -124,13 +134,40 @@ export default function Pdf(props) {
     let QR = ID + 10
 
 
-
     let logo = new Image();
+    logo.setAttribute('crossOrigin', 'anonymous');
 
-    logo.src = '/img/logo.png';
+    logo.src = config[0].logotype;
+
+
+
+
+
+    var img = new Image,
+      //an image that has the proper CORS response header
+      src = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/pie.png",
+      cvs = document.getElementById('myCvs'),
+      ctx = cvs.getContext('2d');
+
+
+    img.crossOrigin = "Anonymous";
+
+
+    img.onload = function () {
+      ctx.drawImage(img, 100, 100);
+      var imgTag = document.getElementById('myImg');
+      var dataURL = cvs.toDataURL();
+      imgTag.src = dataURL;
+    }
+    img.src = src;
+
+    
+
+
 
     // x y width height
-    doc.addImage(logo, 'JPEG', 14, imgLogo, 35, 20);
+    doc.addImage(logo, 'JPEG', 14, imgLogo, 35, 35);
+
 
     //titulo
     doc.text("Registro de Trazabilidad de un Producto", 55, textTitulo);
@@ -181,7 +218,7 @@ export default function Pdf(props) {
         arrayStep.commentary,
         time = new Date(arrayStep.date).toLocaleDateString("es-ES", options)
         // called date-fns to format the date on the ticket
-      //  format(new Date(arrayStep.date), "dd-MM-yyyy")
+        //  format(new Date(arrayStep.date), "dd-MM-yyyy")
       ];
       // push each tickcet's info into a row
       tableRows.push(traceData);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon } from 'mdbreact';
+import Upload from '../extra/UploadFile'
 
 class ApiConfig extends Component {
 
@@ -117,6 +118,12 @@ class ApiConfig extends Component {
                   </label>
                 </div>
                 <input id='db_port' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.db_port} />
+              </div>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <Upload/>
+                </div>
+                <input id='logotype' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.logotype} />
               </div>
               <div className="input-group">
                 <div className="input-group-prepend">

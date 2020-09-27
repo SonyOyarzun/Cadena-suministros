@@ -92,8 +92,8 @@ class TableOrder extends Component {
     let rows = [
       ...this.state.sends.map((data, order) => (
         {
-          transaction: data.transaction,
-          prevTransaction: data.prevTransaction,
+          transaction: data.asset,
+          asset: data.asset,
           from: data.fromName,
           to: data.toName,
           state: data.state,
@@ -106,7 +106,7 @@ class TableOrder extends Component {
 
     //filtrara solo los que tienen estado Enviado
 
-    rows = rows.filter(e => e.transaction == e.prevTransaction)
+    //rows = rows.filter(e => e.transaction == e.prevTransaction)
 
     const data = {
       columns,

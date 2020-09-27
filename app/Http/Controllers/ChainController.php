@@ -29,7 +29,7 @@ class ChainController extends Controller
         'toName' =>
         User::select('name')
           ->whereColumn('chain.to', 'users.id'),
-      ])->where('to', '=', $id)->get();
+      ])->where('to', '=', $id)->orderBy('updated_at','DESC')->get();
     } catch (\Throwable $th) {
 
       return $th;
