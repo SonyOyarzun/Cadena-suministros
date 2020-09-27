@@ -15,8 +15,6 @@ import Send from './Send'
 import Receive from './Receive';
 import Order from './Order';
 
-import Pdf from './extra/pdf/pdfPrint';
-
 
 class Routes extends Component {
 
@@ -44,7 +42,6 @@ class Routes extends Component {
 
                 <Route path="/Search" component={Search} />
 
-                <Route path="/Pdf" component={Pdf} />
 
             </div>
 
