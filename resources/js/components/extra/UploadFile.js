@@ -8,11 +8,13 @@ function UploadFile(props) {
     let url = 'upload'
     let type = ''
 
+
     switch (props.type) {
 
         case 'logotype':
             url = 'uploadLogotype'
             type = 'logotipo'
+
             break;
 
         case 'background':
@@ -31,12 +33,12 @@ function UploadFile(props) {
 
     const handleFileRead = (e) => {
         const content = fileReader.result;
-        setFile(document.getElementById('file').files[0].name)
+        setFile(document.getElementById(url).files[0].name)
         console.log(content)
 
 
         let formData = new FormData();
-        formData.append('file', document.getElementById('file').files[0]);
+        formData.append(url, document.getElementById(url).files[0]);
 
         axios.post(url,
             formData,
@@ -74,8 +76,8 @@ function UploadFile(props) {
                     <input
                         type="file"
                         className="custom-file-input"
-                        id="file"
-                        name='file'
+                        id={url}
+                        name={url}
                         aria-describedby="inputGroupFileAddon01"
                         onChange={e => handleFileChosen(e.target.files[0])}
                     />

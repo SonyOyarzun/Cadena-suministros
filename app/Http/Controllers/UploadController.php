@@ -20,10 +20,12 @@ class UploadController extends Controller
 		try {
 
 			$validation = $request->validate([
-				'file'  =>  'required|file|image|mimes:jpeg,png,gif,jpg|max:2048'
+				'uploadLogotype'  =>  'required|file|image|mimes:jpeg,png,gif,jpg|'
 			]);
 
-			$file = $validation['file'];
+
+			
+			$file = $validation['uploadLogotype'];
 
 
 			// Generate a file name with extension
@@ -52,10 +54,10 @@ class UploadController extends Controller
 		try {
 
 			$validation = $request->validate([
-				'file'  =>  'required|file|image|mimes:jpeg,png,gif,jpg|max:2048'
+				'uploadBackground'  =>  'required|file|image|mimes:jpeg,png,gif,jpg|'
 			]);
 
-			$file = $validation['file'];
+			$file = $validation['uploadBackground'];
 
 
 			// Generate a file name with extension
