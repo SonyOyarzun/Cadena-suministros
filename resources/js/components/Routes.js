@@ -15,7 +15,7 @@ import Send from './Send'
 import Receive from './Receive';
 import Order from './Order';
 
-import Pdf from './extra/Pdf';
+import Pdf from './extra/pdf/pdfPrint';
 
 
 class Routes extends Component {

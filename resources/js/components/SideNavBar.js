@@ -201,7 +201,17 @@ class SideNavBar extends Component {
                   <Link className='darkLight-text' to='/Trace'>Traza</Link>
                 </NavText>
               </NavItem>
+
+              <NavItem eventKey="pdf">
+                <NavText>
+                  <Link className='darkLight-text' to='/Pdf'>pdf</Link>
+                </NavText>
+              </NavItem>
+
             </NavItem>
+
+           
+
 
                       </>
                     )
