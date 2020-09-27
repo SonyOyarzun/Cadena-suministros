@@ -28,8 +28,10 @@ class SideNavBar extends Component {
   render() {
 
     const path = {
-     url: './public/img/logo.png'
+     url: window.location.host+'/storage/app/public/images/logo.PNG'
     }
+    
+   
 
     return (
 

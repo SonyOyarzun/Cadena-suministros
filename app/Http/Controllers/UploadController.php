@@ -31,7 +31,7 @@ class UploadController extends Controller
 			$fileName = 'logo.' . $file->getClientOriginalExtension();
 
 			// Save the file
-			$path = $file->storeAs('/img', $fileName);
+			$path = $file->storeAs('public/images', $fileName);
 
 			return $path;
 			//return 'Archivo cargado';
