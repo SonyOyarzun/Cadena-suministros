@@ -14,19 +14,23 @@ function UploadFile() {
         setFile(document.getElementById('file').files[0].name)
         console.log(content)
 
-        const params = {
-            "file": fileReader,
-        }
 
+        let formData = new FormData();
+        formData.append('file', document.getElementById('file').files[0]);
 
-        axios.post('upload', {
-            params
-        }).then(response => {
-            console.log("resp " + response.data)
-
-        }).catch(error => {
-            console.log("Error " + error)
-        })
+        axios.post('upload',
+            formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        ).then(function(data) {
+          
+            console.log('success');
+        }.bind(this)).catch(function(data) {
+            console.log('error');
+        });
         // … do something with the 'content' …
     };
 
@@ -36,28 +40,55 @@ function UploadFile() {
         fileReader.readAsText(file);
     };
 
+    const submitFiles =()=> {
+        for( let i = 0; i < this.files.length; i++ ){
+            if(this.files[i].id) {
+                continue;
+            }
+            let formData = new FormData();
+            formData.append('file', this.files[i]);
+    
+            axios.post('/' + this.post_url,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            ).then(function(data) {
+                this.files[i].id = data['data']['id'];
+                this.files.splice(i, 1, this.files[i]);
+                console.log('success');
+            }.bind(this)).catch(function(data) {
+                console.log('error');
+            });
+        }
+    }
+
     return (
         <div>
-            <div className="input-group">
-                <div className="input-group-prepend">
-                    <span className="input-group-text" id="inputGroupFileAddon01">
-                        Cargar
+           
+                <div className="input-group">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text" id="inputGroupFileAddon01">
+                            Cargar
     </span>
+                    </div>
+                    <div className="custom-file">
+                        <input
+                            type="file"
+                            className="custom-file-input"
+                            id="file"
+                            name='file'
+                            aria-describedby="inputGroupFileAddon01"
+                            onChange={e => handleFileChosen(e.target.files[0])}
+                        />
+                        <label className="custom-file-label" htmlFor="inputGroupFile01">
+                            {file}
+                        </label>
+                    </div>
                 </div>
-                <div className="custom-file">
-                    <input
-                        type="file"
-                        className="custom-file-input"
-                        id="file"
-                        name='file'
-                        aria-describedby="inputGroupFileAddon01"
-                        onChange={e => handleFileChosen(e.target.files[0])}
-                    />
-                    <label className="custom-file-label" htmlFor="inputGroupFile01">
-                        {file}
-                    </label>
-                </div>
-            </div>
+      
         </div>
     )
 
