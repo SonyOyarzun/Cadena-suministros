@@ -28,7 +28,7 @@ class SideNavBar extends Component {
   render() {
 
     const path = {
-     url: '/storage/images/logo.PNG'
+     url: '/storage/images/'+this.props.config[0].logotype
     }
     //window.location.host+
    

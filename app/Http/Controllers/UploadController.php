@@ -37,9 +37,9 @@ class UploadController extends Controller
 			$api->logotype  	= $fileName;
 			$api->save();
 
-	//		return 'Logo cargado';
+			return 'Logo cargado';
 
-			return $api;
+		//	return $api;
 
 		} catch (\Throwable $th) {
 			return $th;
@@ -70,8 +70,8 @@ class UploadController extends Controller
 			$api->save();
 
 		
-		//	return 'Fondo cargado';
-			return $api;
+			return 'Fondo cargado';
+		//	return $api;
 
 			//dd($path);
 

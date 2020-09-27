@@ -47,6 +47,7 @@ export default function Pdf(props) {
     axios.all([
       axios.get('/assets', { params }),
       axios.get('/transaction', { params }),
+      axios.get('/json-api/config'),
     ])
       .then(responseArr => {
 
@@ -67,7 +68,7 @@ export default function Pdf(props) {
 
             if (responseArr[1].data.asset.data.hasOwnProperty('transaction')) {
               //     setProducts(responseArr[1].data.asset.data.transaction)
-              generatePDF(responseArr[1].data.asset.data.transaction)
+              generatePDF(responseArr[1].data.asset.data.transaction,responseArr[2].data)
             } else {
               setProducts([])
             }
@@ -86,7 +87,7 @@ export default function Pdf(props) {
 
 
 
-  const generatePDF = getdata => {
+  const generatePDF = (getdata,config) => {
 
 
 
@@ -125,7 +126,7 @@ export default function Pdf(props) {
 
 
     let logo = new Image();
-    logo.src = "/storage/images/logo.PNG";
+    logo.src = "/storage/images/"+config[0].logotype;
     //logo.src = "/img/logo.PNG";
 
 

@@ -44,21 +44,28 @@ class App extends Component {
     super(props);
     this.state = {
       loading: true,
-      user: []
+      user: [],
+      config: []
     }
   }
 
 
 
   componentDidMount() {
-    axios.get('/user/my/').then(response => {
-      this.setState({ user: response.data })
-      this.setState({ loading: false })
-      //   console.log(this.state.users)
-    }).catch(error => {
-      this.setState({ user: error })
-      this.setState({ loading: false })
-    })
+
+    axios.all([
+      axios.get('/user/my/'),
+      axios.get('/json-api/config'),
+    ])
+      .then(responseArr => {
+        
+        this.setState({ user: responseArr[0].data })
+        this.setState({ config: responseArr[1].data })
+        this.setState({ loading: false })
+
+      })
+
+
   }
 
   render() {
@@ -88,7 +95,7 @@ class App extends Component {
                     console.log(1)
                     return (
                       <>
-                        <SideNavBar value={this.state.user.role} />
+                        <SideNavBar value={this.state.user.role} config={this.state.config}/>
                       </>
                     )
                     break;
@@ -97,7 +104,7 @@ class App extends Component {
                     console.log(2)
                     return (
                       <>
-                        <SideNavBar value={this.state.user.role} />
+                        <SideNavBar value={this.state.user.role} config={this.state.config}/>
                       </>
                     )
                     break;
@@ -106,7 +113,7 @@ class App extends Component {
                     console.log('default')
                     return (
                       <>
-                        <NavBar value={this.state.user.role} />
+                        <NavBar value={this.state.user.role} config={this.state.config}/>
                       </>
                     )
                     break;
