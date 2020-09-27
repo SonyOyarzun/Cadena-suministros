@@ -33,11 +33,13 @@ class UploadController extends Controller
 			// Save the file
 			$path = $file->storeAs('public/images', $fileName);
 
-			return 'Logo cargado';
-
 			$api = Api_config::findOrFail(1);
-			$api->logotype  	= $path;
+			$api->logotype  	= $fileName;
 			$api->save();
+
+	//		return 'Logo cargado';
+
+			return $api;
 
 		} catch (\Throwable $th) {
 			return $th;
@@ -64,11 +66,12 @@ class UploadController extends Controller
 			$path = $file->storeAs('public/images', $fileName);
 
 			$api = Api_config::findOrFail(1);
-			$api->background  	= $path;
+			$api->background  	= $fileName;
 			$api->save();
 
 		
-			return 'Fondo cargado';
+		//	return 'Fondo cargado';
+			return $api;
 
 			//dd($path);
 
