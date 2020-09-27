@@ -119,28 +119,20 @@ class ApiConfig extends Component {
                 </div>
                 <input id='db_port' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.db_port} />
               </div>
+
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <Upload/>
+                  <Upload type='logotype'/>
                 </div>
-                <input id='logotype' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.logotype} />
               </div>
+              
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" id="basic-addon">
-                    Ruta de Logotipo
-                  </label>
+                  <Upload type='background'/>
                 </div>
-                <input id='logotype' type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon" defaultValue={this.state.config.logotype} />
               </div>
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" id="basic-addon">
-                    Ruta de Fondo
-                  </label>
-                </div>
-                <input id='background' type="text" className="form-control" placeholder="background" aria-label="Fondo" aria-describedby="basic-addon" defaultValue={this.state.config.background} />
-              </div>
+  
+             
               <div className="text-center pt-3 mb-3">
                 <MDBBtn type="button" gradient="blue" rounded className="btn-block z-depth-1a" onClick={process}>Actualizar</MDBBtn>
               </div>

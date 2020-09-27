@@ -126,7 +126,7 @@ export default function Pdf(props) {
 
     let logo = new Image();
     logo.src = "/storage/images/logo.PNG";
-
+    //logo.src = "/img/logo.PNG";
 
 
     // x y width height

@@ -84,8 +84,6 @@ class ApiController extends Controller
 				$api->asset  		= $request->asset;
 				$api->api_port  	= $request->api_port;
 				$api->db_port  		= $request->db_port;
-				$api->logotype  	= $request->logotype;
-				$api->background  	= $request->background;
 
 				$api->save();
 

@@ -14,7 +14,7 @@ use App\Api_config;
 class UploadController extends Controller
 {
 
-	public function uploadFile(Request $request)
+	public function uploadFileLogotype(Request $request)
 	{
 
 		try {
@@ -33,8 +33,42 @@ class UploadController extends Controller
 			// Save the file
 			$path = $file->storeAs('public/images', $fileName);
 
-			return $path;
-			//return 'Archivo cargado';
+			return 'Logo cargado';
+
+			$api = Api_config::findOrFail(1);
+			$api->logotype  	= $path;
+			$api->save();
+
+		} catch (\Throwable $th) {
+			return $th;
+		}
+	}
+
+	public function uploadFileBackground(Request $request)
+	{
+
+		try {
+
+			$validation = $request->validate([
+				'file'  =>  'required|file|image|mimes:jpeg,png,gif,jpg|max:2048'
+			]);
+
+			$file = $validation['file'];
+
+
+			// Generate a file name with extension
+			//	$fileName = 'profile-'.time().'.'.$file->getClientOriginalExtension();
+			$fileName = 'background.' . $file->getClientOriginalExtension();
+
+			// Save the file
+			$path = $file->storeAs('public/images', $fileName);
+
+			$api = Api_config::findOrFail(1);
+			$api->background  	= $path;
+			$api->save();
+
+		
+			return 'Fondo cargado';
 
 			//dd($path);
 

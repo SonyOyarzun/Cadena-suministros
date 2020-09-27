@@ -73,4 +73,5 @@ Route::get('transaction', 'BigController@transaction');
 Route::get('search', 'BigController@search');
 
 //subir archivo
-Route::post('upload', 'UploadController@uploadFile');
+Route::post('uploadLogotype', 'UploadController@uploadFileLogotype');
+Route::post('uploadBackground', 'UploadController@uploadFileBackground');

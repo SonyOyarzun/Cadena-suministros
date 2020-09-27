@@ -3,7 +3,27 @@
 import React, { Component, Fragment, useState } from 'react';
 
 
-function UploadFile() {
+function UploadFile(props) {
+
+    let url = 'upload'
+    let type = ''
+
+    switch (props.type) {
+
+        case 'logotype':
+            url = 'uploadLogotype'
+            type = 'logotipo'
+            break;
+
+        case 'background':
+            url = 'uploadBackground'
+            type = 'fondo de pantalla'
+            break;
+
+        default:
+            break;
+    }
+
 
     const [file, setFile] = useState('Seleccione Archivo');
 
@@ -18,18 +38,18 @@ function UploadFile() {
         let formData = new FormData();
         formData.append('file', document.getElementById('file').files[0]);
 
-        axios.post('upload',
+        axios.post(url,
             formData,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             }
-        ).then(function(data) {
-          
-            console.log('success',data);
-        }.bind(this)).catch(function(data) {
-            console.log('error',data);
+        ).then(function (data) {
+
+            console.log('success', data);
+        }.bind(this)).catch(function (data) {
+            console.log('error', data);
         });
         // … do something with the 'content' …
     };
@@ -40,55 +60,31 @@ function UploadFile() {
         fileReader.readAsText(file);
     };
 
-    const submitFiles =()=> {
-        for( let i = 0; i < this.files.length; i++ ){
-            if(this.files[i].id) {
-                continue;
-            }
-            let formData = new FormData();
-            formData.append('file', this.files[i]);
-    
-            axios.post('/' + this.post_url,
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }
-            ).then(function(data) {
-                this.files[i].id = data['data']['id'];
-                this.files.splice(i, 1, this.files[i]);
-                console.log('success');
-            }.bind(this)).catch(function(data) {
-                console.log('error');
-            });
-        }
-    }
 
     return (
         <div>
-           
-                <div className="input-group">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="inputGroupFileAddon01">
-                            Cargar
+
+            <div className="input-group">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="inputGroupFileAddon01">
+                        {type}
     </span>
-                    </div>
-                    <div className="custom-file">
-                        <input
-                            type="file"
-                            className="custom-file-input"
-                            id="file"
-                            name='file'
-                            aria-describedby="inputGroupFileAddon01"
-                            onChange={e => handleFileChosen(e.target.files[0])}
-                        />
-                        <label className="custom-file-label" htmlFor="inputGroupFile01">
-                            {file}
-                        </label>
-                    </div>
                 </div>
-      
+                <div className="custom-file">
+                    <input
+                        type="file"
+                        className="custom-file-input"
+                        id="file"
+                        name='file'
+                        aria-describedby="inputGroupFileAddon01"
+                        onChange={e => handleFileChosen(e.target.files[0])}
+                    />
+                    <label className="custom-file-label" htmlFor="inputGroupFile01">
+                        {file}
+                    </label>
+                </div>
+            </div>
+
         </div>
     )
 
