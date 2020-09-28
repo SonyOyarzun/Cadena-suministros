@@ -58,7 +58,7 @@ class App extends Component {
       axios.get('/json-api/config'),
     ])
       .then(responseArr => {
-        
+
         this.setState({ user: responseArr[0].data })
         this.setState({ config: responseArr[1].data[0] })
         this.setState({ loading: false })
@@ -74,9 +74,9 @@ class App extends Component {
 
     if (document.getElementById("app")) {
       const assetPath = document.getElementById("app").getAttribute("assetPath");
-      ReactDOM.render(<Routes assetPath={assetPath} />, 
+      ReactDOM.render(<Routes assetPath={assetPath} />,
         document.getElementById("app"));
-  }
+    }
 
     if (loading) { // if your component doesn't have to wait for an async action, remove this block 
       return <Load />; // render null when app is not ready
@@ -87,48 +87,18 @@ class App extends Component {
           <div>
             <Head />
 
-            {
-              (() => {
-                console.log('value :', this.props.value)
-                switch (this.state.user.role) {
-                  case 'A':
-                    console.log(1)
-                    return (
-                      <>
-                        <SideNavBar value={this.state.user.role} config={this.state.config}/>
-                      </>
-                    )
-                    break;
+            {(this.props.value == 'A' || this.props.value == 'U') ?
+              <SideNavBar value={this.state.user.role} config={this.state.config} />
+              : (<NavBar value={this.state.user.role} config={this.state.config} />)
+            }
+            <MDBContainer fluid style={styles.padding}>
 
-                    case 'U':
-                    console.log(2)
-                    return (
-                      <>
-                        <SideNavBar value={this.state.user.role} config={this.state.config}/>
-                      </>
-                    )
-                    break;
+              <Routes />
 
-                  default:
-                    console.log('default')
-                    return (
-                      <>
-                        <NavBar value={this.state.user.role} config={this.state.config}/>
-                      </>
-                    )
-                    break;
-                  }
-                }).call(this)
-              }
-  
-                    <MDBContainer fluid style={styles.padding}>
+            </MDBContainer>
 
-                      <Routes />
-
-                    </MDBContainer>
-
-                      <Foot config={this.state.config} />
-                      </div>
+            <Foot config={this.state.config} />
+          </div>
         </BrowserRouter>
       )
     }
