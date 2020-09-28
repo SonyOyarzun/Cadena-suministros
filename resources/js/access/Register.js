@@ -10,9 +10,8 @@ const styles = {
         height: "70vh",
         paddingTop: "1vw",
         paddingBottom: "1vw",
-        paddingRight: "1vw",
-        paddingLeft: "1vw",
-        right: "0",
+    //    paddingRight: "1vw",
+        marginLeft: "55vw",
     }
 }
 
