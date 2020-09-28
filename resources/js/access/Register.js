@@ -8,10 +8,6 @@ const styles = {
     custom: {
         width: "30vw",
         height: "70vh",
-        marginTop: "0.1vw",
-        paddingBottom: "1vw",
-    //    paddingRight: "1vw",
-        marginLeft: "55vw",
     }
 }
 
@@ -49,52 +45,41 @@ class Register extends Component {
 
     render() {
         return (
-            <div style={styles.custom}>
+            <div style={styles.custom} className='responsive'>
             <Card>
             <Card.Body>
               <Card.Title>Registrarse</Card.Title>
                <Card.Text>
                <form noValidate onSubmit={this.onSubmit}>
                             <div className="form-group">
-                                <label htmlFor="name">First name</label>
+                                <label htmlFor="name">Nombre</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="first_name"
-                                    placeholder="Enter your first name"
+                                    name="Nombre"
+                                    placeholder="Ingrese Nombre"
                                     value={this.state.first_name}
                                     onChange={this.onChange}
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="name">Last name</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    name="last_name"
-                                    placeholder="Enter your lastname name"
-                                    value={this.state.last_name}
-                                    onChange={this.onChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email">Email address</label>
+                                <label htmlFor="email">Mail</label>
                                 <input
                                     type="email"
                                     className="form-control"
-                                    name="email"
-                                    placeholder="Enter email"
+                                    name="Mail"
+                                    placeholder="Ingrese Mail"
                                     value={this.state.email}
                                     onChange={this.onChange}
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="password">Password</label>
+                                <label htmlFor="password">Contraseña</label>
                                 <input
                                     type="password"
                                     className="form-control"
                                     name="password"
-                                    placeholder="Password"
+                                    placeholder="Contraseña"
                                     value={this.state.password}
                                     onChange={this.onChange}
                                 />
