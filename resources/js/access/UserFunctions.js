@@ -16,7 +16,7 @@ export const register = newUser => {
 export const login = user => {
     return axios
         .post(
-            'api/login',
+            '/user/login',
             {
                 email: user.email,
                 password: user.password
@@ -27,6 +27,7 @@ export const login = user => {
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
+            console.log('login',response.data)
             return response.data.token
         })
         .catch(err => {

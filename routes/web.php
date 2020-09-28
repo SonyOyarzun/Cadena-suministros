@@ -48,6 +48,8 @@ Route::put('/user/pass/', 'UserController@changePass');
 Route::post('/user/new/', 'UserController@create');  
 Route::delete('/user/delete/', 'UserController@delete');  
 
+Route::post('/user/login/', 'UserController@userLogin');  
+
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::group(['middleware' => ['cors']], function () {
