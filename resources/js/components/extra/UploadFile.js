@@ -68,20 +68,21 @@ function UploadFile(props) {
 
             <div className="input-group">
                 <div className="input-group-prepend">
-                    <span className="input-group-text" id="inputGroupFileAddon01">
+                    <span className="input-group-text darkLight" id="inputGroupFileAddon01">
                         {type}
     </span>
                 </div>
                 <div className="custom-file">
                     <input
                         type="file"
-                        className="custom-file-input"
+                        className="custom-file-input darkLight"
                         id={url}
                         name={url}
                         aria-describedby="inputGroupFileAddon01"
                         onChange={e => handleFileChosen(e.target.files[0])}
+                        style={{cursor: 'pointer'}}
                     />
-                    <label className="custom-file-label" htmlFor="inputGroupFile01">
+                    <label className="custom-file-label darkLight" htmlFor="inputGroupFile01" >
                         {file}
                     </label>
                 </div>

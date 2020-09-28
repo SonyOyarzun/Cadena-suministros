@@ -97,30 +97,12 @@ const useSpecialMode = () => {
 
 
 
-export default function Theme() {
+export default function Theme(props) {
   const [theme, toggleTheme] = useSpecialMode();
   const themeMode = theme === 'default' ? defaultTheme : specialTheme;
 
-  
-  const [config, setConfig] = useState({});
+  console.log(props.config)
 
-  const [loading, setLoading] = useState(false);
-
-
-  
-  useLayoutEffect(() => {
-
-axios.get('/json-api/config')
-  .then(response => {
-    setConfig(response.data[0])
-    console.log('config',config)
-  })
- 
-  },[])
-
-  
-
-  
 
 const GlobalStyles = createGlobalStyle`
 *,
@@ -130,7 +112,7 @@ const GlobalStyles = createGlobalStyle`
 }
 
 #back{
-  background: url('storage/images/${( config.background )}');
+  background: url('storage/images/${( props.config.background )}');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -320,6 +302,11 @@ table tfoot .links a{
 color: ${({ theme }) => theme.body} !important;
 }
 
+.custom-file-label::after{
+  background-image: ${({ theme }) => theme.gradient} !important;
+  color: ${({ theme }) => theme.text} !important;
+  display: none;
+}
 
 `;
 

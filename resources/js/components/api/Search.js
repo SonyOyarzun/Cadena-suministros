@@ -139,7 +139,7 @@ export default function Search() {
     Object.keys(obj).map((key, row) => (
 
       preRows = [objID[row]],
-      preRows = { clickEvent: () => handleClick(objID[row]) },
+      preRows = { clickEvent: () => handleClick(objID[row]), cursor: 'pointer'},
       Object.keys(obj[key]).map((key2, col) => (
         {
           ...count < Object.keys(obj[key]).length &&

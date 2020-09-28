@@ -16,30 +16,19 @@ var style = {
 }
 
 var phantom = {
-  display: 'block',
-  padding: '20px',
-  height: '60px',
-  width: '100%',
+    display: 'block',
+    padding: '20px',
+    height: '60px',
+    width: '100%',
 }
 
-function children(){
 
-        return(
-          <div>
- huhuhu
-          </div>
-        )
-
-
-    }
-
-function Footer({ children }) {
+function Footer(props) {
     return (
         <div>
             <div style={phantom} />
-             <div style={style} className='foot'>
-                { children }
-<Theme/>
+            <div style={style} className='foot'>
+                <Theme config={props.config} />
             </div>
         </div>
     )

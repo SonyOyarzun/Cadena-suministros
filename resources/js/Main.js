@@ -60,7 +60,7 @@ class App extends Component {
       .then(responseArr => {
         
         this.setState({ user: responseArr[0].data })
-        this.setState({ config: responseArr[1].data })
+        this.setState({ config: responseArr[1].data[0] })
         this.setState({ loading: false })
 
       })
@@ -127,7 +127,7 @@ class App extends Component {
 
                     </MDBContainer>
 
-                      <Foot />
+                      <Foot config={this.state.config} />
                       </div>
         </BrowserRouter>
       )
