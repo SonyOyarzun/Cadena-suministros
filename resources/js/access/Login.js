@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { login } from './UserFunctions'
 
-import { MDBIcon, MDBBtn } from "mdbreact";
+import { MDBIcon, MDBBtn,MDBInput } from "mdbreact";
 
 class Login extends Component {
     constructor() {
@@ -46,6 +46,7 @@ class Login extends Component {
                                     placeholder="Mail"
                                     value={this.state.email}
                                     onChange={this.onChange}
+                                    style={{margin:'10px'}}
                                 />
 
                                 <input
@@ -55,16 +56,19 @@ class Login extends Component {
                                     placeholder="Contraseña"
                                     value={this.state.password}
                                     onChange={this.onChange}
+                                    style={{margin:'10px'}}
                                 />
+
+
                             <label>  
                             <MDBBtn
                                 type="submit"
-                                className="btn btn-primary"
-                                style={{width:'50px',height:'30px'}}
+                                style={{width:'100px',height:'40px',margin:'10px'}}
                             >
-                               <MDBIcon icon="plus" />
+                            Ingresar
                             </MDBBtn>
                             </label>  
+
                         </form>
 
                     </div>

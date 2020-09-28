@@ -35,15 +35,22 @@ class NavBar extends Component {
           <Navbar.Brand className='darkLight' as={Link} to='#home'>Cadena de Suministros</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+
             <Nav className="mr-auto">
 
             <Nav.Link><Link className='darkLight-text' to='/Trace'><MDBIcon icon="barcode" />Traza</Link></Nav.Link>
-                          <Nav.Link><Link className='darkLight-text' to='/Search'><MDBIcon icon="search" />Buscar TX</Link></Nav.Link>
+            <Nav.Link><Link className='darkLight-text' to='/Search'><MDBIcon icon="search" />Buscar TX</Link></Nav.Link>
 
             </Nav>
-            <Nav.Link><Link className='darkLight-text' to='/'><MDBIcon icon="" />Quienes Somos?</Link></Nav.Link>
-            <Nav.Link><Link className='darkLight-text' to='/'><MDBIcon icon="" />Como Funciona?</Link></Nav.Link>
-           <Login/>
+
+
+            <Nav>
+              
+            <Login/>
+
+            </Nav>
+            
+            
           </Navbar.Collapse>
         </Navbar>
 
@@ -55,3 +62,10 @@ class NavBar extends Component {
 
 NavBar = withRouter(NavBar);
 export default NavBar;
+
+
+/**
+ * 
+            <Nav.Link><Link className='darkLight-text' to='/'><MDBIcon icon="" />Quienes Somos?</Link></Nav.Link>
+            <Nav.Link><Link className='darkLight-text' to='/'><MDBIcon icon="" />Como Funciona?</Link></Nav.Link>
+ */
