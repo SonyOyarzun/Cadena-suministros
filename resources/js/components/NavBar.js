@@ -93,7 +93,7 @@ class NavBar extends Component {
             </Nav>
             <Nav.Link><Link className='darkLight-text' to='/'><MDBIcon icon="" />Quienes Somos?</Link></Nav.Link>
             <Nav.Link><Link className='darkLight-text' to='/'><MDBIcon icon="" />Como Funciona?</Link></Nav.Link>
-            <a className='darkLight-text' href='/logout'><MDBIcon icon="door-open" />Salir</a>
+            <div><a className='darkLight-text' href='/logout'><MDBIcon icon="door-open" />Salir</a></div>
           </Navbar.Collapse>
         </Navbar>
 
