@@ -72,6 +72,8 @@ class App extends Component {
 
     const { loading } = this.state;
 
+    //console.log('eval navbar',(this.state.user.role == 'A' || this.state.user.role == 'U'),'value',this.state.user.role)
+
     if (document.getElementById("app")) {
       const assetPath = document.getElementById("app").getAttribute("assetPath");
       ReactDOM.render(<Routes assetPath={assetPath} />,
@@ -87,7 +89,7 @@ class App extends Component {
           <div>
             <Head />
 
-            {(this.props.value == 'A' || this.props.value == 'U') ?
+            {(this.state.user.role == 'A' || this.state.user.role == 'U') ?
               (<SideNavBar value={this.state.user.role} config={this.state.config} />)
               :
               (<NavBar value={this.state.user.role} config={this.state.config} />)
