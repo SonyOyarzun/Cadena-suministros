@@ -3,6 +3,22 @@ import { login } from './UserFunctions'
 
 import { MDBIcon, MDBBtn,MDBInput } from "mdbreact";
 
+const styles = {
+    custom: {
+      paddingTop:"1vw",
+      paddingBottom: "1vh",
+      paddingRight: "1vw",
+      paddingLeft: "1vw"
+    },
+    button: {
+        width: "1vh",
+        height: "1vh",
+        paddingRight: "1vw",
+        paddingLeft: "1vw",
+        paddingTop:"1vw"
+      }
+  }
+
 class Login extends Component {
     constructor() {
         super()
@@ -46,7 +62,7 @@ class Login extends Component {
                                     placeholder="Mail"
                                     value={this.state.email}
                                     onChange={this.onChange}
-                                    style={{margin:'10px'}}
+                                    style={styles.custom}
                                 />
 
                                 <input
@@ -56,14 +72,14 @@ class Login extends Component {
                                     placeholder="Contraseña"
                                     value={this.state.password}
                                     onChange={this.onChange}
-                                    style={{margin:'10px'}}
+                                    style={styles.custom}
                                 />
 
 
                             <label>  
                             <MDBBtn
                                 type="submit"
-                                style={{width:'100px',height:'40px',margin:'10px'}}
+                                style={styles.button}
                             >
                             Ingresar
                             </MDBBtn>
