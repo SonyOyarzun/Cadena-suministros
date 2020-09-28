@@ -65,14 +65,7 @@
                 margin-bottom: 30px;
             }
             
-            #back{
-                background: url('img/cadena.gif');
-                background-position: center center;
-                background-repeat: no-repeat;
-                background-size: cover;
-                height: 100vh;
-                width: 100%;
-            }
+        
         </style>
     </head>
     <body id="back">

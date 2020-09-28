@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useLayoutEffect } from 'react';
 
 
 
@@ -102,11 +102,13 @@ export default function Theme() {
   const themeMode = theme === 'default' ? defaultTheme : specialTheme;
 
   
-  const [config, setConfig] = useState([]);
+  const [config, setConfig] = useState({});
+
+  const [loading, setLoading] = useState(false);
 
 
   
-  useEffect(() => {
+  useLayoutEffect(() => {
 
 axios.get('/json-api/config')
   .then(response => {
@@ -116,7 +118,10 @@ axios.get('/json-api/config')
  
   },[])
 
-   
+  
+
+  
+
 const GlobalStyles = createGlobalStyle`
 *,
 *::after,
@@ -317,6 +322,8 @@ color: ${({ theme }) => theme.body} !important;
 
 
 `;
+
+
 
   return (
     <ThemeProvider theme={themeMode}>
