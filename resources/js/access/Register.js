@@ -48,7 +48,7 @@ class Register extends Component {
             <div style={styles.custom} className='responsive'>
             <Card>
             <Card.Body>
-              <Card.Title>Registrarse</Card.Title>
+              <Card.Title>Registrar Usuario</Card.Title>
                <Card.Text>
                <form noValidate onSubmit={this.onSubmit}>
                             <div className="form-group">
@@ -84,11 +84,22 @@ class Register extends Component {
                                     onChange={this.onChange}
                                 />
                             </div>
+                            <div className="form-group">
+                                <label htmlFor="confirmPassword">Confirmar Contraseña</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    name="confirmPassword"
+                                    placeholder=" Confirmar contraseña"
+                                    value={this.state.password}
+                                    onChange={this.onChange}
+                                />
+                            </div>
                             <button
                                 type="submit"
                                 className="btn btn-lg btn-primary btn-block"
                             >
-                                Register!
+                                Registrarse
                             </button>
                         </form>
                </Card.Text>

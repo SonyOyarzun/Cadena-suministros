@@ -17,7 +17,7 @@ import Order from './Order';
 
 
 //access
-import Register from '../access/Register';
+//import Register from '../access/Register';
 
 class Routes extends Component {
 
@@ -29,8 +29,7 @@ class Routes extends Component {
 
             <div>
 
-                <Route exact path="/" component={Register} />
-
+              
                 <Route path="/User" component={User} />
                 <Route path="/Product" component={Product} />
                 <Route path="/MyProduct" component={MyProduct} />
