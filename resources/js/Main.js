@@ -88,8 +88,9 @@ class App extends Component {
             <Head />
 
             {(this.props.value == 'A' || this.props.value == 'U') ?
-              <SideNavBar value={this.state.user.role} config={this.state.config} />
-              : (<NavBar value={this.state.user.role} config={this.state.config} />)
+              (<SideNavBar value={this.state.user.role} config={this.state.config} />)
+              :
+              (<NavBar value={this.state.user.role} config={this.state.config} />)
             }
             <MDBContainer fluid style={styles.padding}>
 
