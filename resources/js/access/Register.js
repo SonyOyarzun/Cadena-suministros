@@ -1,6 +1,21 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
 
+import {Card} from 'react-bootstrap';
+
+
+const styles = {
+    custom: {
+        width: "30vw",
+        height: "70vh",
+        paddingTop: "1vw",
+        paddingBottom: "1vw",
+        paddingRight: "1vw",
+        paddingLeft: "1vw",
+        right: "0",
+    }
+}
+
 class Register extends Component {
     constructor() {
         super()
@@ -16,10 +31,10 @@ class Register extends Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
 
-    onChange (e) {
+    onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
     }
-    onSubmit (e) {
+    onSubmit(e) {
         e.preventDefault()
 
         const newUser = {
@@ -33,9 +48,26 @@ class Register extends Component {
         })
     }
 
-    render () {
+    render() {
         return (
-            <div className="container">
+            <div style={styles.custom}>
+            <Card>
+            <Card.Body>
+              <Card.Title>Registrarse</Card.Title>
+               <Card.Text>
+               </Card.Text>
+            </Card.Body>
+          </Card>
+          </div>
+        )
+    }
+}
+
+export default Register
+
+
+/**
+ *  <Card style={styles.custom}>
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
                         <form noValidate onSubmit={this.onSubmit}>
@@ -95,9 +127,5 @@ class Register extends Component {
                         </form>
                     </div>
                 </div>
-            </div>
-        )
-    }
-}
-
-export default Register
+            </Card>
+ */

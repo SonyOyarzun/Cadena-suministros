@@ -5,17 +5,18 @@ import { MDBIcon, MDBBtn,MDBInput } from "mdbreact";
 
 const styles = {
     custom: {
-      paddingTop:"1vw",
-      paddingBottom: "1vh",
-      paddingRight: "1vw",
-      paddingLeft: "1vw"
+      marginTop:"0.9vw",  
+      marginBottom: "0.2vh",
+      marginRight: "1vw",
+      marginLeft: "1vw"
     },
     button: {
-        width: "1vh",
-        height: "1vh",
-        paddingRight: "1vw",
-        paddingLeft: "1vw",
-        paddingTop:"1vw"
+        marginTop:"0.5vw",  
+        width: "15vh",
+        height: "5vh",
+        marginRight: "1vw",
+        marginLeft: "1vw",
+        marginTop:"0.2vw"
       }
   }
 

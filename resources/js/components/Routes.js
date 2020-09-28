@@ -17,7 +17,7 @@ import Order from './Order';
 
 
 //access
-import Login from '../access/Navbar';
+import Register from '../access/Register';
 
 class Routes extends Component {
 
@@ -28,6 +28,8 @@ class Routes extends Component {
         return (
 
             <div>
+
+                <Route exact path="/" component={Register} />
 
                 <Route path="/User" component={User} />
                 <Route path="/Product" component={Product} />
