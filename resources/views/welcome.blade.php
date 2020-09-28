@@ -73,15 +73,6 @@
                 top: 0;
                 bottom: 0;
             }
-
-            #back{
-                background: url('img/cadena.gif');
-                background-position: center center;
-                background-repeat: no-repeat;
-                background-size: cover;
-                height: 100vh;
-                width: 100%;
-            }
             
         </style>
     </head>
@@ -100,11 +91,6 @@
                     @endauth
                 </div>
             @endif
-<!--            <div class="content">
-
-                     <img id='logo' src="{{URL::asset('img/logo.png')}}">
-              
-            </div>-->
         </div>
     </body>
 </html>
