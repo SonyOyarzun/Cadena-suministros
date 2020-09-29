@@ -48,9 +48,13 @@ Route::put('/user/pass/', 'UserController@changePass');
 Route::post('/user/new/', 'UserController@create');  
 Route::delete('/user/delete/', 'UserController@delete');  
 
+//custom laravel access
 Route::post('/user/login/', 'UserController@userLogin');  
-Route::post('/password/email/', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-Route::post('/password/reset/','Auth\ResetPasswordController@reset');
+
+Route::post('reset_password_without_token', 'AccountsController@validatePasswordRequest');
+Route::post('reset_password_with_token', 'AccountsController@resetPassword');
+//https://medium.com/@victorighalo/custom-password-reset-in-laravel-21e57816989f
+
 
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

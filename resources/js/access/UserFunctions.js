@@ -38,7 +38,7 @@ export const login = user => {
 export const forgot = user => {
     return axios
         .post(
-            '/password/email/',
+            'reset_password_without_token',
             {
                 email: user.email,
             },
