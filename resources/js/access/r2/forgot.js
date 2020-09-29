@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Nav from './navbar'
 import axios from 'axios'
 
 
@@ -41,9 +40,7 @@ class Forgot extends Component{
         let msg = (!error) ? 'We have e-mailed your password reset link!' : 'User doesnt exist' ;
         let name = (!error) ? 'alert alert-success' : 'alert alert-danger' ;
 		return(
-			<div>
-				<Nav />
-				<div className="container">
+
 				    <div className="row">
 				        <div className="col-md-8 col-md-offset-2">
 				            <div className="panel panel-default">
@@ -73,8 +70,7 @@ class Forgot extends Component{
 				            </div>
 				        </div>
 				    </div>
-				</div>
-			</div>	
+	
 
 			)
 		}
