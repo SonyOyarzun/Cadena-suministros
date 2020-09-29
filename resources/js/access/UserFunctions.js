@@ -35,6 +35,27 @@ export const login = user => {
         })
 }
 
+export const forgot = user => {
+    return axios
+        .post(
+            '/password/email/',
+            {
+                email: user.email,
+            },
+            {
+                headers: { 'Content-Type': 'application/json' }
+            }
+        )
+        .then(response => {
+            localStorage.setItem('usertoken', response.data.token)
+            console.log('login',response.data)
+            location.reload()
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export const getProfile = () => {
     return axios
         .get('api/profile', {

@@ -214,3 +214,6 @@ class UserController extends Controller
   }
 }
 
+
+
+//https://github.com/lijujohn13/react-laravel-auth/tree/master/resources/assets/js

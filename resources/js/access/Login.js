@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { login } from './UserFunctions'
 
 import { MDBIcon, MDBBtn, MDBInput } from "mdbreact";
+import { Button, Navbar, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
+import { NavLink, Link, withRouter } from 'react-router-dom';
 
 const styles = {
     custom: {
@@ -76,7 +78,7 @@ class Login extends Component {
                         style={styles.custom}
                     />
                     <div className='col-sm-12'>
-                        <a href=''>Recuperar contraseña</a>
+                    <Nav.Link><Link className='darkLight-text' to='/Forgot'>Recuperar contraseña</Link></Nav.Link>
                     </div>
                 </div>
                 <div className='col-sm-4'>
