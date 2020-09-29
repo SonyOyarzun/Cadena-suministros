@@ -49,6 +49,7 @@ Route::post('/user/new/', 'UserController@create');
 Route::delete('/user/delete/', 'UserController@delete');  
 
 Route::post('/user/login/', 'UserController@userLogin');  
+Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 

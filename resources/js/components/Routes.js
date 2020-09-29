@@ -18,6 +18,7 @@ import Order from './Order';
 
 //access
 //import Register from '../access/Register';
+import Forgot from '../access/ForgotPass';
 
 class Routes extends Component {
 
@@ -45,6 +46,8 @@ class Routes extends Component {
                 <Route exact path="/Trace/:asset" component={Trace} />
 
                 <Route path="/Search" component={Search} />
+
+                <Route exact path="/Forgot" component={Forgot} />
 
 
             </div>
