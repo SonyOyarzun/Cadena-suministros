@@ -8,11 +8,14 @@ use Illuminate\Http\Request;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Validator, Redirect, Response;
+use Session;
 
 use App\User;
 use PhpParser\Node\Stmt\TryCatch;
 
-use Illuminate\Support\Facades\Validator;
+
 
 class UserController extends Controller
 {
@@ -189,34 +192,25 @@ class UserController extends Controller
       return response()->json(["status" => "failed", "validation_error" => $validator->errors()]);
     }
 
+    $data       =       User::where("email", $request->email)->first();
 
-    // check if entered email exists in db
-    $email_status       =       User::where("email", $request->email)->first();
+    if (!is_null($data)) {
 
 
-    // if email exists then we will check password for the same email
+      if (Hash::check($request->password, $data->password)) {
 
-    if (!is_null($email_status)) {
-      $password_status    =   User::where("email", $request->email)->where("password", md5($request->password))->first();
+       $credentials = $request->only('email', 'password');
 
-      // if password is correct
-      if (!is_null($password_status)) {
-        $user           =       $this->userDetail($request->email);
+       Auth::attempt($credentials);
 
-        return response()->json(["status" => $this->status_code, "success" => true, "message" => "You have logged in successfully", "data" => $user]);
-      } else {
-
-        return response()->json(["status" => "failed", "success" => false, "message" => "Unable to login. Incorrect password."]);
+       return 'Usuario logueado';
 
       }
+
     } else {
-      
-      return response()->json(["status" => "failed", "success" => false, "message" => "Unable to login. Email doesn't exist."]);
+
+      return 'Mail no registrado';
     }
-    
-
-    return 'dfsf';
   }
-
-  
 }
+
