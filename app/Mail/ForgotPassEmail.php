@@ -36,8 +36,8 @@ class ForgotPassEmail extends Mailable
     public function build()
     {
         return $this->from('sender@example.com')
-                    ->view('forgot.blade')
-                    ->text('forgot_plain.blade')
+                    ->view('mails.forgot')
+                    ->text('mails.forgot_plain')
                     ->with(
                       [
                             'message_1' => 'Se ha solicitado un restablecimiento de contraseña,',
