@@ -19,6 +19,9 @@ use Carbon\Carbon;
 
 use Illuminate\Support\Str;
 
+use App\Mail\ForgotPassEmail;
+use Illuminate\Support\Facades\Mail;
+
 
 class AccountsController extends Controller
 {
@@ -65,6 +68,16 @@ class AccountsController extends Controller
 
     try {
       //Here send the link with CURL with an external email API 
+      $objDemo = new \stdClass();
+      $objDemo->transaction = $chain->asset;
+      $objDemo->date        = date('d-m-yy');
+      $objDemo->state       = $chain->state;
+      $objDemo->toTransfer  = $userToTranfer->name;
+      $objDemo->receiver    = $receiver->name;
+      $objDemo->logotype    = $api->logotype;
+      $objDemo->background  = $api->background;
+
+      Mail::to($email)->send(new ForgotPassEmail($objDemo));
       return true;
     } catch (\Exception $e) {
       return false;
