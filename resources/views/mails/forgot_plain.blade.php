@@ -1,7 +1,7 @@
 
 
 logo :              {{$demo->logotype }}
-url : {{$demo->url}}
+url :               {{$demo->url}}
 
 
 valores desde el metodo build en la calse DemoEmail

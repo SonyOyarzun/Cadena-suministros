@@ -72,8 +72,8 @@ class AccountsController extends Controller
       $api = Api_config::findOrFail(1);
       //Here send the link with CURL with an external email API 
       $objDemo = new \stdClass();
-      $objDemo->url = $link;
-      $objDemo->logotype = $api->logotype;
+  //    $objDemo->url       = $link;
+      $objDemo->logotype  = 'storage/image/'.$api->logotype;
 
 
       Mail::to($email)->send(new ForgotPassEmail($objDemo));
@@ -86,6 +86,7 @@ class AccountsController extends Controller
 
   public function resetPassword(Request $request)
 {
+  /*
     //Validate input
     $validator = Validator::make($request->all(), [
         'email' => 'required|email|exists:users,email',
@@ -124,7 +125,7 @@ class AccountsController extends Controller
     } else {
         return redirect()->back()->withErrors(['email' => trans('A Network Error occurred. Please try again.')]);
     }
-
+*/
 }
 }
 

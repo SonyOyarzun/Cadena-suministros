@@ -209,7 +209,7 @@
                         <tbody>
                           <tr>
                             <td style="width:110px;">
-                              <img alt="" height="auto" src='storage/image{{$objDemo->logotype}}' style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="110" />
+                              <img alt="" height="auto" src='{{$demo->logotype}}' style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="110" />
                             </td>
                           </tr>
                         </tbody>
@@ -323,19 +323,14 @@
                       <div style="font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;text-align:left;color:#797e82;">
                         <p style="margin: 10px 0; text-align: center;">&nbsp;</p>
                     <p style="margin: 10px 0; text-align: center;">
-                    {{ $message_1 }} {{ $demo->state }}
+                    {{ $message_1 }} 
                     </p>
                     <p style="margin: 10px 0; text-align: center;">
-                    {{ $message_2 }} {{ $demo->transaction }}
+                    {{ $message_2 }} 
                     </p>
                     <p style="margin: 10px 0; text-align: center;">
-                    {{ $message_3 }} {{ $demo->toTransfer }}
+                    {{ $message_3 }}
                     </p>
-                    <p style="margin: 10px 0; text-align: center;">
-                    {{ $message_4 }} {{ $demo->date }}
-                    </p>
-                    <p style="margin: 10px 0; text-align: center;">
-                    {{ $message_5 }}
                     </p>
                       </div>
                     </td>
