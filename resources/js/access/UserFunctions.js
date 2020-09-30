@@ -48,8 +48,8 @@ export const forgot = user => {
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-            console.log('login',response.data)
-            location.reload()
+            console.log('forgot',response.data)
+  
         })
         .catch(err => {
             console.log(err)
