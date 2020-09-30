@@ -51,7 +51,6 @@ class AccountsController extends Controller
     $tokenData = DB::table('password_resets')
       ->where('email', $request->email)->first();
 
-
     if ($this->sendResetEmail($request->email, $tokenData->token)) {
       return trans('A reset link has been sent to your email address.');
     } else {
@@ -72,9 +71,9 @@ class AccountsController extends Controller
       $api = Api_config::findOrFail(1);
       //Here send the link with CURL with an external email API 
       $objDemo = new \stdClass();
-  //    $objDemo->url       = $link;
+      $objDemo->receiver  = $user->name;
+      $objDemo->url       = $link;
       $objDemo->logotype  = 'storage/image/'.$api->logotype;
-
 
       Mail::to($email)->send(new ForgotPassEmail($objDemo));
       return true;

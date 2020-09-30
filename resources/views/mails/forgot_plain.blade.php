@@ -1,5 +1,4 @@
-
-
+recibe el mail:     {{ $demo->receiver }},
 logo :              {{$demo->logotype }}
 url :               {{$demo->url}}
 
