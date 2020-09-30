@@ -13,6 +13,8 @@ use Validator, Redirect, Response;
 use Session;
 
 use App\User;
+use App\Api_config;
+
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -67,15 +69,12 @@ class AccountsController extends Controller
     $link = config('base_url') . 'password/reset/' . $token . '?email=' . urlencode($user->email);
 
     try {
+      $api = Api_config::findOrFail(1);
       //Here send the link with CURL with an external email API 
       $objDemo = new \stdClass();
-      $objDemo->transaction = $chain->asset;
-      $objDemo->date        = date('d-m-yy');
-      $objDemo->state       = $chain->state;
-      $objDemo->toTransfer  = $userToTranfer->name;
-      $objDemo->receiver    = $receiver->name;
-      $objDemo->logotype    = $api->logotype;
-      $objDemo->background  = $api->background;
+      $objDemo->url = $link;
+      $objDemo->logotype = $api->logotype;
+
 
       Mail::to($email)->send(new ForgotPassEmail($objDemo));
       return true;
@@ -109,7 +108,7 @@ class AccountsController extends Controller
 // Redirect the user back if the email is invalid
     if (!$user) return redirect()->back()->withErrors(['email' => 'Email not found']);
 //Hash and update the new password
-    $user->password = \Hash::make($password);
+    $user->password = Hash::make($password);
     $user->update(); //or $user->save();
 
     //login the user immediately they change password successfully

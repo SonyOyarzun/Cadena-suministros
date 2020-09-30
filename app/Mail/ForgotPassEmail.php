@@ -36,15 +36,13 @@ class ForgotPassEmail extends Mailable
     public function build()
     {
         return $this->from('sender@example.com')
-                    ->view('mails.demo')
-                    ->text('mails.demo_plain')
+                    ->view('forgot.blade')
+                    ->text('forgot_plain.blade')
                     ->with(
                       [
-                            'message_1' => 'El estado del envio realizado se encuentra :',
-                            'message_2' => 'Perteneciente a la ID :',
-                            'message_3' => 'Por el usuario :',
-                            'message_4' => 'Durante la fecha :',
-                            'message_5' => 'Puede consultar mas detalles en el enlace mas abajo',
+                            'message_1' => 'Se ha solicitado un restablecimiento de contraseña,',
+                            'message_2' => 'Si usted no lo ha realizado, ignore este mensaje.',
+                            'message_3' => 'Puede ir al enlace mdiante el siguiente boton :'
                       ]);
                       
     }

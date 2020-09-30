@@ -209,7 +209,7 @@
                         <tbody>
                           <tr>
                             <td style="width:110px;">
-                              <img alt="" height="auto" src={{asset('img/logo.png')}} style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="110" />
+                              <img alt="" height="auto" src='storage/image{{$objDemo->logotype}}' style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="110" />
                             </td>
                           </tr>
                         </tbody>
