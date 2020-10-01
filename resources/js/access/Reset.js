@@ -6,8 +6,8 @@ import {Card} from 'react-bootstrap';
 
 const styles = {
     custom: {
-        width: "30vw",
-        height: "70vh",
+        width: "300px",
+     //   height: "70vh",
     }
 }
 
