@@ -32,7 +32,7 @@ Route::get('/Trace/{asset}',function () {
     return view('home');
 });
 
-Route::get('/Reset/{token}',function () {
+Route::get('/Reset/{token}/{mail}',function () {
     return view('home');
 });
 
