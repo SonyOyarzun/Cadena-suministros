@@ -263,7 +263,7 @@
                         <tbody>
                           <tr>
                             <td style="width:300px;">
-                              <img alt="" height="auto" src="{{$demo->logotype}}" style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="300" />
+                              <img alt="" height="auto" src={{$demo->logotype}} style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="300" />
                             </td>
                           </tr>
                         </tbody>
