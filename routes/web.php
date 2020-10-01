@@ -32,6 +32,10 @@ Route::get('/Trace/{asset}',function () {
     return view('home');
 });
 
+Route::get('/Reset/{token}',function () {
+    return view('home');
+});
+
 /*
 Route::view('/{path?}', 'home')
      ->where('path', '.*')
@@ -50,6 +54,7 @@ Route::delete('/user/delete/', 'UserController@delete');
 
 //custom laravel access
 Route::post('/user/login/', 'UserController@userLogin');  
+
 
 Route::post('reset_password_without_token', 'AccountsController@validatePasswordRequest');
 Route::post('reset_password_with_token', 'AccountsController@resetPassword');

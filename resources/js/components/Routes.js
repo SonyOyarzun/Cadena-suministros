@@ -19,6 +19,7 @@ import Order from './Order';
 //access
 //import Register from '../access/Register';
 import Forgot from '../access/ForgotPass';
+import Reset from '../access/Reset';
 
 class Routes extends Component {
 
@@ -48,6 +49,7 @@ class Routes extends Component {
                 <Route path="/Search" component={Search} />
 
                 <Route exact path="/Forgot" component={Forgot} />
+                <Route exact path="/Reset/:token?:email?"  component={Reset} />
 
 
             </div>
