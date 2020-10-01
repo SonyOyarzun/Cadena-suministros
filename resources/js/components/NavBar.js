@@ -32,7 +32,7 @@ class NavBar extends Component {
       <div>
 
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand className='darkLight' as={Link} to='/'><img src={'storage/images/'+this.props.config.logotype} width='150vw' height='70vw'></img></Navbar.Brand>
+          <Navbar.Brand className='darkLight' as={Link} to='/'><img src={'/storage/images/'+this.props.config.logotype} width='150vw' height='70vw'></img></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
 

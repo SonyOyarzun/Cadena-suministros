@@ -2,12 +2,6 @@ import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import React, { useState, useEffect,useLayoutEffect } from 'react';
 
 
-
-
-
-
-
-
 const defaultTheme = {
   body: '#f1f1f1',
   border: '#363537',
@@ -112,7 +106,7 @@ const GlobalStyles = createGlobalStyle`
 }
 
 #back{
-  background: url('storage/images/${( props.config.background )}');
+  background: url('/storage/images/${( props.config.background )}');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;

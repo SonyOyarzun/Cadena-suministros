@@ -25,9 +25,8 @@ class Reset extends Component {
    
     onSubmit(e){
         e.preventDefault();
-        const url = BASE_URL+'/api/password/reset' ;
         const {token, email, password, password_confirmation} = this.state ;
-        axios.post(url, {
+        axios.post('reset_password_with_token', {
 	    	token,
 	        email,
 	        password,
@@ -35,7 +34,6 @@ class Reset extends Component {
           })
           .then(response=> {
             this.setState({err: false});
-            this.props.history.push('login') ;
           })
           .catch(error=> {
           	this.refs.password.value="";
@@ -43,11 +41,6 @@ class Reset extends Component {
             this.refs.confirm.value="";
             this.setState({err: true});
           });
-     }
-
-    onChange(e){
-     	const {name, value} = e.target;
-        this.setState({[name]: value});
      }
 
 
