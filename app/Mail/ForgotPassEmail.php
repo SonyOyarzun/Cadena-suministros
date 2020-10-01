@@ -42,7 +42,7 @@ class ForgotPassEmail extends Mailable
                       [
                             'message_1' => 'Se ha solicitado un restablecimiento de contraseña,',
                             'message_2' => 'Si usted no lo ha realizado, ignore este mensaje.',
-                            'message_3' => 'Puede ir al enlace mdiante el siguiente boton :'
+                            'message_3' => 'Puede ir al enlace mediante el siguiente boton :'
                       ]);
                       
     }

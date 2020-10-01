@@ -55,8 +55,8 @@ try {
   $objDemo = new \stdClass();
       $objDemo->receiver  = $user->name;
       $objDemo->url       = 67867868;
-      $objDemo->logotype  = 'storage/image/logo.png';
-
+      $objDemo->logotype  = 'storage/images/logo.png';
+      
       Mail::to($request->email)->send(new ForgotPassEmail($objDemo));
 } catch (\Throwable $th) {
   return $th->getMessage();

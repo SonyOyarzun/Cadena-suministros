@@ -57,6 +57,7 @@ class ForgotPass extends Component {
                                     name="email"
                                     placeholder="Ingrese Mail"
                                     onChange={this.onChange}
+                                    required={true}
                                 />
                             </div>   
                             <button

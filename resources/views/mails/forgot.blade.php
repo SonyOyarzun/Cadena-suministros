@@ -209,7 +209,7 @@
                         <tbody>
                           <tr>
                             <td style="width:110px;">
-                              <img alt="" height="auto" src='{{$demo->logotype}}' style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="110" />
+                              <img alt="" height="auto" src={{asset('img/logo.png')}} style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="110" />
                             </td>
                           </tr>
                         </tbody>
@@ -263,7 +263,7 @@
                         <tbody>
                           <tr>
                             <td style="width:300px;">
-                              <img alt="" height="auto" src={{$demo->logotype}} style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="300" />
+                              <img alt="" height="auto" src="{{$demo->logotype}}" style="border:none;display:block;outline:none;text-decoration:none;height:auto;width:100%;" title="" width="300" />
                             </td>
                           </tr>
                         </tbody>
@@ -340,8 +340,8 @@
                       <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
                         <tr>
                           <td align="center" bgcolor="#42a569" role="presentation" style="border:none;border-radius:100px;cursor:auto;padding:15px 25px 15px 25px;background:#42a569;" valign="middle">
-                            <a href={{Request::root()}} style="background:#42a569;color:#ffffff;font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
-                              <b style="font-weight:700"><i style="font-style:normal"><b style="color:variables.textcolor">Ver Traza Actual</b></i></b>
+                            <a href={{$demo->url}} style="background:#42a569;color:#ffffff;font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
+                              <b style="font-weight:700"><i style="font-style:normal"><b style="color:variables.textcolor">Ir a Enlace</b></i></b>
                             </a>
                           </td>
                         </tr>

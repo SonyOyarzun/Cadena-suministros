@@ -126,4 +126,12 @@ axios.all([
   console.log('Date created: ', responseArr[1].data.created_at);
 });
 
+
+
+https://colorhunt.co/
+
+https://www.tailorbrands.com/es/
+
+https://color.adobe.com/es/explore
 */
+
