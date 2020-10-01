@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { register } from './UserFunctions'
+import { reset } from './UserFunctions'
 
 import {Card} from 'react-bootstrap';
 
@@ -15,39 +15,33 @@ class Reset extends Component {
     constructor(props){
         super(props);
         this.state = {
-        	token: decodeURIComponent(props.match.params.token),
+        	token:  decodeURIComponent(props.match.params.token),
             email : decodeURIComponent(props.match.params.email),
             password: '',
-            password_confirmation: '',
+            confirmPassword: '',
             loading: false,
             message:''
         }
+        this.onSubmit = this.onSubmit.bind(this); 
+        this.onChange = this.onChange.bind(this); 
     }
 
    
-    onSubmit(e){
-        e.preventDefault();
-        const {token, email, password, confirmPassword} = this.state ;
-        axios.post('reset_password_with_token', {
-	    	token,
-	        email,
-	        password,
-	        password_confirmation
-          })
-          .then(response=> {
-            this.setState({loading: false});
-            this.setState({message: response.data});
-          })
-          .catch(error=> {
-          	this.refs.password.value="";
-            this.refs.confirm.value="";
-            this.setState({loading: false});
-            this.setState({message: response.data});
-          });
-     }
-     onChange(e){
-        const {name, value} = e.target;
-       this.setState({[name]: value});
+    onChange(e) {
+        this.setState({ [e.target.name]: e.target.value })
+    }
+    onSubmit(e) {
+        e.preventDefault()
+
+        const user = {
+            email: this.state.email,
+            password: this.state.password,
+            confirmPassword:this.state.password
+        }
+
+        reset(user).then(res => {
+            this.props.history.push(`/`)
+        })
     }
 
     render() {
@@ -66,7 +60,7 @@ class Reset extends Component {
                                     className="form-control"
                                     name="Mail"
                                     placeholder="Ingrese Mail"
-                                    value={this.state.email}
+                                    defaultValue={this.state.email}
                                     onChange={this.onChange.bind(this)}
                                 />
                             </div>
@@ -77,7 +71,7 @@ class Reset extends Component {
                                     className="form-control"
                                     name="password"
                                     placeholder="Contraseña"
-                                    onChange={this.onChange.bind(this)}
+                                    onChange={this.onChange}
                                 />
                             </div>
                             <div className="form-group">
@@ -87,7 +81,7 @@ class Reset extends Component {
                                     className="form-control"
                                     name="confirmPassword"
                                     placeholder=" Confirmar contraseña"
-                                    onChange={this.onChange.bind(this)}
+                                    onChange={this.onChange}
                                 />
                             </div>
                             <button

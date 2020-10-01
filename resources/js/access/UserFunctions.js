@@ -56,6 +56,32 @@ export const forgot = user => {
         })
 }
 
+export const reset = user => {
+    return axios
+        .post(
+            'reset_password_with_token',
+            {
+                email: user.email,
+                password:user.token,
+                email:user.email,
+                password:user.password,
+                confirmPassword:user.confirmPassword
+                
+            },
+            {
+                headers: { 'Content-Type': 'application/json' }
+            }
+        )
+        .then(response => {
+            localStorage.setItem('usertoken', response.data.token)
+            console.log('forgot',response.data)
+  
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export const getProfile = () => {
     return axios
         .get('api/profile', {
