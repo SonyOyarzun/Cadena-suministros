@@ -19,13 +19,15 @@ class Reset extends Component {
             email : decodeURIComponent(props.match.params.email),
             password: '',
             password_confirmation: '',
+            loading: false,
+            message:''
         }
     }
 
    
     onSubmit(e){
         e.preventDefault();
-        const {token, email, password, password_confirmation} = this.state ;
+        const {token, email, password, confirmPassword} = this.state ;
         axios.post('reset_password_with_token', {
 	    	token,
 	        email,
@@ -33,16 +35,20 @@ class Reset extends Component {
 	        password_confirmation
           })
           .then(response=> {
-            this.setState({err: false});
+            this.setState({loading: false});
+            this.setState({message: response.data});
           })
           .catch(error=> {
           	this.refs.password.value="";
-            this.refs.email.value="";
             this.refs.confirm.value="";
-            this.setState({err: true});
+            this.setState({loading: false});
+            this.setState({message: response.data});
           });
      }
-
+     onChange(e){
+        const {name, value} = e.target;
+       this.setState({[name]: value});
+    }
 
     render() {
         console.log('state :',this.state)
@@ -61,7 +67,7 @@ class Reset extends Component {
                                     name="Mail"
                                     placeholder="Ingrese Mail"
                                     value={this.state.email}
-                                    onChange={this.onChange}
+                                    onChange={this.onChange.bind(this)}
                                 />
                             </div>
                             <div className="form-group">
@@ -71,8 +77,7 @@ class Reset extends Component {
                                     className="form-control"
                                     name="password"
                                     placeholder="Contraseña"
-                                    value={this.state.password}
-                                    onChange={this.onChange}
+                                    onChange={this.onChange.bind(this)}
                                 />
                             </div>
                             <div className="form-group">
@@ -82,8 +87,7 @@ class Reset extends Component {
                                     className="form-control"
                                     name="confirmPassword"
                                     placeholder=" Confirmar contraseña"
-                                    value={this.state.password}
-                                    onChange={this.onChange}
+                                    onChange={this.onChange.bind(this)}
                                 />
                             </div>
                             <button
