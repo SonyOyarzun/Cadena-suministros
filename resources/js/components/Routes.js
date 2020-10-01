@@ -49,7 +49,7 @@ class Routes extends Component {
                 <Route path="/Search" component={Search} />
 
                 <Route exact path="/Forgot" component={Forgot} />
-                <Route exact path="/Reset/:token?/:email?"  component={Reset} />
+                <Route exact path="/Reset/:email/:token"  component={Reset} />
 
 
             </div>

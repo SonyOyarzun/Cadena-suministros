@@ -43,7 +43,7 @@ class AccountsController extends Controller
 
     DB::table('password_resets')->insert([
       'email' => $request->email,
-      'token' =>  Str::random(60),
+      'token' => app('auth.password.broker')->createToken($user),
       'created_at' => Carbon::now()
     ]);
 
@@ -65,7 +65,7 @@ class AccountsController extends Controller
     //Retrieve the user from the database
     $user = User::where("email", $email)->first();
     //Generate, the password reset link. The token generated is embedded in the link
-    $link = config('base_url') . 'password/reset/' . $token . '?email=' . urlencode($user->email);
+    $link = url('/Reset').'/'.urlencode($user->email).'/'.urlencode($token);
 
     try {
       $api = Api_config::findOrFail(1);

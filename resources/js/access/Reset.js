@@ -15,13 +15,14 @@ class Reset extends Component {
     constructor(props){
         super(props);
         this.state = {
-        	token: props.match.params.token,
-            email : '',
+        	token: decodeURIComponent(props.match.params.token),
+            email : decodeURIComponent(props.match.params.email),
             password: '',
             password_confirmation: '',
         }
     }
 
+   
     onSubmit(e){
         e.preventDefault();
         const url = BASE_URL+'/api/password/reset' ;
@@ -51,6 +52,7 @@ class Reset extends Component {
 
 
     render() {
+        console.log('state :',this.state)
         return (
             <div style={styles.custom} className='responsive'>
             <Card>

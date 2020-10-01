@@ -32,7 +32,7 @@ Route::get('/Trace/{asset}',function () {
     return view('home');
 });
 
-Route::get('/Reset/{token}/{mail}',function () {
+Route::get('/Reset/{email}/{token}',function () {
     return view('home');
 });
 
@@ -42,7 +42,7 @@ Route::view('/{path?}', 'home')
      ->name('home');
 
 */
-Auth::routes();
+//Auth::routes();
 
 Route::get('/user/my/', 'UserController@my');
 Route::get('/user/search/', 'UserController@search');
