@@ -38,7 +38,7 @@ export const login = user => {
 export const forgot = user => {
     return axios
         .post(
-            'reset_password_without_token',
+            '/reset_password_without_token',
             {
                 email: user.email,
             },
@@ -59,14 +59,14 @@ export const forgot = user => {
 export const reset = user => {
     return axios
         .post(
-            'reset_password_with_token',
+            '/reset_password_with_token',
             {
                 email: user.email,
                 password:user.token,
                 email:user.email,
                 password:user.password,
                 confirmPassword:user.confirmPassword
-                
+
             },
             {
                 headers: { 'Content-Type': 'application/json' }
@@ -74,7 +74,7 @@ export const reset = user => {
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-            console.log('forgot',response.data)
+            console.log('reset',response.data)
   
         })
         .catch(err => {

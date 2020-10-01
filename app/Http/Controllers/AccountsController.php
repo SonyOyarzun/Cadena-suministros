@@ -85,7 +85,26 @@ class AccountsController extends Controller
 
   public function resetPassword(Request $request)
 {
-  
+
+
+    if (!isset($request->email)) {
+    return "Debe ingresar mail";
+  } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+    return "Formato mail no valido";
+  } elseif (!User::where('email', $request->email)->exists()) {
+    return "Mail ya existe en los registros";
+  } elseif (!isset($request->password)) {
+    return "Debe ingresar contraseña";
+  } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $request->password)) {
+    return "Contraseña debe Contener: Mayúsculas, números y mas de 8 carácteres";
+  } elseif ($request->password != $request->confirmPassword) {
+    return "Contraseñas no coinciden";
+  } else {
+
+  }
+
+  return $request;
+  /*
     //Validate input
     $validator = Validator::make($request->all(), [
         'email' => 'required|email|exists:users,email',
@@ -93,6 +112,7 @@ class AccountsController extends Controller
         'token' => 'required' ]);
 
     //check if payload is valid before moving on
+    
     if ($validator->fails()) {
         return redirect()->back()->withErrors(['email' => 'Please complete the form']);
     }
@@ -124,8 +144,9 @@ class AccountsController extends Controller
     } else {
         return redirect()->back()->withErrors(['email' => trans('A Network Error occurred. Please try again.')]);
     }
-
+*/
 }
+
 }
 
 

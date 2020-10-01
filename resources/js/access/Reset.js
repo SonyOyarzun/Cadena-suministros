@@ -40,7 +40,7 @@ class Reset extends Component {
         }
 
         reset(user).then(res => {
-            this.props.history.push(`/`)
+          //  this.props.history.push(`/`)
         })
     }
 
