@@ -140,6 +140,20 @@ class AccountsController extends Controller
       DB::table('password_resets')->where('email', $user->email)
         ->delete();
 
+      try {
+        $api = Api_config::findOrFail(1);
+
+        $objDemo = new \stdClass();
+        $objDemo->receiver  = $user->name;
+        $objDemo->logotype  = asset('storage/images/' . $api->logotype);
+  
+        Mail::to($user->email)->send(new ResetSuccessPassEmail($objDemo));
+      } catch (\Throwable $th) {
+        return $th->getMessage();
+      }  
+
+
+
       if ($this->successResetEmail($request->email)) {
         return trans('Email enviado');
       } else {
