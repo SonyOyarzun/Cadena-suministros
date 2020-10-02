@@ -37,14 +37,17 @@ class AccountsController extends Controller
 
     if (!$user) {
 
-      return (['email' => trans('User does not exist')]);
+      return (['email' => trans('Usuario no registrado')]);
     }
 
     //Create Password Reset Token
 
+    $cadena = app('auth.password.broker')->createToken($user);
+    $resultado = str_replace("/", "0", $cadena);
+
     DB::table('password_resets')->insert([
       'email' => $request->email,
-      'token' => app('auth.password.broker')->createToken($user),
+      'token' => $resultado,
       'created_at' => Carbon::now()
     ]);
 
@@ -53,9 +56,9 @@ class AccountsController extends Controller
       ->where('email', $request->email)->first();
 
     if ($this->sendResetEmail($request->email, $tokenData->token)) {
-      return trans('A reset link has been sent to your email address.');
+      return trans('Se ha enviado un enlace por correo para reestablecer contraseña');
     } else {
-      return (['error' => trans('A Network Error occurred. Please try again.')]);
+      return (['error' => trans('Error al enviar correo')]);
     }
   }
 
@@ -65,7 +68,7 @@ class AccountsController extends Controller
     //Retrieve the user from the database
     $user = User::where("email", $email)->first();
     //Generate, the password reset link. The token generated is embedded in the link
-    $link = url('/Reset') . '/' . urlencode($user->email) . '/' . urlencode($token);
+    $link = url('/Reset') . '/' . urlencode($user->email) . '/' . $token;
 
     try {
       $api = Api_config::findOrFail(1);
