@@ -82,8 +82,9 @@ export const reset = user => {
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
          //   console.log('reset', response.data)
+   
          if(response.data=='Email enviado'){
-            window.location.assign(window.location.host)
+            location.reload()
          }else{
             alert(response.data)
          }

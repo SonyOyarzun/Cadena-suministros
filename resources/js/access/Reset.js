@@ -46,7 +46,6 @@ class Reset extends Component {
         reset(user).then(res => {
             this.setState({ loading: false })
             this.setState({ message: 'Restablecer' })
-         //   this.props.history.push(`/`)
         })
     }
 
@@ -93,6 +92,7 @@ class Reset extends Component {
                             <button
                                 type="submit"
                                 className="btn btn-lg btn-primary btn-block"
+                                disabled={this.state.loading}
                             >
                                {this.state.message}
                             </button>
