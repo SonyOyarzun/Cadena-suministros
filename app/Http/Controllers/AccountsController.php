@@ -14,6 +14,7 @@ use Session;
 
 use App\User;
 use App\Api_config;
+use App\Password;
 
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\DB;
@@ -45,12 +46,18 @@ class AccountsController extends Controller
     $cadena =  Str::random(60);
     $resultado = str_replace("/", "0", $cadena);
 
+    $passwordReset = new Password();
+    $passwordReset->email = $request->email;
+    $passwordReset->token = $request->email;
+    $passwordReset->created_at = Carbon::now();
+    
+/*
     DB::table('password_resets')->insert([
       'email' => $request->email,
       'token' => $resultado,
       'created_at' => Carbon::now()
     ]);
-
+*/
     //Get the token just created above
     $tokenData = DB::table('password_resets')
       ->where('email', $request->email)->first();
@@ -139,19 +146,6 @@ class AccountsController extends Controller
       //Delete the token
       DB::table('password_resets')->where('email', $user->email)
         ->delete();
-
-      try {
-        $api = Api_config::findOrFail(1);
-
-        $objDemo = new \stdClass();
-        $objDemo->receiver  = $user->name;
-        $objDemo->logotype  = asset('storage/images/' . $api->logotype);
-  
-        Mail::to($user->email)->send(new ResetSuccessPassEmail($objDemo));
-      } catch (\Throwable $th) {
-        return $th->getMessage();
-      }  
-
 
 
       if ($this->successResetEmail($request->email)) {
