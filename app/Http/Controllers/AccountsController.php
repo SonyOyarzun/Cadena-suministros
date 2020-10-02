@@ -82,6 +82,24 @@ class AccountsController extends Controller
     }
   }
 
+  private function successResetEmail($email)
+  {
+    $user = User::where("email", $email)->first();
+
+    try {
+      $api = Api_config::findOrFail(1);
+      //Here send the link with CURL with an external email API 
+      $objDemo = new \stdClass();
+      $objDemo->receiver  = $user->name;
+      $objDemo->logotype  = asset('storage/images/' . $api->logotype);
+
+      Mail::to($user->email)->send(new ResetSuccessPassEmail($objDemo));
+      return true;
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+
   public function resetPassword(Request $request)
   {
 
@@ -102,7 +120,7 @@ class AccountsController extends Controller
 
       $tokenData = DB::table('password_resets')
         ->where('token', $request->token)->first();
-      // Redirect the user back to the password reset request form if the token is invalid
+
       if (!$tokenData) return 'Token no coincide';
 
       $user = User::where('email', $tokenData->email)->first();
@@ -119,15 +137,11 @@ class AccountsController extends Controller
       DB::table('password_resets')->where('email', $user->email)
         ->delete();
 
-      
-        $api = Api_config::findOrFail(1);
-        //Here send the link with CURL with an external email API 
-        $objDemo = new \stdClass();
-        $objDemo->receiver  = $user->name;
-        $objDemo->logotype  = asset('storage/images/' . $api->logotype);
-  
-        Mail::to($user->email)->send(new ResetSuccessPassEmail($objDemo));
-
+      if ($this->successResetEmail($request->email)) {
+        return trans('Email enviado');
+      } else {
+        return (['error' => trans('Error al enviar')]);
+      }
     }
   }
 }
