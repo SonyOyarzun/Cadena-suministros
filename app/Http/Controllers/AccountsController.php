@@ -126,7 +126,8 @@ class AccountsController extends Controller
 
       if (!$user) return 'Email no encontrada';
 
-      $user->password = Hash::make($request->password);
+    //  $user->password = Hash::make($request->password);
+      $user->password = bcrypt($request->password);
       $user->update(); //or $user->save();
 
       //login the user immediately they change password successfully
