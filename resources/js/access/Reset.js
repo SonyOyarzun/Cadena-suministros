@@ -65,7 +65,7 @@ class Reset extends Component {
                                     className="form-control"
                                     name="Mail"
                                     placeholder="Ingrese Mail"
-                                    defaultValue={this.state.email}
+                                    value={this.state.email}
                                     onChange={this.onChange.bind(this)}
                                 />
                             </div>

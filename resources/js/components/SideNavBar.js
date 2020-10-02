@@ -20,9 +20,6 @@ class SideNavBar extends Component {
     this.handleLink = this.handleLink.bind(this);
   }
 
-  componentDidMount(){
-    this.props.history.push('/');
-  }
 
   handleLink(path) {
     this.props.history.push(path);

@@ -136,9 +136,9 @@ class AccountsController extends Controller
 
 
       if ($this->successResetEmail($request->email)) {
-        return trans('Email enviado');
+        return trans('Contraseña Restablecida');
       } else {
-        return (['error' => trans('Error al enviar')]);
+        return (['error' => trans('Error al Restablecer')]);
       }
     }
   }
