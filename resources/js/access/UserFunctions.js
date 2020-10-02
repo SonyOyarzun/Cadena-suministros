@@ -75,7 +75,7 @@ export const reset = user => {
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
             console.log('reset',response.data)
-  
+            location.reload()
         })
         .catch(err => {
             console.log(err)
