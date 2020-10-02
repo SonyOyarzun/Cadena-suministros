@@ -88,7 +88,7 @@ class AccountsController extends Controller
 
     try {
       $api = Api_config::findOrFail(1);
-      //Here send the link with CURL with an external email API 
+
       $objDemo = new \stdClass();
       $objDemo->receiver  = $user->name;
       $objDemo->logotype  = asset('storage/images/' . $api->logotype);
@@ -102,7 +102,6 @@ class AccountsController extends Controller
 
   public function resetPassword(Request $request)
   {
-
 
     if (!isset($request->email)) {
       return "Debe ingresar mail";
