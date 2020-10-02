@@ -6,7 +6,7 @@ import {Card} from 'react-bootstrap';
 
 const styles = {
     custom: {
-        width: "300px",
+        width: "400px",
         height: "70px",
     }
 }
@@ -19,8 +19,8 @@ class Reset extends Component {
             email : decodeURIComponent(props.match.params.email),
             password: '',
             confirmPassword: '',
+            message: 'Restablecer',
             loading: false,
-            message:''
         }
         this.onSubmit = this.onSubmit.bind(this); 
         this.onChange = this.onChange.bind(this); 
@@ -33,6 +33,9 @@ class Reset extends Component {
     onSubmit(e) {
         e.preventDefault()
 
+        this.setState({ loading: true })
+        this.setState({ message: 'Cargando...' })
+
         const user = {
             email: this.state.email,
             password: this.state.password,
@@ -41,8 +44,9 @@ class Reset extends Component {
         }
 
         reset(user).then(res => {
-           // this.props.history.push(`/`)
-        //   location.reload()
+            this.setState({ loading: false })
+            this.setState({ message: 'Restablecer' })
+         //   this.props.history.push(`/`)
         })
     }
 
@@ -90,7 +94,7 @@ class Reset extends Component {
                                 type="submit"
                                 className="btn btn-lg btn-primary btn-block"
                             >
-                                Restablecer
+                               {this.state.message}
                             </button>
                         </form>
                </Card.Text>

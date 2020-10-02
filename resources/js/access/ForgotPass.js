@@ -6,7 +6,7 @@ import {Card} from 'react-bootstrap';
 
 const styles = {
     custom: {
-        width: "300px",
+        width: "400px",
         height: "70px",
     }
 }
@@ -19,6 +19,8 @@ class ForgotPass extends Component {
             last_name: '',
             email: '',
             password: '',
+            loading: false,
+            message: 'Solicitar',
             errors: {}
         }
 
@@ -32,12 +34,16 @@ class ForgotPass extends Component {
     onSubmit(e) {
         e.preventDefault()
 
+        this.setState({ loading: true })
+        this.setState({ message: 'Cargando...' })
+
         const user = {
             email: this.state.email
         }
 
         forgot(user).then(res => {
-            this.props.history.push(`/`)
+          this.setState({ loading: false })
+          this.setState({ message: 'Solicitar' })
         })
     }
 
@@ -62,9 +68,9 @@ class ForgotPass extends Component {
                             </div>   
                             <button
                                 type="submit"
-                                className="btn btn-lg btn-primary btn-block"
+                                className="btn btn-lg btn-primary btn-block" disabled={this.state.loading}
                             >
-                                Solicitar
+                                {this.state.message}
                             </button>
                         </form>
                </Card.Text>

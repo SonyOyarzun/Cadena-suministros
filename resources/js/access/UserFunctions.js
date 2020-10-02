@@ -54,7 +54,8 @@ export const forgot = user => {
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-            console.log('forgot', response.data)
+         //   console.log('forgot', response.data)
+            alert(response.data)
 
         })
         .catch(err => {
@@ -80,7 +81,13 @@ export const reset = user => {
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-            console.log('reset', response.data)
+         //   console.log('reset', response.data)
+         if(response.data=='Email enviado'){
+            window.location.assign(window.location.host)
+         }else{
+            alert(response.data)
+         }
+           
         })
         .catch(err => {
             console.log(err)

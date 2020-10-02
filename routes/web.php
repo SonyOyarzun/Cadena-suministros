@@ -36,6 +36,10 @@ Route::get('/Reset/{email}/{token}',function () {
     return view('home');
 });
 
+Route::get('/Forgot',function () {
+    return view('home');
+});
+
 /*
 Route::view('/{path?}', 'home')
      ->where('path', '.*')

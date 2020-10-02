@@ -34,14 +34,11 @@ class AccountsController extends Controller
 
     $user =  User::where("email", $request->email)->first();
 
-    //Check if the user exists
-
     if (!$user) {
 
       return (['email' => trans('Usuario no registrado')]);
     }
 
-    //Create Password Reset Token
 
     $cadena =  Str::random(60);
     $resultado = str_replace("/", "0", $cadena);
@@ -51,11 +48,10 @@ class AccountsController extends Controller
     $passwordReset->token = $resultado;
     $passwordReset->save();
 
-    //Get the token just created above
     $tokenData = Password::where('email', $request->email)->first();
 
     if ($this->sendResetEmail($request->email, $tokenData->token)) {
-      return trans('Se ha enviado un enlace por correo para reestablecer contraseña');
+      return trans('Se ha enviado un enlace por correo para restablecer contraseña');
     } else {
       return (['error' => trans('Error al enviar correo')]);
     }
