@@ -42,6 +42,7 @@ class Reset extends Component {
 
         reset(user).then(res => {
            // this.props.history.push(`/`)
+           location.reload()
         })
     }
 

@@ -180,36 +180,33 @@ class UserController extends Controller
   public function userLogin(Request $request)
   {
 
-    $validator          =       Validator::make(
-      $request->all(),
-      [
-        "email"             =>          "required|email",
-        "password"          =>          "required"
-      ]
-    );
-
-    if ($validator->fails()) {
-      return response()->json(["status" => "failed", "validation_error" => $validator->errors()]);
-    }
-
-    $data       =       User::where("email", $request->email)->first();
-
-    if (!is_null($data)) {
-
-
-      if (Hash::check($request->password, $data->password)) {
-
-       $credentials = $request->only('email', 'password');
-
-       Auth::attempt($credentials);
-
-       return 'Usuario logueado';
-
-      }
-
+    if (!isset($request->email)) {
+      return "Debe ingresar mail";
+    } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+      return "Formato mail no valido";
+    } elseif (!isset($request->password)) {
+      return "Debe ingresar contraseña";
     } else {
 
-      return 'Mail no registrado';
+      $user = User::where("email", $request->email)->first();
+
+      if (!is_null($user)) {
+
+        if (Hash::check($request->password, $user->password)) {
+
+          $credentials = $request->only('email', 'password');
+
+          Auth::attempt($credentials);
+
+          return 'Usuario logueado';
+        } else {
+
+          return 'Contraseña no coincide';
+        }
+      } else {
+
+        return 'Mail no registrado';
+      }
     }
   }
 }

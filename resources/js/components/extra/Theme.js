@@ -105,6 +105,11 @@ const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
 }
 
+.navbar.navbar-light .navbar-toggler-icon {
+  cursor: pointer;
+  background-image: url(/img/Toggle.png);
+}
+
 #back{
   background: url('/storage/images/${( props.config.background )}');
   background-position: center center;

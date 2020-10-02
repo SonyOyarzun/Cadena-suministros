@@ -48,7 +48,8 @@ class Login extends Component {
 
         login(user).then(res => {
             if (res) {
-                this.props.history.push(`/`)
+            //    this.props.history.push(`/`)
+                location.reload()
             }
         })
     }

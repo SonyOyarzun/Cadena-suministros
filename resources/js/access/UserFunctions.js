@@ -27,8 +27,14 @@ export const login = user => {
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-            console.log('login',response.data)
-            location.reload()
+            //     console.log('login',response.data)
+
+            if (response.data != 'Usuario logueado') {
+                alert(response.data)
+            } else {
+                location.reload()
+            }
+
         })
         .catch(err => {
             console.log(err)
@@ -48,8 +54,8 @@ export const forgot = user => {
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-            console.log('forgot',response.data)
-  
+            console.log('forgot', response.data)
+
         })
         .catch(err => {
             console.log(err)
@@ -62,10 +68,10 @@ export const reset = user => {
             '/reset_password_with_token',
             {
                 email: user.email,
-                token:user.token,
-                email:user.email,
-                password:user.password,
-                confirmPassword:user.confirmPassword
+                token: user.token,
+                email: user.email,
+                password: user.password,
+                confirmPassword: user.confirmPassword
 
             },
             {
@@ -74,8 +80,7 @@ export const reset = user => {
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-            console.log('reset',response.data)
-            location.reload()
+            console.log('reset', response.data)
         })
         .catch(err => {
             console.log(err)
