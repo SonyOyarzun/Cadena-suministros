@@ -7,18 +7,17 @@ import { NavLink, Link, withRouter } from 'react-router-dom';
 
 const styles = {
     custom: {
-        marginTop: "1.7vw",
-        marginBottom: "0.2vh",
-        marginRight: "0vw",
-        marginLeft: "0vw"
+        marginTop: "20px",
+        marginBottom: "0.2px",
+        marginRight: "0px",
+        marginLeft: "0px"
     },
     button: {
-        marginTop: "0.5vw",
-        width: "15vh",
-        height: "5vh",
-        marginRight: "0vw",
-        marginLeft: "0vw",
-        marginTop: "1.5vw"
+        width: "100px",
+        height: "40px",
+        marginRight: "0px",
+        marginLeft: "0px",
+        marginTop: "17px"
     }
 }
 
