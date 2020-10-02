@@ -131,7 +131,7 @@ export default function Pdf(props) {
 
 
     // x y width height
-    doc.addImage(logo, 'JPEG', 14, imgLogo, 35, 35);
+    doc.addImage(logo, 'JPEG', 14, imgLogo, 30, 15);
 
 
     //titulo
