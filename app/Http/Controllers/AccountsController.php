@@ -42,7 +42,7 @@ class AccountsController extends Controller
 
     //Create Password Reset Token
 
-    $cadena = app('auth.password.broker')->createToken($user);
+    $cadena =  Str::random(60);
     $resultado = str_replace("/", "0", $cadena);
 
     DB::table('password_resets')->insert([

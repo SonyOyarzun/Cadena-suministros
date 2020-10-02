@@ -62,7 +62,7 @@ export const reset = user => {
             '/reset_password_with_token',
             {
                 email: user.email,
-                password:user.token,
+                token:user.token,
                 email:user.email,
                 password:user.password,
                 confirmPassword:user.confirmPassword
