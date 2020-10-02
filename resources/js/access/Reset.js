@@ -7,7 +7,7 @@ import {Card} from 'react-bootstrap';
 const styles = {
     custom: {
         width: "300px",
-     //   height: "70vh",
+        height: "70px",
     }
 }
 
@@ -42,14 +42,14 @@ class Reset extends Component {
 
         reset(user).then(res => {
            // this.props.history.push(`/`)
-           location.reload()
+        //   location.reload()
         })
     }
 
     render() {
         console.log('state :',this.state)
         return (
-            <div style={styles.custom} className='responsive'>
+            <div style={styles.custom} className="mx-auto mt-3">
             <Card>
             <Card.Body>
               <Card.Title>Restablecer Contraseña</Card.Title>

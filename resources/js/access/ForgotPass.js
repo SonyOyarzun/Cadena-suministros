@@ -6,8 +6,8 @@ import {Card} from 'react-bootstrap';
 
 const styles = {
     custom: {
-        width: "30vw",
-        height: "70vh",
+        width: "300px",
+        height: "70px",
     }
 }
 
@@ -43,7 +43,7 @@ class ForgotPass extends Component {
 
     render() {
         return (
-            <div style={styles.custom} className='responsive'>
+            <div style={styles.custom} className="mx-auto mt-3">
             <Card>
             <Card.Body>
               <Card.Title>Recuperar contraseña</Card.Title>

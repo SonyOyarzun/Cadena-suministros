@@ -27,7 +27,7 @@ export const login = user => {
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-                 console.log('login',response.data)
+            //     console.log('login',response.data)
 
             if (response.data != 'Usuario logueado') {
                 alert(response.data)

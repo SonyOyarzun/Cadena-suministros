@@ -18,6 +18,13 @@ const styles = {
         marginRight: "0px",
         marginLeft: "0px",
         marginTop: "17px"
+    },
+    ref: {
+        width: "20px",
+        height: "10px",
+        marginRight: "0px",
+        marginLeft: "0px",
+        marginTop: "0px"
     }
 }
 
@@ -55,6 +62,7 @@ class Login extends Component {
 
     render() {
         return (
+            <div className="mx-auto col-12">
             <form noValidate onSubmit={this.onSubmit} className="row">
                 <div className='col-sm-4'>
                     <input
@@ -78,13 +86,14 @@ class Login extends Component {
                         style={styles.custom}
                     />
                     <div className='col-sm-12'>
-                    <Nav.Link><Link className='darkLight-text' to='/Forgot'>Recuperar contraseña</Link></Nav.Link>
+                    <Link className='darkLight-text' style={styles.ref} to='/Forgot'>Recuperar contraseña</Link>
                     </div>
                 </div>
                 <div className='col-sm-4'>
                 <MDBBtn type="submit" style={styles.button}>Ingresar</MDBBtn>
                 </div>
             </form>
+            </div>
         )
     }
 }

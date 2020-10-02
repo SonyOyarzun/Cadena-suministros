@@ -199,13 +199,17 @@ class UserController extends Controller
           Auth::attempt($credentials);
 
           return 'Usuario logueado';
+
         } else {
 
           return 'Contraseña no coincide';
+
         }
+
       } else {
 
         return 'Mail no registrado';
+        
       }
     }
   }
