@@ -331,6 +331,7 @@
                     <p style="margin: 10px 0; text-align: center;">
                     {{ $message_3 }}
                     </p>
+                    
                     </p>
                       </div>
                     </td>

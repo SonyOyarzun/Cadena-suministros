@@ -328,8 +328,22 @@
                     <p style="margin: 10px 0; text-align: center;">
                     {{ $message_2 }} {{date('d-m-yy')}}
                     </p>
+                   
                     </p>
                       </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;padding-top:20px;padding-right:25px;padding-bottom:10px;padding-left:25px;word-break:break-word;">
+                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+                        <tr>
+                          <td align="center" bgcolor="#42a569" role="presentation" style="border:none;border-radius:100px;cursor:auto;padding:15px 25px 15px 25px;background:#42a569;" valign="middle">
+                            <a href={{$demo->url}} style="background:#42a569;color:#ffffff;font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
+                              <b style="font-weight:700"><i style="font-style:normal"><b style="color:variables.textcolor">Ir a Aplicación</b></i></b>
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
                     </td>
                   </tr>
                 </table>

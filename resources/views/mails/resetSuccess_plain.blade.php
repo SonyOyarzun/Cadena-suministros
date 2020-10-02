@@ -1,5 +1,7 @@
 recibe el mail:     {{ $demo->receiver }},
 logo :              {{$demo->logotype }}
+url :               {{$demo->url}}
+
 
 valores desde el metodo build en la clase ResetSuccessPassEmail
 

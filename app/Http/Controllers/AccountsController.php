@@ -93,6 +93,7 @@ class AccountsController extends Controller
 
       $objDemo = new \stdClass();
       $objDemo->receiver  = $user->name;
+      $objDemo->url  = url('/');
       $objDemo->logotype  = asset('storage/images/' . $api->logotype);
 
       Mail::to($user->email)->send(new ResetSuccessPassEmail($objDemo));

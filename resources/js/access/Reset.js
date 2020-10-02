@@ -41,7 +41,7 @@ class Reset extends Component {
         }
 
         reset(user).then(res => {
-          //  this.props.history.push(`/`)
+            this.props.history.push(`/`)
         })
     }
 
@@ -51,7 +51,7 @@ class Reset extends Component {
             <div style={styles.custom} className='responsive'>
             <Card>
             <Card.Body>
-              <Card.Title>Reestablecer Contraseña</Card.Title>
+              <Card.Title>Restablecer Contraseña</Card.Title>
                <Card.Text>
                <form noValidate onSubmit={this.onSubmit}>
                             <div className="form-group">
@@ -89,7 +89,7 @@ class Reset extends Component {
                                 type="submit"
                                 className="btn btn-lg btn-primary btn-block"
                             >
-                                Reestablecer
+                                Restablecer
                             </button>
                         </form>
                </Card.Text>
