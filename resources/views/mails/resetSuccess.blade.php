@@ -141,7 +141,7 @@
                   <tr>
                     <td align="left" style="font-size:0px;padding:0px 0px 0px 25px;padding-top:0px;padding-bottom:0px;word-break:break-word;">
                       <div style="font-family:Open Sans, Helvetica, Arial, sans-serif;font-size:11px;line-height:22px;text-align:left;color:#797e82;">
-                        <p style="text-align: center; margin: 10px 0;">{{config('app.name')}}  {{date("d-m-yy")}}<a target="_blank" rel="noopener noreferrer"></a><span style="color:#797e82;"> Notificación Estado de Producto</span></p>
+                        <p style="text-align: center; margin: 10px 0;">{{config('app.name')}}  {{date("d-m-yy")}}<a target="_blank" rel="noopener noreferrer"></a><span style="color:#797e82;">Contraseña restablecida con exito</span></p>
                       </div>
                     </td>
                   </tr>

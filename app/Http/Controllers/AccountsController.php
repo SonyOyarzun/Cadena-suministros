@@ -46,21 +46,13 @@ class AccountsController extends Controller
     $cadena =  Str::random(60);
     $resultado = str_replace("/", "0", $cadena);
 
-    $passwordReset = new Password();
+    $passwordReset = new Password;
     $passwordReset->email = $request->email;
-    $passwordReset->token = $request->email;
-    $passwordReset->created_at = Carbon::now();
-    
-/*
-    DB::table('password_resets')->insert([
-      'email' => $request->email,
-      'token' => $resultado,
-      'created_at' => Carbon::now()
-    ]);
-*/
+    $passwordReset->token = $resultado;
+    $passwordReset->save();
+
     //Get the token just created above
-    $tokenData = DB::table('password_resets')
-      ->where('email', $request->email)->first();
+    $tokenData = Password::where('email', $request->email)->first();
 
     if ($this->sendResetEmail($request->email, $tokenData->token)) {
       return trans('Se ha enviado un enlace por correo para reestablecer contraseña');
@@ -127,8 +119,7 @@ class AccountsController extends Controller
       return "Contraseñas no coinciden";
     } else {
 
-      $tokenData = DB::table('password_resets')
-        ->where('token', $request->token)->first();
+      $tokenData = Password::where('token', $request->token)->first();
 
       if (!$tokenData) return 'Token no coincide';
 
@@ -136,7 +127,7 @@ class AccountsController extends Controller
 
       if (!$user) return 'Email no encontrada';
 
-    //  $user->password = Hash::make($request->password);
+      //  $user->password = Hash::make($request->password);
       $user->password = bcrypt($request->password);
       $user->update(); //or $user->save();
 
@@ -144,8 +135,7 @@ class AccountsController extends Controller
       Auth::login($user);
 
       //Delete the token
-      DB::table('password_resets')->where('email', $user->email)
-        ->delete();
+      Password::where('email', $user->email)->delete();
 
 
       if ($this->successResetEmail($request->email)) {
