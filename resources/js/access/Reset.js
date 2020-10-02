@@ -36,7 +36,7 @@ class Reset extends Component {
         const user = {
             email: this.state.email,
             password: this.state.password,
-            confirmPassword:this.state.password
+            confirmPassword:this.state.confirmPassword
         }
 
         reset(user).then(res => {
