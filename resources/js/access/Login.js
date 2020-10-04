@@ -7,11 +7,10 @@ import { NavLink, Link, withRouter } from 'react-router-dom';
 
 const styles = {
     custom: {
-        marginLeft: "10px",
+        marginLeft: "5px",
         marginRight: "0px",
         marginTop: "15px",
-
-        float: 'right',
+        marginBottom: "0px",
         height: "30px",
         width: "100%",
     },
@@ -68,7 +67,7 @@ class Login extends Component {
         return (
             <div className="mx-auto col-12">
             <form noValidate onSubmit={this.onSubmit} className="row">
-                <div className='col-sm-5'>
+                <div className='col-sm-4'>
                     <input
                         type="email"
                         className="form-control"
@@ -79,7 +78,7 @@ class Login extends Component {
                         style={styles.custom}
                     />
                 </div>
-                <div className='row col-sm-5'>
+                <div className='col-sm-5'>
                     <input
                         type="password"
                         className="form-control"
@@ -93,7 +92,7 @@ class Login extends Component {
                     <Link className='darkLight-text' to='/Forgot'>Recuperar contraseña</Link>
                     </div>
                 </div>
-                <div className='col-sm-2' >
+                <div className='col-sm-3' >
                 <MDBBtn type="submit" style={styles.button}>Ingresar</MDBBtn>
                 </div>
             </form>
