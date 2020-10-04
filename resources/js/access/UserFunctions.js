@@ -13,6 +13,42 @@ export const register = newUser => {
         })
 }
 
+export const deleteUser = user => {
+    return axios({
+            method: 'delete',
+            url: '/user/delete/',
+            data: {
+              id: user.id,
+            }
+          }
+        )
+        .then(response => {
+            console.log(response)
+            alert(response.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+/**
+ * 
+axios({
+      method: 'delete',
+      url: '/user/delete/',
+      data: {
+        id: props.id,
+      }
+    })
+      .then((response) => {
+        console.log(response);
+        alert(response.data)
+        props.getData()
+      }, (error) => {
+        console.log(error);
+      });
+ */
+
 export const login = user => {
     return axios
         .post(
