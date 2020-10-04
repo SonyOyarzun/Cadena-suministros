@@ -7,28 +7,29 @@ import { NavLink, Link, withRouter } from 'react-router-dom';
 
 const styles = {
     custom: {
-        marginTop: "15px",
-        marginBottom: "0px",
+        marginLeft: "10px",
         marginRight: "0px",
-        marginLeft: "0px",
+        marginTop: "15px",
+
         float: 'right',
         height: "30px",
+        width: "100%",
     },
     button: {
-        width: "100px",
-        height: "45px",
-        marginRight: "0px",
         marginLeft: "0px",
+        marginRight: "0px",
         marginTop: "10px",
+        marginBottom: "0px",
+        width: "100%",
+        height: "45px",
     },
     ref: {
-        width: "20px",
-        height: "10px",
         marginRight: "0px",
         marginLeft: "0px",
         marginTop: "0px",
         marginBottom: "10px",
-        float: 'left'
+        width: "100%",
+        height: "10px",
     }
 }
 
@@ -70,7 +71,7 @@ class Login extends Component {
                 <div className='col-sm-5'>
                     <input
                         type="email"
-                        className=""
+                        className="form-control"
                         name="email"
                         placeholder="Mail"
                         value={this.state.email}
@@ -81,7 +82,7 @@ class Login extends Component {
                 <div className='row col-sm-5'>
                     <input
                         type="password"
-                        className=""
+                        className="form-control"
                         name="password"
                         placeholder="Contraseña"
                         value={this.state.password}
