@@ -3,12 +3,12 @@ import React, { useState, useEffect,useLayoutEffect } from 'react';
 
 
 const defaultTheme = {
-  body: '#f1f1f1',
-  border: '#363537',
+  body: '#0d7377',
+  border: '#212121',
   font: '1rem',
-  text: '#363537',
-  toggleBorder: '#fff',
-  gradient: 'linear-gradient(#d4d2d2, #FAFAFA)',
+  text: '#eeeeee',
+  toggleBorder: '#212121',
+  gradient: 'linear-gradient(#32e0c4, #0d7377)',
 }
 
 const specialTheme = {
@@ -110,6 +110,8 @@ const GlobalStyles = createGlobalStyle`
   background-image: url(/img/Toggle.png);
 }
 
+
+
 #back{
   background: url('/storage/images/${( props.config.background )}');
   background-position: center center;
@@ -185,6 +187,11 @@ p {
   color: ${({ theme }) => theme.text} !important;
 }
 
+/*Color de item del nav*/
+.sidenav---sidenav-subnavitem---1cD47 :hover{
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text} !important; 
+}
 
 /*Paginacion de tablas*/
 .page-link {
@@ -229,6 +236,8 @@ table td, table th {
   color: ${({ theme }) => theme.text};
   border: ${({ theme }) => theme.border};
   padding: 3px 2px;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 table tr:nth-child(even) {

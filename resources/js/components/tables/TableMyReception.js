@@ -54,13 +54,13 @@ class TableMyReception extends Component {
 
   render() {
 
-    const save = (id_transaction, prevTransaction, to) => {
+    const save = (id_transaction, asset, to) => {
       axios({
         method: 'post',
         url: 'chain/reSend',
         data: {
           transaction: id_transaction,
-          prevTransaction: prevTransaction,
+          asset: asset,
           to: to,
         }
       })
