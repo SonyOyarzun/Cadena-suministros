@@ -87,7 +87,7 @@ export const reset = user => {
                
         })
         .catch(err => {
-            console.log(err)
+            console.log('ex',err)
         })
 }
 

@@ -31,49 +31,51 @@ class AccountsController extends Controller
 {
   public function validatePasswordRequest(Request $request)
   {
+    try {
+      $user =  User::where("email", $request->email)->first();
 
-    $user =  User::where("email", $request->email)->first();
+      if (!$user) {
+        return (trans('Usuario no registrado'));
+      }
 
-    if (!$user) {
+      $cadena =  Str::random(60);
+      $resultado = str_replace("/", "0", $cadena);
 
-      return (['email' => trans('Usuario no registrado')]);
+      $passwordReset = new Password;
+      $passwordReset->email = $request->email;
+      $passwordReset->token = $resultado;
+      $passwordReset->save();
+
+      $tokenData = Password::where('email', $request->email)->first();
+
+      if ($this->sendResetEmail($request->email, $tokenData->token)) {
+        return (trans('Se ha enviado un enlace por correo para restablecer contraseña'));
+      } else {
+        return (trans('Error al enviar correo'));
+      }
+
+    } catch (\Throwable $th) {
+      return (trans('Error al enviar correo'));
     }
-
-
-    $cadena =  Str::random(60);
-    $resultado = str_replace("/", "0", $cadena);
-
-    $passwordReset = new Password;
-    $passwordReset->email = $request->email;
-    $passwordReset->token = $resultado;
-    $passwordReset->save();
-
-    $tokenData = Password::where('email', $request->email)->first();
-
-    if ($this->sendResetEmail($request->email, $tokenData->token)) {
-      return trans('Se ha enviado un enlace por correo para restablecer contraseña');
-    } else {
-      return (['error' => trans('Error al enviar correo')]);
-    }
+    
   }
 
   private function sendResetEmail($email, $token)
   {
-
-    //Retrieve the user from the database
-    $user = User::where("email", $email)->first();
-    //Generate, the password reset link. The token generated is embedded in the link
-    $link = url('/Reset') . '/' . urlencode($user->email) . '/' . $token;
-
     try {
+      $user = User::where("email", $email)->first();
+
+      $link = url('/Reset') . '/' . urlencode($user->email) . '/' . $token;
+
       $api = Api_config::findOrFail(1);
-      //Here send the link with CURL with an external email API 
+
       $objDemo = new \stdClass();
       $objDemo->receiver  = $user->name;
       $objDemo->url       = $link;
       $objDemo->logotype  = asset('storage/images/' . $api->logotype);
 
       Mail::to($email)->send(new ForgotPassEmail($objDemo));
+
       return true;
     } catch (\Exception $e) {
       return false;
