@@ -146,6 +146,7 @@ html * {
   background-color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text}!important;
 }
+
 .dropdown-menu {
   background-color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text}!important;

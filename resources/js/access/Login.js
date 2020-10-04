@@ -51,6 +51,8 @@ class Login extends Component {
     onSubmit(e) {
         e.preventDefault()
 
+        this.props.history.push(`/`)
+        
         const user = {
             email: this.state.email,
             password: this.state.password
