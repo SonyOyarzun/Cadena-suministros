@@ -29,7 +29,7 @@ export const login = user => {
             localStorage.setItem('usertoken', response.data.token)
             //     console.log('login',response.data)
 
-            if (response.data != 'Usuario logueado') {
+            if (response.data != true) {
                 alert(response.data)
             } else {
                 location.reload()
@@ -82,12 +82,11 @@ export const reset = user => {
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
          //   console.log('reset', response.data)
-  
             alert(response.data)
                
         })
         .catch(err => {
-            console.log('ex',err)
+            console.log(err.data)
         })
 }
 

@@ -180,38 +180,45 @@ class UserController extends Controller
   public function userLogin(Request $request)
   {
 
-    if (!isset($request->email)) {
-      return "Debe ingresar mail";
-    } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
-      return "Formato mail no valido";
-    } elseif (!isset($request->password)) {
-      return "Debe ingresar contraseña";
-    } else {
+    try {
 
-      $user = User::where("email", $request->email)->first();
-
-      if (!is_null($user)) {
-
-        if (Hash::check($request->password, $user->password)) {
-
-          $credentials = $request->only('email', 'password');
-
-          Auth::attempt($credentials);
-
-          return 'Usuario logueado';
-
-        } else {
-
-          return 'Contraseña no coincide';
-
-        }
-
+      if (!isset($request->email)) {
+        return "Debe ingresar mail";
+      } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+        return "Formato mail no valido";
+      } elseif (!isset($request->password)) {
+        return "Debe ingresar contraseña";
       } else {
-
-        return 'Mail no registrado';
-        
+  
+        $user = User::where("email", $request->email)->first();
+  
+        if (!is_null($user)) {
+  
+          if (Hash::check($request->password, $user->password)) {
+  
+            $credentials = $request->only('email', 'password');
+  
+            Auth::attempt($credentials);
+  
+            return true;
+  
+          } else {
+  
+            return 'Contraseña no coincide';
+  
+          }
+  
+        } else {
+  
+          return 'Mail no registrado';
+          
+        }
       }
+    } catch (\Throwable $th) {
+     return 'Error al Ingresar';
     }
+
+    
   }
 }
 

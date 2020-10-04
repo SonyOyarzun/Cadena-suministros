@@ -57,7 +57,7 @@ class AccountsController extends Controller
     } catch (\Throwable $th) {
       return (trans('Error al enviar correo'));
     }
-    
+
   }
 
   private function sendResetEmail($email, $token)
@@ -84,9 +84,8 @@ class AccountsController extends Controller
 
   private function successResetEmail($email)
   {
-    $user = User::where("email", $email)->first();
-
     try {
+      $user = User::where("email", $email)->first();
       $api = Api_config::findOrFail(1);
 
       $objDemo = new \stdClass();
@@ -95,6 +94,7 @@ class AccountsController extends Controller
       $objDemo->logotype  = asset('storage/images/' . $api->logotype);
 
       Mail::to($user->email)->send(new ResetSuccessPassEmail($objDemo));
+
       return true;
     } catch (\Exception $e) {
       return false;
@@ -126,21 +126,17 @@ class AccountsController extends Controller
 
       if (!$user) return 'Email no encontrada';
 
-      //  $user->password = Hash::make($request->password);
       $user->password = bcrypt($request->password);
-      $user->update(); //or $user->save();
+      $user->update(); 
 
-      //login the user immediately they change password successfully
       Auth::login($user);
 
-      //Delete the token
       Password::where('email', $user->email)->delete();
 
-
       if ($this->successResetEmail($request->email)) {
-        return trans('Contraseña Restablecida');
+        return (trans('Contraseña Restablecida'));
       } else {
-        return (['error' => trans('Error al Restablecer')]);
+        return (trans('Error al Restablecer'));
       }
     }
   }
@@ -154,4 +150,3 @@ class AccountsController extends Controller
 
 
 
-//https://github.com/lijujohn13/react-laravel-auth/tree/master/resources/assets/js
