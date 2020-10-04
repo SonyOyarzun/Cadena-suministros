@@ -33,8 +33,8 @@ const styles = {
 }
 
 class Login extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             email: '',
             password: '',
@@ -57,48 +57,46 @@ class Login extends Component {
         }
 
         login(user).then(res => {
-            if (res) {
-                this.props.history.push(`/`)
-            }
+            this.props.history.push(`/`)
         })
     }
 
     render() {
         return (
             <div className="mx-auto col-12">
-            <form noValidate onSubmit={this.onSubmit} className="row">
-                <div className='col-sm-4'>
-                    <input
-                        type="email"
-                        className="form-control"
-                        name="email"
-                        placeholder="Mail"
-                        value={this.state.email}
-                        onChange={this.onChange}
-                        style={styles.custom}
-                    />
-                </div>
-                <div className='col-sm-5'>
-                    <input
-                        type="password"
-                        className="form-control"
-                        name="password"
-                        placeholder="Contraseña"
-                        value={this.state.password}
-                        onChange={this.onChange}
-                        style={styles.custom}
-                    />
-                    <div className='col-sm-12' style={styles.ref}>
-                    <Link className='darkLight-text' to='/Forgot'>Recuperar contraseña</Link>
+                <form noValidate onSubmit={this.onSubmit} className="row">
+                    <div className='col-sm-4'>
+                        <input
+                            type="email"
+                            className="form-control"
+                            name="email"
+                            placeholder="Mail"
+                            value={this.state.email}
+                            onChange={this.onChange}
+                            style={styles.custom}
+                        />
                     </div>
-                </div>
-                <div className='col-sm-3' >
-                <MDBBtn type="submit" style={styles.button}>Ingresar</MDBBtn>
-                </div>
-            </form>
+                    <div className='col-sm-5'>
+                        <input
+                            type="password"
+                            className="form-control"
+                            name="password"
+                            placeholder="Contraseña"
+                            value={this.state.password}
+                            onChange={this.onChange}
+                            style={styles.custom}
+                        />
+                        <div className='col-sm-12' style={styles.ref}>
+                            <Link className='darkLight-text' to='/Forgot'>Recuperar contraseña</Link>
+                        </div>
+                    </div>
+                    <div className='col-sm-3' >
+                        <MDBBtn type="submit" style={styles.button}>Ingresar</MDBBtn>
+                    </div>
+                </form>
             </div>
         )
     }
 }
 
-export default Login
+export default withRouter(Login)
