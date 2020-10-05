@@ -52,14 +52,9 @@ class Login extends Component {
         e.preventDefault()
 
         this.props.history.push(`/`)
-        
-        const user = {
-            email: this.state.email,
-            password: this.state.password
-        }
 
-        login(user).then(res => {
-            this.props.history.push(`/`)
+        login(this.state).then(res => {
+            
         })
     }
 
