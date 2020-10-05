@@ -14,38 +14,30 @@ function EditUser(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [state, setState] = useState({ id: props.id, name: props.name ,email:props.email,role: props.role, path: props.path, loading: false , message: 'Actualizar'})
+  const [state, setState] = useState({ id: props.id, name: props.name , email: props.email,role: props.role, path: props.path})
 
-
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('Actualizar')
 
 
   const onChange=(e) =>{
     const { name, value } = e.target;
     setState(prevState => ({ ...prevState,[name]: value }));
-  //setState(currentTarget => ({ ...currentTarget,[name]: value }));
-  //  console.log(e.currentTarget);
-    console.log('name',name,'value',value)
   }
+  console.log('state ',state)
 
   const onSubmit=(e) => {
     e.preventDefault()
 
-    setState({ loading: true })
-    setState({ message: 'Cargando...' })
+    setLoading(true )
+    setMessage('Cargando...')
 
-    const user = {
-      id:     state.id,
-      name:   state.name,
-      email:  state.email,
-      role:   state.role,
-      path:   state.path
-    }
-    console.log('user ',user)
-  //  console.log('state ',state)
+    console.log('state ',state)
 
-    editUser(user).then(res => {
-      setState({ loading: false })
-      setState({ message: 'Restablecer' })
+    editUser(state).then(res => {
+      props.getData()
+      setLoading(false)
+      setMessage('Restablecer')
     })
   }
 
@@ -92,7 +84,7 @@ function EditUser(props) {
             Cerrar
           </Button>
           <Button name='message' variant="primary" onClick={onSubmit}>
-            {state.message}
+            {message}
           </Button>
         </Modal.Footer>
       </Modal>
