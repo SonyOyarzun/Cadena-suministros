@@ -24,15 +24,13 @@ function EditUser(props) {
     const { name, value } = e.target;
     setState(prevState => ({ ...prevState,[name]: value }));
   }
-  console.log('state ',state)
+ // console.log('state ',state)
 
   const onSubmit=(e) => {
     e.preventDefault()
 
     setLoading(true )
     setMessage('Cargando...')
-
-    console.log('state ',state)
 
     editUser(state).then(res => {
       props.getData()
