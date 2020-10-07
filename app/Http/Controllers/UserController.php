@@ -19,7 +19,7 @@ use PhpParser\Node\Stmt\TryCatch;
 
 class UserController extends Controller
 {
-  public function index(Request $request)
+  public function list(Request $request)
   {
     if (!isset($request->resp)) {
       $user = User::all();
@@ -66,7 +66,7 @@ class UserController extends Controller
     return json_encode($user);
   }
 
-  public function create(Request $request)
+  public function new(Request $request)
   {
 
     if (!isset($request->name)) {
@@ -105,7 +105,7 @@ class UserController extends Controller
     }
   }
 
-  public function update(Request $request)
+  public function edit(Request $request)
   {
     $user = User::findOrFail($request->id);
     if ($user == null) {

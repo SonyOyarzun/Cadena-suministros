@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export const register = newUser => {
+export const newUser = user => {
     return axios
-        .post('api/register', newUser, {
+        .post('/user/new/', user, {
             headers: { 'Content-Type': 'application/json' }
         })
         .then(response => {
@@ -46,7 +46,7 @@ export const deleteUser = user => {
 
 export const changePass = user => {
     return axios
-        .put('/user/pass/', user, {
+        .put('/user/changePass/', user, {
             headers: { 'Content-Type': 'application/json' }
         })
         .then(response => {

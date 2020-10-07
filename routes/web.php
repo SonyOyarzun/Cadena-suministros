@@ -50,10 +50,10 @@ Route::view('/{path?}', 'home')
 
 Route::get('/user/my/', 'UserController@my');
 Route::get('/user/search/', 'UserController@search');
-Route::get('/user/list/', 'UserController@index');  
-Route::put('/user/edit/', 'UserController@update');  
-Route::put('/user/pass/', 'UserController@changePass');  
-Route::post('/user/new/', 'UserController@create');  
+Route::get('/user/list/', 'UserController@list');  
+Route::put('/user/edit/', 'UserController@edit');  
+Route::put('/user/changePass/', 'UserController@changePass');  
+Route::post('/user/new/', 'UserController@new');  
 Route::delete('/user/delete/', 'UserController@delete');  
 
 //custom laravel access
