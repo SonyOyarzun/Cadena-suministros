@@ -7,6 +7,7 @@ export const newUser = user => {
         })
         .then(response => {
             console.log(response)
+            alert(response.data)
         })
         .catch(err => {
             console.log(err)
@@ -20,6 +21,7 @@ export const editUser = user => {
         })
         .then(response => {
             console.log(response)
+            alert(response.data)
         })
         .catch(err => {
             console.log(err)

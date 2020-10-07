@@ -23,7 +23,7 @@ function NewUser(props) {
   const [state, setState] = useState({ id: '' , name: '' , email: '',role: '', path: '', pass: '', confirmPass: '', privateKey: alice.privateKey, publicKey: alice.publicKey})
 
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('Actualizar')
+  const [message, setMessage] = useState('Crear usuario')
 
 
   const onChange=(e) =>{
@@ -42,7 +42,7 @@ function NewUser(props) {
     newUser(state).then(res => {
       props.getData()
       setLoading(false)
-      setMessage('Actualizar')
+      setMessage('Crear usuario')
     })
   }
 
