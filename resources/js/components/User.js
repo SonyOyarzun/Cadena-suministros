@@ -3,12 +3,29 @@ import React, { Component, Fragment } from 'react';
 import {Card} from 'react-bootstrap';
 
 import TableUser from './tables/TableUser'
+import { getUser } from './tables/TableFunctions'
+
 
 
 class User extends Component {
 
+  constructor() {
+    super()
+    this.state = {
+        user: []
+    }
+}
+
+componentDidMount() {
+    getUser().then(res => {
+        this.setState({
+            user: res
+        })
+    })
+}
 
     render() {
+      console.log('user:',this.state.user)
         return (
             <div>
             <Card>
@@ -16,7 +33,7 @@ class User extends Component {
               <Card.Title>Lista de Usuarios</Card.Title>
                <Card.Text>
                </Card.Text>
-               <TableUser/>
+               <TableUser user={this.state.user}/>
             </Card.Body>
           </Card>
           </div>
