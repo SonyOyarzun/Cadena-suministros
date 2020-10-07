@@ -61,11 +61,7 @@ export const changePass = user => {
 export const login = user => {
     return axios
         .post(
-            '/user/login',
-            {
-                email: user.email,
-                password: user.password
-            },
+            '/user/login', user ,
             {
                 headers: { 'Content-Type': 'application/json' }
             }
@@ -89,10 +85,7 @@ export const login = user => {
 export const forgot = user => {
     return axios
         .post(
-            '/reset_password_without_token',
-            {
-                email: user.email,
-            },
+            '/reset_password_without_token', user ,
             {
                 headers: { 'Content-Type': 'application/json' }
             }
@@ -111,15 +104,7 @@ export const forgot = user => {
 export const reset = user => {
     return axios
         .post(
-            '/reset_password_with_token',
-            {
-                email: user.email,
-                token: user.token,
-                email: user.email,
-                password: user.password,
-                confirmPassword: user.confirmPassword
-
-            },
+            '/reset_password_with_token', user ,
             {
                 headers: { 'Content-Type': 'application/json' }
             }

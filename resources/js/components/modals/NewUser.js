@@ -1,6 +1,7 @@
 import React, { Component, Fragment, useState } from 'react';
 import { render } from 'react-dom';
 import ReactDOM from 'react-dom';
+import { newUser } from '../../access/UserFunctions';
 
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
@@ -16,39 +17,34 @@ function NewUser(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const BigchainDB = require('bigchaindb-driver')
+  const alice = new BigchainDB.Ed25519Keypair()
 
-  const process = () => {
+  const [state, setState] = useState({ id: '' , name: '' , email: '',role: '', path: '', pass: '', confirmPass: '', privateKey: alice.privateKey, publicKey: alice.publicKey})
 
-    const BigchainDB = require('bigchaindb-driver')
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('Actualizar')
 
-    const alice = new BigchainDB.Ed25519Keypair()
 
-      axios({
-        method: 'post',
-        url: '/user/new/',
-        data: {
-          name: document.getElementById('newUserForm.name').value,
-          email: document.getElementById('newUserForm.email').value,
-          role: document.getElementById('newUserForm.role').value,
-          path: document.getElementById('newUserForm.path').value,
-          pass: document.getElementById('newUserForm.pass').value,
-          confirmPass: document.getElementById('newUserForm.confirmPass').value,
-          publicKey: alice.publicKey,
-          privateKey: alice.privateKey
-        }
-      })
-        .then((response) => {
-          console.log('new user :', response);
-          props.getData()
-          alert(response.data)
-        }, (error) => {
-          console.log(error);
-          alert(error)
-        });
-
+  const onChange=(e) =>{
+    const { name, value } = e.target;
+    setState(prevState => ({ ...prevState,[name]: value }));
   }
+  console.log('state ',state)
+
+  const onSubmit=(e) => {
+    e.preventDefault()
+
+    setLoading(true )
+    setMessage('Cargando...')
 
 
+    newUser(state).then(res => {
+      props.getData()
+      setLoading(false)
+      setMessage('Actualizar')
+    })
+  }
 
 
   return (
@@ -64,30 +60,30 @@ function NewUser(props) {
           <Form>
             <Form.Group controlId="newUserForm.name">
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" placeholder="nombre completo" maxLength="30" />
+              <Form.Control name='name' type="text" placeholder="nombre completo" maxLength="30"  onChange={onChange} defaultValue={state.name}/>
             </Form.Group>
             <Form.Group controlId="newUserForm.email">
               <Form.Label>Mail</Form.Label>
-              <Form.Control type="email" placeholder="name@example.com" maxLength="30"/>
+              <Form.Control name='email' type="email" placeholder="name@example.com" maxLength="30" onChange={onChange} defaultValue={state.email}/>
             </Form.Group>
             <Form.Group controlId="newUserForm.role">
               <Form.Label>Role</Form.Label>
-              <Form.Control as="select" defaultValue={props.role}>
+              <Form.Control as="select" name='role' onChange={onChange} defaultValue={state.role}>
                 <option value="A">Administrador</option>
                 <option value="U">Usuario</option>
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="newUserForm.path">
               <Form.Label>Ruta</Form.Label>
-              <Form.Control as="textarea" rows="3" maxLength="300"/>
+              <Form.Control as="textarea" name='path' rows="3" maxLength="300" onChange={onChange} defaultValue={state.path}/>
             </Form.Group>
             <Form.Group controlId="newUserForm.pass">
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="Password" rows="3" maxLength="12"/>
+              <Form.Control name='pass' type="Password" rows="3" maxLength="12" onChange={onChange} defaultValue={state.pass}/>
             </Form.Group>
             <Form.Group controlId="newUserForm.confirmPass">
               <Form.Label>Repita Contraseña</Form.Label>
-              <Form.Control type="Password" rows="3" maxLength="12"/>
+              <Form.Control name='confirmPass' type="Password" rows="3" maxLength="12" onChange={onChange} defaultValue={state.confirmPass}/>
             </Form.Group>
           </Form>
 
@@ -96,8 +92,8 @@ function NewUser(props) {
           <Button variant="secondary" onClick={handleClose}>
             Cerrar
           </Button>
-          <Button variant="primary" onClick={process}>
-            Guardar Datos
+          <Button variant="primary" onClick={onSubmit}>
+            {message}
           </Button>
         </Modal.Footer>
       </Modal>

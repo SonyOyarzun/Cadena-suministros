@@ -35,7 +35,7 @@ function EditUser(props) {
     editUser(state).then(res => {
       props.getData()
       setLoading(false)
-      setMessage('Restablecer')
+      setMessage('Actualizar')
     })
   }
 
