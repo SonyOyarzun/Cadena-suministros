@@ -12,29 +12,7 @@ export const register = newUser => {
             console.log(err)
         })
 }
-/*
-export const editUser = user => {
-    return axios({
-        method: 'put',
-        url: '/user/edit/',
-        data: {
-            id:     user.id,
-            name:   user.name,
-            email:  user.email,
-            role:   user.role,
-            path:   user.path
-        }
-      }
-    )
-    .then(response => {
-        console.log(response)
-        alert(response.data)
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}
-*/
+
 export const editUser = user => {
     return axios
         .put('/user/edit/', user, {
@@ -66,32 +44,19 @@ export const deleteUser = user => {
         })
 }
 
-/**
- * 
- * @param {  const process = () => {
-
-    axios({
-        method: 'put',
-        url: '/user/edit/',
-        data: {
-          id: props.id,
-          name: document.getElementById('editUserForm.name').value,
-          email: document.getElementById('editUserForm.email').value,
-          role: document.getElementById('editUserForm.role').value,
-          path: document.getElementById('editUserForm.path').value
-        }
-      })
-        .then((response) => {
-          console.log(response);
-          props.getData()
-          alert(response.data)
-        }, (error) => {
-          console.log(error);
-        });
-  
-    }} user 
- */
-
+export const changePass = user => {
+    return axios
+        .put('/user/pass/', user, {
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => {
+            console.log(response)
+            alert(response.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
 
 export const login = user => {
     return axios

@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
 import { MDBIcon,MDBBtn } from "mdbreact";
+import { changePass } from '../../access/UserFunctions';
 
 function PassUser(props) {
 
@@ -14,26 +15,28 @@ function PassUser(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const process = () => {
+  const [state, setState] = useState({ id: props.id, pass: '' , confirmPass: '' })
 
-    axios({
-      method: 'put',
-      url: '/user/pass/',
-      data: {
-        id:   props.id,
-        pass: document.getElementById('passUserForm.pass').value,
-        confirmPass: document.getElementById('passUserForm.confirmPass').value
-      }
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('Actualizar')
+
+
+  const onChange=(e) =>{
+    const { name, value } = e.target;
+    setState(prevState => ({ ...prevState,[name]: value }));
+  }
+ // console.log('state ',state)
+
+  const onSubmit=(e) => {
+    e.preventDefault()
+
+    setLoading(true )
+    setMessage('Cargando...')
+
+    changePass(state).then(res => {
+      setLoading(false)
+      setMessage('Actualizar')
     })
-      .then((response) => {
-    //    console.log(response);
-        alert(response.data)
-      }, (error) => {
-        console.log(error);
-   //     alert(error.data)
-      });
-
-
   }
 
   return (
@@ -53,11 +56,11 @@ function PassUser(props) {
           <Form>
             <Form.Group controlId="passUserForm.pass">
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="Password" rows="3" maxLength="12"/>
+              <Form.Control name='pass' type="Password" rows="3" maxLength="12" onChange={onChange} defaultValue={state.pass}/>
             </Form.Group>
             <Form.Group controlId="passUserForm.confirmPass">
               <Form.Label>Repita Contraseña</Form.Label>
-              <Form.Control type="Password" rows="3" maxLength="12"/>
+              <Form.Control name='confirmPass' type="Password" rows="3" maxLength="12" onChange={onChange}  defaultValue={state.confirmPass}/>
             </Form.Group>
           </Form>
 
@@ -66,8 +69,8 @@ function PassUser(props) {
           <Button variant="secondary" onClick={handleClose}>
             Cerrar
       </Button>
-          <Button variant="primary" onClick={process}>
-            Guardar Datos
+          <Button variant="primary" onClick={onSubmit}>
+            {message}
       </Button>
         </Modal.Footer>
       </Modal>
