@@ -190,9 +190,14 @@ p {
 /*Color de item del nav*/
 .sidenav---sidenav-subnavitem---1cD47 :hover{
   background-color: ${({ theme }) => theme.text} !important;
-  opacity: 0.1;
+  opacity: 0.5;
+  color: ${({ theme }) => theme.body} !important; 
+}
+
+.sidenav---navtext---1AE_f {
   color: ${({ theme }) => theme.text} !important; 
 }
+
 
 
 /*Paginacion de tablas*/

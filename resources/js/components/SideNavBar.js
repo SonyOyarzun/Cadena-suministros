@@ -62,7 +62,7 @@ class SideNavBar extends Component {
                 <MDBIcon className='darkLight-text' icon="tools" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
-                <a className='darkLight-text'>Administración</a>
+                Administración
               </NavText>
               <NavItem eventKey="administracion/usuarios">
                 <NavText>
@@ -86,7 +86,7 @@ class SideNavBar extends Component {
                 <MDBIcon className='darkLight-text' icon="truck-moving" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
-                <p className='darkLight-text'>Distribución</p>
+                Distribución
               </NavText>
               <NavItem eventKey="distribucion/usuarios">
                 <NavText>
@@ -125,8 +125,8 @@ class SideNavBar extends Component {
               <NavIcon>
                 <MDBIcon className='darkLight-text' icon="search" style={{ fontSize: '1.75em' }} />
               </NavIcon>
-              <NavText>
-                <p className='darkLight-text'>Buscar</p>
+              <NavText className='darkLight-text'>
+                Buscar
               </NavText>
 
               <NavItem eventKey="buscar/transaccion">
