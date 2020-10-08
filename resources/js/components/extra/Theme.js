@@ -3,21 +3,21 @@ import React, { useState, useEffect,useLayoutEffect } from 'react';
 
 
 const defaultTheme = {
-  body: '#0d7377',
+  body: '#9c9c9c',
   border: '#212121',
   font: '1rem',
-  text: '#eeeeee',
+  text: '#32e0c4',
   toggleBorder: '#212121',
-  gradient: 'linear-gradient(#32e0c4, #0d7377)',
+  gradient: 'linear-gradient(#32e0c4, #212121)',
 }
 
 const specialTheme = {
-  body: '#363537',
-  border: '#FAFAFA',
-  text: '#FAFAFA',
+  body: '#212121',
+  border: '#212121',
   font: '1rem',
-  toggleBorder: '#6B8096',
-  gradient: 'linear-gradient(#091236, #1E215D)',
+  text: '#32e0c4',
+  toggleBorder: '#212121',
+  gradient: 'linear-gradient(#212121, #0d7377)',
 }
 
 const Toggle = ({ theme, toggleTheme }) => {
@@ -95,7 +95,7 @@ export default function Theme(props) {
   const [theme, toggleTheme] = useSpecialMode();
   const themeMode = theme === 'default' ? defaultTheme : specialTheme;
 
-  console.log(props.config)
+ // console.log(props.config)
 
 
 const GlobalStyles = createGlobalStyle`
@@ -117,7 +117,7 @@ const GlobalStyles = createGlobalStyle`
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 
@@ -189,9 +189,11 @@ p {
 
 /*Color de item del nav*/
 .sidenav---sidenav-subnavitem---1cD47 :hover{
-  background-color: ${({ theme }) => theme.body} !important;
+  background-color: ${({ theme }) => theme.text} !important;
+  opacity: 0.1;
   color: ${({ theme }) => theme.text} !important; 
 }
+
 
 /*Paginacion de tablas*/
 .page-link {
@@ -207,8 +209,6 @@ select {
   background-color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text} !important;
 }
-
-
 
 .modal-content {
   background-color: ${({ theme }) => theme.body} !important;
@@ -331,26 +331,3 @@ color: ${({ theme }) => theme.body} !important;
   );
 };
 
-/*
-SideNav {
-    background-color: ${({ theme }) => theme.body} !important;
-    color: ${({ theme }) => theme.text}!important;
-  }
-
-  NavItem {
-    background-color: ${({ theme }) => theme.body} !important;
-    color: ${({ theme }) => theme.text}!important;
-  }
-
-  NavIcon {
-    color: ${({ theme }) => theme.text}!important;
-  }
-
-  NavText {
-    color: ${({ theme }) => theme.text}!important;
-  }
-
-  Toggle {
-    color: ${({ theme }) => theme.text}!important;
-  }
-*/
