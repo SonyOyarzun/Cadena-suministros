@@ -126,6 +126,205 @@ html * {
   font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 } 
 
+.sidenav---sidenav-subnav---1EN61 {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+
+/*Toggle*/
+.sidenav---icon-bar---u1f02{
+  background-color: ${({ theme }) => theme.text} !important;
+  color: ${({ theme }) => theme.body} !important;  
+}
+
+
+
+.navbar,
+.navbar-default {
+  background-color: ${({ theme }) => theme.body} !important;
+}
+
+.dropdown-item {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important;
+}
+
+.dropdown-menu {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important;
+}
+
+.card {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.btn {
+  background-image: ${({ theme }) => theme.gradient} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+
+input {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+label {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.PrivateNotchedOutline-legendLabelled-3 {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+
+/*flechas paginacion*/
+span{
+  color: ${({ theme }) => theme.body} !important;
+}
+
+p {
+  color: ${({ theme }) => theme.text} !important;
+}
+
+/*Color de item del nav*/
+.sidenav---sidenav-subnavitem---1cD47 {
+  color: ${({ theme }) => theme.text} !important; 
+}
+.sidenav---sidenav-subnavitem---1cD47 :hover{
+  background: transparent;
+  color: ${({ theme }) => theme.text} !important; 
+}
+
+
+/*Color de item del nav sin expandir*/
+.sidenav---navtext---1AE_f {
+  color: ${({ theme }) => theme.text} !important; 
+}
+
+
+
+/*Paginacion de tablas*/
+.page-link {
+  background-color: ${({ theme }) => theme.text} !important;
+  color: ${({ theme }) => theme.body} !important; 
+}
+
+Strong {
+  color: ${({ theme }) => theme.text} !important;
+}
+
+select {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.modal-content {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.foot {
+  background-color: ${({ theme }) => theme.body} !important;
+}
+
+.badge {
+  background-image: ${({ theme }) => theme.gradient} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+
+
+table {
+  border: ${({ theme }) => theme.border};
+  background-color: ${({ theme }) => theme.body};
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table td, table th {
+  color: ${({ theme }) => theme.text};
+  border: ${({ theme }) => theme.border};
+  padding: 3px 2px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+table tr:nth-child(even) {
+  background: ${({ theme }) => theme.body};
+}
+table thead {
+  background: #1C6EA4;
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: ${({ theme }) => theme.gradient};
+  border-bottom: ${({ theme }) => theme.body};
+}
+table thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.text};
+  border-left: ${({ theme }) => theme.body};
+}
+table thead th:first-child {
+  border-left: none;
+}
+
+table tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.body};
+  background: ${({ theme }) => theme.body};
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: ${({ theme }) => theme.gradient};
+  border-top: 2px solid #444444;
+}
+
+table tfoot .links {
+  text-align: right;
+}
+table tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+.darkLight {
+  background: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.darkLight-text{
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.darkLight-body {
+  background: ${({ theme }) => theme.body} !important;
+}
+
+.lightDark-text{
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.lightDark-body {
+  background: ${({ theme }) => theme.text} !important;
+}
+
+[onClick] {
+  cursor:pointer;
+}
+
+.autocomplete{
+color: ${({ theme }) => theme.body} !important;
+}
+
+.custom-file-label::after{
+  background-image: ${({ theme }) => theme.gradient} !important;
+  color: ${({ theme }) => theme.text} !important;
+  display: none;
+}
 
 
 
@@ -138,7 +337,7 @@ html * {
   left: 0;
   z-index: 1006;
   min-width: 64px;
-  background: ${({ theme }) => theme.body};
+  background: #db3d44;
   -webkit-transition: min-width 0.2s;
   -moz-transition: min-width 0.2s;
   -o-transition: min-width 0.2s;
@@ -200,7 +399,7 @@ html * {
   display: none;
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47:hover::before {
-  background: ${({ theme }) => theme.body};
+  background: #fff;
   opacity: 0.15;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=15)";
   filter: alpha(opacity=15);
@@ -214,7 +413,7 @@ html * {
   z-index: -1;
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47.sidenav---selected---1EK3y > .sidenav---navitem---9uL5T {
-  color: ${({ theme }) => theme.text};
+  color: #fff;
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47.sidenav---selected---1EK3y > .sidenav---navitem---9uL5T::before {
   content: " ";
@@ -227,10 +426,10 @@ html * {
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47:hover > .sidenav---navitem---9uL5T {
   background: transparent;
-  color: ${({ theme }) => theme.text};
+  color: #fff;
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T {
-  color: ${({ theme }) => theme.text};
+  color: #f9dcdd;
   padding: 0 14px 0 20px;
   line-height: 28px;
 }
@@ -308,28 +507,28 @@ html * {
   cursor: default;
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T::after {
-  background: ${({ theme }) => theme.body};
+  background: #fff;
   opacity: 0.15;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=15)";
   filter: alpha(opacity=15);
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T::after,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T::after {
-  background: ${({ theme }) => theme.body};
+  background: #000;
   opacity: 0.2;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover.sidenav---highlighted---oUx9u.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after {
-  background: ${({ theme }) => theme.body};
+  background: #000;
   opacity: 0.25;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
   filter: alpha(opacity=25);
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u.sidenav---selected---1EK3y.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover.sidenav---highlighted---oUx9u.sidenav---selected---1EK3y.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after {
-  background: ${({ theme }) => theme.body};
+  background: #000;
   opacity: 0.2;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
@@ -344,13 +543,13 @@ html * {
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f {
-  color: ${({ theme }) => theme.text};
+  color: #fff;
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo > *,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f > *,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo > *,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f > * {
-  color: ${({ theme }) => theme.text};
+  color: #fff;
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T {
   position: relative;
@@ -359,7 +558,7 @@ html * {
   height: 50px;
   white-space: nowrap;
   text-decoration: none;
-  color: ${({ theme }) => theme.text};
+  color: #fff;
   font-size: 14px;
   cursor: pointer;
 }
@@ -373,7 +572,7 @@ html * {
   top: 0;
   bottom: 0;
   left: 0;
-  background: ${({ theme }) => theme.body};
+  background: #fff;
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
@@ -381,11 +580,11 @@ html * {
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f {
-  color: ${({ theme }) => theme.text};
+  color: #f9dcdd;
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo > *,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f > * {
-  color: ${({ theme }) => theme.text};
+  color: #f9dcdd;
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo {
   display: block;
@@ -423,7 +622,7 @@ html * {
   margin: 0;
   top: 0;
   left: 64px;
-  background: ${({ theme }) => theme.body};
+  background: #fff;
   border: 1px #bbb solid;
   -webkit-box-shadow: 2px 2px 10px rgba(0,0,0,0.15);
   box-shadow: 2px 2px 10px rgba(0,0,0,0.15);
@@ -442,25 +641,25 @@ html * {
   margin-bottom: 8px;
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47.sidenav---selected---1EK3y > .sidenav---navitem---9uL5T {
-  color: ${({ theme }) => theme.text};
+  color: #db3d44;
   font-weight: bold;
   background: none;
   cursor: default;
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47.sidenav---selected---1EK3y > .sidenav---navitem---9uL5T:hover {
-  background: ${({ theme }) => theme.text};
+  background: #fff;
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T {
   display: block;
   text-decoration: none;
-  color: ${({ theme }) => theme.text};
+  color: #222;
   font-size: 13px;
   line-height: 30px;
   padding: 0 24px;
   cursor: pointer;
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T:hover {
-  background: ${({ theme }) => theme.body};
+  background: #eee;
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T:focus {
   outline: 0;
