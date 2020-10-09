@@ -126,6 +126,30 @@ html * {
   font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 } 
 
+/*DARKLIGHT CUSTOM INICIO */
+
+.darkLight {
+  background: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.darkLight-text{
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.darkLight-body {
+  background: ${({ theme }) => theme.body} !important;
+}
+
+.lightDark-text{
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.lightDark-body {
+  background: ${({ theme }) => theme.text} !important;
+}
+
+/*DARKLIGHT CUSTOM FIN */
 
 
 
@@ -200,7 +224,7 @@ html * {
   display: none;
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47:hover::before {
-  background: ${({ theme }) => theme.body};
+  background: ${({ theme }) => theme.text};
   opacity: 0.15;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=15)";
   filter: alpha(opacity=15);
@@ -255,7 +279,7 @@ html * {
   width: 20px;
   height: 2px;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.text};
   border-radius: 1px;
   -webkit-transition: all 0.15s;
   -moz-transition: all 0.15s;
@@ -308,7 +332,7 @@ html * {
   cursor: default;
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T::after {
-  background: ${({ theme }) => theme.body};
+  background: ${({ theme }) => theme.text};
   opacity: 0.15;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=15)";
   filter: alpha(opacity=15);
@@ -329,7 +353,7 @@ html * {
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u.sidenav---selected---1EK3y.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover.sidenav---highlighted---oUx9u.sidenav---selected---1EK3y.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after {
-  background: ${({ theme }) => theme.body};
+  background: ${({ theme }) => theme.text};
   opacity: 0.2;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
@@ -448,7 +472,7 @@ html * {
   cursor: default;
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47.sidenav---selected---1EK3y > .sidenav---navitem---9uL5T:hover {
-  background: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.body};
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T {
   display: block;
@@ -459,8 +483,14 @@ html * {
   padding: 0 24px;
   cursor: pointer;
 }
+
+/*HOVER DE ITEMS DE NAV*/
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T:hover {
-  background: ${({ theme }) => theme.body};
+  background: ${({ theme }) => theme.text};
+  background-color: transparent;
+  opacity: 0.7;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T:focus {
   outline: 0;
