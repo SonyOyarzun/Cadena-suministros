@@ -126,170 +126,7 @@ html * {
   font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 } 
 
-.sidenav---sidenav-subnav---1EN61 {
-  background-color: ${({ theme }) => theme.body} !important;
-  color: ${({ theme }) => theme.text} !important;
-}
-
-/*Toggle*/
-.sidenav---icon-bar---u1f02{
-  background-color: ${({ theme }) => theme.text} !important;
-  color: ${({ theme }) => theme.body} !important;  
-}
-
-
-
-.navbar,
-.navbar-default {
-  background-color: ${({ theme }) => theme.body} !important;
-}
-
-.dropdown-item {
-  background-color: ${({ theme }) => theme.body} !important;
-  color: ${({ theme }) => theme.text}!important;
-}
-
-.dropdown-menu {
-  background-color: ${({ theme }) => theme.body} !important;
-  color: ${({ theme }) => theme.text}!important;
-}
-
-.card {
-  background-color: ${({ theme }) => theme.body} !important;
-  color: ${({ theme }) => theme.text} !important;
-}
-
-.btn {
-  background-image: ${({ theme }) => theme.gradient} !important;
-  color: ${({ theme }) => theme.text} !important;
-}
-
-input {
-  background-color: ${({ theme }) => theme.body} !important;
-  color: ${({ theme }) => theme.text} !important;
-}
-label {
-  background-color: ${({ theme }) => theme.body} !important;
-  color: ${({ theme }) => theme.text} !important;
-}
-
-.PrivateNotchedOutline-legendLabelled-3 {
-  background-color: ${({ theme }) => theme.body} !important;
-  color: ${({ theme }) => theme.text} !important;
-}
-
-/*flechas paginacion*/
-span{
-  color: ${({ theme }) => theme.body} !important;
-}
-
-p {
-  color: ${({ theme }) => theme.text} !important;
-}
-
-/*Color de item del nav*/
-.sidenav---sidenav-subnavitem---1cD47 {
-  color: ${({ theme }) => theme.text} !important; 
-}
-.sidenav---sidenav-subnavitem---1cD47 :hover{
-  background: transparent;
-  color: ${({ theme }) => theme.text} !important; 
-}
-
-
-/*Color de item del nav sin expandir*/
-.sidenav---navtext---1AE_f {
-  color: ${({ theme }) => theme.text} !important; 
-}
-
-
-
-/*Paginacion de tablas*/
-.page-link {
-  background-color: ${({ theme }) => theme.text} !important;
-  color: ${({ theme }) => theme.body} !important; 
-}
-
-Strong {
-  color: ${({ theme }) => theme.text} !important;
-}
-
-select {
-  background-color: ${({ theme }) => theme.body} !important;
-  color: ${({ theme }) => theme.text} !important;
-}
-
-.modal-content {
-  background-color: ${({ theme }) => theme.body} !important;
-  color: ${({ theme }) => theme.text} !important;
-}
-
-.foot {
-  background-color: ${({ theme }) => theme.body} !important;
-}
-
-.badge {
-  background-image: ${({ theme }) => theme.gradient} !important;
-  color: ${({ theme }) => theme.text} !important;
-}
-
-
-table {
-  border: ${({ theme }) => theme.border};
-  background-color: ${({ theme }) => theme.body};
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
-}
-table td, table th {
-  color: ${({ theme }) => theme.text};
-  border: ${({ theme }) => theme.border};
-  padding: 3px 2px;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-table tr:nth-child(even) {
-  background: ${({ theme }) => theme.body};
-}
-table thead {
-  background: #1C6EA4;
-  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: ${({ theme }) => theme.gradient};
-  border-bottom: ${({ theme }) => theme.body};
-}
-table thead th {
-  font-size: 15px;
-  font-weight: bold;
-  color: ${({ theme }) => theme.text};
-  border-left: ${({ theme }) => theme.body};
-}
-table thead th:first-child {
-  border-left: none;
-}
-
-table tfoot {
-  font-size: 14px;
-  font-weight: bold;
-  color: ${({ theme }) => theme.body};
-  background: ${({ theme }) => theme.body};
-  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: ${({ theme }) => theme.gradient};
-  border-top: 2px solid #444444;
-}
-
-table tfoot .links {
-  text-align: right;
-}
-table tfoot .links a{
-  display: inline-block;
-  background: #1C6EA4;
-  color: #FFFFFF;
-  padding: 2px 8px;
-  border-radius: 5px;
-}
+/*DARKLIGHT CUSTOM INICIO */
 
 .darkLight {
   background: ${({ theme }) => theme.body} !important;
@@ -312,19 +149,7 @@ table tfoot .links a{
   background: ${({ theme }) => theme.text} !important;
 }
 
-[onClick] {
-  cursor:pointer;
-}
-
-.autocomplete{
-color: ${({ theme }) => theme.body} !important;
-}
-
-.custom-file-label::after{
-  background-image: ${({ theme }) => theme.gradient} !important;
-  color: ${({ theme }) => theme.text} !important;
-  display: none;
-}
+/*DARKLIGHT CUSTOM FIN */
 
 
 
@@ -337,7 +162,7 @@ color: ${({ theme }) => theme.body} !important;
   left: 0;
   z-index: 1006;
   min-width: 64px;
-  background: #db3d44;
+  background: ${({ theme }) => theme.body};
   -webkit-transition: min-width 0.2s;
   -moz-transition: min-width 0.2s;
   -o-transition: min-width 0.2s;
@@ -399,7 +224,7 @@ color: ${({ theme }) => theme.body} !important;
   display: none;
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47:hover::before {
-  background: #fff;
+  background: ${({ theme }) => theme.text};
   opacity: 0.15;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=15)";
   filter: alpha(opacity=15);
@@ -413,7 +238,7 @@ color: ${({ theme }) => theme.body} !important;
   z-index: -1;
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47.sidenav---selected---1EK3y > .sidenav---navitem---9uL5T {
-  color: #fff;
+  color: ${({ theme }) => theme.text};
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47.sidenav---selected---1EK3y > .sidenav---navitem---9uL5T::before {
   content: " ";
@@ -426,10 +251,10 @@ color: ${({ theme }) => theme.body} !important;
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47:hover > .sidenav---navitem---9uL5T {
   background: transparent;
-  color: #fff;
+  color: ${({ theme }) => theme.text};
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T {
-  color: #f9dcdd;
+  color: ${({ theme }) => theme.text};
   padding: 0 14px 0 20px;
   line-height: 28px;
 }
@@ -454,7 +279,7 @@ color: ${({ theme }) => theme.body} !important;
   width: 20px;
   height: 2px;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.text};
   border-radius: 1px;
   -webkit-transition: all 0.15s;
   -moz-transition: all 0.15s;
@@ -507,28 +332,28 @@ color: ${({ theme }) => theme.body} !important;
   cursor: default;
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T::after {
-  background: #fff;
+  background: ${({ theme }) => theme.text};
   opacity: 0.15;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=15)";
   filter: alpha(opacity=15);
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T::after,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T::after {
-  background: #000;
+  background: ${({ theme }) => theme.body};
   opacity: 0.2;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover.sidenav---highlighted---oUx9u.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after {
-  background: #000;
+  background: ${({ theme }) => theme.body};
   opacity: 0.25;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
   filter: alpha(opacity=25);
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u.sidenav---selected---1EK3y.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover.sidenav---highlighted---oUx9u.sidenav---selected---1EK3y.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after {
-  background: #000;
+  background: ${({ theme }) => theme.text};
   opacity: 0.2;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
@@ -543,13 +368,13 @@ color: ${({ theme }) => theme.body} !important;
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f {
-  color: #fff;
+  color: ${({ theme }) => theme.text};
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo > *,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f > *,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo > *,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f > * {
-  color: #fff;
+  color: ${({ theme }) => theme.text};
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T {
   position: relative;
@@ -558,7 +383,7 @@ color: ${({ theme }) => theme.body} !important;
   height: 50px;
   white-space: nowrap;
   text-decoration: none;
-  color: #fff;
+  color: ${({ theme }) => theme.text};
   font-size: 14px;
   cursor: pointer;
 }
@@ -572,7 +397,7 @@ color: ${({ theme }) => theme.body} !important;
   top: 0;
   bottom: 0;
   left: 0;
-  background: #fff;
+  background: ${({ theme }) => theme.body};
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
@@ -580,11 +405,11 @@ color: ${({ theme }) => theme.body} !important;
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f {
-  color: #f9dcdd;
+  color: ${({ theme }) => theme.text};
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo > *,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f > * {
-  color: #f9dcdd;
+  color: ${({ theme }) => theme.text};
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo {
   display: block;
@@ -622,7 +447,7 @@ color: ${({ theme }) => theme.body} !important;
   margin: 0;
   top: 0;
   left: 64px;
-  background: #fff;
+  background: ${({ theme }) => theme.body};
   border: 1px #bbb solid;
   -webkit-box-shadow: 2px 2px 10px rgba(0,0,0,0.15);
   box-shadow: 2px 2px 10px rgba(0,0,0,0.15);
@@ -641,25 +466,31 @@ color: ${({ theme }) => theme.body} !important;
   margin-bottom: 8px;
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47.sidenav---selected---1EK3y > .sidenav---navitem---9uL5T {
-  color: #db3d44;
+  color: ${({ theme }) => theme.text};
   font-weight: bold;
   background: none;
   cursor: default;
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47.sidenav---selected---1EK3y > .sidenav---navitem---9uL5T:hover {
-  background: #fff;
+  background: ${({ theme }) => theme.body};
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T {
   display: block;
   text-decoration: none;
-  color: #222;
+  color: ${({ theme }) => theme.text};
   font-size: 13px;
   line-height: 30px;
   padding: 0 24px;
   cursor: pointer;
 }
+
+/*HOVER DE ITEMS DE NAV*/
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T:hover {
-  background: #eee;
+  background: ${({ theme }) => theme.text};
+  background-color: transparent;
+  opacity: 0.7;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T:focus {
   outline: 0;
@@ -677,6 +508,7 @@ color: ${({ theme }) => theme.body} !important;
   -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
+
 
 
 `;
