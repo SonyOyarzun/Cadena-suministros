@@ -3,20 +3,18 @@ import React, { useState, useEffect,useLayoutEffect } from 'react';
 
 
 const defaultTheme = {
-  body: '#9c9c9c',
-  border: '#212121',
+  body: '#eeeeee',
   font: '1rem',
-  text: '#32e0c4',
-  toggleBorder: '#212121',
+  text: '#212121',
+  border: '#0d7377',
   gradient: 'linear-gradient(#32e0c4, #212121)',
 }
 
 const specialTheme = {
   body: '#212121',
-  border: '#212121',
   font: '1rem',
-  text: '#32e0c4',
-  toggleBorder: '#212121',
+  text: '#eeeeee',
+  border: '#0d7377',
   gradient: 'linear-gradient(#212121, #0d7377)',
 }
 
@@ -367,7 +365,7 @@ color: ${({ theme }) => theme.body} !important;
   display: none;
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47:hover::before {
-  background: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.border};
   opacity: 0.15;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=15)";
   filter: alpha(opacity=15);
@@ -394,10 +392,10 @@ color: ${({ theme }) => theme.body} !important;
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47:hover > .sidenav---navitem---9uL5T {
   background: transparent;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.border};
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T {
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.border};
   padding: 0 14px 0 20px;
   line-height: 28px;
 }
@@ -475,28 +473,28 @@ color: ${({ theme }) => theme.body} !important;
   cursor: default;
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T::after {
-  background: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.border};
   opacity: 0.15;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=15)";
   filter: alpha(opacity=15);
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T::after,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T::after {
-  background: ${({ theme }) => theme.body};
+  background: ${({ theme }) => theme.border};
   opacity: 0.2;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover.sidenav---highlighted---oUx9u.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after {
-  background: ${({ theme }) => theme.body};
+  background: ${({ theme }) => theme.border};
   opacity: 0.25;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
   filter: alpha(opacity=25);
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u.sidenav---selected---1EK3y.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover.sidenav---highlighted---oUx9u.sidenav---selected---1EK3y.sidenav---expanded---1KdUL > .sidenav---navitem---9uL5T::after {
-  background: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.border};
   opacity: 0.2;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
@@ -511,13 +509,13 @@ color: ${({ theme }) => theme.body} !important;
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f {
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.border};
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo > *,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-:hover > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f > *,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo > *,
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f > * {
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.border};
 }
 .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T {
   position: relative;
@@ -615,12 +613,12 @@ color: ${({ theme }) => theme.body} !important;
   cursor: default;
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47.sidenav---selected---1EK3y > .sidenav---navitem---9uL5T:hover {
-  background: ${({ theme }) => theme.body};
+  background: ${({ theme }) => theme.border};
 }
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T {
   display: block;
   text-decoration: none;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.border};
   font-size: 13px;
   line-height: 30px;
   padding: 0 24px;
@@ -629,7 +627,7 @@ color: ${({ theme }) => theme.body} !important;
 
 /*HOVER DE ITEMS DE NAV*/
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T:hover {
-  background: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.border};
   background-color: transparent;
   opacity: 0.7;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
