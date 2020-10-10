@@ -119,21 +119,7 @@ const GlobalStyles = createGlobalStyle`
   width: 100%;
 }
 
-/*PROFILE INICIO*/
-.MuiCardHeader-root{
-  background-color: ${({ theme }) => theme.body} !important;
-  color: ${({ theme }) => theme.text}!important;
-}
 
-.MuiCollapse-wrapper{
-  background-color: ${({ theme }) => theme.body} !important;
-  color: ${({ theme }) => theme.text}!important;
-}
-
-.MuiTypography-root MuiCardHeader-subheader MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock{
-  color: ${({ theme }) => theme.text}!important;
-}
-/*PROFILE FIN*/
 
 html * {
   font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -175,7 +161,7 @@ label {
 
 
 /*flechas paginacion*/
-span{
+span.mdb-dataTables_paginate{
   color: ${({ theme }) => theme.body} !important;
 }
 
@@ -667,6 +653,26 @@ color: ${({ theme }) => theme.body} !important;
 
 /* CSS BARRA LATERAL FIN*/
 
+
+/*PROFILE INICIO*/
+.MuiCardHeader-root{
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.MuiCardHeader-content{
+  color: ${({ theme }) => theme.text} !important;
+}
+.MuiCardHeader-action{
+  color: ${({ theme }) => theme.text} !important;
+}
+
+.MuiCollapse-wrapper{
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important;
+}
+
+/*PROFILE FIN*/
 
 
 `;
