@@ -28,12 +28,6 @@ class SideNavBar extends Component {
 
   render() {
 
-    const path = {
-     url: '/storage/images/'+this.props.config.logotype
-    }
-    //window.location.host+
-   
-
     return (
 
       <div>
@@ -44,13 +38,6 @@ class SideNavBar extends Component {
         >
           <SideNav.Toggle className='darkLight' />
           <SideNav.Nav>
-
-            <NavItem eventKey="home">
- 
-                <img src={path.url} width='65px' height='50px'></img>
-                
- 
-            </NavItem>
 
 {console.log('role',this.props.value)}
 

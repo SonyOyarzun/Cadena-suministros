@@ -1,47 +1,69 @@
-import React, { Component } from 'react'
-import { getProfile } from './UserFunctions'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-class Profile extends Component {
-    constructor() {
-        super()
-        this.state = {
-            name: '',
-            email: ''
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: 300,
+    position: "fixed",
+    right: 30,
+    top: 10 
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  avatar: {
+    maxWidth: 50,
+  },
+}));
+
+export default function RecipeReviewCard(props) {
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+  return (
+    <Card className={classes.root}>
+      <CardHeader
+        avatar={
+            <img className={classes.avatar} src={'/storage/images/'+props.config.logotype}></img>
         }
-    }
-
-    componentDidMount() {
-        getProfile().then(res => {
-            this.setState({
-                name: res.user.name,
-                email: res.user.email
-            })
-        })
-    }
-
-    render() {
-        return (
-            <div className="container">
-                <div className="jumbotron mt-5">
-                    <div className="col-sm-4 mx-auto">
-                        <h1 className="text-center">PROFILE</h1>
-                    </div>
-                    <table className="table col-md-4 mx-auto">
-                        <tbody>
-                            <tr>
-                                <td>Name</td>
-                                <td>{this.state.name}</td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td>{this.state.email}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        )
-    }
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title= {props.user.name}
+        subheader= {props.user.email}
+      />
+    </Card>
+  );
 }
-
-export default Profile

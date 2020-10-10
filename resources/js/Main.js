@@ -26,13 +26,14 @@ import SideNavBar from './components/SideNavBar'
 import Routes from './components/Routes'
 
 import Load from './components/extra/Load'
+import Profile from './access/Profile'
 
 const styles = {
   padding: {
-    paddingTop: "10vh",
+    paddingTop: "20vh",
     paddingBottom: "3vh",
     paddingRight: "10vw",
-    paddingLeft: "10vw"
+    paddingLeft: "20vw"
   }
 }
 
@@ -90,7 +91,12 @@ class App extends Component {
             <Head />
 
             {(this.state.user.role == 'A' || this.state.user.role == 'U') ?
-              (<SideNavBar value={this.state.user.role} config={this.state.config} />)
+              (
+              <>
+              <SideNavBar value={this.state.user.role} config={this.state.config} />
+              <Profile user={this.state.user} config={this.state.config} /> 
+              </>
+              )
               :
               (<NavBar value={this.state.user.role} config={this.state.config} />)
             }
