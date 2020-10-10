@@ -33,7 +33,7 @@ const styles = {
     paddingTop: "20vh",
     paddingBottom: "3vh",
     paddingRight: "10vw",
-    paddingLeft: "20vw"
+    paddingLeft: "15vw"
   }
 }
 

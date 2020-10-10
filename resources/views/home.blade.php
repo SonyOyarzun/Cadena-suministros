@@ -68,7 +68,7 @@
         
         </style>
     </head>
-    <body id="back">
+    <body class="back">
         <div id="root"></div>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>

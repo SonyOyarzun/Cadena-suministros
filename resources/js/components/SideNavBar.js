@@ -132,19 +132,6 @@ class SideNavBar extends Component {
             </NavItem>
                   
 
-
-
-            <NavItem eventKey="salir">
-            <NavIcon>
-              <a className='darkLight-text' href='/logout'><MDBIcon className='darkLight-text' icon="door-open" style={{ fontSize: '1.75em' }} /></a>
-            </NavIcon>
-            <NavText>
-              <a className='darkLight-text' href='/logout'>Salir</a>
-            </NavText>
-          </NavItem>
-
-
-
           </SideNav.Nav>
         </SideNav>
 

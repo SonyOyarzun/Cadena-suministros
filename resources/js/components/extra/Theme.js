@@ -110,7 +110,7 @@ const GlobalStyles = createGlobalStyle`
 
 
 
-#back{
+.back{
   background: url('/storage/images/${( props.config.background )}');
   background-position: center center;
   background-repeat: no-repeat;
@@ -119,6 +119,21 @@ const GlobalStyles = createGlobalStyle`
   width: 100%;
 }
 
+/*PROFILE INICIO*/
+.MuiCardHeader-root{
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important;
+}
+
+.MuiCollapse-wrapper{
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important;
+}
+
+.MuiTypography-root MuiCardHeader-subheader MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock{
+  color: ${({ theme }) => theme.text}!important;
+}
+/*PROFILE FIN*/
 
 html * {
   font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
