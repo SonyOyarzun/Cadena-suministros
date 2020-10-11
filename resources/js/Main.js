@@ -30,7 +30,7 @@ import Profile from './access/Profile'
 
 const styles = {
   padding: {
-    paddingTop: "20vh",
+    paddingTop: "0vh",
     paddingBottom: "3vh",
     paddingRight: "10vw",
     paddingLeft: "15vw"

@@ -2,6 +2,8 @@ import React, { Component, ButtonGroup } from 'react';
 
 import axios from 'axios'
 
+import {getUser} from './TableFunctions'
+
 //import datable
 import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon, MDBBtnGroup } from 'mdbreact';
 
@@ -26,25 +28,15 @@ class TableUser extends Component {
       loading: true
     }
     this.handleLink = this.handleLink.bind(this);
-    this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
-  }
-
-  getData() {
-
-    axios.get('user/list/').then(response => {
-      this.setState({ users: response.data })
-      this.setState({ loading: false })
-      //   console.log(this.state.users)
-    }).catch(error => {
-      alert("Error " + error)
-    })
-
   }
 
 
   componentDidMount() {
 
-    this.getData()
+    getUser().then(response => {
+      this.setState({ users: response })
+      this.setState({ loading: false })
+    })
 
   }
 
@@ -133,7 +125,6 @@ class TableUser extends Component {
             btn
             sortable={false}
             data={data}
-            searchingLabel={'buscar'}
             info={false}
           />
           

@@ -2,6 +2,8 @@ import React, { Component, ButtonGroup } from 'react';
 
 import axios from 'axios'
 
+import {getChain} from './TableFunctions'
+
 //import datable
 import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon } from 'mdbreact';
 
@@ -16,26 +18,15 @@ class TableSend extends Component {
       sends: [],
       loading: true
     }
-    this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
-  }
-
-  getData(){
-
-    axios.get('chain/list').then(response => {
-      this.setState({ sends: response.data })
-      this.setState({ loading: false })
-  //    console.log(this.state.sends)
-      console.log('response :',response.data)
-    }).catch(error => {
-      alert("Error " + error)
-    })
-
   }
 
 
   componentDidMount() {
 
-    this.getData()
+    getChain().then(response => {
+      this.setState({ sends: response })
+      this.setState({ loading: false })
+    })
 
   }
 
