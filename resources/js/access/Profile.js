@@ -55,7 +55,7 @@ export default function RecipeReviewCard(props) {
 
     return (
         <Card className={classes.root}>
-            <CardHeader
+            <CardHeader className='darkLight-text'
                 avatar={
                     <img className={classes.avatar} src={'/storage/images/' + props.config.logotype}></img>
                 }

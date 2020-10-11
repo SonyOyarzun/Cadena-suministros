@@ -663,7 +663,7 @@ color: ${({ theme }) => theme.body} !important;
 .MuiCardHeader-content{
   color: ${({ theme }) => theme.text} !important;
 }
-.MuiCardHeader-action{
+.MuiTypography-root MuiCardHeader-subheader MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock{
   color: ${({ theme }) => theme.text} !important;
 }
 

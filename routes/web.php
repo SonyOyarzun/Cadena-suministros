@@ -94,3 +94,5 @@ Route::get('search', 'BigController@search');
 Route::post('uploadLogotype', 'UploadController@uploadFileLogotype');
 Route::post('uploadBackground', 'UploadController@uploadFileBackground');
 
+
+//https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/db.json
