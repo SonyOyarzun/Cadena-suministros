@@ -661,15 +661,27 @@ color: ${({ theme }) => theme.body} !important;
 }
 
 .MuiCardHeader-content{
-  color: ${({ theme }) => theme.text} !important;
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important;
 }
-.MuiTypography-root MuiCardHeader-subheader MuiTypography-body2 MuiTypography-colorTextSecondary MuiTypography-displayBlock{
-  color: ${({ theme }) => theme.text} !important;
+.MuiCardHeader-action{
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important;
 }
 
 .MuiCollapse-wrapper{
   background-color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text}!important;
+}
+
+.MuiTypography-colorTextSecondary{
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important;
+}
+
+.MuiIconButton-root{
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important; 
 }
 
 /*PROFILE FIN*/
