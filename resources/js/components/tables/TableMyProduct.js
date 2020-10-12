@@ -46,21 +46,6 @@ export default function TableMyProduct(props) {
 
   const isChecked = id => checked.filter(name => name === id)[0] ? true : false
 
-/*
-  useEffect(() => {
-
-    axios.get('user/list')
-      .then(response => {
-
-      }).catch(error => {
-        console.log("Error " + error)
-
-      })
-
-
-  }, []);
-
-  */
   const createJson = (
 
     columns.push({

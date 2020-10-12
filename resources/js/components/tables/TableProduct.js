@@ -19,7 +19,7 @@ class TableProduct extends Component {
 
   render() {
 
-    console.log('TableProduct',this.props.products)
+    //console.log('TableProduct',this.props.products)
     
 
     let columns = []

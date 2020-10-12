@@ -11,13 +11,13 @@ import { getMyProduct } from './tables/TableFunctions'
 import Load from './extra/Load'
 
 
-class Product extends Component {
+class MyProduct extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      products:{}
+      products:[]
     }
 
   }
@@ -25,13 +25,14 @@ class Product extends Component {
   componentDidMount(){
 
     getMyProduct(this.props.path).then(response => {
-      this.setState({ products: response.data, loading: false });
+      this.setState({ products: response, loading: false });
   })
 
   }
 
   
     render() {
+//console.log('products',this.state.products)
 
       if (this.state.loading) { // if your component doesn't have to wait for an async action, remove this block 
       return <Load />; // render null when app is not ready
@@ -52,4 +53,5 @@ class Product extends Component {
     }
 }
 
-export default Product;
+export default MyProduct;
+
