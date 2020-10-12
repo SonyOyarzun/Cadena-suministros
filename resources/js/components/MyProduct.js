@@ -5,6 +5,7 @@ import {Card} from 'react-bootstrap';
 
 
 import TableMyProduct from './tables/TableMyProduct'
+import { getMyProduct } from './tables/TableFunctions'
 
 
 import Load from './extra/Load'
@@ -24,17 +25,9 @@ class Product extends Component {
 
   componentDidMount(){
 
-    axios.get('json-api/my')
-    .then(response => {
-    this.setState({
-      products: response.data,
-      loading: false,
-    });
-
-    }).catch(error => {
-      console.log("Error " + error)
-
-    })
+    getMyProduct(this.props.path).then(response => {
+      this.setState({ products: response.data, loading: false });
+  })
 
   }
 

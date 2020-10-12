@@ -17,9 +17,9 @@ class User extends Component {
 }
 
 componentDidMount() {
-    getUser().then(res => {
+    getUser().then(response => {
         this.setState({
-            user: res
+            user: response
         })
     })
 }

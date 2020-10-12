@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import {NavLink,Link, withRouter}  from 'react-router-dom';
+import { NavLink, Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 //import datable
 import { MDBDataTableV5, MDBBadge } from 'mdbreact';
 
 import Load from '../extra/Load'
+
+import { getProduct } from '../tables/TableFunctions'
 
 
 class TableUser extends Component {
@@ -24,17 +26,11 @@ class TableUser extends Component {
     const { data } = this.props.location
 
     const params = {
-      "path": data,
+      path : data,
     }
 
-    axios.get('json-api',{
-      params
-    })
-    .then(response => {
-      this.setState({ products: response.data})
-      this.setState({ loading: false})
-    }).catch(error => {
-      alert("Error " + error)
+    getProduct(params).then(response => {
+      this.setState({ products: response, loading: false });
     })
 
   }
@@ -49,55 +45,56 @@ class TableUser extends Component {
     let count = 0
 
     Object.keys(this.state.products).map((key, row) => (
-  
+
       preRows = [],
       Object.keys(this.state.products[key]).map((key2, col) => (
-      {...count < Object.keys(this.state.products[key]).length &&
-        columns.push({
-          label: key2,
-          field: key2,
-        }),
-      },
-    //  console.log('contador :',count,' limite',Object.keys(this.state.products[key]).length,' col:',columns),
-          preRows[key2]=this.state.products[row][key2],
-          count = count + 1
+        {
+          ...count < Object.keys(this.state.products[key]).length &&
+          columns.push({
+            label: key2,
+            field: key2,
+          }),
+        },
+        //  console.log('contador :',count,' limite',Object.keys(this.state.products[key]).length,' col:',columns),
+        preRows[key2] = this.state.products[row][key2],
+        count = count + 1
       )),
       rows.push(preRows)
-      
+
     ))
 
 
 
-    let data = { 
+    let data = {
       columns,
       rows
     };
 
     const { loading } = this.state;
-    
-    if(loading) { // if your component doesn't have to wait for an async action, remove this block 
-      return <Load/>; // render null when app is not ready
-    }else{
 
-    return (
-      <div>
-      <div id="stanby"></div>
+    if (loading) { // if your component doesn't have to wait for an async action, remove this block 
+      return <Load />; // render null when app is not ready
+    } else {
 
-        <MDBDataTableV5
-          className='cust-table'
-          responsive
-          bordered
-          hover
-          btn
-          entriesOptions={[5, 10, 15]}
-          entries={5}
-          data={data}
-        />
+      return (
+        <div>
+          <div id="stanby"></div>
 
-      </div>
-    )
+          <MDBDataTableV5
+            className='cust-table'
+            responsive
+            bordered
+            hover
+            btn
+            entriesOptions={[5, 10, 15]}
+            entries={5}
+            data={data}
+          />
+
+        </div>
+      )
+    }
   }
-}
 
 }
 

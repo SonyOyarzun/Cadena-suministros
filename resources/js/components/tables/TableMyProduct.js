@@ -20,6 +20,8 @@ export default function TableMyProduct(props) {
   let array = []
   let count = 0
 
+  console.log('table',props)
+
   const getDataCheckbox = checkedArr => {
     Object.keys(checkedArr).map((key, row) => (
       array.push(JSON.parse(document.getElementById(checkedArr[key]).value))
@@ -44,7 +46,7 @@ export default function TableMyProduct(props) {
 
   const isChecked = id => checked.filter(name => name === id)[0] ? true : false
 
-
+/*
   useEffect(() => {
 
     axios.get('user/list')
@@ -58,6 +60,7 @@ export default function TableMyProduct(props) {
 
   }, []);
 
+  */
   const createJson = (
 
     columns.push({

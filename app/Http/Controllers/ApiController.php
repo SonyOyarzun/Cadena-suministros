@@ -15,7 +15,6 @@ class ApiController extends Controller
 
 	public function product(Request $request)
 	{
-
 		try {
 			$client = new Client();
 			$response = $client->request('GET', $request->path);

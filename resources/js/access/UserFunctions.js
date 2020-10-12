@@ -124,7 +124,7 @@ export const reset = user => {
 
 export const getProfile = () => {
     return axios
-        .get('api/profile', {
+        .get('/user/my/', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {

@@ -28,9 +28,12 @@ import Routes from './components/Routes'
 import Load from './components/extra/Load'
 import Profile from './access/Profile'
 
+import {getProfile} from './access/UserFunctions'
+import {getConfig} from './components/tables/TableFunctions'
+
 const styles = {
   padding: {
-    paddingTop: "0vh",
+    paddingTop: "30vh",
     paddingBottom: "3vh",
     paddingRight: "10vw",
     paddingLeft: "15vw"
@@ -55,32 +58,29 @@ class App extends Component {
   componentDidMount() {
 
     axios.all([
-      axios.get('/user/my/'),
-      axios.get('/json-api/config'),
+      getProfile(),
+      getConfig()
     ])
       .then(responseArr => {
-
-        this.setState({ user: responseArr[0].data })
-        this.setState({ config: responseArr[1].data[0] })
-        this.setState({ loading: false })
-
+        this.setState({ user: responseArr[0], config: responseArr[1], loading: false})
       })
-
 
   }
 
   render() {
 
+    console.log('state :',this.state)
     const { loading } = this.state;
 
     //console.log('eval navbar',(this.state.user.role == 'A' || this.state.user.role == 'U'),'value',this.state.user.role)
 
+    /*
     if (document.getElementById("app")) {
       const assetPath = document.getElementById("app").getAttribute("assetPath");
       ReactDOM.render(<Routes assetPath={assetPath} />,
         document.getElementById("app"));
     }
-
+*/
     if (loading) { // if your component doesn't have to wait for an async action, remove this block 
       return <Load />; // render null when app is not ready
     } else {
