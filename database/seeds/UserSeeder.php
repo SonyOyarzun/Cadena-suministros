@@ -42,8 +42,8 @@ class UserSeeder extends Seeder
             'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/db.json',
             'role' => 'U',
             'password' => bcrypt('12345678'),
-            'publicKey'  => 'H66ANcwb4W81iRHsMReHwJWnPcwyGZCAcWBQDbn6YuqL',
-            'privateKey' => '2RjzmEEXWf51vmhdywNW4aqKjhSyHorYBP4Y2hX3sq4r',
+            'publicKey'  => 'H3EaF1k3dntV7q6dHFayAFHCuiVZa8wSrHAztUUaBYaM',
+            'privateKey' => '9oaPQiy39SQZkNKwsYuA2V5XgUkpKPnr6oCiQ1PHxFzj',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
@@ -54,8 +54,8 @@ class UserSeeder extends Seeder
             'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/db.json',
             'role' => 'U',
             'password' => bcrypt('12345678'),
-            'publicKey'  => 'H66ANcwb4W81iRHsMReHwJWnPcwyGZCAcWBQDbn6YuqL',
-            'privateKey' => '2RjzmEEXWf51vmhdywNW4aqKjhSyHorYBP4Y2hX3sq4r',
+            'publicKey'  => '3fEZQX2yasZTDp7R7a8eUuNaNB3W2xzqvVwT4yYHUqrd',
+            'privateKey' => 'FeinCmwNP764MPnnYtHVdof8QZqWFDtjcLpWgnXrH2jE',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

@@ -6,6 +6,8 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 
+import { receiveChain , getConfig, getTransaction} from "../tables/TableFunctions";
+import { getUser } from "../../access/UserFunctions";
 
 function Transfer(props) {
 
@@ -18,28 +20,21 @@ function Transfer(props) {
 
 
   const save = (id_transaction, asset, from) => {
-    axios({
-      method: 'post',
-      url: 'chain/receive',
-      data: {
-        transaction: id_transaction,
-        asset: asset,
-        from: from,
-      }
-    })
-      .then((response) => {
-        console.log(response);
-        props.getData()
-        alert(response.data)
 
-        setTimeout(function () {
-          setPrevent(false);
-          setMessage('Realizar Recepción')
-        }, 5000);
-        
-      }, (error) => {
-        console.log(error);
-      });
+    const data = {
+      transaction: id_transaction,
+      asset: asset,
+      from: from,
+    }
+
+    receiveChain(data).then((response) => {
+    //  console.log('receive transaction',response);
+      props.getData()
+      setPrevent(false);
+      setMessage('Realizar Recepción')
+    }, (error) => {
+      console.log(error);
+    });
   }
 
 
@@ -65,17 +60,17 @@ function Transfer(props) {
       console.log(paramsReceive, paramsSend)
 
       axios.all([
-        axios.get('/user/search', { params: paramsSend }),
-        axios.get('/user/search', { params: paramsReceive }),
-        axios.get('/json-api/config'),
-        axios.get('transaction', { params: paramsTransaction }),
+        getUser(paramsSend),
+        getUser(paramsReceive),
+        getConfig(),
+        getTransaction(paramsTransaction),
       ])
         .then(responseArr => {
-          receiveTransaction(responseArr[0].data, responseArr[1].data, responseArr[2].data, responseArr[3].data)
-          console.log('send', responseArr[0].data)
-          console.log('receive', responseArr[1].data)
-          console.log('config', responseArr[2].data)
-          console.log('transaction', responseArr[3].data)
+          receiveTransaction(responseArr[0], responseArr[1], responseArr[2], responseArr[3])
+          console.log('send', responseArr[0])
+          console.log('receive', responseArr[1])
+          console.log('config', responseArr[2])
+          console.log('transaction', responseArr[3])
         })
 
         .catch(error => {
@@ -138,7 +133,7 @@ function Transfer(props) {
     //conexion a bigchain
     const BigchainDB = require('bigchaindb-driver')
     const driver = require('bigchaindb-driver')
-    const API_PATH = config[0].path
+    const API_PATH = config.path
     const conn = new driver.Connection(API_PATH)
 
 
@@ -169,7 +164,7 @@ function Transfer(props) {
         return conn.postTransactionCommit(signedTransfer)
       })
       .then(tx => {
-        console.log('Transfer Transaction created :', config[0].path + config[0].transaction + tx.id)
+        console.log('Transfer Transaction created :', config.path + config.transaction + tx.id)
         save(tx.id, asset, props.sendId)
 
       })

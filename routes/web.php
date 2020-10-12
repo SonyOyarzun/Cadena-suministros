@@ -49,7 +49,7 @@ Route::view('/{path?}', 'home')
 //Auth::routes();
 
 Route::get('/user/my/', 'UserController@my');
-Route::get('/user/search/', 'UserController@search');
+Route::post('/user/search/', 'UserController@search');
 Route::get('/user/list/', 'UserController@list');  
 Route::put('/user/edit/', 'UserController@edit');  
 Route::put('/user/changePass/', 'UserController@changePass');  
@@ -87,7 +87,7 @@ Route::post('chain/reSend', 'ChainController@reSend');
 
 //rutas de bigchain
 Route::get('assets', 'BigController@asset');
-Route::get('transaction', 'BigController@transaction');
+Route::post('transaction', 'BigController@transaction');
 Route::get('search', 'BigController@search');
 
 //subir archivo

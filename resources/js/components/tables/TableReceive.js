@@ -9,12 +9,16 @@ import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon } from 'mdbreact';
 
 import Load from '../extra/Load'
 
+import { getChain } from "../tables/TableFunctions";
+import { getProfile } from "../../access/UserFunctions";
+
 class TableSend extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       sends: [],
+      user: [],
       loading: true
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
@@ -22,11 +26,9 @@ class TableSend extends Component {
 
   getData() {
 
-    axios.get('chain/list').then(response => {
-      this.setState({ sends: response.data })
-      this.setState({ loading: false })
-      //    console.log(this.state.sends)
-      console.log('response :', response.data)
+    getChain().then(response => {
+      this.setState({ sends: response, loading: false })
+      console.log('response :', response)
     }).catch(error => {
       alert("Error " + error)
     })
@@ -37,6 +39,10 @@ class TableSend extends Component {
   componentDidMount() {
 
     this.getData()
+
+    getProfile().then(response => {
+      this.setState({ user: response})
+    })
 
   }
 
@@ -95,7 +101,9 @@ class TableSend extends Component {
 
     //filtrara solo los que tienen estado Enviado
 
-    rows = rows.filter(e => e.state == "Enviado")
+    //console.log('filter',this.state.user)
+
+    rows = rows.filter(e => e.state == "Enviado" &&  e.to == this.state.user.name)
 
 
     const data = {

@@ -135,3 +135,17 @@ export const getProfile = () => {
             console.log(err)
         })
 }
+
+export const getUser = (user) => {
+    return axios
+        .post('/user/search',user,  {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+            console.log(response)
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}

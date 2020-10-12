@@ -28,14 +28,19 @@ class TableUser extends Component {
       loading: true
     }
     this.handleLink = this.handleLink.bind(this);
+    this.getData = this.getData.bind(this);
+  }
+
+  getData(){
+    getUser().then(response => {
+      this.setState({ users: response , loading: false })
+    })
   }
 
 
   componentDidMount() {
 
-    getUser().then(response => {
-      this.setState({ users: response , loading: false })
-    })
+    this.getData()
 
   }
 
@@ -115,7 +120,7 @@ class TableUser extends Component {
       return (
         <div>
           <div>
-            <NewUser getData={getUser} />
+            <NewUser getData={this.getData()}/>
           </div>
           <MDBDataTableV5
             className='cust-table'

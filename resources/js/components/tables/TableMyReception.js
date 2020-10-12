@@ -14,6 +14,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import Load from '../extra/Load'
 
+import { getChain, reSendChain } from "../tables/TableFunctions";
+
 class TableMyReception extends Component {
 
   constructor(props) {
@@ -30,20 +32,16 @@ class TableMyReception extends Component {
 
   getData() {
 
-    axios.get('chain/list').then(response => {
-      this.setState({ sends: response.data })
-      this.setState({ loading: false })
-      //    console.log(this.state.sends)
-      console.log('response :', response.data)
-    }).catch(error => {
-      alert("Error " + error)
+    getChain().then(response => {
+      this.setState({ sends: response, loading: false })
+      console.log('response :', response)
     })
 
   }
 
   onTagsChange(event, values) {
     this.setState({ userSend: values })
-    console.log('userSend onChange', this.state.userSend)
+  //  console.log('userSend onChange', this.state.userSend)
   }
 
 
@@ -55,19 +53,16 @@ class TableMyReception extends Component {
   render() {
 
     const save = (id_transaction, asset, to) => {
-      axios({
-        method: 'post',
-        url: 'chain/reSend',
-        data: {
-          transaction: id_transaction,
-          asset: asset,
-          to: to,
-        }
-      })
-        .then((response) => {
+
+      const data = {
+        transaction: id_transaction,
+        asset: asset,
+        to: to,
+      }
+
+      reSendChain(data).then((response) => {
           console.log(response);
           this.getData()
-          alert(response.data)
         }, (error) => {
           console.log(error);
         });
@@ -125,7 +120,9 @@ class TableMyReception extends Component {
 
     //filtrara solo los que tienen estado Enviado
 
-    rows = rows.filter(e => e.state == "Recibido")
+   // rows = rows.filter(e => e.state == "Recibido" && e.to == this.state.userSend.id)
+
+   rows = rows.filter(e => e.state == "Recibido")
 
     const data = {
       columns,

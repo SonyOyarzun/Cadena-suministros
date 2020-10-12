@@ -28,6 +28,66 @@ export const getChain = () => {
         })
 }
 
+export const newChain = (chain) => {
+    return axios
+        .post('chain/new',chain, {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+            //console.log(response.data)
+            alert(response.data)
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const reSendChain = (chain) => {
+    return axios
+        .post('chain/reSend',chain, {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+            //console.log(response.data)
+            alert(response.data)
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const receiveChain = (chain) => {
+    return axios
+        .post('chain/receive',chain, {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+            //console.log(response.data)
+            alert(response.data)
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const getTransaction = (transaction) => {
+    return axios
+        .post('transaction',transaction, {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+            console.log(response.data)
+        //    alert(response.data)
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export const getProduct = (product) => {
     return axios
         .post('api-product', product, {
@@ -47,7 +107,6 @@ export const getMyProduct = () => {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            console.log('api-myProduct', response)
             return response.data
         })
         .catch(err => {

@@ -20,7 +20,7 @@ function NewUser(props) {
   const BigchainDB = require('bigchaindb-driver')
   const alice = new BigchainDB.Ed25519Keypair()
 
-  const [state, setState] = useState({ id: '' , name: '' , email: '',role: '', path: '', pass: '', confirmPass: '', privateKey: alice.privateKey, publicKey: alice.publicKey})
+  const [state, setState] = useState({ id: '' , name: '' , email: '',role: 'A', path: '', pass: '', confirmPass: '', privateKey: alice.privateKey, publicKey: alice.publicKey})
 
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('Crear usuario')
