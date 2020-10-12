@@ -16,7 +16,6 @@ class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sends: [],
       loading: true,
       products:{}
     }

@@ -115,7 +115,7 @@ class TableUser extends Component {
       return (
         <div>
           <div>
-            <NewUser getData={this.getData} />
+            <NewUser getData={getUser} />
           </div>
           <MDBDataTableV5
             className='cust-table'

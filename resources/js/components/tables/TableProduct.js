@@ -5,33 +5,13 @@ import axios from 'axios';
 //import datable
 import { MDBDataTableV5, MDBBadge } from 'mdbreact';
 
-import Load from '../extra/Load'
-
 import { getProduct } from '../tables/TableFunctions'
 
 
-class TableUser extends Component {
+class TableProduct extends Component {
 
   constructor(props) {
-    super(props);
-    this.state = {
-      products: [],
-      loading: true
-    }
-
-  }
-
-  componentDidMount() {
-
-    const { data } = this.props.location
-
-    const params = {
-      path : data,
-    }
-
-    getProduct(params).then(response => {
-      this.setState({ products: response, loading: false });
-    })
+    super();
 
   }
 
@@ -39,24 +19,27 @@ class TableUser extends Component {
 
   render() {
 
+    console.log('TableProduct',this.props.products)
+    
+
     let columns = []
     let preRows = []
     let rows = []
     let count = 0
 
-    Object.keys(this.state.products).map((key, row) => (
+    Object.keys(this.props.products).map((key, row) => (
 
       preRows = [],
-      Object.keys(this.state.products[key]).map((key2, col) => (
+      Object.keys(this.props.products[key]).map((key2, col) => (
         {
-          ...count < Object.keys(this.state.products[key]).length &&
+          ...count < Object.keys(this.props.products[key]).length &&
           columns.push({
             label: key2,
             field: key2,
           }),
         },
         //  console.log('contador :',count,' limite',Object.keys(this.state.products[key]).length,' col:',columns),
-        preRows[key2] = this.state.products[row][key2],
+        preRows[key2] = this.props.products[row][key2],
         count = count + 1
       )),
       rows.push(preRows)
@@ -70,11 +53,6 @@ class TableUser extends Component {
       rows
     };
 
-    const { loading } = this.state;
-
-    if (loading) { // if your component doesn't have to wait for an async action, remove this block 
-      return <Load />; // render null when app is not ready
-    } else {
 
       return (
         <div>
@@ -93,10 +71,10 @@ class TableUser extends Component {
 
         </div>
       )
-    }
+    
   }
 
 }
 
 
-export default withRouter(TableUser);
+export default withRouter(TableProduct);

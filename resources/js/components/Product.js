@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
 
-import {Card} from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
+import Load from './extra/Load'
 import TableProduct from './tables/TableProduct'
-import {getProduct} from './tables/TableFunctions'
+import { getProduct } from './tables/TableFunctions'
 
 
 
@@ -13,39 +14,45 @@ class Product extends Component {
   constructor(props) {
     super()
     this.state = {
-        product: [],
-        loading: false,
-        message: 'Crear usuario'
+      product: [],
+      loading: true
     }
-}
+  }
 
-  componentDidMount(){
 
-    const { data } = this.props.location
+  componentDidMount() {
 
-    console.log('p path',data)
+    const params = {
+      path: this.props.location.data
+    }
 
-    getProduct(data).then(response => {
-      console.log('p response',response)
-      this.setState({ product: response ,  message: 'Crear usuario' , loading: false })
+    getProduct(params).then(response => {
+      this.setState({ product: response, loading: false })
     })
 
   }
 
-    render() {
-        return (
-            <div>
-            <Card>
+  render() {
+
+    if (this.state.loading) {
+      return (<Load/>)
+    } else {
+      return (
+        <div>
+          <Card>
             <Card.Body>
               <Card.Title>Lista de Productos</Card.Title>
-               <Card.Text>
-               </Card.Text>
-               <TableProduct product={this.state.product}/>
+              <Card.Text>
+              </Card.Text>
+              <TableProduct products={this.state.product}/>
             </Card.Body>
           </Card>
-          </div>
-        )
+        </div>
+      )
     }
+  }
 }
 
 export default Product;
+
+// <TableProduct product={this.state.product}/>
