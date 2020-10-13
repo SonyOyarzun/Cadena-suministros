@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const getUser = () => {
     return axios
-        .get('user/list', {
+        .get('/user/list', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
@@ -16,7 +16,7 @@ export const getUser = () => {
 
 export const getChain = () => {
     return axios
-        .get('chain/list', {
+        .get('/chain/list', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
@@ -30,7 +30,7 @@ export const getChain = () => {
 
 export const newChain = (chain) => {
     return axios
-        .post('chain/new',chain, {
+        .post('/chain/new',chain, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
@@ -45,7 +45,7 @@ export const newChain = (chain) => {
 
 export const reSendChain = (chain) => {
     return axios
-        .post('chain/reSend',chain, {
+        .post('/chain/reSend',chain, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
@@ -60,7 +60,7 @@ export const reSendChain = (chain) => {
 
 export const receiveChain = (chain) => {
     return axios
-        .post('chain/receive',chain, {
+        .post('/chain/receive',chain, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
@@ -75,7 +75,7 @@ export const receiveChain = (chain) => {
 
 export const getTransaction = (transaction) => {
     return axios
-        .post('transaction',transaction, {
+        .post('/transaction',transaction, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
@@ -121,7 +121,7 @@ export const searchAsset = (asset) => {
 
 export const getProduct = (product) => {
     return axios
-        .post('api-product', product, {
+        .post('/api-product', product, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
@@ -134,7 +134,7 @@ export const getProduct = (product) => {
 
 export const getMyProduct = () => {
     return axios
-        .get('api-myProduct', {
+        .get('/api-myProduct', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
@@ -147,7 +147,7 @@ export const getMyProduct = () => {
 
 export const getConfig = () => {
     return axios
-        .get('api-config', {
+        .get('/api-config', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
@@ -161,7 +161,7 @@ export const getConfig = () => {
 
 export const getEditConfig = () => {
     return axios
-        .get('api-editConfig', {
+        .get('/api-editConfig', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {

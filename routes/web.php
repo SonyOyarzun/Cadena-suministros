@@ -73,26 +73,26 @@ Route::group(['middleware' => ['cors']], function () {
 });
 
 //rutas api
-Route::post('api-product', 'ApiController@product');
-Route::get('api-myProduct', 'ApiController@myProduct');
-Route::get('api-config', 'ApiController@config');
-Route::put('api-editConfig', 'ApiController@editConfig');
+Route::post('/api-product', 'ApiController@product');
+Route::get('/api-myProduct', 'ApiController@myProduct');
+Route::get('/api-config', 'ApiController@config');
+Route::put('/api-editConfig', 'ApiController@editConfig');
 
 
 //rutas complemento de bigchain
-Route::get('chain/list', 'ChainController@index');
-Route::post('chain/new', 'ChainController@create');
-Route::post('chain/receive', 'ChainController@receive');
-Route::post('chain/reSend', 'ChainController@reSend');
+Route::get('/chain/list', 'ChainController@index');
+Route::post('/chain/new', 'ChainController@create');
+Route::post('/chain/receive', 'ChainController@receive');
+Route::post('/chain/reSend', 'ChainController@reSend');
 
 //rutas de bigchain
-Route::post('assets', 'BigController@asset');
-Route::post('transaction', 'BigController@transaction');
-Route::post('search', 'BigController@search');
+Route::post('/assets', 'BigController@asset');
+Route::post('/transaction', 'BigController@transaction');
+Route::post('/search', 'BigController@search');
 
 //subir archivo
-Route::post('uploadLogotype', 'UploadController@uploadFileLogotype');
-Route::post('uploadBackground', 'UploadController@uploadFileBackground');
+Route::post('/uploadLogotype', 'UploadController@uploadFileLogotype');
+Route::post('/uploadBackground', 'UploadController@uploadFileBackground');
 
 
 //https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/db.json

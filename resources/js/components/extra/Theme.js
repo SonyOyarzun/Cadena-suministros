@@ -1,6 +1,8 @@
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import React, { useState, useEffect,useLayoutEffect } from 'react';
 
+//import {getConfig} from '../components/tables/TableFunctions'
+
 
 const defaultTheme = {
   body: '#eeeeee',

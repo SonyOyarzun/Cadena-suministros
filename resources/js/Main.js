@@ -63,6 +63,7 @@ class App extends Component {
     ])
       .then(responseArr => {
         this.setState({ user: responseArr[0], config: responseArr[1], loading: false})
+        console.log('user',responseArr[0],'config ',responseArr[1])
       })
 
   }
@@ -72,15 +73,7 @@ class App extends Component {
     console.log('state :',this.state)
     const { loading } = this.state;
 
-    //console.log('eval navbar',(this.state.user.role == 'A' || this.state.user.role == 'U'),'value',this.state.user.role)
 
-    /*
-    if (document.getElementById("app")) {
-      const assetPath = document.getElementById("app").getAttribute("assetPath");
-      ReactDOM.render(<Routes assetPath={assetPath} />,
-        document.getElementById("app"));
-    }
-*/
     if (loading) { // if your component doesn't have to wait for an async action, remove this block 
       return <Load />; // render null when app is not ready
     } else {

@@ -171,7 +171,7 @@ console.log('responseArr[1]',responseArr[1])
 
   return (
     <MDBRow>
-      <MDBCol md="12" lg="12" xl="12" className="mx-auto mt-3">
+      <MDBCol md="12" lg="12" xl="12" >
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>
@@ -207,7 +207,7 @@ console.log('responseArr[1]',responseArr[1])
                   </TimelineOppositeContent>
                   <TimelineSeparator>
                     <TimelineDot>
-                      {(array.length)-1 == index ? (
+                      {(array.length) == index-1 ? (
                         <i class="fas fa-check-circle"></i>
                       ) : (
                           <i class="fas fa-arrow-alt-circle-down"></i>
