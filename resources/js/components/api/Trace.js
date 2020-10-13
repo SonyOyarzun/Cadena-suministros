@@ -17,6 +17,8 @@ import { Container } from '@material-ui/core';
 //parametros desde url
 import { useParams , withRouter } from "react-router-dom";
 
+import { getTransaction, getAsset } from "../tables/TableFunctions";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: '6px 16px',
@@ -70,27 +72,27 @@ function Trace(props) {
       }
 
       axios.all([
-        axios.get('/assets', { params }),
-        axios.get('/transaction', { params }),
+        getAsset(params),
+        getTransaction(params),
       ])
         .then(responseArr => {
 
           
-          if (responseArr[0].data.length>0) {
+          if (responseArr[0].length>0) {
 
-            console.log('eval: ', responseArr[0].data[0].hasOwnProperty('metadata'));
+            console.log('eval: ', responseArr[0].hasOwnProperty('metadata'));
             console.log('eval 2: ', responseArr[0].data);
 
-            if (responseArr[0].data[0].hasOwnProperty('metadata')) {
+            if (responseArr[0].hasOwnProperty('metadata')) {
 
-            if (responseArr[0].data[0].metadata.hasOwnProperty('info')) {
-              setStep(responseArr[0].data)
+            if (responseArr[0].metadata.hasOwnProperty('info')) {
+              setStep(responseArr[0])
             } else {
               setStep([])
             }
 
-            if (responseArr[1].data.asset.data.hasOwnProperty('transaction')) {
-              setProducts(responseArr[1].data.asset.data.transaction)
+            if (responseArr[1].asset.data.hasOwnProperty('transaction')) {
+              setProducts(responseArr[1].asset.data.transaction)
             } else {
               setProducts([])
             }
@@ -105,8 +107,8 @@ function Trace(props) {
             setPrevent(false);
             setButtonMessage('Buscar');
           }, 2000)
-          console.log('Traza: ', responseArr[0].data);
-          console.log('Productos: ', responseArr[1].data);
+          console.log('Traza: ', responseArr[0]);
+          console.log('Productos: ', responseArr[1]);
 
         });
 
@@ -168,7 +170,7 @@ function Trace(props) {
 
   return (
     <MDBRow>
-      <MDBCol md="9" lg="7" xl="5" className="mx-auto mt-3">
+      <MDBCol md="12" lg="12" xl="12" className="mx-auto mt-3">
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>

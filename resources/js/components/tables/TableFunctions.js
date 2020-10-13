@@ -88,6 +88,37 @@ export const getTransaction = (transaction) => {
         })
 }
 
+export const getAsset = (asset) => {
+    return axios
+        .post('transaction',asset, {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+            console.log(response.data)
+        //    alert(response.data)
+            return response.data[0]
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const searchAsset = (asset) => {
+    return axios
+        .post('search',asset, {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+          //  console.log('search :',response.data)
+            console.log('asset :', asset)
+        //    alert(response.data)
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export const getProduct = (product) => {
     return axios
         .post('api-product', product, {

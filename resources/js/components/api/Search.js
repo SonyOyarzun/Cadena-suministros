@@ -15,6 +15,8 @@ import Message from '../extra/Messaje';
 import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
+import { getTransaction, getAsset, searchAsset } from "../tables/TableFunctions";
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -74,23 +76,20 @@ export default function Search() {
       "atribute": document.getElementById('id').value,
     }
 
-    axios.get('/search', {
-      params
-    }).then(response => {
-      console.log('productos :', response.data)
-      if (response.data.length >0){
-        setProducts(response.data)
-        getSteps(response.data) 
+    searchAsset(params).then(response => {
+      console.log('productos :', response)
+      if (response.length > 0){
+        setProducts(response)
+        getSteps(response) 
       }
 
     }).catch(error => {
       console.log("Error " + error)
     })
 
-    setTimeout(function() {
       setPrevent(false);
       setButtonMessage('Buscar');
-    }, 5000);
+
   }else{
     alert('Debe ingresar un parametro')
   }
@@ -174,7 +173,7 @@ export default function Search() {
 
   return (
     <MDBRow>
-      <MDBCol md="9" lg="7" xl="5" className="mx-auto mt-3">
+      <MDBCol md="12" lg="12" xl="12" className="mx-auto mt-3">
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>

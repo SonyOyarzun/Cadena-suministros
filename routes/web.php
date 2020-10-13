@@ -86,9 +86,9 @@ Route::post('chain/receive', 'ChainController@receive');
 Route::post('chain/reSend', 'ChainController@reSend');
 
 //rutas de bigchain
-Route::get('assets', 'BigController@asset');
+Route::post('assets', 'BigController@asset');
 Route::post('transaction', 'BigController@transaction');
-Route::get('search', 'BigController@search');
+Route::post('search', 'BigController@search');
 
 //subir archivo
 Route::post('uploadLogotype', 'UploadController@uploadFileLogotype');
