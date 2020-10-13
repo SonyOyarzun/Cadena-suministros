@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+
 import { makeStyles } from '@material-ui/core/styles';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
@@ -15,7 +17,7 @@ import { Container } from '@material-ui/core';
 
 
 //parametros desde url
-import { useParams , withRouter } from "react-router-dom";
+import { useParams, withRouter } from "react-router-dom";
 
 import { getTransaction, getAsset } from "../tables/TableFunctions";
 
@@ -76,38 +78,18 @@ function Trace(props) {
         getTransaction(params),
       ])
         .then(responseArr => {
-console.log('responseArr[0]',responseArr[0])
-console.log('responseArr[1]',responseArr[1])
-          
-          if (responseArr[0].length>0) {
+          console.log('responseArr[0]', responseArr[0])
+          console.log('responseArr[1]', responseArr[1])
 
-            console.log('eval: ', responseArr[0][0].hasOwnProperty('metadata'));
-            console.log('eval 2: ', responseArr[0]);
 
-            if (responseArr[0][0].hasOwnProperty('metadata')) {
+          setStep(responseArr[0])
 
-            if (responseArr[0][0].metadata.hasOwnProperty('info')) {
-              setStep(responseArr[0])
-            } else {
-              setStep([])
-            }
+          setProducts(responseArr[1])
 
-            if (responseArr[1].asset.data.hasOwnProperty('transaction')) {
-              setProducts(responseArr[1].asset.data.transaction)
-            } else {
-              setProducts([])
-            }
-  
-          }else{
-            alert('No se encuentra ID')
-          }
-        }else{
-          alert('No se encuentra ID')
-        }
-          setTimeout(function () {
-            setPrevent(false);
-            setButtonMessage('Buscar');
-          }, 2000)
+
+          setPrevent(false);
+          setButtonMessage('Buscar');
+
           console.log('Traza: ', responseArr[0]);
           console.log('Productos: ', responseArr[1]);
 
@@ -156,8 +138,8 @@ console.log('responseArr[1]',responseArr[1])
 
   );
 
-  console.log('data :',data)
-  console.log('asset :',asset)
+  console.log('data :', data)
+  console.log('asset :', asset)
 
 
   const classes = useStyles();
@@ -194,12 +176,12 @@ console.log('responseArr[1]',responseArr[1])
               : (<></>)
             }
 
-            <Timeline align="alternate">
+            <Timeline align="left">
               {arrayStep.map((label, index) => (
                 time = new Date(label.date),
                 <TimelineItem>
                   <TimelineOppositeContent>
-                    <Typography variant="body2" color="textSecondary">
+                    <Typography style={{ textAlign: 'left' }} variant="body2" color="textSecondary">
                       {
                         time.toLocaleDateString("es-ES", options)
                       }
@@ -207,7 +189,7 @@ console.log('responseArr[1]',responseArr[1])
                   </TimelineOppositeContent>
                   <TimelineSeparator>
                     <TimelineDot>
-                      {(array.length) == index-1 ? (
+                      {(array.length) == index - 1 ? (
                         <i class="fas fa-check-circle"></i>
                       ) : (
                           <i class="fas fa-arrow-alt-circle-down"></i>
@@ -216,7 +198,7 @@ console.log('responseArr[1]',responseArr[1])
                     <TimelineConnector />
                   </TimelineSeparator>
                   <TimelineContent >
-                    <Paper elevation={3} className={'darkLight'}>
+                    <Paper style={{ textAlign: 'right' }} elevation={3} className={'darkLight'}>
                       <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                         <i className="fas fa-truck-moving"></i>
                       </Typography>
