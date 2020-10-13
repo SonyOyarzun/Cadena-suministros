@@ -76,16 +76,17 @@ function Trace(props) {
         getTransaction(params),
       ])
         .then(responseArr => {
-
+console.log('responseArr[0]',responseArr[0])
+console.log('responseArr[1]',responseArr[1])
           
           if (responseArr[0].length>0) {
 
-            console.log('eval: ', responseArr[0].hasOwnProperty('metadata'));
-            console.log('eval 2: ', responseArr[0].data);
+            console.log('eval: ', responseArr[0][0].hasOwnProperty('metadata'));
+            console.log('eval 2: ', responseArr[0]);
 
-            if (responseArr[0].hasOwnProperty('metadata')) {
+            if (responseArr[0][0].hasOwnProperty('metadata')) {
 
-            if (responseArr[0].metadata.hasOwnProperty('info')) {
+            if (responseArr[0][0].metadata.hasOwnProperty('info')) {
               setStep(responseArr[0])
             } else {
               setStep([])
@@ -206,7 +207,7 @@ function Trace(props) {
                   </TimelineOppositeContent>
                   <TimelineSeparator>
                     <TimelineDot>
-                      {(array.length) == index ? (
+                      {(array.length)-1 == index ? (
                         <i class="fas fa-check-circle"></i>
                       ) : (
                           <i class="fas fa-arrow-alt-circle-down"></i>

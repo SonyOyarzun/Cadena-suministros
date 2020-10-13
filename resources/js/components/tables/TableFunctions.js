@@ -90,13 +90,13 @@ export const getTransaction = (transaction) => {
 
 export const getAsset = (asset) => {
     return axios
-        .post('transaction',asset, {
+        .post('/assets',asset, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            console.log(response.data)
+            console.log('assets',response.data)
         //    alert(response.data)
-            return response.data[0]
+            return response.data
         })
         .catch(err => {
             console.log(err)
@@ -105,7 +105,7 @@ export const getAsset = (asset) => {
 
 export const searchAsset = (asset) => {
     return axios
-        .post('search',asset, {
+        .post('/search',asset, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
