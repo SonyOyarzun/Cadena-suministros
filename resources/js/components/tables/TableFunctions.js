@@ -79,7 +79,6 @@ export const receiveChain = (chain) => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err} type={'error'} />, document.getElementById('message'));
         })
 }
 
@@ -102,7 +101,6 @@ export const getTransaction = (transaction) => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err} type={'error'} />, document.getElementById('message'));
             return []
         })
 }
