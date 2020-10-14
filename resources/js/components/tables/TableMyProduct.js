@@ -7,7 +7,6 @@ import Create from '../api/Create'
 
 import Auto from '../extra/AutoComplete'
 
-
 export default function TableMyProduct(props) {
 
   const [userSend, setUserSend] = useState({});
@@ -19,6 +18,7 @@ export default function TableMyProduct(props) {
   let data = []
   let array = []
   let count = 0
+  let params = {}
 
   console.log('table',props)
 
@@ -81,6 +81,7 @@ export default function TableMyProduct(props) {
 
   );
 
+ // rows = rows.filter(e => e.state == "Enviado" &&  e.to == this.state.user.name)
   //console.log('users :', users)
   const styles = {
     border: {

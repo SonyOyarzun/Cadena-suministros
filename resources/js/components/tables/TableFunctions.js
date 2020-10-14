@@ -159,7 +159,6 @@ export const searchAsset = (asset) => {
 }
 
 export const getProduct = (product) => {
-    render(<></>, document.getElementById('message'));
     return axios
         .post('/api-product', product, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
@@ -169,12 +168,10 @@ export const getProduct = (product) => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const getMyProduct = () => {
-    render(<></>, document.getElementById('message'));
     return axios
         .get('/api-myProduct', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
@@ -184,12 +181,10 @@ export const getMyProduct = () => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const getConfig = () => {
-    render(<></>, document.getElementById('message'));
     return axios
         .get('/api-config', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
@@ -200,7 +195,6 @@ export const getConfig = () => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
