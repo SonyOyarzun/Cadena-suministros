@@ -39,7 +39,7 @@ function Transfer(props) {
       setMessage('Realizar Recepción')
     }, (error) => {
       console.log(error);
-      render(<SnackBar state={true} alert={error} type={'error'} />, document.getElementById('message'));
+      render(<SnackBar state={true} alert={'Error al realizar Transferencia'} type={'error'} />, document.getElementById('message'));
     });
   }
 
