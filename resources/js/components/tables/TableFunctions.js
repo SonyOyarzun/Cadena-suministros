@@ -196,10 +196,10 @@ export const getConfig = () => {
         })
 }
 
-export const getEditConfig = () => {
+export const editConfig = () => {
     render(<></>, document.getElementById('message'));
     return axios
-        .get('/api-editConfig', {
+        .put('/api-editConfig', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {

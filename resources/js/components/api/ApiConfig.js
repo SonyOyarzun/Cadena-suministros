@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon } from 'mdbreact';
 import Upload from '../extra/UploadFile'
+import { getConfig , editConfig } from "../tables/TableFunctions";
+
 
 class ApiConfig extends Component {
 
@@ -21,13 +23,9 @@ class ApiConfig extends Component {
 
 
   getData = () => {
-    axios({
-      method: 'get',
-      url: 'json-api/config'
-    })
-      .then((response) => {
-        console.log(response.data);
-        this.setState({ config: response.data[0] })
+    getConfig().then((response) => {
+        console.log(response);
+        this.setState({ config: response })
       }, (error) => {
         console.log(error);
       });
@@ -39,21 +37,18 @@ class ApiConfig extends Component {
 
     const process = () => {
 
-      axios({
-        method: 'put',
-        url: 'json-api/editConfig',
-        data: {
+       const  data = {
           id: document.getElementById('id').value,
           path: document.getElementById('path').value,
           transaction: document.getElementById('transaction').value,
           asset: document.getElementById('asset').value,
           api_port: document.getElementById('api_port').value,
           db_port: document.getElementById('db_port').value,
-          logotype: document.getElementById('logotype').value,
-          background: document.getElementById('background').value
+        //  logotype: document.getElementById('logotype').value,
+        //  background: document.getElementById('background').value
         }
-      })
-        .then((response) => {
+   
+      editConfig(data).then((response) => {
           console.log(response);
           this.getData()
           alert(response.data)
