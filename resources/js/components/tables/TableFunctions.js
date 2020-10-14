@@ -79,7 +79,7 @@ export const receiveChain = (chain) => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            render(<SnackBar state={true} alert={err} type={'error'} />, document.getElementById('message'));
         })
 }
 
@@ -91,18 +91,18 @@ export const getTransaction = (transaction) => {
         })
         .then(response => {
             //    console.log(response.data)
-
             if (response.data.asset.data.hasOwnProperty('transaction')) {
-                return response.data.asset.data.transaction
-            } else {
-                render(<SnackBar state={true} alert={'No se encuentra ID'} type={'error'} />, document.getElementById('message'));
-                return []
-            }
+
+                return  response.data.asset.data.transaction
+            }else{
+
+                render(<SnackBar state={true} alert={response.data} type={'error'} />, document.getElementById('message'));
+            } 
 
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            render(<SnackBar state={true} alert={err} type={'error'} />, document.getElementById('message'));
             return []
         })
 }
@@ -137,7 +137,7 @@ export const getAsset = (asset) => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            render(<SnackBar state={true} alert={err} type={'error'} />, document.getElementById('message'));
             return result
         })
 }
@@ -154,7 +154,7 @@ export const searchAsset = (asset) => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            render(<SnackBar state={true} alert={err} type={'error'} />, document.getElementById('message'));
         })
 }
 
@@ -209,7 +209,7 @@ export const getEditConfig = () => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            render(<SnackBar state={true} alert={err} type={'error'} />, document.getElementById('message'));
         })
 }
 

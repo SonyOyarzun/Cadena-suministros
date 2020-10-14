@@ -9,6 +9,9 @@ import { Button, Modal, Card, Form } from 'react-bootstrap';
 import { receiveChain , getConfig, getTransaction} from "../tables/TableFunctions";
 import { getUser } from "../../access/UserFunctions";
 
+import SnackBar from '../extra/SnackBar'
+import { render } from 'react-dom';
+
 function Transfer(props) {
 
   const [show, setShow] = useState(false);
@@ -28,17 +31,22 @@ function Transfer(props) {
     }
 
     receiveChain(data).then((response) => {
+      render(<></>, document.getElementById('message'));
+
     //  console.log('receive transaction',response);
       props.getData()
       setPrevent(false);
       setMessage('Realizar Recepción')
     }, (error) => {
       console.log(error);
+      render(<SnackBar state={true} alert={error} type={'error'} />, document.getElementById('message'));
     });
   }
 
 
   const process = () => {
+
+    render(<></>, document.getElementById('message'));
 
     if (document.getElementById('commentary').value.trim().length > 0) {
 
@@ -80,7 +88,7 @@ function Transfer(props) {
           console.log('transaction', error[3])
         })
     } else {
-      alert('Debe ingresar un comentario')
+      render(<SnackBar state={true} alert={'Debe ingresar un comentario'} type={'info'} />, document.getElementById('message'));
     }
 
 
@@ -90,6 +98,7 @@ function Transfer(props) {
 
   const receiveTransaction = (userSend, userReceive, config, transaction) => {
 
+    render(<></>, document.getElementById('message'));
     console.log('transaction asset :', transaction)
     //llaves de quien envia
 
@@ -166,7 +175,7 @@ function Transfer(props) {
       .then(tx => {
         console.log('Transfer Transaction created :', config.path + config.transaction + tx.id)
         save(tx.id, asset, props.sendId)
-
+        render(<SnackBar state={true} alert={'Transaccion Transferida'} type={'success'} />, document.getElementById('message'));
       })
 
 
