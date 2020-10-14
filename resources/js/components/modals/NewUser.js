@@ -30,7 +30,7 @@ function NewUser(props) {
     const { name, value } = e.target;
     setState(prevState => ({ ...prevState,[name]: value }));
   }
-  console.log('state ',state)
+  //console.log('state ',state)
 
   const onSubmit=(e) => {
     e.preventDefault()
@@ -40,9 +40,9 @@ function NewUser(props) {
 
 
     newUser(state).then(res => {
-      props.getData()
       setLoading(false)
       setMessage('Crear usuario')
+      props.getData()
     })
   }
 

@@ -33,9 +33,9 @@ function EditUser(props) {
     setMessage('Cargando...')
 
     editUser(state).then(res => {
-      props.getData()
       setLoading(false)
       setMessage('Actualizar')
+      props.getData()
     })
   }
 

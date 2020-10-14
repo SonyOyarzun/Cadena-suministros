@@ -11,7 +11,7 @@ export const newUser = user => {
         })
         .then(response => {
             console.log(response)
-            render(<SnackBar state={true} alert={response.data} type={'success'} />, document.getElementById('message'));
+            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
         })
         .catch(err => {
             console.log(err)
@@ -20,9 +20,6 @@ export const newUser = user => {
 }
 
 export const editUser = user => {
-    let message = 'No se encuentra ID'
-    let type = 'error'
-    let result = []
     render(<></>, document.getElementById('message'));
     return axios
         .put('/user/edit/', user, {
@@ -30,17 +27,15 @@ export const editUser = user => {
         })
         .then(response => {
             console.log(response)
-            alert(response.data)
+            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const deleteUser = user => {
-    let message = 'No se encuentra ID'
-    let type = 'error'
-    let result = []
     render(<></>, document.getElementById('message'));
     return axios({
             method: 'delete',
@@ -52,17 +47,15 @@ export const deleteUser = user => {
         )
         .then(response => {
             console.log(response)
-            alert(response.data)
+            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const changePass = user => {
-    let message = 'No se encuentra ID'
-    let type = 'error'
-    let result = []
     render(<></>, document.getElementById('message'));
     return axios
         .put('/user/changePass/', user, {
@@ -70,10 +63,11 @@ export const changePass = user => {
         })
         .then(response => {
             console.log(response)
-            alert(response.data)
+            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
@@ -103,9 +97,6 @@ export const login = user => {
 }
 
 export const forgot = user => {
-    let message = 'No se encuentra ID'
-    let type = 'error'
-    let result = []
     render(<></>, document.getElementById('message'));
     return axios
         .post(
@@ -116,19 +107,16 @@ export const forgot = user => {
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-         //   console.log('forgot', response.data)
-            alert(response.data)
+         render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
 
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const reset = user => {
-    let message = 'No se encuentra ID'
-    let type = 'error'
-    let result = []
     render(<></>, document.getElementById('message'));
     return axios
         .post(
@@ -139,19 +127,16 @@ export const reset = user => {
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-         //   console.log('reset', response.data)
-            alert(response.data)
+         render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
                
         })
         .catch(err => {
             console.log(err.data)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const getProfile = () => {
-    let message = 'No se encuentra ID'
-    let type = 'error'
-    let result = []
     render(<></>, document.getElementById('message'));
     return axios
         .get('/user/my/', {
@@ -163,13 +148,11 @@ export const getProfile = () => {
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const getUser = (user) => {
-    let message = 'No se encuentra ID'
-    let type = 'error'
-    let result = []
     render(<></>, document.getElementById('message'));
     return axios
         .post('/user/search',user,  {
@@ -181,5 +164,6 @@ export const getUser = (user) => {
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }

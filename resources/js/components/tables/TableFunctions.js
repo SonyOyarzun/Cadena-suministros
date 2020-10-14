@@ -15,10 +15,12 @@ export const getUser = () => {
         })
         .catch(err => {
             console.log(err)
+           
         })
 }
 
 export const getChain = () => {
+    render(<></>, document.getElementById('message'));
     return axios
         .get('/chain/list', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
@@ -33,13 +35,14 @@ export const getChain = () => {
 }
 
 export const newChain = (chain) => {
+    render(<></>, document.getElementById('message'));
     return axios
         .post('/chain/new', chain, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
             //console.log(response.data)
-            alert(response.data)
+            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
             return response.data
         })
         .catch(err => {
@@ -48,13 +51,14 @@ export const newChain = (chain) => {
 }
 
 export const reSendChain = (chain) => {
+    render(<></>, document.getElementById('message'));
     return axios
         .post('/chain/reSend', chain, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
             //console.log(response.data)
-            alert(response.data)
+            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
             return response.data
         })
         .catch(err => {
@@ -63,21 +67,24 @@ export const reSendChain = (chain) => {
 }
 
 export const receiveChain = (chain) => {
+    render(<></>, document.getElementById('message'));
     return axios
         .post('/chain/receive', chain, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
             //console.log(response.data)
-            alert(response.data)
+            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
             return response.data
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const getTransaction = (transaction) => {
+    render(<></>, document.getElementById('message'));
     return axios
         .post('/transaction', transaction, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
@@ -95,6 +102,7 @@ export const getTransaction = (transaction) => {
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
             return []
         })
 }
@@ -129,27 +137,29 @@ export const getAsset = (asset) => {
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
             return result
         })
 }
 
 export const searchAsset = (asset) => {
+    render(<></>, document.getElementById('message'));
     return axios
         .post('/search', asset, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            //  console.log('search :',response.data)
-            console.log('asset :', asset)
-            //    alert(response.data)
+            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
             return response.data
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const getProduct = (product) => {
+    render(<></>, document.getElementById('message'));
     return axios
         .post('/api-product', product, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
@@ -159,10 +169,12 @@ export const getProduct = (product) => {
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const getMyProduct = () => {
+    render(<></>, document.getElementById('message'));
     return axios
         .get('/api-myProduct', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
@@ -172,10 +184,12 @@ export const getMyProduct = () => {
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const getConfig = () => {
+    render(<></>, document.getElementById('message'));
     return axios
         .get('/api-config', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
@@ -186,20 +200,22 @@ export const getConfig = () => {
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const getEditConfig = () => {
+    render(<></>, document.getElementById('message'));
     return axios
         .get('/api-editConfig', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            //   console.log(response)
             return response.data[0]
         })
         .catch(err => {
             console.log(err)
+            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 

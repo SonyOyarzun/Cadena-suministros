@@ -25,7 +25,7 @@ componentDidMount() {
 }
 
     render() {
-   //   console.log('user:',this.state.user)
+   
         return (
             <div>
             <Card>
