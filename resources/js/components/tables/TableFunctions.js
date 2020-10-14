@@ -83,7 +83,7 @@ export const getTransaction = (transaction) => {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-        //    console.log(response.data)
+            //    console.log(response.data)
 
             if (response.data.asset.data.hasOwnProperty('transaction')) {
                 return response.data.asset.data.transaction
@@ -100,37 +100,36 @@ export const getTransaction = (transaction) => {
 }
 
 export const getAsset = (asset) => {
+
+    let message = 'No se encuentra ID'
+    let type = 'error'
+    let result = []
+    render(<></>, document.getElementById('message'));
+
     return axios
         .post('/assets', asset, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-         //   console.log('assets', response.data)
-
+            
             if (response.data.length > 0) {
 
                 if (response.data[0].hasOwnProperty('metadata')) {
 
                     if (response.data[0].metadata.hasOwnProperty('info')) {
-                        render(<SnackBar state={true} alert={'Transaccion encontrada'} type={'success'} />, document.getElementById('message'));
-                        return response.data
-                    } else {
-                        return []
-                    }
+                        message = 'Transaccion encontrada'
+                        type = 'success'
+                        result = response.data
+                    } 
+                } 
+            } 
 
-                } else {
-                    render(<SnackBar state={true} alert={'No se encuentra ID'} type={'error'} />, document.getElementById('message'));
-                    return []
-                }
-            } else {
-                render(<SnackBar state={true} alert={'No se encuentra ID'} type={'error'} />, document.getElementById('message'));
-                return []
-            }
-
+            render(<SnackBar state={true} alert={message} type={type} />, document.getElementById('message'));
+            return result
         })
         .catch(err => {
             console.log(err)
-            return []
+            return result
         })
 }
 
