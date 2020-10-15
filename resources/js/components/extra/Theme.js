@@ -4,18 +4,18 @@ import React, { useState, useEffect,useLayoutEffect } from 'react';
 
 
 const defaultTheme = {
-  body: '#eeeeee',
-  font: '1rem',
-  text: '#212121',
-  border: '#0d7377',
-  gradient: 'linear-gradient(#32e0c4, #212121)',
-}
-
-const specialTheme = {
-  body: '#212121',
+  body: 'rgba(13,115,119, 0.9)',
   font: '1rem',
   text: '#eeeeee',
   border: '#0d7377',
+  gradient: 'linear-gradient(#212121, #0d7377)',
+}
+
+const specialTheme = {
+  body: 'rgb(33,33,33,0.7)',
+  font: '1rem',
+  text: '#eeeeee',
+  border: 'rgb(13,115,119, 0.7)',
   gradient: 'linear-gradient(#212121, #0d7377)',
 }
 
@@ -113,11 +113,12 @@ const GlobalStyles = createGlobalStyle`
 
 .back{
   background: url('/storage/images/${( props.config.background )}');
-  background-position: center center;
+  background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
   width: 100%;
+  position: fixed;
 }
 
 
