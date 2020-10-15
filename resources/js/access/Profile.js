@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     const [expanded, setExpanded] = React.useState(false);
 
     const handleClick = () => {
-        props.history.push('/logout');
+        location.href = "/logout";
     };
 
     return (
