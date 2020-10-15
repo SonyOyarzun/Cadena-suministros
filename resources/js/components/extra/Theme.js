@@ -4,7 +4,7 @@ import React, { useState, useEffect,useLayoutEffect } from 'react';
 
 
 const defaultTheme = {
-  body: 'rgba(13,115,119, 0.9)',
+  body: 'rgba(13,115,119, 0.7)',
   font: '1rem',
   text: '#eeeeee',
   border: '#0d7377',
@@ -663,21 +663,17 @@ color: ${({ theme }) => theme.body} !important;
 }
 
 .MuiCardHeader-content{
-  background-color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text}!important;
 }
 .MuiCardHeader-action{
-  background-color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text}!important;
 }
 
 .MuiCollapse-wrapper{
-  background-color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text}!important;
 }
 
 .MuiTypography-colorTextSecondary{
-  background-color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text}!important;
 }
 

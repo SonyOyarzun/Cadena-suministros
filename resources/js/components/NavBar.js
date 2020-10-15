@@ -38,8 +38,8 @@ class NavBar extends Component {
 
             <Nav className="mr-auto">
 
-            <Nav.Link className='text-center darkLight'><Link className='darkLight-text' to='/Trace'><MDBIcon icon="barcode" />Traza</Link></Nav.Link>
-            <Nav.Link className='text-center darkLight'><Link className='darkLight-text' to='/Search'><MDBIcon icon="search" />Buscar TX</Link></Nav.Link>
+            <Nav.Link className='text-center'><Link className='darkLight-text' to='/Trace'><MDBIcon icon="barcode" />Traza</Link></Nav.Link>
+            <Nav.Link className='text-center'><Link className='darkLight-text' to='/Search'><MDBIcon icon="search" />Buscar TX</Link></Nav.Link>
 
             </Nav>
 
@@ -60,8 +60,7 @@ class NavBar extends Component {
   }
 };
 
-NavBar = withRouter(NavBar);
-export default NavBar;
+export default withRouter(NavBar);
 
 
 /**

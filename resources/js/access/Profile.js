@@ -15,9 +15,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import PowerSettingsNewTwoToneIcon from '@material-ui/icons/PowerSettingsNewTwoTone';
 
 import { Button, Navbar, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
 import { MDBIcon, MDBBtn } from "mdbreact";
+
+import { NavLink, Link, withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,44 +46,39 @@ const useStyles = makeStyles((theme) => ({
     avatar: {
         maxWidth: 50,
     },
+    button: {
+        marginTop: 10,
+        marginLeft: 10,
+    },
 }));
 
-export default function RecipeReviewCard(props) {
+ function RecipeReviewCard(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
+    const handleClick = () => {
+        props.history.push('/logout');
     };
 
     return (
         <Card className={classes.root}>
-            <CardHeader className='darkLight-text'
+            <CardHeader
                 avatar={
                     <img className={classes.avatar} src={'/storage/images/' + props.config.logotype}></img>
                 }
-                action={
-                    <IconButton aria-label="settings" className={clsx(classes.expand, {
-                        [classes.expandOpen]: expanded,
-                    })}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                    >
 
-                        <ExpandMoreIcon />
-
-                    </IconButton>
-                }
                 title={props.user.name}
                 subheader={props.user.email}
+                action={
+                    <IconButton className={classes.button}>
+                      <PowerSettingsNewTwoToneIcon onClick={handleClick} />
+                    </IconButton>
+                  }
             />
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent className='text-center'>
-                    <Typography paragraph><a className='lightDark-text' href='/logout'><MDBIcon className='lightDark-text' icon="door-open" style={{ fontSize: '1.75em' }} />Salir</a></Typography>
-                </CardContent>
-            </Collapse>
+             
         </Card>
 
     );
 }
+
+export default withRouter(RecipeReviewCard)

@@ -33,7 +33,7 @@ import {getConfig} from './components/tables/TableFunctions'
 
 const styles = {
   padding: {
-    paddingTop: "10vh",
+    paddingTop: "14vh",
     paddingBottom: "3vh",
     paddingRight: "10vw",
     paddingLeft: "10vw"
