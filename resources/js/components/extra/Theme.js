@@ -4,11 +4,11 @@ import React, { useState, useEffect,useLayoutEffect } from 'react';
 
 
 const defaultTheme = {
-  body: 'rgba(13,115,119, 0.7)',
+  body: 'rgb(0,136,145, 0.7)',
   font: '1rem',
-  text: '#eeeeee',
-  border: '#0d7377',
-  gradient: 'linear-gradient(#212121, #0d7377)',
+  text: '#e7e7de',
+  border: 'rgb(33,33,33,0.7)',
+  gradient: 'linear-gradient(#00587a, #0f3057)',
 }
 
 const specialTheme = {
@@ -116,9 +116,8 @@ const GlobalStyles = createGlobalStyle`
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
+  height: 1100px;
   width: 100%;
-  position: fixed;
 }
 
 
@@ -157,10 +156,11 @@ input {
   color: ${({ theme }) => theme.text} !important;
 }
 label {
-  background-color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text} !important;
 }
-
+a {
+  color: ${({ theme }) => theme.text} !important;
+}
 
 /*flechas paginacion*/
 span.mdb-dataTables_paginate{
@@ -305,6 +305,7 @@ color: ${({ theme }) => theme.body} !important;
   bottom: 0;
   left: 0;
   z-index: 1006;
+  min-height: 1100px;
   min-width: 64px;
   background: ${({ theme }) => theme.body};
   -webkit-transition: min-width 0.2s;
@@ -322,6 +323,7 @@ color: ${({ theme }) => theme.body} !important;
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
   min-width: 240px;
 }
+
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- .sidenav---navicon---3gCRo + .sidenav---navtext---1AE_f {
   visibility: visible;
   opacity: 1;
@@ -336,6 +338,11 @@ color: ${({ theme }) => theme.body} !important;
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---expandable---3_dr7 > .sidenav---navitem---9uL5T {
   cursor: pointer;
 }
+
+.sidenav---sidenav-subnav---1EN61 {
+  color: ${({ theme }) => theme.text};
+}
+
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 {
   position: static;
   border: none;
@@ -395,10 +402,10 @@ color: ${({ theme }) => theme.body} !important;
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47:hover > .sidenav---navitem---9uL5T {
   background: transparent;
-  color: ${({ theme }) => theme.border};
+  color: ${({ theme }) => theme.text};
 }
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T {
-  color: ${({ theme }) => theme.border};
+  color: ${({ theme }) => theme.text};
   padding: 0 14px 0 20px;
   line-height: 28px;
 }
