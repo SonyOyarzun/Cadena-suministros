@@ -100,13 +100,13 @@ function Trace(props) {
          // }
 
 
-          if (responseArr[1].asset.data.hasOwnProperty('transaction')) {
+      //    if (responseArr[1].asset.data.hasOwnProperty('transaction')) {
 
-            setProducts(responseArr[1].data.asset.data.transaction)
+            setProducts(responseArr[1].asset.data.transaction)
 
-          } else {
-            alert('No encontrada')
-          }
+     //     } else {
+     //       alert('No encontrada')
+      //    }
 
 
           setPrevent(false);

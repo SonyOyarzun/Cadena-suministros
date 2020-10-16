@@ -1,81 +1,72 @@
 import axios from 'axios'
-import React from 'react';
-import SnackBar from '../components/extra/SnackBar'
-import { render } from 'react-dom';
+
 
 export const newUser = user => {
-    render(<></>, document.getElementById('message'));
     return axios
         .post('/user/new/', user, {
             headers: { 'Content-Type': 'application/json' }
         })
         .then(response => {
             console.log(response)
-            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
         })
 }
 
 export const editUser = user => {
-    render(<></>, document.getElementById('message'));
     return axios
         .put('/user/edit/', user, {
             headers: { 'Content-Type': 'application/json' }
         })
         .then(response => {
             console.log(response)
-            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
+            return response.data
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            return []
         })
 }
 
 export const deleteUser = user => {
-    render(<></>, document.getElementById('message'));
     return axios({
-            method: 'delete',
-            url: '/user/delete/',
-            data: {
-              id: user.id,
-            }
-          }
-        )
+        method: 'delete',
+        url: '/user/delete/',
+        data: {
+            id: user.id,
+        }
+    }
+    )
         .then(response => {
             console.log(response)
-            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
-        })
-        .catch(err => {
-            console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            return response.data
+                .catch(err => {
+                    console.log(err)
+                    return []
+                })
         })
 }
 
 export const changePass = user => {
-    render(<></>, document.getElementById('message'));
     return axios
         .put('/user/changePass/', user, {
             headers: { 'Content-Type': 'application/json' }
         })
         .then(response => {
             console.log(response)
-            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
-        })
-        .catch(err => {
-            console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            return response.data
+                .catch(err => {
+                    console.log(err)
+                    return []
+                })
         })
 }
 
 export const login = user => {
-    render(<></>, document.getElementById('message'));
     return axios
         .post(
-            '/user/login', user ,
+            '/user/login', user,
             {
                 headers: { 'Content-Type': 'application/json' }
             }
@@ -84,60 +75,58 @@ export const login = user => {
             localStorage.setItem('usertoken', response.data.token)
 
             if (response.data != true) {
-                render(<SnackBar state={true} alert={response.data} type={'warning'} />, document.getElementById('message'));
+                return response.data
             } else {
                 location.reload()
+                return response.data
             }
 
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            return []
         })
 }
 
 export const forgot = user => {
-    render(<></>, document.getElementById('message'));
     return axios
         .post(
-            '/reset_password_without_token', user ,
+            '/reset_password_without_token', user,
             {
                 headers: { 'Content-Type': 'application/json' }
             }
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-         render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
+            return response.data
 
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            return []
         })
 }
 
 export const reset = user => {
-    render(<></>, document.getElementById('message'));
     return axios
         .post(
-            '/reset_password_with_token', user ,
+            '/reset_password_with_token', user,
             {
                 headers: { 'Content-Type': 'application/json' }
             }
         )
         .then(response => {
             localStorage.setItem('usertoken', response.data.token)
-         render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
-               
+            return response.data
+
         })
         .catch(err => {
             console.log(err.data)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            return []
         })
 }
 
 export const getProfile = () => {
-    render(<></>, document.getElementById('message'));
     return axios
         .get('/user/my/', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
@@ -148,14 +137,13 @@ export const getProfile = () => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            return []
         })
 }
 
 export const getUser = (user) => {
-    render(<></>, document.getElementById('message'));
     return axios
-        .post('/user/search',user,  {
+        .post('/user/search', user, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
@@ -164,6 +152,6 @@ export const getUser = (user) => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err.data} type={'error'} />, document.getElementById('message'));
+            return []
         })
 }

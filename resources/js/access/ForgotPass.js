@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { forgot } from './UserFunctions'
 
-import {Card} from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+
+import SnackBar from '../components/extra/SnackBar'
+import { render } from 'react-dom';
 
 
 const styles = {
@@ -41,42 +44,43 @@ class ForgotPass extends Component {
             email: this.state.email
         }
 
-        forgot(user).then(res => {
-          this.setState({ loading: false })
-          this.setState({ message: 'Solicitar' })
+        forgot(user).then(response => {
+            this.setState({ loading: false })
+            this.setState({ message: 'Solicitar' })
+            render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
         })
     }
 
     render() {
         return (
             <div style={styles.custom} className="mx-auto mt-3">
-            <Card>
-            <Card.Body>
-              <Card.Title>Recuperar contraseña</Card.Title>
-               <Card.Text>
-               <form noValidate onSubmit={this.onSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="email">Mail</label>
-                                <input
-                                    type="email"
-                                    className="form-control"
-                                    name="email"
-                                    placeholder="Ingrese Mail"
-                                    onChange={this.onChange}
-                                    required={true}
-                                />
-                            </div>   
-                            <button
-                                type="submit"
-                                className="btn btn-lg btn-primary btn-block" disabled={this.state.loading}
-                            >
-                                {this.state.message}
-                            </button>
-                        </form>
-               </Card.Text>
-            </Card.Body>
-          </Card>
-          </div>
+                <Card>
+                    <Card.Body>
+                        <Card.Title>Recuperar contraseña</Card.Title>
+                        <Card.Text>
+                            <form noValidate onSubmit={this.onSubmit}>
+                                <div className="form-group">
+                                    <label htmlFor="email">Mail</label>
+                                    <input
+                                        type="email"
+                                        className="form-control"
+                                        name="email"
+                                        placeholder="Ingrese Mail"
+                                        onChange={this.onChange}
+                                        required={true}
+                                    />
+                                </div>
+                                <button
+                                    type="submit"
+                                    className="btn btn-lg btn-primary btn-block" disabled={this.state.loading}
+                                >
+                                    {this.state.message}
+                                </button>
+                            </form>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </div>
         )
     }
 }

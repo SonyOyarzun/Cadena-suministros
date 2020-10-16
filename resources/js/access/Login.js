@@ -5,6 +5,9 @@ import { MDBIcon, MDBBtn, MDBInput } from "mdbreact";
 import { Button, Navbar, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
+import SnackBar from '../components/extra/SnackBar'
+import { render } from 'react-dom';
+
 const styles = {
     custom: {
         marginLeft: "5px",
@@ -50,11 +53,15 @@ class Login extends Component {
     }
     onSubmit(e) {
         e.preventDefault()
+        render(<></>, document.getElementById('message'));
 
         this.props.history.push(`/`)
 
-        login(this.state).then(res => {
-            
+        login(this.state).then(response => {
+            console.log('login:',response)
+            if (response != true) {
+                render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+            }
         })
     }
 

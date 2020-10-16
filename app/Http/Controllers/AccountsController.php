@@ -35,7 +35,7 @@ class AccountsController extends Controller
       $user =  User::where("email", $request->email)->first();
 
       if (!$user) {
-        return (trans('Usuario no registrado'));
+        return ['message'=>'Mail no registrado','type'=>'error'];
       }
 
       $cadena =  Str::random(60);
@@ -49,13 +49,13 @@ class AccountsController extends Controller
       $tokenData = Password::where('email', $request->email)->first();
 
       if ($this->sendResetEmail($request->email, $tokenData->token)) {
-        return (trans('Se ha enviado un enlace por correo para restablecer contraseña'));
+        return ['message'=>'Se ha enviado un enlace por correo para restablecer contraseña','type'=>'success'];
       } else {
-        return (trans('Error al enviar correo'));
+        return ['message'=>'Error al enviar correo','type'=>'error'];
       }
 
     } catch (\Throwable $th) {
-      return (trans('Error al enviar correo'));
+      return ['message'=>'Error al enviar correo','type'=>'error'];
     }
 
   }
@@ -106,16 +106,20 @@ class AccountsController extends Controller
 
     if (!isset($request->email)) {
       return "Debe ingresar mail";
+      return ['message'=>'Error al enviar correo','type'=>'error'];
     } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
       return "Formato mail no valido";
+      return ['message'=>'Error al enviar correo','type'=>'error'];
     } elseif (!User::where('email', $request->email)->exists()) {
       return "Mail ya existe en los registros";
+      return ['message'=>'Error al enviar correo','type'=>'error'];
     } elseif (!isset($request->password)) {
       return "Debe ingresar contraseña";
+      return ['message'=>'Error al enviar correo','type'=>'error'];
     } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $request->password)) {
-      return "Contraseña debe Contener: Mayúsculas, números y mas de 8 carácteres";
+      return ['message'=>'Contraseña debe Contener: Mayúsculas, números y mas de 8 carácteres','type'=>'error'];
     } elseif ($request->password != $request->confirmPassword) {
-      return "Contraseñas no coinciden";
+      return ['message'=>'Contraseñas no coinciden','type'=>'error'];
     } else {
 
       $tokenData = Password::where('token', $request->token)->first();

@@ -1,7 +1,4 @@
 import axios from 'axios'
-import React from 'react';
-import SnackBar from '../extra/SnackBar'
-import { render } from 'react-dom';
 
 
 export const getUser = () => {
@@ -15,7 +12,7 @@ export const getUser = () => {
         })
         .catch(err => {
             console.log(err)
-           
+           return []
         })
 }
 
@@ -25,73 +22,63 @@ export const getChain = () => {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            //   console.log(response)
             return response.data
         })
         .catch(err => {
             console.log(err)
+            return []
         })
 }
 
 export const newChain = (chain) => {
-    render(<></>, document.getElementById('message'));
     return axios
         .post('/chain/new', chain, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            //console.log(response.data)
-            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
             return response.data
         })
         .catch(err => {
             console.log(err)
+            return []
         })
 }
 
 export const reSendChain = (chain) => {
-    render(<></>, document.getElementById('message'));
     return axios
         .post('/chain/reSend', chain, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            //console.log(response.data)
-            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
             return response.data
         })
         .catch(err => {
             console.log(err)
+            return []
         })
 }
 
 export const receiveChain = (chain) => {
-    render(<></>, document.getElementById('message'));
     return axios
         .post('/chain/receive', chain, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            //console.log(response.data)
-            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
             return response.data
         })
         .catch(err => {
             console.log(err)
+            return []
         })
 }
 
 export const getTransaction = (transaction) => {
-    render(<></>, document.getElementById('message'));
     return axios
         .post('/transaction', transaction, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            //    console.log(response.data)
-
             return  response.data
-
         })
         .catch(err => {
             console.log(err)
@@ -100,20 +87,16 @@ export const getTransaction = (transaction) => {
 }
 
 export const getAsset = (asset) => {
-
-    let result = []
-
     return axios
         .post('/assets', asset, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
-        .then(response => {
-            
+        .then(response => { 
             return response.data
         })
         .catch(err => {
             console.log(err)
-            return result
+            return []
         })
 }
 
@@ -127,6 +110,7 @@ export const searchAsset = (asset) => {
         })
         .catch(err => {
             console.log(err)
+            return[]
         })
 }
 
@@ -140,6 +124,7 @@ export const getProduct = (product) => {
         })
         .catch(err => {
             console.log(err)
+            return []
         })
 }
 
@@ -153,6 +138,7 @@ export const getMyProduct = () => {
         })
         .catch(err => {
             console.log(err)
+            return []
         })
 }
 
@@ -167,6 +153,7 @@ export const getConfig = () => {
         })
         .catch(err => {
             console.log(err)
+            return []
         })
 }
 
@@ -180,12 +167,7 @@ export const editConfig = () => {
         })
         .catch(err => {
             console.log(err)
+            return []
         })
 }
 
-/**
-   <Alert severity="error">This is an error message!</Alert>
-      <Alert severity="warning">This is a warning message!</Alert>
-      <Alert severity="info">This is an information message!</Alert>
-      <Alert severity="success">This is a success message!</Alert>
- */

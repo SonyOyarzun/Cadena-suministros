@@ -182,11 +182,11 @@ class UserController extends Controller
     try {
 
       if (!isset($request->email)) {
-        return "Debe ingresar mail";
+        return ['message'=>'Debe ingresar mail','type'=>'error'];
       } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
-        return "Formato mail no valido";
+        return ['message'=>'Formato mail no valido','type'=>'error'];
       } elseif (!isset($request->password)) {
-        return "Debe ingresar contraseña";
+        return ['message'=>'Debe ingresar contraseña','type'=>'error'];
       } else {
   
         $user = User::where("email", $request->email)->first();
@@ -203,21 +203,19 @@ class UserController extends Controller
   
           } else {
   
-            return 'Contraseña no coincide';
+            return ['message'=>'Contraseña no coincide','type'=>'error'];
   
           }
   
         } else {
   
-          return 'Mail no registrado';
+          return ['message'=>'Mail no registrado','type'=>'error'];
           
         }
       }
     } catch (\Throwable $th) {
-     return 'Error al Ingresar';
+     return ['message'=>'Error al Ingresar','type'=>'error'];
     }
-
-    
   }
 }
 
