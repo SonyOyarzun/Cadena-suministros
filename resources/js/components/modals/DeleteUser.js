@@ -3,20 +3,22 @@ import { deleteUser } from '../../access/UserFunctions'
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
 
+import SnackBar from '../../components/extra/SnackBar'
+import { render } from 'react-dom';
+
 function DeleteUser(props) {
 
 
 const onSubmit = (e) => {
   e.preventDefault()
-  console.log(props)
-
+  render(<></>, document.getElementById('message'));
+//  console.log(props)
   const data = {
       id: props.id
   }
-
-  deleteUser(data).then(res => {
+  deleteUser(data).then(response => {
+    render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
     props.getData()
-  
   })
 
 }

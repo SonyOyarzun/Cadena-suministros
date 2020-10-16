@@ -1,5 +1,5 @@
 import React, { Component, Fragment, useState } from 'react';
-import { render } from 'react-dom';
+
 import ReactDOM from 'react-dom';
 import { newUser } from '../../access/UserFunctions';
 
@@ -7,7 +7,9 @@ import { newUser } from '../../access/UserFunctions';
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
-import { data } from 'jquery';
+
+import SnackBar from '../../components/extra/SnackBar'
+import { render } from 'react-dom';
 
 function NewUser(props) {
 
@@ -34,14 +36,15 @@ function NewUser(props) {
 
   const onSubmit=(e) => {
     e.preventDefault()
-
+    render(<></>, document.getElementById('message'));
     setLoading(true )
     setMessage('Cargando...')
 
 
-    newUser(state).then(res => {
+    newUser(state).then(response => {
       setLoading(false)
       setMessage('Crear usuario')
+      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
       props.getData()
     })
   }

@@ -70,23 +70,23 @@ class UserController extends Controller
   {
 
     if (!isset($request->name)) {
-      return "Debe ingresar nombre";
+      return ['message'=>'Debe ingresar nombre','type'=>'error'];
     } elseif (!isset($request->email)) {
-      return "Debe ingresar mail";
+      return ['message'=>'Debe ingresar mail','type'=>'error'];
     } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
-      return "Formato mail no valido";
+      return ['message'=>'Formato mail no valido','type'=>'error'];
     } elseif (User::where('email', $request->email)->exists()) {
-      return "Mail ya existe en los registros";
+      return ['message'=>'Mail ya existe en los registros','type'=>'error'];
     } elseif (!isset($request->role)) {
-      return "Debe ingresar role";
+      return ['message'=>'Debe ingresar rol','type'=>'error'];
     } elseif (!isset($request->path)) {
-      return "Debe ingresar ruta de api";
+      return ['message'=>'Debe ingresar ruta de api','type'=>'error'];
     } elseif (!isset($request->pass)) {
-      return "Debe ingresar contraseña";
+      return ['message'=>'Debe ingresar contraseña','type'=>'error'];
     } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $request->pass)) {
-      return "Contraseña debe Contener: Mayúsculas, números y mas de 8 carácteres";
+      return ['message'=>'Contraseña debe Contener: Mayúsculas, números y mas de 8 carácteres','type'=>'error'];
     } elseif ($request->pass != $request->confirmPass) {
-      return "Contraseñas no coinciden";
+      return ['message'=>'Contraseñas no coinciden','type'=>'error'];
     } else {
 
       $user = new User;
@@ -101,7 +101,7 @@ class UserController extends Controller
       $user->updated_at = now();
       $user->save();
 
-      return "Usuario Creado";
+      return ['message'=>'Usuario Creado','type'=>'success'];
     }
   }
 
@@ -164,14 +164,14 @@ class UserController extends Controller
       $user = User::findOrFail($request->id);
       if ($user == null) {
 
-        return 'Usuario no encontrado';
+        return ['message'=>'Usuario no encontrado','type'=>'error'];
       } else {
         $user->delete();
-        return 'Usuario Eliminado';
+        return ['message'=>'Usuario Eliminado','type'=>'success'];
         return $request->id;
       }
     } else {
-      return 'Administrador no puede ser Eliminado';
+      return ['message'=>'Administrador no puede ser Eliminado','type'=>'warning'];
     }
   }
 

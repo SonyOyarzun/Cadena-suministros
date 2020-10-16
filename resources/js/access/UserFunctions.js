@@ -8,9 +8,11 @@ export const newUser = user => {
         })
         .then(response => {
             console.log(response)
+            return response.data
         })
         .catch(err => {
             console.log(err)
+            return []
         })
 }
 
@@ -41,10 +43,10 @@ export const deleteUser = user => {
         .then(response => {
             console.log(response)
             return response.data
-                .catch(err => {
-                    console.log(err)
-                    return []
-                })
+
+        }).catch(err => {
+            console.log(err)
+            return []
         })
 }
 
