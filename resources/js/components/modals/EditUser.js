@@ -1,11 +1,13 @@
 import React, { Component, Fragment, useState } from 'react';
-import { render } from 'react-dom';
 import ReactDOM from 'react-dom';
 import { editUser } from '../../access/UserFunctions'
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
+
+import SnackBar from '../../components/extra/SnackBar'
+import { render } from 'react-dom';
 
 function EditUser(props) {
 
@@ -28,13 +30,14 @@ function EditUser(props) {
 
   const onSubmit=(e) => {
     e.preventDefault()
-
+    render(<></>, document.getElementById('message'));
     setLoading(true )
     setMessage('Cargando...')
 
-    editUser(state).then(res => {
+    editUser(state).then(response => {
       setLoading(false)
       setMessage('Actualizar')
+      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
       props.getData()
     })
   }

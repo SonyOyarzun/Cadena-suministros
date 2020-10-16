@@ -110,19 +110,19 @@ class UserController extends Controller
     $user = User::findOrFail($request->id);
     if ($user == null) {
 
-      return 'Usuario no encontrado';
+      return ['message'=>'Usuario no encontrado','type'=>'error'];
     } else {
 
       if (!isset($request->name)) {
-        return "Debe ingresar nombre";
+        return ['message'=>'Debe ingresar nombre','type'=>'error'];
       } elseif (!isset($request->email)) {
-        return "Debe ingresar mail";
+        return ['message'=>'Debe ingresar mail','type'=>'error'];
       } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
-        return "Formato mail no valido";
+        return ['message'=>'Formato mail no valido','type'=>'error'];
       } elseif (!isset($request->role)) {
-        return "Debe ingresar role";
+        return ['message'=>'Debe ingresar role','type'=>'error'];
       } elseif (!isset($request->path)) {
-        return "Debe ingresar ruta de api";
+        return ['message'=>'Debe ingresar ruta de api','type'=>'error'];
       } else {
 
         $user->name  = $request->name;
@@ -131,7 +131,7 @@ class UserController extends Controller
         $user->path  = $request->path;
         $user->save();
 
-        return "Usuario Actualizado";
+        return ['message'=>'Usuario Actualizado','type'=>'success'];
       }
     }
   }
