@@ -6,7 +6,7 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 
-import { receiveChain , getConfig, getTransaction} from "../tables/TableFunctions";
+import { receiveChain , getConfig, getTransaction, getAsset} from "../tables/TableFunctions";
 import { getUser } from "../../access/UserFunctions";
 
 import SnackBar from '../extra/SnackBar'
@@ -21,6 +21,7 @@ function Transfer(props) {
   const [prevent, setPrevent] = useState(false);
   const [message, setMessage] = useState('Realizar Recepción');
 
+  console.log(props)
 
   const save = (id_transaction, asset, from) => {
 
@@ -31,15 +32,12 @@ function Transfer(props) {
     }
 
     receiveChain(data).then((response) => {
-      render(<></>, document.getElementById('message'));
-
-    //  console.log('receive transaction',response);
-      props.getData()
       setPrevent(false);
       setMessage('Realizar Recepción')
+      props.getData()
     }, (error) => {
       console.log(error);
-      render(<SnackBar state={true} alert={'Error al realizar Transferencia'} type={'error'} />, document.getElementById('message'));
+     
     });
   }
 
@@ -65,7 +63,7 @@ function Transfer(props) {
         "asset": props.transaction,
       }
 
-      console.log(paramsReceive, paramsSend)
+      console.log('params ',paramsReceive, paramsSend,paramsTransaction)
 
       axios.all([
         getUser(paramsSend),
@@ -74,18 +72,18 @@ function Transfer(props) {
         getTransaction(paramsTransaction),
       ])
         .then(responseArr => {
-          receiveTransaction(responseArr[0], responseArr[1], responseArr[2], responseArr[3])
+
           console.log('send', responseArr[0])
           console.log('receive', responseArr[1])
           console.log('config', responseArr[2])
           console.log('transaction', responseArr[3])
+
+          receiveTransaction(responseArr[0], responseArr[1], responseArr[2], responseArr[3])
+ 
         })
 
         .catch(error => {
-          console.log('send', error[0])
-          console.log('receive', error[1])
-          console.log('config', error[2])
-          console.log('transaction', error[3])
+          console.log('send', error)
         })
     } else {
       render(<SnackBar state={true} alert={'Debe ingresar un comentario'} type={'info'} />, document.getElementById('message'));
@@ -98,13 +96,13 @@ function Transfer(props) {
 
   const receiveTransaction = (userSend, userReceive, config, transaction) => {
 
-    render(<></>, document.getElementById('message'));
     console.log('transaction asset :', transaction)
     //llaves de quien envia
 
 
     let asset = null
 
+    console.log('transaction operation :', transaction.operation)
     switch (transaction.operation) {
       case 'CREATE':
         asset = transaction.id
@@ -174,8 +172,8 @@ function Transfer(props) {
       })
       .then(tx => {
         console.log('Transfer Transaction created :', config.path + config.transaction + tx.id)
+        console.log('Save Transaction :', tx.id, asset, props.sendId)
         save(tx.id, asset, props.sendId)
-        render(<SnackBar state={true} alert={'Transaccion Transferida'} type={'success'} />, document.getElementById('message'));
       })
 
 

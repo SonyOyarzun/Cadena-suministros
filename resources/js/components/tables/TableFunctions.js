@@ -20,7 +20,6 @@ export const getUser = () => {
 }
 
 export const getChain = () => {
-    render(<></>, document.getElementById('message'));
     return axios
         .get('/chain/list', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
@@ -90,13 +89,8 @@ export const getTransaction = (transaction) => {
         })
         .then(response => {
             //    console.log(response.data)
-            if (response.data.asset.data.hasOwnProperty('transaction')) {
 
-                return  response.data.asset.data.transaction
-            }else{
-
-                render(<SnackBar state={true} alert={response.data} type={'error'} />, document.getElementById('message'));
-            } 
+            return  response.data
 
         })
         .catch(err => {
@@ -107,10 +101,7 @@ export const getTransaction = (transaction) => {
 
 export const getAsset = (asset) => {
 
-    let message = 'No se encuentra ID'
-    let type = 'error'
     let result = []
-    render(<></>, document.getElementById('message'));
 
     return axios
         .post('/assets', asset, {
@@ -118,41 +109,24 @@ export const getAsset = (asset) => {
         })
         .then(response => {
             
-            if (response.data.length > 0) {
-
-                if (response.data[0].hasOwnProperty('metadata')) {
-
-                    if (response.data[0].metadata.hasOwnProperty('info')) {
-                        message = 'Transaccion encontrada'
-                        type = 'success'
-                        result = response.data
-                    } 
-                } 
-            } 
-
-            render(<SnackBar state={true} alert={message} type={type} />, document.getElementById('message'));
-            return result
+            return response.data
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err} type={'error'} />, document.getElementById('message'));
             return result
         })
 }
 
 export const searchAsset = (asset) => {
-    render(<></>, document.getElementById('message'));
     return axios
         .post('/search', asset, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            render(<SnackBar state={true} alert={response.data} type={'info'} />, document.getElementById('message'));
             return response.data
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err} type={'error'} />, document.getElementById('message'));
         })
 }
 
@@ -197,7 +171,6 @@ export const getConfig = () => {
 }
 
 export const editConfig = () => {
-    render(<></>, document.getElementById('message'));
     return axios
         .put('/api-editConfig', {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
@@ -207,7 +180,6 @@ export const editConfig = () => {
         })
         .catch(err => {
             console.log(err)
-            render(<SnackBar state={true} alert={err} type={'error'} />, document.getElementById('message'));
         })
 }
 

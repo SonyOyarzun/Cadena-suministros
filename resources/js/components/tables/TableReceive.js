@@ -12,7 +12,7 @@ import Load from '../extra/Load'
 import { getChain } from "../tables/TableFunctions";
 import { getProfile } from "../../access/UserFunctions";
 
-class TableSend extends Component {
+class TableReceive extends Component {
 
   constructor(props) {
     super(props);
@@ -115,7 +115,7 @@ class TableSend extends Component {
 
     //console.log('filter :',arrayFilter)
 
-    console.log('data :',data)
+    //console.log('data :',data)
 
     const { loading } = this.state;
 
@@ -141,5 +141,5 @@ class TableSend extends Component {
 
 }
 
-export default TableSend;
+export default TableReceive;
 

@@ -60,7 +60,7 @@ class ChainController extends Controller
     try {
 
       Chain::query()
-        ->where('transaction', '=', $request->asset)
+        ->where('transaction', '=', $request->transaction)
         ->update(['state' => 'Transferido']);
 
       $chain = new Chain;

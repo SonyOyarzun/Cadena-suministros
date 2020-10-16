@@ -80,8 +80,27 @@ function Trace(props) {
         .then(responseArr => {
           console.log('responseArr[0]', responseArr[0])
           console.log('responseArr[1]', responseArr[1])
+/*
+          if (response.data.length > 0) {
 
+            if (response.data[0].hasOwnProperty('metadata')) {
 
+                if (response.data[0].metadata.hasOwnProperty('info')) {
+
+                    result = response.data
+                } 
+            } 
+        } 
+*/
+/*
+if (response.data.asset.data.hasOwnProperty('transaction')) {
+
+  return  response.data.asset.data.transaction
+}else{
+
+  render(<SnackBar state={true} alert={response.data} type={'error'} />, document.getElementById('message'));
+} 
+*/
           setStep(responseArr[0])
 
           setProducts(responseArr[1])
