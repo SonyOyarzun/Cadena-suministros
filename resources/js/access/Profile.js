@@ -21,13 +21,15 @@ import { Button, Navbar, Nav, NavDropdown, Form, FormControl } from 'react-boots
 import { MDBIcon, MDBBtn } from "mdbreact";
 
 import { NavLink, Link, withRouter } from 'react-router-dom';
+import zIndex from '@material-ui/core/styles/zIndex';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 300,
         position: "fixed",
         right: 30,
-        top: 10
+        top: 10,
+        zIndex:999
     },
     media: {
         height: 0,
