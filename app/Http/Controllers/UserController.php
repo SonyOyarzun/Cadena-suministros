@@ -141,19 +141,19 @@ class UserController extends Controller
     $user = User::findOrFail($request->id);
     if ($user == null) {
 
-      return 'Usuario no encontrado';
+      return ['message'=>'Usuario no encontrado','type'=>'error'];
     } else {
 
       if (!isset($request->pass)) {
-        return "Debe ingresar contraseña";
+        return ['message'=>'Debe ingresar contraseña','type'=>'error'];
       } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $request->pass)) {
-        return "Contraseña debe Contener: Mayúsculas, números y mas de 8 carácteres";
+        return ['message'=>'Contraseña debe Contener: Mayúsculas, números y mas de 8 carácteres','type'=>'error'];
       } elseif ($request->pass != $request->confirmPass) {
-        return "Contraseñas no coinciden";
+        return ['message'=>'Contraseñas no coinciden','type'=>'error'];
       } else {
         $user->password  = bcrypt($request->pass);
         $user->save();
-        return 'Contraseña Actualizada';
+        return ['message'=>'Contraseña Actualizada','type'=>'success'];
       }
     }
   }

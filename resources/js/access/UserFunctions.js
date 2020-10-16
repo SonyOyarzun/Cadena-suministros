@@ -56,10 +56,10 @@ export const changePass = user => {
         .then(response => {
             console.log(response)
             return response.data
-                .catch(err => {
-                    console.log(err)
-                    return []
-                })
+
+        }).catch(err => {
+            console.log(err)
+            return []
         })
 }
 

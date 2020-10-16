@@ -1,12 +1,13 @@
 import React, { Component, Fragment, useState } from 'react';
-import { render } from 'react-dom';
-import ReactDOM from 'react-dom';
 
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
 import { MDBIcon,MDBBtn } from "mdbreact";
 import { changePass } from '../../access/UserFunctions';
+
+import SnackBar from '../../components/extra/SnackBar'
+import { render } from 'react-dom';
 
 function PassUser(props) {
 
@@ -29,13 +30,14 @@ function PassUser(props) {
 
   const onSubmit=(e) => {
     e.preventDefault()
-
+    render(<></>, document.getElementById('message'));
     setLoading(true )
     setMessage('Cargando...')
 
-    changePass(state).then(res => {
+    changePass(state).then(response => {
       setLoading(false)
       setMessage('Actualizar')
+      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
     })
   }
 
