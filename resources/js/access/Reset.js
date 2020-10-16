@@ -3,6 +3,8 @@ import { reset } from './UserFunctions'
 
 import {Card} from 'react-bootstrap';
 
+import SnackBar from '../components/extra/SnackBar'
+import { render } from 'react-dom';
 
 const styles = {
     custom: {
@@ -32,7 +34,7 @@ class Reset extends Component {
     }
     onSubmit(e) {
         e.preventDefault()
-
+        render(<></>, document.getElementById('message'));
         this.setState({ loading: true })
         this.setState({ message: 'Cargando...' })
 
@@ -43,9 +45,10 @@ class Reset extends Component {
             token:  this.state.token,
         }
 
-        reset(user).then(res => {
+        reset(user).then(response => {
             this.setState({ loading: false })
             this.setState({ message: 'Restablecer' })
+            render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
         })
     }
 

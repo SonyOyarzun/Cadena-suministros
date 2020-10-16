@@ -105,17 +105,13 @@ class AccountsController extends Controller
   {
 
     if (!isset($request->email)) {
-      return "Debe ingresar mail";
-      return ['message'=>'Error al enviar correo','type'=>'error'];
+      return ['message'=>'Debe ingresar mail','type'=>'error'];
     } elseif (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
-      return "Formato mail no valido";
-      return ['message'=>'Error al enviar correo','type'=>'error'];
+      return ['message'=>'Formato mail no valido','type'=>'error'];
     } elseif (!User::where('email', $request->email)->exists()) {
-      return "Mail ya existe en los registros";
-      return ['message'=>'Error al enviar correo','type'=>'error'];
+      return ['message'=>'Mail ya existe en los registros','type'=>'error'];
     } elseif (!isset($request->password)) {
-      return "Debe ingresar contraseña";
-      return ['message'=>'Error al enviar correo','type'=>'error'];
+      return ['message'=>'Debe ingresar contraseña','type'=>'error'];
     } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $request->password)) {
       return ['message'=>'Contraseña debe Contener: Mayúsculas, números y mas de 8 carácteres','type'=>'error'];
     } elseif ($request->password != $request->confirmPassword) {
@@ -124,11 +120,11 @@ class AccountsController extends Controller
 
       $tokenData = Password::where('token', $request->token)->first();
 
-      if (!$tokenData) return 'Token no coincide';
+      if (!$tokenData) return ['message'=>'Token no coincide','type'=>'error'];
 
       $user = User::where('email', $tokenData->email)->first();
 
-      if (!$user) return 'Email no encontrada';
+      if (!$user) return ['message'=>'Email no encontrada','type'=>'error'];
 
       $user->password = bcrypt($request->password);
       $user->update(); 
@@ -138,9 +134,9 @@ class AccountsController extends Controller
       Password::where('email', $user->email)->delete();
 
       if ($this->successResetEmail($request->email)) {
-        return (trans('Contraseña Restablecida'));
+        return ['message'=>'Contraseña Restablecida','type'=>'success'];
       } else {
-        return (trans('Error al Restablecer'));
+        return ['message'=>'Error al Restablecer','type'=>'error'];
       }
     }
   }
