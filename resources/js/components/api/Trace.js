@@ -211,7 +211,7 @@ function Trace(props) {
                   </TimelineOppositeContent>
                   <TimelineSeparator>
                     <TimelineDot>
-                      {(array.length) == index - 1 ? (
+                      {(arrayStep.length)-1 == index  ? (
                         <i class="fas fa-check-circle"></i>
                       ) : (
                           <i class="fas fa-arrow-alt-circle-down"></i>
@@ -220,12 +220,12 @@ function Trace(props) {
                     <TimelineConnector />
                   </TimelineSeparator>
                   <TimelineContent >
-                    <Paper style={{ textAlign: 'right' }} elevation={3} className={'darkLight'}>
+                    <Paper style={{ textAlign: 'right' }} elevation={3}>
                       <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                         <i className="fas fa-truck-moving"></i>
                       </Typography>
-                      <Typography className='darkLight' style={{ textAlign: 'center' }}>{label.from} <i class="fas fa-angle-double-right"></i> {label.to}</Typography>
-                      <Typography className='darkLight' style={{ textAlign: 'center' }}>{label.commentary}</Typography>
+                      <Typography style={{ textAlign: 'center' }}>{label.from} <i class="fas fa-angle-double-right"></i> {label.to}</Typography>
+                      <Typography  style={{ textAlign: 'center' }}>{label.commentary}</Typography>
                     </Paper>
                   </TimelineContent>
                 </TimelineItem>

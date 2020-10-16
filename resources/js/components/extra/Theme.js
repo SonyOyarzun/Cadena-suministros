@@ -126,6 +126,7 @@ html * {
   font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 } 
 
+/*NAVBAR*/
 .navbar,
 .navbar-default {
   background-color: ${({ theme }) => theme.body} !important;
@@ -137,6 +138,17 @@ html * {
 }
 
 .dropdown-menu {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important;
+}
+
+
+/*TRACE*/
+.MuiTypography-body1 {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important;
+}
+.MuiTypography-h6 {
   background-color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text}!important;
 }
@@ -300,12 +312,11 @@ color: ${({ theme }) => theme.body} !important;
 /* CSS BARRA LATERAL INICIO*/
 
 .sidenav---sidenav---_2tBP {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   z-index: 1006;
-  min-height: 1100px;
   min-width: 64px;
   background: ${({ theme }) => theme.body};
   -webkit-transition: min-width 0.2s;
