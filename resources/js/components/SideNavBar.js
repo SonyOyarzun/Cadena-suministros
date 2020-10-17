@@ -56,9 +56,16 @@ class SideNavBar extends Component {
                   <Link  to='/User'>Usuarios</Link>
                 </NavText>
               </NavItem>
+
               <NavItem eventKey="administracion/configuracion">
                 <NavText>
                   <Link  to='/ApiConfig'>Configuración</Link>
+                </NavText>
+              </NavItem>
+
+              <NavItem eventKey="administracion/temperature">
+                <NavText>
+                  <Link  to='/Temperature'>Temperatura</Link>
                 </NavText>
               </NavItem>
 

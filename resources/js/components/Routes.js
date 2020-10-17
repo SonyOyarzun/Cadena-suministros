@@ -14,6 +14,7 @@ import Search from './api/Search'
 import Send from './Send'
 import Receive from './Receive';
 import Order from './Order';
+import Temperature from './Temperature';
 
 
 //access
@@ -51,6 +52,7 @@ class Routes extends Component {
                 <Route exact path="/Forgot" component={Forgot} />
                 <Route exact path="/Reset/:email/:token"  component={Reset} />
 
+                <Route exact path="/Temperature" component={Temperature} />
 
             </div>
 
