@@ -107,3 +107,14 @@ function NewUser(props) {
 }
 
 export default NewUser;
+
+/**
+ const bip39 = require('bip39')
+
+const seed = bip39.mnemonicToSeed('seedPhrase').slice(0,32)
+const alice = new BigchainDB.Ed25519Keypair(seed)
+
+https://www.bigchaindb.com/developers/guide/tutorial-car-telemetry-app/
+
+https://tutorials.bigchaindb.com/crab/create
+ */
