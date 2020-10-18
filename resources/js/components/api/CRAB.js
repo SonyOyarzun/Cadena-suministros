@@ -37,17 +37,11 @@ export const create = (data, metadata, keys, config) => {
 
 }
 
-export const transfer = (data, metadata,keys) => {
+export const transfer = (data, metadata,keys, config) => {
 
     const BigchainDB = require('bigchaindb-driver')
-    
-    let config = []
-
-    getConfig().then(response => {
-        config  = response.path
-    })
-
-    let API_PATH = config.path
+    const driver = require('bigchaindb-driver')
+    const conn = new driver.Connection(config.path)
 
     let asset = null
 
@@ -66,7 +60,7 @@ export const transfer = (data, metadata,keys) => {
         break;
     }
 
-    return conn.getTransaction(txCreatedID)
+    return conn.getTransaction(asset)
       .then((txCreated) => {
         const createTranfer = BigchainDB.Transaction.
           makeTransferTransaction(
@@ -79,7 +73,7 @@ export const transfer = (data, metadata,keys) => {
               BigchainDB.Transaction.makeEd25519Condition(
                 keys.receivePublickey))],
             {
-              info: info
+              metadata
             }
           )
 
@@ -91,8 +85,7 @@ export const transfer = (data, metadata,keys) => {
       })
       .then(tx => {
         console.log('Transfer Transaction created :', config.path + config.transaction + tx.id)
-        console.log('Save Transaction :', tx.id, asset, props.sendId)
-        save(tx.id, asset, props.sendId)
+        return tx
       })
 
 }

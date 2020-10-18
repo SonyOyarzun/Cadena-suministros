@@ -8,6 +8,7 @@ import { Button, Modal, Card, Form } from 'react-bootstrap';
 
 import { receiveChain , getConfig, getTransaction, getAsset} from "../tables/TableFunctions";
 import { getUser } from "../../access/UserFunctions";
+import { transfer } from "../api/CRAB";
 
 import SnackBar from '../extra/SnackBar'
 import { render } from 'react-dom';
@@ -117,13 +118,10 @@ function Transfer(props) {
         break;
     }
 
-
-    const sendPublicKey = userSend.publicKey
-    const sendPrivateKey = userSend.privateKey
-
-    //llave de quien recibe
-    const receivePublickey = userReceive.publicKey
-
+    const keys = {
+      receivePublickey: userReceive.publicKey,
+      sendPrivateKey: userSend.privateKey,
+    }
     //id de transaccion
     const txCreatedID = props.transaction
 
@@ -137,6 +135,10 @@ function Transfer(props) {
       date: new Date().toString()
     }
 
+    transfer(transaction, info, keys, config).then(response => {
+      setPrevent(false);
+    })
+    /*
     //conexion a bigchain
     const BigchainDB = require('bigchaindb-driver')
     const driver = require('bigchaindb-driver')
@@ -177,7 +179,7 @@ function Transfer(props) {
       })
 
 
-
+*/
 
   }
 
