@@ -17,18 +17,13 @@ class Meter extends Component {
             value:  this.props.meter.value,
             max: this.props.meter.max,
             min: this.props.meter.min,
-            random: 0 ,
 
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
 
-        this.data = {
-            value: 0,
-            date: new Date().toString()
-          }
         this.metadata = {
-            value: 0,
+            value: this.state.value,
             date: new Date().toString()
           }
     }
@@ -52,19 +47,15 @@ class Meter extends Component {
 
         setInterval(()=>{
 
-            if(this.state.random < 0.4) {
+            if(Math.random() < 0.6) {
                 this.tempUp()
             }
             else{
                 this.tempDown()
             }
-            this.setState({ random: Math.random()}) 
+            create(this.state,this.metadata)
 
-            create(this.data,this.metadata,props.config).then(response => {
-            console.log('CRAB create:',response)
-            })
-
-        },3000)
+        },5000)
 
     }
 
@@ -72,7 +63,7 @@ class Meter extends Component {
 
     render() {
 
-        console.log(this.state)
+        console.log('Meter props:',this.props)
         const radius = this.props.radius;
         const interpolate = interpolateRgb(this.startColor, this.endColor);
         const fillColor = interpolate((this.state.value/this.state.max));
@@ -160,4 +151,4 @@ class Meter extends Component {
     }
 }
 
-export default withRouter(Meter)
+export default Meter

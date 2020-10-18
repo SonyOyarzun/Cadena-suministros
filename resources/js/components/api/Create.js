@@ -4,6 +4,8 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 
 import { getConfig, newChain } from "../tables/TableFunctions";
 import { getProfile } from "../../access/UserFunctions";
+import { create } from "../api/CRAB";
+import { keys } from 'lodash';
 
 
 function Create(props) {
@@ -13,37 +15,37 @@ function Create(props) {
   const [prevent, setPrevent] = useState(false);
 
 
-    const process = () => {
-      axios.all([
-        getProfile(),
-        getConfig(),
-      ])
+  const process = () => {
+    axios.all([
+      getProfile(),
+      getConfig(),
+    ])
       .then(responseArr => {
-        createTransaction(responseArr[0],responseArr[1])
-        console.log('todo',responseArr)
-        console.log('my',responseArr[0])
-        console.log('config',responseArr[1])
+        createTransaction(responseArr[0], responseArr[1])
+        console.log('todo', responseArr)
+        console.log('my', responseArr[0])
+        console.log('config', responseArr[1])
       })
 
       .catch(error => {
-        console.log('todo',error)
+        console.log('todo', error)
         console.log('my', error[0])
         console.log('config', error[1])
       })
-    }
+  }
 
 
 
   const save = (id_transaction, asset, to) => {
 
-    const data= {
+    const data = {
       transaction: id_transaction,
       asset: asset,
       to: to,
     }
 
     newChain(data).then(response => {
-    
+
     })
 
   }
@@ -58,12 +60,14 @@ function Create(props) {
         return true;
   };
 
-  const createTransaction = (user,config) => {
+  const createTransaction = (user, config) => {
 
     setPrevent(true)
 
-    const myPublicKey = user.publicKey
-    const myPrivateKey = user.privateKey
+    const keys = {
+      publicKey: user.publicKey,
+      privateKey: user.privateKey,
+    }
     //console.log('getData ',props.getData,'getUserSend ',props.getUserSend);
     if (isset(props.getData) && props.getUserSend.hasOwnProperty('values')) {
 
@@ -77,55 +81,23 @@ function Create(props) {
         date: new Date().toString()
       }
 
-      console.log('path',config.path)
-      const BigchainDB = require('bigchaindb-driver')
+      create(transaction, info, keys, config).then(response => {
+        save(response.id, response.id, userSend.id)
+        setPrevent(false);
+      })
+     
 
-      const API_PATH = config.path
-
-
-      const tx = BigchainDB.Transaction.makeCreateTransaction(
-        // Data JSON
-        { transaction },
-
-        { info: info },
-
-        // A transaction needs an output
-        [BigchainDB.Transaction.makeOutput(
-          BigchainDB.Transaction.makeEd25519Condition(myPublicKey))
-        ],
-        myPublicKey
-      )
-
-      // Sign the transaction with private keys
-      const txSigned = BigchainDB.Transaction.signTransaction(tx, myPrivateKey)
-      // Send the transaction off to BigchainDB
-      let conn = new BigchainDB.Connection(API_PATH)
-
-      conn.postTransactionCommit(txSigned)
-        .then(res => {
-          const elem = API_PATH + config.transaction + txSigned.id;
-          console.log('Transaction', txSigned.id, 'accepted', 'URL :', elem);
-          save(txSigned.id, txSigned.id, userSend.id)
-
-          setTimeout(function() {
-            setPrevent(false);
-          }, 5000);
-         
-        })
-      console.log(txSigned);
-
-      
     } else {
       alert('Debe ingresar productos y destinatario')
       setPrevent(false);
     }
-    
+
 
   }
 
   return (
     <div>
-      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={process}  disabled={prevent}>
+      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={process} disabled={prevent}>
         <MDBIcon icon="paper-plane" />
       </MDBBtn>
     </div>

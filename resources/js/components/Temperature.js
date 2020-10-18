@@ -10,8 +10,8 @@ import { NavLink, Link, withRouter } from 'react-router-dom';
 
 class Temperature extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             value: 10.6,
             min: 2,
@@ -60,7 +60,7 @@ class Temperature extends Component {
 
 }
 
-export default withRouter(Temperature)
+export default Temperature
 
 
 
