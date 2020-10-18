@@ -5,6 +5,8 @@ import { getUser } from './tables/TableFunctions'
 import Meter from '../components/extra/Meter';
 import Lineal from '../components/extra/Lineal';
 
+import { NavLink, Link, withRouter } from 'react-router-dom';
+
 
 class Temperature extends Component {
 
@@ -58,8 +60,7 @@ class Temperature extends Component {
 
 }
 
-export default Temperature;
-
+export default withRouter(Temperature)
 
 
 

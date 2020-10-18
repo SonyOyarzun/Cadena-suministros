@@ -13,9 +13,6 @@ function Create(props) {
   const [prevent, setPrevent] = useState(false);
 
 
-
-  //useEffect(() => {
-
     const process = () => {
       axios.all([
         getProfile(),
@@ -35,7 +32,7 @@ function Create(props) {
       })
     }
 
-  //}, []);
+
 
   const save = (id_transaction, asset, to) => {
 
@@ -49,23 +46,6 @@ function Create(props) {
     
     })
 
-    /*
-    axios({
-      method: 'post',
-      url: 'chain/new',
-      data: {
-        transaction: id_transaction,
-        asset: asset,
-        to: to,
-      }
-    })
-      .then((response) => {
-        console.log(response);
-        alert(response.data)
-      }, (error) => {
-        console.log(error);
-      });
-      */
   }
 
   function isset(variable) {

@@ -4,7 +4,12 @@ import React, { Component, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import LiquidFillGauge from 'react-liquid-gauge';
 
-export default class Meter extends Component {
+import { NavLink, Link, withRouter } from 'react-router-dom';
+
+import {create} from '../api/CRAB';
+
+
+class Meter extends Component {
 
     constructor(props) {
         super(props);
@@ -17,11 +22,19 @@ export default class Meter extends Component {
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
+
+        this.data = {
+            value: 0,
+            date: new Date().toString()
+          }
+        this.metadata = {
+            value: 0,
+            date: new Date().toString()
+          }
     }
 
     startColor = '#03afff'; // cornflowerblue
     endColor = '#ff0000'; // crimson
-
 
     tempUp() {
        this.setState({ value: this.state.value + Math.random() })
@@ -46,6 +59,11 @@ export default class Meter extends Component {
                 this.tempDown()
             }
             this.setState({ random: Math.random()}) 
+
+            create(this.data,this.metadata,props.config).then(response => {
+            console.log('CRAB create:',response)
+            })
+
         },3000)
 
     }
@@ -142,3 +160,4 @@ export default class Meter extends Component {
     }
 }
 
+export default withRouter(Meter)

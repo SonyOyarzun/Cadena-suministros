@@ -43,7 +43,6 @@ const styles = {
 
 class App extends Component {
 
-
   constructor(props) {
     super(props);
     this.state = {
@@ -51,6 +50,7 @@ class App extends Component {
       user: [],
       config: []
     }
+    this.paramsRoute = this.paramsRoute.bind(this)
   }
 
 
@@ -67,6 +67,19 @@ class App extends Component {
       })
 
   }
+
+paramsRoute(){
+
+  router.push({
+    pathname: '/some-route',
+    search: '?param=123',
+    state: {
+      additionalParam: 'value',
+    },
+})
+
+}
+ 
 
   render() {
 
