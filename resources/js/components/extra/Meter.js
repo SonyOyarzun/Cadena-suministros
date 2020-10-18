@@ -9,8 +9,11 @@ export default class Meter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.meter,
+            value: this.props.meter.value,
+            max: this.props.meter.max,
+            min: this.props.meter.min,
             random: 0 ,
+            percent: (this.props.meter.value/this.props.meter.max)*100
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
@@ -21,18 +24,17 @@ export default class Meter extends Component {
 
 
     tempUp() {
-       this.setState({ value: this.state.value + 1 })
-       this.setState({ random: Math.random()}) 
+       this.setState({ value: this.state.value + 0.1 })
     }
 
     tempDown() {
-       this.setState({ value: this.state.value - 1 }) 
-       this.setState({ random: Math.random()}) 
+       this.setState({ value: this.state.value - 0.1 }) 
     }
 
 
 
     componentDidMount(){
+        this.setState({ random: Math.random()}) 
         this.tempDown()  
     }
 
@@ -40,14 +42,14 @@ export default class Meter extends Component {
 
         setInterval(()=>{
 
-            if(this.state.random < 0.5) {
+            if(this.state.random < 0.4) {
                 this.tempUp()
             }
             else{
                 this.tempDown()
             }
 
-        },1000)
+        },3000)
 
     }
 
@@ -55,7 +57,7 @@ export default class Meter extends Component {
 
     render() {
 
-    //    console.log(this.state)
+        console.log(this.state)
         const radius = this.props.radius;
         const interpolate = interpolateRgb(this.startColor, this.endColor);
         const fillColor = interpolate(this.state.value / 100);
@@ -87,13 +89,13 @@ export default class Meter extends Component {
                     style={{ margin: '0 auto' }}
                     width={radius * 2}
                     height={radius * 2}
-                    value={this.state.value}
+                    value={this.state.percent}
                     percent="C°"
                     textSize={1}
                     textOffsetX={0}
                     textOffsetY={0}
                     textRenderer={(props) => {
-                        const value = Math.round(props.value);
+                        const value = parseFloat(props.value).toFixed(2);
                         const radius = Math.min(props.height / 2, props.width / 2);
                         const textPixels = (props.textSize * radius / 2);
                         const valueStyle = {
@@ -143,16 +145,3 @@ export default class Meter extends Component {
     }
 }
 
-/**
-                 <button
-                        type="button"
-                        className="btn btn-default btn-block"
-                        onClick={() => {
-                            this.setState({ value: Math.random() * 100 });
-                        }}
-                    >
-                        Refresh
-                    </button>
-
-                    //setTimeout(sayHi, 1000);
- */
