@@ -11,7 +11,7 @@ class Temperature extends Component {
     constructor() {
         super()
         this.state = {
-            meter: 70
+            meter: 10
         }
 
     }
@@ -31,7 +31,7 @@ class Temperature extends Component {
 
                 <Card className='row'>
                     <Card.Body className='col-sm-4' style={styles.size}>
-                        <Card.Title>Temperatura {this.state.meter}</Card.Title>
+                        <Card.Title>Temperatura</Card.Title>
                         <Card.Text>
                         </Card.Text>
                         <Meter meter={this.state.meter} radius={styles.size.radius} />

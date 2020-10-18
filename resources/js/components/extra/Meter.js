@@ -1,6 +1,6 @@
 import { color } from 'd3-color';
 import { interpolateRgb } from 'd3-interpolate';
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import LiquidFillGauge from 'react-liquid-gauge';
 
@@ -9,7 +9,8 @@ export default class Meter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.meter
+            value: this.props.meter,
+            random: 0 ,
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
@@ -20,34 +21,41 @@ export default class Meter extends Component {
 
 
     tempUp() {
-        this.setState({ value: this.state.value + 1 })
+       this.setState({ value: this.state.value + 1 })
+       this.setState({ random: Math.random()}) 
     }
 
     tempDown() {
-        this.setState({ value: this.state.value - 1 })
+       this.setState({ value: this.state.value - 1 }) 
+       this.setState({ random: Math.random()}) 
+    }
+
+
+
+    componentDidMount(){
+        this.tempDown()  
     }
 
     componentDidMount() {
 
-        setInterval(this.tempDown(), 5000);
-          
+        setInterval(()=>{
+
+            if(this.state.random < 0.5) {
+                this.tempUp()
+            }
+            else{
+                this.tempDown()
+            }
+
+        },1000)
+
     }
 
-    componentDidUpdate() {
 
-        setInterval(this.tempDown(), 5000);
-          
-    }
-
-
-    
 
     render() {
 
-
-
-        console.log(this.state.value)
-
+    //    console.log(this.state)
         const radius = this.props.radius;
         const interpolate = interpolateRgb(this.startColor, this.endColor);
         const fillColor = interpolate(this.state.value / 100);
@@ -72,7 +80,6 @@ export default class Meter extends Component {
             }
         ];
 
-        console.log('meter :', this.state.value)
 
         return (
             <div>
@@ -123,9 +130,6 @@ export default class Meter extends Component {
                         fill: color('#fff').toString(),
                         fontFamily: 'Arial'
                     }}
-                    onClick={() => {
-                        this.setState({ value: Math.random() * 100 });
-                    }}
                 />
                 <div
                     style={{
@@ -149,4 +153,6 @@ export default class Meter extends Component {
                     >
                         Refresh
                     </button>
+
+                    //setTimeout(sayHi, 1000);
  */
