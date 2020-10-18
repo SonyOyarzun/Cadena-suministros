@@ -23,16 +23,18 @@ class Temperature extends Component {
 
         const styles = {
             size: {
-                margin: 30,
                 radius: 80
+            },
+            size2: {
+                marginTop: 10
             },
         }
 
         return (
-            <div className='group-form'>
+            <div>
 
-                <Card className='row'>
-                    <Card.Body className='col-sm-4' style={styles.size}>
+                <Card style={styles.size2}>
+                    <Card.Body className='float-left'>
                         <Card.Title>Temperatura</Card.Title>
                         <Card.Text>
                         </Card.Text>
@@ -40,8 +42,9 @@ class Temperature extends Component {
                     </Card.Body>
                 </Card>
 
-                <Card className='row'>
-                    <Card.Body className='col-sm-12' style={styles.size}>
+
+                <Card style={styles.size2}>
+                    <Card.Body className='' style={styles.size2}>
                         <Card.Title>Medicion</Card.Title>
                         <Card.Text>
                         </Card.Text>

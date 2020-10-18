@@ -24,11 +24,11 @@ export default class Meter extends Component {
 
 
     tempUp() {
-       this.setState({ value: this.state.value + 0.1 })
+       this.setState({ value: this.state.value + Math.random() })
     }
 
     tempDown() {
-       this.setState({ value: this.state.value - 0.1 }) 
+       this.setState({ value: this.state.value - Math.random() }) 
     }
 
 
@@ -57,7 +57,7 @@ export default class Meter extends Component {
         console.log(this.state)
         const radius = this.props.radius;
         const interpolate = interpolateRgb(this.startColor, this.endColor);
-        const fillColor = interpolate(this.state.value / 100);
+        const fillColor = interpolate((this.state.value/this.state.max));
         const gradientStops = [
             {
                 key: '0%',
