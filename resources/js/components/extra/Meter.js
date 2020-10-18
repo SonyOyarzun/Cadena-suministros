@@ -9,11 +9,11 @@ export default class Meter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.meter.value,
+            value:  this.props.meter.value,
             max: this.props.meter.max,
             min: this.props.meter.min,
             random: 0 ,
-            percent: (this.props.meter.value/this.props.meter.max)*100
+
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
@@ -33,12 +33,9 @@ export default class Meter extends Component {
 
 
 
-    componentDidMount(){
-        this.setState({ random: Math.random()}) 
-        this.tempDown()  
-    }
-
     componentDidMount() {
+
+        this.tempDown()  
 
         setInterval(()=>{
 
@@ -48,7 +45,7 @@ export default class Meter extends Component {
             else{
                 this.tempDown()
             }
-
+            this.setState({ random: Math.random()}) 
         },3000)
 
     }
@@ -89,13 +86,13 @@ export default class Meter extends Component {
                     style={{ margin: '0 auto' }}
                     width={radius * 2}
                     height={radius * 2}
-                    value={this.state.percent}
+                    value={(this.state.value/this.state.max)*100}
                     percent="C°"
                     textSize={1}
                     textOffsetX={0}
                     textOffsetY={0}
                     textRenderer={(props) => {
-                        const value = parseFloat(props.value).toFixed(2);
+                        const value = parseFloat(this.state.value).toFixed(2);
                         const radius = Math.min(props.height / 2, props.width / 2);
                         const textPixels = (props.textSize * radius / 2);
                         const valueStyle = {
