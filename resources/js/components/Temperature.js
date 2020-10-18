@@ -11,15 +11,11 @@ class Temperature extends Component {
     constructor() {
         super()
         this.state = {
-            user: []
+            meter: 70
         }
-    }
-
-
-
-    componentDidMount() {
 
     }
+
 
     render() {
 
@@ -32,12 +28,13 @@ class Temperature extends Component {
 
         return (
             <div className='group-form'>
+
                 <Card className='row'>
                     <Card.Body className='col-sm-4' style={styles.size}>
-                        <Card.Title>Temperatura</Card.Title>
+                        <Card.Title>Temperatura {this.state.meter}</Card.Title>
                         <Card.Text>
                         </Card.Text>
-                        <Meter radius={styles.size.radius} />
+                        <Meter meter={this.state.meter} radius={styles.size.radius} />
                     </Card.Body>
                 </Card>
 

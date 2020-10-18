@@ -6,13 +6,48 @@ import LiquidFillGauge from 'react-liquid-gauge';
 
 export default class Meter extends Component {
 
-    state = {
-        value: 50
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: this.props.meter
+        }
+        this.tempUp = this.tempUp.bind(this);
+        this.tempDown = this.tempDown.bind(this);
+    }
+
     startColor = '#03afff'; // cornflowerblue
     endColor = '#ff0000'; // crimson
 
+
+    tempUp() {
+        this.setState({ value: this.state.value + 1 })
+    }
+
+    tempDown() {
+        this.setState({ value: this.state.value - 1 })
+    }
+
+    componentDidMount() {
+
+        setInterval(this.tempDown(), 5000);
+          
+    }
+
+    componentDidUpdate() {
+
+        setInterval(this.tempDown(), 5000);
+          
+    }
+
+
+    
+
     render() {
+
+
+
+        console.log(this.state.value)
+
         const radius = this.props.radius;
         const interpolate = interpolateRgb(this.startColor, this.endColor);
         const fillColor = interpolate(this.state.value / 100);
@@ -36,6 +71,8 @@ export default class Meter extends Component {
                 offset: '100%'
             }
         ];
+
+        console.log('meter :', this.state.value)
 
         return (
             <div>
