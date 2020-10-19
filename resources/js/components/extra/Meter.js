@@ -6,7 +6,7 @@ import LiquidFillGauge from 'react-liquid-gauge';
 
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
-import {create} from '../api/CRAB';
+import { create, transfer } from '../api/CRAB';
 
 
 class Meter extends Component {
@@ -14,48 +14,79 @@ class Meter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value:  this.props.meter.value,
-            max: this.props.meter.max,
-            min: this.props.meter.min,
-
+            value: this.props.data.value,
+            max: this.props.data.max,
+            min: this.props.data.min,
+            transaction: [],
+            start: false
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
+        this.start = this.start.bind(this);
 
-        this.metadata = {
-            value: this.state.value,
-            date: new Date().toString()
-          }
     }
 
     startColor = '#03afff'; // cornflowerblue
     endColor = '#ff0000'; // crimson
 
+    keysCreate = {
+        publicKey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
+        privateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
+    }
+    keysTransfer = {
+        receivePublickey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
+        sendPrivateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
+    }
+
+    data = {
+        type: 'temperatura',
+        date: new Date().toString()
+    }
+
     tempUp() {
-       this.setState({ value: this.state.value + Math.random() })
+        this.setState({ value: this.state.value + Math.random() })
     }
 
     tempDown() {
-       this.setState({ value: this.state.value - Math.random() }) 
+        this.setState({ value: this.state.value - Math.random() })
     }
 
+    start() {
 
+        create(this.data, this.state, this.keysCreate, this.props.data.config).then(response => {
+            console.log('response ', response)
+        }).catch(error => {
+            console.log('error ', error)
+        })
+
+        this.componentDidMount()
+
+    }
 
     componentDidMount() {
 
-        this.tempDown()  
+        console.log('start :', this.state.start)
 
-        setInterval(()=>{
+        this.setState({ start: true })
 
-            if(Math.random() < 0.6) {
-                this.tempUp()
-            }
-            else{
-                this.tempDown()
-            }
-            create(this.state,this.metadata)
+        if (this.state.start) {
 
-        },5000)
+            this.tempDown()
+
+            setInterval(() => {
+
+                if (Math.random() < 0.6) {
+                    this.tempUp()
+                }
+                else {
+                    this.tempDown()
+                }
+
+                transfer(this.state.transaction, this.state, this.keysTransfer, this.props.data.config)
+
+            }, 5000)
+
+        }
 
     }
 
@@ -63,10 +94,10 @@ class Meter extends Component {
 
     render() {
 
-        console.log('Meter props:',this.props)
+        console.log('Meter props:', this.props)
         const radius = this.props.radius;
         const interpolate = interpolateRgb(this.startColor, this.endColor);
-        const fillColor = interpolate((this.state.value/this.state.max));
+        const fillColor = interpolate((this.state.value / this.state.max));
         const gradientStops = [
             {
                 key: '0%',
@@ -91,11 +122,12 @@ class Meter extends Component {
 
         return (
             <div>
+                <button onClick={() => this.start()}>Iniciar</button>
                 <LiquidFillGauge
                     style={{ margin: '0 auto' }}
                     width={radius * 2}
                     height={radius * 2}
-                    value={(this.state.value/this.state.max)*100}
+                    value={(this.state.value / this.state.max) * 100}
                     percent="C°"
                     textSize={1}
                     textOffsetX={0}

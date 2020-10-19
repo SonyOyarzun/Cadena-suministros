@@ -4,10 +4,9 @@ import { getConfig } from '../tables/TableFunctions'
 
 export const create = (data, metadata, keys, config) => {
 
+    console.log('data',data,'metadata',metadata,'keys',keys,'config',config)
     const BigchainDB = require('bigchaindb-driver')
-
-    let API_PATH = config.path
-
+    console.log('1',keys.publicKey,keys.privateKey)
     const tx = BigchainDB.Transaction.makeCreateTransaction(
 
         { data },
@@ -19,14 +18,15 @@ export const create = (data, metadata, keys, config) => {
         ],
         keys.publicKey
     )
-
+    
     const txSigned = BigchainDB.Transaction.signTransaction(tx, keys.privateKey)
 
-    let conn = new BigchainDB.Connection(API_PATH)
+    let conn = new BigchainDB.Connection(config.path)
 
+    console.log('2')
     return conn.postTransactionCommit(txSigned)
         .then(response => {
-            const elem = API_PATH + config.transaction + txSigned.id;
+            const elem = config.path + config.transaction + txSigned.id;
             console.log('Transaction', txSigned.id, 'aceptada', 'URL :', elem);
             return response
         })
@@ -37,7 +37,7 @@ export const create = (data, metadata, keys, config) => {
 
 }
 
-export const transfer = (data, metadata,keys, config) => {
+export const transfer = (transaction, metadata,keys, config) => {
 
     const BigchainDB = require('bigchaindb-driver')
     const driver = require('bigchaindb-driver')
@@ -45,14 +45,14 @@ export const transfer = (data, metadata,keys, config) => {
 
     let asset = null
 
-    console.log('transaction operation :', data.operation)
-    switch (data.operation) {
+    console.log('transaction operation :', transaction.operation)
+    switch (transaction.operation) {
       case 'CREATE':
-        asset = data.id
+        asset = transaction.id
         console.log('CREATE :', asset)
         break;
       case 'TRANSFER':
-        asset = data.asset.id
+        asset = transaction.asset.id
         console.log('TRANSFER :', asset)
         break;
 
@@ -89,90 +89,3 @@ export const transfer = (data, metadata,keys, config) => {
       })
 
 }
-
-const receiveTransaction = (userSend, userReceive, config, transaction) => {
-
-    console.log('transaction asset :', transaction)
-    //llaves de quien envia
-
-
-    let asset = null
-
-    console.log('transaction operation :', transaction.operation)
-    switch (transaction.operation) {
-      case 'CREATE':
-        asset = transaction.id
-        console.log('CREATE :', asset)
-        break;
-      case 'TRANSFER':
-        asset = transaction.asset.id
-        console.log('TRANSFER :', asset)
-        break;
-
-      default:
-        break;
-    }
-
-
-    const sendPublicKey = userSend.publicKey
-    const sendPrivateKey = userSend.privateKey
-
-    //llave de quien recibe
-    const receivePublickey = userReceive.publicKey
-
-    //id de transaccion
-    const txCreatedID = props.transaction
-
-    // console.log('send :', userSend, 'receive :', userReceive,'transaction :',txCreatedID)
-
-    // metadatos de informacion adicional
-    const info = {
-      from: userSend.name,
-      to: userReceive.name,
-      commentary: document.getElementById('commentary').value,
-      date: new Date().toString()
-    }
-
-    //conexion a bigchain
-    const BigchainDB = require('bigchaindb-driver')
-    const driver = require('bigchaindb-driver')
-    const API_PATH = config.path
-    const conn = new driver.Connection(API_PATH)
-
-
-
-    console.log(conn.getTransaction(txCreatedID))
-    // Get transaction payload by ID
-    conn.getTransaction(txCreatedID)
-      .then((txCreated) => {
-        const createTranfer = BigchainDB.Transaction.
-          makeTransferTransaction(
-            // The output index 0 is the one that is being spent
-            [{
-              tx: txCreated,
-              output_index: 0
-            }],
-            [BigchainDB.Transaction.makeOutput(
-              BigchainDB.Transaction.makeEd25519Condition(
-                receivePublickey))],
-            {
-              info: info
-            }
-          )
-
-        // Sign with the key of the owner of the painting (Alice)
-        const signedTransfer = BigchainDB.Transaction
-          .signTransaction(createTranfer, sendPrivateKey)
-        console.log('tx', signedTransfer)
-        return conn.postTransactionCommit(signedTransfer)
-      })
-      .then(tx => {
-        console.log('Transfer Transaction created :', config.path + config.transaction + tx.id)
-        console.log('Save Transaction :', tx.id, asset, props.sendId)
-        save(tx.id, asset, props.sendId)
-      })
-
-
-
-
-  }

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { getUser } from './tables/TableFunctions'
+import { getUser, getConfig } from './tables/TableFunctions'
 import Meter from '../components/extra/Meter';
 import Lineal from '../components/extra/Lineal';
 
@@ -15,11 +15,19 @@ class Temperature extends Component {
         this.state = {
             value: 10.6,
             min: 2,
-            max: 20
+            max: 20,
+            config: []
         }
 
     }
 
+    componentDidMount(){
+
+        getConfig().then(response => {
+            this.setState({ config: response })
+          })
+
+    }
 
     render() {
 
@@ -40,7 +48,7 @@ class Temperature extends Component {
                         <Card.Title>Temperatura</Card.Title>
                         <Card.Text>
                         </Card.Text>
-                        <Meter meter={this.state} radius={styles.size.radius} />
+                        <Meter data={this.state} radius={styles.size.radius} />
                     </Card.Body>
                 </Card>
 

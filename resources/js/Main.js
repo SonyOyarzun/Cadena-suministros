@@ -50,7 +50,6 @@ class App extends Component {
       user: [],
       config: []
     }
-    this.paramsRoute = this.paramsRoute.bind(this)
   }
 
 
@@ -63,21 +62,10 @@ class App extends Component {
     ])
       .then(responseArr => {
         this.setState({ user: responseArr[0], config: responseArr[1], loading: false})
-        this.paramsRoute()
         console.log('user',responseArr[0],'config ',responseArr[1])
       })
 
   }
-
-paramsRoute(){
-
-  router.push({
-    pathname: '/Temperature',
-    state: 'value',
-  }
-)
-
-}
  
 
   render() {
