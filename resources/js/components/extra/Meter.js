@@ -6,7 +6,7 @@ import LiquidFillGauge from 'react-liquid-gauge';
 
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
-import { create, transfer } from '../api/CRAB';
+import { create, transfer, append } from '../api/CRAB';
 
 
 class Meter extends Component {
@@ -18,7 +18,8 @@ class Meter extends Component {
             max: this.props.data.max,
             min: this.props.data.min,
             transaction: [],
-            start: false
+            start: false,
+            chain: 0,
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
@@ -29,13 +30,36 @@ class Meter extends Component {
     startColor = '#03afff'; // cornflowerblue
     endColor = '#ff0000'; // crimson
 
+
+
     keysCreate = {
         publicKey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
         privateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
     }
+    /*
     keysTransfer = {
         receivePublickey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
         sendPrivateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
+    }
+    keysTransfer2 = {
+        receivePublickey: 'BXYYLSVnDGpxkLngaWTS2ioMSrZxRNmATLj82hs9z86d',
+        sendPrivateKey: 'HMtmAxvo6Z7eVHuXjtQQ4m94QZscDo3uVScpwsZPBWb8',
+    }
+*/
+    keys = []
+
+    keysTransfer = {
+        receivePublickey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
+        sendPrivateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
+    }
+
+    keysTransfer2 = {
+        receivePublickey: 'BXYYLSVnDGpxkLngaWTS2ioMSrZxRNmATLj82hs9z86d',
+        sendPrivateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
+    }
+    keysTransfer1 = {
+        receivePublickey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
+        sendPrivateKey: 'HMtmAxvo6Z7eVHuXjtQQ4m94QZscDo3uVScpwsZPBWb8',
     }
 
     data = {
@@ -54,7 +78,8 @@ class Meter extends Component {
     start() {
 
         create(this.data, this.state, this.keysCreate, this.props.data.config).then(response => {
-            console.log('response ', response)
+    //        console.log('start create response ', response)
+            this.setState({ transaction: response })
         }).catch(error => {
             console.log('error ', error)
         })
@@ -65,7 +90,7 @@ class Meter extends Component {
 
     componentDidMount() {
 
-        console.log('start :', this.state.start)
+     //   console.log('start :', this.state.start, 'chain :', this.state.chain)
 
         this.setState({ start: true })
 
@@ -82,9 +107,25 @@ class Meter extends Component {
                     this.tempDown()
                 }
 
-                transfer(this.state.transaction, this.state, this.keysTransfer, this.props.data.config)
+                    if (this.state.chain == 0) {
+                      this.keys = this.keysTransfer
+                    }
+                    else if (this.state.chain % 2 == 0) {
+                        this.keys = this.keysTransfer1
+                    } else {
+                        this.keys = this.keysTransfer2
+                    }
+                
+                append(this.state.transaction, this.state, this.keys, this.props.data.config).then(response => {
+               //     console.log('start transfer response ', response)
+                    this.setState({ transaction: response })
+                 //   console.log('state transaction ', this.state.transaction)
+                    this.setState({ chain: this.state.chain + 1 })  
+                })
+   
+            }, 10000)
 
-            }, 5000)
+            
 
         }
 
@@ -94,7 +135,6 @@ class Meter extends Component {
 
     render() {
 
-        console.log('Meter props:', this.props)
         const radius = this.props.radius;
         const interpolate = interpolateRgb(this.startColor, this.endColor);
         const fillColor = interpolate((this.state.value / this.state.max));
