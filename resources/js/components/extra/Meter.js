@@ -123,7 +123,7 @@ class Meter extends Component {
                     this.setState({ chain: this.state.chain + 1 })  
                 })
    
-            }, 10000)
+            }, 30000)
 
             
 
