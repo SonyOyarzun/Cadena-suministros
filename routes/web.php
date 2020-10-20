@@ -94,5 +94,9 @@ Route::post('/search', 'BigController@search');
 Route::post('/uploadLogotype', 'UploadController@uploadFileLogotype');
 Route::post('/uploadBackground', 'UploadController@uploadFileBackground');
 
+//rutas meter
+Route::get('/meter/list', 'MeterController@index');
+Route::post('/meter/new', 'MeterController@create');
+
 
 //https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/db.json
