@@ -19,6 +19,7 @@ class Meter extends Component {
             min: this.props.data.min,
             transaction: [],
             start: false,
+            date : new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
             chain: 0,
         }
         this.tempUp = this.tempUp.bind(this);
@@ -27,6 +28,10 @@ class Meter extends Component {
 
     }
 
+    /*
+    options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    time = new Date(Date.now()).toLocaleDateString("es-ES", options)
+*/
     startColor = '#03afff'; // cornflowerblue
     endColor = '#ff0000'; // crimson
 
@@ -62,10 +67,6 @@ class Meter extends Component {
         sendPrivateKey: 'HMtmAxvo6Z7eVHuXjtQQ4m94QZscDo3uVScpwsZPBWb8',
     }
 
-    data = {
-        type: 'temperatura',
-        date: new Date().toString()
-    }
 
     tempUp() {
         this.setState({ value: this.state.value + Math.random() })
