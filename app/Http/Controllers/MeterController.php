@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Meter;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
+
+use App\Mail\DemoEmail;
+use Illuminate\Support\Facades\Mail;
+
 
 class MeterController extends Controller
 {
@@ -14,7 +20,13 @@ class MeterController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $meter = Meter::select()->get();
+        } catch (\Throwable $th) {
+
+            return $th;
+        }
+        return $meter;
     }
 
     /**
@@ -22,9 +34,20 @@ class MeterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
+        try {
+            $meter = new Meter;
+            $meter->value = $request->value;
+            $meter->created_at = now();
+            $meter->updated_at = now();
+            $meter->save();
+        } catch (\Throwable $th) {
+
+            return $th;
+        }
+        return "Temperatura guardada";
     }
 
     /**
