@@ -8,6 +8,8 @@ import { NavLink, Link, withRouter } from 'react-router-dom';
 
 import { create, transfer, append } from '../api/CRAB';
 
+import { newMeter } from '../extra/ExtraFunctions';
+
 
 class Meter extends Component {
 
@@ -17,7 +19,6 @@ class Meter extends Component {
             value: this.props.data.value,
             max: this.props.data.max,
             min: this.props.data.min,
-            transaction: [],
             start: false,
             date : new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
             chain: 0,
@@ -77,14 +78,14 @@ class Meter extends Component {
     }
 
     start() {
-
+/*
         create(this.data, this.state, this.keysCreate, this.props.data.config).then(response => {
     //        console.log('start create response ', response)
             this.setState({ transaction: response })
         }).catch(error => {
             console.log('error ', error)
         })
-
+*/
         this.componentDidMount()
 
     }
@@ -117,13 +118,18 @@ class Meter extends Component {
                         this.keys = this.keysTransfer2
                     }
                 
+                    newMeter(this.state).then(response => {
+                             console.log('meter', response)
+                    })
+                /*    
                 append(this.state.transaction, this.state, this.keys, this.props.data.config).then(response => {
                //     console.log('start transfer response ', response)
                     this.setState({ transaction: response })
                  //   console.log('state transaction ', this.state.transaction)
                     this.setState({ chain: this.state.chain + 1 })  
                 })
-   
+   */
+
             }, 30000)
 
             

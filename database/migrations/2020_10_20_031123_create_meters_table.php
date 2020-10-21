@@ -16,6 +16,8 @@ class CreateMetersTable extends Migration
         Schema::create('meters', function (Blueprint $table) {
             $table->id();
             $table->integer('value');
+            $table->integer('min');
+            $table->integer('max');
             $table->timestamps();
         });
     }

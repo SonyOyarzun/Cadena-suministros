@@ -40,6 +40,8 @@ class MeterController extends Controller
         try {
             $meter = new Meter;
             $meter->value = $request->value;
+            $meter->max = $request->max;
+            $meter->min = $request->min;
             $meter->created_at = now();
             $meter->updated_at = now();
             $meter->save();
