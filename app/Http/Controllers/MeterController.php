@@ -21,12 +21,25 @@ class MeterController extends Controller
     public function index()
     {
         try {
+   
+            $array = array();
             $meter = Meter::select()->get();
+
+            foreach($meter as $content){
+
+                $array = array(
+                    'key'   => $content->id,
+                    'data' => number_format($content->value,2)
+                );
+
+                
+            };
+
         } catch (\Throwable $th) {
 
-            return $th;
+            return $th->getMessage();
         }
-        return $meter;
+        return $array;
     }
 
     /**
@@ -38,6 +51,7 @@ class MeterController extends Controller
     {
 
         try {
+            
             $meter = new Meter;
             $meter->value = $request->value;
             $meter->max = $request->max;
@@ -45,10 +59,12 @@ class MeterController extends Controller
             $meter->created_at = now();
             $meter->updated_at = now();
             $meter->save();
+            
         } catch (\Throwable $th) {
 
-            return $th;
+            return $th->getMessage();
         }
+
         return "Temperatura guardada";
     }
 

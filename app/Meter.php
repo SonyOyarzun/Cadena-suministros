@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Meter extends Model
 {
-    protected $table = 'meter';
+    //protected $table = 'meter';
 }
