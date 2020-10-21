@@ -27,11 +27,15 @@ class MeterController extends Controller
 
             foreach($meter as $content){
 
-                $array = array(
-                    'key'   => $content->id,
-                    'data' => number_format($content->value,2)
+
+                $meter = array(
+
+                    'key'   => "$content->id",
+                    'data'  => number_format($content->value,2)
+                    
                 );
 
+                array_push($array,$meter);
                 
             };
 

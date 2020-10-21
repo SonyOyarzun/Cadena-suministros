@@ -13,22 +13,31 @@ export default class Lineal extends Component {
     }
     preRows = []
 
+    hold = [
+        { key: '1', data: 7.6 },
+        { key: '2', data: 8.5 },
+        { key: '3', data: 9.8 }
+    ];
+
     componentDidMount(){
-        
+        setInterval(() => {
         getMeter().then(response => {
-            
+           
             this.preRows.push(response)
-            console.log('data :', this.preRows)
-                
+            this.setState({data: this.preRows})    
+
         })
+      
+    },3000)
+    this.componentDidMount()
     }
 
     render() {
 
-
+       
         return (
             <div>
-                <BarChart width={this.props.width} height={this.props.height} data={this.preRows} />
+                <BarChart width={this.props.width} height={this.props.height} data={this.state.data[0]} />
             </div>
         );
     }
