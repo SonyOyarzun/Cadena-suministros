@@ -23,7 +23,14 @@ import ws from '../api/WebSocket';
         // single websocket instance for the own application and constantly trying to reconnect.
     
         componentDidMount() {
-            this.connect();
+       //     this.connect();
+
+       console.log(this.state.data[0])
+            getMeter().then(response => {
+
+                     this.setState({ data: response })
+            
+                 })
         }
     
         timeout = 250; // Initial timeout duration as a class variable
@@ -85,6 +92,7 @@ import ws from '../api/WebSocket';
             return(
                 <>
                 <Chart
+                backgroundColor={'blue'}
                 width={'100%'}
                 height={'400px'}
                 chartType="LineChart"

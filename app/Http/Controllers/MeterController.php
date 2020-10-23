@@ -23,9 +23,9 @@ class MeterController extends Controller
         try {
    
             $array = array();
-            $meter = Meter::select()->get();
+            $meter = Meter::select()->offSet(0)->limit(10)->get();
 
-            array_push($array,'T','C°');
+            array_push($array,['T','C°']);
 
             foreach($meter as $content){
 
@@ -37,7 +37,7 @@ class MeterController extends Controller
                     
                 );
 */
-                array_push($array,"$content->id",(float)number_format($content->value,2));
+                array_push($array,["$content->id",(float)number_format($content->value,2)]);
                 
             };
 
