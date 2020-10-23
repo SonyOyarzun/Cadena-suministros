@@ -1,3 +1,5 @@
+
+
 import { color } from 'd3-color';
 import { interpolateRgb } from 'd3-interpolate';
 import React, { Component, useEffect } from 'react';
@@ -20,7 +22,7 @@ class Meter extends Component {
             max: this.props.data.max,
             min: this.props.data.min,
             start: false,
-            date : new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
+            date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
             chain: 0,
         }
         this.tempUp = this.tempUp.bind(this);
@@ -29,13 +31,9 @@ class Meter extends Component {
 
     }
 
-    /*
-    options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-    time = new Date(Date.now()).toLocaleDateString("es-ES", options)
-*/
+
     startColor = '#03afff'; // cornflowerblue
     endColor = '#ff0000'; // crimson
-
 
 
     keysCreate = {
@@ -78,23 +76,22 @@ class Meter extends Component {
     }
 
     start() {
-/*
-        create(this.data, this.state, this.keysCreate, this.props.data.config).then(response => {
-    //        console.log('start create response ', response)
-            this.setState({ transaction: response })
-        }).catch(error => {
-            console.log('error ', error)
-        })
-*/
-        this.componentDidMount()
+        /*
+                create(this.data, this.state, this.keysCreate, this.props.data.config).then(response => {
+            //        console.log('start create response ', response)
+                    this.setState({ transaction: response })
+                }).catch(error => {
+                    console.log('error ', error)
+                })
+        */
+        this.setState({ start: true })
 
+        this.componentDidMount()
     }
 
     componentDidMount() {
 
-     //   console.log('start :', this.state.start, 'chain :', this.state.chain)
-
-        this.setState({ start: true })
+        //   console.log('start :', this.state.start, 'chain :', this.state.chain)
 
         if (this.state.start) {
 
@@ -109,18 +106,18 @@ class Meter extends Component {
                     this.tempDown()
                 }
 
-                    if (this.state.chain == 0) {
-                      this.keys = this.keysTransfer
-                    }
-                    else if (this.state.chain % 2 == 0) {
-                        this.keys = this.keysTransfer1
-                    } else {
-                        this.keys = this.keysTransfer2
-                    }
-                
-                    newMeter(this.state).then(response => {
-                             console.log('meter', response)
-                    })
+                if (this.state.chain == 0) {
+                    this.keys = this.keysTransfer
+                }
+                else if (this.state.chain % 2 == 0) {
+                    this.keys = this.keysTransfer1
+                } else {
+                    this.keys = this.keysTransfer2
+                }
+
+                newMeter(this.state).then(response => {
+                    console.log('meter', response)
+                })
                 /*    
                 append(this.state.transaction, this.state, this.keys, this.props.data.config).then(response => {
                //     console.log('start transfer response ', response)
@@ -130,9 +127,9 @@ class Meter extends Component {
                 })
    */
 
-            }, 1000)
+            }, 5000)
 
-            
+
 
         }
 

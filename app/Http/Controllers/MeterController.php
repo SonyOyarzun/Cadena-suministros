@@ -25,17 +25,19 @@ class MeterController extends Controller
             $array = array();
             $meter = Meter::select()->get();
 
+            array_push($array,'T','C°');
+
             foreach($meter as $content){
 
-
+/*
                 $meter = array(
 
                     'key'   => "$content->id",
                     'data'  => number_format($content->value,2)
                     
                 );
-
-                array_push($array,$meter);
+*/
+                array_push($array,"$content->id",(float)number_format($content->value,2));
                 
             };
 
