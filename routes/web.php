@@ -46,7 +46,20 @@ Route::view('/{path?}', 'home')
      ->name('home');
 
 */
-//Auth::routes();
+
+//websocket
+Auth::routes();
+
+Broadcast::routes();
+
+Route::resource('messages', 'MessageController')->only([
+    'index',
+    'store'
+]);
+
+
+
+
 
 Route::get('/user/my/', 'UserController@my');
 Route::post('/user/search/', 'UserController@search');
@@ -98,5 +111,3 @@ Route::post('/uploadBackground', 'UploadController@uploadFileBackground');
 Route::get('/meter/list', 'MeterController@index');
 Route::post('/meter/new', 'MeterController@create');
 
-
-//https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/db.json

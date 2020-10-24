@@ -29,12 +29,52 @@ class Meter extends Component {
         this.tempDown = this.tempDown.bind(this);
         this.start = this.start.bind(this);
 
+        this.created = this.created.bind(this)
+        this.fetchMessages = this.fetchMessages.bind(this)
     }
 
 
     startColor = '#03afff'; // cornflowerblue
     endColor = '#ff0000'; // crimson
 
+
+    //websocket methods
+    created() {
+        this.fetchMessages();
+  
+        Echo.private('chat')
+            .listen('MessageSentEvent', (e) => {
+                this.messages.push({
+                    message: e.message.message,
+                    user: e.user
+                });
+                console.log('socket : Echo',this.messages)
+            });
+      
+    }
+
+    fetchMessages() {
+        axios.get('/messages').then(response => {
+            this.messages = response.data;
+            console.log('socket : fetchMessages',response)
+        });
+    }
+
+    addMessage(message) {
+        axios.post('/messages', {
+            message
+        }).then(response => {
+            this.messages.push({
+                message: response.data.message.message,
+                user: response.data.user
+            });
+        });
+    }
+
+    sendMessage() {
+        this.addMessage(this.newMessage);
+        this.newMessage = '';
+    }
 
     keysCreate = {
         publicKey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
@@ -90,6 +130,8 @@ class Meter extends Component {
     }
 
     componentDidMount() {
+
+        this.created();
 
         //   console.log('start :', this.state.start, 'chain :', this.state.chain)
 
