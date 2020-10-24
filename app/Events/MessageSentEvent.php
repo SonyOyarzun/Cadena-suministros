@@ -25,10 +25,10 @@ class MessageSentEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Message $message, User $user)
+    public function __construct(User $user)
     {
-        $this->message = $message;
         $this->user = $user;
+        dd('event hola construc');
     }
 
     /**
@@ -38,6 +38,7 @@ class MessageSentEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+         dd('event hola boad');
         return new PrivateChannel('chat');
     }
 }

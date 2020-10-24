@@ -62,7 +62,7 @@ class App extends Component {
     ])
       .then(responseArr => {
         this.setState({ user: responseArr[0], config: responseArr[1], loading: false})
-        console.log('user',responseArr[0],'config ',responseArr[1])
+    //    console.log('user',responseArr[0],'config ',responseArr[1])
       })
 
   }

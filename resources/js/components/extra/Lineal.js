@@ -10,54 +10,72 @@ import { getMeter } from '../extra/ExtraFunctions';
 import ws from '../api/WebSocket';
 
 
-   export default class Lineal extends Component {
-        constructor(props) {
-            super(props);
-    
-            this.state = {
-                ws: null,
-                data : []
-            };
+export default class Lineal extends Component {
+    constructor(props) {
+        super(props);
 
-            
-        }
-    
-      
-    
-        componentDidMount() {
-   
-            
-
+        this.state = {
+            ws: null,
+            data: []
         };
-    
-  
-    
-        render() {
-            return(
-                <>
-                <Chart
-                backgroundColor={'blue'}
-                width={'100%'}
-                height={'400px'}
-                chartType="LineChart"
-                loader={<div>Loading Chart</div>}
+        this.listen = this.listen.bind(this)
 
-                data={this.state.data}
-
-                options={{
-                    hAxis: {
-                        title: 'Registro',
-                    },
-                    vAxis: {
-                        title: 'Temperatura',
-                    },
-                }}
-                rootProps={{ 'data-testid': '1' }}
-            />
-            </>
-            ) 
-        }
     }
+
+
+    listen() {
+        
+        console.log('socket : listen')
+
+        Echo.private('meter')
+            .listen('MeterEvent', (e) => {
+
+                this.setState({data: e})
+                console.log('socket : Echo', e)
+            });
+
+    }
+
+
+    componentDidMount() {
+
+
+
+
+    };
+
+
+
+    render() {
+
+        this.listen()
+
+        console.log(' lineal data :',this.state.data)
+        return (
+            <>
+                <Chart
+                    backgroundColor={'blue'}
+                    width={'100%'}
+                    height={'400px'}
+                    chartType="LineChart"
+                    loader={<div>Loading Chart</div>}
+
+                    data={this.state.data}
+
+                    options={{
+                        hAxis: {
+                            title: 'Registro',
+                        },
+                        vAxis: {
+                            title: 'Temperatura',
+                        },
+                    }}
+                    rootProps={{ 'data-testid': '1' }}
+                />
+            </>
+        )
+    }
+}
 
 
 

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Mail\DemoEmail;
 use Illuminate\Support\Facades\Mail;
 
+use App\Events\MeterEvent;
+
 
 class MeterController extends Controller
 {
@@ -65,6 +67,8 @@ class MeterController extends Controller
             $meter->created_at = now();
             $meter->updated_at = now();
             $meter->save();
+
+            broadcast(new MeterEvent($meter))->toOthers();
             
         } catch (\Throwable $th) {
 
