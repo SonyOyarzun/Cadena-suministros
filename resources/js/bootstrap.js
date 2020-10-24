@@ -46,3 +46,9 @@ window.Echo = new Echo({
     broadcaster: Larasocket,
     token: process.env.MIX_LARASOCKET_TOKEN,
 });
+
+window.Echo.private('meter')
+.listen('MeterEvent', (e) => {
+
+    console.log('socket : Echo', e)
+});

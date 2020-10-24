@@ -12,7 +12,6 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Meter;
 
-
 class MeterEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
