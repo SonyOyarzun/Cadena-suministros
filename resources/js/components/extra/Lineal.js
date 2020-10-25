@@ -24,15 +24,16 @@ export default class Lineal extends Component {
 
 
     listen() {
+
         
-        console.log('socket : listen')
+        Echo.private('meter').listen('MeterEvent', (e) => {
 
-        Echo.private('meter')
-            .listen('MeterEvent', (e) => {
+                this.setState({data: e })
 
-                this.setState({data: e})
                 console.log('socket : Echo', e)
             });
+            
+       //    console.log(Echo.private('meter'))
 
     }
 

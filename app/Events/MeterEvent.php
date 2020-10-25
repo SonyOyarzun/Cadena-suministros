@@ -26,6 +26,7 @@ class MeterEvent implements ShouldBroadcast
     public function __construct(Meter $meter)
     {
         $this->meter = $meter;
+        
     }
 
     /**

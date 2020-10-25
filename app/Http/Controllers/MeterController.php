@@ -69,7 +69,7 @@ class MeterController extends Controller
             $meter->save();
 
          //   broadcast(new MeterEvent($meter))->toOthers();
-         broadcast(new MeterEvent($meter))->toOthers();
+         broadcast(new MeterEvent($meter));
          
             
         } catch (\Throwable $th) {

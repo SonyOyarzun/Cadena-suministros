@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Broadcast::routes();
+Auth::routes();
+
 
 Route::get('/', function () {
     return view('home');
@@ -46,18 +49,6 @@ Route::view('/{path?}', 'home')
      ->name('home');
 
 */
-
-//websocket
-Auth::routes();
-
-Broadcast::routes();
-
-Route::resource('messages', 'MessageController')->only([
-    'index',
-    'store'
-]);
-
-
 
 
 

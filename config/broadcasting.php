@@ -40,7 +40,10 @@ return [
                 'useTLS' => true,
             ],
         ],
-
+        'larasocket' => [
+            'driver' => 'larasocket',
+            'token' => env('LARASOCKET_TOKEN'),
+        ],
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',
@@ -53,11 +56,6 @@ return [
         'null' => [
             'driver' => 'null',
         ],
-        'larasocket' => [
-            'driver' => 'larasocket',
-            'token' => env('LARASOCKET_TOKEN'),
-        ],
-
     ],
 
 ];
