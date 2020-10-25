@@ -2,7 +2,7 @@ import React, { Component, ButtonGroup } from 'react';
 
 import axios from 'axios'
 
-import {getUser} from './TableFunctions'
+import { getUser } from './TableFunctions'
 
 //import datable
 import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon, MDBBtnGroup } from 'mdbreact';
@@ -31,9 +31,9 @@ class TableUser extends Component {
     this.getData = this.getData.bind(this);
   }
 
-  getData(){
+  getData() {
     getUser().then(response => {
-      this.setState({ users: response , loading: false })
+      this.setState({ users: response, loading: false })
     })
   }
 
@@ -49,7 +49,7 @@ class TableUser extends Component {
       pathname: path,
       data: data // your data array of objects
     })
-    console.log('handleLink',path,data)
+    console.log('handleLink', path, data)
   }
 
   render() {
@@ -99,12 +99,13 @@ class TableUser extends Component {
             role: data.role,
             action:
               <MDBBtnGroup className="mr-2">
-                <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path} getData={this.getData} />
                 <PassUser id={data.id} />
-                <DeleteUser id={data.id} getData={this.getData} />
-                <MDBBtn tag="a" size="sm" gradient="blue"  onClick={() => this.handleLink("Product", data.path)}>
+                <MDBBtn tag="a" size="sm" gradient="blue" onClick={() => this.handleLink("Product", data.path)}>
                   <MDBIcon icon="shopping-cart" />
                 </MDBBtn>
+                <EditUser id={data.id} name={data.name} email={data.email} role={data.role} path={data.path} getData={this.getData} />
+                <DeleteUser id={data.id} getData={this.getData} />
+
               </MDBBtnGroup>
           }
         ))
@@ -120,7 +121,7 @@ class TableUser extends Component {
       return (
         <div>
           <div>
-            <NewUser getData={this.getData()}/>
+            <NewUser getData={this.getData()} />
           </div>
           <MDBDataTableV5
             className='cust-table'
@@ -132,7 +133,7 @@ class TableUser extends Component {
             data={data}
             info={false}
           />
-          
+
 
         </div>
       )
