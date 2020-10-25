@@ -68,8 +68,12 @@ class MeterController extends Controller
             $meter->updated_at = now();
             $meter->save();
 
-         //   broadcast(new MeterEvent($meter))->toOthers();
-         broadcast(new MeterEvent($meter));
+
+         $array = array();
+         array_push($array,['T','C°']);
+
+
+         broadcast(new MeterEvent($array));
          
             
         } catch (\Throwable $th) {

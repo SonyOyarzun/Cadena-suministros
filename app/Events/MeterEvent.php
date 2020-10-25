@@ -9,23 +9,22 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-
-use App\Meter;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class MeterEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $meter;
+    public $data;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Meter $meter)
+    public function __construct(Array $meter)
     {
-        $this->meter = $meter;
+        $this->data = $meter;
         
     }
 

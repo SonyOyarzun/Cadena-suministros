@@ -22,6 +22,7 @@ export default class Lineal extends Component {
 
     }
 
+    
 
     listen() {
 
@@ -33,14 +34,15 @@ export default class Lineal extends Component {
                 console.log('socket : Echo', e)
             });
             
-       //    console.log(Echo.private('meter'))
 
     }
 
 
     componentDidMount() {
 
-
+        getMeter().then(response => {
+            this.setState({ data: response })
+          })
 
 
     };
@@ -51,7 +53,7 @@ export default class Lineal extends Component {
 
         this.listen()
 
-        console.log(' lineal data :',this.state.data)
+        console.log(' lineal data :',this.socket)
         return (
             <>
                 <Chart
