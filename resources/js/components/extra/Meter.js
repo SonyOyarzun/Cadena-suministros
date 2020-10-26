@@ -99,7 +99,7 @@ class Meter extends Component {
 
         setInterval(() => {
 
-            if (Math.random() < 0.6) {
+            if (Math.random() < 0.5) {
                 this.tempUp()
             }
             else {
