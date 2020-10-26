@@ -57,7 +57,7 @@ export default class Lineal extends Component {
                     backgroundColor={'blue'}
                     width={'100%'}
                     height={'400px'}
-                    chartType="LineChart"
+                    chartType="AreaChart"
                     loader={<div>Loading Chart</div>}
 
                     data={this.state.data}

@@ -63,12 +63,6 @@ class SideNavBar extends Component {
                 </NavText>
               </NavItem>
 
-              <NavItem eventKey="administracion/temperature">
-                <NavText>
-                  <Link  to='/Temperature'>Temperatura</Link>
-                </NavText>
-              </NavItem>
-
             </NavItem>
 
   }
@@ -103,6 +97,12 @@ class SideNavBar extends Component {
               <NavItem eventKey="distribucion/recibir">
                 <NavText>
                   <Link  to='/Receive'>Recibir Producto</Link>
+                </NavText>
+              </NavItem>
+
+              <NavItem eventKey="distribucion/temperatura">
+                <NavText>
+                  <Link  to='/Temperature'>Temperatura</Link>
                 </NavText>
               </NavItem>
 

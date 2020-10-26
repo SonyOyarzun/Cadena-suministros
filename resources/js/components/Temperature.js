@@ -4,8 +4,11 @@ import { Card } from 'react-bootstrap';
 import { getUser, getConfig } from './tables/TableFunctions'
 import Meter from '../components/extra/Meter';
 import Lineal from '../components/extra/Lineal';
+import Load from '../components/extra/Load';
 
 import { NavLink, Link, withRouter } from 'react-router-dom';
+
+import { getMeter } from './extra/ExtraFunctions';
 
 
 class Temperature extends Component {
@@ -13,7 +16,7 @@ class Temperature extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: 10.6,
+            value: null,
             min: 2,
             max: 20,
             config: []
@@ -23,13 +26,20 @@ class Temperature extends Component {
 
     componentDidMount(){
 
-        getConfig().then(response => {
-            this.setState({ config: response })
-          })
+        axios.all([
+            getConfig(),
+            getMeter()
+          ])
+            .then(responseArr => {
+              this.setState({ config: responseArr[0], value: responseArr[1][responseArr[1].length-1][1] })
+      
+            })
 
     }
 
     render() {
+
+console.log(this.state)
 
         const styles = {
             size: {
@@ -39,6 +49,12 @@ class Temperature extends Component {
                 marginTop: 10
             },
         }
+
+        if(this.state.value==null){
+
+            return (<Load/>)
+
+        }else{
 
         return (
             <div>
@@ -65,7 +81,7 @@ class Temperature extends Component {
         )
 
     }
-
+    }
 }
 
 export default Temperature

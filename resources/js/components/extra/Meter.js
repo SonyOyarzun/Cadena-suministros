@@ -21,7 +21,6 @@ class Meter extends Component {
             value: this.props.data.value,
             max: this.props.data.max,
             min: this.props.data.min,
-            start: false,
             date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
             chain: 0,
         }
@@ -32,7 +31,7 @@ class Meter extends Component {
     }
 
     messages = []
-    newMessage =''
+    newMessage = ''
 
     startColor = '#03afff'; // cornflowerblue
     endColor = '#ff0000'; // crimson
@@ -93,50 +92,40 @@ class Meter extends Component {
 
     componentDidMount() {
 
-        //   console.log('start :', this.state.start, 'chain :', this.state.chain)
+        setInterval(() => {
 
-        if (this.state.start) {
+            if (Math.random() < 0.6) {
+                this.tempUp()
+            }
+            else {
+                this.tempDown()
+            }
 
-            this.tempDown()
-
-            setInterval(() => {
-
-                if (Math.random() < 0.6) {
-                    this.tempUp()
-                }
-                else {
-                    this.tempDown()
-                }
-
-                if (this.state.chain == 0) {
-                    this.keys = this.keysTransfer
-                }
-                else if (this.state.chain % 2 == 0) {
-                    this.keys = this.keysTransfer1
-                } else {
-                    this.keys = this.keysTransfer2
-                }
-
-                
-                newMeter(this.state).then(response => {
-                    console.log('meter', response)
-                })
-                
-                /*    
-                append(this.state.transaction, this.state, this.keys, this.props.data.config).then(response => {
-               //     console.log('start transfer response ', response)
-                    this.setState({ transaction: response })
-                 //   console.log('state transaction ', this.state.transaction)
-                    this.setState({ chain: this.state.chain + 1 })  
-                })
-   */
+            if (this.state.chain == 0) {
+                this.keys = this.keysTransfer
+            }
+            else if (this.state.chain % 2 == 0) {
+                this.keys = this.keysTransfer1
+            } else {
+                this.keys = this.keysTransfer2
+            }
 
 
-            }, 3000)
+            newMeter(this.state).then(response => {
+                console.log('meter', response)
+            })
+
+            /*    
+            append(this.state.transaction, this.state, this.keys, this.props.data.config).then(response => {
+           //     console.log('start transfer response ', response)
+                this.setState({ transaction: response })
+             //   console.log('state transaction ', this.state.transaction)
+                this.setState({ chain: this.state.chain + 1 })  
+            })
+*/
 
 
-
-        }
+        }, 3000)
 
     }
 
@@ -171,7 +160,7 @@ class Meter extends Component {
 
         return (
             <div>
-                <button onClick={() => this.start()}>Iniciar</button>
+                
                 <LiquidFillGauge
                     style={{ margin: '0 auto' }}
                     width={radius * 2}
