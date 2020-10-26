@@ -267,3 +267,7 @@ function Trace(props) {
 }
 
 export default withRouter(Trace)
+
+
+
+//varJson.reverse() invertir registros

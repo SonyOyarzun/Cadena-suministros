@@ -6,7 +6,7 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 
-import { receiveChain , getConfig, getTransaction, getAsset} from "../tables/TableFunctions";
+import { receiveChain, getConfig, getTransaction, getAsset } from "../tables/TableFunctions";
 import { getUser } from "../../access/UserFunctions";
 import { transfer } from "../api/CRAB";
 
@@ -22,7 +22,33 @@ function Transfer(props) {
   const [prevent, setPrevent] = useState(false);
   const [message, setMessage] = useState('Realizar Recepción');
 
+  const [commentary, setCommentary] = useState('');
+
   console.log(props)
+
+  const getMeter = () => {
+
+    console.log('listen')
+
+    Echo.private('meter')
+      .listen('MeterEvent', (response) => {
+        setCommentary('Temperatura: '+response.data[0][response.data[0].length-1][1])
+        console.log('echo :', response.data[0][response.data[0].length-1][1])
+      });
+
+  }
+
+
+
+  useEffect(() => {
+
+    getMeter()
+
+  });
+
+
+  getMeter()
+
 
   const save = (id_transaction, asset, from) => {
 
@@ -38,7 +64,7 @@ function Transfer(props) {
       props.getData()
     }, (error) => {
       console.log(error);
-     
+
     });
   }
 
@@ -64,7 +90,7 @@ function Transfer(props) {
         "asset": props.transaction,
       }
 
-      console.log('params ',paramsReceive, paramsSend,paramsTransaction)
+      console.log('params ', paramsReceive, paramsSend, paramsTransaction)
 
       axios.all([
         getUser(paramsSend),
@@ -80,7 +106,7 @@ function Transfer(props) {
           console.log('transaction', responseArr[3])
 
           receiveTransaction(responseArr[0], responseArr[1], responseArr[2], responseArr[3])
- 
+
         })
 
         .catch(error => {
@@ -138,48 +164,6 @@ function Transfer(props) {
     transfer(transaction, info, keys, config).then(response => {
       setPrevent(false);
     })
-    /*
-    //conexion a bigchain
-    const BigchainDB = require('bigchaindb-driver')
-    const driver = require('bigchaindb-driver')
-    const API_PATH = config.path
-    const conn = new driver.Connection(API_PATH)
-
-
-
-    console.log(conn.getTransaction(txCreatedID))
-    // Get transaction payload by ID
-    conn.getTransaction(txCreatedID)
-      .then((txCreated) => {
-        const createTranfer = BigchainDB.Transaction.
-          makeTransferTransaction(
-            // The output index 0 is the one that is being spent
-            [{
-              tx: txCreated,
-              output_index: 0
-            }],
-            [BigchainDB.Transaction.makeOutput(
-              BigchainDB.Transaction.makeEd25519Condition(
-                receivePublickey))],
-            {
-              info: info
-            }
-          )
-
-        // Sign with the key of the owner of the painting (Alice)
-        const signedTransfer = BigchainDB.Transaction
-          .signTransaction(createTranfer, sendPrivateKey)
-        console.log('tx', signedTransfer)
-        return conn.postTransactionCommit(signedTransfer)
-      })
-      .then(tx => {
-        console.log('Transfer Transaction created :', config.path + config.transaction + tx.id)
-        console.log('Save Transaction :', tx.id, asset, props.sendId)
-        save(tx.id, asset, props.sendId)
-      })
-
-
-*/
 
   }
 
@@ -197,7 +181,7 @@ function Transfer(props) {
           <Form>
             <Form.Group controlId="commentary">
               <Form.Label>Comentario</Form.Label>
-              <Form.Control type="text" rows="3" maxLength="30" />
+              <Form.Control type="text" rows="3" maxLength="30" defaultValue={commentary} value={commentary} />
             </Form.Group>
           </Form>
 
