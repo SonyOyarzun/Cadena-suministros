@@ -25,7 +25,7 @@ class MeterController extends Controller
         try {
    
             $array = array();
-            $meter = Meter::select()->offSet(0)->limit(10)->get();
+            $meter = Meter::select()->limit(10)->orderBy('id','desc')->get();
 
             array_push($array,['T','C°']);
 
@@ -68,12 +68,10 @@ class MeterController extends Controller
             $meter->updated_at = now();
             $meter->save();
 
+        
+            $index = [$this->index()];
 
-         $array = array();
-         array_push($array,['T','C°']);
-
-
-         broadcast(new MeterEvent($array));
+         broadcast(new MeterEvent($index));
          
             
         } catch (\Throwable $th) {
