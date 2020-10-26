@@ -14,6 +14,7 @@ import { newMeter } from '../extra/ExtraFunctions';
 
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
+import { ClearAll } from '@material-ui/icons';
 
 
 class Meter extends Component {
@@ -26,6 +27,7 @@ class Meter extends Component {
             min: this.props.data.min,
             date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
             chain: 0,
+            start: true,
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
@@ -97,12 +99,16 @@ class Meter extends Component {
 
     componentDidMount() {
 
+        if(this.state.start){
+
         setInterval(() => {
 
             if (Math.random() < 0.5) {
+                console.log('UP')
                 this.tempUp()
             }
             else {
+                console.log('DOWN')
                 this.tempDown()
             }
 
@@ -133,6 +139,13 @@ class Meter extends Component {
         }, 3000)
 
     }
+
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.componentDidMount());
+    }
+
 
 
     onChange(event) {
