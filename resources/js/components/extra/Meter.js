@@ -12,6 +12,9 @@ import { create, transfer, append } from '../api/CRAB';
 
 import { newMeter } from '../extra/ExtraFunctions';
 
+//Componentes de Bootstap
+import { Button, Modal, Card, Form } from 'react-bootstrap';
+
 
 class Meter extends Component {
 
@@ -27,6 +30,8 @@ class Meter extends Component {
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
         this.start = this.start.bind(this);
+        this.onChange = this.onChange.bind(this);
+        
 
     }
 
@@ -130,6 +135,10 @@ class Meter extends Component {
     }
 
 
+    onChange(event) {
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
 
     render() {
 
@@ -160,7 +169,19 @@ class Meter extends Component {
 
         return (
             <div>
-                
+                <Form>
+
+                    <Form.Group controlId="form.max">
+                        <Form.Label>Maximo</Form.Label>
+                        <Form.Control name='max' type="number" placeholder="maximo" maxLength="2" onChange={this.onChange} defaultValue={this.state.max} />
+                    </Form.Group>
+
+                    <Form.Group controlId="form.min">
+                        <Form.Label>Minimo</Form.Label>
+                        <Form.Control name='min' type="number" placeholder="minimo" maxLength="2" onChange={this.onChange} defaultValue={this.state.min} />
+                    </Form.Group>
+
+                </Form>
                 <LiquidFillGauge
                     style={{ margin: '0 auto' }}
                     width={radius * 2}
