@@ -33,7 +33,7 @@ class Meter extends Component {
         this.tempDown = this.tempDown.bind(this);
         this.start = this.start.bind(this);
         this.onChange = this.onChange.bind(this);
-        
+        this.register = this.register.bind(this);
 
     }
 
@@ -76,10 +76,12 @@ class Meter extends Component {
 
 
     tempUp() {
+        console.log('UP')
         this.setState({ value: this.state.value + Math.random() })
     }
 
     tempDown() {
+        console.log('DOWN')
         this.setState({ value: this.state.value - Math.random() })
     }
 
@@ -97,53 +99,56 @@ class Meter extends Component {
         this.componentDidMount()
     }
 
+    register() {
+
+        if (this.state.start) {
+
+            setInterval(() => {
+
+                if (Math.random() < 0.5) {
+                    this.tempUp()
+                }
+                else {
+                    this.tempDown()
+                }
+
+                if (this.state.chain == 0) {
+                    this.keys = this.keysTransfer
+                }
+                else if (this.state.chain % 2 == 0) {
+                    this.keys = this.keysTransfer1
+                } else {
+                    this.keys = this.keysTransfer2
+                }
+
+                newMeter(this.state).then(response => {
+                    console.log('meter', response)
+                })
+
+                /*    
+                append(this.state.transaction, this.state, this.keys, this.props.data.config).then(response => {
+               //     console.log('start transfer response ', response)
+                    this.setState({ transaction: response })
+                 //   console.log('state transaction ', this.state.transaction)
+                    this.setState({ chain: this.state.chain + 1 })  
+                })
+    */
+
+            }, 10000)
+
+        }
+
+    }
+
+
+
     componentDidMount() {
-
-        if(this.state.start){
-
-        setInterval(() => {
-
-            if (Math.random() < 0.5) {
-                console.log('UP')
-                this.tempUp()
-            }
-            else {
-                console.log('DOWN')
-                this.tempDown()
-            }
-
-            if (this.state.chain == 0) {
-                this.keys = this.keysTransfer
-            }
-            else if (this.state.chain % 2 == 0) {
-                this.keys = this.keysTransfer1
-            } else {
-                this.keys = this.keysTransfer2
-            }
-
-
-            newMeter(this.state).then(response => {
-                console.log('meter', response)
-            })
-
-            /*    
-            append(this.state.transaction, this.state, this.keys, this.props.data.config).then(response => {
-           //     console.log('start transfer response ', response)
-                this.setState({ transaction: response })
-             //   console.log('state transaction ', this.state.transaction)
-                this.setState({ chain: this.state.chain + 1 })  
-            })
-*/
-
-
-        }, 3000)
-
+        this.register()
     }
 
-    }
 
-    componentWillUnmount(){
-        clearInterval(this.componentDidMount());
+    componentWillUnmount() {
+        clearInterval(newMeter);
     }
 
 
@@ -186,12 +191,12 @@ class Meter extends Component {
 
                     <Form.Group controlId="form.max">
                         <Form.Label>Maximo</Form.Label>
-                        <Form.Control name='max' type="number" placeholder="maximo" maxLength="2" onChange={this.onChange} defaultValue={this.state.max} />
+                        <Form.Control name='max' type="number" placeholder="maximo" maxLength="2" onChange={this.onChange} defaultValue={this.state.max} min='1' />
                     </Form.Group>
 
                     <Form.Group controlId="form.min">
                         <Form.Label>Minimo</Form.Label>
-                        <Form.Control name='min' type="number" placeholder="minimo" maxLength="2" onChange={this.onChange} defaultValue={this.state.min} />
+                        <Form.Control name='min' type="number" placeholder="minimo" maxLength="2" onChange={this.onChange} defaultValue={this.state.min} max='0'/>
                     </Form.Group>
 
                 </Form>
