@@ -10,21 +10,24 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use PhpParser\Node\Expr\Cast\Object_;
+use App\User;
 
 class MeterEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $data;
+    public $user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Array $meter)
+    public function __construct(Array $meter,User $user)
     {
         $this->data = $meter;
+        $this->user = $user;
         
     }
 
@@ -35,6 +38,6 @@ class MeterEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('meter');
+        return new PrivateChannel('meter',$this->user);
     }
 }

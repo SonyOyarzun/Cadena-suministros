@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
+
 use App\Mail\DemoEmail;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,15 +24,15 @@ class MeterController extends Controller
     public function index()
     {
         try {
-   
+
             $array = array();
-            $meter = Meter::select()->limit(10)->orderBy('id','desc')->get();
+            $meter = Meter::select()->limit(10)->orderBy('id', 'desc')->get();
 
-            array_push($array,['T','C°','Min','Max']);
+            array_push($array, ['T', 'C°', 'Min', 'Max']);
 
-            foreach($meter as $content){
+            foreach ($meter as $content) {
 
-/*
+                /*
                 $meter = array(
 
                     'key'   => "$content->id",
@@ -39,10 +40,8 @@ class MeterController extends Controller
                     
                 );
 */
-                array_push($array,["$content->id",(float)number_format($content->value,2),$content->min,$content->max]);
-                
+                array_push($array, ["$content->id", (float)number_format($content->value, 2), $content->min, $content->max]);
             };
-
         } catch (\Throwable $th) {
 
             return $th->getMessage();
@@ -59,7 +58,7 @@ class MeterController extends Controller
     {
 
         try {
-            
+
             $meter = new Meter;
             $meter->value = $request->value;
             $meter->max = $request->max;
@@ -68,12 +67,10 @@ class MeterController extends Controller
             $meter->updated_at = now();
             $meter->save();
 
-        
+            $user = Auth::user();
             $index = [$this->index()];
 
-         broadcast(new MeterEvent($index));
-         
-            
+            broadcast(new MeterEvent($index, $user));
         } catch (\Throwable $th) {
 
             return $th->getMessage();

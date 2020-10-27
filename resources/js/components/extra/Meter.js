@@ -134,7 +134,7 @@ class Meter extends Component {
                 })
     */
 
-            }, 10000)
+            }, 5000)
 
         }
 
