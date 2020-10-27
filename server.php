@@ -41,6 +41,14 @@ php artisan make:seeder MoviesTableSeeder
 
 composer dump-autoload
 
+set COMPOSER_MEMORY_LIMIT=-1
+composer require beyondcode/laravel-websockets
+
+
+
+https://www.laraveltip.com/laravel-websocket-como-utilizar-websockets-con-php/
+
+
 https://medium.com/@vchaurasia95/basic-operations-in-bigchaindb-using-js-eb530216eaa7
 
 https://www.itsolutionstuff.com/post/react-form-validation-tutorial-exampleexample.html
@@ -71,5 +79,15 @@ https://color.adobe.com/es/explore
 
 
 https://tutorials.bigchaindb.com/crab/create
+
+
+
+//https://larasocket.com/projects/cadena-de-suministros
+
+//https://medium.com/@zachvv11/building-a-real-time-chat-application-with-laravel-and-larasocket-c3e377537dc2
+
+//279|16uN1IyYWiJtXQvESm9MqLO0alccB2mlCKxEjYQc6qBetU8j3565niIqCYnC3136Xt8q5UsadNvq6fka
+
+//https://code.i-harness.com/es/docs/laravel~5.6/docs/5.6/broadcasting
 */
 

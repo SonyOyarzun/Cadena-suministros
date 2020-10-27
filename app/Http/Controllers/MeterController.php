@@ -71,6 +71,7 @@ class MeterController extends Controller
             $index = [$this->index()];
 
             broadcast(new MeterEvent($index, $user));
+            
         } catch (\Throwable $th) {
 
             return $th->getMessage();
