@@ -43,6 +43,7 @@ composer dump-autoload
 
 set COMPOSER_MEMORY_LIMIT=-1
 composer require beyondcode/laravel-websockets
+php artisan websockets:serve
 
 
 
