@@ -240,11 +240,11 @@ class Meter extends Component {
                         fill: fillColor
                     }}
                     textStyle={{
-                        fill: color('#444').toString(),
+                        fill: color('#fff').toString(),
                         fontFamily: 'Arial'
                     }}
                     waveTextStyle={{
-                        fill: color('#fff').toString(),
+                        fill: color('#ffff00').toString(),
                         fontFamily: 'Arial'
                     }}
                 />

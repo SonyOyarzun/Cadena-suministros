@@ -14,7 +14,7 @@ class MeterSeeder extends Seeder
     {
         DB::table('meters')->insert([
             'id'            => 1,
-            'value'         => 0.0,
+            'value'         => 5.0,
             'min'           => 0,
             'max'           => 10,
             'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
