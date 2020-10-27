@@ -12,6 +12,7 @@ import Load from '../extra/Load'
 import { getChain } from "../tables/TableFunctions";
 import { getProfile } from "../../access/UserFunctions";
 import { ToggleButton } from 'react-bootstrap';
+import { getWeekYearWithOptions } from 'date-fns/fp';
 
 class TableReceive extends Component {
 
@@ -101,7 +102,7 @@ class TableReceive extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <Transfer sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData} />,
+          action: <Transfer sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData} switch={this.state.switch} />,
 
         }
 

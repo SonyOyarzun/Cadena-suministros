@@ -32,8 +32,8 @@ function Transfer(props) {
 
     Echo.private('meter')
       .listen('MeterEvent', (response) => {
-        setCommentary('Temperatura: '+response.data[0][response.data[0].length-1][1])
-        console.log('echo :', response.data[0][response.data[0].length-1][1])
+        setCommentary('Temperatura: ' + response.data[0][response.data[0].length - 1][1])
+        console.log('echo :', response.data[0][response.data[0].length - 1][1])
       });
 
   }
@@ -181,7 +181,13 @@ function Transfer(props) {
           <Form>
             <Form.Group controlId="commentary">
               <Form.Label>Comentario</Form.Label>
-              <Form.Control type="text" rows="3" maxLength="30" defaultValue={commentary} value={commentary} />
+              {props.switch  ? (
+                <Form.Control type="text" rows="3" maxLength="30" defaultValue={commentary} value={commentary} />
+              ):(
+                <Form.Control type="text" rows="3" maxLength="30" defaultValue=''/>
+              )
+              }
+
             </Form.Group>
           </Form>
 
