@@ -27,13 +27,11 @@ class Meter extends Component {
             min: this.props.data.min,
             date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
             chain: 0,
-            start: true,
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
         this.start = this.start.bind(this);
         this.onChange = this.onChange.bind(this);
-        this.register = this.register.bind(this);
 
     }
 
@@ -94,56 +92,46 @@ class Meter extends Component {
                     console.log('error ', error)
                 })
         */
-        this.setState({ start: true })
 
-        this.componentDidMount()
     }
 
-    register() {
+    timer = setInterval(() => {
 
-        if (this.state.start) {
-
-            setInterval(() => {
-
-                if (Math.random() < 0.5) {
-                    this.tempUp()
-                }
-                else {
-                    this.tempDown()
-                }
-
-                if (this.state.chain == 0) {
-                    this.keys = this.keysTransfer
-                }
-                else if (this.state.chain % 2 == 0) {
-                    this.keys = this.keysTransfer1
-                } else {
-                    this.keys = this.keysTransfer2
-                }
-
-                newMeter(this.state).then(response => {
-                    console.log('meter', response)
-                })
-
-                /*    
-                append(this.state.transaction, this.state, this.keys, this.props.data.config).then(response => {
-               //     console.log('start transfer response ', response)
-                    this.setState({ transaction: response })
-                 //   console.log('state transaction ', this.state.transaction)
-                    this.setState({ chain: this.state.chain + 1 })  
-                })
-    */
-
-            }, 5000)
-
+        if (Math.random() < 0.5) {
+            this.tempUp()
+        }
+        else {
+            this.tempDown()
         }
 
-    }
+        if (this.state.chain == 0) {
+            this.keys = this.keysTransfer
+        }
+        else if (this.state.chain % 2 == 0) {
+            this.keys = this.keysTransfer1
+        } else {
+            this.keys = this.keysTransfer2
+        }
 
+        newMeter(this.state).then(response => {
+            console.log('meter', response)
+        })
 
+        /*    
+        append(this.state.transaction, this.state, this.keys, this.props.data.config).then(response => {
+       //     console.log('start transfer response ', response)
+            this.setState({ transaction: response })
+         //   console.log('state transaction ', this.state.transaction)
+            this.setState({ chain: this.state.chain + 1 })  
+        })
+*/
+
+    }, 5000)
+
+   
 
     componentDidMount() {
-        this.register()
+        this.timer
     }
 
 
