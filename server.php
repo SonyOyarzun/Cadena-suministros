@@ -41,6 +41,8 @@ php artisan make:seeder MoviesTableSeeder
 
 composer dump-autoload
 
+
+https://github.com/beyondcode/laravel-websockets-demo
 set COMPOSER_MEMORY_LIMIT=-1
 composer require beyondcode/laravel-websockets
 php artisan websockets:serve

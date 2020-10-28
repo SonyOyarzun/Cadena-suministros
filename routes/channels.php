@@ -20,11 +20,15 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });
 */
 Broadcast::channel('meter', function ($user) {
-    return (int) $user->id === (int) Auth::id();
+    return true;
 });
 
 /*
 Broadcast::channel('chat', function () {
     return \Illuminate\Support\Facades\Auth::check();
+});
+
+Broadcast::channel('meter', function ($user) {
+    return (int) $user->id === (int) Auth::id();
 });
 */
