@@ -199,6 +199,10 @@ class Meter extends Component {
                         <Form.Control name='min' type="number" placeholder="minimo" maxLength="2" onChange={this.onChange} defaultValue={this.state.min} max='0'/>
                     </Form.Group>
 
+                    <Form.Group controlId="form.min">
+                        <Button className='btn btn-block' onClick={()=>(this.setState({value: 0}))}>Reset</Button>
+                    </Form.Group>
+
                 </Form>
                 <LiquidFillGauge
                     style={{ margin: '0 auto' }}
