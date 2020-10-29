@@ -25,26 +25,32 @@ class MeterController extends Controller
     {
         try {
 
+            $id = Auth::id();
             $array = array();
-            $meter = Meter::select()->limit(10)->orderBy('id', 'desc')->get();
+            $meter = Meter::select()->limit(10)->orderBy('chain', 'desc')->where('userId', '=', $id)->get();
 
             array_push($array, ['T', 'C°', 'Min', 'Max']);
 
-            foreach ($meter as $content) {
+            if ($meter->count() > 0) {
+               
+                foreach ($meter as $content) {
 
-                /*
-                $meter = array(
-
-                    'key'   => "$content->id",
-                    'data'  => number_format($content->value,2)
-                    
-                );
-*/
-                array_push($array, ["$content->id", (float)number_format($content->value, 2), $content->min, $content->max]);
-            };
+                    /*
+                    $meter = array(
+    
+                        'key'   => "$content->id",
+                        'data'  => number_format($content->value,2)
+                        
+                    );
+    */
+                    array_push($array, ["$content->chain", (float)number_format($content->value, 2), $content->min, $content->max]);
+                };
+            } else {
+                array_push($array, [0, (float)number_format(0, 2), 0, 10]);
+            }
         } catch (\Throwable $th) {
 
-            return $th->getMessage();
+            return false;
         }
         return $array;
     }
@@ -59,10 +65,14 @@ class MeterController extends Controller
 
         try {
 
+            $id = Auth::id();
+
             $meter = new Meter;
             $meter->value = $request->value;
             $meter->max = $request->max;
             $meter->min = $request->min;
+            $meter->chain = $request->chain;
+            $meter->userId = $id;
             $meter->created_at = now();
             $meter->updated_at = now();
             $meter->save();
@@ -71,7 +81,6 @@ class MeterController extends Controller
             $index = [$this->index()];
 
             broadcast(new MeterEvent($index, $user));
-
         } catch (\Throwable $th) {
 
             return $th->getMessage();

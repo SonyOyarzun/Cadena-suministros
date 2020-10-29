@@ -19,6 +19,7 @@ class Temperature extends Component {
             value: null,
             min: null,
             max: null,
+            chain : null,
             config: []
         }
 
@@ -32,11 +33,15 @@ class Temperature extends Component {
         ])
             .then(responseArr => {
                 this.setState({
-                    config:     responseArr[0],
-                    value:      responseArr[1][responseArr[1].length - 1][1],
-                    min:        responseArr[1][responseArr[1].length-1][2],
-                    max:        responseArr[1][responseArr[1].length-1][3]
+                    config: responseArr[0],
                 })
+   
+                    this.setState({
+                        value: responseArr[1][responseArr[1].length - 1][1],
+                        min: responseArr[1][responseArr[1].length - 1][2],
+                        max: responseArr[1][responseArr[1].length - 1][3],
+                        chain: responseArr[1][responseArr[1].length - 1][4]
+                    })  
 
             })
 

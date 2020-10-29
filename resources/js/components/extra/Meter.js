@@ -122,13 +122,13 @@ class Meter extends Component {
        //     console.log('start transfer response ', response)
             this.setState({ transaction: response })
          //   console.log('state transaction ', this.state.transaction)
-            this.setState({ chain: this.state.chain + 1 })  
+          
         })
 */
-
+        this.setState({ chain: this.state.chain + 1 })
     }, 5000)
 
-   
+
 
     componentDidMount() {
         this.timer
@@ -184,11 +184,11 @@ class Meter extends Component {
 
                     <Form.Group controlId="form.min">
                         <Form.Label>Minimo</Form.Label>
-                        <Form.Control name='min' type="number" placeholder="minimo" maxLength="2" onChange={this.onChange} defaultValue={this.state.min} max='0'/>
+                        <Form.Control name='min' type="number" placeholder="minimo" maxLength="2" onChange={this.onChange} defaultValue={this.state.min} max='0' />
                     </Form.Group>
 
                     <Form.Group controlId="form.min">
-                        <Button className='btn btn-block' onClick={()=>(this.setState({value: 0}))}>Reset</Button>
+                        <Button className='btn btn-block' onClick={() => (this.setState({ value: 0 }))}>Reset</Button>
                     </Form.Group>
 
                 </Form>

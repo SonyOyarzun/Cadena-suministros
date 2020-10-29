@@ -14,10 +14,11 @@ class CreateMetersTable extends Migration
     public function up()
     {
         Schema::create('meters', function (Blueprint $table) {
-            $table->id();
+            $table->integer('userId');
             $table->float('value');
             $table->integer('min');
             $table->integer('max');
+            $table->integer('chain');
             $table->timestamps();
         });
     }
