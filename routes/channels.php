@@ -19,7 +19,8 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 */
-Broadcast::channel('meter.'.Auth::id(), function ($userId) {
+
+Broadcast::channel('meter.{userId}', function ($userId) {
     return true;
 });
 
