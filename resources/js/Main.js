@@ -86,7 +86,7 @@ class App extends Component {
             {(this.state.user.role == 'A' || this.state.user.role == 'U') ?
               (
               <>
-              <SideNavBar value={this.state.user.role} config={this.state.config} />
+              <SideNavBar value={this.state.user.role} config={this.state.config} user={this.state.user}/>
               <Profile user={this.state.user} config={this.state.config} /> 
               </>
               )

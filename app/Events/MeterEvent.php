@@ -17,7 +17,7 @@ class MeterEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $meter;
+    public $data;
     public $user;
 
     /**
@@ -25,9 +25,9 @@ class MeterEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Array $meter,User $user)
+    public function __construct(Array $data,User $user)
     {
-        $this->meter = $meter;
+        $this->data = $data;
         $this->user = $user;  
     }
 

@@ -65,23 +65,23 @@ class MeterController extends Controller
 
         try {
 
-            $id = Auth::id();
-
+            $user = Auth::user();
+            
             $meter = new Meter;
             $meter->value = $request->value;
             $meter->max = $request->max;
             $meter->min = $request->min;
             $meter->chain = $request->chain;
-            $meter->userId = $id;
+            $meter->userId = $user->id;
             $meter->created_at = now();
             $meter->updated_at = now();
             $meter->save();
 
-            $user = Auth::user();
+            
             $index = [$this->index()];
 
             broadcast(new MeterEvent($index, $user));
-            
+
         } catch (\Throwable $th) {
 
             return $th->getMessage();

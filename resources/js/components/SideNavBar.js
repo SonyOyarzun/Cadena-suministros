@@ -102,7 +102,7 @@ class SideNavBar extends Component {
 
               <NavItem eventKey="distribucion/temperatura">
                 <NavText>
-                  <Link  to='/Temperature'>Temperatura</Link>
+                  <Link  to={'/Temperature/'+this.props.user.id}>Temperatura</Link>
                 </NavText>
               </NavItem>
 

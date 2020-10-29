@@ -16,6 +16,7 @@ class Temperature extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            id : props.match.params.id,
             value: null,
             min: null,
             max: null,
@@ -84,7 +85,7 @@ class Temperature extends Component {
                             <Card.Title>Medicion</Card.Title>
                             <Card.Text>
                             </Card.Text>
-                            <Lineal height={200} width={200} />
+                            <Lineal id={this.state.id}  height={200} width={200} />
                         </Card.Body>
                     </Card>
                 </div>

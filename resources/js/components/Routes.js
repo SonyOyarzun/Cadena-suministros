@@ -53,6 +53,7 @@ class Routes extends Component {
                 <Route exact path="/Reset/:email/:token"  component={Reset} />
 
                 <Route exact path="/Temperature" component={Temperature} />
+                <Route exact path="/Temperature/:id" component={Temperature} />
 
             </div>
 

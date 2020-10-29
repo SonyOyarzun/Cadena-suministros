@@ -22,14 +22,14 @@ export default class Lineal extends Component {
 
     }
 
-    
+    channel = 'meter.'+this.props.id
 
     listen() {
-  
-        Echo.private('meter.1')
+  console.log('canal :',this.channel)
+        Echo.private(this.channel)
         .listen('MeterEvent', (response) => {
-            this.setState({ data: response.data[0] })
             console.log('echo :',response.data[0] )
+            this.setState({ data: response.data[0] })
         });
             
     }
