@@ -26,10 +26,10 @@ export default class Lineal extends Component {
 
     listen() {
   
-        Echo.private('meter')
+        Echo.private('meter.1')
         .listen('MeterEvent', (response) => {
             this.setState({ data: response.data[0] })
-            //console.log('echo :',response.data[0] )
+            console.log('echo :',response.data[0] )
         });
             
     }
