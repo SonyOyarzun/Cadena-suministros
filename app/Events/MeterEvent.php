@@ -38,6 +38,6 @@ class MeterEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('meter.'.$this->user->id,$this->user);
+        return new PrivateChannel("meter.{$this->user->id}",$this->user);
     }
 }
