@@ -9,7 +9,7 @@ import Load from '../components/extra/Load';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
 import { getMeter } from './extra/ExtraFunctions';
-
+import { create, transfer, registerMeter } from './api/CRAB';
 
 class Temperature extends Component {
 
@@ -21,12 +21,33 @@ class Temperature extends Component {
             min: null,
             max: null,
             chain : null,
-            config: []
+            config: [],
+            transaction: [],
+            asset: 'Inicial',
         }
+        this.start = this.start.bind(this);
+
+    }
+
+    keysCreate = {
+        publicKey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
+        privateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
+    }
+
+    start() {
+
+        create(this.state, this.state, this.keysCreate, this.state.config).then(response => {
+            console.log('start create response ', response)
+            this.setState({ transaction: response, asset: response.id })
+        }).catch(error => {
+            console.log('error ', error)
+        })
 
     }
 
     componentDidMount() {
+
+        this.start()
 
         axios.all([
             getConfig(),
@@ -38,10 +59,10 @@ class Temperature extends Component {
                 })
                 console.log('Temperature mount:',responseArr)
                     this.setState({
+                        chain:  responseArr[1][responseArr[1].length - 1][0],
                         value:  responseArr[1][responseArr[1].length - 1][1],
                         min:    responseArr[1][responseArr[1].length - 1][2],
                         max:    responseArr[1][responseArr[1].length - 1][3],
-                        chain:  responseArr[1][responseArr[1].length - 1][0]
                     })  
 
             })
@@ -85,7 +106,7 @@ class Temperature extends Component {
                             <Card.Title>Medicion</Card.Title>
                             <Card.Text>
                             </Card.Text>
-                            <Lineal id={this.state.id}  height={200} width={200} />
+                            <Lineal data={this.state}  height={200} width={200} />
                         </Card.Body>
                     </Card>
                 </div>

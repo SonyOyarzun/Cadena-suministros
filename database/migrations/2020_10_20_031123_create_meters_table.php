@@ -20,6 +20,7 @@ class CreateMetersTable extends Migration
             $table->integer('min');
             $table->integer('max');
             $table->integer('chain');
+            $table->string('asset');
             $table->timestamps();
         });
     }

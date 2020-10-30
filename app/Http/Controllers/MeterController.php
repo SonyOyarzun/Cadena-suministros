@@ -46,7 +46,7 @@ class MeterController extends Controller
                     array_push($array, [$content->chain, (float)number_format($content->value, 2), $content->min, $content->max]);
                 };
             } else {
-                array_push($array, [0, (float)number_format(0, 2), 0, 10]);;
+                array_push($array, [0, (float)number_format(0, 2), 0, 10]);
             }
         } catch (\Throwable $th) {
 
@@ -77,12 +77,15 @@ class MeterController extends Controller
                 return ['message' => 'Registro sin minimo', 'type' => 'error'];
             } elseif (!isset($request->chain)) {
                 return ['message' => 'cadena sin valor', 'type' => 'error'];
+            } elseif (!isset($request->asset)) {
+                return ['message' => 'asset sin valor', 'type' => 'error'];
             } else {
 
                 $meter->value = $request->value;
                 $meter->max = $request->max;
                 $meter->min = $request->min;
                 $meter->chain = $request->chain;
+                $meter->asset = $request->asset;
                 $meter->userId = $user->id;
                 $meter->created_at = now();
                 $meter->updated_at = now();

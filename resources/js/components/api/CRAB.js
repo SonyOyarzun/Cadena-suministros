@@ -90,7 +90,7 @@ export const transfer = (transaction, metadata,keys, config) => {
 }
 
 
-export const append = (transaction, metadata,keys, config) => {
+export const registerMeter = (transaction, metadata,keys, config) => {
 
     const BigchainDB = require('bigchaindb-driver')
     const driver = require('bigchaindb-driver')

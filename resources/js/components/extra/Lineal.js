@@ -6,6 +6,7 @@ import Chart from "react-google-charts";
 import { getAsset, getTransaction } from '../tables/TableFunctions'
 
 import { getMeter } from '../extra/ExtraFunctions';
+import { create, transfer, registerMeter } from '../api/CRAB';
 
 import ws from '../api/WebSocket';
 
@@ -16,32 +17,86 @@ export default class Lineal extends Component {
 
         this.state = {
             ws: null,
-            data: []
+            data: [],
+            transaction : [],
+            asset : this.props.data.asset
         };
         this.listen = this.listen.bind(this)
-
     }
 
-    channel = 'meter.'+this.props.id
+    channel = 'meter.' + this.props.data.id
 
     listen() {
         //console.log('canal :',this.channel)
         Echo.private(this.channel)
-        .listen('MeterEvent', (response) => {
-          //  console.log('echo :',response.data[0] )
-            this.setState({ data: response.data[0] })
-        });
-            
+            .listen('MeterEvent', (response) => {
+                //  console.log('echo :',response.data[0] )
+                this.setState({ data: response.data[0] })
+            });
+
     }
+
+
+    /*
+    keysTransfer = {
+        receivePublickey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
+        sendPrivateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
+    }
+    keysTransfer2 = {
+        receivePublickey: 'BXYYLSVnDGpxkLngaWTS2ioMSrZxRNmATLj82hs9z86d',
+        sendPrivateKey: 'HMtmAxvo6Z7eVHuXjtQQ4m94QZscDo3uVScpwsZPBWb8',
+    }
+*/
+    keys = []
+
+    keysTransfer = {
+        receivePublickey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
+        sendPrivateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
+    }
+    keysTransfer1 = {
+        receivePublickey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
+        sendPrivateKey: 'HMtmAxvo6Z7eVHuXjtQQ4m94QZscDo3uVScpwsZPBWb8',
+    }
+    keysTransfer2 = {
+        receivePublickey: 'BXYYLSVnDGpxkLngaWTS2ioMSrZxRNmATLj82hs9z86d',
+        sendPrivateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
+    }
+
+    count=0
+
+    
 
 
     componentDidMount() {
 
         getMeter().then(response => {
             this.setState({ data: response })
-          })
+        })
 
-          this.listen()
+        this.listen()
+
+        if (this.count == 0) {
+            console.log('keysTransfer[0]')
+            this.keys = this.keysTransfer
+        }
+        else if (this.count % 2 == 0) {
+            console.log('keysTransfer[1]')
+            this.keys = this.keysTransfer1
+        } else {
+            console.log('keysTransfer[2]')
+            this.keys = this.keysTransfer2
+        }
+
+
+        registerMeter(this.state.transaction, this.state, this.keys, this.props.data.config).then(response => {
+            console.log('start transfer response ', response)
+            this.setState({ transaction: response })
+            //   console.log('state transaction ', this.state.transaction)
+
+        })
+
+        this.count = this.count + 1
+
 
     };
 
