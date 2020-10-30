@@ -16,7 +16,7 @@ class Temperature extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            id : props.match.params.id,
+            id : props.match.params.id, //parametro desde url, routes
             value: null,
             min: null,
             max: null,
@@ -36,12 +36,12 @@ class Temperature extends Component {
                 this.setState({
                     config: responseArr[0],
                 })
-   
+                console.log('Temperature mount:',responseArr)
                     this.setState({
-                        value: responseArr[1][responseArr[1].length - 1][1],
-                        min: responseArr[1][responseArr[1].length - 1][2],
-                        max: responseArr[1][responseArr[1].length - 1][3],
-                        chain: responseArr[1][responseArr[1].length - 1][4]
+                        value:  responseArr[1][responseArr[1].length - 1][1],
+                        min:    responseArr[1][responseArr[1].length - 1][2],
+                        max:    responseArr[1][responseArr[1].length - 1][3],
+                        chain:  responseArr[1][responseArr[1].length - 1][0]
                     })  
 
             })
@@ -50,7 +50,7 @@ class Temperature extends Component {
 
     render() {
 
-        console.log(this.state)
+    //    console.log('Temperature :',this.state)
 
         const styles = {
             size: {

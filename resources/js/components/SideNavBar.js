@@ -31,7 +31,7 @@ class SideNavBar extends Component {
     return (
 
       <div>
-        <SideNav 
+        <SideNav
           onSelect={(selected) => {
             // Add your code here
           }}
@@ -39,81 +39,80 @@ class SideNavBar extends Component {
           <SideNav.Toggle />
           <SideNav.Nav>
 
-{console.log('role',this.props.value)}
 
-{this.props.value=='A' &&
+            {this.props.value == 'A' &&
 
-            <NavItem eventKey="administracion">
+              <NavItem eventKey="administracion">
 
-              <NavIcon>
-                <MDBIcon icon="tools" style={{ fontSize: '1.75em' }} />
-              </NavIcon>
-              <NavText>
-                Administración
+                <NavIcon>
+                  <MDBIcon icon="tools" style={{ fontSize: '1.75em' }} />
+                </NavIcon>
+                <NavText>
+                  Administración
               </NavText>
-              <NavItem eventKey="administracion/usuarios">
-                <NavText>
-                  <Link  to='/User'>Usuarios</Link>
-                </NavText>
+                <NavItem eventKey="administracion/usuarios">
+                  <NavText>
+                    <Link to='/User'>Usuarios</Link>
+                  </NavText>
+                </NavItem>
+
+                <NavItem eventKey="administracion/configuracion">
+                  <NavText>
+                    <Link to='/ApiConfig'>Configuración</Link>
+                  </NavText>
+                </NavItem>
+
               </NavItem>
 
-              <NavItem eventKey="administracion/configuracion">
+            }
+
+            {(this.props.value == 'A' || this.props.value == 'U') &&
+
+              <NavItem eventKey="distribucion">
+                <NavIcon>
+                  <MDBIcon icon="truck-moving" style={{ fontSize: '1.75em' }} />
+                </NavIcon>
                 <NavText>
-                  <Link  to='/ApiConfig'>Configuración</Link>
-                </NavText>
-              </NavItem>
-
-            </NavItem>
-
-  }
-
-{(this.props.value=='A' || this.props.value=='U') &&
-
-            <NavItem eventKey="distribucion">
-              <NavIcon>
-                <MDBIcon icon="truck-moving" style={{ fontSize: '1.75em' }} />
-              </NavIcon>
-              <NavText>
-                Distribución
+                  Distribución
               </NavText>
-              <NavItem eventKey="distribucion/usuarios">
-                <NavText>
-                  <Link  to='/MyProduct'>Mis Productos</Link>
-                </NavText>
-              </NavItem>
+                <NavItem eventKey="distribucion/usuarios">
+                  <NavText>
+                    <Link to='/MyProduct'>Mis Productos</Link>
+                  </NavText>
+                </NavItem>
 
-              <NavItem eventKey="distribucion/reenviar">
-                <NavText>
-                  <Link  to='/MyReception'>Reenviar Productos</Link>
-                </NavText>
-              </NavItem>
+                <NavItem eventKey="distribucion/reenviar">
+                  <NavText>
+                    <Link to='/MyReception'>Reenviar Productos</Link>
+                  </NavText>
+                </NavItem>
 
-              <NavItem eventKey="distribucion/pedidos">
-                <NavText>
-                  <Link  to='/Order'>Pedidos</Link>
-                </NavText>
-              </NavItem>
+                <NavItem eventKey="distribucion/pedidos">
+                  <NavText>
+                    <Link to='/Order'>Pedidos</Link>
+                  </NavText>
+                </NavItem>
 
-              <NavItem eventKey="distribucion/recibir">
-                <NavText>
-                  <Link  to='/Receive'>Recibir Producto</Link>
-                </NavText>
-              </NavItem>
+                <NavItem eventKey="distribucion/recibir">
+                  <NavText>
+                    <Link to='/Receive'>Recibir Producto</Link>
+                  </NavText>
+                </NavItem>
 
-              <NavItem eventKey="distribucion/temperatura">
-                <NavText>
-                  <Link  to={'/Temperature/'+this.props.user.id}>Temperatura</Link>
-                </NavText>
-              </NavItem>
+                <NavItem eventKey="distribucion/temperatura">
+                  <NavText>
+                    <Link to={'/Temperature/' + this.props.user.id}>Temperatura</Link>
+                  </NavText>
+                </NavItem>
 
-              <NavItem eventKey="distribucion/notificacion">
-                <NavText>
-                  <Link  to='/Notification'>Notificaciones</Link>
-                </NavText>
-              </NavItem>
+                <NavItem eventKey="distribucion/notificacion">
+                  <NavText>
+                    <Link to='/Notification'>Notificaciones</Link>
+                  </NavText>
+                </NavItem>
 
-            </NavItem>
-  }
+              </NavItem>
+            }
 
             <NavItem eventKey="buscar">
               <NavIcon>
@@ -125,19 +124,19 @@ class SideNavBar extends Component {
 
               <NavItem eventKey="buscar/transaccion">
                 <NavText>
-                  <Link  to='/Search'>Buscar TX</Link>
+                  <Link to='/Search'>Buscar TX</Link>
                 </NavText>
               </NavItem>
 
               <NavItem eventKey="buscar/traza">
                 <NavText>
-                  <Link  to='/Trace'>Traza</Link>
+                  <Link to='/Trace'>Traza</Link>
                 </NavText>
               </NavItem>
 
 
             </NavItem>
-                  
+
 
           </SideNav.Nav>
         </SideNav>

@@ -27,12 +27,12 @@ class MeterController extends Controller
 
             $id = Auth::id();
             $array = array();
-            $meter = Meter::select()->limit(10)->orderBy('chain', 'desc')->where('userId', '=', $id)->get();
+            $meter = Meter::select()->orderBy('id', 'asc')->where('userId', '=', $id)->get();
 
             array_push($array, ['T', 'C°', 'Min', 'Max']);
 
-            if ($meter->count() > 0) {
-               
+            if (count($meter) > 0) {
+
                 foreach ($meter as $content) {
 
                     /*
@@ -43,14 +43,14 @@ class MeterController extends Controller
                         
                     );
     */
-                    array_push($array, ["$content->chain", (float)number_format($content->value, 2), $content->min, $content->max]);
+                    array_push($array, [$content->chain, (float)number_format($content->value, 2), $content->min, $content->max]);
                 };
             } else {
-                array_push($array, [0, (float)number_format(0, 2), 0, 10]);
+                array_push($array, [0, (float)number_format(0, 2), 0, 10]);;
             }
         } catch (\Throwable $th) {
 
-            return false;
+            return  ['message' => $th->getMessage(), 'type' => 'error'];
         }
         return $array;
     }
@@ -66,28 +66,38 @@ class MeterController extends Controller
         try {
 
             $user = Auth::user();
-            
+
             $meter = new Meter;
-            $meter->value = $request->value;
-            $meter->max = $request->max;
-            $meter->min = $request->min;
-            $meter->chain = $request->chain;
-            $meter->userId = $user->id;
-            $meter->created_at = now();
-            $meter->updated_at = now();
-            $meter->save();
 
-            
-            $index = [$this->index()];
+            if (!isset($request->value)) {
+                return ['message' => 'Registro sin valor', 'type' => 'error'];
+            } elseif (!isset($request->max)) {
+                return ['message' => 'Registro sin maximo', 'type' => 'error'];
+            } elseif (!isset($request->min)) {
+                return ['message' => 'Registro sin minimo', 'type' => 'error'];
+            } elseif (!isset($request->chain)) {
+                return ['message' => 'cadena sin valor', 'type' => 'error'];
+            } else {
 
-            broadcast(new MeterEvent($index, $user));
+                $meter->value = $request->value;
+                $meter->max = $request->max;
+                $meter->min = $request->min;
+                $meter->chain = $request->chain;
+                $meter->userId = $user->id;
+                $meter->created_at = now();
+                $meter->updated_at = now();
+                $meter->save();
 
+                $index = [$this->index()];
+
+                broadcast(new MeterEvent($index, $user));
+
+                return  ['message' => 'Temperatura guardada', 'type' => 'success'];
+            }
         } catch (\Throwable $th) {
 
             return $th->getMessage();
         }
-
-        return "Temperatura guardada";
     }
 
     /**

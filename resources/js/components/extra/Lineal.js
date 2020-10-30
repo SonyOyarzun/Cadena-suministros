@@ -25,10 +25,10 @@ export default class Lineal extends Component {
     channel = 'meter.'+this.props.id
 
     listen() {
-  console.log('canal :',this.channel)
+        //console.log('canal :',this.channel)
         Echo.private(this.channel)
         .listen('MeterEvent', (response) => {
-            console.log('echo :',response.data[0] )
+          //  console.log('echo :',response.data[0] )
             this.setState({ data: response.data[0] })
         });
             
@@ -49,8 +49,6 @@ export default class Lineal extends Component {
 
     render() {
 
-
-        console.log(' lineal data :',this.state.data)
         return (
             <>
                 <Chart

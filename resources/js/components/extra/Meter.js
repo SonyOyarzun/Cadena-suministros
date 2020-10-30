@@ -26,7 +26,7 @@ class Meter extends Component {
             max: this.props.data.max,
             min: this.props.data.min,
             date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
-            chain: 0,
+            chain: this.props.data.chain,
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
