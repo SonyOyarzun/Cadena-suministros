@@ -8,7 +8,7 @@ import LiquidFillGauge from 'react-liquid-gauge';
 
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
-import { newMeter } from '../extra/ExtraFunctions';
+import { newMeter, resetMeter } from '../extra/ExtraFunctions';
 
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
@@ -25,11 +25,12 @@ class Meter extends Component {
             min: this.props.data.min,
             date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
             chain: this.props.data.chain,
-            asset : this.props.data.asset
+            asset: this.props.data.asset
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     startColor = '#03afff'; // cornflowerblue
@@ -46,7 +47,13 @@ class Meter extends Component {
         this.setState({ value: this.state.value - Math.random() })
     }
 
- 
+    reset() {
+        console.log('RESET')
+        resetMeter().then(response => {
+            console.log('meter reset :', response)
+        })
+    }
+
 
     timer = setInterval(() => {
 
@@ -63,7 +70,7 @@ class Meter extends Component {
         })
 
         this.setState({ chain: this.state.chain + 1 })
-        
+
     }, 5000)
 
 
@@ -72,7 +79,9 @@ class Meter extends Component {
         this.timer
     }
 
-
+    componentWillUnmount() {
+    clearInterval(this.timer)
+    }
 
     onChange(event) {
         this.setState({ [event.target.name]: event.target.value });
@@ -80,7 +89,7 @@ class Meter extends Component {
 
 
     render() {
-        console.log('state Meter',this.state)
+        console.log('state Meter', this.state)
         const radius = this.props.radius;
         const interpolate = interpolateRgb(this.startColor, this.endColor);
         const fillColor = interpolate((this.state.value / this.state.max));
@@ -121,7 +130,7 @@ class Meter extends Component {
                     </Form.Group>
 
                     <Form.Group controlId="form.min">
-                        <Button className='btn btn-block' onClick={() => (this.setState({ value: 0 }))}>Reset</Button>
+                        <Button className='btn btn-block' onClick={this.reset}>Reset</Button>
                     </Form.Group>
 
                 </Form>

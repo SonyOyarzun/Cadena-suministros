@@ -101,4 +101,5 @@ Route::post('/uploadBackground', 'UploadController@uploadFileBackground');
 //rutas meter
 Route::get('/meter/list', 'MeterController@index');
 Route::post('/meter/new', 'MeterController@create');
+Route::delete('/meter/reset', 'MeterController@destroy');
 

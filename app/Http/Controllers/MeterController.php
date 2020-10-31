@@ -154,8 +154,9 @@ class MeterController extends Controller
      * @param  \App\Meter  $meter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Meter $meter)
+    public function destroy()
     {
-        //
+        $userId = Auth::id();
+        $meter =Meter::where('Userid',$userId)->delete();
     }
 }

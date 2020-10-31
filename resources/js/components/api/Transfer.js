@@ -9,6 +9,7 @@ import { Button, Modal, Card, Form } from 'react-bootstrap';
 import { receiveChain, getConfig, getTransaction, getAsset } from "../tables/TableFunctions";
 import { getUser } from "../../access/UserFunctions";
 import { transfer } from "../api/CRAB";
+import { getMeter } from "../extra/ExtraFunctions";
 
 import SnackBar from '../extra/SnackBar'
 import { render } from 'react-dom';
@@ -24,17 +25,14 @@ function Transfer(props) {
 
   const [commentary, setCommentary] = useState('');
 
+
   console.log(props)
 
-  const getMeter = () => {
+  const meter = () => {
 
-    console.log('listen')
-
-    Echo.private('meter')
-      .listen('MeterEvent', (response) => {
-        setCommentary('Temperatura: ' + response.data[0][response.data[0].length - 1][1])
-        console.log('echo :', response.data[0][response.data[0].length - 1][1])
-      });
+      getMeter().then(response => {
+        setCommentary('Temperatura: ' + response[response.length - 1][1])
+    })
 
   }
 
@@ -42,12 +40,11 @@ function Transfer(props) {
 
   useEffect(() => {
 
-    getMeter()
+    meter()
 
   });
 
 
-  getMeter()
 
 
   const save = (id_transaction, asset, from) => {
