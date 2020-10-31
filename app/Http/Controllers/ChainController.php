@@ -68,7 +68,7 @@ class ChainController extends Controller
       $chain->asset       = $request->asset;
       $chain->from        = $request->from;
       $chain->to          = $id;
-      $chain->state       = 'Recibido';
+      $chain->state       = $request->state;
       $chain->created_at = now();
       $chain->updated_at = now();
       $chain->save();
@@ -92,7 +92,7 @@ class ChainController extends Controller
       // throw $th;
       return $th->getMessage();
     }
-    return "Transaccion Recibida";
+    return "Transaccion Actualizada";
   }
 
   public function reSend(Request $request)

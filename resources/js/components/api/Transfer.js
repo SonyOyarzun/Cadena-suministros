@@ -53,6 +53,7 @@ function Transfer(props) {
       transaction: id_transaction,
       asset: asset,
       from: from,
+      state: 'Recibido',
     }
 
     receiveChain(data).then((response) => {

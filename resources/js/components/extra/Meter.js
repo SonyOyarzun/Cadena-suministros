@@ -51,6 +51,7 @@ class Meter extends Component {
         console.log('RESET')
         resetMeter().then(response => {
             console.log('meter reset :', response)
+            this.setState({chain : 0 , value : 0 })
         })
     }
 
