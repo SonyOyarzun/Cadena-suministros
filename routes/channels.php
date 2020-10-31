@@ -24,6 +24,10 @@ Broadcast::channel('meter.{userId}', function ($userId) {
     return true;
 });
 
+Broadcast::channel('notification', function ($userId) {
+    return true;
+});
+
 /*
 Broadcast::channel('chat', function () {
     return \Illuminate\Support\Facades\Auth::check();
