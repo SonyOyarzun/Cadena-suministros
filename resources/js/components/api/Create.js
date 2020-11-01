@@ -45,7 +45,7 @@ function Create(props) {
     }
 
     newChain(data).then(response => {
-
+      console.log('new chain :', response )
     })
 
   }

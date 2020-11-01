@@ -24,7 +24,7 @@ Broadcast::channel('meter.{userId}', function ($userId) {
     return true;
 });
 
-Broadcast::channel('notification', function ($userId) {
+Broadcast::channel('notification', function ($user) {
     return true;
 });
 

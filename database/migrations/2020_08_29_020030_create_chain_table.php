@@ -19,7 +19,7 @@ class CreateChainTable extends Migration
             $table->integer('from');
             $table->integer('to');
             $table->string('state');
-            $table->string('comentary');
+            $table->string('commentary');
             $table->timestamps();
         });
     }

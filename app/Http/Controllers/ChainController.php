@@ -14,6 +14,8 @@ use App\Api_config;
 use App\Chain;
 use App\User;
 
+use App\Events\NotificationEvent;
+
 class ChainController extends Controller
 {
   public function index()
@@ -46,11 +48,17 @@ class ChainController extends Controller
     $chain->asset       = $request->asset;
     $chain->from        = $id;
     $chain->to          = $request->to;
+    $chain->commentary  = 'Inicio';
     $chain->state       = 'Enviado';
     $chain->created_at = now();
     $chain->updated_at = now();
     $chain->save();
-    return "Transaccion Creada";
+
+    $index = [$this->index()];
+
+    broadcast(new NotificationEvent($index));
+    return ['message'=>'Transaccion Creada','type'=>'success'];
+
   }
 
   public function receive(Request $request)

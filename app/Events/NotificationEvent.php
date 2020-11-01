@@ -9,19 +9,22 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use PhpParser\Node\Expr\Cast\Array_;
 
-class NotificationEvent
+class NotificationEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $data;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Array $data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -31,6 +34,6 @@ class NotificationEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('notification');
     }
 }

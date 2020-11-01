@@ -88,7 +88,7 @@ function Profile(props) {
         //console.log('canal :',this.channel)
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
-                //  console.log('echo :',response.data[0] )
+                  console.log('echo :',response.data )
                 setNotification(response.data)
             });
 
@@ -135,13 +135,14 @@ function Profile(props) {
                 </IconButton>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
+                {notification.map((data, index) => (
                 <CardContent>
-                    <p >Method:</p>
+                    <p >Pedido {data.state} por {data.toName}</p>
                     <p >
-                        Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-                        minutes.
+                    {data.commentary}
                     </p>
                 </CardContent>
+                ))}
             </Collapse>
 
         </Card>
