@@ -89,9 +89,9 @@ function Profile(props) {
 
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
-                console.log('echo :', response.data[0][response.data[0].length - 1])
-                newNotification.push(response.data[0][response.data[0].length - 1])
-                setNotification(newNotification)
+                console.log('echo :', response.data[0])
+                newNotification.push(response.data[0][0])
+                setNotification(newNotification.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)))
                 newCount = newCount + 1
                 if (newCount > 5) {
                     setCount('5+')

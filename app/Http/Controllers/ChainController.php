@@ -49,9 +49,9 @@ class ChainController extends Controller
       $chain->asset       = $request->asset;
       $chain->from        = $id;
       $chain->to          = $request->to;
-      $chain->commentary  = 'Inicio2';
-      //$chain->state       = 'Enviado';
-      $chain->state       = 'Rechazado';
+      $chain->commentary  = 'Inicio';
+      $chain->state       = 'Enviado';
+     // $chain->state       = 'Rechazado';
       $chain->created_at = now();
       $chain->updated_at = now();
       $chain->save();
