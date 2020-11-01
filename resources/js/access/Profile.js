@@ -1,4 +1,4 @@
-import React, { useEffect , useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -72,6 +72,7 @@ function Profile(props) {
     const [notification, setNotification] = useState([]);
     const [count, setCount] = useState('0');
     let newCount = 0
+    let src = '/storage/images/' + props.config.logotype
 
 
     const handleClick = () => {
@@ -88,16 +89,16 @@ function Profile(props) {
 
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
-                  console.log('echo :',response.data[0][response.data[0].length-1])
-                  newNotification.push(response.data[0][response.data[0].length-1])
-                  setNotification(newNotification)
-                  newCount = newCount + 1
-                  if(newCount>5){
+                console.log('echo :', response.data[0][response.data[0].length - 1])
+                newNotification.push(response.data[0][response.data[0].length - 1])
+                setNotification(newNotification)
+                newCount = newCount + 1
+                if (newCount > 5) {
                     setCount('5+')
-                  }else{
+                } else {
                     setCount(newCount)
-                  }
-                  
+                }
+
             });
 
     }
@@ -105,8 +106,8 @@ function Profile(props) {
 
 
     useEffect(() => {
-        listen()   
-      }, [])
+        listen()
+    }, [])
 
 
     return (
@@ -124,45 +125,57 @@ function Profile(props) {
                     </IconButton>
                 }
             />
-{notification.length>0 ? (
-    <>
-            <CardActions>
-                <CardContent>
-                    <p width='100%'>
-                       Notificaciones Nuevas: {count}
-                    </p>
-                </CardContent>
-                <IconButton
-                    className={clsx(classes.expand, {
-                        [classes.expandOpen]: expanded,
-                    },classes.collapsedButton)}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                >
-                    <ExpandMoreIcon />
-                </IconButton>
-            </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                {notification.map((data, index) => (
-                 <CardHeader
-                 avatar={
-                     <img className={classes.avatar} src={'/storage/images/' + props.config.logotype}></img>
-                 }
- 
-                 title= {data.state}
-                 subheader={data.toName}
-                 action={
-                     <IconButton className={classes.button}>
-                         <PowerSettingsNewTwoToneIcon onClick={handleClick} />
-                     </IconButton>
-                 }
-             />
-                ))}
-            </Collapse>
-            </>
-):( <></> )
-}
+            {notification.length > 0 ? (
+                <>
+                    <CardActions>
+                        <CardContent>
+                            <p width='100%'>
+                                Notificaciones Nuevas: {count}
+                            </p>
+                        </CardContent>
+                        <IconButton
+                            className={clsx(classes.expand, {
+                                [classes.expandOpen]: expanded,
+                            }, classes.collapsedButton)}
+                            onClick={handleExpandClick}
+                            aria-expanded={expanded}
+                            aria-label="show more"
+                        >
+                            <ExpandMoreIcon />
+                        </IconButton>
+                    </CardActions>
+                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                        {notification.map((data, index) => (
+
+                            (() => {
+                                switch (data.state) {
+                                    case 'Recibido':
+                                        src = '/img/acepted.png'
+                                        break
+                                    case 'Rechazado':
+                                        src = '/img/cancel.png'
+                                        break
+                                }
+                            }).call(this),
+
+                            <CardHeader
+                                avatar={
+                                    <img className={classes.avatar} src={src}></img>
+                                }
+
+                                title={data.state+' por '+data.toName}
+                                subheader={data.commentary}
+                                action={
+                                    <IconButton className={classes.button}>
+                                        <PowerSettingsNewTwoToneIcon onClick={handleClick} />
+                                    </IconButton>
+                                }
+                            />
+                        ))}
+                    </Collapse>
+                </>
+            ) : (<></>)
+            }
         </Card>
     );
 }

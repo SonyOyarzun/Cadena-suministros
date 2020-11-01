@@ -41,23 +41,31 @@ class ChainController extends Controller
 
   public function create(Request $request)
   {
-    $id = Auth::id();
+    try {
+      $id = Auth::id();
 
-    $chain = new Chain;
-    $chain->transaction = $request->transaction;
-    $chain->asset       = $request->asset;
-    $chain->from        = $id;
-    $chain->to          = $request->to;
-    $chain->commentary  = 'Inicio';
-    $chain->state       = 'Enviado';
-    $chain->created_at = now();
-    $chain->updated_at = now();
-    $chain->save();
+      $chain = new Chain;
+      $chain->transaction = $request->transaction;
+      $chain->asset       = $request->asset;
+      $chain->from        = $id;
+      $chain->to          = $request->to;
+      $chain->commentary  = 'Inicio2';
+      //$chain->state       = 'Enviado';
+      $chain->state       = 'Rechazado';
+      $chain->created_at = now();
+      $chain->updated_at = now();
+      $chain->save();
 
-    $index = [$this->index()];
+      $index = [$this->index()];
 
-    broadcast(new NotificationEvent($index));
-    return ['message'=>'Transaccion Creada','type'=>'success'];
+      broadcast(new NotificationEvent($index));
+      return ['message'=>'Transaccion Creada','type'=>'success'];
+
+    } catch (\Throwable $th) {
+       return ['message'=>'Error en Transaccion','type'=>'error'];
+    }
+  
+
 
   }
 
@@ -98,9 +106,13 @@ class ChainController extends Controller
       Mail::to($receiver->email)->send(new DemoEmail($objDemo));
     } catch (\Throwable $th) {
       // throw $th;
-      return $th->getMessage();
+      return ['message'=>'Error al Actualizar Transaccion','type'=>'error'];
     }
-    return "Transaccion Actualizada";
+
+    $index = [$this->index()];
+
+    broadcast(new NotificationEvent($index));
+    return ['message'=>'Transaccion Actualizar','type'=>'success'];
   }
 
   public function reSend(Request $request)
@@ -115,9 +127,10 @@ class ChainController extends Controller
           'to'     => $request->to
         ]);
     } catch (\Throwable $th) {
-      return $th->getMessage();
+      return ['message'=>'Error al Reenviar Transaccion','type'=>'error'];
     }
-    return "Transaccion Reenviada";
+
+    return ['message'=>'Transaccion Reenviada','type'=>'success'];
   }
 }
 
