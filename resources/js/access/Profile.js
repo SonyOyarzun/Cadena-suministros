@@ -124,7 +124,8 @@ function Profile(props) {
                     </IconButton>
                 }
             />
-
+{notification.length>0 ? (
+    <>
             <CardActions>
                 <CardContent>
                     <p width='100%'>
@@ -144,15 +145,24 @@ function Profile(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 {notification.map((data, index) => (
-                <CardContent>
-                    <p >Pedido {data.state} por {data.toName}</p>
-                    <p >
-                    {data.commentary}
-                    </p>
-                </CardContent>
+                 <CardHeader
+                 avatar={
+                     <img className={classes.avatar} src={'/storage/images/' + props.config.logotype}></img>
+                 }
+ 
+                 title= {data.state}
+                 subheader={data.toName}
+                 action={
+                     <IconButton className={classes.button}>
+                         <PowerSettingsNewTwoToneIcon onClick={handleClick} />
+                     </IconButton>
+                 }
+             />
                 ))}
             </Collapse>
-
+            </>
+):( <></> )
+}
         </Card>
     );
 }
