@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         position: "fixed",
         right: 30,
         top: 10,
-        zIndex:999
+        zIndex: 999
     },
     media: {
         height: 0,
@@ -54,12 +54,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
- function RecipeReviewCard(props) {
+function RecipeReviewCard(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleClick = () => {
         location.href = "/logout";
+    };
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
     };
 
     return (
@@ -73,13 +77,37 @@ const useStyles = makeStyles((theme) => ({
                 subheader={props.user.email}
                 action={
                     <IconButton className={classes.button}>
-                      <PowerSettingsNewTwoToneIcon onClick={handleClick} />
+                        <PowerSettingsNewTwoToneIcon onClick={handleClick} />
                     </IconButton>
-                  }
+                }
             />
-             
-        </Card>
 
+
+            <CardActions >
+            <label style={paddingLeft:50}> Notificaciones Pendientes:</label>
+                <IconButton height={'50px'}
+                    className={clsx(classes.expand, {
+                        [classes.expandOpen]: expanded,
+                    })}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                >
+                    <ExpandMoreIcon />
+                </IconButton>
+            </CardActions>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                    <Typography paragraph>Method:</Typography>
+                    <Typography paragraph>
+                        Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
+                        minutes.
+                     </Typography>
+
+                </CardContent>
+            </Collapse>
+
+        </Card>
     );
 }
 

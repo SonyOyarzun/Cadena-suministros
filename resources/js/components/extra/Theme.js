@@ -700,6 +700,12 @@ color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text}!important; 
 }
 
+
+.MuiPaper-root{
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important; 
+}
+
 /*PROFILE FIN*/
 
 
