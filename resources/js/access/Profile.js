@@ -70,6 +70,9 @@ function Profile(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
     const [notification, setNotification] = useState([]);
+    const [count, setCount] = useState('0');
+    let newCount = 0
+
 
     const handleClick = () => {
         location.href = "/logout";
@@ -79,17 +82,22 @@ function Profile(props) {
         setExpanded(!expanded);
     };
 
+    const newNotification = []
+
     const listen = () => {
 
-        getChain().then(response => {
-            setNotification(response)
-        })
-
-        //console.log('canal :',this.channel)
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
-                  console.log('echo :',response.data )
-                setNotification(response.data[0])
+                  console.log('echo :',response.data[0][response.data[0].length-1])
+                  newNotification.push(response.data[0][response.data[0].length-1])
+                  setNotification(newNotification)
+                  newCount = newCount + 1
+                  if(newCount>5){
+                    setCount('5+')
+                  }else{
+                    setCount(newCount)
+                  }
+                  
             });
 
     }
@@ -120,7 +128,7 @@ function Profile(props) {
             <CardActions>
                 <CardContent>
                     <p width='100%'>
-                       Notificaciones Nuevas:
+                       Notificaciones Nuevas: {count}
                     </p>
                 </CardContent>
                 <IconButton
