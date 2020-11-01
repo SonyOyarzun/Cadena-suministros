@@ -89,7 +89,7 @@ function Profile(props) {
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
                   console.log('echo :',response.data )
-                setNotification(response.data)
+                setNotification(response.data[0])
             });
 
     }
