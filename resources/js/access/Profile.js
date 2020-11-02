@@ -89,7 +89,7 @@ function Profile(props) {
         location.href = "/Trace/" + asset;
     };
 
-    const viewNotificationClick = (asset) => {
+    const viewNotificationClick = () => {
         viewNotification().then(response => {
            console.log(response)
         })
@@ -97,22 +97,24 @@ function Profile(props) {
 
     const getNotification = () => {
         getChain().then(response => {
+            console.log('get notification:',response)
             sortNotification(response)
         })
     };
 
-    const sortNotification = (data) => {
-
-        newNotification.push(data)
-
+    const sortNotification = (response) => {
+        console.log('sort :',response)
+        newNotification.push(response)
+        newNotification = newNotification[0]
+        console.log('sort 1:',newNotification)
         newNotification.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-
+        console.log('sort 2:',newNotification)
         newNotification = newNotification.filter(e => e.to == props.user.id || e.from == props.user.id)
-
+        console.log('sort 3:',newNotification)
         setNotification(newNotification)
 
         
-        if(data.to == props.user.id || data.from == props.user.id){
+        if(response.to == props.user.id || response.from == props.user.id || response.viewTo == 0 ){
             newCount = newCount + 1
         }
 
@@ -121,6 +123,8 @@ function Profile(props) {
         } else {
             setCount(newCount)
         }
+
+        console.log('sort 4:',newNotification)
 
     };
 
@@ -131,9 +135,9 @@ function Profile(props) {
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
 
-                console.log('echo :', response.data[0][0])
+                console.log('echo :', response.data[0])
 
-                sortNotification(response.data[0][0])
+                sortNotification(response.data[0])
 
             });
 
@@ -146,7 +150,7 @@ function Profile(props) {
         getNotification()
 
         listen()
-        
+
     }, [])
 
 
@@ -160,12 +164,12 @@ function Profile(props) {
                 title={props.user.name}
                 subheader={props.user.email}
                 action={
-                    <IconButton className={classes.button}>
+                    <IconButton className={classes.button} >
                         <PowerSettingsNewTwoToneIcon onClick={handleClick} />
                     </IconButton>
                 }
             />
-            {notification.length > 0 ? (
+            {newCount > 0 ? (
                 <>
                     <CardActions>
                         <CardContent>
@@ -177,7 +181,7 @@ function Profile(props) {
                             className={clsx(classes.expand, {
                                 [classes.expandOpen]: expanded,
                             }, classes.collapsedButton)}
-                            onClick={handleExpandClick}
+                            onClick={handleExpandClick,viewNotificationClick}
                             aria-expanded={expanded}
                             aria-label="show more"
                         >
@@ -204,7 +208,7 @@ function Profile(props) {
                                 }
                             }).call(this),
 
-                            <CardHeader
+                            <CardHeader id={index}
                                 avatar={
                                     <img className={classes.avatar} src={src}></img>
                                 }
