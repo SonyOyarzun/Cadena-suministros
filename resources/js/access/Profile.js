@@ -96,7 +96,7 @@ function Profile(props) {
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
 
-                console.log('echo :', response.data[0])
+                console.log('echo :', response.data[0][0])
 
                 newNotification.push(response.data[0][0])
 
@@ -106,8 +106,11 @@ function Profile(props) {
 
                 setNotification(newNotification)
 
-                newCount = newCount + 1
                 
+                if(response.data[0][0].to == props.user.id || response.data[0][0].from == props.user.id){
+                    newCount = newCount + 1
+                }
+
                 if (newCount > 5) {
                     setCount('5+')
                 } else {

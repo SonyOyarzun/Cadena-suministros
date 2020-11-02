@@ -20,6 +20,8 @@ class CreateChainTable extends Migration
             $table->integer('to');
             $table->string('state');
             $table->string('commentary');
+            $table->boolean('viewTo');
+            $table->boolean('viewFrom');
             $table->timestamps();
         });
     }
