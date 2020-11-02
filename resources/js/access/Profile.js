@@ -24,7 +24,7 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import zIndex from '@material-ui/core/styles/zIndex';
 
-import { getChain } from '../components/tables/TableFunctions';
+import { getChain , viewNotification } from '../components/tables/TableFunctions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -85,8 +85,43 @@ function Profile(props) {
         setExpanded(!expanded);
     };
 
-    const handleNotifiClick = (asset) => {
+    const handleNotificationClick = (asset) => {
         location.href = "/Trace/" + asset;
+    };
+
+    const viewNotificationClick = (asset) => {
+        viewNotification().then(response => {
+           console.log(response)
+        })
+    };
+
+    const getNotification = () => {
+        getChain().then(response => {
+            sortNotification(response)
+        })
+    };
+
+    const sortNotification = (data) => {
+
+        newNotification.push(data)
+
+        newNotification.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+
+        newNotification = newNotification.filter(e => e.to == props.user.id || e.from == props.user.id)
+
+        setNotification(newNotification)
+
+        
+        if(data.to == props.user.id || data.from == props.user.id){
+            newCount = newCount + 1
+        }
+
+        if (newCount > 5) {
+            setCount('5+')
+        } else {
+            setCount(newCount)
+        }
+
     };
 
     let newNotification = []
@@ -98,24 +133,7 @@ function Profile(props) {
 
                 console.log('echo :', response.data[0][0])
 
-                newNotification.push(response.data[0][0])
-
-                newNotification.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-
-                newNotification = newNotification.filter(e => e.to == props.user.id || e.from == props.user.id)
-
-                setNotification(newNotification)
-
-                
-                if(response.data[0][0].to == props.user.id || response.data[0][0].from == props.user.id){
-                    newCount = newCount + 1
-                }
-
-                if (newCount > 5) {
-                    setCount('5+')
-                } else {
-                    setCount(newCount)
-                }
+                sortNotification(response.data[0][0])
 
             });
 
@@ -124,7 +142,11 @@ function Profile(props) {
 
 
     useEffect(() => {
+
+        getNotification()
+
         listen()
+        
     }, [])
 
 
@@ -190,7 +212,7 @@ function Profile(props) {
                                 title={title}
                                 subheader={data.commentary}
                                 action={
-                                    <IconButton className={classes.button} onClick={() => handleNotifiClick(data.asset)}>
+                                    <IconButton className={classes.button} onClick={() => handleNotificationClick(data.asset)}>
                                         <FindInPageIcon />
                                     </IconButton>
                                 }

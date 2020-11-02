@@ -88,7 +88,7 @@ Route::get('/chain/list', 'ChainController@index');
 Route::post('/chain/new', 'ChainController@create');
 Route::post('/chain/receive', 'ChainController@receive');
 Route::post('/chain/reSend', 'ChainController@reSend');
-Route::post('/chain/viewNotifi', 'ChainController@viewNotification');
+Route::post('/chain/viewNotification', 'ChainController@viewNotification');
 
 //rutas de bigchain
 Route::post('/assets', 'BigController@asset');
