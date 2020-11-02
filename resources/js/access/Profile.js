@@ -70,8 +70,8 @@ const useStyles = makeStyles((theme) => ({
 function Profile(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
-    const [notification, setNotification] = useState([0]);
-    const [count, setCount] = useState('0');
+    const [notification, setNotification] = useState([]);
+    const [count, setCount] = useState(0);
 
     let newNotification = []
 
@@ -85,6 +85,7 @@ function Profile(props) {
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
+        console.log('expand')
     };
 
     const handleNotificationClick = (asset) => {
@@ -92,23 +93,24 @@ function Profile(props) {
     };
 
     const viewNotificationClick = () => {
-        viewNotification().then(response => {
-            console.log(response)
-        })
+        //     viewNotification().then(response => {
+        //         console.log(response)
+        //     })
     };
 
     const getNotification = () => {
         getChain().then(response => {
             console.log('get notification:', response)
-            newNotification = response.filter(e => e.to == props.user.id || e.from == props.user.id || e.viewTo == 0)
-            setNotification(newNotification)
 
-            console.log('filter:', newNotification)
+            newNotification.push(response)
+            //   newNotification = response.filter(e => e.to == props.user.id || e.from == props.user.id || e.viewTo == 0)
+            sortNotification(newNotification)
+
+            // console.log('filter:', newNotification)
         })
     };
 
     const sortNotification = (response) => {
-        console.log('sort 1:', response)
         /*
                 console.log('sort 1:', newNotification)
                 newNotification.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
@@ -116,25 +118,9 @@ function Profile(props) {
                 newNotification = newNotification.filter(e => e.to == props.user.id || e.from == props.user.id)
                 console.log('sort 3:', newNotification)
                 */
-       
 
-
-        newCount = response.length
-
-        if (newCount > 0) {
-
-            if (newCount > 5) {
-                setCount('5+')
-            } else {
-                setCount(newCount)
-            }
-
-            setNotification(response)
-
-        } 
-
-        console.log('sort 4:', response)
-
+        setCount(response[0].length)
+        setNotification(response[0])
     };
 
 
@@ -145,10 +131,12 @@ function Profile(props) {
             .listen('NotificationEvent', (response) => {
 
                 console.log('echo :', response.data[0][0])
+                console.log('echo 2 :', newNotification)
 
-                newNotification.push(response.data[0][0])
+                newNotification[0].push(response.data[0][0])
 
                 sortNotification(newNotification)
+              //  setCount(count + 1)
 
             });
 
@@ -160,15 +148,22 @@ function Profile(props) {
 
         getNotification()
 
+    }, [])
+
+    useEffect(() => {
+
         listen()
 
-       
-        console.log('newCount :', newCount)
+    }, [])
 
-    }, [newCount])
+
+    console.log('noti:', newNotification)
+
+
 
 
     return (
+
         <Card className={classes.root}>
             <CardHeader
                 avatar={
@@ -183,7 +178,7 @@ function Profile(props) {
                     </IconButton>
                 }
             />
-            {newCount > 0 ? (
+            {count >= 0 ? (
                 <>
                     <CardActions>
                         <CardContent>
@@ -195,7 +190,7 @@ function Profile(props) {
                             className={clsx(classes.expand, {
                                 [classes.expandOpen]: expanded,
                             }, classes.collapsedButton)}
-                            onClick={handleExpandClick, viewNotificationClick}
+                            onClick={handleExpandClick}
                             aria-expanded={expanded}
                             aria-label="show more"
                         >
