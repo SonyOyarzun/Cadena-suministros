@@ -100,24 +100,18 @@ function Profile(props) {
 
     const getNotification = () => {
         getChain().then(response => {
-            console.log('get notification:', response)
 
             newNotification.push(response)
-            //   newNotification = response.filter(e => e.to == props.user.id || e.from == props.user.id || e.viewTo == 0)
             sortNotification(newNotification)
 
-            // console.log('filter:', newNotification)
         })
     };
 
     const sortNotification = (response) => {
-        /*
-                console.log('sort 1:', newNotification)
-                newNotification.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-                console.log('sort 2:', newNotification)
-                newNotification = newNotification.filter(e => e.to == props.user.id || e.from == props.user.id)
-                console.log('sort 3:', newNotification)
-                */
+
+        response.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+    
+        response[0] = response[0].filter(e => e.to == props.user.id || e.from == props.user.id)
 
         setCount(response[0].length)
         setNotification(response[0])
