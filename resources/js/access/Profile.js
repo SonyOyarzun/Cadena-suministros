@@ -16,6 +16,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PowerSettingsNewTwoToneIcon from '@material-ui/icons/PowerSettingsNewTwoTone';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
 
 import { Button, Navbar, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
 import { MDBIcon, MDBBtn } from "mdbreact";
@@ -71,9 +72,10 @@ function Profile(props) {
     const [expanded, setExpanded] = useState(false);
     const [notification, setNotification] = useState([]);
     const [count, setCount] = useState('0');
+
     let newCount = 0
     let src = '/storage/images/' + props.config.logotype
-
+    let title = ''
 
     const handleClick = () => {
         location.href = "/logout";
@@ -83,16 +85,29 @@ function Profile(props) {
         setExpanded(!expanded);
     };
 
-    const newNotification = []
+    const handleNotifiClick = (asset) => {
+        location.href = "/Trace/" + asset;
+    };
+
+    let newNotification = []
 
     const listen = () => {
 
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
+
                 console.log('echo :', response.data[0])
+
                 newNotification.push(response.data[0][0])
-                setNotification(newNotification.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)))
+
+                newNotification.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+
+                newNotification = newNotification.filter(e => e.to == props.user.id || e.from == props.user.id)
+
+                setNotification(newNotification)
+
                 newCount = newCount + 1
+                
                 if (newCount > 5) {
                     setCount('5+')
                 } else {
@@ -151,9 +166,15 @@ function Profile(props) {
                                 switch (data.state) {
                                     case 'Recibido':
                                         src = '/img/acepted.png'
+                                        title = 'Producto Recibido por ' + data.toName
+                                        break
+                                    case 'Enviado':
+                                        src = '/img/send.png'
+                                        title = 'Producto Enviado por ' + data.fromName
                                         break
                                     case 'Rechazado':
                                         src = '/img/cancel.png'
+                                        title = 'Producto Rechazado por ' + data.toName
                                         break
                                 }
                             }).call(this),
@@ -163,11 +184,11 @@ function Profile(props) {
                                     <img className={classes.avatar} src={src}></img>
                                 }
 
-                                title={data.state+' por '+data.toName}
+                                title={title}
                                 subheader={data.commentary}
                                 action={
-                                    <IconButton className={classes.button}>
-                                        <PowerSettingsNewTwoToneIcon onClick={handleClick} />
+                                    <IconButton className={classes.button} onClick={() => handleNotifiClick(data.asset)}>
+                                        <FindInPageIcon />
                                     </IconButton>
                                 }
                             />
