@@ -130,13 +130,9 @@ function Profile(props) {
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
 
-                console.log('echo :', response.data[0][0])
-                console.log('echo 2 :', newNotification)
-
                 newNotification[0].push(response.data[0][0])
 
                 sortNotification(newNotification)
-              //  setCount(count + 1)
 
             });
 
@@ -148,17 +144,9 @@ function Profile(props) {
 
         getNotification()
 
-    }, [])
-
-    useEffect(() => {
-
         listen()
 
     }, [])
-
-
-    console.log('noti:', newNotification)
-
 
 
 
