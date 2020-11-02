@@ -31,7 +31,7 @@ class ChainController extends Controller
         'toName' =>
         User::select('name')
           ->whereColumn('chain.to', 'users.id'),
-      ])->where('to', '=', $id)->orWhere('from', '=', $id)->orderBy('updated_at','DESC')->orderBy('state','DESC')->get();
+      ])->where('to', '=', $id)->orWhere('from', '=', $id)->orderBy('updated_at', 'DESC')->orderBy('state', 'DESC')->get();
     } catch (\Throwable $th) {
 
       return $th;
@@ -51,7 +51,9 @@ class ChainController extends Controller
       $chain->to          = $request->to;
       $chain->commentary  = 'Inicio';
       $chain->state       = 'Enviado';
-     // $chain->state       = 'Rechazado';
+      // $chain->state       = 'Rechazado';
+      $chain->viewFrom   = false;
+      $chain->viewTo     = false;
       $chain->created_at = now();
       $chain->updated_at = now();
       $chain->save();
@@ -59,14 +61,10 @@ class ChainController extends Controller
       $index = [$this->index()];
 
       broadcast(new NotificationEvent($index));
-      return ['message'=>'Transaccion Creada','type'=>'success'];
-
+      return ['message' => 'Transaccion Creada', 'type' => 'success'];
     } catch (\Throwable $th) {
-       return ['message'=>'Error en Transaccion','type'=>'error'];
+      return ['message' => 'Error en Transaccion', 'type' => 'error'];
     }
-  
-
-
   }
 
   public function receive(Request $request)
@@ -106,13 +104,13 @@ class ChainController extends Controller
       Mail::to($receiver->email)->send(new DemoEmail($objDemo));
     } catch (\Throwable $th) {
       // throw $th;
-      return ['message'=>'Error al Actualizar Transaccion','type'=>'error'];
+      return ['message' => 'Error al Actualizar Transaccion', 'type' => 'error'];
     }
 
     $index = [$this->index()];
 
     broadcast(new NotificationEvent($index));
-    return ['message'=>'Transaccion Actualizar','type'=>'success'];
+    return ['message' => 'Transaccion Actualizar', 'type' => 'success'];
   }
 
   public function reSend(Request $request)
@@ -127,12 +125,33 @@ class ChainController extends Controller
           'to'     => $request->to
         ]);
     } catch (\Throwable $th) {
-      return ['message'=>'Error al Reenviar Transaccion','type'=>'error'];
+      return ['message' => 'Error al Reenviar Transaccion', 'type' => 'error'];
     }
 
-    return ['message'=>'Transaccion Reenviada','type'=>'success'];
+    return ['message' => 'Transaccion Reenviada', 'type' => 'success'];
+  }
+
+
+
+  public function viewNotification()
+  {
+
+    try {
+      $id = Auth::id();
+
+      Chain::query()
+        ->where('to', '=', $id)
+        ->update([
+          'viewTo'  => true,
+        ]);
+    } catch (\Throwable $th) {
+      return ['message' => 'Error al Ver Notificacion', 'type' => 'error'];
+    }
+
+    return ['message' => 'Notificaciones Vistas', 'type' => 'success'];
   }
 }
+
 
 
 
