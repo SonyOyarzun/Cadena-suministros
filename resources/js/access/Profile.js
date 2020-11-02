@@ -24,7 +24,7 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import zIndex from '@material-ui/core/styles/zIndex';
 
-import { getChain , viewNotification } from '../components/tables/TableFunctions';
+import { getChain, viewNotification } from '../components/tables/TableFunctions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -70,8 +70,10 @@ const useStyles = makeStyles((theme) => ({
 function Profile(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
-    const [notification, setNotification] = useState([]);
+    const [notification, setNotification] = useState([0]);
     const [count, setCount] = useState('0');
+
+    let newNotification = []
 
     let newCount = 0
     let src = '/storage/images/' + props.config.logotype
@@ -91,53 +93,62 @@ function Profile(props) {
 
     const viewNotificationClick = () => {
         viewNotification().then(response => {
-           console.log(response)
+            console.log(response)
         })
     };
 
     const getNotification = () => {
         getChain().then(response => {
-            console.log('get notification:',response)
-            sortNotification(response)
+            console.log('get notification:', response)
+            newNotification = response.filter(e => e.to == props.user.id || e.from == props.user.id || e.viewTo == 0)
+            setNotification(newNotification)
+
+            console.log('filter:', newNotification)
         })
     };
 
     const sortNotification = (response) => {
-        console.log('sort :',response)
-        newNotification.push(response)
-        newNotification = newNotification[0]
-        console.log('sort 1:',newNotification)
-        newNotification.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-        console.log('sort 2:',newNotification)
-        newNotification = newNotification.filter(e => e.to == props.user.id || e.from == props.user.id)
-        console.log('sort 3:',newNotification)
-        setNotification(newNotification)
+        console.log('sort 1:', response)
+        /*
+                console.log('sort 1:', newNotification)
+                newNotification.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+                console.log('sort 2:', newNotification)
+                newNotification = newNotification.filter(e => e.to == props.user.id || e.from == props.user.id)
+                console.log('sort 3:', newNotification)
+                */
+       
 
-        
-        if(response.to == props.user.id || response.from == props.user.id || response.viewTo == 0 ){
-            newCount = newCount + 1
-        }
 
-        if (newCount > 5) {
-            setCount('5+')
-        } else {
-            setCount(newCount)
-        }
+        newCount = response.length
 
-        console.log('sort 4:',newNotification)
+        if (newCount > 0) {
+
+            if (newCount > 5) {
+                setCount('5+')
+            } else {
+                setCount(newCount)
+            }
+
+            setNotification(response)
+
+        } 
+
+        console.log('sort 4:', response)
 
     };
 
-    let newNotification = []
+
 
     const listen = () => {
 
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
 
-                console.log('echo :', response.data[0])
+                console.log('echo :', response.data[0][0])
 
-                sortNotification(response.data[0])
+                newNotification.push(response.data[0][0])
+
+                sortNotification(newNotification)
 
             });
 
@@ -151,7 +162,10 @@ function Profile(props) {
 
         listen()
 
-    }, [])
+       
+        console.log('newCount :', newCount)
+
+    }, [newCount])
 
 
     return (
@@ -181,7 +195,7 @@ function Profile(props) {
                             className={clsx(classes.expand, {
                                 [classes.expandOpen]: expanded,
                             }, classes.collapsedButton)}
-                            onClick={handleExpandClick,viewNotificationClick}
+                            onClick={handleExpandClick, viewNotificationClick}
                             aria-expanded={expanded}
                             aria-label="show more"
                         >
