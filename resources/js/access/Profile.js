@@ -111,7 +111,7 @@ function Profile(props) {
 
         response.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
     
-        response[0] = response[0].filter(e => (e.to == props.user.id &&  e.view == 0) )
+        response[0] = response[0].filter(e => (e.to == props.user.id &&  e.view == 0) || (e.from == props.user.id &&  e.view == 3) )
 
         setCount(response[0].length)
         setNotification(response[0])

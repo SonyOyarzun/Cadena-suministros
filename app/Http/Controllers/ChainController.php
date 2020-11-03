@@ -52,7 +52,7 @@ class ChainController extends Controller
       $chain->commentary  = '';
       $chain->state       = 'Enviado';
       // $chain->state       = 'Rechazado';
-      $chain->view        = false;
+      $chain->view        = 0;
       $chain->created_at = now();
       $chain->updated_at = now();
       $chain->save();
@@ -82,6 +82,7 @@ class ChainController extends Controller
       $chain->from        = $request->from;
       $chain->to          = $id;
       $chain->state       = $request->state;
+      $chain->view        = 3;
       $chain->created_at = now();
       $chain->updated_at = now();
       $chain->save();
@@ -141,7 +142,7 @@ class ChainController extends Controller
       Chain::query()
         ->where('to', '=', $id)
         ->update([
-          'view'  => true,
+          'view'  => 1,
         ]);
 
     } catch (\Throwable $th) {
