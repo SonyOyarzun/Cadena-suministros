@@ -53,13 +53,16 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 50,
     },
     collapsedTitle: {
-
+        height: 40,
+        alignItems: 'center',
+        paddingTop: 20,
     },
     collapsedButton: {
         position: "absolute",
         right: 20,
         width: 20,
-        height: 20,
+        height: 10,
+        top: 90
     },
     button: {
         marginTop: 10,
@@ -160,9 +163,9 @@ function Profile(props) {
                     </IconButton>
                 }
             />
-            {count >= 0 ? (
+            {count > 0 ? (
                 <>
-                    <CardActions>
+                    <CardActions className={classes.collapsedTitle}>
                         <CardContent>
                             <p width='100%'>
                                 Notificaciones Nuevas: {count}
