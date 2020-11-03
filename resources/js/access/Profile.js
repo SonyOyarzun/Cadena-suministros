@@ -85,7 +85,7 @@ function Profile(props) {
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
-        console.log('expand')
+        viewNotificationClick()
     };
 
     const handleNotificationClick = (asset) => {
@@ -93,9 +93,9 @@ function Profile(props) {
     };
 
     const viewNotificationClick = () => {
-        //     viewNotification().then(response => {
-        //         console.log(response)
-        //     })
+             viewNotification().then(response => {
+                 console.log(response)
+             })
     };
 
     const getNotification = () => {
@@ -111,7 +111,7 @@ function Profile(props) {
 
         response.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
     
-        response[0] = response[0].filter(e => e.to == props.user.id || e.from == props.user.id)
+        response[0] = response[0].filter(e => (e.to == props.user.id &&  e.view == 0) )
 
         setCount(response[0].length)
         setNotification(response[0])

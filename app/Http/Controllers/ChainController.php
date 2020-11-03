@@ -49,11 +49,10 @@ class ChainController extends Controller
       $chain->asset       = $request->asset;
       $chain->from        = $id;
       $chain->to          = $request->to;
-      $chain->commentary  = 'Inicio';
+      $chain->commentary  = '';
       $chain->state       = 'Enviado';
       // $chain->state       = 'Rechazado';
-      $chain->viewFrom   = false;
-      $chain->viewTo     = false;
+      $chain->view        = false;
       $chain->created_at = now();
       $chain->updated_at = now();
       $chain->save();
@@ -142,8 +141,9 @@ class ChainController extends Controller
       Chain::query()
         ->where('to', '=', $id)
         ->update([
-          'viewTo'  => true,
+          'view'  => true,
         ]);
+
     } catch (\Throwable $th) {
       return ['message' => 'Error al Ver Notificacion', 'type' => 'error'];
     }
