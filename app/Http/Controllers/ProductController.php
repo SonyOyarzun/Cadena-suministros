@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 
 class ProductController extends Controller
 {
@@ -24,18 +25,31 @@ class ProductController extends Controller
      */
     public function create(Request $request)
     {
-        if (!isset($request->name)) {
-            return ['message'=>'Debe ingresar nombre','type'=>'error'];
-          } else {
+
+       // return $request[0];
+        try {
+            if (!isset($request)) {
+                return ['message'=>'Debe ingresar producto','type'=>'error'];
+              } else {
+          
+                $product = new Product;
+                $product->JSON  = json_encode($request[0]);
+                $product->created_at = now();
+                $product->updated_at = now();
+                $product->save();
+
+                return ['message'=>'Producto ingresado','type'=>'success'];
+              }
+
+        } catch (\Throwable $th) {
+            return ['message'=>$th->getMessage(),'type'=>'ERROR'];
+        }
+       
       
-            $product = new Product;
-            $product->JSON  = $request->JSON;
-            $product->created_at = now();
-            $product->updated_at = now();
-            $product->save();
-      
-            return ['message'=>'Producto ingresado','type'=>'success'];
+            
     }
+
+    
 
     /**
      * Store a newly created resource in storage.

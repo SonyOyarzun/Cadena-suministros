@@ -2,7 +2,7 @@ import React, { Component, Fragment, useState, useEffect, useCallback } from 're
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
 
-import { getConfig, newChain } from "../tables/TableFunctions";
+import { getConfig, newChain , productReply} from "../tables/TableFunctions";
 import { getProfile } from "../../access/UserFunctions";
 import { create } from "../api/CRAB";
 import { keys } from 'lodash';
@@ -87,6 +87,9 @@ function Create(props) {
         setPrevent(false);
       })
      
+      productReply(transaction).then(response => {
+        console.log('product Reply :', response )
+      })
 
     } else {
       alert('Debe ingresar productos y destinatario')

@@ -90,6 +90,9 @@ Route::post('/chain/receive', 'ChainController@receive');
 Route::post('/chain/reSend', 'ChainController@reSend');
 Route::post('/chain/viewNotification', 'ChainController@viewNotification');
 
+//copia de producto
+Route::post('/product/new', 'ProductController@create');
+
 //rutas de bigchain
 Route::post('/assets', 'BigController@asset');
 Route::post('/transaction', 'BigController@transaction');

@@ -86,6 +86,20 @@ export const viewNotification = () => {
         })
 }
 
+export const productReply = (product) => {
+    return axios
+        .post('/product/new', product, {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+            return []
+        })
+}
+
 export const getTransaction = (transaction) => {
     return axios
         .post('/transaction', transaction, {
