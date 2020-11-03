@@ -25,13 +25,26 @@ function Transfer(props) {
 
   const [commentary, setCommentary] = useState('');
 
+  let icon = 'check-square'
+
+    switch (props.state) {
+      case 'Recibido':
+        icon = 'check-circle'
+        break;
+      case 'Rechazado':
+        icon = 'ban'
+        break;
+      default:
+        break;
+    }
+
 
   console.log(props)
 
   const meter = () => {
 
-      getMeter().then(response => {
-        setCommentary('Temperatura: ' + response[response.length - 1][1])
+    getMeter().then(response => {
+      setCommentary('Temperatura: ' + response[response.length - 1][1])
     })
 
   }
@@ -53,7 +66,7 @@ function Transfer(props) {
       transaction: id_transaction,
       asset: asset,
       from: from,
-      state: 'Recibido',
+      state: props.state,
     }
 
     receiveChain(data).then((response) => {
@@ -124,7 +137,6 @@ function Transfer(props) {
     console.log('transaction asset :', transaction)
     //llaves de quien envia
 
-
     let asset = null
 
     console.log('transaction operation :', transaction.operation)
@@ -156,6 +168,7 @@ function Transfer(props) {
       from: userSend.name,
       to: userReceive.name,
       commentary: document.getElementById('commentary').value,
+      state: props.state,
       date: new Date().toString()
     }
 
@@ -168,8 +181,9 @@ function Transfer(props) {
   return (
     <div>
       <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={handleShow}>
-        <MDBIcon icon="paper-plane" />
+        <MDBIcon icon={icon} />
       </MDBBtn>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Agregar comentario</Modal.Title>
@@ -179,11 +193,11 @@ function Transfer(props) {
           <Form>
             <Form.Group controlId="commentary">
               <Form.Label>Comentario</Form.Label>
-              {props.switch  ? (
+              {props.switch ? (
                 <Form.Control type="text" rows="3" maxLength="30" defaultValue={commentary} value={commentary} />
-              ):(
-                <Form.Control type="text" rows="3" maxLength="30" defaultValue=''/>
-              )
+              ) : (
+                  <Form.Control type="text" rows="3" maxLength="30" defaultValue='' />
+                )
               }
 
             </Form.Group>

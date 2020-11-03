@@ -5,7 +5,7 @@ import axios from 'axios'
 import Transfer from '../api/Transfer'
 
 //import datable
-import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon } from 'mdbreact';
+import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon , MDBBtnGroup } from 'mdbreact';
 
 import Load from '../extra/Load'
 
@@ -102,8 +102,12 @@ class TableReceive extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <Transfer sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData} switch={this.state.switch} />,
-
+          action:  
+          <MDBBtnGroup className="mr-2">
+          <Transfer state={'Recibido'} sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData} switch={this.state.switch} />
+          <Transfer state={'Rechazado'} sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData} switch={this.state.switch} />
+          </MDBBtnGroup>
+          
         }
 
       ))

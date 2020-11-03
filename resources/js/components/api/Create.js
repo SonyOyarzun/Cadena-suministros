@@ -78,6 +78,7 @@ function Create(props) {
         from: user.name,
         to: userSend.name,
         commentary: 'Inicio',
+        state: 'enviado',
         date: new Date().toString()
       }
 
