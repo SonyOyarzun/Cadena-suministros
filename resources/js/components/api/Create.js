@@ -13,6 +13,8 @@ import { render } from 'react-dom';
 
 function Create(props) {
 
+  const [prevent, setPrevent] = useState(false);
+
   console.log('props ', props)
 
   const process = () => {
@@ -61,7 +63,7 @@ function Create(props) {
   };
 
   const createTransaction = (user, config) => {
-
+    setPrevent(true)
     render(<Load/>, document.getElementById('message'));
 
     const keys = {
@@ -90,20 +92,21 @@ function Create(props) {
         console.log('product Reply :', response )
 
         props.updateData()
-
+        setPrevent(false)
       })
 
 
     } else {
       alert('Debe ingresar productos y destinatario')
       render(<></>, document.getElementById('message'));
+      setPrevent(false)
     }
 
   }
 
   return (
     <div>
-      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={process} >
+      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={process} disabled={prevent}>
         <MDBIcon icon="paper-plane" />
       </MDBBtn>
     </div>
