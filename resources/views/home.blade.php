@@ -71,6 +71,7 @@
     <body class="back">
         <div id="root"></div>
         <div id="message"></div>
+        <div id="load"></div>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
