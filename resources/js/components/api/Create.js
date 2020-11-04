@@ -7,13 +7,13 @@ import { getProfile } from "../../access/UserFunctions";
 import { create } from "../api/CRAB";
 import { keys } from 'lodash';
 
+import Load from '../extra/Load'
+import { render } from 'react-dom';
+
 
 function Create(props) {
 
   console.log('props ', props)
-
-  const [prevent, setPrevent] = useState(false);
-
 
   const process = () => {
     axios.all([
@@ -62,7 +62,7 @@ function Create(props) {
 
   const createTransaction = (user, config) => {
 
-    setPrevent(true)
+    render(<Load/>, document.getElementById('message'));
 
     const keys = {
       publicKey: user.publicKey,
@@ -84,24 +84,26 @@ function Create(props) {
 
       create(transaction, info, keys, config).then(response => {
         save(response.id, response.id, userSend.id)
-        setPrevent(false);
       })
      
       productReply(transaction).then(response => {
         console.log('product Reply :', response )
+
+        props.updateData()
+
       })
+
 
     } else {
       alert('Debe ingresar productos y destinatario')
-      setPrevent(false);
+      render(<></>, document.getElementById('message'));
     }
-
 
   }
 
   return (
     <div>
-      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={process} disabled={prevent}>
+      <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={process} >
         <MDBIcon icon="paper-plane" />
       </MDBBtn>
     </div>

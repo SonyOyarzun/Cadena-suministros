@@ -107,7 +107,7 @@ export default function TableMyProduct(props) {
       <>
       
         <MDBRow style={styles.border}>
-          <MDBCol size="2"><Create getData={checkbox} getUserSend={userSend} /></MDBCol>
+          <MDBCol size="2"><Create getData={checkbox} getUserSend={userSend} updateData={props.updateData} /></MDBCol>
           <MDBCol size="4">
             <Auto onTagsChange={onTagsChange}/>
           </MDBCol>
