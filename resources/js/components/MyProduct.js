@@ -5,7 +5,7 @@ import {Card} from 'react-bootstrap';
 
 
 import TableMyProduct from './tables/TableMyProduct'
-import { getMyProduct } from './tables/TableFunctions'
+import { getMyProduct , productList} from './tables/TableFunctions'
 
 
 import Load from './extra/Load'
@@ -24,9 +24,19 @@ class MyProduct extends Component {
 
   componentDidMount(){
 
-    getMyProduct(this.props.path).then(response => {
-      this.setState({ products: response, loading: false });
-  })
+    axios.all([
+      getMyProduct(this.props.path),
+      productList(),
+    ])
+      .then(responseArr => {
+
+       console.log('getMyProduct',responseArr[0])
+
+       console.log('productList',responseArr[1])
+
+       this.setState({products : responseArr[0], loading: false })
+
+      })
 
   }
 

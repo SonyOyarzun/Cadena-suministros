@@ -15,7 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        
+            $product = Product::get();
+
+          return $product;
     }
 
     /**
@@ -26,16 +29,14 @@ class ProductController extends Controller
     public function create(Request $request)
     {
 
-       // return $request[0];
         try {
             if (!isset($request)) {
                 return ['message'=>'Debe ingresar producto','type'=>'error'];
               } else {
           
                 $product = new Product;
-                $product->JSON  = json_encode($request[0]);
-                $product->created_at = now();
-                $product->updated_at = now();
+                $product->json  = json_encode($request[0]);
+                $product->timestamps = false; 
                 $product->save();
 
                 return ['message'=>'Producto ingresado','type'=>'success'];

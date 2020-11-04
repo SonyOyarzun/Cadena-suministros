@@ -91,6 +91,7 @@ Route::post('/chain/reSend', 'ChainController@reSend');
 Route::post('/chain/viewNotification', 'ChainController@viewNotification');
 
 //copia de producto
+Route::get('/product/list', 'ProductController@index');
 Route::post('/product/new', 'ProductController@create');
 
 //rutas de bigchain
