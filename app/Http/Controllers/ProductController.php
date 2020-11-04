@@ -39,7 +39,8 @@ class ProductController extends Controller
                 $product->timestamps = false; 
                 $product->save();
 
-                return ['message'=>'Producto ingresado','type'=>'success'];
+                return true;
+              
               }
 
         } catch (\Throwable $th) {
