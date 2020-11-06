@@ -143,7 +143,7 @@ class ChainController extends Controller
       $id = Auth::id();
 
       Chain::query()
-        ->where('to', '=', $id)->orWhere([['from','=',$id],['view','=',3]])
+        ->where([['to', '=', $id],['view','!=',3]])->orWhere([['from','=',$id],['view','=',3]])
         ->update([
           'view'  => 1,
         ]);

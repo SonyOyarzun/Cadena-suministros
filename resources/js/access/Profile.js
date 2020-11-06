@@ -105,6 +105,7 @@ function Profile(props) {
         getChain().then(response => {
 
             newNotification.push(response)
+            console.log('getNotification :',newNotification)
             sortNotification(newNotification)
 
         })
@@ -126,10 +127,10 @@ function Profile(props) {
 
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
-             console.log('echo :')
-                newNotification[0].push(response.data[0][0])
-
-                sortNotification(newNotification)
+             console.log('echo :',response.data[0])
+             newNotification[0].push(response.data[0])
+                console.log('echo 2 :',newNotification[0])
+                sortNotification(newNotification[0])
 
             });
 
