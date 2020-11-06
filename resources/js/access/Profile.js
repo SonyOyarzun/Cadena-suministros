@@ -126,7 +126,7 @@ function Profile(props) {
 
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
-
+             console.log('echo :')
                 newNotification[0].push(response.data[0][0])
 
                 sortNotification(newNotification)

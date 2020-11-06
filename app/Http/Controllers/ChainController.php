@@ -77,11 +77,12 @@ class ChainController extends Controller
         ->update(['state' => 'Transferido']);
 
       $chain = new Chain;
-      $chain->transaction = $request->transaction;
+      $chain->transaction = $request->newTransaction;
       $chain->asset       = $request->asset;
       $chain->from        = $request->from;
       $chain->to          = $id;
       $chain->state       = $request->state;
+      $chain->commentary  = $request->commentary;
       $chain->view        = 3;
       $chain->created_at = now();
       $chain->updated_at = now();
@@ -104,12 +105,14 @@ class ChainController extends Controller
       Mail::to($receiver->email)->send(new DemoEmail($objDemo));
     } catch (\Throwable $th) {
       // throw $th;
-      return ['message' => 'Error al Actualizar Transaccion', 'type' => 'error'];
+      return ['message' => $th->getMessage(), 'type' => 'error'];
+    } finally {
+      $index = [$this->index()];
+
+      broadcast(new NotificationEvent($index));
     }
 
-    $index = [$this->index()];
-
-    broadcast(new NotificationEvent($index));
+   
     return ['message' => 'Transaccion Actualizar', 'type' => 'success'];
   }
 
@@ -140,7 +143,7 @@ class ChainController extends Controller
       $id = Auth::id();
 
       Chain::query()
-        ->where('to', '=', $id)
+        ->where('to', '=', $id)->orWhere([['from','=',$id],['view','=',3]])
         ->update([
           'view'  => 1,
         ]);

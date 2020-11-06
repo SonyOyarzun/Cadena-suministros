@@ -39,7 +39,7 @@ function Transfer(props) {
     }
 
 
-  console.log(props)
+  //console.log(props)
 
   const meter = () => {
 
@@ -60,18 +60,21 @@ function Transfer(props) {
 
 
 
-  const save = (id_transaction, asset, from) => {
+  const save = (id_transaction,newTransaction, asset, from) => {
 
     const data = {
       transaction: id_transaction,
+      newTransaction: newTransaction,
       asset: asset,
       from: from,
+      commentary: document.getElementById('commentary').value,
       state: props.state,
     }
 
     receiveChain(data).then((response) => {
       setPrevent(false);
       setMessage('Realizar Recepción')
+      console.log('receiveChain :',response)
       props.getData()
     }, (error) => {
       console.log(error);
@@ -82,7 +85,7 @@ function Transfer(props) {
 
   const process = () => {
 
-    render(<></>, document.getElementById('message'));
+    render(<></>, document.getElementById('load'));
 
     if (document.getElementById('commentary').value.trim().length > 0) {
 
@@ -174,9 +177,14 @@ function Transfer(props) {
 
     transfer(transaction, info, keys, config).then(response => {
       setPrevent(false);
+      console.log('n',response)
+      save(txCreatedID, response.id ,asset, userSend.id)
     })
 
+
   }
+
+ 
 
   return (
     <div>
