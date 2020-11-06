@@ -51,18 +51,17 @@ class ChainController extends Controller
       $chain->to          = $request->to;
       $chain->commentary  = '';
       $chain->state       = 'Enviado';
-      // $chain->state       = 'Rechazado';
       $chain->view        = 0;
       $chain->created_at = now();
       $chain->updated_at = now();
       $chain->save();
 
-      $index = [$this->index()];
-
-      broadcast(new NotificationEvent($index));
       return ['message' => 'Transaccion Creada', 'type' => 'success'];
     } catch (\Throwable $th) {
       return ['message' => 'Error en Transaccion', 'type' => 'error'];
+    } finally {
+      $index = [$this->index()];
+      broadcast(new NotificationEvent($index));
     }
   }
 
@@ -108,11 +107,8 @@ class ChainController extends Controller
       return ['message' => $th->getMessage(), 'type' => 'error'];
     } finally {
       $index = [$this->index()];
-
       broadcast(new NotificationEvent($index));
     }
-
-   
     return ['message' => 'Transaccion Actualizar', 'type' => 'success'];
   }
 
@@ -125,10 +121,14 @@ class ChainController extends Controller
         ->update([
           'state'  => 'Enviado',
           'from'   => $id,
-          'to'     => $request->to
+          'to'     => $request->to,
+          'view'   => 0
         ]);
     } catch (\Throwable $th) {
       return ['message' => 'Error al Reenviar Transaccion', 'type' => 'error'];
+    } finally {
+      $index = [$this->index()];
+      broadcast(new NotificationEvent($index));
     }
 
     return ['message' => 'Transaccion Reenviada', 'type' => 'success'];
@@ -143,11 +143,10 @@ class ChainController extends Controller
       $id = Auth::id();
 
       Chain::query()
-        ->where([['to', '=', $id],['view','!=',3]])->orWhere([['from','=',$id],['view','=',3]])
+        ->where([['to', '=', $id], ['view', '!=', 3]])->orWhere([['from', '=', $id], ['view', '=', 3]])
         ->update([
           'view'  => 1,
         ]);
-
     } catch (\Throwable $th) {
       return ['message' => 'Error al Ver Notificacion', 'type' => 'error'];
     }
