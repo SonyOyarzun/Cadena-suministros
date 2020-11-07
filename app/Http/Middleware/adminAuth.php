@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 use Closure;
 
@@ -15,6 +16,9 @@ class adminAuth
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $userRole = Auth::id();
+        if( !($userRole == 'A') ){
+            return $next($request);
+        }
     }
 }

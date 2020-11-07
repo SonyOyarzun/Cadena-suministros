@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,21 +40,42 @@ Route::get('/Forgot',function () {
 });
 
 Route::group(['namespace' => 'Admin', 
-            'prefix' => 'admin',
-            'middleware' => 'auth'], function() {
+            'prefix' => '',
+            'middleware' => 'adminAuth'], function() {
  
-                Route::get('/home', function () {
+                Route::get('/User', function () {
+                    return view('home');
+                });
+
+                Route::get('/ApiConfig', function () {
                     return view('home');
                 });
 });
 
 Route::group(['namespace' => 'Admin', 
-            'prefix' => 'user',
-            'middleware' => 'auth'], function() {
+            'prefix' => '',
+            'middleware' => 'userAuth'], function() {
  
-                Route::get('/home', function () {
+                Route::get('/MyProduct', function () {
                     return view('home');
                 });
+
+                Route::get('/MyReception', function () {
+                    return view('home');
+                });
+
+                Route::get('/Order', function () {
+                    return view('home');
+                });
+
+                Route::get('/Receive', function () {
+                    return view('home');
+                });
+
+                Route::get('/Temperature/{id}', function () {
+                    return view('home');
+                });
+       
 });
 
 /*
