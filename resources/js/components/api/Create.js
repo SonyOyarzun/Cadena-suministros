@@ -8,7 +8,10 @@ import { create } from "../api/CRAB";
 import { keys } from 'lodash';
 
 import Load from '../extra/Load'
+
+import SnackBar from '../extra/SnackBar'
 import { render } from 'react-dom';
+
 
 
 function Create(props) {
@@ -37,7 +40,7 @@ function Create(props) {
 
 
   const save = (id_transaction, asset, to) => {
-
+    render(<></>, document.getElementById('message'));
     const data = {
       transaction: id_transaction,
       asset: asset,
@@ -46,6 +49,7 @@ function Create(props) {
 
     newChain(data).then(response => {
       console.log('new chain :', response )
+      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
     })
 
   }
@@ -61,7 +65,7 @@ function Create(props) {
   };
 
   const createTransaction = (user, config) => {
-
+    render(<></>, document.getElementById('message'));
     render(<Load/>, document.getElementById('load'));
 
     const keys = {
@@ -96,7 +100,7 @@ function Create(props) {
 
       
     } else {
-      alert('Debe ingresar productos y destinatario')
+      render(<SnackBar state={true} alert={'Debe ingresar productos y destinatario'} type={'warning'} />, document.getElementById('message'));
       render(<></>, document.getElementById('load'));
     }
 

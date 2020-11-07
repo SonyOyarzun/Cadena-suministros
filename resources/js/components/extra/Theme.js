@@ -145,7 +145,7 @@ html * {
 
 /*TRACE*/
 .MuiTypography-body1 {
-  background-color: ${({ theme }) => theme.body} !important;
+  background-color: ${({ theme }) => theme.body} !important; 
   color: ${({ theme }) => theme.text}!important;
 }
 .MuiTypography-h6 {
@@ -709,6 +709,22 @@ color: ${({ theme }) => theme.body} !important;
 /*PROFILE FIN*/
 
 
+/*SNACKS INICIO*/
+
+.MuiAlert-icon {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important; 
+}
+.MuiAlert-message {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important; 
+}
+.MuiAlert-action {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important; 
+}
+
+/*SNACKS FIN*/
 `;
 
 
