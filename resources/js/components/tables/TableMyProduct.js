@@ -18,7 +18,7 @@ export default function TableMyProduct(props) {
   let data = []
   let array = []
   let count = 0
-  let params = {}
+
 
   console.log('table',props)
 
@@ -32,6 +32,7 @@ export default function TableMyProduct(props) {
 
 
   const toggleCheck = e => {
+    setChecked([])
   // multiseleccion  
   //let checkedArr = checked;
   let checkedArr = [];

@@ -46,8 +46,6 @@ class MyProduct extends Component {
 
         this.setState({ products: array, loading: false })
 
-        render(<></>, document.getElementById('message'));
-
       })
 
   }

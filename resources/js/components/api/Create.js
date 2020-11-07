@@ -62,7 +62,7 @@ function Create(props) {
 
   const createTransaction = (user, config) => {
 
-    render(<Load/>, document.getElementById('message'));
+    render(<Load/>, document.getElementById('load'));
 
     const keys = {
       publicKey: user.publicKey,
@@ -91,12 +91,13 @@ function Create(props) {
           })
         }
         props.updateData()
+        render(<></>, document.getElementById('load'));
       })
 
       
     } else {
       alert('Debe ingresar productos y destinatario')
-      render(<></>, document.getElementById('message'));
+      render(<></>, document.getElementById('load'));
     }
 
   }

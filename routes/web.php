@@ -13,16 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Broadcast::routes();
-Auth::routes();
-
+//Auth::routes();
 
 Route::get('/', function () {
     return view('home');
-});
-
-Route::get('/home', function () {
-    return view('home');
-});
+})->name('/');
 
 //Rutas de Componentes React
 Route::get('/Search',function () {
@@ -43,11 +38,40 @@ Route::get('/Forgot',function () {
     return view('home');
 });
 
+Route::group(['namespace' => 'Admin', 
+            'prefix' => 'admin',
+            'middleware' => 'auth'], function() {
+ 
+                Route::get('/home', function () {
+                    return view('home');
+                });
+});
+
+Route::group(['namespace' => 'Admin', 
+            'prefix' => 'user',
+            'middleware' => 'auth'], function() {
+ 
+                Route::get('/home', function () {
+                    return view('home');
+                });
+});
+
 /*
 Route::view('/{path?}', 'home')
      ->where('path', '.*')
      ->name('home');
 
+     Route::get('/{name}', array(
+     'as' => 'dashboard', 
+     'uses' => 'DashboardController@index')
+    )->where('name', '(dashboard)?');
+
+
+    Route::group(['namespace' => 'Admin', 
+            'prefix' => 'admin',
+            'middleware' => 'auth'], function() {
+    Route::resource('users', 'UserController');
+});
 */
 
 
