@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
+
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 use Closure;
 
-class adminAuth
+class adminAuth extends Middleware
 {
     /**
      * Handle an incoming request.
@@ -13,8 +17,13 @@ class adminAuth
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    protected function redirectTo($request)
     {
-      //  return $next($request);
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+
+        if (!($user->role=='A')) {
+            return route('/');
+        }
     }
 }

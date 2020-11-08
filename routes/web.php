@@ -45,27 +45,6 @@ Route::get('/Forgot',function () {
 
 
 
-Route::get('/MyProduct', function () {
-    return view('home');
-});
-
-Route::get('/MyReception', function () {
-    return view('home');
-});
-
-Route::get('/Order', function () {
-    return view('home');
-});
-
-Route::get('/Receive', function () {
-    return view('home');
-});
-
-Route::get('/Temperature/{id}', function () {
-    return view('home');
-});
-
-/*
 Route::group(['namespace' => 'Admin', 
             'prefix' => '',
             'middleware' => 'adminAuth'], function() {
@@ -79,8 +58,7 @@ Route::group(['namespace' => 'Admin',
                 });
 
 });
-*/
-/*
+
 Route::group(['namespace' => 'Admin', 
             'prefix' => '',
             'middleware' => 'userAuth'], function() {
@@ -107,9 +85,6 @@ Route::group(['namespace' => 'Admin',
        
 
 });
-*/
-
-
 
 
 Route::get('/user/my/', 'UserController@my');

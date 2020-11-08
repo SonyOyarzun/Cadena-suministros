@@ -23,6 +23,11 @@ export default function TableMyProduct(props) {
   console.log('table',props)
 
 
+  const cleanChecked = () => {
+    console.log('CLEAN')
+    setCheckbox([])
+  }
+
 
   const getDataCheckbox = checkedArr => {
     Object.keys(checkedArr).map((key, row) => (
@@ -109,7 +114,9 @@ console.log('cheched kamra',checked)
       <>
       
         <MDBRow style={styles.border}>
-          <MDBCol size="2"><Create getData={checkbox} getUserSend={userSend} updateData={props.updateData}/></MDBCol>
+          <MDBCol size="2">
+            <button onClick={cleanChecked}>limpiar</button>
+            <Create getData={checkbox} getUserSend={userSend} updateData={props.updateData} clean={cleanChecked}/></MDBCol>
           <MDBCol size="4">
             <Auto onTagsChange={onTagsChange}/>
           </MDBCol>

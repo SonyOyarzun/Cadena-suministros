@@ -104,6 +104,7 @@ function Create(props) {
           render(<></>, document.getElementById('load'));
         }
         props.updateData()
+        props.clean()
       })
 
 
