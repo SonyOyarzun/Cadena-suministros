@@ -11,6 +11,8 @@ import { getUser } from "../../access/UserFunctions";
 import { transfer } from "../api/CRAB";
 import { getMeter } from "../extra/ExtraFunctions";
 
+import Load from '../extra/Load'
+
 import SnackBar from '../extra/SnackBar'
 import { render } from 'react-dom';
 
@@ -61,7 +63,7 @@ function Transfer(props) {
 
 
   const save = (id_transaction,newTransaction, asset, from) => {
-
+    render(<></>, document.getElementById('message'));
     const data = {
       transaction: id_transaction,
       newTransaction: newTransaction,
@@ -75,17 +77,15 @@ function Transfer(props) {
       setPrevent(false);
       setMessage('Realizar Recepción')
       console.log('receiveChain :',response)
+      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
       props.getData()
-    }, (error) => {
-      console.log(error);
-
-    });
+    })
   }
 
 
   const process = () => {
-
-    render(<></>, document.getElementById('load'));
+    render(<></>, document.getElementById('message'));
+    render(<Load />, document.getElementById('load'));
 
     if (document.getElementById('commentary').value.trim().length > 0) {
 
@@ -119,7 +119,9 @@ function Transfer(props) {
           console.log('config', responseArr[2])
           console.log('transaction', responseArr[3])
 
-          receiveTransaction(responseArr[0], responseArr[1], responseArr[2], responseArr[3])
+          receiveTransaction(responseArr[0], responseArr[1], responseArr[2], responseArr[3]).then((response) => {
+            render(<></>, document.getElementById('load'));
+          })
 
         })
 
@@ -127,6 +129,7 @@ function Transfer(props) {
           console.log('send', error)
         })
     } else {
+      render(<></>, document.getElementById('load'));
       render(<SnackBar state={true} alert={'Debe ingresar un comentario'} type={'info'} />, document.getElementById('message'));
     }
 

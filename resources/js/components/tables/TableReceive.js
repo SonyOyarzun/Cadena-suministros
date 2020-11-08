@@ -156,6 +156,9 @@ class TableReceive extends Component {
             responsive
             bordered
             hover
+            entriesOptions={[5, 20, 25]} 
+            entries={5} 
+            pagesAmount={4}
             btn
             sortable={false}
             data={data}
