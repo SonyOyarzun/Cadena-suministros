@@ -2,7 +2,7 @@ import React, { Component, Fragment, useState, useEffect, useCallback } from 're
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
 
-import { getConfig, newChain , productReply} from "../tables/TableFunctions";
+import { getConfig, newChain, productReply } from "../tables/TableFunctions";
 import { getProfile } from "../../access/UserFunctions";
 import { create } from "../api/CRAB";
 import { keys } from 'lodash';
@@ -48,7 +48,7 @@ function Create(props) {
     }
 
     newChain(data).then(response => {
-      console.log('new chain :', response )
+      console.log('new chain :', response)
       render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
     })
 
@@ -66,7 +66,7 @@ function Create(props) {
 
   const createTransaction = (user, config) => {
     render(<></>, document.getElementById('message'));
-    render(<Load/>, document.getElementById('load'));
+    render(<Load />, document.getElementById('load'));
 
     const keys = {
       publicKey: user.publicKey,
@@ -87,18 +87,24 @@ function Create(props) {
       }
 
       productReply(transaction).then(response => {
-        console.log('product Reply :', response )
+        console.log('product Reply :', response)
 
-        if(response==true){
-          create(transaction, info, keys, config).then(response => {
-            save(response.id, response.id, userSend.id)
-          })
+        if (response == true) {
+          create(transaction, info, keys, config)
+            .then(response => {
+              save(response.id, response.id, userSend.id)
+            }).catch(response => {
+              render(<></>, document.getElementById('load'));
+            }).then(response => {
+              render(<></>, document.getElementById('load'));
+            })
+        }else{
+          render(<></>, document.getElementById('load'));
         }
         props.updateData()
-        render(<></>, document.getElementById('load'));
       })
 
-      
+
     } else {
       render(<SnackBar state={true} alert={'Debe ingresar productos y destinatario'} type={'warning'} />, document.getElementById('message'));
       render(<></>, document.getElementById('load'));

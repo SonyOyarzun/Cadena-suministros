@@ -22,6 +22,8 @@ export default function TableMyProduct(props) {
 
   console.log('table',props)
 
+  useEffect()
+
   const getDataCheckbox = checkedArr => {
     Object.keys(checkedArr).map((key, row) => (
       array.push(JSON.parse(document.getElementById(checkedArr[key]).value))
@@ -32,7 +34,6 @@ export default function TableMyProduct(props) {
 
 
   const toggleCheck = e => {
-    setChecked([])
   // multiseleccion  
   //let checkedArr = checked;
   let checkedArr = [];
@@ -102,13 +103,13 @@ export default function TableMyProduct(props) {
   }
 
 
-
+console.log('cheched kamra',checked)
 
     return (
       <>
       
         <MDBRow style={styles.border}>
-          <MDBCol size="2"><Create getData={checkbox} getUserSend={userSend} updateData={props.updateData} /></MDBCol>
+          <MDBCol size="2"><Create getData={checkbox} getUserSend={userSend} updateData={props.updateData}/></MDBCol>
           <MDBCol size="4">
             <Auto onTagsChange={onTagsChange}/>
           </MDBCol>
