@@ -111,7 +111,7 @@ class TableMyReception extends Component {
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action: <MDBBtn color="primary" rounded onClick={() => { save(data.transaction, data.prevTransaction, this.state.userSend.id) }}><MDBIcon icon="user-plus" /></MDBBtn>,
+          action: <MDBBtn color="primary" rounded onClick={() => { save(data.transaction, data.prevTransaction, this.state.userSend.id) }}><MDBIcon far icon="share-square" /></MDBBtn>,
 
         }
 
