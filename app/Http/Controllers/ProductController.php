@@ -15,10 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        
-            $product = Product::get();
 
-          return $product;
+        $product = Product::get();
+
+        return $product;
     }
 
     /**
@@ -31,27 +31,22 @@ class ProductController extends Controller
 
         try {
             if (!isset($request)) {
-                return ['message'=>'Debe ingresar producto','type'=>'error'];
-              } else {
-          
+                return ['message' => 'Debe ingresar producto', 'type' => 'error'];
+            } else {
+
                 $product = new Product;
                 $product->json  = json_encode($request[0]);
-                $product->timestamps = false; 
+                $product->timestamps = false;
                 $product->save();
 
                 return true;
-              
-              }
-
+            }
         } catch (\Throwable $th) {
-            return ['message'=>$th->getMessage(),'type'=>'ERROR'];
+            return ['message' => $th->getMessage(), 'type' => 'ERROR'];
         }
-       
-      
-            
     }
 
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -107,5 +102,33 @@ class ProductController extends Controller
     public function destroy(product $product)
     {
         //
+    }
+
+
+    public function exist(Request $request)
+    {
+        try {
+            if (!isset($request)) {
+
+                return false;
+
+            } else {
+
+
+                $product = Product::where('json', '=', json_encode($request[0]));
+
+                if ($product) {
+
+                    return true;
+
+                }
+
+                return false;
+            }
+        } catch (\Throwable $th) {
+
+            return false;
+            
+        }
     }
 }

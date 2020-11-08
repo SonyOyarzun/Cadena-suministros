@@ -52,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
     avatar: {
         maxWidth: 50,
     },
+    collapsedBox: {
+        maxHeight: 500,
+        overflow: 'auto',
+    },
     collapsedTitle: {
         height: 40,
         alignItems: 'center',
@@ -96,9 +100,11 @@ function Profile(props) {
     };
 
     const viewNotificationClick = () => {
+        /*
              viewNotification().then(response => {
                  console.log(response)
              })
+             */
     };
 
     const getNotification = () => {
@@ -180,7 +186,7 @@ function Profile(props) {
                             <ExpandMoreIcon />
                         </IconButton>
                     </CardActions>
-                    <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    <Collapse className={classes.collapsedBox} in={expanded} timeout="auto" unmountOnExit >
                         {notification.map((data, index) => (
 
                             (() => {

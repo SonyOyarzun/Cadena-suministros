@@ -100,6 +100,20 @@ export const productReply = (product) => {
         })
 }
 
+export const productExist = (product) => {
+    return axios
+        .post('/product/exist', product, {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+            return false
+        })
+}
+
 export const productList = () => {
     return axios
         .get('/product/list', {

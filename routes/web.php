@@ -20,9 +20,6 @@ Route::get('/', function () {
     return view('home');
 })->name('/');
 
-Route::get('/login', function () {
-    return view('home');
-})->name('login');
 
 //Rutas de Componentes React
 Route::get('/Search',function () {
@@ -82,8 +79,6 @@ Route::group(['namespace' => 'Admin',
                 Route::get('/Temperature/{id}', function () {
                     return view('home');
                 });
-       
-
 });
 
 
@@ -128,6 +123,7 @@ Route::post('/chain/viewNotification', 'ChainController@viewNotification');
 //copia de producto
 Route::get('/product/list', 'ProductController@index');
 Route::post('/product/new', 'ProductController@create');
+Route::post('/product/exist', 'ProductController@exist');
 
 //rutas de bigchain
 Route::post('/assets', 'BigController@asset');

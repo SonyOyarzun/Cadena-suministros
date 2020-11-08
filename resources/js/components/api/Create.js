@@ -2,7 +2,7 @@ import React, { Component, Fragment, useState, useEffect, useCallback } from 're
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
 
-import { getConfig, newChain, productReply } from "../tables/TableFunctions";
+import { getConfig, newChain, productReply , productExist } from "../tables/TableFunctions";
 import { getProfile } from "../../access/UserFunctions";
 import { create } from "../api/CRAB";
 import { keys } from 'lodash';
@@ -86,8 +86,8 @@ function Create(props) {
         date: new Date().toString()
       }
 
-      productReply(transaction).then(response => {
-        console.log('product Reply :', response)
+      productExist(transaction).then(response => {
+        console.log('product Exist :', response)
 
         if (response == true) {
           
@@ -95,14 +95,17 @@ function Create(props) {
 
             .then(response => {
               save(response.id, response.id, userSend.id)
+              productReply(transaction).then(response => {
+                console.log('product Reply :', response)
+              })
             })
             .catch(response => {
               render(<></>, document.getElementById('load'));
             })
             .then(response => {
-              render(<></>, document.getElementById('load'));
               props.updateData()
               props.clean()
+              render(<></>, document.getElementById('load'));
             })
         
         }else{
