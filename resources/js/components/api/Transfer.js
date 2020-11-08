@@ -25,7 +25,7 @@ function Transfer(props) {
   const [prevent, setPrevent] = useState(false);
   const [message, setMessage] = useState('Realizar Recepción');
 
-  render(<></>, document.getElementById('message'));
+
 
   const [commentary, setCommentary] = useState('');
 
