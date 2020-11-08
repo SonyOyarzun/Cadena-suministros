@@ -12,8 +12,6 @@ import { MDBDataTableV5, MDBBtn, MDBIcon, MDBInput, MDBTable, MDBTableBody, MDBT
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import Load from '../extra/Load'
-
 import { getChain, reSendChain } from "../tables/TableFunctions";
 
 import Load from '../extra/Load'
@@ -62,6 +60,7 @@ class TableMyReception extends Component {
 
     const save = (id_transaction, asset, to) => {
       render(<></>, document.getElementById('message'));
+      render(<Load/>, document.getElementById('load'));
       const data = {
         transaction: id_transaction,
         asset: asset,
@@ -72,9 +71,11 @@ class TableMyReception extends Component {
           console.log(response);
           render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
           this.getData()
+          render(<></>, document.getElementById('load'));
         }, (response) => {
           console.log(response);
           render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+          render(<></>, document.getElementById('load'));
         });
     }
 
