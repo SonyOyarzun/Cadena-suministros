@@ -22,7 +22,7 @@ export default function TableMyProduct(props) {
 
   console.log('table',props)
 
-  useEffect()
+
 
   const getDataCheckbox = checkedArr => {
     Object.keys(checkedArr).map((key, row) => (

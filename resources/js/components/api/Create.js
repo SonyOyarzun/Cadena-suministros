@@ -90,6 +90,7 @@ function Create(props) {
         console.log('product Reply :', response)
 
         if (response == true) {
+          
           create(transaction, info, keys, config)
             .then(response => {
               save(response.id, response.id, userSend.id)
@@ -98,6 +99,7 @@ function Create(props) {
             }).then(response => {
               render(<></>, document.getElementById('load'));
             })
+        
         }else{
           render(<></>, document.getElementById('load'));
         }
@@ -119,6 +121,8 @@ function Create(props) {
       </MDBBtn>
     </div>
   )
+
+ 
 }
 
 

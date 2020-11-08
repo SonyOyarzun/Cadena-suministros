@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('home');
 })->name('/');
 
+Route::get('/login', function () {
+    return view('home');
+})->name('login');
+
 //Rutas de Componentes React
 Route::get('/Search',function () {
     return view('home');
@@ -39,6 +43,29 @@ Route::get('/Forgot',function () {
     return view('home');
 });
 
+
+
+Route::get('/MyProduct', function () {
+    return view('home');
+});
+
+Route::get('/MyReception', function () {
+    return view('home');
+});
+
+Route::get('/Order', function () {
+    return view('home');
+});
+
+Route::get('/Receive', function () {
+    return view('home');
+});
+
+Route::get('/Temperature/{id}', function () {
+    return view('home');
+});
+
+/*
 Route::group(['namespace' => 'Admin', 
             'prefix' => '',
             'middleware' => 'adminAuth'], function() {
@@ -50,8 +77,10 @@ Route::group(['namespace' => 'Admin',
                 Route::get('/ApiConfig', function () {
                     return view('home');
                 });
-});
 
+});
+*/
+/*
 Route::group(['namespace' => 'Admin', 
             'prefix' => '',
             'middleware' => 'userAuth'], function() {
@@ -76,25 +105,10 @@ Route::group(['namespace' => 'Admin',
                     return view('home');
                 });
        
-});
 
-/*
-Route::view('/{path?}', 'home')
-     ->where('path', '.*')
-     ->name('home');
-
-     Route::get('/{name}', array(
-     'as' => 'dashboard', 
-     'uses' => 'DashboardController@index')
-    )->where('name', '(dashboard)?');
-
-
-    Route::group(['namespace' => 'Admin', 
-            'prefix' => 'admin',
-            'middleware' => 'auth'], function() {
-    Route::resource('users', 'UserController');
 });
 */
+
 
 
 

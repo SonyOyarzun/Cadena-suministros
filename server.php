@@ -98,5 +98,8 @@ https://tutorials.bigchaindb.com/crab/create
 
 ICONOS
 https://material-ui.com/components/material-icons/
+
+PROMESAS
+https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Usar_promesas
 */
 
