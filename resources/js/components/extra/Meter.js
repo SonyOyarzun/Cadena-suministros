@@ -9,6 +9,7 @@ import LiquidFillGauge from 'react-liquid-gauge';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
 import { newMeter, resetMeter } from '../extra/ExtraFunctions';
+import { create, transfer, registerMeter } from '../api/CRAB';
 
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
@@ -25,7 +26,9 @@ class Meter extends Component {
             min: this.props.data.min,
             date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
             chain: this.props.data.chain,
-            asset: this.props.data.asset
+            asset: this.props.data.asset,
+            config: this.props.data.config,
+            meterPack: this.props.data.meterPack,
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
@@ -36,6 +39,13 @@ class Meter extends Component {
     startColor = '#03afff'; // cornflowerblue
     endColor = '#ff0000'; // crimson
 
+    BigchainDB = require('bigchaindb-driver')
+    alice = new this.BigchainDB.Ed25519Keypair()
+
+    keysCreate = {
+        publicKey:  this.alice.publicKey,
+        privateKey: this.alice.privateKey,
+    }
 
     tempUp() {
         console.log('UP')
@@ -71,6 +81,16 @@ class Meter extends Component {
         })
 
         this.setState({ chain: this.state.chain + 1 })
+
+        if(this.state.chain % 10 == 0){
+            create(this.state, this.state, this.keysCreate, this.state.config)
+        .then(response => {
+            console.log('start create response ', response)
+            this.setState({ transaction: response, asset: response.id })
+        }).catch(error => {
+            console.log('error ', error)
+        })
+        }
 
     }, 5000)
 

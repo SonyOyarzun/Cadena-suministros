@@ -105,12 +105,6 @@ class SideNavBar extends Component {
                   </NavText>
                 </NavItem>
 
-                <NavItem eventKey="distribucion/notificacion">
-                  <NavText>
-                    <Link to='/Notification'>Notificaciones</Link>
-                  </NavText>
-                </NavItem>
-
               </NavItem>
             }
 
