@@ -30,6 +30,9 @@ class TableMyReception extends Component {
     this.onTagsChange = this.onTagsChange.bind(this);
   }
 
+  options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+  time
+
   getData() {
 
     getChain().then(response => {
@@ -110,8 +113,11 @@ class TableMyReception extends Component {
           from: data.fromName,
           to: data.toName,
           state: data.state,
-          updated_at: data.updated_at,
-          action: <MDBBtn color="primary" rounded onClick={() => { save(data.transaction, data.prevTransaction, this.state.userSend.id) }}><MDBIcon far icon="share-square" /></MDBBtn>,
+          updated_at: this.time = new Date(data.updated_at).toLocaleDateString("es-ES", this.options) ,
+          action: 
+          <MDBBtn color="primary" rounded onClick={() => { save(data.transaction, data.asset, this.state.userSend.id) }}>
+          <MDBIcon far icon="share-square"/>
+          </MDBBtn>,
 
         }
 

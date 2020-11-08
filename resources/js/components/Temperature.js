@@ -23,7 +23,7 @@ class Temperature extends Component {
             chain : null,
             config: [],
             transaction: [],
-            asset: 'Inicial',
+            asset: null,
         }
         this.start = this.start.bind(this);
 
@@ -36,7 +36,8 @@ class Temperature extends Component {
 
     start() {
 
-        create(this.state, this.state, this.keysCreate, this.state.config).then(response => {
+        create(this.state, this.state, this.keysCreate, this.state.config)
+        .then(response => {
             console.log('start create response ', response)
             this.setState({ transaction: response, asset: response.id })
         }).catch(error => {
@@ -82,7 +83,7 @@ class Temperature extends Component {
             },
         }
 
-        if (this.state.value == null) {
+        if (this.state.value == null || this.state.asset == null) {
 
             return (<Load />)
 
