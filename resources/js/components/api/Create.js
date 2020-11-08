@@ -92,19 +92,25 @@ function Create(props) {
         if (response == true) {
           
           create(transaction, info, keys, config)
+
             .then(response => {
               save(response.id, response.id, userSend.id)
-            }).catch(response => {
+            })
+            .catch(response => {
               render(<></>, document.getElementById('load'));
-            }).then(response => {
+            })
+            .then(response => {
               render(<></>, document.getElementById('load'));
+              props.updateData()
+              props.clean()
             })
         
         }else{
           render(<></>, document.getElementById('load'));
+          props.updateData()
         }
-        props.updateData()
-        props.clean()
+        
+     
       })
 
 

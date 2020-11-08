@@ -25,7 +25,8 @@ export default function TableMyProduct(props) {
 
   const cleanChecked = () => {
     console.log('CLEAN')
-    setCheckbox([])
+    setChecked([])
+    getDataCheckbox([])
   }
 
 
@@ -45,7 +46,7 @@ export default function TableMyProduct(props) {
     checkedArr.filter(name => name === e.target.id)[0]
       ? checkedArr = checkedArr.filter(name => name !== e.target.id)
       : checkedArr.push(e.target.id);
-    setChecked(checkedArr)
+   setChecked(checkedArr)
    getDataCheckbox(checkedArr)
   };
 
@@ -108,14 +109,11 @@ export default function TableMyProduct(props) {
   }
 
 
-console.log('cheched kamra',checked)
-
     return (
       <>
       
         <MDBRow style={styles.border}>
           <MDBCol size="2">
-            <button onClick={cleanChecked}>limpiar</button>
             <Create getData={checkbox} getUserSend={userSend} updateData={props.updateData} clean={cleanChecked}/></MDBCol>
           <MDBCol size="4">
             <Auto onTagsChange={onTagsChange}/>
