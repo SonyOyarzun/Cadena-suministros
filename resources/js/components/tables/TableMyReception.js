@@ -16,6 +16,11 @@ import Load from '../extra/Load'
 
 import { getChain, reSendChain } from "../tables/TableFunctions";
 
+import Load from '../extra/Load'
+
+import SnackBar from '../extra/SnackBar'
+import { render } from 'react-dom';
+
 class TableMyReception extends Component {
 
   constructor(props) {
@@ -56,7 +61,7 @@ class TableMyReception extends Component {
   render() {
 
     const save = (id_transaction, asset, to) => {
-
+      render(<></>, document.getElementById('message'));
       const data = {
         transaction: id_transaction,
         asset: asset,
@@ -65,9 +70,11 @@ class TableMyReception extends Component {
 
       reSendChain(data).then((response) => {
           console.log(response);
+          render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
           this.getData()
-        }, (error) => {
-          console.log(error);
+        }, (response) => {
+          console.log(response);
+          render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
         });
     }
 
