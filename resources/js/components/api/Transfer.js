@@ -65,7 +65,7 @@ function Transfer(props) {
 
 
   const save = (id_transaction, newTransaction, asset, from) => {
-    render(<></>, document.getElementById('message'));
+   
     const data = {
       transaction: id_transaction,
       newTransaction: newTransaction,
@@ -76,22 +76,28 @@ function Transfer(props) {
     }
 
     receiveChain(data).then((response) => {
-      setPrevent(false);
-      setMessage('Realizar Recepción')
       console.log('receiveChain :', response)
+    //  render(<></>, document.getElementById('message'));
       render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+
       props.getData()
-    })
-      .catch(response => {
-        render(<SnackBar state={true} alert={response.message} type={'error'} />, document.getElementById('message'));
+      .then(() => {
         setMessage('Realizar Recepción')
-        setPrevent(false);
+        setPrevent(false)
+      }) .then(() => {
+        render(<></>, document.getElementById('load'));
       })
+      
+    })
+    .catch(response => {
+    console.log('error receiveChain',response)
+    })
+    
   }
 
 
   const process = () => {
-    render(<></>, document.getElementById('message'));
+
     if (document.getElementById('commentary').value.trim().length > 0) {
 
       setPrevent(true)
@@ -130,14 +136,14 @@ function Transfer(props) {
         })
 
         .catch(response => {
-          console.log('send', response)
-          render(<SnackBar state={true} alert={response.message} type={'error'} />, document.getElementById('message'));
+          console.log('error get', response)
           setMessage('Realizar Recepción')
           setPrevent(false);
         })
 
     } else {
-      render(<SnackBar state={true} alert={'Debe ingresar un comentario'} type={'info'} />, document.getElementById('message'));
+  //   render(<></>, document.getElementById('message'));
+   //   render(<SnackBar state={true} alert={'Debe ingresar un comentario'} type={'info'} />, document.getElementById('message'));
     }
 
 
@@ -186,11 +192,12 @@ function Transfer(props) {
     }
 
     transfer(transaction, info, keys, config).then(response => {
-      setPrevent(false);
       console.log('transfer:', response)
       save(txCreatedID, response.id, asset, userSend.id)
     }).catch(response => {
-      render(<SnackBar state={true} alert={response.message} type={'error'} />, document.getElementById('message'));
+      console.log(response)
+      
+    }).then(()=>{
       render(<></>, document.getElementById('load'));
       setMessage('Realizar Recepción')
       setPrevent(false);

@@ -91,22 +91,34 @@ function Create(props) {
 
         if (response == true) {
           
-          create(transaction, info, keys, config)
+         let promise = create(transaction, info, keys, config)
 
             .then(response => {
               save(response.id, response.id, userSend.id)
               productReply(transaction).then(response => {
                 console.log('product Reply :', response)
+                props.updateData()
+                props.clean()
               })
             })
             .catch(response => {
-              render(<></>, document.getElementById('load'));
+              console.log('error create :', response)
             })
-            .then(response => {
-              props.updateData()
-              props.clean()
-              render(<></>, document.getElementById('load'));
+            .finally(() => {
+
+              setTimeout(() => {
+                render(<></>, document.getElementById('load'));
+              }, 10000);
+             
             })
+         
+            console.log('promise',promise)
+
+            /*
+            if(promise==true){
+              render(<></>, document.getElementById('load'));
+            }
+            */
         
         }else{
           render(<></>, document.getElementById('load'));
