@@ -40,7 +40,6 @@ function Create(props) {
 
 
   const save = (id_transaction, asset, to) => {
-    render(<></>, document.getElementById('message'));
     const data = {
       transaction: id_transaction,
       asset: asset,
@@ -65,7 +64,6 @@ function Create(props) {
   };
 
   const createTransaction = (user, config) => {
-    render(<></>, document.getElementById('message'));
     render(<Load />, document.getElementById('load'));
 
     const keys = {
@@ -108,17 +106,10 @@ function Create(props) {
 
               setTimeout(() => {
                 render(<></>, document.getElementById('load'));
-              }, 10000);
+              }, 15000);
              
             })
          
-            console.log('promise',promise)
-
-            /*
-            if(promise==true){
-              render(<></>, document.getElementById('load'));
-            }
-            */
         
         }else{
           render(<></>, document.getElementById('load'));

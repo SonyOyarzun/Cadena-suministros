@@ -109,7 +109,7 @@ class ChainController extends Controller
       $index = [$this->index()];
       broadcast(new NotificationEvent($index));
     }
-    return ['message' => 'Transaccion Actualizar', 'type' => 'success'];
+    return ['message' => "Producto $chain->state", 'type' => 'success'];
   }
 
   public function reSend(Request $request)

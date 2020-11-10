@@ -65,7 +65,7 @@ function Transfer(props) {
 
 
   const save = (id_transaction, newTransaction, asset, from) => {
-   
+
     const data = {
       transaction: id_transaction,
       newTransaction: newTransaction,
@@ -75,24 +75,16 @@ function Transfer(props) {
       state: props.state,
     }
 
-    receiveChain(data).then((response) => {
-      console.log('receiveChain :', response)
-    //  render(<></>, document.getElementById('message'));
-      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
-
-      props.getData()
-      .then(() => {
-        setMessage('Realizar Recepción')
-        setPrevent(false)
-      }) .then(() => {
-        render(<></>, document.getElementById('load'));
+    receiveChain(data)
+      .then((response) => {
+        console.log('receiveChain :', response)
+        render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+        props.getData()
       })
-      
-    })
-    .catch(response => {
-    console.log('error receiveChain',response)
-    })
-    
+      .catch(response => {
+        console.log('error receiveChain', response)
+      })
+
   }
 
 
@@ -142,8 +134,7 @@ function Transfer(props) {
         })
 
     } else {
-  //   render(<></>, document.getElementById('message'));
-   //   render(<SnackBar state={true} alert={'Debe ingresar un comentario'} type={'info'} />, document.getElementById('message'));
+      render(<SnackBar state={true} alert={'Debe ingresar un comentario'} type={'info'} />, document.getElementById('message'));
     }
 
 
@@ -196,11 +187,19 @@ function Transfer(props) {
       save(txCreatedID, response.id, asset, userSend.id)
     }).catch(response => {
       console.log(response)
-      
-    }).then(()=>{
-      render(<></>, document.getElementById('load'));
-      setMessage('Realizar Recepción')
-      setPrevent(false);
+
+    }).then(() => {
+
+    }).finally(() => {
+
+      setTimeout(() => {
+        
+        setMessage('Realizar Recepción')
+        setPrevent(false)
+        handleClose()
+        render(<></>, document.getElementById('load'));
+      }, 15000);
+
     })
 
 
