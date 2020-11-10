@@ -168,6 +168,8 @@ function Transfer(props) {
       receivePublickey: userReceive.publicKey,
       sendPrivateKey: userSend.privateKey,
     }
+
+
     //id de transaccion
     const txCreatedID = props.transaction
 
@@ -181,6 +183,8 @@ function Transfer(props) {
       state: props.state,
       date: new Date().toString()
     }
+
+    console.log('KEYS :',keys)
 
     transfer(transaction, info, keys, config).then(response => {
       console.log('transfer:', response)

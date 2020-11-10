@@ -116,6 +116,10 @@ class ChainController extends Controller
   {
     $id = Auth::id();
     try {
+
+      if (!isset($request->to)) {
+        return ['message'=>'Debe ingresar destinatario','type'=>'error'];
+      } elseif (!isset($request->email)) {
       Chain::query()
         ->where('transaction', '=', $request->transaction)
         ->update([
@@ -124,6 +128,7 @@ class ChainController extends Controller
           'to'     => $request->to,
           'view'   => 0
         ]);
+      }
     } catch (\Throwable $th) {
       return ['message' => 'Error al Reenviar Transaccion', 'type' => 'error'];
     } finally {
