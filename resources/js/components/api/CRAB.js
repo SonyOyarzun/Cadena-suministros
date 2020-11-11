@@ -51,7 +51,8 @@ export const transfer = (transaction, metadata,keys, config) => {
         console.log('CREATE :', asset)
         break;
       case 'TRANSFER':
-        asset = transaction.asset.id
+     //   asset = transaction.asset.id
+        asset = transaction.id
         console.log('TRANSFER :', asset)
         break;
 

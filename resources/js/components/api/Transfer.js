@@ -148,7 +148,7 @@ function Transfer(props) {
     //llaves de quien envia
 
     let asset = null
-
+    console.log('transaction :', transaction)
     console.log('transaction operation :', transaction.operation)
     switch (transaction.operation) {
       case 'CREATE':
@@ -169,11 +169,10 @@ function Transfer(props) {
       sendPrivateKey: userSend.privateKey,
     }
 
-
     //id de transaccion
     const txCreatedID = props.transaction
 
-    // console.log('send :', userSend, 'receive :', userReceive,'transaction :',txCreatedID)
+     console.log('send :', userSend, 'receive :', userReceive,'transaction :',txCreatedID)
 
     // metadatos de informacion adicional
     const info = {
@@ -190,7 +189,7 @@ function Transfer(props) {
       console.log('transfer:', response)
       save(txCreatedID, response.id, asset, userSend.id)
     }).catch(response => {
-      console.log(response)
+      console.log('error transfer',response)
 
     }).then(() => {
 
