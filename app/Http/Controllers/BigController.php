@@ -43,15 +43,20 @@ class BigController extends Controller
 	{
 
 		try {
-			$client = new Client();
-			$response = $client->request('GET', 'https://test.ipdb.io/api/v1/assets/?search=' . $request->atribute);
-			$statusCode = $response->getStatusCode();
-			$body = $response->getBody()->getContents();
+
+			if (!isset($request->attribute)) {
+				return ['message'=>'Debe ingresar parametro','type'=>'error'];
+			  }else{
+				$client = new Client();
+				$response = $client->request('GET', 'https://test.ipdb.io/api/v1/assets/?search=' . $request->attribute);
+				$statusCode = $response->getStatusCode();
+				$body = $response->getBody()->getContents();
+			  }
+		
 		} catch (\Exception $e) {
-			//return json_encode($e->getMessage());
 			return ['message'=>'Producto no encontrado','type'=>'error'];
 		}
-		return $body;
+			return $body;	
 	}
 
 

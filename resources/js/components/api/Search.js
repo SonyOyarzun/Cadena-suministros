@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
@@ -54,6 +54,7 @@ export default function Search() {
 
   let array = []
 
+
   const getSteps = (step) => {
 
     Object.keys(step).map((key, row) => (
@@ -72,33 +73,33 @@ export default function Search() {
 
   const process = () => {
 
-    if(document.getElementById('id').value.trim().length>0){
+    render(<Load/>, document.getElementById('load'));
+    render(<></>, document.getElementById('message'));
     setPrevent(true)
     setButtonMessage('Cargando...')
 
+
     const params = {
-      "atribute": document.getElementById('id').value,
+      "attribute": document.getElementById('id').value,
     }
 
     searchAsset(params).then(response => {
       console.log('productos :', response)
-      if (response.length > 0){
-        setProducts(response)
-        getSteps(response) 
+      if (response.type != 'error'){
+        setProducts(response) 
       }else{
-        render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
       }
 
-    }).catch(error => {
-      console.log("Error " + error)
-    })
-
+    }).catch(response => {
+      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+      console.log("Error " + response)
+    }).finally(() => {
       setPrevent(false);
       setButtonMessage('Buscar');
+      render(<></>, document.getElementById('load'));
+    })
 
-  }else{
-    render(<SnackBar state={true} alert={'Debe ingresar un parametro'} type={'Error'} />, document.getElementById('message'));
-  }
 
   }
 
@@ -142,7 +143,7 @@ export default function Search() {
       }
     )),
 
-    console.log('obj :',obj),
+   // console.log('obj :',obj),
 
     Object.keys(obj).map((key, row) => (
 
@@ -151,7 +152,7 @@ export default function Search() {
       
       Object.keys(obj[key][0]).map((key2, col) => (
 
-        console.log('table :',key2),
+     //   console.log('table :',key2),
         
         {...count < Object.keys(obj[key][0]).length &&
           columns.push({
@@ -211,7 +212,7 @@ export default function Search() {
               </Typography>
                 </div>
               )
-              : (<></>)
+              : (<center>{'Sin resultados'}</center>)
             }
             <MDBDataTableV5
               responsive

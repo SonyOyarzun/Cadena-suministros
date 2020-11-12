@@ -1,11 +1,13 @@
 import React, { Component, Fragment, useState, useRef } from 'react';
-import { render } from 'react-dom';
 import ReactDOM from 'react-dom';
 
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
 import { MDBIcon, MDBBtn, MDBAlert } from "mdbreact";
+
+import SnackBar from '../extra/SnackBar'
+import { render } from 'react-dom';
 
 function PassUser(props) {
 
@@ -14,6 +16,7 @@ function PassUser(props) {
   const textRef = useRef(null);
 
   const copyToClipboard = (e) => {
+
     textRef.current.select();
     document.execCommand('copy');
     // This is just personal preference.
@@ -33,15 +36,15 @@ function PassUser(props) {
 
 
         <Modal.Body>
-{copySuccess != '' &&
-        <MDBAlert className='darkLight' >
-        {copySuccess}
-        </MDBAlert>
-}
-          <Form.Group controlId="message">
+          {copySuccess != '' &&
+            render(<SnackBar state={true} alert={copySuccess} type={'success'} />, document.getElementById('message'))
+          }
+          <Form.Group controlId="messages">
             <Form.Label>{props.label}</Form.Label>
             <Form.Control readOnly type="text" rows="3" maxLength="12" defaultValue={props.value} ref={textRef} />
           </Form.Group>
+
+
 
           {
 
