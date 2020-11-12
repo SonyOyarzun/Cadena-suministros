@@ -17,6 +17,11 @@ import { Container } from '@material-ui/core';
 
 import { getTransaction, getAsset, searchAsset } from "../tables/TableFunctions";
 
+import Load from '../extra/Load'
+
+import SnackBar from '../extra/SnackBar'
+import { render } from 'react-dom';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -51,18 +56,17 @@ export default function Search() {
 
   const getSteps = (step) => {
 
-    array = []
-
     Object.keys(step).map((key, row) => (
-      
-      {...step[row]['metadata'].hasOwnProperty('info') &&
-      array.push(step[row]['metadata']['info'])
+
+      console.log('key ',step[row]['data']['data']),
+
+      {...step[row]['data'].hasOwnProperty('data') &&
+      array.push(step[row]['data']['data'])
       }
 
     ))
 
     console.log('get array :', array)
-
 
   }
 
@@ -81,6 +85,8 @@ export default function Search() {
       if (response.length > 0){
         setProducts(response)
         getSteps(response) 
+      }else{
+        render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
       }
 
     }).catch(error => {
@@ -91,7 +97,7 @@ export default function Search() {
       setButtonMessage('Buscar');
 
   }else{
-    alert('Debe ingresar un parametro')
+    render(<SnackBar state={true} alert={'Debe ingresar un parametro'} type={'Error'} />, document.getElementById('message'));
   }
 
   }
@@ -107,10 +113,10 @@ export default function Search() {
   let preRows = []
   let rows = []
   let data = []
-  array = []
+
   let count = 0
 
-  let obj = {}
+  let obj = []
   let objID = []
 
 
@@ -120,11 +126,11 @@ export default function Search() {
     
 
     products.map((data, index) => (
-  
+     
       {
-        ...data.data.hasOwnProperty('transaction') ? (
+        ...data.data.hasOwnProperty('data') ? (
 
-          obj = data.data.transaction,
+          obj[index]= data.data.data,
           objID[index] = data.id
         ) : (
             console.log('no encontrada'),
@@ -134,22 +140,29 @@ export default function Search() {
       }
     )),
 
+    console.log('obj :',obj),
 
     Object.keys(obj).map((key, row) => (
 
       preRows = [objID[row]],
       preRows = { clickEvent: () => handleClick(objID[row]), cursor: 'pointer'},
+      
       Object.keys(obj[key]).map((key2, col) => (
-        {
-          ...count < Object.keys(obj[key]).length &&
+
+        console.log('table :',obj[key][col]),
+        /*
+        {...count < Object.keys(obj[key]).length &&
           columns.push({
             label: key2,
             field: key2,
           }),
         },
+        */
+       
         preRows[key2] = obj[row][key2],
         count = count + 1
       )),
+      
       rows.push(preRows)
 
     )),
@@ -162,7 +175,7 @@ export default function Search() {
   );
 
 
-
+  console.log('arrayf  :', array)
   console.log('data  :', data)
 
   const classes = useStyles();
@@ -176,16 +189,19 @@ export default function Search() {
       <MDBCol md="12" lg="12" xl="12" className="mx-auto mt-3">
         <MDBCard className={classes.root}>
 
-          <MDBCardHeader>
+          <MDBCardHeader>Busqueda de Productos</MDBCardHeader>
+
+          <MDBCardBody>
+          
             <MDBInput id="id" label="Producto" validate error="wrong" success="right" valueDefault="" />
             <div className="text-center pt-3 mb-3">
   <MDBBtn type="button" onClick={process} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{buttonMessage}</MDBBtn>
             </div>
-          </MDBCardHeader>
+          </MDBCardBody>
 
           <MDBCardFooter className={classes.root}>
 
-            {array.length > 0 ?
+            {products.length > 0 ?
               (
                 <div className="text-center">
                   <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">

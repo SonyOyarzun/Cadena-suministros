@@ -37,30 +37,11 @@ export const create = (data, metadata, keys, config) => {
 
 export const transfer = (transaction, metadata,keys, config) => {
 
-   // console.log('keys',keys)
     const BigchainDB = require('bigchaindb-driver')
     const driver = require('bigchaindb-driver')
     const conn = new driver.Connection(config.path)
 
-    let asset = null
-
-    console.log('transaction operation :', transaction.operation)
-    switch (transaction.operation) {
-      case 'CREATE':
-        asset = transaction.id
-        console.log('CREATE :', asset)
-        break;
-      case 'TRANSFER':
-     //   asset = transaction.asset.id
-        asset = transaction.id
-        console.log('TRANSFER :', asset)
-        break;
-
-      default:
-        break;
-    }
-
-    return conn.getTransaction(asset)
+    return conn.getTransaction(transaction.id)
       .then((txCreated) => {
         const createTranfer = BigchainDB.Transaction.
           makeTransferTransaction(
@@ -77,7 +58,6 @@ export const transfer = (transaction, metadata,keys, config) => {
             }
           )
 
-        // Sign with the key of the owner of the painting (Alice)
         const signedTransfer = BigchainDB.Transaction
           .signTransaction(createTranfer, keys.sendPrivateKey)
         console.log('tx', signedTransfer)
@@ -97,25 +77,8 @@ export const registerMeter = (transaction, metadata,keys, config) => {
     const driver = require('bigchaindb-driver')
     const conn = new driver.Connection(config.path)
 
-    let asset = null
-
-    console.log('transaction operation :', transaction.operation)
-    switch (transaction.operation) {
-      case 'CREATE':
-        asset = transaction.id
-        console.log('CREATE :', asset)
-        break;
-      case 'TRANSFER':
-        asset = transaction.id
-       // asset = transaction.asset.id
-        console.log('TRANSFER :', asset)
-        break;
-
-      default:
-        break;
-    }
-
-    return conn.getTransaction(asset)
+ 
+    return conn.getTransaction(transaction.id)
       .then((txCreated) => {
         const createTranfer = BigchainDB.Transaction.
           makeTransferTransaction(

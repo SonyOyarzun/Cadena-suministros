@@ -106,7 +106,7 @@ function Create(props) {
 
               setTimeout(() => {
                 render(<></>, document.getElementById('load'));
-              }, 15000);
+              }, 10000);
              
             })
          

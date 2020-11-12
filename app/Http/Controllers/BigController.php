@@ -20,8 +20,7 @@ class BigController extends Controller
 			$statusCode = $response->getStatusCode();
 			$body = $response->getBody()->getContents();
 		} catch (\Exception $e) {
-			//return json_encode($e->getMessage());
-			return $e->getMessage();
+			return ['message'=>$e->getMessage(),'type'=>'error'];
 		}
 		return $body;
 	}
@@ -35,8 +34,7 @@ class BigController extends Controller
 			$statusCode = $response->getStatusCode();
 			$body = $response->getBody()->getContents();
 		} catch (\Exception $e) {
-			//return json_encode($e->getMessage());
-			return $e->getMessage();
+			return ['message'=>$e->getMessage(),'type'=>'error'];
 		}
 		return $body;
 	}
@@ -51,7 +49,7 @@ class BigController extends Controller
 			$body = $response->getBody()->getContents();
 		} catch (\Exception $e) {
 			//return json_encode($e->getMessage());
-			return $e->getMessage();
+			return ['message'=>'Producto no encontrado','type'=>'error'];
 		}
 		return $body;
 	}
@@ -71,8 +69,8 @@ class BigController extends Controller
 			$statusCode2 = $response2->getStatusCode();
 			$body2 = $response2->getBody()->getContents();
 		} catch (\Exception $e) {
-			//return json_encode($e->getMessage());
-			return $e->getMessage();
+	
+			return ['message'=>$e->getMessage(),'type'=>'error'];
 		}
 		return $body+$body2;
 	}
