@@ -116,7 +116,7 @@ export default function Search() {
 
   let count = 0
 
-  let obj = []
+  let obj = {}
   let objID = []
 
 
@@ -132,6 +132,8 @@ export default function Search() {
 
           obj[index]= data.data.data,
           objID[index] = data.id
+
+
         ) : (
             console.log('no encontrada'),
             columns = [{label: "Busqueda", field: "message"}],
@@ -147,19 +149,19 @@ export default function Search() {
       preRows = [objID[row]],
       preRows = { clickEvent: () => handleClick(objID[row]), cursor: 'pointer'},
       
-      Object.keys(obj[key]).map((key2, col) => (
+      Object.keys(obj[key][0]).map((key2, col) => (
 
-        console.log('table :',obj[key][col]),
-        /*
-        {...count < Object.keys(obj[key]).length &&
+        console.log('table :',key2),
+        
+        {...count < Object.keys(obj[key][0]).length &&
           columns.push({
             label: key2,
             field: key2,
           }),
         },
-        */
+        
        
-        preRows[key2] = obj[row][key2],
+        preRows[key2] = obj[row][0][key2],
         count = count + 1
       )),
       
