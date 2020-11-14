@@ -13,8 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
-import { getTransaction, getAsset, searchAsset , getConfig } from "../tables/TableFunctions";
-import { burn } from "../api/CRAB";
+import { getTransaction, getAsset, searchAsset , getConfig , getUser, getChain } from "../tables/TableFunctions";
+
+import {transfer} from '../api/CRAB'
 
 import Load from '../extra/Load'
 
@@ -42,7 +43,10 @@ export default function Terminate(props) {
   const [show, setShow] = useState(false);
 
   const [message, setMessage] = useState('');
+
+  const [user, setUser] = useState([]);
   const [config, setConfig] = useState([]);
+  const [chain, setChain] = useState([]);
 
   const [prevent, setPrevent] = useState(false);
   const [buttonMessage, setButtonMessage] = useState('Buscar');
@@ -73,20 +77,34 @@ export default function Terminate(props) {
   }
 
   useEffect( () =>{
- 
-  getConfig().then(response => {
 
-    setConfig(response)
-
-  })
+    axios.all([
+      getUser(),
+      getConfig(),
+      getChain()
+    ])
+      .then(responseArr => {
+        setUser(responseArr[0])
+        setConfig(responseArr[1])
+        setChain(responseArr[2])
+    //    console.log('user',responseArr[0],'config ',responseArr[1])
+      })
 
   }, [] );
 
   const terminate = () => {
 
-    burn(products,config).then(response => {
+   products.map((transaction,index)=>{
+
+    console.log(transaction)
+  //  user.filter(e=>e.publickey==transaction.asset.publickey)
+
+   }) 
+/*
+    transfer(transaction,metadata,keys,config).then(response => {
     console.log('terminate',response)
     })
+    */
 
   }
 
@@ -164,28 +182,30 @@ export default function Terminate(props) {
 
    // console.log('obj :',obj),
 
-    Object.keys(obj).map((key, row) => (
+   Object.keys(obj).map((key, row) => (
+
+    preRows = [objID[row]],
+    preRows = { clickEvent: () => handleClick(objID[row]), cursor: 'pointer'},
+    
+    Object.keys(obj[key][0]).map((key2, col) => (
+
+   //   console.log('table :',key2),
       
-      Object.keys(obj[key][0]).map((key2, col) => (
-
-     //   console.log('table :',key2),
-        
-        {...count < Object.keys(obj[key][0]).length &&
-          columns.push({
-            label: key2,
-            field: key2,
-          }),
-        },
-        count = count + 1
-      )),
-      console.log('p ',obj[row][0]),
+      {...count < Object.keys(obj[key][0]).length &&
+        columns.push({
+          label: key2,
+          field: key2,
+        }),
+      },
       
-      preRows = obj[row][0],
-      rows.push(preRows),
-
-      console.log('pre ',rows)
-
+     
+      preRows[key2] = obj[row][0][key2],
+      count = count + 1
     )),
+    
+    rows.push(preRows)
+
+  )),
 
     data = {
       columns,
