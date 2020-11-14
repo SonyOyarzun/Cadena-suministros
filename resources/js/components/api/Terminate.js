@@ -176,13 +176,14 @@ export default function Terminate(props) {
             field: key2,
           }),
         },
-        
-       
-        preRows[key2] = obj[row][0][key2],
         count = count + 1
       )),
+      console.log('p ',obj[row][0]),
       
-      rows.push(preRows)
+      preRows = obj[row][0],
+      rows.push(preRows),
+
+      console.log('pre ',rows)
 
     )),
 

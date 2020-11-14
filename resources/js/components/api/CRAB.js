@@ -110,40 +110,35 @@ export const append = (transaction, metadata,keys, config) => {
 
 export const burn = (transaction, config) => {
 
-
+  console.log('transaction :',transaction,'config :',config)
   const BigchainDB = require('bigchaindb-driver')
-  const driver = require('bigchaindb-driver')
   const conn = new driver.Connection(config.path)
 
   const BURN_ADDRESS = 'BurnBurnBurnBurnBurnBurnBurnBurnBurnBurnBurn'
 
-  transaction.map((data,index)=>{
+  transaction.map(( data , index )=>{
 
-    driver.Transaction.makeTransferTransaction(
+    console.log('data :',data.id)
+    
+    BigchainDB.Transaction.makeTransferTransaction(
 
-      [{ tx: data, output_index: 0 }],
+      /*
+      [{ tx: data.id, output_index: 0 }],
       [driver.Transaction.makeOutput(driver.Transaction.makeEd25519Condition(BURN_ADDRESS))],
       //modified metadata
       {'status':'Burned'}
+      */
   
   ).then(tx => {
+    /*
     tx.map((data,index)=>{
     console.log('burn Transaction :', config.path + config.transaction + data.id)
 
-    })
+    })*/
     return tx
   })
 
   })
-
-driver.Transaction.makeTransferTransaction(
-
-    [{ tx: assetCreateTxSigned, output_index: 0 }],
-    [driver.Transaction.makeOutput(driver.Transaction.makeEd25519Condition(BURN_ADDRESS))],
-    //modified metadata
-    {'status':'Burned'}
-
-);
 
 
 }

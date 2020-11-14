@@ -6,7 +6,7 @@ import Chart from "react-google-charts";
 import { getAsset, getTransaction } from '../tables/TableFunctions'
 
 import { getMeter } from '../extra/ExtraFunctions';
-import { create, transfer, registerMeter } from '../api/CRAB';
+import { create, transfer } from '../api/CRAB';
 
 import ws from '../api/WebSocket';
 
@@ -86,14 +86,6 @@ export default class Lineal extends Component {
             console.log('keysTransfer[2]')
             this.keys = this.keysTransfer2
         }
-
-
-        registerMeter(this.state.transaction, this.state, this.keys, this.props.data.config).then(response => {
-            console.log('start transfer response ', response)
-            this.setState({ transaction: response })
-            //   console.log('state transaction ', this.state.transaction)
-
-        })
 
         this.count = this.count + 1
 
