@@ -54,6 +54,10 @@ Route::group(['namespace' => 'Admin',
                     return view('home');
                 });
 
+                Route::get('/Terminate', function () {
+                    return view('home');
+                });
+
 });
 
 Route::group(['namespace' => 'Admin', 

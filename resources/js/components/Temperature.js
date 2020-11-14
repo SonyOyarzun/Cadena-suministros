@@ -9,7 +9,7 @@ import Load from '../components/extra/Load';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
 import { getMeter } from './extra/ExtraFunctions';
-import { create, transfer, registerMeter } from './api/CRAB';
+import { create, transfer } from './api/CRAB';
 
 class Temperature extends Component {
 

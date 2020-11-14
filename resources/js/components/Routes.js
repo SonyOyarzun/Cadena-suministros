@@ -15,6 +15,7 @@ import Send from './Send'
 import Receive from './Receive';
 import Order from './Order';
 import Temperature from './Temperature';
+import Terminate from './api/Terminate';
 
 
 //access
@@ -39,6 +40,7 @@ class Routes extends Component {
                 <Route path="/MyReception" component={MyReception} />
 
                 <Route path="/ApiConfig" component={ApiConfig} />
+                <Route path="/Terminate" component={Terminate} />
 
                 <Route path="/Send" component={Send} />
                 <Route path="/Receive" component={Receive} />

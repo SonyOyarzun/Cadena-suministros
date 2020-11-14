@@ -71,7 +71,7 @@ export const transfer = (transaction, metadata,keys, config) => {
 }
 
 
-export const registerMeter = (transaction, metadata,keys, config) => {
+export const append = (transaction, metadata,keys, config) => {
 
     const BigchainDB = require('bigchaindb-driver')
     const driver = require('bigchaindb-driver')
@@ -89,7 +89,7 @@ export const registerMeter = (transaction, metadata,keys, config) => {
             }],
             [BigchainDB.Transaction.makeOutput(
               BigchainDB.Transaction.makeEd25519Condition(
-                keys.receivePublickey))],
+                keys.publickey))],
             {
               metadata
             }
@@ -97,7 +97,7 @@ export const registerMeter = (transaction, metadata,keys, config) => {
 
         // Sign with the key of the owner of the painting (Alice)
         const signedTransfer = BigchainDB.Transaction
-          .signTransaction(createTranfer, keys.sendPrivateKey)
+          .signTransaction(createTranfer, keys.privateKey)
         console.log('tx', signedTransfer)
         return conn.postTransactionCommit(signedTransfer)
       })
@@ -105,6 +105,46 @@ export const registerMeter = (transaction, metadata,keys, config) => {
         console.log('Transfer Transaction created :', config.path + config.transaction + tx.id)
         return tx
       })
+
+}
+
+export const burn = (transaction, config) => {
+
+
+  const BigchainDB = require('bigchaindb-driver')
+  const driver = require('bigchaindb-driver')
+  const conn = new driver.Connection(config.path)
+
+  const BURN_ADDRESS = 'BurnBurnBurnBurnBurnBurnBurnBurnBurnBurnBurn'
+
+  transaction.map((data,index)=>{
+
+    driver.Transaction.makeTransferTransaction(
+
+      [{ tx: data, output_index: 0 }],
+      [driver.Transaction.makeOutput(driver.Transaction.makeEd25519Condition(BURN_ADDRESS))],
+      //modified metadata
+      {'status':'Burned'}
+  
+  ).then(tx => {
+    tx.map((data,index)=>{
+    console.log('burn Transaction :', config.path + config.transaction + data.id)
+
+    })
+    return tx
+  })
+
+  })
+
+driver.Transaction.makeTransferTransaction(
+
+    [{ tx: assetCreateTxSigned, output_index: 0 }],
+    [driver.Transaction.makeOutput(driver.Transaction.makeEd25519Condition(BURN_ADDRESS))],
+    //modified metadata
+    {'status':'Burned'}
+
+);
+
 
 }
 

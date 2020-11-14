@@ -62,6 +62,12 @@ class SideNavBar extends Component {
                   </NavText>
                 </NavItem>
 
+                <NavItem eventKey="administracion/bajaDeProducto">
+                  <NavText>
+                    <Link to='/Terminate'>Dar de Baja</Link>
+                  </NavText>
+                </NavItem>
+
               </NavItem>
 
             }
