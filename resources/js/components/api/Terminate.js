@@ -97,6 +97,7 @@ export default function Terminate(props) {
    products.map((transaction,index)=>{
 
     console.log(transaction)
+    console.log(chain)
   //  user.filter(e=>e.publickey==transaction.asset.publickey)
 
    }) 
