@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
@@ -13,9 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
-import { getTransaction, getAsset, searchAsset , getConfig , getUser, getChain } from "../tables/TableFunctions";
+import { getTransaction, getAsset, searchAsset, getConfig, getUser, getChain } from "../tables/TableFunctions";
 
-import {transfer} from '../api/CRAB'
+import { transfer } from '../api/CRAB'
 
 import Load from '../extra/Load'
 
@@ -64,10 +64,11 @@ export default function Terminate(props) {
 
     Object.keys(step).map((key, row) => (
 
-      console.log('key ',step[row]['data']['data']),
+      console.log('key ', step[row]['data']['data']),
 
-      {...step[row]['data'].hasOwnProperty('data') &&
-      array.push(step[row]['data']['data'])
+      {
+        ...step[row]['data'].hasOwnProperty('data') &&
+        array.push(step[row]['data']['data'])
       }
 
     ))
@@ -76,7 +77,7 @@ export default function Terminate(props) {
 
   }
 
-  useEffect( () =>{
+  useEffect(() => {
 
     axios.all([
       getUser(),
@@ -87,31 +88,49 @@ export default function Terminate(props) {
         setUser(responseArr[0])
         setConfig(responseArr[1])
         setChain(responseArr[2])
-    //    console.log('user',responseArr[0],'config ',responseArr[1])
+        //    console.log('user',responseArr[0],'config ',responseArr[1])
       })
 
-  }, [] );
+  }, []);
 
   const terminate = () => {
 
-   products.map((transaction,index)=>{
+    const BURN_ADDRESS = 'BurnBurnBurnBurnBurnBurnBurnBurnBurnBurnBurn'
 
-    console.log(transaction)
-    console.log(chain)
-  //  user.filter(e=>e.publickey==transaction.asset.publickey)
+    products.map((transaction, index) => {
 
-   }) 
-/*
-    transfer(transaction,metadata,keys,config).then(response => {
-    console.log('terminate',response)
+      console.log(transaction)
+      const tx = chain.filter((e) => e.transaction == transaction.id)
+      const us = user.filter((e) => e.id == tx[0].from)
+      console.log('tx', tx)
+      console.log('user', us)
+
+      const metadata = {
+        from: us[0].name,
+        to: 'FIN',
+        commentary: document.getElementById('commentary').value,
+        state: 'Terminado',
+        date: new Date().toString()
+      }
+      console.log('metadata',metadata)
+      const keys = {
+        receivePublickey: BURN_ADDRESS,
+        sendPrivateKey: us[0].privateKey,
+      }
+      console.log('keys',keys)
+
+      transfer(transaction, metadata, keys, config).then(response => {
+        console.log('terminate', response)
+      })
+
     })
-    */
+
 
   }
 
   const process = () => {
 
-    render(<Load/>, document.getElementById('load'));
+    render(<Load />, document.getElementById('load'));
     render(<></>, document.getElementById('message'));
     setPrevent(true)
     setButtonMessage('Cargando...')
@@ -123,10 +142,10 @@ export default function Terminate(props) {
 
     searchAsset(params).then(response => {
       console.log('productos :', response)
-      if (response.type != 'error'){
-        setProducts(response) 
-      }else{
-      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+      if (response.type != 'error') {
+        setProducts(response)
+      } else {
+        render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
       }
 
     }).catch(response => {
@@ -162,51 +181,52 @@ export default function Terminate(props) {
   const createJson = (
     //Busca propiedad transaction, la cual es caracteristica de nuestro diseño
 
-    
+
 
     products.map((data, index) => (
-     
+
       {
         ...data.data.hasOwnProperty('data') ? (
 
-          obj[index]= data.data.data,
+          obj[index] = data.data.data,
           objID[index] = data.id
 
 
         ) : (
             console.log('no encontrada'),
-            columns = [{label: "Busqueda", field: "message"}],
-            rows = [{message: "Sin registros"}]
+            columns = [{ label: "Busqueda", field: "message" }],
+            rows = [{ message: "Sin registros" }]
           )
       }
     )),
 
-   // console.log('obj :',obj),
+    // console.log('obj :',obj),
 
-   Object.keys(obj).map((key, row) => (
+    Object.keys(obj).map((key, row) => (
 
-    preRows = [objID[row]],
-    preRows = { clickEvent: () => handleClick(objID[row]), cursor: 'pointer'},
-    
-    Object.keys(obj[key][0]).map((key2, col) => (
+      preRows = [objID[row]],
+      preRows = { clickEvent: () => handleClick(objID[row]), cursor: 'pointer' },
 
-   //   console.log('table :',key2),
-      
-      {...count < Object.keys(obj[key][0]).length &&
-        columns.push({
-          label: key2,
-          field: key2,
-        }),
-      },
-      
-     
-      preRows[key2] = obj[row][0][key2],
-      count = count + 1
+      Object.keys(obj[key][0]).map((key2, col) => (
+
+        //   console.log('table :',key2),
+
+        {
+          ...count < Object.keys(obj[key][0]).length &&
+          columns.push({
+            label: key2,
+            field: key2,
+          }),
+        },
+
+
+        preRows[key2] = obj[row][0][key2],
+        count = count + 1
+      )),
+
+      rows.push(preRows)
+
     )),
-    
-    rows.push(preRows)
-
-  )),
 
     data = {
       columns,
@@ -233,12 +253,12 @@ export default function Terminate(props) {
           <MDBCardHeader>Busqueda de Productos</MDBCardHeader>
 
           <MDBCardBody>
-          
+
             <MDBInput id="id" label="Producto" validate error="wrong" success="right" valueDefault="" />
             <div className="text-center pt-3 mb-3">
-            <MDBBtn type="button" onClick={process} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">
-              {buttonMessage}
-            </MDBBtn>
+              <MDBBtn type="button" onClick={process} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">
+                {buttonMessage}
+              </MDBBtn>
             </div>
 
             {products.length > 0 ?
@@ -267,18 +287,18 @@ export default function Terminate(props) {
 
           <MDBCardFooter className={classes.root}>
 
-          {products.length > 0 ? (<>
-          <MDBInput id="id" label="Observacion" validate error="wrong" success="right" valueDefault="" />
-            <div className="text-center pt-3 mb-3">
-            <MDBBtn type="button" onClick={terminate} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">
-              {buttonMessage2}
-            </MDBBtn>
-            </div>
+            {products.length > 0 ? (<>
+              <MDBInput id="commentary" label="Observacion" validate error="wrong" success="right" valueDefault="" />
+              <div className="text-center pt-3 mb-3">
+                <MDBBtn type="button" onClick={terminate} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">
+                  {buttonMessage2}
+                </MDBBtn>
+              </div>
             </>
-          )
-          :
-          (<></>)
-        }
+            )
+              :
+              (<></>)
+            }
           </MDBCardFooter>
 
         </MDBCard>
