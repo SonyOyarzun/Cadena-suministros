@@ -101,5 +101,16 @@ https://material-ui.com/components/material-icons/
 
 PROMESAS
 https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Usar_promesas
+
+
+
+//SEARCH
+https://blog.bigchaindb.com/introducing-queryable-assets-in-bigchaindb-v-1-0-adbe1b86e622
+
+http://docs.bigchaindb.com/projects/js-driver/en/latest/usage.html
+
+
+conn.searchMetadata('1.32')
+        .then(assets => console.log('Found assets with serial number Bicycle Inc.:', assets))
 */
 

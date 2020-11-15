@@ -21,7 +21,7 @@ class Meter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: this.props.data.id,
+            user: 'user-'+this.props.data.id,
             value: this.props.data.value,
             max: this.props.data.max,
             min: this.props.data.min,

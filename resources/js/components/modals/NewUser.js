@@ -22,6 +22,8 @@ function NewUser(props) {
   const BigchainDB = require('bigchaindb-driver')
   const alice = new BigchainDB.Ed25519Keypair()
 
+  //var keypair = new driver.Ed25519Keypair(bip39.mnemonicToSeed("yourString").slice(0, 32))
+
   const [state, setState] = useState({ id: '' , name: '' , email: '',role: 'A', path: '', pass: '', confirmPass: '', privateKey: alice.privateKey, publicKey: alice.publicKey})
 
   const [loading, setLoading] = useState(false)
