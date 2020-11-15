@@ -8,8 +8,6 @@ import { getAsset, getTransaction } from '../tables/TableFunctions'
 import { getMeter } from '../extra/ExtraFunctions';
 import { create, transfer } from '../api/CRAB';
 
-import ws from '../api/WebSocket';
-
 
 export default class Lineal extends Component {
     constructor(props) {
@@ -36,36 +34,7 @@ export default class Lineal extends Component {
 
     }
 
-
-    /*
-    keysTransfer = {
-        receivePublickey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
-        sendPrivateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
-    }
-    keysTransfer2 = {
-        receivePublickey: 'BXYYLSVnDGpxkLngaWTS2ioMSrZxRNmATLj82hs9z86d',
-        sendPrivateKey: 'HMtmAxvo6Z7eVHuXjtQQ4m94QZscDo3uVScpwsZPBWb8',
-    }
-*/
-    keys = []
-
-    keysTransfer = {
-        receivePublickey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
-        sendPrivateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
-    }
-    keysTransfer1 = {
-        receivePublickey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
-        sendPrivateKey: 'HMtmAxvo6Z7eVHuXjtQQ4m94QZscDo3uVScpwsZPBWb8',
-    }
-    keysTransfer2 = {
-        receivePublickey: 'BXYYLSVnDGpxkLngaWTS2ioMSrZxRNmATLj82hs9z86d',
-        sendPrivateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
-    }
-
     count=0
-
-    
-
 
     componentDidMount() {
 
@@ -74,21 +43,6 @@ export default class Lineal extends Component {
         })
 
         this.listen()
-
-        if (this.count == 0) {
-            console.log('keysTransfer[0]')
-            this.keys = this.keysTransfer
-        }
-        else if (this.count % 2 == 0) {
-            console.log('keysTransfer[1]')
-            this.keys = this.keysTransfer1
-        } else {
-            console.log('keysTransfer[2]')
-            this.keys = this.keysTransfer2
-        }
-
-        this.count = this.count + 1
-
 
     };
 
@@ -121,16 +75,6 @@ export default class Lineal extends Component {
         )
     }
 }
-
-
-
-/**
-  const data = [
-            { key: '1', data: 7.6 },
-            { key: '2', data: 8.5 },
-            { key: '3', data: 9.8 }
-        ];
- */
 
 
 

@@ -60,23 +60,23 @@ class BigController extends Controller
 	}
 
 
-	public function trace(Request $request)
+	public function metadata(Request $request)
 	{
 
 		try {
 			$client = new Client();
-			$response = $client->request('GET', 'https://test.ipdb.io/api/v1/transactions?asset_id=' . $request->asset . '&operation=TRANSFER&last_tx=false');
+			$response = $client->request('GET', 'https://test.ipdb.io/api/v1/metadata?search=' . $request->asset . '&last_tx=false');
 			$statusCode = $response->getStatusCode();
 			$body = $response->getBody()->getContents();
 
-			$client2 = new Client();
-			$response2 = $client2->request('GET', 'https://test.ipdb.io/api/v1/transactions/' . $request->asset);
-			$statusCode2 = $response2->getStatusCode();
-			$body2 = $response2->getBody()->getContents();
 		} catch (\Exception $e) {
 	
 			return ['message'=>$e->getMessage(),'type'=>'error'];
 		}
-		return $body+$body2;
+		return $body;
 	}
 }
+
+
+
+value:0

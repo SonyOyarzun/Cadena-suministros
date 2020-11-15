@@ -39,6 +39,8 @@ function Trace(props) {
 
   const [products, setProducts] = useState([]);
 
+  const [revert, setRevert] = useState(false);
+
   const [prevent, setPrevent] = useState(false);
   const [buttonMessage, setButtonMessage] = useState('Buscar');
 
@@ -89,7 +91,12 @@ function Trace(props) {
               if (responseArr[0][0].metadata.hasOwnProperty('metadata')) {
 
                 console.log('metadata.metadata', responseArr[0])
-                setStep(responseArr[0])
+                if(revert==true){
+                  responseArr[0].sort((a, b) => b.metadata.metadata.date - a.metadata.metadata.date)
+                }else{
+                  setStep(responseArr[0])
+                }
+                
 
               } else {
                 alert('No encontrada')
@@ -194,6 +201,8 @@ function Trace(props) {
             {arrayStep.length > 0 ?
               (
                 <div className="text-center">
+                   <MDBInput id="order" label="Invertir Orden" validate error="wrong" success="right" valueDefault={asset} />
+                   <MDBBtn type="button" onClick={revert} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{'Invertir'}</MDBBtn>
                   <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                     <i class="fas fa-map-marked-alt"></i> Recorrido
               </Typography>

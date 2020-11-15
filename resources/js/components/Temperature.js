@@ -38,12 +38,6 @@ class Temperature extends Component {
         privateKey: this.alice.privateKey,
     }
 
-    /**
-     keysCreate = {
-        publicKey: '8t6F2tkjtReYVFSiEzoKazzJS9n9MmfgQp1uqWABym84',
-        privateKey: '83cPMqhrRnofy3EVE4SPMqVCokjWcKZTLuadqprRgLFB',
-    }
-    */
 
     start() {
 //console.log('keys',this.keysCreate)
