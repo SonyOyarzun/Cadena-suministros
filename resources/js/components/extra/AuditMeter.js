@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { LinearAxis, LinearGauge, BarSeries, StackedNormalizedBarSeries, BarChart } from "reaviz";
 import Chart from "react-google-charts";
 
-import { getAsset, getTransaction } from '../tables/TableFunctions'
+import { getAsset, getTransaction , getConfig } from '../tables/TableFunctions'
 
 import { getMeter } from './ExtraFunctions';
 import { create, transfer , searchMetadata } from '../api/CRAB';
@@ -15,6 +15,7 @@ export default class AuditMeter extends Component {
 
         this.state = {
             search: '',
+            config: [],
         };
 
         this.audit = this.audit.bind(this)
@@ -23,7 +24,7 @@ export default class AuditMeter extends Component {
 
     audit() {
 
-        searchMetadata(this.state.search,this.props.config).then(response => {
+        searchMetadata(this.state.search,this.state.config).then(response => {
             this.setState({ data: response })
         })
 
