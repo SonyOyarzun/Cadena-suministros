@@ -93,15 +93,46 @@ export default function Terminate(props) {
 
   }, []);
 
+  const save = (id_transaction, newTransaction, asset, from) => {
+
+    const data = {
+      transaction: id_transaction,
+      newTransaction: newTransaction,
+      asset: asset,
+      from: from,
+      commentary: document.getElementById('commentary').value,
+      state: props.state,
+    }
+
+    receiveChain(data)
+      .then((response) => {
+        console.log('receiveChain :', response)
+        render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+        props.getData()
+      })
+      .catch(response => {
+        console.log('error receiveChain', response)
+      })
+
+  }
+
+
   const terminate = () => {
 
     const BURN_ADDRESS = 'BurnBurnBurnBurnBurnBurnBurnBurnBurnBurnBurn'
 
     products.map((transaction, index) => {
 
+    
+      const params = {
+        "asset": transaction.id,
+      }
+
+      getAsset(params).then(response => {
+    
       console.log(transaction)
       const tx = chain.filter((e) => e.transaction == transaction.id)
-      const us = user.filter((e) => e.id == tx[0].from)
+      const us = user.filter((e) => e.id == tx[0].to)
       console.log('tx', tx)
       console.log('user', us)
 
@@ -112,19 +143,29 @@ export default function Terminate(props) {
         state: 'Terminado',
         date: new Date().toString()
       }
+
       console.log('metadata',metadata)
+
       const keys = {
         receivePublickey: BURN_ADDRESS,
         sendPrivateKey: us[0].privateKey,
       }
+
       console.log('keys',keys)
 
-      transfer(transaction, metadata, keys, config).then(response => {
-        console.log('terminate', response)
+      console.log('response',response[0])
+
+      transfer(response[0], metadata, keys, config).then(response2 => {
+        console.log('terminate', response2)
+        save(response[0].id, response.id, transaction.id, us[0].id)
+
+      }).catch(response => {
+        console.log('error terminate', response)
       })
 
     })
 
+  })
 
   }
 
