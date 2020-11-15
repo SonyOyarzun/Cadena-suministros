@@ -54,7 +54,7 @@ function Trace(props) {
 
     Object.keys(step).map((key, row) => (
 
-      arrayStep.push(step[row]['metadata']['info'])
+      arrayStep.push(step[row]['metadata']['metadata'])
 
     ))
 
@@ -81,32 +81,36 @@ function Trace(props) {
           console.log('getAsset', responseArr[0])
           console.log('getTransaction', responseArr[1])
 
-    //      if (responseArr[0].length > 0) {
+          if (responseArr[0].length > 0) {
+            console.log('length', responseArr[0])
+            if (responseArr[0][0].hasOwnProperty('metadata')) {
 
-      //      if (responseArr[0].hasOwnProperty('metadata')) {
+              console.log('metadata', responseArr[0])
+              if (responseArr[0][0].metadata.hasOwnProperty('metadata')) {
 
-        //      if (responseArr[0].metadata.hasOwnProperty('info')) {
-
+                console.log('metadata.metadata', responseArr[0])
                 setStep(responseArr[0])
 
-          //    } else {
-        //        alert('No encontrada')
-            //  }
-            //} else {
-            //  alert('No encontrada')
-            //}
-          //} else {
-            //alert('No encontrada')
-         // }
+              } else {
+                alert('No encontrada')
+              }
+
+            } else {
+              alert('No encontrada')
+            }
+
+          } else {
+            alert('No encontrada')
+          }
 
 
-      //    if (responseArr[1].asset.data.hasOwnProperty('transaction')) {
+          if (responseArr[1].asset.data.hasOwnProperty('data')) {
 
-            setProducts(responseArr[1].asset.data.transaction)
+            setProducts(responseArr[1].asset.data.data)
 
-     //     } else {
-     //       alert('No encontrada')
-      //    }
+          } else {
+            alert('No encontrada')
+         }
 
 
           setPrevent(false);
