@@ -58,6 +58,10 @@ Route::group(['namespace' => 'Admin',
                     return view('home');
                 });
 
+                Route::get('/Audit', function () {
+                    return view('home');
+                });
+
 });
 
 Route::group(['namespace' => 'Admin', 

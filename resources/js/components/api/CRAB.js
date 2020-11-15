@@ -70,4 +70,18 @@ export const transfer = (transaction, metadata, keys, config) => {
 }
 
 
+export const searchMetadata = ( search , config ) => {
+
+  const BigchainDB = require('bigchaindb-driver')
+  const conn = new BigchainDB.Connection(config.path)
+
+  return conn.searchMetadata(search)
+    .then(assets => {
+      console.log('Found assets ', assets)
+      return assets
+    })
+
+}
+
+
 

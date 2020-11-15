@@ -68,6 +68,12 @@ class SideNavBar extends Component {
                   </NavText>
                 </NavItem>
 
+                <NavItem eventKey="administracion/auditar">
+                  <NavText>
+                    <Link to='/Audit'>Auditar temperatura</Link>
+                  </NavText>
+                </NavItem>
+
               </NavItem>
 
             }

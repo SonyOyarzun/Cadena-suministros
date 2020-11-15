@@ -16,6 +16,7 @@ import Receive from './Receive';
 import Order from './Order';
 import Temperature from './Temperature';
 import Terminate from './api/Terminate';
+import Audit from './extra/AuditMeter';
 
 
 //access
@@ -41,6 +42,7 @@ class Routes extends Component {
 
                 <Route path="/ApiConfig" component={ApiConfig} />
                 <Route path="/Terminate" component={Terminate} />
+                <Route path="/Audit" component={Audit} />
 
                 <Route path="/Send" component={Send} />
                 <Route path="/Receive" component={Receive} />
