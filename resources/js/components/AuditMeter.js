@@ -89,7 +89,7 @@ class AuditMeter extends Component {
                             <Card.Title>Medicion</Card.Title>
                             <Card.Text>
                             </Card.Text>
-                          
+                            <Audit data={this.state} height={200} width={200} />
                         </Card.Body>
                     </Card>
                 </div>

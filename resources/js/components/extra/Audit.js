@@ -32,7 +32,7 @@ export default class AuditMeter extends Component {
 
     componentDidMount() {
 
-        audit()
+        this.audit()
     
     };
 
