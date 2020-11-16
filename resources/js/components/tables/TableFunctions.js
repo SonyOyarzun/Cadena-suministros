@@ -170,6 +170,20 @@ export const searchAsset = (asset) => {
         })
 }
 
+export const searchMetadata = (asset) => {
+    return axios
+        .post('/searchMetadata', asset, {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+            return[]
+        })
+}
+
 export const getProduct = (product) => {
     return axios
         .post('/api-product', product, {

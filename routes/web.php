@@ -137,6 +137,7 @@ Route::post('/product/exist', 'ProductController@exist');
 Route::post('/assets', 'BigController@asset');
 Route::post('/transaction', 'BigController@transaction');
 Route::post('/search', 'BigController@search');
+Route::post('/searchMetadata', 'BigController@searchMetadata');
 
 //subir archivo
 Route::post('/uploadLogotype', 'UploadController@uploadFileLogotype');

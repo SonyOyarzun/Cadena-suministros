@@ -43,7 +43,7 @@ function Auto(props) {
                 options={users}
                 getOptionLabel={option => (option.name)}
                 onChange={props.onTagsChange}
-                renderInput={(params) => <TextField className='autocomplete' {...params} label="Usuario a enviar" variant="outlined" />}
+                renderInput={(params) => <TextField className='autocomplete' {...params} label={props.label} variant="outlined" />}
             />
         </div>
     )

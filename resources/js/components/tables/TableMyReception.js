@@ -9,9 +9,6 @@ import Auto from '../extra/AutoComplete'
 //import datable
 import { MDBDataTableV5, MDBBtn, MDBIcon, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
 
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-
 import { getChain, reSendChain } from "../tables/TableFunctions";
 
 import Load from '../extra/Load'
@@ -167,7 +164,7 @@ class TableMyReception extends Component {
         <>
         <MDBRow fluid style={styles.border}>
           <MDBCol size="4">
-            <Auto onTagsChange={this.onTagsChange} />
+            <Auto onTagsChange={this.onTagsChange} label={'Usuario a Enviar'}/>
           </MDBCol>
         </MDBRow>
 

@@ -21,15 +21,12 @@ class Meter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: 'user-'+this.props.data.id,
             value: this.props.data.value,
             max: this.props.data.max,
             min: this.props.data.min,
-            date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
             chain: this.props.data.chain,
             asset: this.props.data.asset,
             config: this.props.data.config,
-            meterPack: this.props.data.meterPack,
         }
         this.tempUp = this.tempUp.bind(this);
         this.tempDown = this.tempDown.bind(this);
@@ -44,8 +41,23 @@ class Meter extends Component {
     alice = new this.BigchainDB.Ed25519Keypair()
 
     keysCreate = {
-        publicKey:  this.alice.publicKey,
+        publicKey: this.alice.publicKey,
         privateKey: this.alice.privateKey,
+    }
+
+    asset = {
+        value: this.props.data.value,
+        max: this.props.data.max,
+        min: this.props.data.min,
+        date: this.props.data.date,
+        chain: this.props.data.chain,
+        date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
+    }
+
+    metadata = {
+        user: 'user-' + this.props.data.id,
+        meterPack: this.props.data.meterPack, 
+        date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
     }
 
     tempUp() {
@@ -62,7 +74,7 @@ class Meter extends Component {
         console.log('RESET')
         resetMeter().then(response => {
             console.log('meter reset :', response)
-            this.setState({chain : 0 , value : 0 })
+            this.setState({ chain: 0, value: 0 })
         })
     }
 
@@ -83,14 +95,14 @@ class Meter extends Component {
 
         this.setState({ chain: this.state.chain + 1 })
 
-        if(this.state.chain % 10 == 0){
-            create(this.state, this.state, this.keysCreate, this.state.config)
-        .then(response => {
-            console.log('start create response ', response)
-            this.setState({ transaction: response, asset: response.id })
-        }).catch(error => {
-            console.log('error ', error)
-        })
+        if (this.state.chain % 10 == 0) {
+            create(this.asset, this.metadata, this.keysCreate, this.state.config)
+                .then(response => {
+                    console.log('start create response ', response)
+                    this.setState({ transaction: response, asset: response.id })
+                }).catch(error => {
+                    console.log('error ', error)
+                })
         }
 
     }, 5000)
@@ -102,7 +114,7 @@ class Meter extends Component {
     }
 
     componentWillUnmount() {
-    clearInterval(this.timer)
+        clearInterval(this.timer)
     }
 
     onChange(event) {

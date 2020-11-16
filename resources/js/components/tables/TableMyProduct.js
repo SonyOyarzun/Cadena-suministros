@@ -116,7 +116,7 @@ export default function TableMyProduct(props) {
           <MDBCol size="2">
             <Create getData={checkbox} getUserSend={userSend} updateData={props.updateData} clean={cleanChecked}/></MDBCol>
           <MDBCol size="4">
-            <Auto onTagsChange={onTagsChange}/>
+            <Auto onTagsChange={onTagsChange} label={'Usuario a Enviar'}/>
           </MDBCol>
           </MDBRow>
 

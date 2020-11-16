@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { getUser, getConfig } from './tables/TableFunctions'
+import { getUser, getConfig , searchMetadata } from './tables/TableFunctions'
 import Meter from './extra/Meter';
-import Lineal from './extra/Lineal';
+import Audit from './extra/Audit';
+import Auto from './extra/AutoComplete';
 import Load from './extra/Load';
 
 import { NavLink, Link, withRouter } from 'react-router-dom';
@@ -11,74 +12,45 @@ import { NavLink, Link, withRouter } from 'react-router-dom';
 import { getMeter } from './extra/ExtraFunctions';
 import { create, transfer } from './api/CRAB';
 
-class Temperature extends Component {
+//import datable
+import { MDBDataTableV5, MDBBtn, MDBIcon, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
+
+
+
+class AuditMeter extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            id : props.match.params.id, //parametro desde url, routes
-            value: null,
-            min: null,
-            max: null,
-            chain : null,
+            id: props.match.params.id, //parametro desde url, routes
             config: [],
-            transaction: [],
-            asset: null,
-            meterPack: []
+            user: [],
+            data: []
         }
-        this.start = this.start.bind(this);
-
-    }
-
-    BigchainDB = require('bigchaindb-driver')
-    alice = new this.BigchainDB.Ed25519Keypair()
-
-    keysCreate = {
-        publicKey:  this.alice.publicKey,
-        privateKey: this.alice.privateKey,
-    }
-
-
-    start() {
-//console.log('keys',this.keysCreate)
-        create(this.state, this.state, this.keysCreate, this.state.config)
-        .then(response => {
-            console.log('start create response ', response)
-            this.setState({ transaction: response, asset: response.id })
-        }).catch(error => {
-            console.log('error ', error)
-        })
-
+        this.onTagsChange = this.onTagsChange.bind(this)
     }
 
     componentDidMount() {
 
-    //    this.start()
-
-        axios.all([
-            getConfig(),
-            getMeter()
-        ])
-            .then(responseArr => {
-                this.setState({
-                    config: responseArr[0],
-                })
-                console.log('Temperature mount:',responseArr)
-                    this.setState({
-                        chain:  responseArr[1][responseArr[1].length - 1][0],
-                        value:  responseArr[1][responseArr[1].length - 1][1],
-                        min:    responseArr[1][responseArr[1].length - 1][2],
-                        max:    responseArr[1][responseArr[1].length - 1][3],
-                        meterPack: responseArr[1]
-                    })  
-
-            })
+        getConfig().then(response => {
+            this.setState({ config: response })
+        })
 
     }
 
-    render() {
+    onTagsChange(event, values) {
 
-    //    console.log('Temperature :',this.state)
+        const search = {asset:'user-'+values.id}
+
+        searchMetadata(search).then(response => {
+            this.setState({ data: response })
+            console.log(response)
+        })
+    }
+
+    render() {
+        console.log('user onChange', this.state.user)
+        //    console.log('Temperature :',this.state)
 
         const styles = {
             size: {
@@ -86,10 +58,15 @@ class Temperature extends Component {
             },
             size2: {
                 marginTop: 10
-            },
+            }, border: {
+                height: '100px',
+                paddingTop: "1vh",
+                paddingBottom: "1vh",
+            }
         }
 
-        if (this.state.value == null ) {
+
+        if (this.state.config == null) {
 
             return (<Load />)
 
@@ -98,11 +75,21 @@ class Temperature extends Component {
             return (
                 <div>
                     <Card style={styles.size2}>
+
+                        <Card.Header>
+                            <MDBRow fluid style={styles.border}>
+                                <MDBCol size="4">
+                                    <Auto onTagsChange={this.onTagsChange} label={'Usuario a Auditar'} />
+                                </MDBCol>
+                            </MDBRow>
+                        </Card.Header>
+
+
                         <Card.Body className='' style={styles.size2}>
                             <Card.Title>Medicion</Card.Title>
                             <Card.Text>
                             </Card.Text>
-                            <Lineal data={this.state}  height={200} width={200} />
+                          
                         </Card.Body>
                     </Card>
                 </div>
@@ -112,11 +99,11 @@ class Temperature extends Component {
     }
 }
 
-export default Temperature
+export default AuditMeter
 
 
 
-
+// -- <Audit data={this.state} height={200} width={200} />
 
 
 

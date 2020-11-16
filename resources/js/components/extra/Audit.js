@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { LinearAxis, LinearGauge, BarSeries, StackedNormalizedBarSeries, BarChart } from "reaviz";
 import Chart from "react-google-charts";
 
-import { getAsset, getTransaction , getConfig } from '../tables/TableFunctions'
+import { getAsset, getTransaction , getConfig , searchMetadata } from '../tables/TableFunctions'
 
 import { getMeter } from './ExtraFunctions';
-import { create, transfer , searchMetadata } from '../api/CRAB';
+import { create, transfer } from '../api/CRAB';
 
 
 export default class AuditMeter extends Component {
@@ -14,8 +14,7 @@ export default class AuditMeter extends Component {
         super(props);
 
         this.state = {
-            search: '',
-            config: [],
+            data: ['max','min','value'],
         };
 
         this.audit = this.audit.bind(this)
@@ -24,21 +23,17 @@ export default class AuditMeter extends Component {
 
     audit() {
 
-        searchMetadata(this.state.search,this.state.config).then(response => {
+        searchMetadata('user-1').then(response => {
             this.setState({ data: response })
         })
 
     }
 
-    count=0
 
     componentDidMount() {
 
-        searchMetadata()
-        .then(response => {
-            this.setState({ data: response })
-        })
-
+        audit()
+    
     };
 
 
@@ -46,7 +41,6 @@ export default class AuditMeter extends Component {
     render() {
 
         return (
-            <>
                 <Chart
                     backgroundColor={'blue'}
                     width={'100%'}
@@ -66,7 +60,6 @@ export default class AuditMeter extends Component {
                     }}
                     rootProps={{ 'data-testid': '1' }}
                 />
-            </>
         )
     }
 }
