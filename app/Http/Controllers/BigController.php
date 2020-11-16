@@ -81,7 +81,7 @@ class BigController extends Controller
 
 		try {
 			$client = new Client();
-			$response = $client->request('GET', 'https://test.ipdb.io/api/v1/metadata?search=' . $request->asset . '&limit=1&last_tx=false');
+			$response = $client->request('GET', 'https://test.ipdb.io/api/v1/metadata?search=' . $request->asset . '&limit=1&last_tx=true');
 			$statusCode = $response->getStatusCode();
 			$body = $response->getBody()->getContents();
 
