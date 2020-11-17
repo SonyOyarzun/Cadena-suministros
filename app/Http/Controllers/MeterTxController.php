@@ -15,9 +15,18 @@ class MeterTxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        try {
+
+            $meter = MeterTx::select()->orderBy('id', 'desc')->where('user', '=', $request->id)->limit(1)->get();
+
+          
+        } catch (\Throwable $th) {
+
+            return  ['message' => $th->getMessage(), 'type' => 'error'];
+        }
+        return $meter;
     }
 
     /**
