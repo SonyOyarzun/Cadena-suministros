@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { getAsset, getTransaction , getConfig , searchMetadata ,  } from './tables/TableFunctions'
+import { getAsset, getTransaction, getConfig, searchMetadata, } from './tables/TableFunctions'
 import Meter from './extra/Meter';
 import Audit from './extra/Audit';
 import Auto from './extra/AutoComplete';
@@ -9,7 +9,7 @@ import Load from './extra/Load';
 
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
-import { getMeter , lastMeterTx } from './extra/ExtraFunctions';
+import { getMeter, lastMeterTx } from './extra/ExtraFunctions';
 import { create, transfer } from './api/CRAB';
 
 //import datable
@@ -40,22 +40,42 @@ class AuditMeter extends Component {
 
     onTagsChange(event, values) {
 
-        const search = {id: values.id}
+        const search = { id: values.id }
 
-        console.log('search',search)
+        console.log('search', search)
 
         lastMeterTx(search).then(last => {
 
-            const transaction = {asset : last[0].tx}
+            if (last.length > 0) {
 
-            console.log('transaction',transaction)
+                if (last[0].hasOwnProperty('tx')) {
 
-        getTransaction(transaction).then(response => {
-            this.setState({ data: response.metadata.metadata.meterPack })
-            console.log('onTagsChange',response.metadata.metadata.meterPack )
+                    const transaction = { asset: last[0].tx }
+
+                    console.log('transaction', transaction)
+
+                    getTransaction(transaction).then(response => {
+
+                        if (response.metadata.hasOwnProperty('metadata')) {
+                            this.setState({ data: response.metadata.metadata.meterPack })
+                            console.log('onTagsChange', response.metadata.metadata.meterPack)
+                        } else {
+                            this.setState({ data: [['C°', 'T', 'Min', 'Max'], [0, 0, 0, 0]] })
+                        }
+
+                    })
+
+                } else {
+
+                    this.setState({ data: [['C°', 'T', 'Min', 'Max'], [0, 0, 0, 0]] })
+                }
+
+            } else {
+
+                this.setState({ data: [['C°', 'T', 'Min', 'Max'], [0, 0, 0, 0]] })
+            }
+
         })
-
-    })
 
     }
 
