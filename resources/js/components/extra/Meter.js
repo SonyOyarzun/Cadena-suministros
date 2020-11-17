@@ -37,6 +37,7 @@ class Meter extends Component {
     startColor = '#03afff'; // cornflowerblue
     endColor = '#ff0000'; // crimson
 
+    
     BigchainDB = require('bigchaindb-driver')
     alice = new this.BigchainDB.Ed25519Keypair()
 
@@ -55,7 +56,6 @@ class Meter extends Component {
     }
 
     metadata = {
-        user: 'user-' + this.props.data.id,
         meterPack: this.props.data.meterPack, 
         date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
     }
@@ -98,6 +98,9 @@ class Meter extends Component {
         if (this.state.chain % 10 == 0) {
 
             console.log('keys ', this.keysCreate)
+            console.log('asset ', this.asset)
+            console.log('keys ', this.metadata)
+            console.log('config ', this.state.config)
 
             create(this.asset, this.metadata, this.keysCreate, this.state.config)
                 .then(response => {
