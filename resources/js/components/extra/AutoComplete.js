@@ -11,10 +11,11 @@ function Auto(props) {
 
     const [users, setUsers] = useState([]);
 
-    const params = {
-        resp: 'no'
-    }
+    let params = {}
 
+    if (props.label == 'Usuario a Enviar') {
+        params = {resp: 'no'}
+    }
 
 
     useEffect(() => {

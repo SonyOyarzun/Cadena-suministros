@@ -176,7 +176,7 @@ export const searchMetadata = (asset) => {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            return response.data
+            return response.data[0].metadata.metadata.meterPack
         })
         .catch(err => {
             console.log(err)

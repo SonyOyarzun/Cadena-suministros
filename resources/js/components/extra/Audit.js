@@ -14,7 +14,13 @@ export default class AuditMeter extends Component {
         super(props);
 
         this.state = {
-            data: ['max','min','value'],
+            data: [
+                [ 'T' ,'C°','Min','Max'],
+                [  0  , 0  ,  0  ,  0  ],
+            ],
+            search:{
+                asset:'user-'+this.props.data.user.id
+            }
         };
 
         this.audit = this.audit.bind(this)
@@ -23,7 +29,8 @@ export default class AuditMeter extends Component {
 
     audit() {
 
-        searchMetadata('user-1').then(response => {
+        searchMetadata(this.state.search).then(response => {
+            console.log('user-',response)
             this.setState({ data: response })
         })
 

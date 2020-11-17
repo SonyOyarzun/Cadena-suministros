@@ -74,7 +74,7 @@ class AuditMeter extends Component {
 
             return (
                 <div>
-                    <Card style={styles.size2}>
+                    <Card>
 
                         <Card.Header>
                             <MDBRow fluid style={styles.border}>
@@ -85,7 +85,7 @@ class AuditMeter extends Component {
                         </Card.Header>
 
 
-                        <Card.Body className='' style={styles.size2}>
+                        <Card.Body>
                             <Card.Title>Medicion</Card.Title>
                             <Card.Text>
                             </Card.Text>
