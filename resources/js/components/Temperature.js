@@ -26,34 +26,10 @@ class Temperature extends Component {
             asset: null,
             meterPack: []
         }
-        this.start = this.start.bind(this);
-
-    }
-
-    BigchainDB = require('bigchaindb-driver')
-    alice = new this.BigchainDB.Ed25519Keypair()
-
-    keysCreate = {
-        publicKey:  this.alice.publicKey,
-        privateKey: this.alice.privateKey,
-    }
-
-
-    start() {
-//console.log('keys',this.keysCreate)
-        create(this.state, this.state, this.keysCreate, this.state.config)
-        .then(response => {
-            console.log('start create response ', response)
-            this.setState({ transaction: response, asset: response.id })
-        }).catch(error => {
-            console.log('error ', error)
-        })
 
     }
 
     componentDidMount() {
-
-    //    this.start()
 
         axios.all([
             getConfig(),

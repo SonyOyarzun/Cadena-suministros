@@ -56,7 +56,7 @@ function Trace(props) {
 
     Object.keys(step).map((key, row) => (
 
-      arrayStep.push(step[row]['metadata']['metadata'])
+      arrayStep.push(step[row]['metadata'])
 
     ))
 
@@ -88,11 +88,11 @@ function Trace(props) {
             if (responseArr[0][0].hasOwnProperty('metadata')) {
 
               console.log('metadata', responseArr[0])
-              if (responseArr[0][0].metadata.hasOwnProperty('metadata')) {
+              if (responseArr[0][0].hasOwnProperty('metadata')) {
 
-                console.log('metadata.metadata', responseArr[0])
+                console.log('metadata', responseArr[0])
                 if(revert==true){
-                  responseArr[0].sort((a, b) => b.metadata.metadata.date - a.metadata.metadata.date)
+                  responseArr[0].sort((a, b) => b.metadata.date - a.metadata.date)
                 }else{
                   setStep(responseArr[0])
                 }

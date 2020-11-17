@@ -96,6 +96,9 @@ class Meter extends Component {
         this.setState({ chain: this.state.chain + 1 })
 
         if (this.state.chain % 10 == 0) {
+
+            console.log('keys ', this.keysCreate)
+
             create(this.asset, this.metadata, this.keysCreate, this.state.config)
                 .then(response => {
                     console.log('start create response ', response)

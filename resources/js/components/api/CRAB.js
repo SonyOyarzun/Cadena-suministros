@@ -10,7 +10,7 @@ export const create = (data, metadata, keys, config) => {
 
     { data },
 
-    { metadata: metadata },
+    { metadata },
 
     [BigchainDB.Transaction.makeOutput(
       BigchainDB.Transaction.makeEd25519Condition(keys.publicKey))
