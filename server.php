@@ -112,5 +112,9 @@ http://docs.bigchaindb.com/projects/js-driver/en/latest/usage.html
 
 conn.searchMetadata('1.32')
         .then(assets => console.log('Found assets with serial number Bicycle Inc.:', assets))
+
+
+        /informe sensores
+        http://oa.upm.es/53622/1/TFG_VICTOR_ROMAN_ARAGAY.pdf
 */
 

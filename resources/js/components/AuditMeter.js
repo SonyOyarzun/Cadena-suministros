@@ -41,15 +41,15 @@ class AuditMeter extends Component {
     onTagsChange(event, values) {
 
         const search = {asset:'user-'+values.id}
+        console.log('search',search)
 
         searchMetadata(search).then(response => {
             this.setState({ data: response })
-            console.log(response)
+            console.log('onTagsChange',response)
         })
     }
 
     render() {
-        console.log('user onChange', this.state.user)
         //    console.log('Temperature :',this.state)
 
         const styles = {

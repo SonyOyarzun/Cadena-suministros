@@ -26,9 +26,11 @@ function Auto(props) {
             })
             .then(response => {
                 setUsers(response.data);
-                console.log('users :', users)
             }).catch(error => {
                 console.log("Error " + error)
+            }).finally(() => {
+                console.log('users :', users)
+                console.log('params :', params)
             })
 
     }, []);

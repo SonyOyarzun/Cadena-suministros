@@ -12,7 +12,7 @@ export const getUser = () => {
         })
         .catch(err => {
             console.log(err)
-           return []
+            return []
         })
 }
 
@@ -134,7 +134,7 @@ export const getTransaction = (transaction) => {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            return  response.data
+            return response.data
         })
         .catch(err => {
             console.log(err)
@@ -147,7 +147,7 @@ export const getAsset = (asset) => {
         .post('/assets', asset, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
-        .then(response => { 
+        .then(response => {
             return response.data
         })
         .catch(err => {
@@ -166,7 +166,7 @@ export const searchAsset = (asset) => {
         })
         .catch(err => {
             console.log(err)
-            return[]
+            return []
         })
 }
 
@@ -176,11 +176,16 @@ export const searchMetadata = (asset) => {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            return response.data[0].metadata.metadata.meterPack
+            console.log('length :',response.data)
+            if (response.data[0].metadata.hasOwnProperty('metadata')) {
+                return response.data[0].metadata.metadata.meterPack
+            } else {
+                return false
+            }
         })
         .catch(err => {
             console.log(err)
-            return[]
+            return []
         })
 }
 

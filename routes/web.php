@@ -148,3 +148,5 @@ Route::get('/meter/list', 'MeterController@index');
 Route::post('/meter/new', 'MeterController@create');
 Route::delete('/meter/reset', 'MeterController@destroy');
 
+Route::post('/meter/tx', 'MeterTxController@create');
+

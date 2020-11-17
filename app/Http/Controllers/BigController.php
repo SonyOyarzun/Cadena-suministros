@@ -60,22 +60,6 @@ class BigController extends Controller
 	}
 
 
-	public function auditMeter(Request $request)
-	{
-		try {
-			$client = new Client();
-			$response = $client->request('GET', 'https://test.ipdb.io/api/v1/metadata/?search=' . "user-$request->id" . '&last_tx=true&limit=1');
-			$statusCode = $response->getStatusCode();
-			$body = $response->getBody()->getContents();
-
-		} catch (\Exception $e) {
-	
-			return ['message'=>$e->getMessage(),'type'=>'error'];
-		}
-		return $body;
-	}
-
-// aun no usado pero ok
 	public function searchMetadata(Request $request)
 	{
 

@@ -13,39 +13,23 @@ export default class AuditMeter extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            data: [
-                [ 'T' ,'C°','Min','Max'],
-                [  0  , 0  ,  0  ,  0  ],
-            ],
-            search:{
-                asset:'user-'+this.props.data.user.id
-            }
-        };
-
-        this.audit = this.audit.bind(this)
     }
 
-
-    audit() {
-
-        searchMetadata(this.state.search).then(response => {
-            console.log('user-',response)
-            this.setState({ data: response })
-        })
-
-    }
-
-
-    componentDidMount() {
-
-        this.audit()
-    
-    };
-
+    data = []
 
 
     render() {
+
+        {this.props.data.data !=false ? (
+
+            this.data = this.props.data.data
+
+        ):(
+
+            this.data =  [["T", "C°", "Min", "Max"],[0, 0, 0, 0]]
+        )
+            
+        }
 
         return (
                 <Chart
@@ -55,7 +39,7 @@ export default class AuditMeter extends Component {
                     chartType="AreaChart"
                     loader={<div>Loading Chart</div>}
 
-                    data={this.state.data}
+                    data={this.data}
 
                     options={{
                         hAxis: {

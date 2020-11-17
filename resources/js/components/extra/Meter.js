@@ -8,7 +8,7 @@ import LiquidFillGauge from 'react-liquid-gauge';
 
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
-import { newMeter, resetMeter } from '../extra/ExtraFunctions';
+import { newMeter, resetMeter , meterTx } from '../extra/ExtraFunctions';
 import { create, transfer, registerMeter } from '../api/CRAB';
 
 //Componentes de Bootstap
@@ -100,6 +100,12 @@ class Meter extends Component {
                 .then(response => {
                     console.log('start create response ', response)
                     this.setState({ transaction: response, asset: response.id })
+                    const params = {
+                        tx: response.id
+                    }
+                    meterTx(params).then(response => {
+                        console.log('start create tx ', response)
+                    })
                 }).catch(error => {
                     console.log('error ', error)
                 })
