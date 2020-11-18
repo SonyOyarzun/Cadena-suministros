@@ -57,8 +57,8 @@ class AuditMeter extends Component {
                     getTransaction(transaction).then(response => {
 
                         if (response.metadata.hasOwnProperty('metadata')) {
-                            this.setState({ data: response.metadata.metadata.meterPack })
-                            console.log('onTagsChange', response.metadata.metadata.meterPack)
+                            this.setState({ data: response.metadata.metadata })
+                            console.log('onTagsChange', response.metadata.metadata)
                         } else {
                             this.setState({ data: [['C°', 'T', 'Min', 'Max'], [0, 0, 0, 0]] })
                         }

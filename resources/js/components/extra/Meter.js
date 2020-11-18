@@ -8,7 +8,7 @@ import LiquidFillGauge from 'react-liquid-gauge';
 
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
-import { newMeter, resetMeter, meterTx } from '../extra/ExtraFunctions';
+import { newMeter, resetMeter, meterTx , getMeter } from '../extra/ExtraFunctions';
 import { create, transfer, registerMeter } from '../api/CRAB';
 
 //Componentes de Bootstap
@@ -48,10 +48,6 @@ class Meter extends Component {
         date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
     }
 
-    metadata = {
-        meterPack: this.props.data.meterPack,
-        date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
-    }
 
     tempUp() {
         console.log('UP')
@@ -82,7 +78,13 @@ class Meter extends Component {
             privateKey: this.alice.privateKey,
         }
 
-        create(this.asset, this.metadata, this.keysCreate, this.state.config)
+
+    
+            getMeter().then( metadata => {
+
+         
+
+        create(this.asset, metadata, this.keysCreate, this.state.config)
             .then(response => {
                 console.log('start create response ', response)
                 this.setState({ transaction: response, asset: response.id })
@@ -95,8 +97,11 @@ class Meter extends Component {
             }).catch(error => {
                 console.log('error ', error)
             })
+
+        })
     }
 
+    
 
     timer = setInterval(() => {
 
