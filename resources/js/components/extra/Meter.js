@@ -8,7 +8,7 @@ import LiquidFillGauge from 'react-liquid-gauge';
 
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
-import { newMeter, resetMeter , meterTx } from '../extra/ExtraFunctions';
+import { newMeter, resetMeter, meterTx } from '../extra/ExtraFunctions';
 import { create, transfer, registerMeter } from '../api/CRAB';
 
 //Componentes de Bootstap
@@ -32,19 +32,12 @@ class Meter extends Component {
         this.tempDown = this.tempDown.bind(this);
         this.onChange = this.onChange.bind(this);
         this.reset = this.reset.bind(this);
+        this.meterTx = this.meterTx.bind(this);
     }
 
     startColor = '#03afff'; // cornflowerblue
     endColor = '#ff0000'; // crimson
 
-    
-    BigchainDB = require('bigchaindb-driver')
-    alice = new this.BigchainDB.Ed25519Keypair()
-
-    keysCreate = {
-        publicKey: this.alice.publicKey,
-        privateKey: this.alice.privateKey,
-    }
 
     asset = {
         value: this.props.data.value,
@@ -56,7 +49,7 @@ class Meter extends Component {
     }
 
     metadata = {
-        meterPack: this.props.data.meterPack, 
+        meterPack: this.props.data.meterPack,
         date: new Date().toLocaleDateString("es-ES", { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }),
     }
 
@@ -78,6 +71,32 @@ class Meter extends Component {
         })
     }
 
+    meterTx() {
+        console.log('MeterTx')
+//no se debe generar una transaccion con las mismas llaves en poco tiempo
+        this.BigchainDB = require('bigchaindb-driver')
+        this.alice = new this.BigchainDB.Ed25519Keypair()
+
+        this.keysCreate = {
+            publicKey: this.alice.publicKey,
+            privateKey: this.alice.privateKey,
+        }
+
+        create(this.asset, this.metadata, this.keysCreate, this.state.config)
+            .then(response => {
+                console.log('start create response ', response)
+                this.setState({ transaction: response, asset: response.id })
+                const params = {
+                    tx: response.id
+                }
+                meterTx(params).then(response => {
+                    console.log('start create tx ', response)
+                })
+            }).catch(error => {
+                console.log('error ', error)
+            })
+    }
+
 
     timer = setInterval(() => {
 
@@ -97,24 +116,8 @@ class Meter extends Component {
 
         if (this.state.chain % 10 == 0) {
 
-            console.log('keys ', this.keysCreate)
-            console.log('asset ', this.asset)
-            console.log('keys ', this.metadata)
-            console.log('config ', this.state.config)
+              this.meterTx()
 
-            create(this.asset, this.metadata, this.keysCreate, this.state.config)
-                .then(response => {
-                    console.log('start create response ', response)
-                    this.setState({ transaction: response, asset: response.id })
-                    const params = {
-                        tx: response.id
-                    }
-                    meterTx(params).then(response => {
-                        console.log('start create tx ', response)
-                    })
-                }).catch(error => {
-                    console.log('error ', error)
-                })
         }
 
     }, 5000)

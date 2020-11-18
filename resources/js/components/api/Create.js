@@ -89,7 +89,7 @@ function Create(props) {
 
         if (response == true) {
           
-         let promise = create(transaction, info, keys, config)
+         create(transaction, info, keys, config)
 
             .then(response => {
               save(response.id, response.id, userSend.id)

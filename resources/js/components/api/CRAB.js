@@ -4,7 +4,7 @@ import { getConfig } from '../tables/TableFunctions'
 
 export const create = (data, metadata, keys, config) => {
 
-  //  console.log('keys',keys)
+  console.log('data :',data,'metadata :',metadata,'keys :',keys,'config :',config,)
   const BigchainDB = require('bigchaindb-driver')
   const tx = BigchainDB.Transaction.makeCreateTransaction(
 
@@ -18,9 +18,13 @@ export const create = (data, metadata, keys, config) => {
     keys.publicKey
   )
 
+  console.log('tx',tx);
+
   const txSigned = BigchainDB.Transaction.signTransaction(tx, keys.privateKey)
 
   let conn = new BigchainDB.Connection(config.path)
+
+  console.log('txSigned',txSigned);
 
   return conn.postTransactionCommit(txSigned)
     .then(response => {
