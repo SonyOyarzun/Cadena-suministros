@@ -41,7 +41,9 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            errors: {}
+            errors: {},
+            alert: '',
+            type: '',
         }
 
         this.onChange = this.onChange.bind(this)
@@ -53,14 +55,12 @@ class Login extends Component {
     }
     onSubmit(e) {
         e.preventDefault()
-        render(<></>, document.getElementById('message'));
-
         this.props.history.push(`/`)
 
         login(this.state).then(response => {
-            console.log('login:',response)
+            console.log('login:', response)
             if (response != true) {
-                render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+                this.setState({ alert: response.message, type: response.type })
             }
         })
     }
@@ -68,6 +68,9 @@ class Login extends Component {
     render() {
         return (
             <div className="mx-auto col-12">
+                {this.state.alert!='' &&
+                    <SnackBar alert={this.state.alert} type={this.state.type} />
+                }
                 <form noValidate onSubmit={this.onSubmit} className="row">
                     <div className='col-sm-4'>
                         <input

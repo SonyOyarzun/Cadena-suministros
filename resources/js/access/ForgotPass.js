@@ -45,15 +45,16 @@ class ForgotPass extends Component {
         }
 
         forgot(user).then(response => {
-            this.setState({ loading: false })
-            this.setState({ message: 'Solicitar' })
-            render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+            this.setState({ loading: false , message: 'Solicitar' , alert: response.message , type:response.type })
         })
     }
 
     render() {
         return (
             <div style={styles.custom} className="mx-auto mt-3">
+                 {this.state.alert != '' &&
+                    <SnackBar alert={this.state.alert} type={this.state.type} />
+                }
                 <Card>
                     <Card.Body>
                         <Card.Title>Recuperar contraseña</Card.Title>
