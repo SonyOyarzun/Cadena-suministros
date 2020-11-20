@@ -197,6 +197,9 @@ export default function Search() {
   return (
     <MDBRow>
       <MDBCol md="12" lg="12" xl="12" className="mx-auto mt-3">
+      {alert != '' &&
+        <SnackBar alert={alert} type={type} />
+      }
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>Busqueda de Productos</MDBCardHeader>

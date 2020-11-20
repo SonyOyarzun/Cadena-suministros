@@ -44,6 +44,9 @@ function Trace(props) {
   const [prevent, setPrevent] = useState(false);
   const [buttonMessage, setButtonMessage] = useState('Buscar');
 
+  const [alert, setAlert] = useState('');
+  const [type, setType] = useState('');
+
   const { asset } = useParams();
   //const { asset } = props
 
@@ -187,6 +190,9 @@ function Trace(props) {
   return (
     <MDBRow>
       <MDBCol md="12" lg="12" xl="12" >
+      {alert != '' &&
+        <SnackBar alert={alert} type={type} />
+      }
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>

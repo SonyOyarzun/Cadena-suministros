@@ -32,9 +32,10 @@ export default function CustomizedSnackbars(props) {
     console.log('event' ,event,'reason', reason)
 
     if (reason === 'clickaway') {
-      setOpen(false)  
+      return
     }
-
+    setOpen(false)  
+    
   };
 
   console.log('show :', open)

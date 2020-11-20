@@ -52,6 +52,8 @@ export default function Terminate(props) {
   const [buttonMessage, setButtonMessage] = useState('Buscar');
   const [buttonMessage2, setButtonMessage2] = useState('Dar de Baja');
 
+  const [alert, setAlert] = useState('');
+  const [type, setType] = useState('');
 
   const [step, setStep] = useState([]);
 
@@ -107,7 +109,8 @@ export default function Terminate(props) {
     receiveChain(data)
       .then((response) => {
         console.log('receiveChain :', response)
-        render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+        setAlert(response.message)
+        setType(response.type)
         props.getData()
       })
       .catch(response => {
@@ -123,56 +126,55 @@ export default function Terminate(props) {
 
     products.map((transaction, index) => {
 
-    
+
       const params = {
         "asset": transaction.id,
       }
 
       getAsset(params).then(response => {
-    
-      console.log(transaction)
-      const tx = chain.filter((e) => e.transaction == transaction.id)
-      const us = user.filter((e) => e.id == tx[0].to)
-      console.log('tx', tx)
-      console.log('user', us)
 
-      const metadata = {
-        from: us[0].name,
-        to: 'FIN',
-        commentary: document.getElementById('commentary').value,
-        state: 'Terminado',
-        date: new Date().toString()
-      }
+        console.log(transaction)
+        const tx = chain.filter((e) => e.transaction == transaction.id)
+        const us = user.filter((e) => e.id == tx[0].to)
+        console.log('tx', tx)
+        console.log('user', us)
 
-      console.log('metadata',metadata)
+        const metadata = {
+          from: us[0].name,
+          to: 'FIN',
+          commentary: document.getElementById('commentary').value,
+          state: 'Terminado',
+          date: new Date().toString()
+        }
 
-      const keys = {
-        receivePublickey: BURN_ADDRESS,
-        sendPrivateKey: us[0].privateKey,
-      }
+        console.log('metadata', metadata)
 
-      console.log('keys',keys)
+        const keys = {
+          receivePublickey: BURN_ADDRESS,
+          sendPrivateKey: us[0].privateKey,
+        }
 
-      console.log('response',response[0])
+        console.log('keys', keys)
 
-      transfer(response[0], metadata, keys, config).then(response2 => {
-        console.log('terminate', response2)
-        save(response[0].id, response.id, transaction.id, us[0].id)
+        console.log('response', response[0])
 
-      }).catch(response => {
-        console.log('error terminate', response)
+        transfer(response[0], metadata, keys, config).then(response2 => {
+          console.log('terminate', response2)
+          save(response[0].id, response.id, transaction.id, us[0].id)
+
+        }).catch(response => {
+          console.log('error terminate', response)
+        })
+
       })
 
     })
-
-  })
 
   }
 
   const process = () => {
 
     render(<Load />, document.getElementById('load'));
-    render(<></>, document.getElementById('message'));
     setPrevent(true)
     setButtonMessage('Cargando...')
 
@@ -186,11 +188,13 @@ export default function Terminate(props) {
       if (response.type != 'error') {
         setProducts(response)
       } else {
-        render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+        setAlert(response.message)
+        setType(response.type)
       }
 
     }).catch(response => {
-      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+      setAlert(response.message)
+      setType(response.type)
       console.log("Error " + response)
     }).finally(() => {
       setPrevent(false);
@@ -289,6 +293,9 @@ export default function Terminate(props) {
   return (
     <MDBRow>
       <MDBCol md="12" lg="12" xl="12" className="mx-auto mt-3">
+      {alert != '' &&
+        <SnackBar alert={alert} type={type} />
+      }
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>Busqueda de Productos</MDBCardHeader>
