@@ -2,7 +2,7 @@ import React, { Component, Fragment, useState, useEffect, useCallback } from 're
 //Material Bootstrap
 import { MDBIcon, MDBBtn } from "mdbreact";
 
-import { getConfig, newChain, productReply , productExist } from "../tables/TableFunctions";
+import { getConfig, newChain, productReply, productExist } from "../tables/TableFunctions";
 import { getProfile } from "../../access/UserFunctions";
 import { create } from "../api/CRAB";
 import { keys } from 'lodash';
@@ -17,6 +17,8 @@ import { render } from 'react-dom';
 function Create(props) {
 
   console.log('props ', props)
+  const [alert, setAlert] = useState('');
+  const [type, setType] = useState('');
 
   const process = () => {
     axios.all([
@@ -48,7 +50,8 @@ function Create(props) {
 
     newChain(data).then(response => {
       console.log('new chain :', response)
-      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+      setAlert(response.message)
+      setType(response.type)
     })
 
   }
@@ -88,8 +91,8 @@ function Create(props) {
         console.log('product Exist :', response)
 
         if (response == true) {
-          
-         create(transaction, info, keys, config)
+
+          create(transaction, info, keys, config)
 
             .then(response => {
               save(response.id, response.id, userSend.id)
@@ -107,21 +110,22 @@ function Create(props) {
               setTimeout(() => {
                 render(<></>, document.getElementById('load'));
               }, 10000);
-             
+
             })
-         
-        
-        }else{
+
+
+        } else {
           render(<></>, document.getElementById('load'));
           props.updateData()
         }
-        
-     
+
+
       })
 
 
     } else {
-      render(<SnackBar state={true} alert={'Debe ingresar productos y destinatario'} type={'warning'} />, document.getElementById('message'));
+      setAlert('Debe ingresar productos y destinatario')
+      setType('warning')
       render(<></>, document.getElementById('load'));
     }
 
@@ -129,13 +133,16 @@ function Create(props) {
 
   return (
     <div>
+      {alert != '' &&
+        <SnackBar alert={alert} type={type} />
+      }
       <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={process}>
         <MDBIcon icon="paper-plane" />
       </MDBBtn>
     </div>
   )
 
- 
+
 }
 
 

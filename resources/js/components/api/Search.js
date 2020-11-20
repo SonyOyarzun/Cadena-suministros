@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
@@ -47,6 +47,9 @@ export default function Search() {
   const [prevent, setPrevent] = useState(false);
   const [buttonMessage, setButtonMessage] = useState('Buscar');
 
+  const [alert, setAlert] = useState('');
+  const [type, setType] = useState('');
+
 
   const [step, setStep] = useState([]);
 
@@ -59,10 +62,11 @@ export default function Search() {
 
     Object.keys(step).map((key, row) => (
 
-      console.log('key ',step[row]['data']['data']),
+      console.log('key ', step[row]['data']['data']),
 
-      {...step[row]['data'].hasOwnProperty('data') &&
-      array.push(step[row]['data']['data'])
+      {
+        ...step[row]['data'].hasOwnProperty('data') &&
+        array.push(step[row]['data']['data'])
       }
 
     ))
@@ -73,8 +77,7 @@ export default function Search() {
 
   const process = () => {
 
-    render(<Load/>, document.getElementById('load'));
-    render(<></>, document.getElementById('message'));
+    render(<Load />, document.getElementById('load'));
     setPrevent(true)
     setButtonMessage('Cargando...')
 
@@ -85,14 +88,17 @@ export default function Search() {
 
     searchAsset(params).then(response => {
       console.log('productos :', response)
-      if (response.type != 'error'){
-        setProducts(response) 
-      }else{
-      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+      if (response.type != 'error') {
+        setProducts(response)
+      } else {
+        setAlert(response.message)
+        setType(response.type)
       }
 
     }).catch(response => {
-      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+      setAlert(response.message)
+      setType(response.type)
+
       console.log("Error " + response)
     }).finally(() => {
       setPrevent(false);
@@ -124,48 +130,49 @@ export default function Search() {
   const createJson = (
     //Busca propiedad transaction, la cual es caracteristica de nuestro diseño
 
-    
+
 
     products.map((data, index) => (
-     
+
       {
         ...data.data.hasOwnProperty('data') ? (
 
-          obj[index]= data.data.data,
+          obj[index] = data.data.data,
           objID[index] = data.id
 
 
         ) : (
             console.log('no encontrada'),
-            columns = [{label: "Busqueda", field: "message"}],
-            rows = [{message: "Sin registros"}]
+            columns = [{ label: "Busqueda", field: "message" }],
+            rows = [{ message: "Sin registros" }]
           )
       }
     )),
 
-   // console.log('obj :',obj),
+    // console.log('obj :',obj),
 
     Object.keys(obj).map((key, row) => (
 
       preRows = [objID[row]],
-      preRows = { clickEvent: () => handleClick(objID[row]), cursor: 'pointer'},
-      
+      preRows = { clickEvent: () => handleClick(objID[row]), cursor: 'pointer' },
+
       Object.keys(obj[key][0]).map((key2, col) => (
 
-     //   console.log('table :',key2),
-        
-        {...count < Object.keys(obj[key][0]).length &&
+        //   console.log('table :',key2),
+
+        {
+          ...count < Object.keys(obj[key][0]).length &&
           columns.push({
             label: key2,
             field: key2,
           }),
         },
-        
-       
+
+
         preRows[key2] = obj[row][0][key2],
         count = count + 1
       )),
-      
+
       rows.push(preRows)
 
     )),
@@ -195,10 +202,10 @@ export default function Search() {
           <MDBCardHeader>Busqueda de Productos</MDBCardHeader>
 
           <MDBCardBody>
-          
+
             <MDBInput id="id" label="Producto" validate error="wrong" success="right" valueDefault="" />
             <div className="text-center pt-3 mb-3">
-  <MDBBtn type="button" onClick={process} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{buttonMessage}</MDBBtn>
+              <MDBBtn type="button" onClick={process} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{buttonMessage}</MDBBtn>
             </div>
           </MDBCardBody>
 

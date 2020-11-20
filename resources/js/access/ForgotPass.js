@@ -55,7 +55,7 @@ class ForgotPass extends Component {
     render() {
         return (
             <div style={styles.custom} className="mx-auto mt-3">
-                 {this.state.alert != '' &&
+                {this.state.alert != '' &&
                     <SnackBar alert={this.state.alert} type={this.state.type} />
                 }
                 <Card>

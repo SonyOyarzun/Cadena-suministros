@@ -25,7 +25,8 @@ function Transfer(props) {
   const [prevent, setPrevent] = useState(false);
   const [message, setMessage] = useState('Realizar Recepción');
 
-  render(<></>, document.getElementById('message'));
+  const [alert, setAlert] = useState('');
+  const [type, setType] = useState('');
 
   const [commentary, setCommentary] = useState('');
 
@@ -78,7 +79,9 @@ function Transfer(props) {
     receiveChain(data)
       .then((response) => {
         console.log('receiveChain :', response)
-        render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+        setAlert(response.message)
+        setType(response.type)
+
         props.getData()
       })
       .catch(response => {
@@ -134,7 +137,8 @@ function Transfer(props) {
         })
 
     } else {
-      render(<SnackBar state={true} alert={'Debe ingresar un comentario'} type={'info'} />, document.getElementById('message'));
+      setAlert('Debe ingresar un comentario')
+      setType('info')
     }
 
 
@@ -172,7 +176,7 @@ function Transfer(props) {
     //id de transaccion
     const txCreatedID = props.transaction
 
-     console.log('send :', userSend, 'receive :', userReceive,'transaction :',txCreatedID)
+    console.log('send :', userSend, 'receive :', userReceive, 'transaction :', txCreatedID)
 
     // metadatos de informacion adicional
     const info = {
@@ -183,20 +187,20 @@ function Transfer(props) {
       date: new Date().toString()
     }
 
-    console.log('KEYS :',keys)
+    console.log('KEYS :', keys)
 
     transfer(transaction, info, keys, config).then(response => {
       console.log('transfer:', response)
       save(txCreatedID, response.id, asset, userSend.id)
     }).catch(response => {
-      console.log('error transfer',response)
+      console.log('error transfer', response)
 
     }).then(() => {
 
     }).finally(() => {
 
       setTimeout(() => {
-        
+
         setMessage('Realizar Recepción')
         setPrevent(false)
         handleClose()
@@ -212,6 +216,9 @@ function Transfer(props) {
 
   return (
     <div>
+      {alert != '' &&
+        <SnackBar alert={alert} type={type} />
+      }
       <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={handleShow}>
         <MDBIcon icon={icon} />
       </MDBBtn>
