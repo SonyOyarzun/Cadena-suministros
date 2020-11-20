@@ -115,7 +115,7 @@ function Trace(props) {
             setAlert('No encontrada')
           }
 
-          if (responseArr[1].length > 0) {
+          if (responseArr[1].hasOwnProperty('asset')) {
 
             if (responseArr[1].asset.data.hasOwnProperty('data')) {
 
@@ -130,8 +130,7 @@ function Trace(props) {
 
           console.log('step: ', responseArr[0]);
           console.log('Productos: ', responseArr[1].asset.data.data);
-          setProducts(responseArr[1].asset.data.data)
-          setStep(responseArr[0])
+
 
         }).finally(() => {
           setPrevent(false);
@@ -216,7 +215,6 @@ function Trace(props) {
             {arrayStep.length > 0 &&
               (
                 <div className="text-center">
-                  <MDBInput id="order" label="Invertir Orden" validate error="wrong" success="right" valueDefault={asset} />
                   <MDBBtn type="button" onClick={revert} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{'Invertir'}</MDBBtn>
                   <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                     <i class="fas fa-map-marked-alt"></i> Recorrido
@@ -264,30 +262,31 @@ function Trace(props) {
 
           <MDBCardFooter className={classes.root}>
 
-            {array.length > 0 &&
+            {products.length > 0 &&
               (
                 <div className="text-center">
+
                   <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                     <MDBIcon icon="cash-register" /> Producto
-              </Typography>
+                  </Typography>
 
-
+                  <MDBDataTableV5
+                    responsive
+                    bordered
+                    hover
+                    btn
+                    sortable={false}
+                    paging={false}
+                    searching={false}
+                    data={data}
+                    info={false}
+                  />
                 </div>
 
               )
             }
 
-            <MDBDataTableV5
-              responsive
-              bordered
-              hover
-              btn
-              sortable={false}
-              paging={false}
-              searching={false}
-              data={data}
-              info={false}
-            />
+
           </MDBCardFooter>
 
         </MDBCard>
