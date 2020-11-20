@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
-import { getTransaction, getAsset, searchAsset, getConfig, getUser, getChain } from "../tables/TableFunctions";
+import { getTransaction, getAsset, searchAsset, getConfig, getUser, getChain , receiveChain } from "../tables/TableFunctions";
 
 import { transfer } from '../api/CRAB'
 
