@@ -16,28 +16,31 @@ function EditUser(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [state, setState] = useState({ id: props.id, name: props.name , email: props.email,role: props.role, path: props.path})
+  const [state, setState] = useState({ id: props.id, name: props.name, email: props.email, role: props.role, path: props.path })
 
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('Actualizar')
 
+  const [alert, setAlert] = useState('');
+  const [type, setType] = useState('');
 
-  const onChange=(e) =>{
+
+  const onChange = (e) => {
     const { name, value } = e.target;
-    setState(prevState => ({ ...prevState,[name]: value }));
+    setState(prevState => ({ ...prevState, [name]: value }));
   }
- // console.log('state ',state)
+  // console.log('state ',state)
 
-  const onSubmit=(e) => {
+  const onSubmit = (e) => {
     e.preventDefault()
-    render(<></>, document.getElementById('message'));
-    setLoading(true )
+    setLoading(true)
     setMessage('Cargando...')
 
     editUser(state).then(response => {
       setLoading(false)
       setMessage('Actualizar')
-      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+      setAlert(response.message)
+      setType(response.type)
       props.getData()
     })
   }
@@ -45,6 +48,9 @@ function EditUser(props) {
 
   return (
     <div>
+      {alert != '' &&
+        <SnackBar alert={alert} type={type} />
+      }
       <MDBBtn tag="a" size="sm" gradient="blue" onClick={handleShow}>
         <MDBIcon far icon="edit" />
       </MDBBtn>
@@ -60,11 +66,11 @@ function EditUser(props) {
             </Form.Group>
             <Form.Group controlId="editUserForm.name">
               <Form.Label>Nombre</Form.Label>
-              <Form.Control name='name' type="text" placeholder="nombre completo" defaultValue={state.name} maxLength="30" onChange={onChange}/>
+              <Form.Control name='name' type="text" placeholder="nombre completo" defaultValue={state.name} maxLength="30" onChange={onChange} />
             </Form.Group>
             <Form.Group controlId="editUserForm.email">
               <Form.Label>Mail</Form.Label>
-              <Form.Control name='email' type="email" placeholder="name@example.com" defaultValue={state.email} maxLength="30" onChange={onChange}/>
+              <Form.Control name='email' type="email" placeholder="name@example.com" defaultValue={state.email} maxLength="30" onChange={onChange} />
             </Form.Group>
             <Form.Group controlId="editUserForm.role">
               <Form.Label>Role</Form.Label>
@@ -75,7 +81,7 @@ function EditUser(props) {
             </Form.Group>
             <Form.Group controlId="editUserForm.path">
               <Form.Label>Ruta</Form.Label>
-              <Form.Control name='path' as="textarea" rows="3" defaultValue={state.path} maxLength="300" onChange={onChange}/>
+              <Form.Control name='path' as="textarea" rows="3" defaultValue={state.path} maxLength="300" onChange={onChange} />
             </Form.Group>
           </Form>
 
