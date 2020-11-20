@@ -84,6 +84,7 @@ function Trace(props) {
         getTransaction(params),
       ])
         .then(responseArr => {
+          console.log('get', responseArr)
           console.log('getAsset', responseArr[0])
           console.log('getTransaction', responseArr[1])
 
@@ -127,8 +128,10 @@ function Trace(props) {
             setAlert('No encontrada')
           }
 
-          console.log('Traza: ', responseArr[0]);
-          console.log('Productos: ', responseArr[1]);
+          console.log('step: ', responseArr[0]);
+          console.log('Productos: ', responseArr[1].asset.data.data);
+          setProducts(responseArr[1].asset.data.data)
+          setStep(responseArr[0])
 
         }).finally(() => {
           setPrevent(false);
@@ -199,7 +202,7 @@ function Trace(props) {
         }
         <MDBCard className={classes.root}>
 
-        <MDBCardHeader>Trazabilidad de un Producto</MDBCardHeader>
+          <MDBCardHeader>Trazabilidad de un Producto</MDBCardHeader>
 
           <MDBCardBody>
             <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault={asset} />
@@ -268,7 +271,13 @@ function Trace(props) {
                     <MDBIcon icon="cash-register" /> Producto
               </Typography>
 
-              <MDBDataTableV5
+
+                </div>
+
+              )
+            }
+
+            <MDBDataTableV5
               responsive
               bordered
               hover
@@ -279,11 +288,6 @@ function Trace(props) {
               data={data}
               info={false}
             />
-                </div>
-                
-              )
-            }
-          
           </MDBCardFooter>
 
         </MDBCard>
