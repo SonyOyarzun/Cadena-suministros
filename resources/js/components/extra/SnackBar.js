@@ -24,7 +24,7 @@ export default function CustomizedSnackbars(props) {
 
   useEffect( ()=>{
     setOpen(true)  
- },[props.alert]);
+ },[props]);
 
 
   const handleClose = (event, reason) => {
@@ -34,6 +34,7 @@ export default function CustomizedSnackbars(props) {
     if (reason === 'clickaway') {
       setOpen(false)  
     }
+
   };
 
   console.log('show :', open)

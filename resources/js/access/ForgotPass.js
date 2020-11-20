@@ -24,7 +24,9 @@ class ForgotPass extends Component {
             password: '',
             loading: false,
             message: 'Solicitar',
-            errors: {}
+            errors: {},
+            alert: '',
+            type: ''
         }
 
         this.onChange = this.onChange.bind(this)
@@ -45,7 +47,8 @@ class ForgotPass extends Component {
         }
 
         forgot(user).then(response => {
-            this.setState({ loading: false , message: 'Solicitar' , alert: response.message , type:response.type })
+            this.setState({ loading: false , message: 'Solicitar' , alert: response.message , type: response.type })
+            console.log('forgot: ',response)
         })
     }
 
