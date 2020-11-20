@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
+import SnackBar from '../extra/SnackBar'
 
 //parametros desde url
 import { useParams, withRouter } from "react-router-dom";
@@ -94,45 +95,48 @@ function Trace(props) {
               if (responseArr[0][0].metadata.hasOwnProperty('metadata')) {
 
                 console.log('metadata', responseArr[0])
-                if(revert==true){
+                if (revert == true) {
                   responseArr[0].sort((a, b) => b.metadata.metadata.date - a.metadata.metadata.date)
-                }else{
+                } else {
                   setStep(responseArr[0])
                 }
-                
+
 
               } else {
-                alert('No encontrada')
+                setAlert('No encontrada')
               }
 
             } else {
-              alert('No encontrada')
+              setAlert('No encontrada')
             }
 
           } else {
-            alert('No encontrada')
+            setAlert('No encontrada')
           }
 
+          if (responseArr[1].length > 0) {
 
-          if (responseArr[1].asset.data.hasOwnProperty('data')) {
+            if (responseArr[1].asset.data.hasOwnProperty('data')) {
 
-            setProducts(responseArr[1].asset.data.data)
+              setProducts(responseArr[1].asset.data.data)
 
+            } else {
+              setAlert('No encontrada')
+            }
           } else {
-            alert('No encontrada')
-         }
-
-
-          setPrevent(false);
-          setButtonMessage('Buscar');
+            setAlert('No encontrada')
+          }
 
           console.log('Traza: ', responseArr[0]);
           console.log('Productos: ', responseArr[1]);
 
-        });
+        }).finally(() => {
+          setPrevent(false);
+          setButtonMessage('Buscar');
+        })
 
     } else {
-      alert('Debe ingresar una ID')
+      setAlert('Debe ingresar una ID')
     }
 
   }
@@ -190,31 +194,32 @@ function Trace(props) {
   return (
     <MDBRow>
       <MDBCol md="12" lg="12" xl="12" >
-      {alert != '' &&
-        <SnackBar alert={alert} type={type} />
-      }
+        {alert != '' &&
+          <SnackBar alert={alert} type={type} />
+        }
         <MDBCard className={classes.root}>
 
-          <MDBCardHeader>
+        <MDBCardHeader>Trazabilidad de un Producto</MDBCardHeader>
+
+          <MDBCardBody>
             <MDBInput id="id" label="ID ASSETS" validate error="wrong" success="right" valueDefault={asset} />
             <div className="text-center pt-3 mb-3">
               <MDBBtn type="button" onClick={process} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{buttonMessage}</MDBBtn>
             </div>
-          </MDBCardHeader>
+          </MDBCardBody>
 
           <MDBCardBody className={classes.root}>
 
-            {arrayStep.length > 0 ?
+            {arrayStep.length > 0 &&
               (
                 <div className="text-center">
-                   <MDBInput id="order" label="Invertir Orden" validate error="wrong" success="right" valueDefault={asset} />
-                   <MDBBtn type="button" onClick={revert} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{'Invertir'}</MDBBtn>
+                  <MDBInput id="order" label="Invertir Orden" validate error="wrong" success="right" valueDefault={asset} />
+                  <MDBBtn type="button" onClick={revert} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{'Invertir'}</MDBBtn>
                   <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                     <i class="fas fa-map-marked-alt"></i> Recorrido
               </Typography>
                 </div>
               )
-              : (<></>)
             }
 
             <Timeline align="left">
@@ -230,7 +235,7 @@ function Trace(props) {
                   </TimelineOppositeContent>
                   <TimelineSeparator>
                     <TimelineDot>
-                      {(arrayStep.length)-1 == index  ? (
+                      {(arrayStep.length) - 1 == index ? (
                         <i class="fas fa-check-circle"></i>
                       ) : (
                           <i class="fas fa-arrow-alt-circle-down"></i>
@@ -244,7 +249,7 @@ function Trace(props) {
                         <i className="fas fa-truck-moving"></i>
                       </Typography>
                       <Typography style={{ textAlign: 'center' }}>{label.from} <i class="fas fa-angle-double-right"></i> {label.to}</Typography>
-                      <Typography  style={{ textAlign: 'center' }}>{label.commentary}</Typography>
+                      <Typography style={{ textAlign: 'center' }}>{label.commentary}</Typography>
                     </Paper>
                   </TimelineContent>
                 </TimelineItem>
@@ -256,17 +261,14 @@ function Trace(props) {
 
           <MDBCardFooter className={classes.root}>
 
-            {array.length > 0 ?
+            {array.length > 0 &&
               (
                 <div className="text-center">
                   <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                     <MDBIcon icon="cash-register" /> Producto
               </Typography>
-                </div>
-              )
-              : (<></>)
-            }
-            <MDBDataTableV5
+
+              <MDBDataTableV5
               responsive
               bordered
               hover
@@ -277,6 +279,11 @@ function Trace(props) {
               data={data}
               info={false}
             />
+                </div>
+                
+              )
+            }
+          
           </MDBCardFooter>
 
         </MDBCard>

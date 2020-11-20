@@ -11,7 +11,8 @@ import { render } from 'react-dom';
 
 function PassUser(props) {
 
-  const [copySuccess, setCopySuccess] = useState(false);
+  const [alert, setAlert] = useState('');
+  const [type, setType] = useState('');
 
   const textRef = useRef(null);
 
@@ -22,12 +23,17 @@ function PassUser(props) {
     // This is just personal preference.
     // I prefer to not show the whole text area selected.
     e.target.focus();
-    setCopySuccess('ID de Transaccion copiada');
+    setAlert('ID de Transaccion copiada');
   };
 
 
   return (
     <div>
+
+      {alert != '' &&
+        <SnackBar alert={alert} type={type} />
+      }
+
       <Modal show={props.show} onHide={props.handleClose}>
 
         <Modal.Header closeButton>
@@ -36,9 +42,6 @@ function PassUser(props) {
 
 
         <Modal.Body>
-          {copySuccess != '' &&
-            render(<SnackBar state={true} alert={copySuccess} type={'success'} />, document.getElementById('message'))
-          }
           <Form.Group controlId="messages">
             <Form.Label>{props.label}</Form.Label>
             <Form.Control readOnly type="text" rows="3" maxLength="12" defaultValue={props.value} ref={textRef} />

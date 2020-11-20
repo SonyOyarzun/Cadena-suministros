@@ -3,7 +3,7 @@ import React, { Component, Fragment, useState } from 'react';
 //Componentes de Bootstap
 import { Button, Modal, Card, Form } from 'react-bootstrap';
 //Material Bootstrap
-import { MDBIcon,MDBBtn } from "mdbreact";
+import { MDBIcon, MDBBtn } from "mdbreact";
 import { changePass } from '../../access/UserFunctions';
 
 import SnackBar from '../../components/extra/SnackBar'
@@ -16,36 +16,43 @@ function PassUser(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [state, setState] = useState({ id: props.id, pass: '' , confirmPass: '' })
+  const [state, setState] = useState({ id: props.id, pass: '', confirmPass: '' })
 
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('Actualizar')
 
+  const [alert, setAlert] = useState('');
+  const [type, setType] = useState('');
 
-  const onChange=(e) =>{
+
+  const onChange = (e) => {
     const { name, value } = e.target;
-    setState(prevState => ({ ...prevState,[name]: value }));
+    setState(prevState => ({ ...prevState, [name]: value }));
   }
- // console.log('state ',state)
+  // console.log('state ',state)
 
-  const onSubmit=(e) => {
+  const onSubmit = (e) => {
     e.preventDefault()
-    render(<></>, document.getElementById('message'));
-    setLoading(true )
+    setLoading(true)
     setMessage('Cargando...')
 
     changePass(state).then(response => {
       setLoading(false)
       setMessage('Actualizar')
-      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+      setAlert(response.message)
+      setType(response.type)
     })
   }
 
   return (
     <div>
 
+      {alert != '' &&
+        <SnackBar alert={alert} type={type} />
+      }
+
       <MDBBtn tag="a" size="sm" gradient="blue" onClick={handleShow}>
-      <MDBIcon  icon="key" />
+        <MDBIcon icon="key" />
       </MDBBtn>
 
 
@@ -58,11 +65,11 @@ function PassUser(props) {
           <Form>
             <Form.Group controlId="passUserForm.pass">
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control name='pass' type="Password" rows="3" maxLength="12" onChange={onChange} defaultValue={state.pass}/>
+              <Form.Control name='pass' type="Password" rows="3" maxLength="12" onChange={onChange} defaultValue={state.pass} />
             </Form.Group>
             <Form.Group controlId="passUserForm.confirmPass">
               <Form.Label>Repita Contraseña</Form.Label>
-              <Form.Control name='confirmPass' type="Password" rows="3" maxLength="12" onChange={onChange}  defaultValue={state.confirmPass}/>
+              <Form.Control name='confirmPass' type="Password" rows="3" maxLength="12" onChange={onChange} defaultValue={state.confirmPass} />
             </Form.Group>
           </Form>
 
@@ -73,7 +80,7 @@ function PassUser(props) {
       </Button>
           <Button variant="primary" onClick={onSubmit}>
             {message}
-      </Button>
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>

@@ -82,7 +82,10 @@ function Transfer(props) {
         setAlert(response.message)
         setType(response.type)
 
-        props.getData()
+        setTimeout(() => {
+          props.getData()
+        }, 5000);
+
       })
       .catch(response => {
         console.log('error receiveChain', response)
@@ -205,7 +208,7 @@ function Transfer(props) {
         setPrevent(false)
         handleClose()
         render(<></>, document.getElementById('load'));
-      }, 15000);
+      }, 10000);
 
     })
 

@@ -220,11 +220,8 @@ export default function Search() {
                   <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                     <MDBIcon icon="cash-register" /> Producto
               </Typography>
-                </div>
-              )
-              : (<center>{'Sin resultados'}</center>)
-            }
-            <MDBDataTableV5
+
+              <MDBDataTableV5
               responsive
               bordered
               hover
@@ -235,6 +232,12 @@ export default function Search() {
               data={data}
               info={false}
             />
+
+                </div>
+              )
+              : (<center>{'Sin resultados'}</center>)
+            }
+           
           </MDBCardFooter>
 
         </MDBCard>

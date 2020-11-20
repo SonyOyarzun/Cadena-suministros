@@ -47,7 +47,7 @@ class Reset extends Component {
 
         reset(user).then(response => {
             this.setState({ loading: false, message: 'Restablecer', type: response.type, alert: response.message })
-            console.log('state :', this.state)
+            console.log('state :', response)
         })
     }
 

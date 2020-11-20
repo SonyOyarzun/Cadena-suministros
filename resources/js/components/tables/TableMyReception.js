@@ -24,7 +24,9 @@ class TableMyReception extends Component {
       sends: [],
       loading: true,
       users: [],
-      userSend: []
+      userSend: [],
+      alert: '',
+      type: ''
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
     this.onTagsChange = this.onTagsChange.bind(this);
@@ -44,7 +46,7 @@ class TableMyReception extends Component {
 
   onTagsChange(event, values) {
     this.setState({ userSend: values })
-  //  console.log('userSend onChange', this.state.userSend)
+    //  console.log('userSend onChange', this.state.userSend)
   }
 
 
@@ -57,7 +59,7 @@ class TableMyReception extends Component {
 
     const save = (id_transaction, asset, to) => {
       render(<></>, document.getElementById('message'));
-      render(<Load/>, document.getElementById('load'));
+      render(<Load />, document.getElementById('load'));
       const data = {
         transaction: id_transaction,
         asset: asset,
@@ -65,15 +67,20 @@ class TableMyReception extends Component {
       }
 
       reSendChain(data).then((response) => {
-          console.log(response);
-          render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+        console.log(response);
+        this.setState({ alert: response.message, type: response.type })
+
+        setTimeout(() => {
+          render(<></>, document.getElementById('load'));
           this.getData()
-          render(<></>, document.getElementById('load'));
-        }, (response) => {
-          console.log(response);
-          render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
-          render(<></>, document.getElementById('load'));
-        });
+        }, 5000);
+
+        
+      }, (response) => {
+        console.log(response);
+        this.setState({ alert: response.message, type: response.type })
+        render(<></>, document.getElementById('load'));
+      });
     }
 
     let columns = [
@@ -118,11 +125,11 @@ class TableMyReception extends Component {
           from: data.fromName,
           to: data.toName,
           state: data.state,
-          updated_at: this.time = new Date(data.updated_at).toLocaleDateString("es-ES", this.options) ,
-          action: 
-          <MDBBtn color="primary" rounded onClick={() => { save(data.transaction, data.asset, this.state.userSend.id) }}>
-          <MDBIcon far icon="share-square"/>
-          </MDBBtn>,
+          updated_at: this.time = new Date(data.updated_at).toLocaleDateString("es-ES", this.options),
+          action:
+            <MDBBtn color="primary" rounded onClick={() => { save(data.transaction, data.asset, this.state.userSend.id) }}>
+              <MDBIcon far icon="share-square" />
+            </MDBBtn>,
 
         }
 
@@ -131,9 +138,9 @@ class TableMyReception extends Component {
 
     //filtrara solo los que tienen estado Enviado
 
-   // rows = rows.filter(e => e.state == "Recibido" && e.to == this.state.userSend.id)
+    // rows = rows.filter(e => e.state == "Recibido" && e.to == this.state.userSend.id)
 
-   rows = rows.filter(e => e.state == "Recibido")
+    rows = rows.filter(e => e.state == "Recibido")
 
     const data = {
       columns,
@@ -162,28 +169,31 @@ class TableMyReception extends Component {
     } else {
       return (
         <>
-        <MDBRow fluid style={styles.border}>
-          <MDBCol size="4">
-            <Auto onTagsChange={this.onTagsChange} label={'Usuario a Enviar'}/>
-          </MDBCol>
-        </MDBRow>
+          {this.state.alert != '' &&
+            <SnackBar alert={this.state.alert} type={this.state.type} />
+          }
+          <MDBRow fluid style={styles.border}>
+            <MDBCol size="4">
+              <Auto onTagsChange={this.onTagsChange} label={'Usuario a Enviar'} />
+            </MDBCol>
+          </MDBRow>
 
-        <MDBRow>
-          <MDBCol size="12">
-            <MDBDataTableV5
-              className='cust-table'
-              responsive
-              entriesOptions={[5, 10, 15]}
-              entries={5}
-              pagesAmount={4}
-              bordered
-              hover
-              btn
-              sortable={false}
-              data={data}
-            />
-          </MDBCol>
-        </MDBRow>
+          <MDBRow>
+            <MDBCol size="12">
+              <MDBDataTableV5
+                className='cust-table'
+                responsive
+                entriesOptions={[5, 10, 15]}
+                entries={5}
+                pagesAmount={4}
+                bordered
+                hover
+                btn
+                sortable={false}
+                data={data}
+              />
+            </MDBCol>
+          </MDBRow>
 
         </>
       )
