@@ -24,29 +24,32 @@ function NewUser(props) {
 
   //var keypair = new driver.Ed25519Keypair(bip39.mnemonicToSeed("yourString").slice(0, 32))
 
-  const [state, setState] = useState({ id: '' , name: '' , email: '',role: 'A', path: '', pass: '', confirmPass: '', privateKey: alice.privateKey, publicKey: alice.publicKey})
+  const [state, setState] = useState({ id: '', name: '', email: '', role: 'A', path: '', pass: '', confirmPass: '', privateKey: alice.privateKey, publicKey: alice.publicKey })
 
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('Crear usuario')
 
+  const [alert, setAlert] = useState('');
+  const [type, setType] = useState('');
 
-  const onChange=(e) =>{
+  const onChange = (e) => {
     const { name, value } = e.target;
-    setState(prevState => ({ ...prevState,[name]: value }));
+    setState(prevState => ({ ...prevState, [name]: value }));
   }
   //console.log('state ',state)
 
-  const onSubmit=(e) => {
+  const onSubmit = (e) => {
     e.preventDefault()
     render(<></>, document.getElementById('message'));
-    setLoading(true )
+    setLoading(true)
     setMessage('Cargando...')
 
 
     newUser(state).then(response => {
       setLoading(false)
       setMessage('Crear usuario')
-      render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+      setAlert(response.message)
+      setType(response.type)
       props.getData()
     })
   }
@@ -54,7 +57,9 @@ function NewUser(props) {
 
   return (
     <div>
-
+      {alert != '' &&
+        <SnackBar alert={alert} type={type} />
+      }
       <MDBBtn color="primary" rounded onClick={handleShow}><MDBIcon icon="user-plus" /> Agregar Usuario</MDBBtn>
 
       <Modal show={show} onHide={handleClose}>
@@ -65,11 +70,11 @@ function NewUser(props) {
           <Form>
             <Form.Group controlId="newUserForm.name">
               <Form.Label>Nombre</Form.Label>
-              <Form.Control name='name' type="text" placeholder="nombre completo" maxLength="30"  onChange={onChange} defaultValue={state.name}/>
+              <Form.Control name='name' type="text" placeholder="nombre completo" maxLength="30" onChange={onChange} defaultValue={state.name} />
             </Form.Group>
             <Form.Group controlId="newUserForm.email">
               <Form.Label>Mail</Form.Label>
-              <Form.Control name='email' type="email" placeholder="name@example.com" maxLength="30" onChange={onChange} defaultValue={state.email}/>
+              <Form.Control name='email' type="email" placeholder="name@example.com" maxLength="30" onChange={onChange} defaultValue={state.email} />
             </Form.Group>
             <Form.Group controlId="newUserForm.role">
               <Form.Label>Role</Form.Label>
@@ -80,15 +85,15 @@ function NewUser(props) {
             </Form.Group>
             <Form.Group controlId="newUserForm.path">
               <Form.Label>Ruta</Form.Label>
-              <Form.Control as="textarea" name='path' rows="3" maxLength="300" onChange={onChange} defaultValue={state.path}/>
+              <Form.Control as="textarea" name='path' rows="3" maxLength="300" onChange={onChange} defaultValue={state.path} />
             </Form.Group>
             <Form.Group controlId="newUserForm.pass">
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control name='pass' type="Password" rows="3" maxLength="12" onChange={onChange} defaultValue={state.pass}/>
+              <Form.Control name='pass' type="Password" rows="3" maxLength="12" onChange={onChange} defaultValue={state.pass} />
             </Form.Group>
             <Form.Group controlId="newUserForm.confirmPass">
               <Form.Label>Repita Contraseña</Form.Label>
-              <Form.Control name='confirmPass' type="Password" rows="3" maxLength="12" onChange={onChange} defaultValue={state.confirmPass}/>
+              <Form.Control name='confirmPass' type="Password" rows="3" maxLength="12" onChange={onChange} defaultValue={state.confirmPass} />
             </Form.Group>
           </Form>
 
