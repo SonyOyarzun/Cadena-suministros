@@ -139,6 +139,7 @@ export default function Terminate(props) {
         console.log('tx', tx)
         console.log('user', us)
 
+        if(document.getElementById('commentary').value!=''){
         const metadata = {
           from: us[0].name,
           to: 'FIN',
@@ -146,7 +147,10 @@ export default function Terminate(props) {
           state: 'Terminado',
           date: new Date().toString()
         }
-
+      }else{
+      setAlert('Debe ingresar Observacion')
+      setType('error')
+      }
         console.log('metadata', metadata)
 
         const keys = {
@@ -315,11 +319,8 @@ export default function Terminate(props) {
                   <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                     <MDBIcon icon="cash-register" /> Producto
               </Typography>
-                </div>
-              )
-              : (<center>{'Sin resultados'}</center>)
-            }
-            <MDBDataTableV5
+
+              <MDBDataTableV5
               responsive
               bordered
               hover
@@ -330,6 +331,12 @@ export default function Terminate(props) {
               data={data}
               info={false}
             />
+
+                </div>
+              )
+              : (<center>{'Sin resultados'}</center>)
+            }
+            
 
           </MDBCardBody>
 
