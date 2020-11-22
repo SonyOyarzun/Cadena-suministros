@@ -11,7 +11,7 @@ let style = {
     position: "fixed",
     left: "0",
     bottom: "0",
-    height: "150px",
+    height: "160px",
     width: "100%",
     zIndex: 9999
 }
@@ -32,7 +32,11 @@ let theme = {
 }
 
 let text = {
-    marginLeft: 15,
+    marginLeft: 20,
+}
+
+let logo = {
+    bottom: '-15px',
 }
 
 const styles = {
@@ -62,8 +66,8 @@ function Footer(props) {
 
                 <MDBContainer fluid className="text-center">
                     <MDBRow>
-                        <MDBCol className='col-sm-10 text-left'>
-                            <div><img src={'/img/logo.svg'} width={'90'} height={'70'} /></div>
+                        <MDBCol className='col-sm-10 text-left' style={logo}>
+                            <div><img src={'/img/logo.svg'} width={'100'} height={'80'} /></div>
                             <p>
                                 Proyecto de Titulo: Cadena de suministros.
                             </p>
