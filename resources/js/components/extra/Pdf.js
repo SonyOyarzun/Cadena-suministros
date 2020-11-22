@@ -181,11 +181,11 @@ export default function Pdf(props) {
     let sizeQR = 30
 
     let imgLogo = 10
-    let textTitulo = imgLogo + 50
-    let titleProd = textTitulo + 15
-    let tableProd = titleProd + 10
-    let titleTrace = tableProd + 25
-    let tableTrace = titleTrace + 10
+    let textTitulo = imgLogo + 55
+    let titleProd = textTitulo + 20
+    let tableProd = titleProd + 5
+    let titleTrace = tableProd + 30
+    let tableTrace = titleTrace + 5
     let ID = maxHeight - margin
     let QR = imgLogo 
     let Foot = ID + 5
@@ -272,6 +272,8 @@ export default function Pdf(props) {
     let time
     let rowsAutotable = 0
 
+    for(let i=0;i<=30;i++){
+
     arrayStep.forEach(arrayStep => {
       const traceData = [
         arrayStep.from,
@@ -283,18 +285,22 @@ export default function Pdf(props) {
         //  format(new Date(arrayStep.date), "dd-MM-yyyy")
       ];
       // push each tickcet's info into a row
-      rowsAutotable = rowsAutotable + 1
+   //   rowsAutotable = rowsAutotable + 1
       tableRows.push(traceData);
     });
 
-    if (count > 1) {
+  }
+
+    console.log('tableRows ', tableRows)
+    doc.autoTable(tableColumn, tableRows, { startY: tableTrace });
+
+    /*
+    if (rowsAutotable > 1) {
       pagination = pagination + 1
       doc.addPage()
       page(pagination)
     }
-    console.log('tableRows ', tableRows)
-    doc.autoTable(tableColumn, tableRows, { startY: tableTrace });
-
+*/
 
     //const date = Date().split(" ");
     const date = Date().split(" ")
