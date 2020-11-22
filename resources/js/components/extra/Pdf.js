@@ -176,7 +176,7 @@ export default function Pdf(props) {
 
     let customWidthR = maxWidth - margin + 1
     let customWidthL = margin - 1
-    let marginBottom = margin * 1.5
+    let marginBottom = margin * 1.3
 
     let sizeQR = 30
 
@@ -186,7 +186,7 @@ export default function Pdf(props) {
     let tableProd = titleProd + 5
     let titleTrace = tableProd + 30
     let tableTrace = titleTrace + 5
-    let ID = maxHeight - margin
+    let ID = maxHeight - margin + 3
     let QR = imgLogo 
     let Foot = ID + 5
 
@@ -222,7 +222,7 @@ export default function Pdf(props) {
       doc.text("Tx:" + props.transaction, margin, ID);
       doc.text("Valide esta transacción escaneando el codigo QR de la esquina derecha superior", margin, Foot);
 
-      doc.text("Pagina:" + page , customWidthR - margin, ID);
+      //doc.text("Pagina:" + page , customWidthR - margin, ID);
       //crear qr
       let qr = qrcode(9, 'M');
       var URLdomain = window.location.host;
@@ -272,7 +272,7 @@ export default function Pdf(props) {
     let time
     let rowsAutotable = 0
 
-    for(let i=0;i<=30;i++){
+   // for(let i=0;i<=30;i++){
 
     arrayStep.forEach(arrayStep => {
       const traceData = [
@@ -289,7 +289,7 @@ export default function Pdf(props) {
       tableRows.push(traceData);
     });
 
-  }
+  //}
 
     console.log('tableRows ', tableRows)
     doc.autoTable(tableColumn, tableRows, { startY: tableTrace });
