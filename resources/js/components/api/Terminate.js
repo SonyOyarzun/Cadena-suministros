@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
-import { getTransaction, getAsset, searchAsset, getConfig, getUser, getChain , receiveChain } from "../tables/TableFunctions";
+import { getTransaction, getAsset, searchAsset, getConfig, getUser, getChain, receiveChain } from "../tables/TableFunctions";
 
 import { transfer } from '../api/CRAB'
 
@@ -115,6 +115,8 @@ export default function Terminate(props) {
       })
       .catch(response => {
         console.log('error receiveChain', response)
+        setAlert(response.message)
+        setType(response.type)
       })
 
   }
@@ -122,57 +124,64 @@ export default function Terminate(props) {
 
   const terminate = () => {
 
-    const BURN_ADDRESS = 'BurnBurnBurnBurnBurnBurnBurnBurnBurnBurnBurn'
+    if (document.getElementById('commentary').value.trim().length > 0) {
 
-    products.map((transaction, index) => {
+      const BURN_ADDRESS = 'BurnBurnBurnBurnBurnBurnBurnBurnBurnBurnBurn'
+
+      products.map((transaction, index) => {
 
 
-      const params = {
-        "asset": transaction.id,
-      }
-
-      getAsset(params).then(response => {
-
-        console.log(transaction)
-        const tx = chain.filter((e) => e.transaction == transaction.id)
-        const us = user.filter((e) => e.id == tx[0].to)
-        console.log('tx', tx)
-        console.log('user', us)
-
-        if(document.getElementById('commentary').value!=''){
-        const metadata = {
-          from: us[0].name,
-          to: 'FIN',
-          commentary: document.getElementById('commentary').value,
-          state: 'Terminado',
-          date: new Date().toString()
-        }
-      }else{
-      setAlert('Debe ingresar Observacion')
-      setType('error')
-      }
-        console.log('metadata', metadata)
-
-        const keys = {
-          receivePublickey: BURN_ADDRESS,
-          sendPrivateKey: us[0].privateKey,
+        const params = {
+          "asset": transaction.id,
         }
 
-        console.log('keys', keys)
+        getAsset(params).then(response => {
 
-        console.log('response', response[0])
+          console.log(transaction)
+          const tx = chain.filter((e) => e.transaction == transaction.id)
+          const us = user.filter((e) => e.id == tx[0].to)
+          console.log('tx', tx)
+          console.log('user', us)
 
-        transfer(response[0], metadata, keys, config).then(response2 => {
-          console.log('terminate', response2)
-          save(response[0].id, response.id, transaction.id, us[0].id)
 
-        }).catch(response => {
-          console.log('error terminate', response)
+
+          const metadata = {
+            from: us[0].name,
+            to: 'FIN',
+            commentary: document.getElementById('commentary').value,
+            state: 'Terminado',
+            date: new Date().toString()
+          }
+
+          console.log('metadata', metadata)
+
+          const keys = {
+            receivePublickey: BURN_ADDRESS,
+            sendPrivateKey: us[0].privateKey,
+          }
+
+          console.log('keys', keys)
+
+          console.log('response', response[0])
+
+          transfer(response[0], metadata, keys, config).then(response2 => {
+            console.log('terminate', response2)
+            save(response2[0].id, response2.id, transaction.id, us[0].id)
+
+          }).catch(response => {
+            console.log('error terminate', response)
+            setAlert(response.message)
+            setType(response.type)
+          })
+
         })
 
       })
 
-    })
+    } else {
+      setAlert('Debe ingresar Observacion')
+      setType('error')
+    }
 
   }
 
@@ -297,9 +306,9 @@ export default function Terminate(props) {
   return (
     <MDBRow>
       <MDBCol md="12" lg="12" xl="12" className="mx-auto mt-3">
-      {alert != '' &&
-        <SnackBar alert={alert} type={type} />
-      }
+        {alert != '' &&
+          <SnackBar alert={alert} type={type} />
+        }
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>Busqueda de Productos</MDBCardHeader>
@@ -320,23 +329,23 @@ export default function Terminate(props) {
                     <MDBIcon icon="cash-register" /> Producto
               </Typography>
 
-              <MDBDataTableV5
-              responsive
-              bordered
-              hover
-              btn
-              sortable={false}
-              paging={false}
-              searching={false}
-              data={data}
-              info={false}
-            />
+                  <MDBDataTableV5
+                    responsive
+                    bordered
+                    hover
+                    btn
+                    sortable={false}
+                    paging={false}
+                    searching={false}
+                    data={data}
+                    info={false}
+                  />
 
                 </div>
               )
               : (<center>{'Sin resultados'}</center>)
             }
-            
+
 
           </MDBCardBody>
 
