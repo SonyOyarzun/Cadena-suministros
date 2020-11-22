@@ -13,6 +13,9 @@ import "jspdf-autotable";
 //functions
 import { newMeter, resetMeter, meterTx, getMeter } from '../extra/ExtraFunctions';
 import { getTransaction, getAsset, getConfig } from "../tables/TableFunctions";
+import Load from '../extra/Load'
+import { render } from 'react-dom';
+import SnackBar from '../extra/SnackBar'
 
 //formato fecha
 //import { format } from "date-fns";
@@ -50,6 +53,8 @@ export default function Pdf(props) {
   //useEffect(() => {
 
   const getData = () => {
+
+    render(<Load />, document.getElementById('load'));
 
     const params = {
       "asset": props.transaction,
@@ -113,6 +118,7 @@ export default function Pdf(props) {
       }).finally(() => {
         setPrevent(false);
         setButtonMessage('Buscar');
+        render(<></>, document.getElementById('load'));
       })
 
 
@@ -159,13 +165,13 @@ export default function Pdf(props) {
 
 
     let logo = new Image();
-    logo.src = "/storage/images/" + config.logotype;
-    //logo.src = "/img/logo.PNG";
+    //logo.src = "/storage/images/" + config.logotype;
+    logo.src = "/img/logo.png";
 
 
     // x y width height
-    doc.addImage(logo, 'JPEG', 14, imgLogo, 30, 15);
-
+    doc.addImage(logo, 'PNG', 14, imgLogo, 45, 30);
+    //doc.addSVG(logo, 20, 20, doc.internal.pageSize.width - 20*2)
 
     //titulo
     doc.text("Registro de Trazabilidad de un Producto", 55, textTitulo);
@@ -197,14 +203,14 @@ export default function Pdf(props) {
 
 
 
-    const tableColumn = ["De", "Para", "Comentario", "Fecha"];
+    const tableColumn = ["De", "Para", "Comentario", "Estado", "Fecha"];
     // define an empty array of rows
     const tableRows = [];
     // for each ticket pass all its data into an array
 
     //getSteps()
 
-    console.log('v ', arrayStep)
+    console.log('arrayStep ', arrayStep)
 
     var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
     var time
@@ -214,6 +220,7 @@ export default function Pdf(props) {
         arrayStep.from,
         arrayStep.to,
         arrayStep.commentary,
+        arrayStep.state,
         time = new Date(arrayStep.date).toLocaleDateString("es-ES", options)
         // called date-fns to format the date on the ticket
         //  format(new Date(arrayStep.date), "dd-MM-yyyy")
@@ -221,21 +228,27 @@ export default function Pdf(props) {
       // push each tickcet's info into a row
       tableRows.push(traceData);
     });
-
+    console.log('tableRows ', tableRows)
     doc.autoTable(tableColumn, tableRows, { startY: tableTrace });
 
 
-    const date = Date().split(" ");
+    //const date = Date().split(" ");
+    const date = Date().split(" ")
 
     const dateStr = date[0] + date[1] + date[2] + date[3] + date[4];
     // guardar pdf
-    doc.save(`report_${dateStr}.pdf`);
+    doc.save(`reporte_${dateStr}.pdf`);
   };
 
   return (
-    <MDBBtn tag="a" size="sm" gradient="blue" onClick={() => getData()}>
-      <MDBIcon far icon="file-pdf" />
-    </MDBBtn>
+    <>
+      {alert != '' &&
+        <SnackBar alert={alert} type={type} />
+      }
+      <MDBBtn tag="a" size="sm" gradient="blue" onClick={() => getData()}>
+        <MDBIcon far icon="file-pdf" />
+      </MDBBtn>
+    </>
   )
 
 }
