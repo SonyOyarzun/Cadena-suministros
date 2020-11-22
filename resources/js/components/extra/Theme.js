@@ -5,7 +5,6 @@ import React, { useState, useEffect,useLayoutEffect } from 'react';
 
 const defaultTheme = {
   body: 'rgb(0,136,145, 0.7)',
-  font: '1rem',
   text: '#e7e7de',
   border: 'rgb(33,33,33,0.7)',
   gradient: 'linear-gradient(#00587a, #0f3057)',
@@ -13,7 +12,6 @@ const defaultTheme = {
 
 const specialTheme = {
   body: 'rgb(33,33,33,0.7)',
-  font: '1rem',
   text: '#eeeeee',
   border: 'rgb(13,115,119, 0.7)',
   gradient: 'linear-gradient(#212121, #0d7377)',

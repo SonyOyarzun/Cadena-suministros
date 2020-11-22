@@ -1,14 +1,14 @@
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-import React, { useState, useEffect,useLayoutEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 
 
 
 const defaultTheme = {
-  font: '1rem',
+  font: '0.9rem',
 }
 
 const specialTheme = {
-  font: '1.2rem',
+  font: '1.1rem',
 }
 
 const Toggle = ({ theme, toggleTheme }) => {
@@ -86,10 +86,10 @@ export default function Theme(props) {
   const [theme, toggleTheme] = useSpecialMode();
   const themeMode = theme === 'default' ? defaultTheme : specialTheme;
 
- // console.log(props.config)
+  // console.log(props.config)
 
 
-const GlobalStyles = createGlobalStyle`
+  const GlobalStyles = createGlobalStyle`
 *,
 *::after,
 *::before {
@@ -101,6 +101,62 @@ html * {
   font-size: ${({ theme }) => theme.font};
 } 
 
+/*TABLE INICIO*/
+table {
+  font-size: ${({ theme }) => theme.font};
+}
+table td, table th {
+  font-size: ${({ theme }) => theme.font};
+}
+table tr:nth-child(even) {
+  font-size: ${({ theme }) => theme.font};
+}
+table thead {
+  font-size: ${({ theme }) => theme.font};
+}
+table thead th {
+  font-size: ${({ theme }) => theme.font};
+}
+table thead th:first-child {
+  font-size: ${({ theme }) => theme.font};
+}
+table tfoot {
+  font-size: ${({ theme }) => theme.font};
+}
+table tfoot .links {
+  font-size: ${({ theme }) => theme.font};
+}
+table tfoot .links a{
+  font-size: ${({ theme }) => theme.font};
+}
+/*TABLE FIN*/
+
+/*PROFILE INICIO*/
+.MuiCardHeader-root{
+  font-size: ${({ theme }) => theme.font};
+}
+.MuiCardHeader-content{
+  font-size: ${({ theme }) => theme.font};
+}
+.MuiCardHeader-action{
+  font-size: ${({ theme }) => theme.font};
+}
+.MuiCollapse-wrapper{
+  font-size: ${({ theme }) => theme.font};
+}
+.MuiTypography-colorTextSecondary{
+  font-size: ${({ theme }) => theme.font};
+}
+.MuiIconButton-root{
+  font-size: ${({ theme }) => theme.font};
+}
+.MuiPaper-root{
+  font-size: ${({ theme }) => theme.font};
+}
+.MuiTypography-root{
+  font-size: ${({ theme }) => theme.font};
+}
+/*PROFILE FIN*/
 `;
 
 
