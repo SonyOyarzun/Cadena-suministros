@@ -138,6 +138,12 @@ export default function Pdf(props) {
     // initialize jsPDF
     const doc = new jsPDF("p","mm","a4");
 
+    const centeredText = (text, y) =>{
+      var textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+      var textOffset = (doc.internal.pageSize.width - textWidth) / 2;
+      doc.text(textOffset, y, text);
+  }
+
     Object.keys(getdata).map((key, row) => (
 
       preRows = [],
@@ -153,7 +159,7 @@ export default function Pdf(props) {
       console.log(columns, rows)
 
     //fuentes
-    doc.setFont('RopaSans-Regular');
+    doc.setFont('Roboto');
     //doc.setFontType('normal');
     //doc.setFontSize(28);
 
@@ -161,7 +167,8 @@ export default function Pdf(props) {
     let maxWidth = doc.internal.pageSize.width
     let maxHeight = doc.internal.pageSize.height
     let margin = 14
-    
+    let centerWidth = maxWidth/2
+
     let imgLogo = 10
     let textTitulo = imgLogo + 50
     let titleProd = textTitulo + 15
@@ -169,7 +176,9 @@ export default function Pdf(props) {
     let titleTrace = tableProd + 25
     let tableTrace = titleTrace + 10
     let ID = imgLogo + 250
-    let QR = ID + 10
+    let QR = imgLogo - 5
+    let Foot = ID + 5
+
 
 
     let logo = new Image();
@@ -190,17 +199,20 @@ export default function Pdf(props) {
     doc.line(maxWidth-margin,maxHeight-(margin*2),maxWidth-margin,textTitulo-imgLogo) // linea margen derecho
 
     //titulo
-    doc.text("Registro de Trazabilidad de un Producto", 55, textTitulo);
+    doc.setFontSize(20);
+    centeredText("Registro de Trazabilidad de un Producto",textTitulo)
     // startY is basically margin-top
 
     //coordenadas x y de ubicacion de texto
-    doc.text("Producto", margin, titleProd);
-    doc.autoTable(columns, rows, { startY: tableProd, startX: margin+1 });
+    centeredText("Producto",titleProd)
+    doc.autoTable(columns, rows, { startY: tableProd });
 
-    doc.text("Recorrido", margin, titleTrace);
+    centeredText("Recorrido",titleTrace)
 
     //pie de firmas
-    doc.text("Valide esta transaccion escaneando el codigo QR", margin, ID);
+    doc.setFontSize(9);
+    doc.text("Tx:"+props.transaction,margin, ID);
+    doc.text("Valide esta transacción escaneando el codigo QR de la esquina derecha superior"+props.transaction,margin, ID);
 
     //crear qr
     let qr = qrcode(9, 'M');
@@ -215,7 +227,7 @@ export default function Pdf(props) {
 
     console.log('dataUrl :', dataUrl)
 
-    doc.addImage(dataUrl, 'JPEG', margin, QR, 15, 15);
+    doc.addImage(dataUrl, 'JPEG', maxWidth-(margin*3), QR, 40, 40);
 
 
 
@@ -245,7 +257,7 @@ export default function Pdf(props) {
       tableRows.push(traceData);
     });
     console.log('tableRows ', tableRows)
-    doc.autoTable(tableColumn, tableRows, { startY: tableTrace ,startX: margin+1});
+    doc.autoTable(tableColumn, tableRows, { startY: tableTrace});
 
 
     //const date = Date().split(" ");
