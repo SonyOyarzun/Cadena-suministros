@@ -77,7 +77,7 @@ export default function Pdf(props) {
 
               console.log('metadata', responseArr[0])
 
-              setStep(responseArr[0])
+              getSteps(responseArr[0])
 
 
             } else {
