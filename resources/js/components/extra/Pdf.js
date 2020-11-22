@@ -136,7 +136,7 @@ export default function Pdf(props) {
     let count = 0
 
     // initialize jsPDF
-    const doc = new jsPDF();
+    const doc = new jsPDF("p","mm","a4");
 
     Object.keys(getdata).map((key, row) => (
 
@@ -152,10 +152,18 @@ export default function Pdf(props) {
 
       console.log(columns, rows)
 
+    //fuentes
+    doc.setFont('RopaSans-Regular');
+    //doc.setFontType('normal');
+    //doc.setFontSize(28);
 
     //ubicacion elementos
+    let maxWidth = doc.internal.pageSize.width
+    let maxHeight = doc.internal.pageSize.height
+    let margin = 14
+    
     let imgLogo = 10
-    let textTitulo = imgLogo + 30
+    let textTitulo = imgLogo + 50
     let titleProd = textTitulo + 15
     let tableProd = titleProd + 10
     let titleTrace = tableProd + 25
@@ -168,23 +176,31 @@ export default function Pdf(props) {
     //logo.src = "/storage/images/" + config.logotype;
     logo.src = "/img/logo.png";
 
+    console.log('internal ',maxWidth,maxHeight)
 
     // x y width height
-    doc.addImage(logo, 'PNG', 14, imgLogo, 45, 30);
-    //doc.addSVG(logo, 20, 20, doc.internal.pageSize.width - 20*2)
+    doc.addImage(logo, 'PNG', margin, imgLogo, 45, 30);
+
+    doc.line(maxWidth-margin,textTitulo-imgLogo, margin,textTitulo-imgLogo) // linea cabecera superior
+    doc.line(maxWidth-margin,textTitulo+imgLogo, margin,textTitulo+imgLogo) // linea cabecera inferior
+
+    doc.line(maxWidth-margin,maxHeight-(margin*2), margin,maxHeight-(margin*2)) // linea footer inferior
+
+    doc.line(margin,maxHeight-(margin*2),margin,textTitulo-imgLogo) // linea margen izquierdo
+    doc.line(maxWidth-margin,maxHeight-(margin*2),maxWidth-margin,textTitulo-imgLogo) // linea margen derecho
 
     //titulo
     doc.text("Registro de Trazabilidad de un Producto", 55, textTitulo);
     // startY is basically margin-top
 
     //coordenadas x y de ubicacion de texto
-    doc.text("Producto", 14, titleProd);
-    doc.autoTable(columns, rows, { startY: tableProd });
+    doc.text("Producto", margin, titleProd);
+    doc.autoTable(columns, rows, { startY: tableProd, startX: margin+1 });
 
-    doc.text("Recorrido", 14, titleTrace);
+    doc.text("Recorrido", margin, titleTrace);
 
     //pie de firmas
-    doc.text("Valide esta transaccion escaneando el codigo QR", 14, ID);
+    doc.text("Valide esta transaccion escaneando el codigo QR", margin, ID);
 
     //crear qr
     let qr = qrcode(9, 'M');
@@ -199,7 +215,7 @@ export default function Pdf(props) {
 
     console.log('dataUrl :', dataUrl)
 
-    doc.addImage(dataUrl, 'JPEG', 12, QR, 15, 15);
+    doc.addImage(dataUrl, 'JPEG', margin, QR, 15, 15);
 
 
 
@@ -229,7 +245,7 @@ export default function Pdf(props) {
       tableRows.push(traceData);
     });
     console.log('tableRows ', tableRows)
-    doc.autoTable(tableColumn, tableRows, { startY: tableTrace });
+    doc.autoTable(tableColumn, tableRows, { startY: tableTrace ,startX: margin+1});
 
 
     //const date = Date().split(" ");
