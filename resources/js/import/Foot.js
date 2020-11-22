@@ -3,25 +3,34 @@ import ReactDOM from 'react-dom'
 import Theme from '../components/extra/Theme'
 import Font from '../components/extra/Font'
 
-import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from "mdbreact";
+import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBCardHeader } from "mdbreact";
 
 
-var style = {
-    textAlign: "center",
-    padding: "20px",
+let style = {
+    padding: "0px",
     position: "fixed",
     left: "0",
     bottom: "0",
-    height: "100",
+    height: "150px",
     width: "100%",
+    zIndex: 9999
 }
 
-var phantom = {
+let phantom = {
     display: 'block',
     padding: '20px',
     height: '10px',
     width: '100%',
 }
+
+let theme = {
+    position: 'relative',
+    bottom: '-20px',
+    padding: '0',
+    height: '10px',
+    paddingRight: 20,
+}
+
 const styles = {
     fieldSet: {
         margin: 10,
@@ -47,31 +56,41 @@ function Footer(props) {
             <div style={phantom} />
             <div style={style} className='foot'>
 
-                <MDBContainer fluid className="text-center text-md-left">
+                <MDBContainer fluid className="text-center">
                     <MDBRow>
-                        <MDBCol md="6">
-                            <h5 className="title"><img src={'/img/logo.svg'} width={'90'} height={'70'} /></h5>
+                        <MDBCol className='col-sm-10 text-left'>
+                            <div><img src={'/img/logo.svg'} width={'90'} height={'70'} /></div>
                             <p>
                                 Proyecto de Titulo: Cadena de suministros.
-                                </p>
+                            </p>
                         </MDBCol>
-                        <MDBCol md="6">
-                            <MDBRow>
 
-                                <legend><Theme config={props.config} /></legend>
-                                <legend><Font config={props.config} /></legend>
-
-                            </MDBRow>
+                        <MDBCol className='col-sm-2' style={theme} >
+                            <MDBCard>
+                                <table>
+                                    <tr>
+                                        <td>Contraste</td>
+                                        <td><Theme style={theme} config={props.config} /></td>
+                                    </tr>
+                                    <tr>
+                                        <td> Fuente</td>
+                                        <td><Font style={theme} config={props.config} /></td>
+                                    </tr>
+                                </table>
+                            </MDBCard>
                         </MDBCol>
+
                     </MDBRow>
+
+                    <div className="footer-copyright col-sm-12" height={'100'}>
+                        <MDBContainer fluid>
+                            &copy; {new Date().getFullYear()} Cadena de Suministros CASU
+                    </MDBContainer>
+                    </div>
+
                 </MDBContainer>
-                <div className="footer-copyright text-center py-3">
-                    <MDBContainer fluid>
-                        &copy; {new Date().getFullYear()} Cadena de Suministros CASU
-                        </MDBContainer>
-                </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 
