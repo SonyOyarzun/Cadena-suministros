@@ -136,13 +136,13 @@ export default function Pdf(props) {
     let count = 0
 
     // initialize jsPDF
-    const doc = new jsPDF("p","mm","a4");
+    const doc = new jsPDF("p", "mm", "a4");
 
-    const centeredText = (text, y) =>{
+    const centeredText = (text, y) => {
       var textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor;
       var textOffset = (doc.internal.pageSize.width - textWidth) / 2;
       doc.text(textOffset, y, text);
-  }
+    }
 
     Object.keys(getdata).map((key, row) => (
 
@@ -167,7 +167,7 @@ export default function Pdf(props) {
     let maxWidth = doc.internal.pageSize.width
     let maxHeight = doc.internal.pageSize.height
     let margin = 14
-    let centerWidth = maxWidth/2
+    let centerWidth = maxWidth / 2
 
     let imgLogo = 10
     let textTitulo = imgLogo + 50
@@ -185,49 +185,57 @@ export default function Pdf(props) {
     //logo.src = "/storage/images/" + config.logotype;
     logo.src = "/img/logo.png";
 
-    console.log('internal ',maxWidth,maxHeight)
 
-    // x y width height
-    doc.addImage(logo, 'PNG', margin, imgLogo, 45, 30);
+    //PAGINA
+    const page = () => {
+      doc.addImage(logo, 'PNG', margin, imgLogo, 45, 30);
 
-    doc.line(maxWidth-margin,textTitulo-imgLogo, margin,textTitulo-imgLogo) // linea cabecera superior
-    doc.line(maxWidth-margin,textTitulo+imgLogo, margin,textTitulo+imgLogo) // linea cabecera inferior
+      doc.line(maxWidth - margin, textTitulo - imgLogo, margin, textTitulo - imgLogo) // linea cabecera superior
+      doc.line(maxWidth - margin, textTitulo + imgLogo, margin, textTitulo + imgLogo) // linea cabecera inferior
 
-    doc.line(maxWidth-margin,maxHeight-(margin*2), margin,maxHeight-(margin*2)) // linea footer inferior
+      doc.line(maxWidth - margin, maxHeight - (margin * 2), margin, maxHeight - (margin * 2)) // linea footer inferior
 
-    doc.line(margin,maxHeight-(margin*2),margin,textTitulo-imgLogo) // linea margen izquierdo
-    doc.line(maxWidth-margin,maxHeight-(margin*2),maxWidth-margin,textTitulo-imgLogo) // linea margen derecho
+      doc.line(margin, maxHeight - (margin * 2), margin, textTitulo - imgLogo) // linea margen izquierdo
+      doc.line(maxWidth - margin, maxHeight - (margin * 2), maxWidth - margin, textTitulo - imgLogo) // linea margen derecho
+
+      //pie de firmas
+      doc.setFontSize(9);
+      doc.text("Tx:" + props.transaction, margin, ID);
+      doc.text("Valide esta transacción escaneando el codigo QR de la esquina derecha superior" + props.transaction, margin, ID);
+
+      //crear qr
+      let qr = qrcode(9, 'M');
+      var URLdomain = window.location.host;
+      qr.addData(URLdomain + '/Trace/' + props.transaction);
+      //qr.addData('false');
+      qr.make();
+
+
+      //cerar etiqueta y extraer el src
+      let dataUrl = qr.createImg(4).src;
+
+      console.log('dataUrl :', dataUrl)
+
+      doc.addImage(dataUrl, 'JPEG', maxWidth - (margin * 3), QR, 40, 40);
+    }
+
+
+    page()
 
     //titulo
     doc.setFontSize(20);
-    centeredText("Registro de Trazabilidad de un Producto",textTitulo)
+    centeredText("Registro de Trazabilidad de un Producto", textTitulo)
     // startY is basically margin-top
 
     //coordenadas x y de ubicacion de texto
-    centeredText("Producto",titleProd)
+    centeredText("Producto", titleProd)
     doc.autoTable(columns, rows, { startY: tableProd });
 
-    centeredText("Recorrido",titleTrace)
-
-    //pie de firmas
-    doc.setFontSize(9);
-    doc.text("Tx:"+props.transaction,margin, ID);
-    doc.text("Valide esta transacción escaneando el codigo QR de la esquina derecha superior"+props.transaction,margin, ID);
-
-    //crear qr
-    let qr = qrcode(9, 'M');
-    var URLdomain = window.location.host;
-    qr.addData(URLdomain + '/Trace/' + props.transaction);
-    //qr.addData('false');
-    qr.make();
+    centeredText("Recorrido", titleTrace)
 
 
-    //cerar etiqueta y extraer el src
-    let dataUrl = qr.createImg(4).src;
 
-    console.log('dataUrl :', dataUrl)
 
-    doc.addImage(dataUrl, 'JPEG', maxWidth-(margin*3), QR, 40, 40);
 
 
 
@@ -240,8 +248,9 @@ export default function Pdf(props) {
 
     console.log('arrayStep ', arrayStep)
 
-    var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-    var time
+    let options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    let time
+    let rowsAutotable = 0
 
     arrayStep.forEach(arrayStep => {
       const traceData = [
@@ -254,10 +263,16 @@ export default function Pdf(props) {
         //  format(new Date(arrayStep.date), "dd-MM-yyyy")
       ];
       // push each tickcet's info into a row
+      rowsAutotable = rowsAutotable + 1
       tableRows.push(traceData);
     });
+
+    if (count > 1) {
+      doc.addPage()
+      page()
+    }
     console.log('tableRows ', tableRows)
-    doc.autoTable(tableColumn, tableRows, { startY: tableTrace});
+    doc.autoTable(tableColumn, tableRows, { startY: tableTrace });
 
 
     //const date = Date().split(" ");
