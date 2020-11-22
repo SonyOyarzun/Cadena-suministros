@@ -31,6 +31,10 @@ let theme = {
     paddingRight: 20,
 }
 
+let text = {
+    marginLeft: 15,
+}
+
 const styles = {
     fieldSet: {
         margin: 10,
@@ -69,11 +73,11 @@ function Footer(props) {
                             <MDBCard>
                                 <table>
                                     <tr>
-                                        <td>Contraste</td>
+                                        <td><label style={text}>Contraste</label></td>
                                         <td><Theme style={theme} config={props.config} /></td>
                                     </tr>
                                     <tr>
-                                        <td> Fuente</td>
+                                        <td><label style={text}>Fuente</label></td>
                                         <td><Font style={theme} config={props.config} /></td>
                                     </tr>
                                 </table>

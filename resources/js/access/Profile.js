@@ -29,7 +29,7 @@ import { getChain, viewNotification } from '../components/tables/TableFunctions'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 300,
+        maxWidth: 350,
         position: "fixed",
         right: 30,
         top: 10,
