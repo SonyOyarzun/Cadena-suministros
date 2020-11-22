@@ -92,13 +92,13 @@ class TableOrder extends Component {
     let rows = [
       ...this.state.sends.map((data, order) => (
         {
-          transaction: data.asset,
+          transaction: data.transaction,
           asset: data.asset,
           from: data.fromName,
           to: data.toName,
           state: data.state,
           updated_at: format(new Date(data.updated_at), "dd/MM/yyyy"),
-          action: <Pdf transaction={data.transaction}/>,
+          action: <Pdf transaction={data.asset}/>,
         }
 
       ))

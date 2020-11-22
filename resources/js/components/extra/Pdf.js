@@ -10,12 +10,25 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
+//functions
+import { newMeter, resetMeter, meterTx, getMeter } from '../extra/ExtraFunctions';
+import { getTransaction, getAsset, getConfig } from "../tables/TableFunctions";
+
 //formato fecha
 //import { format } from "date-fns";
 import { string } from 'prop-types';
 
 
 export default function Pdf(props) {
+
+  const [step, setStep] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  const [prevent, setPrevent] = useState(false);
+  const [buttonMessage, setButtonMessage] = useState('Buscar');
+
+  const [alert, setAlert] = useState('');
+  const [type, setType] = useState('');
 
 
   let arrayStep = []
@@ -26,7 +39,7 @@ export default function Pdf(props) {
 
     Object.keys(step).map((key, row) => (
 
-      arrayStep.push(step[row]['metadata']['info'])
+      arrayStep.push(step[row]['metadata']['metadata'])
 
     ))
 
@@ -44,42 +57,64 @@ export default function Pdf(props) {
 
     console.log('id :', props.transaction)
 
+
     axios.all([
-      axios.get('/assets', { params }),
-      axios.get('/transaction', { params }),
-      axios.get('/json-api/config'),
+      getAsset(params),
+      getTransaction(params),
+      getConfig(params),
     ])
       .then(responseArr => {
+        console.log('get', responseArr)
+        console.log('getAsset', responseArr[0])
+        console.log('getTransaction', responseArr[1])
+
+        if (responseArr[0].length > 0) {
+          console.log('length', responseArr[0])
+          if (responseArr[0][0].metadata.hasOwnProperty('metadata')) {
+
+            console.log('metadata', responseArr[0])
+            if (responseArr[0][0].metadata.hasOwnProperty('metadata')) {
+
+              console.log('metadata', responseArr[0])
+
+              setStep(responseArr[0])
 
 
-        if (responseArr[0].data.length > 0) {
-
-          console.log('eval: ', responseArr[0].data[0].hasOwnProperty('metadata'));
-          console.log('eval 2: ', responseArr[0].data);
-
-          if (responseArr[0].data[0].hasOwnProperty('metadata')) {
-
-            if (responseArr[0].data[0].metadata.hasOwnProperty('info')) {
-              //  setStep(responseArr[0].data)
-              getSteps(responseArr[0].data)
             } else {
-              setStep([])
-            }
-
-            if (responseArr[1].data.asset.data.hasOwnProperty('transaction')) {
-              //     setProducts(responseArr[1].data.asset.data.transaction)
-              generatePDF(responseArr[1].data.asset.data.transaction,responseArr[2].data)
-            } else {
-              setProducts([])
+              setAlert('No encontrada')
             }
 
           } else {
-            console.log('No se encuentra ID')
+            setAlert('No encontrada')
+          }
+
+        } else {
+          setAlert('No encontrada')
+        }
+
+        if (responseArr[1].hasOwnProperty('asset')) {
+
+          if (responseArr[1].asset.data.hasOwnProperty('data')) {
+
+            setProducts(responseArr[1].asset.data.data)
+            generatePDF(responseArr[1].asset.data.data, responseArr[2])
+
+          } else {
+            setAlert('No encontrada')
           }
         } else {
-          console.log('No se encuentra ID')
+          setAlert('No encontrada')
         }
-      });
+
+        console.log('step: ', responseArr[0]);
+        console.log('Productos: ', responseArr[1].asset.data.data);
+
+
+      }).finally(() => {
+        setPrevent(false);
+        setButtonMessage('Buscar');
+      })
+
 
   }
   //}, []);
@@ -87,9 +122,7 @@ export default function Pdf(props) {
 
 
 
-  const generatePDF = (getdata,config) => {
-
-
+  const generatePDF = (getdata, config) => {
 
     let columns = []
     let preRows = []
@@ -126,7 +159,7 @@ export default function Pdf(props) {
 
 
     let logo = new Image();
-    logo.src = "/storage/images/"+config[0].logotype;
+    logo.src = "/storage/images/" + config.logotype;
     //logo.src = "/img/logo.PNG";
 
 
