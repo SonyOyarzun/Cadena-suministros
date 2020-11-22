@@ -4,10 +4,10 @@ import React, { useState, useEffect,useLayoutEffect } from 'react';
 
 
 const defaultTheme = {
-  body: 'rgb(0,136,145, 0.7)',
-  text: '#e7e7de',
-  border: 'rgb(33,33,33,0.7)',
-  gradient: 'linear-gradient(#00587a, #0f3057)',
+  body: 'rgb(155,164,180,0.7)',
+  text: '#f1f6f9',
+  border: 'rgb(155,164,180,0.7)',
+  gradient: 'linear-gradient(#14274e, #394867)',
 }
 
 const specialTheme = {
