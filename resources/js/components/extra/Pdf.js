@@ -163,6 +163,9 @@ export default function Pdf(props) {
     //doc.setFontType('normal');
     //doc.setFontSize(28);
 
+    // contador de paginas
+    let pagination = 1
+
     //ubicacion elementos
     let maxWidth = doc.internal.pageSize.width
     let maxHeight = doc.internal.pageSize.height
@@ -197,7 +200,7 @@ export default function Pdf(props) {
 
 
     //PAGINA
-    const page = () => {
+    const page = (page) => {
 
       doc.addImage(logo, 'PNG', margin, imgLogo, 45, 30);
       doc.addImage(mark, 'PNG', centerWidth, centerHeight, 75, 75);
@@ -219,6 +222,7 @@ export default function Pdf(props) {
       doc.text("Tx:" + props.transaction, margin, ID);
       doc.text("Valide esta transacción escaneando el codigo QR de la esquina derecha superior", margin, Foot);
 
+      doc.text("Pagina:" + page , customWidthR - margin, ID);
       //crear qr
       let qr = qrcode(9, 'M');
       var URLdomain = window.location.host;
@@ -237,7 +241,9 @@ export default function Pdf(props) {
     }
 
 
-    page()
+    
+
+    page(pagination)
 
 
     //texto de primera pagina
@@ -282,8 +288,9 @@ export default function Pdf(props) {
     });
 
     if (count > 1) {
+      pagination = pagination + 1
       doc.addPage()
-      page()
+      page(pagination)
     }
     console.log('tableRows ', tableRows)
     doc.autoTable(tableColumn, tableRows, { startY: tableTrace });
