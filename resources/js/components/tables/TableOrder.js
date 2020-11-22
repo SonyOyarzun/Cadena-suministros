@@ -106,7 +106,7 @@ class TableOrder extends Component {
 
     //filtrara solo los que tienen estado Enviado
 
-    //rows = rows.filter(e => e.transaction == e.prevTransaction)
+    rows = rows.filter(e => e.state != 'Transferido')
 
     const data = {
       columns,

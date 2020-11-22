@@ -166,8 +166,16 @@ export default function Pdf(props) {
     //ubicacion elementos
     let maxWidth = doc.internal.pageSize.width
     let maxHeight = doc.internal.pageSize.height
+    let scale = doc.internal.pageSize.scaleFactor
     let margin = 14
-    let centerWidth = maxWidth / 2
+    let centerWidth = (maxWidth / 3)
+    let centerHeight = (maxHeight / 2)
+
+    let customWidthR = maxWidth - margin + 1
+    let customWidthL = margin - 1
+    let marginBottom = margin * 1.5
+
+    let sizeQR = 30
 
     let imgLogo = 10
     let textTitulo = imgLogo + 50
@@ -175,33 +183,41 @@ export default function Pdf(props) {
     let tableProd = titleProd + 10
     let titleTrace = tableProd + 25
     let tableTrace = titleTrace + 10
-    let ID = imgLogo + 250
-    let QR = imgLogo - 5
+    let ID = maxHeight - margin
+    let QR = imgLogo 
     let Foot = ID + 5
 
 
 
     let logo = new Image();
+    let mark = new Image();
     //logo.src = "/storage/images/" + config.logotype;
     logo.src = "/img/logo.png";
+    mark.src = "/img/icon-logo.png";
 
 
     //PAGINA
     const page = () => {
+
       doc.addImage(logo, 'PNG', margin, imgLogo, 45, 30);
+      doc.addImage(mark, 'PNG', centerWidth, centerHeight, 75, 75);
 
-      doc.line(maxWidth - margin, textTitulo - imgLogo, margin, textTitulo - imgLogo) // linea cabecera superior
-      doc.line(maxWidth - margin, textTitulo + imgLogo, margin, textTitulo + imgLogo) // linea cabecera inferior
+      //titulo
+      doc.setFontSize(20);
+      centeredText("Registro de Trazabilidad de un Producto", textTitulo)
 
-      doc.line(maxWidth - margin, maxHeight - (margin * 2), margin, maxHeight - (margin * 2)) // linea footer inferior
+      doc.line(customWidthR, textTitulo - imgLogo, customWidthL, textTitulo - imgLogo) // linea cabecera superior
+      doc.line(customWidthR, textTitulo + imgLogo, customWidthL, textTitulo + imgLogo) // linea cabecera inferior
 
-      doc.line(margin, maxHeight - (margin * 2), margin, textTitulo - imgLogo) // linea margen izquierdo
-      doc.line(maxWidth - margin, maxHeight - (margin * 2), maxWidth - margin, textTitulo - imgLogo) // linea margen derecho
+      doc.line(customWidthR, maxHeight - marginBottom, customWidthL, maxHeight - marginBottom) // linea footer inferior
+
+      doc.line(customWidthL, maxHeight - marginBottom, customWidthL, textTitulo - imgLogo) // linea margen izquierdo
+      doc.line(customWidthR, maxHeight - marginBottom, customWidthR, textTitulo - imgLogo) // linea margen derecho
 
       //pie de firmas
       doc.setFontSize(9);
       doc.text("Tx:" + props.transaction, margin, ID);
-      doc.text("Valide esta transacción escaneando el codigo QR de la esquina derecha superior" + props.transaction, margin, ID);
+      doc.text("Valide esta transacción escaneando el codigo QR de la esquina derecha superior", margin, Foot);
 
       //crear qr
       let qr = qrcode(9, 'M');
@@ -216,18 +232,16 @@ export default function Pdf(props) {
 
       console.log('dataUrl :', dataUrl)
 
-      doc.addImage(dataUrl, 'JPEG', maxWidth - (margin * 3), QR, 40, 40);
+      doc.addImage(dataUrl, 'JPEG', maxWidth - margin - sizeQR + 3, QR, sizeQR, sizeQR);
+
     }
 
 
     page()
 
-    //titulo
-    doc.setFontSize(20);
-    centeredText("Registro de Trazabilidad de un Producto", textTitulo)
-    // startY is basically margin-top
 
-    //coordenadas x y de ubicacion de texto
+    //texto de primera pagina
+    doc.setFontSize(20);
     centeredText("Producto", titleProd)
     doc.autoTable(columns, rows, { startY: tableProd });
 
@@ -281,6 +295,7 @@ export default function Pdf(props) {
     const dateStr = date[0] + date[1] + date[2] + date[3] + date[4];
     // guardar pdf
     doc.save(`reporte_${dateStr}.pdf`);
+    // doc.output();
   };
 
   return (
