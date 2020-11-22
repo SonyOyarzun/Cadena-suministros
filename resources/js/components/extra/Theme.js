@@ -725,6 +725,21 @@ color: ${({ theme }) => theme.body} !important;
 }
 
 /*SNACKS FIN*/
+
+/*FOOTER INICIO*/
+
+.page-footer{
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important; 
+}
+
+.footer-copyright {
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important; 
+}
+
+/*FOOTER FIN*/
+
 `;
 
 

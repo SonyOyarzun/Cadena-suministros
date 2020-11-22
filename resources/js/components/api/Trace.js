@@ -96,6 +96,8 @@ function Trace(props) {
               if (responseArr[0][0].metadata.hasOwnProperty('metadata')) {
 
                 console.log('metadata', responseArr[0])
+
+                console.log('revert', revert)
                 
                 if (revert == true) {
                   setStep(responseArr[0].sort((a, b) => b.metadata.metadata.date - a.metadata.metadata.date))
