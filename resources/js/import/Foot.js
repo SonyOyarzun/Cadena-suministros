@@ -13,7 +13,7 @@ let style = {
     bottom: "0",
     height: "160px",
     width: "100%",
-    zIndex: 9999
+    zIndex: 1500
 }
 
 let phantom = {
@@ -32,7 +32,7 @@ let theme = {
 }
 
 let text = {
-    marginLeft: 20,
+    marginLeft: 10,
 }
 
 let logo = {

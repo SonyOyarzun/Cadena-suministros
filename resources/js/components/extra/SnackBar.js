@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { truncate } from 'lodash';
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={9} variant="filled" {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     '& > * + *': {
       marginTop: theme.spacing(2),
     },
+    position: "fixed",
+    top: 0,
+    zIndex: 9999999
   },
 }));
 
@@ -45,7 +48,7 @@ export default function CustomizedSnackbars(props) {
 
   return (
     <div className={classes.root}>
-      <Snackbar open={open} autoHideDuration={10000} >
+      <Snackbar  open={open} autoHideDuration={10000} >
         <Alert onClose={handleClose} severity={props.type}>
           {props.alert}
         </Alert>

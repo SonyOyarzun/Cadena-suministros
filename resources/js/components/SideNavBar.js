@@ -12,6 +12,9 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import { MDBIcon, MDBBtn } from "mdbreact";
 
+let style = {
+  zIndex: 100
+}
 
 class SideNavBar extends Component {
 
@@ -30,7 +33,7 @@ class SideNavBar extends Component {
 
     return (
 
-      <div>
+      <div style={style}>
         <SideNav
           onSelect={(selected) => {
             // Add your code here

@@ -703,7 +703,10 @@ color: ${({ theme }) => theme.body} !important;
   background-color: ${({ theme }) => theme.body} !important;
   color: ${({ theme }) => theme.text}!important; 
 }
-
+.MuiTypography-root{
+  background-color: ${({ theme }) => theme.body} !important;
+  color: ${({ theme }) => theme.text}!important; 
+}
 /*PROFILE FIN*/
 
 
