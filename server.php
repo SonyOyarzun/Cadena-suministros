@@ -116,5 +116,13 @@ conn.searchMetadata('1.32')
 
         /informe sensores
         http://oa.upm.es/53622/1/TFG_VICTOR_ROMAN_ARAGAY.pdf
+
+        PWA
+https://omarbarbosa.com/posts/convertir-aplicacion-laravel-en-una-pwa
+
+https://www.pwaexperts.io/tutoriales/desarrolla-primera-pwa-react
+
+set COMPOSER_MEMORY_LIMIT=-1
+composer require silviolleite/laravelpwa
 */
 
