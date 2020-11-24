@@ -124,5 +124,13 @@ https://www.pwaexperts.io/tutoriales/desarrolla-primera-pwa-react
 
 set COMPOSER_MEMORY_LIMIT=-1
 composer require silviolleite/laravelpwa
+
+
+
+//GENERADOR DE ICONOS
+https://cloudconvert.com/svg-to-png
+
+npm install --global pwa-asset-generator
+pwa-asset-generator C:\Users\sonyo\OneDrive\Documentos\GitHub\Cadena-suministros\public\img\logo.svg C:\Users\sonyo\OneDrive\Escritorio\iconos2
 */
 
