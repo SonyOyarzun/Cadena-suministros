@@ -25,6 +25,7 @@ Route::get('/', function () {
 Route::get('/Search',function () {
     return view('home');
 });
+
 Route::get('/Trace',function () {
     return view('home');
 });
@@ -151,4 +152,9 @@ Route::delete('/meter/reset', 'MeterController@destroy');
 //tx
 Route::post('/meter/tx', 'MeterTxController@create');
 Route::post('/meter/last_tx', 'MeterTxController@index');
+
+//PWA
+Route::get('/offline', function () {    
+    return view('vendor/laravelpwa/offline');
+    });
 
