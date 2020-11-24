@@ -5,7 +5,7 @@ return [
     'manifest' => [
         'name' => env('APP_NAME', 'Cadena de Suministros'),
         'short_name' => 'PWA',
-        'start_url' => env('APP_URL',''),
+        'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
         'display' => 'standalone',
