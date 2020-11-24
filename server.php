@@ -126,6 +126,9 @@ set COMPOSER_MEMORY_LIMIT=-1
 composer require silviolleite/laravelpwa
 
 
+//administrar PWA
+
+chrome://apps
 
 //GENERADOR DE ICONOS
 https://cloudconvert.com/svg-to-png
