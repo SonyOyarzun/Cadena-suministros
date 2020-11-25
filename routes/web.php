@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Auth;
 //Broadcast::routes();
 //Auth::routes();
 
+//PUSH ROUTES
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/save-device-token', 'PushController@saveToken');
+Route::post('/send-push', 'PushController@sendPush')->name('send-push');
+
 Route::get('/', function () {
     return view('home');
 })->name('/');

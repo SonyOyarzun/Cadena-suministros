@@ -135,5 +135,11 @@ https://cloudconvert.com/svg-to-png
 
 npm install --global pwa-asset-generator
 pwa-asset-generator C:\Users\sonyo\OneDrive\Documentos\GitHub\Cadena-suministros\public\img\logo.svg C:\Users\sonyo\OneDrive\Escritorio\iconos2
+
+
+//
+PUSH NOTIFICATION
+https://github.com/ashik0019/A-Quick-Guide-to-Implement-Firebase-Web-Push-Notification-in-Laravel
+
 */
 
