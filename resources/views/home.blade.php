@@ -167,6 +167,14 @@
     <div id="message"></div>
     <div id="load"></div>
     <script src="{{ asset('js/app.js') }}"></script>
+    
 </body>
+
+<form action="{{ route('send-push') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id" value="1" />
+
+                                                <input class="btn btn-primary" type="submit" value="Send Push">
+                                            </form>
 
 </html>

@@ -17,10 +17,12 @@ class PushController extends Controller
 
     public function saveToken (Request $request)
     {
-        /*
+        
         $user = User::find($request->user_id);
+  
         $user->device_token = $request->fcm_token;
         $user->save();
+    
         //dd( $this->serverKey);
         if($user)
             return response()->json([
@@ -30,7 +32,7 @@ class PushController extends Controller
         return response()->json([
             'message' => 'Error!'
         ]);
-        */
+        
     }
 
     public function sendPush (Request $request)
