@@ -144,6 +144,10 @@ function Profile(props) {
 
     useEffect(() => {
 
+        senPush().then(response => {
+           console.log(response)
+      
+          })
 
         getNotification()
 

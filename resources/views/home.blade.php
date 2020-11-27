@@ -117,6 +117,20 @@ const config = {
                     console.log(err)
                 })
 
+                axios
+                .post('/send-push', params,{
+                    headers: {
+                        Authorization: `Bearer ${localStorage.usertoken}`
+                    }
+                })
+                .then(response => {
+                    console.log(response.data)
+
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
         })
         .catch(function (err) {
             console.log("Unable to get permission to notify.", err);

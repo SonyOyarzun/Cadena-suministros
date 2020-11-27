@@ -27,44 +27,50 @@ class PushController extends Controller
             return ['message'=>'Token actualizado','type'=>'success'];
 
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            return  ['message'=> $th->getMessage(),'type'=>'error'];
         }
     }
 
     public function sendPush(Request $request)
     {
-        $user = User::find(Auth::id());
-        //dd($user);
-        //dd( $this->serverKey);
-        $data = [
-            "to" => $user->device_token,
-            "notification" =>
-            [
-                "title" => 'This is test push notification title',
-                "body" => "Sample Notification by ashiq|||| Sample Notification by ashiq||| Sample Notification by ashiq||Sample Notification by ashiq Sample Notification by ashiq Sample Notification by ashiq",
-                "icon" => url('/logo.png')
-            ],
-        ];
-        $dataString = json_encode($data);
 
-        $headers = [
-            'Authorization: key=' . $this->serverKey,
-            'Content-Type: application/json',
-        ];
+        try {
+            
+            $user = User::find(Auth::id());
+            //dd($user);
+            //dd( $this->serverKey);
+            $data = [
+                "to" => $user->device_token,
+                "notification" =>
+                [
+                    "title" => 'This is test push notification title',
+                    "body" => "Sample Notification by ashiq|||| Sample Notification by ashiq||| Sample Notification by ashiq||Sample Notification by ashiq Sample Notification by ashiq Sample Notification by ashiq",
+                    "icon" => url('/logo.png')
+                ],
+            ];
+            $dataString = json_encode($data);
+    
+            $headers = [
+                'Authorization: key=' . $this->serverKey,
+                'Content-Type: application/json',
+            ];
+    
+            $ch = curl_init();
+    
+            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+    
+            $response = curl_exec($ch);
 
-        $ch = curl_init();
+            return ['message'=>'notificacion enviada','type'=>'success'];
 
-        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+        } catch (\Throwable $th) {
+            return  ['message'=> $th->getMessage(),'type'=>'error'];
+        }
 
-        $response = curl_exec($ch);
-
-        //dd($response);
-
-        return redirect('/home')->with('message', 'Notification sent!');
     }
 }
