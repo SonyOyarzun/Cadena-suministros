@@ -14,39 +14,24 @@ class PushController extends Controller
     public function __construct()
     {
         $this->serverKey = "AAAAgbKw7Cw:APA91bG1KPVCccgkGWpvlT0J8Ix_2rCk0Y3wmBlswIoLbXGxALWvg-v2uQFC9LJsdqf6iYr_dXn3exVeNbtDcWtk4TH0m4pSSA-uz1IAKTUzqDQeKbiTYkY-elTQSSWzNmtl8tH0aXU5";
-
     }
 
-    public function saveToken (Request $response)
+    public function saveToken(Request $request)
     {
-        
-        $user = User::find(Auth::id());
-  
-    //$user->device_token = $request->fcm_token;
-     //   $user->save();
-     foreach($response as $data){
-        
-        dd($data->data);
-    }
-   
-        return $response;
-        
-    /*
-        //dd( $this->serverKey);
-        if($user)
-            return response()->json([
-                'message' => 'User token updated'
-            ]);
+        try {
+            $user = User::find(Auth::id());
 
-        return response()->json([
-            'message' => 'Error!'
-        ]);*/
+            $user->device_token = $request->fcm_token;
+            $user->save();
 
-        
-        
+            return ['message'=>'Token actualizado','type'=>'success'];
+
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
-    public function sendPush (Request $request)
+    public function sendPush(Request $request)
     {
         $user = User::find(Auth::id());
         //dd($user);
@@ -54,11 +39,11 @@ class PushController extends Controller
         $data = [
             "to" => $user->device_token,
             "notification" =>
-                [
-                    "title" => 'This is test push notification title',
-                    "body" => "Sample Notification by ashiq|||| Sample Notification by ashiq||| Sample Notification by ashiq||Sample Notification by ashiq Sample Notification by ashiq Sample Notification by ashiq",
-                    "icon" => url('/logo.png')
-                ],
+            [
+                "title" => 'This is test push notification title',
+                "body" => "Sample Notification by ashiq|||| Sample Notification by ashiq||| Sample Notification by ashiq||Sample Notification by ashiq Sample Notification by ashiq Sample Notification by ashiq",
+                "icon" => url('/logo.png')
+            ],
         ];
         $dataString = json_encode($data);
 
