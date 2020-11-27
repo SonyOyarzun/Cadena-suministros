@@ -14,6 +14,12 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+    {{--<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js"></script>--}}
+    {{-- <script src="{{ asset('firebase-messaging-sw.js') }}" defer></script>--}}
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
+
     <!-- Styles -->
     <style>
         html,
@@ -69,112 +75,71 @@
         }
     </style>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+<script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+const config = {
+        apiKey: "AIzaSyDYfNh7s4SFh2VDJJ9HplC2y7ehO1NhvfE",
+        authDomain: "larafire-240b4.firebaseapp.com",
+        databaseURL: "https://larafire-240b4.firebaseio.com",
+        projectId: "larafire-240b4",
+        storageBucket: "larafire-240b4.appspot.com",
+        messagingSenderId: "557048720428",
+        appId: "1:557048720428:web:690fee0ef9ff5181acf589",
+        measurementId: "G-JEJ1MZ09QJ"
+    };
+    firebase.initializeApp(config);
 
-    <script>
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        var firebaseConfig = {
-            apiKey: "AIzaSyBk9Y7_TsbZiA0lciQ1vvwSo3ez8jtYtso",
-            authDomain: "cadenasuministros.firebaseapp.com",
-            databaseURL: "https://cadenasuministros.firebaseio.com",
-            projectId: "cadenasuministros",
-            storageBucket: "cadenasuministros.appspot.com",
-            messagingSenderId: "967812490146",
-            appId: "1:967812490146:web:ab6fd137d2a80de9d548fb",
-            measurementId: "G-T7Q6EB91JH"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
-    </script>
+    const messaging = firebase.messaging();
 
-</head>
+    messaging
+        .requestPermission()
+        .then(function () {
+            return messaging.getToken()
+        })
+        .then(function (token) {
+            console.log(token)
 
-<script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
-    {{--<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js"></script>--}}
-   {{-- <script src="{{ asset('firebase-messaging-sw.js') }}" defer></script>--}}
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
-    <script>
-        $(document).ready(function(){
-            const config = {
-                apiKey: "AIzaSyDYfNh7s4SFh2VDJJ9HplC2y7ehO1NhvfE",
-                authDomain: "larafire-240b4.firebaseapp.com",
-                databaseURL: "https://larafire-240b4.firebaseio.com",
-                projectId: "larafire-240b4",
-                storageBucket: "larafire-240b4.appspot.com",
-                messagingSenderId: "557048720428",
-                appId: "1:557048720428:web:690fee0ef9ff5181acf589",
-                measurementId: "G-JEJ1MZ09QJ"
-            };
-            firebase.initializeApp(config);
-            const messaging = firebase.messaging();
+            const params = {
+            fcm_token: token
+            }
 
-            messaging
-                .requestPermission()
-                .then(function () {
-                    return messaging.getToken()
+            axios
+                .post('/save-device-token', params,{
+                    headers: {
+                        Authorization: `Bearer ${localStorage.usertoken}`
+                    }
                 })
-                .then(function(token) {
-                    console.log(token)
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    $.ajax({
-                        url: '{{ URL::to('/save-device-token') }}',
-                        type: 'POST',
-                        data: {
-                            user_id: {!! json_encode(Auth::id() ?? '') !!},
-                            fcm_token: token
-                        },
-                        dataType: 'JSON',
-                        success: function (response) {
-                            console.log(response)
-                        },
-                        error: function (err) {
-                            console.log(" Can't do because: " + err);
-                        },
-                    });
+                .then(response => {
+                    console.log(response)
+
                 })
-                .catch(function (err) {
-                    console.log("Unable to get permission to notify.", err);
-                });
+                .catch(err => {
+                    console.log(err)
+                })
 
-            messaging.onMessage(function(payload) {
-                const noteTitle = payload.notification.title;
-                const noteOptions = {
-                    body: payload.notification.body,
-                    icon: payload.notification.icon,
-                };
-                new Notification(noteTitle, noteOptions);
-            });
-        });
-    </script>
+        })
+        .catch(function (err) {
+            console.log("Unable to get permission to notify.", err);
+        })
 
+    messaging.onMessage(function (payload) {
+        const noteTitle = payload.notification.title;
+        const noteOptions = {
+            body: payload.notification.body,
+            icon: payload.notification.icon,
+        }
+        new Notification(noteTitle, noteOptions);
+    })
+          
+       
+</script>
 
 <body class="back">
     <div id="root"></div>
     <div id="message"></div>
     <div id="load"></div>
     <script src="{{ asset('js/app.js') }}"></script>
-    
+  
 </body>
-
-<form action="{{ route('send-push') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="id" value="1" />
-
-                                                <input class="btn btn-primary" type="submit" value="Send Push">
-                                            </form>
 
 </html>

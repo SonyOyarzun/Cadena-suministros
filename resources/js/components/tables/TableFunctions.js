@@ -246,3 +246,18 @@ export const editConfig = () => {
         })
 }
 
+export const senPush = () => {
+    return axios
+        .post('/send-push', {
+            headers: {
+                Authorization: `Bearer ${localStorage.usertoken}`
+            }
+        })
+        .then(response => {
+            console.log(response)
+
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}

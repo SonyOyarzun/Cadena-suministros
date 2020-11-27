@@ -28,8 +28,9 @@ import Routes from './components/Routes'
 import Load from './components/extra/Load'
 import Profile from './access/Profile'
 
-import {getProfile} from './access/UserFunctions'
-import {getConfig} from './components/tables/TableFunctions'
+import { getProfile } from './access/UserFunctions'
+import { getConfig } from './components/tables/TableFunctions'
+import { fireConfig } from './firebaseConfig'
 
 const styles = {
   padding: {
@@ -41,6 +42,7 @@ const styles = {
 }
 
 
+
 class App extends Component {
 
   constructor(props) {
@@ -50,9 +52,10 @@ class App extends Component {
       user: [],
       config: []
     }
+
   }
 
-
+ 
 
   componentDidMount() {
 
@@ -61,12 +64,12 @@ class App extends Component {
       getConfig()
     ])
       .then(responseArr => {
-        this.setState({ user: responseArr[0], config: responseArr[1], loading: false})
-    //    console.log('user',responseArr[0],'config ',responseArr[1])
+        this.setState({ user: responseArr[0], config: responseArr[1], loading: false })
+            console.log('user',responseArr[0],'config ',responseArr[1])
       })
 
   }
- 
+
 
   render() {
 
@@ -84,10 +87,10 @@ class App extends Component {
 
             {(this.state.user.role == 'A' || this.state.user.role == 'U') ?
               (
-              <>
-              <SideNavBar value={this.state.user.role} config={this.state.config} user={this.state.user}/>
-              <Profile user={this.state.user} config={this.state.config} /> 
-              </>
+                <>
+                  <SideNavBar value={this.state.user.role} config={this.state.config} user={this.state.user} />
+                  <Profile user={this.state.user} config={this.state.config} />
+                </>
               )
               :
               (<NavBar value={this.state.user.role} config={this.state.config} />)

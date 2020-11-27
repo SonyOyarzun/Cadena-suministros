@@ -24,7 +24,8 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import zIndex from '@material-ui/core/styles/zIndex';
 
-import { getChain, viewNotification } from '../components/tables/TableFunctions';
+import { getChain, viewNotification, senPush } from '../components/tables/TableFunctions';
+import { fire } from '../firebaseConfig';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -111,7 +112,7 @@ function Profile(props) {
         getChain().then(response => {
 
             newNotification.push(response)
-            console.log('getNotification :',newNotification)
+            console.log('getNotification :', newNotification)
             sortNotification(newNotification)
 
         })
@@ -120,8 +121,8 @@ function Profile(props) {
     const sortNotification = (response) => {
 
         response.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-    
-        response[0] = response[0].filter(e => (e.to == props.user.id &&  e.view == 0) || (e.from == props.user.id &&  e.view == 3) )
+
+        response[0] = response[0].filter(e => (e.to == props.user.id && e.view == 0) || (e.from == props.user.id && e.view == 3))
 
         setCount(response[0].length)
         setNotification(response[0])
@@ -133,7 +134,7 @@ function Profile(props) {
 
         Echo.private('notification')
             .listen('NotificationEvent', (response) => {
-             console.log('echo :',response.data)
+                console.log('echo :', response.data)
                 sortNotification(response.data)
             });
 
@@ -142,6 +143,7 @@ function Profile(props) {
 
 
     useEffect(() => {
+
 
         getNotification()
 
@@ -172,7 +174,7 @@ function Profile(props) {
                     <CardActions className={classes.collapsedTitle}>
                         <CardContent>
                             <p width='100%'>
-                                Notificaciones Nuevas: {count}
+                                Notificaciones Nuevas : {count}
                             </p>
                         </CardContent>
                         <IconButton
@@ -202,6 +204,10 @@ function Profile(props) {
                                     case 'Rechazado':
                                         src = '/img/cancel.png'
                                         title = 'Producto Rechazado por ' + data.toName
+                                        break
+                                    case 'Terminado':
+                                        src = '/img/cancel.png'
+                                        title = 'Producto Terminado por ' + data.toName
                                         break
                                 }
                             }).call(this),

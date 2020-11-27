@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PushController extends Controller
 {
@@ -15,14 +17,21 @@ class PushController extends Controller
 
     }
 
-    public function saveToken (Request $request)
+    public function saveToken (Request $response)
     {
         
-        $user = User::find($request->user_id);
+        $user = User::find(Auth::id());
   
-        $user->device_token = $request->fcm_token;
-        $user->save();
-    
+    //$user->device_token = $request->fcm_token;
+     //   $user->save();
+     foreach($response as $data){
+        
+        dd($data->data);
+    }
+   
+        return $response;
+        
+    /*
         //dd( $this->serverKey);
         if($user)
             return response()->json([
@@ -31,13 +40,15 @@ class PushController extends Controller
 
         return response()->json([
             'message' => 'Error!'
-        ]);
+        ]);*/
+
+        
         
     }
 
     public function sendPush (Request $request)
     {
-        $user = User::find($request->id);
+        $user = User::find(Auth::id());
         //dd($user);
         //dd( $this->serverKey);
         $data = [
