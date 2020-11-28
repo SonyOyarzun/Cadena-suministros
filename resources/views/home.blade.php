@@ -76,7 +76,7 @@
     </style>
 
 <script>
-
+/*
 const config = {
         apiKey: "AIzaSyDYfNh7s4SFh2VDJJ9HplC2y7ehO1NhvfE",
         authDomain: "larafire-240b4.firebaseapp.com",
@@ -145,7 +145,7 @@ const config = {
         new Notification(noteTitle, noteOptions);
     })
           
-       
+   /*    
 </script>
 
 <body class="back">

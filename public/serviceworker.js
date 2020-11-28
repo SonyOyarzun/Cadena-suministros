@@ -25,6 +25,8 @@ self.addEventListener("install", event => {
 });
 
 // Clear cache on activate
+
+/*
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(cacheNames => {
@@ -50,3 +52,5 @@ self.addEventListener("fetch", event => {
             })
     )
 });
+
+*/
