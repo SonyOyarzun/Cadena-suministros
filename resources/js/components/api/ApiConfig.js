@@ -109,25 +109,37 @@ class ApiConfig extends Component {
                 <Card>
                   <Card.Header>Servidor de Correo</Card.Header>
                   <Card.Body>
-                  <Form.Group controlId="configForm.apiPath">
-                      <Form.Label>Ruta API</Form.Label>
-                      <Form.Control name='apiPath' type="text" placeholder="Ruta API" maxLength="30" defaultValue={this.state.config.path} />
+                  <Form.Group controlId="configForm.mailer">
+                      <Form.Label>Mailer</Form.Label>
+                      <Form.Control name='mailer' type="text" placeholder="Mailer" maxLength="30" defaultValue={this.state.config.path} />
                     </Form.Group>
-                    <Form.Group controlId="configForm.txPath">
-                      <Form.Label>Ruta Transaccion</Form.Label>
-                      <Form.Control name='txPath' type="text" placeholder="Ruta Transaccion" maxLength="30" defaultValue={this.state.config.transaction} />
+                    <Form.Group controlId="configForm.host">
+                      <Form.Label>Host</Form.Label>
+                      <Form.Control name='host' type="text" placeholder="Host" maxLength="30" defaultValue={this.state.config.transaction} />
                     </Form.Group>
-                    <Form.Group controlId="configForm.assetPath">
-                      <Form.Label>Ruta Asset</Form.Label>
-                      <Form.Control name='assetPath' type="text" placeholder="Ruta Asset" maxLength="30" defaultValue={this.state.config.asset} />
+                    <Form.Group controlId="configForm.port">
+                      <Form.Label>Puerto</Form.Label>
+                      <Form.Control name='port' type="text" placeholder="Puerto" maxLength="30" defaultValue={this.state.config.asset} />
                     </Form.Group>
-                    <Form.Group controlId="configForm.apiPort">
-                      <Form.Label>Puerto API</Form.Label>
-                      <Form.Control name='apiPort' type="text" placeholder="Puerto API" maxLength="300" defaultValue={this.state.config.api_port} />
+                    <Form.Group controlId="configForm.user">
+                      <Form.Label>Usuario</Form.Label>
+                      <Form.Control name='user' type="text" placeholder="Usuario" maxLength="300" defaultValue={this.state.config.api_port} />
                     </Form.Group>
-                    <Form.Group controlId="configForm.dbPort">
-                      <Form.Label>Puerto DB</Form.Label>
-                      <Form.Control name='dbPort' type="text" placeholder="Puerto DB" maxLength="300" defaultValue={this.state.config.db_port} />
+                    <Form.Group controlId="configForm.pass">
+                      <Form.Label>Contraseña</Form.Label>
+                      <Form.Control name='pass' type="text" placeholder="Contraseña" maxLength="300" defaultValue={this.state.config.db_port} />
+                    </Form.Group>
+                    <Form.Group controlId="configForm.encryption">
+                      <Form.Label>Encriptacion</Form.Label>
+                      <Form.Control name='encryption' type="text" placeholder="Encriptacion" maxLength="300" defaultValue={this.state.config.db_port} />
+                    </Form.Group>
+                    <Form.Group controlId="configForm.from">
+                      <Form.Label>Remitente</Form.Label>
+                      <Form.Control name='from' type="text" placeholder="Remitente" maxLength="300" defaultValue={this.state.config.db_port} />
+                    </Form.Group>
+                    <Form.Group controlId="configForm.fromName">
+                      <Form.Label>Nombre Remitente</Form.Label>
+                      <Form.Control name='fromName' type="text" placeholder="Nombre Remitente" maxLength="300" defaultValue={this.state.config.db_port} />
                     </Form.Group>
                   </Card.Body>
                 </Card>
