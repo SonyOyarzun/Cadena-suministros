@@ -114,14 +114,15 @@ const GlobalStyles = createGlobalStyle`
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 1100px;
+  overFlow: auto;
+  padding-bottom: 200vh;
   width: 100%;
 }
 
 
 
 html * {
-  font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: Roboto;
 } 
 
 /*NAVBAR*/

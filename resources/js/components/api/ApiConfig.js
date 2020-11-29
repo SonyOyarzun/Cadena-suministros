@@ -73,7 +73,7 @@ class ApiConfig extends Component {
       <MDBRow>
         <MDBCol md="10" lg="10" xl="10" className="mx-auto mt-5">
           <Form>
-            <Carousel activeIndex={this.state.index} onSelect={this.handleSelect} style={{ padding: '80px'}}>
+            <Carousel activeIndex={this.state.index} onSelect={this.handleSelect} style={{ padding: '9vw'}}>
 
             <Carousel.Item>
                 <Card>
