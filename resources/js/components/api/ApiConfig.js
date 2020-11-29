@@ -75,6 +75,20 @@ class ApiConfig extends Component {
           <Form>
             <Carousel activeIndex={this.state.index} onSelect={this.handleSelect} style={{ padding: '80px'}}>
 
+            <Carousel.Item>
+                <Card>
+                  <Card.Header>APP</Card.Header>
+                  <Card.Body>
+                  <Form.Group controlId="configForm.logotype">
+                      <Upload type='logotype'/>
+                    </Form.Group>
+                    <Form.Group controlId="configForm.background">
+                      <Upload type='background'/>
+                    </Form.Group>
+                  </Card.Body>
+                </Card>
+              </Carousel.Item>
+
               <Carousel.Item>
                 <Card>
                   <Card.Header>API</Card.Header>
@@ -111,35 +125,35 @@ class ApiConfig extends Component {
                   <Card.Body>
                   <Form.Group controlId="configForm.mailer">
                       <Form.Label>Mailer</Form.Label>
-                      <Form.Control name='mailer' type="text" placeholder="Mailer" maxLength="30" defaultValue={this.state.config.path} />
+                      <Form.Control name='mailer' type="text" placeholder="Mailer" maxLength="30" defaultValue={this.state.config.mailer} />
                     </Form.Group>
                     <Form.Group controlId="configForm.host">
                       <Form.Label>Host</Form.Label>
-                      <Form.Control name='host' type="text" placeholder="Host" maxLength="30" defaultValue={this.state.config.transaction} />
+                      <Form.Control name='host' type="text" placeholder="Host" maxLength="30" defaultValue={this.state.config.host} />
                     </Form.Group>
                     <Form.Group controlId="configForm.port">
                       <Form.Label>Puerto</Form.Label>
-                      <Form.Control name='port' type="text" placeholder="Puerto" maxLength="30" defaultValue={this.state.config.asset} />
+                      <Form.Control name='port' type="text" placeholder="Puerto" maxLength="30" defaultValue={this.state.config.port} />
                     </Form.Group>
                     <Form.Group controlId="configForm.user">
                       <Form.Label>Usuario</Form.Label>
-                      <Form.Control name='user' type="text" placeholder="Usuario" maxLength="300" defaultValue={this.state.config.api_port} />
+                      <Form.Control name='user' type="text" placeholder="Usuario" maxLength="300" defaultValue={this.state.config.user} />
                     </Form.Group>
                     <Form.Group controlId="configForm.pass">
                       <Form.Label>Contraseña</Form.Label>
-                      <Form.Control name='pass' type="text" placeholder="Contraseña" maxLength="300" defaultValue={this.state.config.db_port} />
+                      <Form.Control name='pass' type="text" placeholder="Contraseña" maxLength="300" defaultValue={this.state.config.pass} />
                     </Form.Group>
                     <Form.Group controlId="configForm.encryption">
                       <Form.Label>Encriptacion</Form.Label>
-                      <Form.Control name='encryption' type="text" placeholder="Encriptacion" maxLength="300" defaultValue={this.state.config.db_port} />
+                      <Form.Control name='encryption' type="text" placeholder="Encriptacion" maxLength="300" defaultValue={this.state.config.encryption} />
                     </Form.Group>
                     <Form.Group controlId="configForm.from">
                       <Form.Label>Remitente</Form.Label>
-                      <Form.Control name='from' type="text" placeholder="Remitente" maxLength="300" defaultValue={this.state.config.db_port} />
+                      <Form.Control name='from' type="text" placeholder="Remitente" maxLength="300" defaultValue={this.state.config.from} />
                     </Form.Group>
                     <Form.Group controlId="configForm.fromName">
                       <Form.Label>Nombre Remitente</Form.Label>
-                      <Form.Control name='fromName' type="text" placeholder="Nombre Remitente" maxLength="300" defaultValue={this.state.config.db_port} />
+                      <Form.Control name='fromName' type="text" placeholder="Nombre Remitente" maxLength="300" defaultValue={this.state.config.fromName} />
                     </Form.Group>
                   </Card.Body>
                 </Card>
@@ -149,25 +163,37 @@ class ApiConfig extends Component {
                 <Card>
                   <Card.Header>FireBase</Card.Header>
                   <Card.Body>
-                  <Form.Group controlId="configForm.apiPath">
-                      <Form.Label>Ruta API</Form.Label>
-                      <Form.Control name='apiPath' type="text" placeholder="Ruta API" maxLength="30" defaultValue={this.state.config.path} />
+                  <Form.Group controlId="configForm.apiKey">
+                      <Form.Label>API key</Form.Label>
+                      <Form.Control name='apiKey' type="text" placeholder="Ruta API" maxLength="30" defaultValue={this.state.config.apiKey} />
                     </Form.Group>
-                    <Form.Group controlId="configForm.txPath">
-                      <Form.Label>Ruta Transaccion</Form.Label>
-                      <Form.Control name='txPath' type="text" placeholder="Ruta Transaccion" maxLength="30" defaultValue={this.state.config.transaction} />
+                    <Form.Group controlId="configForm.authDomain">
+                      <Form.Label>Auth Domain</Form.Label>
+                      <Form.Control name='authDomain' type="text" placeholder="Ruta Transaccion" maxLength="30" defaultValue={this.state.config.authDomain} />
                     </Form.Group>
-                    <Form.Group controlId="configForm.assetPath">
-                      <Form.Label>Ruta Asset</Form.Label>
-                      <Form.Control name='assetPath' type="text" placeholder="Ruta Asset" maxLength="30" defaultValue={this.state.config.asset} />
+                    <Form.Group controlId="configForm.databaseURL">
+                      <Form.Label>Database URL</Form.Label>
+                      <Form.Control name='databaseURL' type="text" placeholder="Ruta Asset" maxLength="30" defaultValue={this.state.config.databaseURL} />
                     </Form.Group>
-                    <Form.Group controlId="configForm.apiPort">
-                      <Form.Label>Puerto API</Form.Label>
-                      <Form.Control name='apiPort' type="text" placeholder="Puerto API" maxLength="300" defaultValue={this.state.config.api_port} />
+                    <Form.Group controlId="configForm.projectId">
+                      <Form.Label>Project ID</Form.Label>
+                      <Form.Control name='projectId' type="text" placeholder="Puerto API" maxLength="300" defaultValue={this.state.config.projectId} />
                     </Form.Group>
-                    <Form.Group controlId="configForm.dbPort">
-                      <Form.Label>Puerto DB</Form.Label>
-                      <Form.Control name='dbPort' type="text" placeholder="Puerto DB" maxLength="300" defaultValue={this.state.config.db_port} />
+                    <Form.Group controlId="configForm.storageBucket">
+                      <Form.Label>Storage Bucket</Form.Label>
+                      <Form.Control name='storageBucket' type="text" placeholder="Puerto DB" maxLength="300" defaultValue={this.state.config.storageBucket} />
+                    </Form.Group>
+                    <Form.Group controlId="configForm.messagingSenderId">
+                      <Form.Label>Messaging Sender ID</Form.Label>
+                      <Form.Control name='messagingSenderId' type="text" placeholder="Puerto DB" maxLength="300" defaultValue={this.state.config.messagingSenderId} />
+                    </Form.Group>
+                    <Form.Group controlId="configForm.appId">
+                      <Form.Label>App ID</Form.Label>
+                      <Form.Control name='appId' type="text" placeholder="Puerto DB" maxLength="300" defaultValue={this.state.config.appId} />
+                    </Form.Group>
+                    <Form.Group controlId="configForm.measurementId">
+                      <Form.Label>Measurement ID</Form.Label>
+                      <Form.Control name='measurementId' type="text" placeholder="Puerto DB" maxLength="300" defaultValue={this.state.config.measurementId} />
                     </Form.Group>
                   </Card.Body>
                 </Card>

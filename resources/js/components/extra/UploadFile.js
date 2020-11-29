@@ -1,6 +1,6 @@
-
-
 import React, { Component, Fragment, useState } from 'react';
+import { MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBModalFooter, MDBIcon } from 'mdbreact';
+import { Button, Modal, Card, Form, ListGroup } from 'react-bootstrap';
 
 
 function UploadFile(props) {
@@ -13,13 +13,13 @@ function UploadFile(props) {
 
         case 'logotype':
             url = 'uploadLogotype'
-            type = 'logotipo'
+            type = 'Logotipo'
 
             break;
 
         case 'background':
             url = 'uploadBackground'
-            type = 'fondo de pantalla'
+            type = 'Fondo de pantalla'
             break;
 
         default:
@@ -64,31 +64,21 @@ function UploadFile(props) {
 
 
     return (
-        <div>
-
-            <div className="input-group">
-                <div className="input-group-prepend">
-                    <span className="input-group-text darkLight" id="inputGroupFileAddon01">
-                        {type}
-    </span>
-                </div>
-                <div className="custom-file">
-                    <input
-                        type="file"
-                        className="custom-file-input darkLight"
+        <>
+            <Form.Group controlId="configForm.background">
+                <Form>
+                    <Form.File
+                        className='fileUpload'
+                        label= {type}
+                        
                         id={url}
                         name={url}
-                        aria-describedby="inputGroupFileAddon01"
                         onChange={e => handleFileChosen(e.target.files[0])}
                         style={{cursor: 'pointer'}}
                     />
-                    <label className="custom-file-label darkLight" htmlFor="inputGroupFile01" >
-                        {file}
-                    </label>
-                </div>
-            </div>
-
-        </div>
+                </Form>
+            </Form.Group>
+        </>
     )
 
 

@@ -141,5 +141,12 @@ pwa-asset-generator C:\Users\sonyo\OneDrive\Documentos\GitHub\Cadena-suministros
 PUSH NOTIFICATION
 https://github.com/ashik0019/A-Quick-Guide-to-Implement-Firebase-Web-Push-Notification-in-Laravel
 
+
+
+
+
+//Notas Proximas versiones
+--log de acciones por usuario
+
 */
 
