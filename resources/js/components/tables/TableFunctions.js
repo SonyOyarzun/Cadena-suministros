@@ -232,13 +232,14 @@ export const getConfig = () => {
         })
 }
 
-export const editConfig = () => {
+export const editConfig = (config) => {
+    console.log('editConfig ex:',config)
     return axios
-        .put('/api-editConfig', {
+        .post('/api-editConfig',config, {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            return response.data[0]
+            return response.data
         })
         .catch(err => {
             console.log(err)

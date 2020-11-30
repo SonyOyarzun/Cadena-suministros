@@ -16,9 +16,13 @@ class ApiConfig extends Component {
     }
     this.getData = this.getData.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
-
+  onChange(e) {
+    console.log('onchange event',e.target.name,e.target.value);
+    this.setState({ [e.target.name]: e.target.value })
+  }
 
   handleSelect = (selectedIndex, e) => {
     this.setState({ index: selectedIndex })
@@ -33,7 +37,7 @@ class ApiConfig extends Component {
 
   getData = () => {
     getConfig().then((response) => {
-      console.log(response);
+      console.log('apiconfig',response);
       this.setState({ config: response })
     }, (error) => {
       console.log(error);
@@ -46,21 +50,10 @@ class ApiConfig extends Component {
 
     const process = () => {
 
-      const data = {
-        id: document.getElementById('id').value,
-        path: document.getElementById('path').value,
-        transaction: document.getElementById('transaction').value,
-        asset: document.getElementById('asset').value,
-        api_port: document.getElementById('api_port').value,
-        db_port: document.getElementById('db_port').value,
-        //  logotype: document.getElementById('logotype').value,
-        //  background: document.getElementById('background').value
-      }
-
-      editConfig(data).then((response) => {
+      editConfig(this.state.config).then((response) => {
         console.log(response);
         this.getData()
-        alert(response.data)
+        alert(response)
       }, (error) => {
         console.log(error);
       });
@@ -73,17 +66,17 @@ class ApiConfig extends Component {
       <MDBRow>
         <MDBCol md="10" lg="10" xl="10" className="mx-auto mt-5">
           <Form>
-            <Carousel activeIndex={this.state.index} onSelect={this.handleSelect} style={{ padding: '9vw'}}>
+            <Carousel activeIndex={this.state.index} onSelect={this.handleSelect} style={{ padding: '9vw' }}>
 
-            <Carousel.Item>
+              <Carousel.Item>
                 <Card>
                   <Card.Header>APP</Card.Header>
                   <Card.Body>
-                  <Form.Group controlId="configForm.logotype">
-                      <Upload type='logotype'/>
+                    <Form.Group controlId="configForm.logotype">
+                      <Upload type='logotype' />
                     </Form.Group>
                     <Form.Group controlId="configForm.background">
-                      <Upload type='background'/>
+                      <Upload type='background' />
                     </Form.Group>
                   </Card.Body>
                 </Card>
@@ -93,10 +86,10 @@ class ApiConfig extends Component {
                 <Card>
                   <Card.Header>API</Card.Header>
                   <Card.Body>
-              
+
                     <Form.Group controlId="configForm.apiPath">
                       <Form.Label>Ruta API</Form.Label>
-                      <Form.Control name='apiPath' type="text" placeholder="Ruta API" maxLength="30" defaultValue={this.state.config.path} />
+                      <Form.Control name='apiPath' type="text" placeholder="Ruta API" maxLength="30" defaultValue={this.state.config.path} onChange={this.onChange}/>
                     </Form.Group>
                     <Form.Group controlId="configForm.txPath">
                       <Form.Label>Ruta Transaccion</Form.Label>
@@ -123,7 +116,7 @@ class ApiConfig extends Component {
                 <Card>
                   <Card.Header>Servidor de Correo</Card.Header>
                   <Card.Body>
-                  <Form.Group controlId="configForm.mailer">
+                    <Form.Group controlId="configForm.mailer">
                       <Form.Label>Mailer</Form.Label>
                       <Form.Control name='mailer' type="text" placeholder="Mailer" maxLength="30" defaultValue={this.state.config.mailer} />
                     </Form.Group>
@@ -163,7 +156,7 @@ class ApiConfig extends Component {
                 <Card>
                   <Card.Header>FireBase</Card.Header>
                   <Card.Body>
-                  <Form.Group controlId="configForm.apiKey">
+                    <Form.Group controlId="configForm.apiKey">
                       <Form.Label>API key</Form.Label>
                       <Form.Control name='apiKey' type="text" placeholder="Ruta API" maxLength="30" defaultValue={this.state.config.apiKey} />
                     </Form.Group>
