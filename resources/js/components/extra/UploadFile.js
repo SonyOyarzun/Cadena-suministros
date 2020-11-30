@@ -52,7 +52,11 @@ function UploadFile(props) {
             console.log('success', data);
         }.bind(this)).catch(function (data) {
             console.log('error', data);
-        });
+        }).finally(()=>{
+           if(confirm('Para reflejar cambios en la aplicacion, es necesario refrescar.')){
+               window.location.reload()
+           }
+        })
         // … do something with the 'content' …
     };
 
