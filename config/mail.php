@@ -1,5 +1,22 @@
 <?php
 
+/*
+use App\Api_config;
+
+$api = Api_config::findOrFail(1);
+
+//correo
+				$api->mailer  		= $request->mailer;
+				$api->host  		= $request->host;
+				$api->port  		= $request->port;
+				$api->user  		= $request->user;
+				$api->pass  		= $request->pass;
+				$api->encryption  	= $request->encryption;
+				$api->from  		= $request->from;
+                $api->fromName  	= $request->fromName;
+                
+                */
+
 return [
 
     /*
