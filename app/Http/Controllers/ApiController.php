@@ -58,7 +58,7 @@ class ApiController extends Controller
 	{
 		
 		try {
-			$api = Api_config::findOrFail($request->id);
+			$api = Api_config::findOrFail(1);
 
 		if ($api == null) {
 			return ['message'=>'Api no encontrada','type'=>'error'];

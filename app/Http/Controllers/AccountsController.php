@@ -55,7 +55,7 @@ class AccountsController extends Controller
       }
 
     } catch (\Throwable $th) {
-      return ['message'=>'Error al enviar correo','type'=>'error'];
+      return ['message'=>$th->getMessage(),'type'=>'error'];
     }
 
   }

@@ -48,6 +48,9 @@ composer require beyondcode/laravel-websockets
 php artisan websockets:serve
 
 
+//CREATE SERVICEPROVIDER
+php artisan make:provider ProgrammingPotServiceProvider
+
 
 https://www.laraveltip.com/laravel-websocket-como-utilizar-websockets-con-php/
 
