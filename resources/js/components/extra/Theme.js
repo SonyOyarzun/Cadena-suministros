@@ -104,8 +104,10 @@ const GlobalStyles = createGlobalStyle`
 
 .navbar.navbar-light .navbar-toggler-icon {
   cursor: pointer;
-  background-image: url(/img/Toggle.png);
-}
+  background-image: url(/img/icon-logo.svg);
+  width: 50px;
+  height: 50px;
+  }
 
 
 
