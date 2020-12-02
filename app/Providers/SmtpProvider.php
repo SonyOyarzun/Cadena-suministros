@@ -16,27 +16,7 @@ class SmtpProvider extends ServiceProvider
     public function register()
     {
 
-        if (\Schema::hasTable('api_config')) {
-                 
-            $api = DB::table('api_config')->first();
-            
-            if ($api) //checking if table is not empty
-            {
-                $config = array(
-                    'mailer'        => $api->mailer,
-                    'host'          => $api->host,
-                    'port'          => $api->port,
-                    'user'          => $api->user,
-                    'pass'          => $api->pass,
-                    'encryption'    => $api->encryption,
-                    'from'          => $api->from,
-                    'fromName'      => $api->fromName,
-                );
-                config()->set('smtp', $config);
-                dd(config());
-            }
-            
-        }
+      
 
         
     }
@@ -48,6 +28,27 @@ class SmtpProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if (\Schema::hasTable('api_config')) {
+                 
+            $api = DB::table('api_config')->first();
+            
+            if ($api) //checking if table is not empty
+            {
+                $config = array(
+                    'driver'     => $api->mailer,
+                    'host'       => $api->host,
+                    'port'       => $api->port,
+                    'from'       => array('address' => $api->from, 'name' => $api->fromName ),
+                    'encryption' => $api->encryption,
+                    'username'   => $api->user,
+                    'password'   => $api->pass,
+                    'sendmail'   => '/usr/sbin/sendmail -bs',
+                    'pretend'    => false,
+                );
+                config()->set('mail', $config);
+    
+            }
+            
+        }
     }
 }

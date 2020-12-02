@@ -35,8 +35,7 @@ class ResetSuccessPassEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('sender@example.com')
-                    ->view('mails.resetSuccess')
+        return $this->view('mails.resetSuccess')
                     ->text('mails.resetSuccess_plain')
                     ->with(
                       [

@@ -35,8 +35,7 @@ class ForgotPassEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('sender@example.com')
-                    ->view('mails.forgot')
+        return $this->view('mails.forgot')
                     ->text('mails.forgot_plain')
                     ->with(
                       [

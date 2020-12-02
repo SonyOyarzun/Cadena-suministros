@@ -1,5 +1,4 @@
 <?php
-//dd(config());
 
 return [
 
@@ -109,4 +108,3 @@ return [
     ],
 
 ];
-
