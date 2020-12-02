@@ -3,6 +3,8 @@ import { forgot } from './UserFunctions'
 
 import { Card } from 'react-bootstrap';
 
+import { MDBIcon, MDBBtn, MDBInput } from "mdbreact";
+
 import SnackBar from '../components/extra/SnackBar'
 import { render } from 'react-dom';
 
@@ -74,12 +76,9 @@ class ForgotPass extends Component {
                                         required={true}
                                     />
                                 </div>
-                                <button
-                                    type="submit"
-                                    className="btn btn-lg btn-primary btn-block" disabled={this.state.loading}
-                                >
-                                    {this.state.message}
-                                </button>
+                   
+
+                                <MDBBtn className={'btn-block'} type="submit" style={styles.button} disabled={this.state.loading}>{this.state.message}</MDBBtn>
                             </form>
                         </Card.Text>
                     </Card.Body>

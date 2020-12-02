@@ -101,7 +101,7 @@ html * {
   font-size: ${({ theme }) => theme.font};
 } 
 
-.btn-default {
+.btn {
   font-size: ${({ theme }) => theme.font};
 } 
 

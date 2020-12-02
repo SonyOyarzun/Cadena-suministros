@@ -3,6 +3,8 @@ import { reset } from './UserFunctions'
 
 import { Card } from 'react-bootstrap';
 
+import { MDBIcon, MDBBtn, MDBInput } from "mdbreact";
+
 import SnackBar from '../components/extra/SnackBar'
 
 const styles = {
@@ -94,13 +96,7 @@ class Reset extends Component {
                                         onChange={this.onChange}
                                     />
                                 </div>
-                                <button
-                                    type="submit"
-                                    className="btn btn-lg btn-primary btn-block"
-                                    disabled={this.state.loading}
-                                >
-                                    {this.state.message}
-                                </button>
+                                <MDBBtn className={'btn-block'} type="submit" style={styles.button} disabled={this.state.loading}>{this.state.message}</MDBBtn>
                             </form>
                         </Card.Text>
                     </Card.Body>
