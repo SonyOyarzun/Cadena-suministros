@@ -101,6 +101,10 @@ html * {
   font-size: ${({ theme }) => theme.font};
 } 
 
+.btn-default {
+  font-size: ${({ theme }) => theme.font};
+} 
+
 /*TABLE INICIO*/
 table {
   font-size: ${({ theme }) => theme.font};
