@@ -94,6 +94,7 @@ class ApiConfig extends Component {
         messagingSenderId: response.messagingSenderId,
         appId: response.appId,
         measurementId: response.measurementId,
+        serverKey: response.serverKey,
 
        })
     }, (error) => {
@@ -244,6 +245,10 @@ class ApiConfig extends Component {
                     <Form.Group controlId="configForm.measurementId">
                       <Form.Label>Measurement ID</Form.Label>
                       <Form.Control name='measurementId' type="text" placeholder="Puerto DB" maxLength="300" defaultValue={this.state.measurementId} onChange={this.onChange}/>
+                    </Form.Group>
+                    <Form.Group controlId="configForm.measurementId">
+                      <Form.Label>Server Key</Form.Label>
+                      <Form.Control name='serverKey' type="text" placeholder="Llave de servidor" maxLength="300" defaultValue={this.state.serverKey} onChange={this.onChange}/>
                     </Form.Group>
                   </Card.Body>
                 </Card>

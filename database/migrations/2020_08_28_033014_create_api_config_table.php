@@ -42,6 +42,7 @@ class CreateApiConfigTable extends Migration
             $table->string('messagingSenderId');
             $table->string('appId');
             $table->string('measurementId');
+            $table->string('serverKey');
 
              //APP
             $table->string('logotype');

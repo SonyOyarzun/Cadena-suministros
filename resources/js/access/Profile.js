@@ -144,8 +144,9 @@ function Profile(props) {
 
     useEffect(() => {
 
+        console.log('push push x')
         senPush().then(response => {
-           console.log(response)
+           console.log('push push',response)
       
           })
 

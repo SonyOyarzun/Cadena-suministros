@@ -41,7 +41,8 @@ class ApiSeeder extends Seeder
             'storageBucket' => 'cadenasuministros.appspot.com',
             'messagingSenderId' => '967812490146',
             'appId'         => '1:967812490146:web:ab6fd137d2a80de9d548fb',
-            'measurementId'   => 'G-T7Q6EB91JH',
+            'measurementId' => 'G-T7Q6EB91JH',
+            'serverKey'     =>'AAAA4VYeo6I:APA91bHBYwxkRpjaTZbr9nYwPVvwdvWWuQF039_NcMR118oBOlkTqDbcIV0xjEC5QTOXHyCEawKFLo0kyrmRAUoHA-F7I4Uc9BgOg0i00tM7IrMerxlJwBioxuDOkLvXs08e9CIA6FJ1',
 
             //APP
             'logotype'      => 'logo.png',
