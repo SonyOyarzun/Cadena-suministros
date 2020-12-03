@@ -43,9 +43,9 @@ class PushController extends Controller
                 "to" => $user->device_token,
                 "notification" =>
                 [
-                    "title" => 'Notificaciones Nuevas',
-                    "body" => "Usted tiene nuevas notificaciones",
-                    "icon" => url('/img/logo.svg')
+                    "title"     => 'Notificaciones Nuevas',
+                    "body"      => "Usted tiene nuevas notificaciones",
+                    "icon"      => url('/img/logo.svg')
                 ],
             ];
             $dataString = json_encode($data);
@@ -66,7 +66,8 @@ class PushController extends Controller
     
             $response = curl_exec($ch);
 
-            return ['message'=>'notificacion enviada','type'=>'success'];
+            return $response;
+          //  return ['message'=>'notificacion enviada','type'=>'success'];
 
         } catch (\Throwable $th) {
             return  ['message'=> $th->getMessage(),'type'=>'error'];

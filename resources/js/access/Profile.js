@@ -24,8 +24,9 @@ import { MDBIcon, MDBBtn } from "mdbreact";
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import zIndex from '@material-ui/core/styles/zIndex';
 
-import { getChain, viewNotification, senPush } from '../components/tables/TableFunctions';
-import { fire } from '../firebaseConfig';
+import { getChain, viewNotification } from '../components/tables/TableFunctions';
+import PushNotification from '../components/extra/PushNotification'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -136,6 +137,7 @@ function Profile(props) {
             .listen('NotificationEvent', (response) => {
                 console.log('echo :', response.data)
                 sortNotification(response.data)
+                PushNotification()
             });
 
     }
@@ -144,11 +146,7 @@ function Profile(props) {
 
     useEffect(() => {
 
-        console.log('push push x')
-        senPush().then(response => {
-           console.log('push push',response)
-      
-          })
+        PushNotification()
 
         getNotification()
 
