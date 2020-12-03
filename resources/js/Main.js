@@ -30,7 +30,7 @@ import Profile from './access/Profile'
 
 import { getProfile } from './access/UserFunctions'
 import { getConfig } from './components/tables/TableFunctions'
-import { fireConfig } from './firebaseConfig'
+import ValidateFire from './components/extra/ValidateFire'
 
 const styles = {
   padding: {
@@ -55,7 +55,7 @@ class App extends Component {
 
   }
 
- 
+  fire
 
   componentDidMount() {
 
@@ -90,6 +90,7 @@ class App extends Component {
                 <>
                   <SideNavBar value={this.state.user.role} config={this.state.config} user={this.state.user} />
                   <Profile user={this.state.user} config={this.state.config} />
+                  <ValidateFire/>
                 </>
               )
               :

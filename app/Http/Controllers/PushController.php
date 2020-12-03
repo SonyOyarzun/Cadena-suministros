@@ -43,9 +43,9 @@ class PushController extends Controller
                 "to" => $user->device_token,
                 "notification" =>
                 [
-                    "title" => 'This is test push notification title',
-                    "body" => "Sample Notification by ashiq|||| Sample Notification by ashiq||| Sample Notification by ashiq||Sample Notification by ashiq Sample Notification by ashiq Sample Notification by ashiq",
-                    "icon" => url('/logo.png')
+                    "title" => 'Notificaciones Nuevas',
+                    "body" => "Usted tiene nuevas notificaciones",
+                    "icon" => url('/img/logo.svg')
                 ],
             ];
             $dataString = json_encode($data);

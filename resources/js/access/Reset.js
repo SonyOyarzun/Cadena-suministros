@@ -73,7 +73,7 @@ class Reset extends Component {
                                         name="Mail"
                                         placeholder="Ingrese Mail"
                                         value={this.state.email}
-                                        onChange={this.onChange}
+                                        onBlur={this.onChange}
                                     />
                                 </div>
                                 <div className="form-group">
