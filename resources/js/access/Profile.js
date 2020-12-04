@@ -115,7 +115,14 @@ function Profile(props) {
             newNotification.push(response)
             console.log('getNotification :', newNotification)
             sortNotification(newNotification)
-
+            
+            if (response.length > 0) {
+                PushMessage = {
+                    title: 'Notificaciones Nuevas',
+                    body: 'Usted tiene nuevas notificaciones',
+                }
+                PushNotification(PushMessage)
+            }
         })
     };
 
@@ -141,8 +148,8 @@ function Profile(props) {
                 sortNotification(response.data)
 
                 PushMessage = {
-                    title   :   'Producto ' + response.data[0][0].state + ' por ' + response.data[0][0].fromName,
-                    body    :   response.data[0][0].commentary,
+                    title: 'Producto ' + response.data[0][response.data[0].length - 1].state + ' por ' + response.data[0][0].fromName,
+                    body: response.data[0][response.data[0].length - 1].commentary,
                 }
                 PushNotification(PushMessage)
             });
@@ -150,15 +157,8 @@ function Profile(props) {
     }
 
 
-    PushMessage = {
-        title   :   'Notificaciones Nuevas',
-        body    :   'Usted tiene nuevas notificaciones',
-    }
-
 
     useEffect(() => {
-
-        PushNotification(PushMessage)
 
         getNotification()
 
