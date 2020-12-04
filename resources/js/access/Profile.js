@@ -130,6 +130,8 @@ function Profile(props) {
     };
 
 
+    let PushMessage = {}
+
 
     const listen = () => {
 
@@ -137,16 +139,26 @@ function Profile(props) {
             .listen('NotificationEvent', (response) => {
                 console.log('echo :', response.data)
                 sortNotification(response.data)
-                PushNotification()
+
+                PushMessage = {
+                    title   :   'Producto ' + response.data[0][0].state + ' por ' + response.data[0][0].fromName,
+                    body    :   response.data[0][0].commentary,
+                }
+                PushNotification(PushMessage)
             });
 
     }
 
 
+    PushMessage = {
+        title   :   'Notificaciones Nuevas',
+        body    :   'Usted tiene nuevas notificaciones',
+    }
+
 
     useEffect(() => {
 
-        PushNotification()
+        PushNotification(PushMessage)
 
         getNotification()
 

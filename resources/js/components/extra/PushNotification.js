@@ -2,7 +2,7 @@ import React, { Component, Fragment, useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import fire from './FireBase'
 
-function ValidateFire(props) {
+function PushNotification(props) {
 
     const messaging = fire.messaging();
 
@@ -32,19 +32,24 @@ function ValidateFire(props) {
                     console.log(err)
                 })
 
-            axios
-                .post('/send-push', params, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.usertoken}`
-                    }
+                .finally(() => {
+
+                    axios
+                        .post('/send-push', props, {
+                            headers: {
+                                Authorization: `Bearer ${localStorage.usertoken}`
+                            }
+                        })
+                        .then(response => {
+                            console.log(response.data)
+                            return response.data
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+
                 })
-                .then(response => {
-                    console.log(response.data)
-                    return response.data
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+
 
         })
         .catch(function (err) {
@@ -65,4 +70,4 @@ function ValidateFire(props) {
 
 }
 
-export default ValidateFire;
+export default PushNotification;
