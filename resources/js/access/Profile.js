@@ -115,13 +115,6 @@ function Profile(props) {
             newNotification.push(response)
             console.log('getNotification :', newNotification)
 
-            if (newNotification[0].length > 0) {
-                PushMessage = {
-                    title: 'Notificaciones Nuevas',
-                    body: 'Usted tiene nuevas notificaciones',
-                }
-                PushNotification(PushMessage)
-            }
             sortNotification(newNotification)
         })
     };
@@ -133,6 +126,14 @@ function Profile(props) {
         response[0] = response[0].filter(e => (e.to == props.user.id && e.view == 0) || (e.from == props.user.id && e.view == 3))
 
         if (response[0].length>0) {
+
+          //  if (response[0].hasOwnProperty('state')) {
+                PushMessage = {
+                    title: 'Notificaciones Nuevas',
+                    body: 'Usted tiene ' + response[0].length + ' nueva(s) notificacion(es)',
+                }
+                PushNotification(PushMessage)
+        //    }
 
         response[0].map((data, order) => (
 
