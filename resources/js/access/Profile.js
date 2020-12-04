@@ -114,7 +114,6 @@ function Profile(props) {
 
             newNotification.push(response)
             console.log('getNotification :', newNotification)
-            sortNotification(newNotification)
 
             if (newNotification[0].length > 0) {
                 PushMessage = {
@@ -123,6 +122,7 @@ function Profile(props) {
                 }
                 PushNotification(PushMessage)
             }
+            sortNotification(newNotification)
         })
     };
 
@@ -134,14 +134,15 @@ function Profile(props) {
 
         if (response[0].length>0) {
 
-        if (response[0][0].hasOwnProperty('state')) {
+        response[0].map((data, order) => (
 
             PushMessage = {
-                title: 'Producto ' + response[0][0].state + ' por ' + response[0][0].fromName,
-                body: response[0][0].commentary,
-            }
+                title: 'Producto ' + data.state + ' por ' + data.fromName,
+                body: data.commentary,
+            },
+
             PushNotification(PushMessage)
-        }
+        ))
 
     }
         setCount(response[0].length)
