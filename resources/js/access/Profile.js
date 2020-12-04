@@ -116,7 +116,7 @@ function Profile(props) {
             console.log('getNotification :', newNotification)
             sortNotification(newNotification)
 
-            if (response.length > 0) {
+            if (newNotification[0].length > 0) {
                 PushMessage = {
                     title: 'Notificaciones Nuevas',
                     body: 'Usted tiene nuevas notificaciones',
