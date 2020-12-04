@@ -115,7 +115,7 @@ function Profile(props) {
             newNotification.push(response)
             console.log('getNotification :', newNotification)
             sortNotification(newNotification)
-            
+
             if (response.length > 0) {
                 PushMessage = {
                     title: 'Notificaciones Nuevas',
@@ -147,6 +147,10 @@ function Profile(props) {
                 console.log('echo :', response.data)
                 sortNotification(response.data)
 
+                resultFilter = response.data.filter(e.state != 'transferido')
+
+                console.log('resultFilter',resultFilter)
+                
                 PushMessage = {
                     title: 'Producto ' + response.data[0][response.data[0].length - 1].state + ' por ' + response.data[0][0].fromName,
                     body: response.data[0][response.data[0].length - 1].commentary,
