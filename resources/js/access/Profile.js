@@ -102,11 +102,11 @@ function Profile(props) {
     };
 
     const viewNotificationClick = () => {
-        /*
+        
              viewNotification().then(response => {
                  console.log(response)
              })
-             */
+             
     };
 
     const getNotification = () => {
@@ -132,6 +132,12 @@ function Profile(props) {
 
         response[0] = response[0].filter(e => (e.to == props.user.id && e.view == 0) || (e.from == props.user.id && e.view == 3))
 
+        PushMessage = {
+            title: 'Producto ' + response[0][0].state + ' por ' + response[0][0].fromName,
+            body: response[0][0].commentary,
+        }
+        PushNotification(PushMessage)
+
         setCount(response[0].length)
         setNotification(response[0])
     };
@@ -146,16 +152,7 @@ function Profile(props) {
             .listen('NotificationEvent', (response) => {
                 console.log('echo :', response.data)
                 sortNotification(response.data)
-
-                resultFilter = response.data.filter(e.state != 'transferido')
-
-                console.log('resultFilter',resultFilter)
-                
-                PushMessage = {
-                    title: 'Producto ' + response.data[0][response.data[0].length - 1].state + ' por ' + response.data[0][0].fromName,
-                    body: response.data[0][response.data[0].length - 1].commentary,
-                }
-                PushNotification(PushMessage)
+       
             });
 
     }
