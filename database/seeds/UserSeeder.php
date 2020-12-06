@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
        DB::table('users')->insert([
             'name' => 'Laboratorios de Niche',
             'email' => 'admin@admin.com',
-            'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/db.json',
+            'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/medical.json',
             'role' => 'A',
             'password' => bcrypt('12345678'),
             'publicKey'  => '5bAAdgeKRpaiQ75onTGaBjkGM6HZ9GiCD2Xhv3pA9Ksq',
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'CC Chile',
             'email' => 'ccchile@cadena.cl',
-            'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/db.json',
+            'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/medical.json',
             'role' => 'U',
             'password' => bcrypt('12345678'),
             'publicKey'  => 'H66ANcwb4W81iRHsMReHwJWnPcwyGZCAcWBQDbn6YuqL',
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'AC SUR',
             'email' => 'acsur@cadena.cl',
-            'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/db.json',
+            'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/medical.json',
             'role' => 'U',
             'password' => bcrypt('12345678'),
             'publicKey'  => 'H3EaF1k3dntV7q6dHFayAFHCuiVZa8wSrHAztUUaBYaM',
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Consultorio',
             'email' => 'consultorio@cadena.cl',
-            'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/db.json',
+            'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/medical.json',
             'role' => 'U',
             'password' => bcrypt('12345678'),
             'publicKey'  => '3fEZQX2yasZTDp7R7a8eUuNaNB3W2xzqvVwT4yYHUqrd',

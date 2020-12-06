@@ -30,7 +30,7 @@ class ApiSeeder extends Seeder
             'user'          => 'eb9a7318d73a41',
             'pass'          => '260c45cd1cc606',
             'encryption'    => 'tls',
-            'from'          => 'null',
+            'from'          => 'cadenaXXX@tripleX.com',
             'fromName'      => 'Cadena de Suministros',
 
             //FIREBASE
