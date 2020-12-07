@@ -762,6 +762,11 @@ color: ${({ theme }) => theme.body} !important;
   filter: alpha(opacity=0);
 }
 /*UPLOAD FIN*/
+
+
+.form-control-sm ::placeholder{
+  content: 'gg';
+}
 `;
 
 

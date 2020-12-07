@@ -132,6 +132,10 @@ class TableUser extends Component {
             sortable={false}
             data={data}
             info={false}
+            searchLabel= 'Buscar'
+            infoLabel= {['Mostrando', 'de', 'de', 'entradas']}
+            paginationLabel= {['Previous', 'Next']}
+            entriesLabel= 'Cantidad de usuarios'
           />
 
 
