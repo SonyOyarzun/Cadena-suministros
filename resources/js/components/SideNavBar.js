@@ -40,6 +40,9 @@ class SideNavBar extends Component {
           }}
         >
           <SideNav.Toggle />
+          <SideNav.brand>
+            g
+          </SideNav.brand>
           <SideNav.Nav>
 
 
@@ -145,6 +148,17 @@ class SideNavBar extends Component {
 
 
             </NavItem>
+
+            <NavItem eventKey="icon" style={{position:'relative', bottom:0}}>
+              <NavIcon>
+                <img src={'/img/icon-logo.svg'} style={{ width: '1.75em' }}></img>
+              </NavIcon>
+              <NavText>
+              <img src={'/img/logo.svg'} style={{ width: '3.75em' }}></img>
+              </NavText>
+            </NavItem>
+
+            
 
 
           </SideNav.Nav>

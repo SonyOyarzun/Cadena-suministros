@@ -3,7 +3,7 @@ import React, { Component, ButtonGroup } from 'react';
 import axios from 'axios'
 
 //import datable
-import { MDBDataTableV5, MDBBtn, MDBIcon,MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
+import { MDBDataTableV5, MDBBtn, MDBIcon, MDBInput, MDBTable, MDBTableBody, MDBTableHead, MDBRow, MDBCol } from 'mdbreact';
 
 
 import Load from '../extra/Load'
@@ -29,7 +29,7 @@ class TableOrder extends Component {
     axios.get('chain/list/').then(response => {
       this.setState({ sends: response.data })
       this.setState({ loading: false })
-          console.log('sends :',this.state.sends)
+      console.log('sends :', this.state.sends)
       console.log('response :', response.data)
     }).catch(error => {
       console.log("Error " + error)
@@ -51,7 +51,7 @@ class TableOrder extends Component {
   }
 
 
- 
+
   render() {
 
     let columns = [
@@ -98,7 +98,7 @@ class TableOrder extends Component {
           to: data.toName,
           state: data.state,
           updated_at: format(new Date(data.updated_at), "dd/MM/yyyy"),
-          action: <Pdf transaction={data.asset}/>,
+          action: <Pdf transaction={data.asset} />,
         }
 
       ))
@@ -118,7 +118,7 @@ class TableOrder extends Component {
     //console.log('filter :',arrayFilter)
 
     console.log('data :', data)
-  
+
 
     const { loading } = this.state;
 
@@ -139,6 +139,13 @@ class TableOrder extends Component {
               btn
               sortable={false}
               data={data}
+
+              info={false}
+              searchLabel='Buscar'
+              infoLabel={['Mostrando', 'de', 'de', 'entradas']}
+              paginationLabel={['Previous', 'Next']}
+              entriesLabel='Cantidad Maxima'
+              disableRetreatAfterSorting={true}
             />
           </MDBCol>
         </MDBRow>

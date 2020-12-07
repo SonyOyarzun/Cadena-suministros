@@ -339,6 +339,12 @@ export default function Terminate(props) {
                     searching={false}
                     data={data}
                     info={false}
+
+                    searchLabel='Buscar'
+                    infoLabel={['Mostrando', 'de', 'de', 'entradas']}
+                    paginationLabel={['Previous', 'Next']}
+                    entriesLabel='Cantidad Maxima'
+                    disableRetreatAfterSorting={true}
                   />
 
                 </div>

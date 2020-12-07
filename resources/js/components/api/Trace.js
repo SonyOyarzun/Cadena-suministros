@@ -98,7 +98,7 @@ function Trace(props) {
                 console.log('metadata', responseArr[0])
 
                 console.log('revert', revert)
-                
+
                 if (revert == true) {
                   setStep(responseArr[0].sort((a, b) => b.metadata.metadata.date - a.metadata.metadata.date))
                 } else {
@@ -282,7 +282,13 @@ function Trace(props) {
                     paging={false}
                     searching={false}
                     data={data}
+
                     info={false}
+                    searchLabel='Buscar'
+                    infoLabel={['Mostrando', 'de', 'de', 'entradas']}
+                    paginationLabel={['Previous', 'Next']}
+                    entriesLabel='Cantidad Maxima'
+                    disableRetreatAfterSorting={true}
                   />
                 </div>
 

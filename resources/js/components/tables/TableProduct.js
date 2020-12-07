@@ -67,6 +67,13 @@ class TableProduct extends Component {
             entriesOptions={[5, 10, 15]}
             entries={5}
             data={data}
+
+            info={false}
+            searchLabel= 'Buscar'
+            infoLabel= {['Mostrando', 'de', 'de', 'entradas']}
+            paginationLabel= {['Previous', 'Next']}
+            entriesLabel= 'Cantidad Maxima'
+            disableRetreatAfterSorting={true}
           />
 
         </div>

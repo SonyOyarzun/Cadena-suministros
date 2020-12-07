@@ -22,8 +22,8 @@ const Toggle = ({ theme, toggleTheme }) => {
 
   return (
     <ToggleContainer defaultTheme={isDefault} onClick={toggleTheme}>
-      <img src="/img/sun.svg" width="50" height="50" alt="Sun free icon" title="Tema Diurno" />
-      <img src="/img/moon.svg" width="50" height="50" alt="Moon free icon" title="Tema Nocturno" />
+      <img src="/img/sun.svg" width="100" height="100" alt="Sun free icon" title="Tema Diurno" />
+      <img src="/img/moon.svg" width="100" height="100" alt="Moon free icon" title="Tema Nocturno" />
     </ToggleContainer>
   );
 };
@@ -32,7 +32,7 @@ const ToggleContainer = styled.button`
   position: relative;
   display: flex;
   justify-content: space-between;
-  background: ${({ theme }) => theme.gradient};
+  background: ${({ theme }) => theme.text};
   width: 3rem;
   height: 2rem;
   margin: 0 auto;

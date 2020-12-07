@@ -75,7 +75,7 @@ class TableMyReception extends Component {
           this.getData()
         }, 5000);
 
-        
+
       }, (response) => {
         console.log(response);
         this.setState({ alert: response.message, type: response.type })
@@ -191,6 +191,13 @@ class TableMyReception extends Component {
                 btn
                 sortable={false}
                 data={data}
+
+                info={false}
+                searchLabel= 'Buscar'
+                infoLabel= {['Mostrando', 'de', 'de', 'entradas']}
+                paginationLabel= {['Previous', 'Next']}
+                entriesLabel= 'Cantidad Maxima'
+                disableRetreatAfterSorting={true}
               />
             </MDBCol>
           </MDBRow>

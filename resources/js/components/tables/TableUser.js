@@ -135,7 +135,8 @@ class TableUser extends Component {
             searchLabel= 'Buscar'
             infoLabel= {['Mostrando', 'de', 'de', 'entradas']}
             paginationLabel= {['Previous', 'Next']}
-            entriesLabel= 'Cantidad de usuarios'
+            entriesLabel= 'Cantidad Maxima'
+            disableRetreatAfterSorting={true}
           />
 
 

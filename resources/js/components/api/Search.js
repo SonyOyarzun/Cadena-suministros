@@ -197,9 +197,9 @@ export default function Search() {
   return (
     <MDBRow>
       <MDBCol md="12" lg="12" xl="12" className="mx-auto mt-3">
-      {alert != '' &&
-        <SnackBar alert={alert} type={type} />
-      }
+        {alert != '' &&
+          <SnackBar alert={alert} type={type} />
+        }
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>Busqueda de Productos</MDBCardHeader>
@@ -221,23 +221,29 @@ export default function Search() {
                     <MDBIcon icon="cash-register" /> Producto
               </Typography>
 
-              <MDBDataTableV5
-              responsive
-              bordered
-              hover
-              btn
-              sortable={false}
-              paging={false}
-              searching={false}
-              data={data}
-              info={false}
-            />
+                  <MDBDataTableV5
+                    responsive
+                    bordered
+                    hover
+                    btn
+                    sortable={false}
+                    paging={false}
+                    searching={false}
+                    data={data}
+                    info={false}
+
+                    searchLabel='Buscar'
+                    infoLabel={['Mostrando', 'de', 'de', 'entradas']}
+                    paginationLabel={['Previous', 'Next']}
+                    entriesLabel='Cantidad Maxima'
+                    disableRetreatAfterSorting={true}
+                  />
 
                 </div>
               )
               : (<center>{'Sin resultados'}</center>)
             }
-           
+
           </MDBCardFooter>
 
         </MDBCard>
