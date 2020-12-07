@@ -11,6 +11,7 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import { MDBIcon, MDBBtn } from "mdbreact";
+import { NavbarBrand } from 'react-bootstrap';
 
 let style = {
   zIndex: 100
@@ -36,15 +37,16 @@ class SideNavBar extends Component {
       <div style={style}>
         <SideNav
           onSelect={(selected) => {
-            // Add your code here
+           
           }}
         >
-          <SideNav.Toggle />
-          <SideNav.brand>
-            g
-          </SideNav.brand>
+           
+
+          <SideNav.Toggle/>
+
           <SideNav.Nav>
 
+    
 
             {this.props.value == 'A' &&
 
@@ -149,19 +151,9 @@ class SideNavBar extends Component {
 
             </NavItem>
 
-            <NavItem eventKey="icon" style={{position:'relative', bottom:0}}>
-              <NavIcon>
-                <img src={'/img/icon-logo.svg'} style={{ width: '1.75em' }}></img>
-              </NavIcon>
-              <NavText>
-              <img src={'/img/logo.svg'} style={{ width: '3.75em' }}></img>
-              </NavText>
-            </NavItem>
-
-            
-
-
           </SideNav.Nav>
+
+        
         </SideNav>
 
       </div >

@@ -20,12 +20,11 @@ let style = {
 let phantom = {
     display: 'block',
     padding: '20px',
-    height: '10px',
+    heigth: '10px',
     width: '100%',
 }
 
 let theme = {
-    position: 'relative',
     bottom: '-5px',
     padding: '0',
     height: '10px',
@@ -65,9 +64,12 @@ function Footer(props) {
             <div style={phantom} />
             <div style={style} className='foot'>
 
-                <MDBContainer fluid className="text-center">
+                <MDBContainer fluid >
                     <MDBRow>
-                        <MDBCol className='col-3 mx-auto' style={theme} >
+                        <MDBCol className='col-8'>
+                            <img src={'/img/logo.svg'} style={{width:'4em'}}></img>
+                        </MDBCol>
+                        <MDBCol className='col-4' style={theme} >
                             <MDBCard>
                                 <table>
                                     <tr>
@@ -80,7 +82,7 @@ function Footer(props) {
                             </MDBCard>
                         </MDBCol>
 
-                        <MDBCol className="footer-copyright col-sm-12" style={line} height={'100'}>
+                        <MDBCol className="footer-copyright col-sm-12 text-center" style={line} height={'100'}>
                             <MDBContainer fluid>
                                 &copy; {new Date().getFullYear()} Cadena de Suministros CASU
                     </MDBContainer>
