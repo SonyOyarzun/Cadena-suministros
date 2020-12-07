@@ -67,7 +67,7 @@ function Footer(props) {
                 <MDBContainer fluid >
                     <MDBRow>
                         <MDBCol className='col-8'>
-                            <img src={'/img/logo.svg'} style={{width:'4em'}}></img>
+                            <img src={'/img/logo.svg'} style={{width:'5em'}}></img>
                         </MDBCol>
                         <MDBCol className='col-4' style={theme} >
                             <MDBCard>
