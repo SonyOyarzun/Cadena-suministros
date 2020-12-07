@@ -136,7 +136,6 @@ export default function TableMyProduct(props) {
             data={data}
 
 
-            info={false}
             searchLabel='Buscar'
             infoLabel={['Mostrando', 'de', 'de', 'entradas']}
             paginationLabel={['Previous', 'Next']}
