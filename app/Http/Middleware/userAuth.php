@@ -23,7 +23,7 @@ class userAuth extends Middleware
         $id = Auth::id();
         $user = User::findOrFail($id);
 
-        if (!($user->role=='A') || !($user->role=='U')) {
+        if (!($user->role=='A'|| $user->role=='U')) {
             abort(403, "¡Debe Autentificarse Primero!");
         }
         return $next($request);
