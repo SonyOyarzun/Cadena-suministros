@@ -650,7 +650,7 @@ color: ${({ theme }) => theme.body} !important;
 /*HOVER DE ITEMS DE NAV*/
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T:hover {
   background: ${({ theme }) => theme.border};
-  background-color: transparent;
+  background-color: ${({ theme }) => theme.border};
   opacity: 0.7;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
   filter: alpha(opacity=70);
@@ -671,6 +671,7 @@ color: ${({ theme }) => theme.body} !important;
   -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
+
 
 /* CSS BARRA LATERAL FIN*/
 
