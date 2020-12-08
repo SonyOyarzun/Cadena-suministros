@@ -176,6 +176,10 @@ a {
   text-decoration: none;
 }
 
+a:link, a:visited, a:active {
+  text-decoration:none;
+}
+
 /*flechas paginacion*/
 span.mdb-dataTables_paginate{
   color: ${({ theme }) => theme.body} !important;
