@@ -186,9 +186,9 @@ export default function Pdf(props) {
     let tableProd = titleProd + 5
     let titleTrace = tableProd + 30
     let tableTrace = titleTrace + 5
-    let ID = maxHeight - margin + 3
+    let ID = imgLogo - 30
     let QR = imgLogo 
-    let Foot = ID + 5
+    let Foot = imgLogo - 35
 
 
 

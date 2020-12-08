@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Middleware;
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 use Illuminate\Support\Facades\Auth;
 use App\User;
 
 use Closure;
 
-class adminAuth extends Middleware
+class adminAuth 
 {
     /**
      * Handle an incoming request.
@@ -17,13 +16,15 @@ class adminAuth extends Middleware
      * @param  \Closure  $next
      * @return mixed
      */
-    protected function redirectTo($request)
+
+    public function handle($request, Closure $next)
     {
         $id = Auth::id();
         $user = User::findOrFail($id);
 
         if (!($user->role=='A')) {
-            return route('/');
+            abort(403, "¡No tienes suficientes permisos!");
         }
+        return $next($request);
     }
 }

@@ -17,13 +17,15 @@ class userAuth extends Middleware
      * @param  \Closure  $next
      * @return mixed
      */
-    protected function redirectTo($request)
+
+    public function handle($request, Closure $next)
     {
         $id = Auth::id();
         $user = User::findOrFail($id);
 
-        if (!($user->role=='A' || $user->role=='U')) {
-            return route('/');
+        if (!($user->role=='A') || !($user->role=='U')) {
+            abort(403, "¡Debe Autentificarse Primero!");
         }
+        return $next($request);
     }
 }
