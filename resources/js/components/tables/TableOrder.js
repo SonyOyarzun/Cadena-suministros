@@ -13,6 +13,8 @@ import Pdf from '../extra/Pdf'
 //formato fecha
 import { format } from "date-fns";
 
+import Message from '../extra/Messaje';
+
 class TableOrder extends Component {
 
   constructor(props) {
@@ -20,8 +22,11 @@ class TableOrder extends Component {
     this.state = {
       sends: [],
       loading: true,
+      show: false,
+      message: '',
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
+    this.sendID = this.sendID.bind(this);
   }
 
   getData() {
@@ -50,6 +55,9 @@ class TableOrder extends Component {
     })
   }
 
+  sendID(id) {
+    this.setState({show:true, message: id})
+  }
 
 
   render() {
@@ -92,7 +100,9 @@ class TableOrder extends Component {
     let rows = [
       ...this.state.sends.map((data, order) => (
         {
-          transaction: data.transaction,
+          transaction: <MDBBtn color="primary" rounded onClick={() =>{ this.sendID(data.transaction) }}>
+            Transaccion
+          </MDBBtn>,
           asset: data.asset,
           from: data.fromName,
           to: data.toName,
@@ -148,6 +158,7 @@ class TableOrder extends Component {
               disableRetreatAfterSorting={true}
             />
           </MDBCol>
+          <Message handleShow={() =>{this.setState({show:true})}} handleClose={() =>{this.setState({show:false})}} show={this.state.show} title={'Transacción'} label={'ID'} value={this.state.message}></Message>
         </MDBRow>
       )
     }

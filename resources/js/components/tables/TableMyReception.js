@@ -61,7 +61,6 @@ class TableMyReception extends Component {
 
   sendID(id) {
     this.setState({show:true, message: id})
-
   }
 
   render() {

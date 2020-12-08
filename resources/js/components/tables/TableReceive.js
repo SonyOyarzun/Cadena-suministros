@@ -5,7 +5,7 @@ import axios from 'axios'
 import Transfer from '../api/Transfer'
 
 //import datable
-import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon , MDBBtnGroup } from 'mdbreact';
+import { MDBDataTableV5, MDBBadge, MDBBtn, MDBIcon, MDBBtnGroup } from 'mdbreact';
 
 import Load from '../extra/Load'
 
@@ -13,6 +13,8 @@ import { getChain } from "../tables/TableFunctions";
 import { getProfile } from "../../access/UserFunctions";
 import { ToggleButton } from 'react-bootstrap';
 import { getWeekYearWithOptions } from 'date-fns/fp';
+
+import Message from '../extra/Messaje';
 
 class TableReceive extends Component {
 
@@ -23,8 +25,11 @@ class TableReceive extends Component {
       user: [],
       loading: true,
       switch: true,
+      show: false,
+      message: '',
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente 
+    this.sendID = this.sendID.bind(this);
   }
 
   getData() {
@@ -55,6 +60,10 @@ class TableReceive extends Component {
       switch: !this.state.switch
     });
     console.log(this.state.switch)
+  }
+
+  sendID(id) {
+    this.setState({ show: true, message: id })
   }
 
   render() {
@@ -97,17 +106,19 @@ class TableReceive extends Component {
     let rows = [
       ...this.state.sends.map((data, order) => (
         {
-          transaction: data.transaction,
+          transaction: <MDBBtn color="primary" rounded onClick={() =>{ this.sendID(data.transaction) }}>
+            Transaccion
+          </MDBBtn>,
           from: data.fromName,
           to: data.toName,
           state: data.state,
           updated_at: data.updated_at,
-          action:  
-          <MDBBtnGroup className="mr-2">
-          <Transfer state={'Recibido'} sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData} switch={this.state.switch} />
-          <Transfer state={'Rechazado'} sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData} switch={this.state.switch} />
-          </MDBBtnGroup>
-          
+          action:
+            <MDBBtnGroup className="mr-2">
+              <Transfer state={'Recibido'} sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData} switch={this.state.switch} />
+              <Transfer state={'Rechazado'} sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData} switch={this.state.switch} />
+            </MDBBtnGroup>
+
         }
 
       ))
@@ -156,20 +167,22 @@ class TableReceive extends Component {
             responsive
             bordered
             hover
-            entriesOptions={[5, 20, 25]} 
-            entries={5} 
+            entriesOptions={[5, 20, 25]}
+            entries={5}
             pagesAmount={4}
             btn
             sortable={false}
             data={data}
 
             info={false}
-            searchLabel= 'Buscar'
-            infoLabel= {['Mostrando', 'de', 'de', 'entradas']}
-            paginationLabel= {['Previous', 'Next']}
-            entriesLabel= 'Cantidad Maxima'
+            searchLabel='Buscar'
+            infoLabel={['Mostrando', 'de', 'de', 'entradas']}
+            paginationLabel={['Previous', 'Next']}
+            entriesLabel='Cantidad Maxima'
             disableRetreatAfterSorting={true}
           />
+
+          <Message handleShow={() => { this.setState({ show: true }) }} handleClose={() => { this.setState({ show: false }) }} show={this.state.show} title={'Transacción'} label={'ID'} value={this.state.message}></Message>
         </div>
       )
     }
