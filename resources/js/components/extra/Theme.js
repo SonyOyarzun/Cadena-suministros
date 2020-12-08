@@ -173,6 +173,7 @@ label {
 }
 a {
   color: ${({ theme }) => theme.text} !important;
+  text-decoration: none;
 }
 
 /*flechas paginacion*/
@@ -182,6 +183,7 @@ span.mdb-dataTables_paginate{
 
 p {
   color: ${({ theme }) => theme.text} !important;
+  text-decoration: none;
 }
 
 
@@ -646,6 +648,7 @@ color: ${({ theme }) => theme.body} !important;
   padding: 0 24px;
   cursor: pointer;
 }
+
 
 /*HOVER DE ITEMS DE NAV*/
 .sidenav---sidenav-subnav---1EN61 > .sidenav---sidenav-subnavitem---1cD47 > .sidenav---navitem---9uL5T:hover {
