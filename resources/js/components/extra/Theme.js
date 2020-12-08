@@ -173,7 +173,6 @@ label {
 }
 a {
   color: ${({ theme }) => theme.text} !important;
-  text-decoration: none;
 }
 
 a:link, a:visited, a:active {
@@ -187,7 +186,6 @@ span.mdb-dataTables_paginate{
 
 p {
   color: ${({ theme }) => theme.text} !important;
-  text-decoration: none;
 }
 
 
