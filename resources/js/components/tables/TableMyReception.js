@@ -121,7 +121,9 @@ class TableMyReception extends Component {
     let rows = [
       ...this.state.sends.map((data, order) => (
         {
-          transaction: data.transaction,
+          transaction: <MDBBtn color="primary" rounded onClick={() => { save(data.transaction, data.asset, this.state.userSend.id) }}>
+            <MDBIcon far icon="share-square" />
+          </MDBBtn>,
           from: data.fromName,
           to: data.toName,
           state: data.state,
@@ -193,15 +195,14 @@ class TableMyReception extends Component {
                 data={data}
 
                 info={false}
-                searchLabel= 'Buscar'
-                infoLabel= {['Mostrando', 'de', 'de', 'entradas']}
-                paginationLabel= {['Previous', 'Next']}
-                entriesLabel= 'Cantidad Maxima'
+                searchLabel='Buscar'
+                infoLabel={['Mostrando', 'de', 'de', 'entradas']}
+                paginationLabel={['Previous', 'Next']}
+                entriesLabel='Cantidad Maxima'
                 disableRetreatAfterSorting={true}
               />
             </MDBCol>
           </MDBRow>
-
         </>
       )
     }
