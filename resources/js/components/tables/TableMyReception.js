@@ -16,6 +16,8 @@ import Load from '../extra/Load'
 import SnackBar from '../extra/SnackBar'
 import { render } from 'react-dom';
 
+import Message from '../extra/Messaje';
+
 class TableMyReception extends Component {
 
   constructor(props) {
@@ -26,10 +28,13 @@ class TableMyReception extends Component {
       users: [],
       userSend: [],
       alert: '',
-      type: ''
+      type: '',
+      show: false,
+      message: '',
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
     this.onTagsChange = this.onTagsChange.bind(this);
+    this.sendID = this.sendID.bind(this);
   }
 
   options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
@@ -54,6 +59,10 @@ class TableMyReception extends Component {
     this.getData()
   }
 
+  sendID(id) {
+    this.setState({show:true, message: id})
+
+  }
 
   render() {
 
@@ -121,8 +130,8 @@ class TableMyReception extends Component {
     let rows = [
       ...this.state.sends.map((data, order) => (
         {
-          transaction: <MDBBtn color="primary" rounded onClick={() => { save(data.transaction, data.asset, this.state.userSend.id) }}>
-            <MDBIcon far icon="share-square" />
+          transaction: <MDBBtn color="primary" rounded onClick={() =>{ this.sendID(data.transaction) }}>
+            Transaccion
           </MDBBtn>,
           from: data.fromName,
           to: data.toName,
@@ -203,6 +212,8 @@ class TableMyReception extends Component {
               />
             </MDBCol>
           </MDBRow>
+
+          <Message handleShow={() =>{this.setState({show:true})}} handleClose={() =>{this.setState({show:false})}} show={this.state.show} title={'Transacción'} label={'ID'} value={this.state.message}></Message>
         </>
       )
     }
