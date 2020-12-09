@@ -218,7 +218,7 @@ function Trace(props) {
             {arrayStep.length > 0 &&
               (
                 <div className="text-center">
-                  <MDBBtn type="button" onClick={revert} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{'Invertir'}</MDBBtn>
+                 
                   <Typography style={{ textAlign: 'center' }} variant="h6" component="h1">
                     <i class="fas fa-map-marked-alt"></i> Recorrido
               </Typography>
@@ -309,3 +309,4 @@ export default withRouter(Trace)
 
 
 //varJson.reverse() invertir registros
+// <MDBBtn type="button" onClick={revert} disabled={prevent} gradient="blue" rounded className="btn-block z-depth-1a">{'Invertir'}</MDBBtn>
