@@ -184,11 +184,11 @@ export default function Pdf(props) {
     let textTitulo = imgLogo + 55
     let titleProd = textTitulo + 20
     let tableProd = titleProd + 5
-    let titleTrace = tableProd + 30
+    let titleTrace = tableProd + 40
     let tableTrace = titleTrace + 5
-    let ID = imgLogo - 30
-    let QR = imgLogo 
-    let Foot = imgLogo - 35
+    let ID = imgLogo + 35
+    let QR = imgLogo
+    let Foot = imgLogo + 40
 
 
 
@@ -196,14 +196,14 @@ export default function Pdf(props) {
     let mark = new Image();
     //logo.src = "/storage/images/" + config.logotype;
     logo.src = "/img/logo.png";
-    mark.src = "/img/icon-logo.png";
+    mark.src = "/img/icon-logo-bw.png";
 
 
     //PAGINA
     const page = (page) => {
 
       doc.addImage(logo, 'PNG', margin, imgLogo, 45, 30);
-      doc.addImage(mark, 'PNG', centerWidth, centerHeight, 75, 75);
+      doc.addImage(mark, 'PNG', centerWidth, centerHeight + 40, 75, 75);
 
       //titulo
       doc.setFontSize(20);
@@ -219,8 +219,8 @@ export default function Pdf(props) {
 
       //pie de firmas
       doc.setFontSize(9);
-      doc.text("Tx:" + props.transaction, margin, ID);
-      doc.text("Valide esta transacción escaneando el codigo QR de la esquina derecha superior", margin, Foot);
+      doc.text("Tx:" + props.transaction, customWidthR - 102, ID);
+      doc.text("Valide esta transacción escaneando el codigo QR", customWidthR - 63, Foot);
 
       //doc.text("Pagina:" + page , customWidthR - margin, ID);
       //crear qr
@@ -241,7 +241,7 @@ export default function Pdf(props) {
     }
 
 
-    
+
 
     page(pagination)
 
@@ -272,7 +272,7 @@ export default function Pdf(props) {
     let time
     let rowsAutotable = 0
 
-   // for(let i=0;i<=30;i++){
+    // for(let i=0;i<=30;i++){
 
     arrayStep.forEach(arrayStep => {
       const traceData = [
@@ -285,11 +285,11 @@ export default function Pdf(props) {
         //  format(new Date(arrayStep.date), "dd-MM-yyyy")
       ];
       // push each tickcet's info into a row
-   //   rowsAutotable = rowsAutotable + 1
+      //   rowsAutotable = rowsAutotable + 1
       tableRows.push(traceData);
     });
 
-  //}
+    //}
 
     console.log('tableRows ', tableRows)
     doc.autoTable(tableColumn, tableRows, { startY: tableTrace });
@@ -303,11 +303,16 @@ export default function Pdf(props) {
 */
 
     //const date = Date().split(" ");
-    const date = Date().split(" ")
 
-    const dateStr = date[0] + date[1] + date[2] + date[3] + date[4];
+    options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    time
+    time = new Date().toLocaleDateString("es-ES",options)
+   // const date = Date().split(" ")
+    //const dateStr = date[0] + date[1] + date[2] + date[3] + date[4];
+
+    const dateStr = time 
     // guardar pdf
-    doc.save(`reporte_${dateStr}.pdf`);
+    doc.save(`reporte ${dateStr}.pdf`);
     // doc.output();
   };
 

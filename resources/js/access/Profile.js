@@ -140,9 +140,9 @@ function Profile(props) {
             PushMessage = {
                 title: 'Producto ' + data.state + ' por ' + data.fromName,
                 body: data.commentary,
-            },
+            }
 
-            PushNotification(PushMessage)
+            ,PushNotification(PushMessage)
         ))
 
     }
