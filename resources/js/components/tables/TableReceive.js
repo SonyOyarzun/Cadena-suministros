@@ -66,6 +66,9 @@ class TableReceive extends Component {
     this.setState({ show: true, message: id })
   }
 
+  options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+  time
+
   render() {
 
     let columns = [
@@ -112,7 +115,7 @@ class TableReceive extends Component {
           from: data.fromName,
           to: data.toName,
           state: data.state,
-          updated_at: data.updated_at,
+          updated_at: this.time = new Date(data.updated_at).toLocaleDateString("es-ES", this.options),
           action:
             <MDBBtnGroup className="mr-2">
               <Transfer state={'Recibido'} sendId={data.from} receiveId={data.to} transaction={data.transaction} getData={this.getData} switch={this.state.switch} />
