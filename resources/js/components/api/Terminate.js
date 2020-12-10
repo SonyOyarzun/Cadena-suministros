@@ -111,7 +111,6 @@ export default function Terminate(props) {
         console.log('receiveChain :', response)
         setAlert(response.message)
         setType(response.type)
-        props.getData()
       })
       .catch(response => {
         console.log('error receiveChain', response)
