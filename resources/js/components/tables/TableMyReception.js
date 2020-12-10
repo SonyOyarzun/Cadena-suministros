@@ -142,7 +142,6 @@ class TableMyReception extends Component {
             </MDBBtn>,
 
         }
-
       ))
     ]
 

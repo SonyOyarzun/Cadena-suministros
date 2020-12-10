@@ -134,7 +134,7 @@ function Profile(props) {
                 }
                 PushNotification(PushMessage)
         //    }
-
+/*
         response[0].map((data, order) => (
 
             PushMessage = {
@@ -144,7 +144,7 @@ function Profile(props) {
 
             ,PushNotification(PushMessage)
         ))
-
+*/
     }
         setCount(response[0].length)
         setNotification(response[0])
