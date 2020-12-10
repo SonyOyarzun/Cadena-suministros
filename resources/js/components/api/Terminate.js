@@ -103,7 +103,7 @@ export default function Terminate(props) {
       asset: asset,
       from: from,
       commentary: document.getElementById('commentary').value,
-      state: props.state,
+      state: 'Terminado',
     }
 
     receiveChain(data)
