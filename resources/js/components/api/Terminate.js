@@ -109,7 +109,6 @@ export default function Terminate(props) {
     terminateChain(data)
       .then((response) => {
         console.log('terminateChain :', response)
-        render(<Load/>)
         setAlert(response.message)
         setType(response.type)
       })
@@ -117,15 +116,13 @@ export default function Terminate(props) {
         console.log('error terminateChain', response)
         setAlert(response.message)
         setType(response.type)
-      }).finally(() => {
-        render(<></>)
       })
 
   }
 
 
   const terminate = () => {
-
+    render(<Load />, document.getElementById('load'));
     if (document.getElementById('commentary').value.trim().length > 0) {
 
       const BURN_ADDRESS = 'BurnBurnBurnBurnBurnBurnBurnBurnBurnBurnBurn'
@@ -174,6 +171,8 @@ export default function Terminate(props) {
             console.log('error terminate', response)
             setAlert(response.message)
             setType(response.type)
+          }).finally(() => {
+            render(<></>, document.getElementById('load'));
           })
 
         })
