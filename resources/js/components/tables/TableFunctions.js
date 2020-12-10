@@ -72,6 +72,20 @@ export const receiveChain = (chain) => {
         })
 }
 
+export const terminateChain = (chain) => {
+    return axios
+        .post('/chain/terminate', chain, {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+            return []
+        })
+}
+
 export const viewNotification = () => {
     return axios
         .post('/chain/viewNotification', {

@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
-import { getTransaction, getAsset, searchAsset, getConfig, getUser, getChain, receiveChain } from "../tables/TableFunctions";
+import { getTransaction, getAsset, searchAsset, getConfig, getUser, getChain, receiveChain, terminateChain } from "../tables/TableFunctions";
 
 import { transfer } from '../api/CRAB'
 
@@ -106,16 +106,19 @@ export default function Terminate(props) {
       state: 'Terminado',
     }
 
-    receiveChain(data)
+    terminateChain(data)
       .then((response) => {
-        console.log('receiveChain :', response)
+        console.log('terminateChain :', response)
+        render(<Load/>)
         setAlert(response.message)
         setType(response.type)
       })
       .catch(response => {
-        console.log('error receiveChain', response)
+        console.log('error terminateChain', response)
         setAlert(response.message)
         setType(response.type)
+      }).finally(() => {
+        render(<></>)
       })
 
   }

@@ -112,6 +112,41 @@ class ChainController extends Controller
     return ['message' => "Producto $chain->state", 'type' => 'success'];
   }
 
+  public function terminate(Request $request)
+  {
+    $id = Auth::id();
+
+    try {
+
+      Chain::query()
+        ->where('transaction', '=', $request->transaction)
+        ->update(['state' => 'Terminado']);
+
+      $api = Api_config::findOrFail(1);
+
+      $userToTranfer   = User::findOrFail($id);
+      $receiver = User::findOrFail($request->from);
+
+      $objDemo = new \stdClass();
+      $objDemo->transaction = $request->asset;
+      $objDemo->date        = date('d-m-yy');
+      $objDemo->state       = $request->state;
+      $objDemo->toTransfer  = $userToTranfer->name;
+      $objDemo->receiver    = $receiver->name;
+      $objDemo->logotype    = $api->logotype;
+      $objDemo->background  = $api->background;
+
+      Mail::to($receiver->email)->send(new DemoEmail($objDemo));
+    } catch (\Throwable $th) {
+      // throw $th;
+      return ['message' => $th->getMessage(), 'type' => 'error'];
+    } finally {
+      $index = [$this->index()];
+      broadcast(new NotificationEvent($index));
+    }
+    return ['message' => "Producto $chain->state", 'type' => 'success'];
+  }
+
   public function reSend(Request $request)
   {
     $id = Auth::id();

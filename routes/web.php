@@ -132,6 +132,7 @@ Route::get('/chain/list', 'ChainController@index');
 Route::post('/chain/new', 'ChainController@create');
 Route::post('/chain/receive', 'ChainController@receive');
 Route::post('/chain/reSend', 'ChainController@reSend');
+Route::post('/chain/terminate', 'ChainController@terminate');
 Route::post('/chain/viewNotification', 'ChainController@viewNotification');
 
 //copia de producto
