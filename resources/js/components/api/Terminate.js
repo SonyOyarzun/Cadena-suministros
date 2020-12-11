@@ -164,6 +164,8 @@ export default function Terminate(props) {
           transfer(response[0], metadata, keys, config).then(response2 => {
             console.log('terminate', response2)
             save(response2.id, response2.asset.id, transaction.id, us[0].id)
+            setAlert('Producto(s) de baja')
+            setType('success')
 
           }).catch(response => {
             console.log('error terminate', response)
