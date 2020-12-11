@@ -167,8 +167,8 @@ export default function Terminate(props) {
 
           }).catch(response => {
             console.log('error terminate', response)
-            setAlert(response.message)
-            setType(response.type)
+            setAlert('No se puede dar de baja un producto seleccionado')
+            setType('error')
           }).finally(() => {
             render(<></>, document.getElementById('load'));
           })
