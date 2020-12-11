@@ -142,9 +142,7 @@ export default function Search() {
 
 
         ) : (
-            console.log('no encontrada'),
-            columns = [{ label: "Busqueda", field: "message" }],
-            rows = [{ message: "Sin registros" }]
+            console.log('no encontrada')
           )
       }
     )),
