@@ -125,27 +125,27 @@ function Profile(props) {
 
         response[0] = response[0].filter(e => (e.to == props.user.id && e.view == 0) || (e.from == props.user.id && e.view == 3) || (e.state != 'Transferido'))
 
-        if (response[0].length>0) {
+        if (response[0].length > 0) {
 
-          //  if (response[0].hasOwnProperty('state')) {
-                PushMessage = {
-                    title: 'Notificaciones Nuevas',
-                    body: 'Usted tiene ' + response[0].length + ' nueva(s) notificacion(es)',
-                }
-                PushNotification(PushMessage)
-        //    }
-/*
-        response[0].map((data, order) => (
-
+            //  if (response[0].hasOwnProperty('state')) {
             PushMessage = {
-                title: 'Producto ' + data.state + ' por ' + data.fromName,
-                body: data.commentary,
+                title: 'Notificaciones Nuevas',
+                body: 'Usted tiene ' + response[0].length + ' nueva(s) notificacion(es)',
             }
-
-            ,PushNotification(PushMessage)
-        ))
-*/
-    }
+            PushNotification(PushMessage)
+            //    }
+            /*
+                    response[0].map((data, order) => (
+            
+                        PushMessage = {
+                            title: 'Producto ' + data.state + ' por ' + data.fromName,
+                            body: data.commentary,
+                        }
+            
+                        ,PushNotification(PushMessage)
+                    ))
+            */
+        }
         setCount(response[0].length)
         setNotification(response[0])
     };
@@ -220,6 +220,10 @@ function Profile(props) {
                                     case 'Recibido':
                                         src = '/img/acepted.png'
                                         title = 'Producto Recibido por ' + data.toName
+                                        break
+                                    case 'Transferido':
+                                        src = '/img/acepted.png'
+                                        title = 'Producto Transferido por ' + data.toName
                                         break
                                     case 'Enviado':
                                         src = '/img/send.png'
