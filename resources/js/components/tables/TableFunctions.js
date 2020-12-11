@@ -78,6 +78,7 @@ export const terminateChain = (chain) => {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
+            console.log('terminateChain',response)
             return response.data
         })
         .catch(err => {

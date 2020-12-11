@@ -108,12 +108,10 @@ export default function Terminate(props) {
 
     terminateChain(data)
       .then((response) => {
-        console.log('terminateChain :', response)
         setAlert(response.message)
         setType(response.type)
       })
       .catch(response => {
-        console.log('error terminateChain', response)
         setAlert(response.message)
         setType(response.type)
       })
@@ -252,9 +250,7 @@ export default function Terminate(props) {
 
 
         ) : (
-            console.log('no encontrada'),
-            columns = [{ label: "Busqueda", field: "message" }],
-            rows = [{ message: "Sin registros" }]
+            console.log('no encontrada')
           )
       }
     )),
