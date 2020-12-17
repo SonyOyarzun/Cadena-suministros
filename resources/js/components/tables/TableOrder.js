@@ -101,7 +101,7 @@ class TableOrder extends Component {
       ...this.state.sends.map((data, order) => (
         {
           transaction: <MDBBtn color="primary" rounded onClick={() =>{ this.sendID(data.transaction) }}>
-            Transaccion
+            ID Transaccion
           </MDBBtn>,
           asset: data.asset,
           from: data.fromName,

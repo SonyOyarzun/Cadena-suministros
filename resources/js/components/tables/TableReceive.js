@@ -110,7 +110,7 @@ class TableReceive extends Component {
       ...this.state.sends.map((data, order) => (
         {
           transaction: <MDBBtn color="primary" rounded onClick={() =>{ this.sendID(data.transaction) }}>
-            Transaccion
+            ID Transaccion
           </MDBBtn>,
           from: data.fromName,
           to: data.toName,

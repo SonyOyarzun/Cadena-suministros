@@ -71,7 +71,7 @@ class TableUser extends Component {
           width: 150,
         },
         {
-          label: 'Email',
+          label: 'Mail',
           field: 'email',
           width: 200,
         },
