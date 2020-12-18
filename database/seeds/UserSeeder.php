@@ -60,5 +60,29 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
+        DB::table('users')->insert([
+            'name' => 'Dogges Chile',
+            'email' => 'central@dogges.cl',
+            'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/dogges.json',
+            'role' => 'A',
+            'password' => bcrypt('12345678'),
+            'publicKey'  => '7Bj9SfW3hX6i82Lfzhwq5ywCn9WJBP3AYgNpSFSYgo7J',
+            'privateKey' => 'E4VdFFQjTQCbweSSH1iBRSihHx5S6RC7JhXfcuBvFQdZ',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Dogges Brazil',
+            'email' => 'central@dogges.br',
+            'path' => 'https://raw.githubusercontent.com/SonyOyarzun/Json-Server/main/dogges.json',
+            'role' => 'A',
+            'password' => bcrypt('12345678'),
+            'publicKey'  => 'De5GL8AVfdAMNCnUvx1UZhNwJkbj1h2mkScQAYyhti4U',
+            'privateKey' => 'Ds1aoqNjmuqntvCuMDCiS9cBWH4Mdj7TTu69HqnobKRo',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
     }
 }
