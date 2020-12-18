@@ -153,3 +153,12 @@ https://github.com/ashik0019/A-Quick-Guide-to-Implement-Firebase-Web-Push-Notifi
 
 */
 
+
+
+/*
+ BUGS ENCONTRADOS
+
+ AL CREAR USUARIO SI NO SE HACE REFRESH, CREA CON LA MISMA PUBLIC Y PRIVATE
+
+ */
+
