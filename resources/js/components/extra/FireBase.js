@@ -1,15 +1,25 @@
 
 import firebase from 'firebase';
+import { getConfig } from "../tables/TableFunctions";
+
+
+    getConfig()
+    .then(response => {
+      console.log('firebaseConfig', response)
+    })
+    .catch(error => {
+      console.log('firebaseConfig error:', error)
+    })
 
 const config = {
-    apiKey: "AIzaSyDYfNh7s4SFh2VDJJ9HplC2y7ehO1NhvfE",
-    authDomain: "larafire-240b4.firebaseapp.com",
-    databaseURL: "https://larafire-240b4.firebaseio.com",
-    projectId: "larafire-240b4",
-    storageBucket: "larafire-240b4.appspot.com",
-    messagingSenderId: "557048720428",
-    appId: "1:557048720428:web:690fee0ef9ff5181acf589",
-    measurementId: "G-JEJ1MZ09QJ"
+    apiKey: "AIzaSyBk9Y7_TsbZiA0lciQ1vvwSo3ez8jtYtso",
+    authDomain: "cadenasuministros.firebaseapp.com/",
+    databaseURL: "https://cadenasuministros.firebaseio.com",
+    projectId: "cadenasuministros",
+    storageBucket: "cadenasuministros.appspot.com",
+    messagingSenderId: "967812490146",
+    appId: "1:967812490146:web:ab6fd137d2a80de9d548fb",
+    measurementId: "G-T7Q6EB91JH"
 };
 
 const fire = firebase.initializeApp(config);

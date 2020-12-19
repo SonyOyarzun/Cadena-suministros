@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\User;
+use \App\Api_config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -13,7 +14,9 @@ class PushController extends Controller
 
     public function __construct()
     {
-        $this->serverKey = "AAAAgbKw7Cw:APA91bG1KPVCccgkGWpvlT0J8Ix_2rCk0Y3wmBlswIoLbXGxALWvg-v2uQFC9LJsdqf6iYr_dXn3exVeNbtDcWtk4TH0m4pSSA-uz1IAKTUzqDQeKbiTYkY-elTQSSWzNmtl8tH0aXU5";
+        $config = Api_config::find(1);
+
+        $this->serverKey =  $config->serverKey;
     }
 
     public function saveToken(Request $request)
@@ -24,10 +27,9 @@ class PushController extends Controller
             $user->device_token = $request->fcm_token;
             $user->save();
 
-            return ['message'=>'Token actualizado','type'=>'success'];
-
+            return ['message' => 'Token actualizado', 'type' => 'success'];
         } catch (\Throwable $th) {
-            return  ['message'=> $th->getMessage(),'type'=>'error'];
+            return  ['message' => $th->getMessage(), 'type' => 'error'];
         }
     }
 
@@ -35,7 +37,7 @@ class PushController extends Controller
     {
 
         try {
-            
+
             $user = User::find(Auth::id());
             //dd($user);
             //dd( $this->serverKey);
@@ -49,28 +51,26 @@ class PushController extends Controller
                 ],
             ];
             $dataString = json_encode($data);
-    
+
             $headers = [
                 'Authorization: key=' . $this->serverKey,
                 'Content-Type: application/json',
             ];
-    
+
             $ch = curl_init();
-    
+
             curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-    
+
             $response = curl_exec($ch);
 
             return $response;
-
         } catch (\Throwable $th) {
-            return  ['message'=> $th->getMessage(),'type'=>'error'];
+            return  ['message' => $th->getMessage(), 'type' => 'error'];
         }
-
     }
 }
