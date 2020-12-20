@@ -64,6 +64,7 @@ class Login extends Component {
         password: document.getElementById('password').value,
         }
     
+
         
 
         login(user).then(response => {
@@ -83,7 +84,7 @@ class Login extends Component {
                 {this.state.show!=false &&
                     <SnackBar alert={this.state.alert} type={this.state.type} />
                 }
-                <form Validate onSubmit={this.onSubmit} className="row">
+                <form validate onSubmit={this.onSubmit} className="row">
                     <div className='col-sm-4'>
                         <input
                          id="email"

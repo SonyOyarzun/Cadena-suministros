@@ -22,8 +22,8 @@ class ForgotPass extends Component {
         this.state = {
             first_name: '',
             last_name: '',
-            email: '',
             password: '',
+            email:'',
             loading: false,
             show: false,
             message: 'Solicitar',
@@ -42,11 +42,13 @@ class ForgotPass extends Component {
     onSubmit(e) {
         e.preventDefault()
 
-        this.setState({ loading: true, message: 'Cargando...' })
+        this.setState({ loading: true, message: 'Cargando...', show: false })
 
         const user = {
-            email: document.getElementById('email').value,
+            email: document.getElementById('email2').value,
         }
+
+        console.log('forgot user:', user)
 
         forgot(user).then(response => {
             this.setState({ loading: false, message: 'Solicitar', alert: response.message, type: response.type, show: true })
@@ -58,24 +60,25 @@ class ForgotPass extends Component {
     render() {
         return (
             <div style={styles.custom} className="mx-auto mt-3">
-                {this.state.alert != '' &&
+                {this.state.show!=false &&
                     <SnackBar show={this.state.show} alert={this.state.alert} type={this.state.type} />
                 }
                 <Card>
                     <Card.Body>
                         <Card.Title>Recuperar contraseña</Card.Title>
                         <Card.Text>
-                            <form Validate onSubmit={this.onSubmit}>
+
+                            <form validate onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="email">Mail</label>
                                     <input
-                                        id='email'
+                                        id='email2'
                                         type="email"
                                         className="form-control"
                                         name="email"
                                         placeholder="Ingrese Mail"
-                                    //    onChange={this.onChange}
-                                        required={true}
+                                        onChange={this.onChange}
+                                        required
                                     />
                                 </div>
 
