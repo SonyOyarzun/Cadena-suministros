@@ -1,4 +1,4 @@
-import React ,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -28,34 +28,31 @@ export default function CustomizedSnackbars(props) {
 
   console.log('snack :', props)
 
-  useEffect( ()=>{
+  useEffect(() => {
 
-    
-    if(props.show == true){
-       setOpen(true)
-    }
-    
+    setOpen(props.show)
 
- },[props]);
+
+  }, [props]);
 
 
   const handleClose = (event, reason) => {
 
-    console.log('event' ,event,'reason', reason)
-  
+    console.log('event', event, 'reason', reason)
+
     if (reason === 'clickaway') {
-     // setOpen(true)  
+      // setOpen(true)  
       return
     }
-    setOpen(false)  
-    
+    setOpen(false)
+
   };
 
   console.log('show :', props.show)
 
   return (
     <div className={classes.root}>
-      <Snackbar  open={open} autoHideDuration={5000} >
+      <Snackbar open={open} autoHideDuration={5000} >
         <Alert onClose={handleClose} severity={props.type}>
           {props.alert}
         </Alert>

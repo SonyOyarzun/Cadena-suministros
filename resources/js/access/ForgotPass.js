@@ -49,16 +49,10 @@ class ForgotPass extends Component {
         }
 
         forgot(user).then(response => {
-            this.setState({ loading: false , message: 'Solicitar' , alert: response.message , type: response.type })
+            this.setState({ loading: false , message: 'Solicitar' , alert: response.message , type: response.type , show: false })
             console.log('forgot: ',response)
         })
-        .finally(() => {
-
-            if(this.state.message!='Solicitar'){
-                this.setState({ show: true  })
-            }
-          
-        })
+   
     }
 
     render() {
@@ -71,7 +65,7 @@ class ForgotPass extends Component {
                     <Card.Body>
                         <Card.Title>Recuperar contraseña</Card.Title>
                         <Card.Text>
-                            <form noValidate onSubmit={this.onSubmit}>
+                            <form Validate onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="email">Mail</label>
                                     <input
