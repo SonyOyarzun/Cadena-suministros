@@ -57,7 +57,14 @@ class Login extends Component {
         e.preventDefault()
         this.props.history.push(`/`)
 
-        login(this.state).then(response => {
+        const user = {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        }
+    
+        
+
+        login(user).then(response => {
             console.log('login:', response)
             if (response != true) {
                 this.setState({ alert: response.message, type: response.type })
@@ -71,27 +78,31 @@ class Login extends Component {
                 {this.state.alert!='' &&
                     <SnackBar alert={this.state.alert} type={this.state.type} />
                 }
-                <form noValidate onSubmit={this.onSubmit} className="row">
+                <form Validate onSubmit={this.onSubmit} className="row">
                     <div className='col-sm-4'>
                         <input
+                         id="email"
                             type="email"
                             className="form-control"
                             name="email"
                             placeholder="Mail"
-                            value={this.state.email}
-                            onChange={this.onChange}
+                     //       value={this.state.email}
+                     //       onChange={this.onChange}
                             style={styles.custom}
+                            required
                         />
                     </div>
                     <div className='col-sm-5'>
                         <input
+                        id="password"
                             type="password"
                             className="form-control"
                             name="password"
                             placeholder="Contraseña"
-                            value={this.state.password}
-                            onChange={this.onChange}
+                        //    value={this.state.password}
+                        //    onChange={this.onChange}
                             style={styles.custom}
+                            required
                         />
                         <div className='col-sm-12' style={styles.ref}>
                             <Link className='darkLight-text' to='/Forgot'>Recuperar contraseña</Link>
