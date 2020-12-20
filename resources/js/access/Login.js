@@ -44,6 +44,7 @@ class Login extends Component {
             errors: {},
             alert: '',
             type: '',
+            show: false,
         }
 
         this.onChange = this.onChange.bind(this)
@@ -56,6 +57,7 @@ class Login extends Component {
     onSubmit(e) {
         e.preventDefault()
         this.props.history.push(`/`)
+        this.setState({ show: false })
 
         const user = {
         email: document.getElementById('email').value,
@@ -67,15 +69,18 @@ class Login extends Component {
         login(user).then(response => {
             console.log('login:', response)
             if (response != true) {
-                this.setState({ alert: response.message, type: response.type })
+                this.setState({ alert: response.message, type: response.type, show: true })
+            }else{
+                this.setState({ show: false })
             }
         })
+
     }
 
     render() {
         return (
             <div className="mx-auto col-12">
-                {this.state.alert!='' &&
+                {this.state.show!=false &&
                     <SnackBar alert={this.state.alert} type={this.state.type} />
                 }
                 <form Validate onSubmit={this.onSubmit} className="row">
