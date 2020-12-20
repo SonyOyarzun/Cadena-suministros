@@ -41,9 +41,9 @@ class Reset extends Component {
         this.setState({ loading: true , message: 'Cargando...'})
 
         const user = {
-            email: this.state.email,
-            password: this.state.password,
-            confirmPassword: this.state.confirmPassword,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            confirmPassword: document.getElementById('confirmPassword').value,
             token: this.state.token,
         }
 
@@ -64,36 +64,39 @@ class Reset extends Component {
                     <Card.Body>
                         <Card.Title>Restablecer Contraseña</Card.Title>
                         <Card.Text>
-                            <form noValidate onSubmit={this.onSubmit}>
+                            <form Validate onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="email">Mail</label>
                                     <input
+                                    id='email'
                                         type="email"
                                         className="form-control"
                                         name="Mail"
                                         placeholder="Ingrese Mail"
                                         value={this.state.email}
-                                        onBlur={this.onChange}
+                                   //     onBlur={this.onChange}
                                     />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="password">Contraseña</label>
                                     <input
+                                    id='password'
                                         type="password"
                                         className="form-control"
                                         name="password"
                                         placeholder="Contraseña"
-                                        onChange={this.onChange}
+                                  //      onChange={this.onChange}
                                     />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="confirmPassword">Confirmar Contraseña</label>
                                     <input
+                                    id='confirmPassword'
                                         type="password"
                                         className="form-control"
                                         name="confirmPassword"
                                         placeholder=" Confirmar contraseña"
-                                        onChange={this.onChange}
+                                  //      onChange={this.onChange}
                                     />
                                 </div>
                                 <MDBBtn className={'btn-block'} type="submit" style={styles.button} disabled={this.state.loading}>{this.state.message}</MDBBtn>
