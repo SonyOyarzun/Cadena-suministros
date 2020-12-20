@@ -25,6 +25,7 @@ class ForgotPass extends Component {
             email: '',
             password: '',
             loading: false,
+            show: false,
             message: 'Solicitar',
             errors: {},
             alert: '',
@@ -41,8 +42,7 @@ class ForgotPass extends Component {
     onSubmit(e) {
         e.preventDefault()
 
-        this.setState({ loading: true })
-        this.setState({ message: 'Cargando...' })
+        this.setState({ loading: true, message: 'Cargando...'})
 
         const user = {
             email: this.state.email
@@ -52,13 +52,20 @@ class ForgotPass extends Component {
             this.setState({ loading: false , message: 'Solicitar' , alert: response.message , type: response.type })
             console.log('forgot: ',response)
         })
+        .finally(() => {
+
+            if(this.state.message!='Solicitar'){
+                this.setState({ show: true  })
+            }
+          
+        })
     }
 
     render() {
         return (
             <div style={styles.custom} className="mx-auto mt-3">
                 {this.state.alert != '' &&
-                    <SnackBar alert={this.state.alert} type={this.state.type} />
+                    <SnackBar show={this.state.show} alert={this.state.alert} type={this.state.type} />
                 }
                 <Card>
                     <Card.Body>

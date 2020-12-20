@@ -29,9 +29,13 @@ export default function CustomizedSnackbars(props) {
   console.log('snack :', props)
 
   useEffect( ()=>{
-    setOpen(true)
 
     
+    if(props.show == true){
+       setOpen(true)
+    }
+    
+
  },[props]);
 
 
@@ -40,14 +44,14 @@ export default function CustomizedSnackbars(props) {
     console.log('event' ,event,'reason', reason)
   
     if (reason === 'clickaway') {
-      setOpen(false)  
+     // setOpen(true)  
       return
     }
-    setOpen(true)  
+    setOpen(false)  
     
   };
 
-  console.log('show :', open)
+  console.log('show :', props.show)
 
   return (
     <div className={classes.root}>
