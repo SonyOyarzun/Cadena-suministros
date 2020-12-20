@@ -42,17 +42,17 @@ class ForgotPass extends Component {
     onSubmit(e) {
         e.preventDefault()
 
-        this.setState({ loading: true, message: 'Cargando...'})
+        this.setState({ loading: true, message: 'Cargando...' })
 
         const user = {
-            email: this.state.email
+            email: document.getElementById('email').value,
         }
 
         forgot(user).then(response => {
-            this.setState({ loading: false , message: 'Solicitar' , alert: response.message , type: response.type , show: false })
-            console.log('forgot: ',response)
+            this.setState({ loading: false, message: 'Solicitar', alert: response.message, type: response.type, show: true })
+            console.log('forgot: ', response)
         })
-   
+
     }
 
     render() {
@@ -69,15 +69,16 @@ class ForgotPass extends Component {
                                 <div className="form-group">
                                     <label htmlFor="email">Mail</label>
                                     <input
+                                        id='email'
                                         type="email"
                                         className="form-control"
                                         name="email"
                                         placeholder="Ingrese Mail"
-                                        onChange={this.onChange}
+                                    //    onChange={this.onChange}
                                         required={true}
                                     />
                                 </div>
-                   
+
 
                                 <MDBBtn className={'btn-block'} type="submit" style={styles.button} disabled={this.state.loading}>{this.state.message}</MDBBtn>
                             </form>
