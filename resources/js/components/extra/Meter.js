@@ -8,7 +8,7 @@ import LiquidFillGauge from 'react-liquid-gauge';
 
 import { NavLink, Link, withRouter } from 'react-router-dom';
 
-import { newMeter, resetMeter, meterTx , getMeter } from '../extra/ExtraFunctions';
+import { newMeter, resetMeter, meterTx, getMeter } from '../extra/ExtraFunctions';
 import { create, transfer, registerMeter } from '../api/CRAB';
 
 //Componentes de Bootstap
@@ -69,7 +69,7 @@ class Meter extends Component {
 
     meterTx() {
         console.log('MeterTx')
-//no se debe generar una transaccion con las mismas llaves en poco tiempo
+        //no se debe generar una transaccion con las mismas llaves en poco tiempo
         this.BigchainDB = require('bigchaindb-driver')
         this.alice = new this.BigchainDB.Ed25519Keypair()
 
@@ -79,29 +79,29 @@ class Meter extends Component {
         }
 
 
-    
-            getMeter().then( metadata => {
 
-         
+        getMeter().then(metadata => {
 
-        create(this.asset, metadata, this.keysCreate, this.state.config)
-            .then(response => {
-                console.log('start create response ', response)
-                this.setState({ transaction: response, asset: response.id })
-                const params = {
-                    tx: response.id
-                }
-                meterTx(params).then(response => {
-                    console.log('start create tx ', response)
+            console.log('getMeter ', metadata[1][1])
+
+            create(this.asset, metadata[1][1], this.keysCreate, this.state.config)
+                .then(response => {
+                    console.log('start create response ', response)
+                    this.setState({ transaction: response, asset: response.id })
+                    const params = {
+                        tx: response.id
+                    }
+                    meterTx(params).then(response => {
+                        console.log('start create tx ', response)
+                    })
+                }).catch(error => {
+                    console.log('error ', error)
                 })
-            }).catch(error => {
-                console.log('error ', error)
-            })
 
         })
     }
 
-    
+
 
     timer = setInterval(() => {
 
@@ -121,7 +121,7 @@ class Meter extends Component {
 
         if (this.state.chain % 10 == 0) {
 
-              this.meterTx()
+            this.meterTx()
 
         }
 

@@ -28,8 +28,8 @@ export default class Lineal extends Component {
         //console.log('canal :',this.channel)
         Echo.private(this.channel)
             .listen('MeterEvent', (response) => {
-                //  console.log('echo :',response.data[0] )
-                this.setState({ data: response.data[0] })
+                  console.log('echo :',response.data[0][1][1] )
+                this.setState({ data: response.data[0][1][1] })
             });
 
     }
@@ -55,9 +55,9 @@ export default class Lineal extends Component {
                 <Chart
                     backgroundColor={'blue'}
                     width={'100%'}
-                    height={'400px'}
+                    height={'600px'}
                     chartType="AreaChart"
-                    loader={<div>Loading Chart</div>}
+                    loader={<div>Cargando Registros</div>}
 
                     data={this.state.data}
 
@@ -68,6 +68,7 @@ export default class Lineal extends Component {
                         vAxis: {
                             title: 'Temperatura',
                         },
+                        chartArea: { width: '83%', height: '94%' },
                     }}
                     rootProps={{ 'data-testid': '1' }}
                 />

@@ -114,13 +114,15 @@ class ChainController extends Controller
 
   public function terminate(Request $request)
   {
-    $id = Auth::id();
 
     try {
 
-      Chain::query()
+      $id = Auth::id();
+      $chain = Chain::query()
         ->where('transaction', '=', $request->transaction)
         ->update(['state' => 'Terminado']);
+
+      dd($chain);
 
       $api = Api_config::findOrFail(1);
 
@@ -144,7 +146,7 @@ class ChainController extends Controller
       $index = [$this->index()];
       broadcast(new NotificationEvent($index));
     }
-    return ['message' => "Producto $chain->state", 'type' => 'success'];
+    return ['message' => "Producto $request->state", 'type' => 'success'];
   }
 
   public function reSend(Request $request)
@@ -153,16 +155,16 @@ class ChainController extends Controller
     try {
 
       if (!isset($request->to)) {
-        return ['message'=>'Debe ingresar destinatario','type'=>'error'];
+        return ['message' => 'Debe ingresar destinatario', 'type' => 'error'];
       } elseif (!isset($request->email)) {
-      Chain::query()
-        ->where('transaction', '=', $request->transaction)
-        ->update([
-          'state'  => 'Enviado',
-          'from'   => $id,
-          'to'     => $request->to,
-          'view'   => 0
-        ]);
+        Chain::query()
+          ->where('transaction', '=', $request->transaction)
+          ->update([
+            'state'  => 'Enviado',
+            'from'   => $id,
+            'to'     => $request->to,
+            'view'   => 0
+          ]);
       }
     } catch (\Throwable $th) {
       return ['message' => 'Error al Reenviar Transaccion', 'type' => 'error'];

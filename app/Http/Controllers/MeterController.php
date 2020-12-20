@@ -29,7 +29,7 @@ class MeterController extends Controller
             $array = array();
             $meter = Meter::select()->orderBy('id', 'asc')->where('userId', '=', $id)->get();
 
-            array_push($array, ['T', 'C°', 'Min', 'Max']);
+            array_push($array,['fecha',['T', 'C°', 'Min', 'Max']]);
 
             if (count($meter) > 0) {
 
@@ -42,11 +42,12 @@ class MeterController extends Controller
                         'data'  => number_format($content->value,2)
                         
                     );
+                    date('d/m/y d:m:s', strtotime($content->updated_at))
     */
-                    array_push($array, [$content->chain, (float)number_format($content->value, 2), $content->min, $content->max]);
+                    array_push($array, [date('d/m/y d:m:s', strtotime($content->updated_at)),[$content->chain, (float)number_format($content->value, 2), $content->min, $content->max]]);
                 };
             } else {
-                array_push($array, [0, (float)number_format(0, 2), 0, 10]);
+                array_push($array, ['---',[0, (float)number_format(0, 2), 0, 10]]);
             }
         } catch (\Throwable $th) {
 
@@ -117,9 +118,11 @@ class MeterController extends Controller
      * @param  \App\Meter  $meter
      * @return \Illuminate\Http\Response
      */
-    public function show(Meter $meter)
+    public function show(Request $request)
     {
-        //
+        $meter = Meter::select()->orderBy('id', 'asc')->where('chain', '=', $request->chain)->get();
+
+        return  $meter;
     }
 
     /**
