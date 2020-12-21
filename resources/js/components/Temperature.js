@@ -40,13 +40,13 @@ class Temperature extends Component {
                     config: responseArr[0],
                 })
                 console.log('Temperature mount:',responseArr)
-                console.log('Temperature mount2:',responseArr[1][1][1][0])
+                console.log('Temperature mount2:',responseArr[1][responseArr[1].length - 1].temp)
                     this.setState({
-                        chain:  responseArr[1][1][1][0],
-                        value:  responseArr[1][1][1][1],
-                        min:    responseArr[1][1][1][2],
-                        max:    responseArr[1][1][1][3],
-                        meterPack: responseArr[1][1][1]
+                        chain:  responseArr[1][responseArr[1].length - 1].temp[0],
+                        value:  responseArr[1][responseArr[1].length - 1].temp[1],
+                        min:    responseArr[1][responseArr[1].length - 1].temp[2],
+                        max:    responseArr[1][responseArr[1].length - 1].temp[3],
+                        meterPack: responseArr[1]
                     })  
 
             })

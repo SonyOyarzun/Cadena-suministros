@@ -29,7 +29,10 @@ class MeterController extends Controller
             $array = array();
             $meter = Meter::select()->orderBy('id', 'asc')->where('userId', '=', $id)->get();
 
-            array_push($array,['fecha',['T', 'C°', 'Min', 'Max']]);
+            array_push($array, [
+                'fecha' => '00/00/00 00:00:00',
+                'temp' => ['T', 'C°', 'Min', 'Max']
+            ]);
 
             if (count($meter) > 0) {
 
@@ -44,10 +47,16 @@ class MeterController extends Controller
                     );
                     date('d/m/y d:m:s', strtotime($content->updated_at))
     */
-                    array_push($array, [date('d/m/y d:m:s', strtotime($content->updated_at)),[$content->chain, (float)number_format($content->value, 2), $content->min, $content->max]]);
+                    array_push($array, [
+                        'fecha' => date('d/m/y d:m:s', strtotime($content->updated_at)),
+                        'temp' => [$content->chain, (float)number_format($content->value, 2), $content->min, $content->max],
+                    ]);
                 };
             } else {
-                array_push($array, ['---',[0, (float)number_format(0, 2), 0, 10]]);
+                array_push($array, [
+                    'fecha' => '00/00/00 00:00:00',
+                    'temp' => [0, (float)number_format(0, 2), 0, 10]
+                ]);
             }
         } catch (\Throwable $th) {
 
@@ -157,6 +166,6 @@ class MeterController extends Controller
     public function destroy()
     {
         $userId = Auth::id();
-        $meter =Meter::where('Userid',$userId)->delete();
+        $meter = Meter::where('Userid', $userId)->delete();
     }
 }

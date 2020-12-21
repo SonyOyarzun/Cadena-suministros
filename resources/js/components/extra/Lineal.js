@@ -16,8 +16,8 @@ export default class Lineal extends Component {
         this.state = {
             ws: null,
             data: [],
-            transaction : [],
-            asset : this.props.data.asset
+            transaction: [],
+            asset: this.props.data.asset
         };
         this.listen = this.listen.bind(this)
     }
@@ -28,18 +28,32 @@ export default class Lineal extends Component {
         //console.log('canal :',this.channel)
         Echo.private(this.channel)
             .listen('MeterEvent', (response) => {
-                  console.log('echo :',response.data[0][1][1] )
-                this.setState({ data: response.data[0][1][1] })
+                console.log('echo :', response.data[0])
+                //       this.setState({ data: response.data[0] })
             });
 
     }
 
-    count=0
+    count = 0
 
     componentDidMount() {
 
         getMeter().then(response => {
-            this.setState({ data: response })
+            console.log('Lineal data :', response)
+
+            let array = []
+            let row = []
+
+            response.map((content, index) => (
+
+
+                row[index] = [content.fecha, content.temp[1], content.temp[2], content.temp[3]],
+
+                array.push(row),
+                console.log('row:', row)
+            ))
+
+            this.setState({ data: array })
         })
 
         this.listen()
@@ -50,6 +64,8 @@ export default class Lineal extends Component {
 
     render() {
 
+        console.log('hhh:', this.state.data)
+
         return (
             <>
                 <Chart
@@ -59,7 +75,7 @@ export default class Lineal extends Component {
                     chartType="AreaChart"
                     loader={<div>Cargando Registros</div>}
 
-                    data={this.state.data}
+                    data={this.state.data[0]}
 
                     options={{
                         hAxis: {
