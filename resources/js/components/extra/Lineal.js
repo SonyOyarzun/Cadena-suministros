@@ -30,6 +30,20 @@ export default class Lineal extends Component {
             .listen('MeterEvent', (response) => {
                 console.log('echo :', response.data[0])
                 //       this.setState({ data: response.data[0] })
+
+                let array = []
+                let row = []
+    
+                response.data[0].map((content, index) => (
+    
+    
+                    row[index] = [content.fecha, content.temp[1], content.temp[2], content.temp[3]],
+    
+                    array.push(row),
+                    console.log('row:', row)
+                ))
+    
+                this.setState({ data: array })
             });
 
     }
