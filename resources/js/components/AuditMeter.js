@@ -57,8 +57,23 @@ class AuditMeter extends Component {
                     getTransaction(transaction).then(response => {
 
                         if (response.metadata.hasOwnProperty('metadata')) {
-                            this.setState({ data: response.metadata.metadata })
-                            console.log('onTagsChange', response.metadata.metadata)
+                       //     this.setState({ data: response.metadata.metadata })
+                         //   console.log('onTagsChange', response.metadata.metadata)
+
+                            let array = []
+                            let row = []
+                
+                            response.metadata.metadata.map((content, index) => (
+                
+                
+                                row[index] = [content.fecha, content.temp[1], content.temp[2], content.temp[3]],
+                
+                                array.push(row)
+                           // ,    console.log('row:', row)
+                            ))
+                
+                            this.setState({ data: array })
+
                         } else {
                             this.setState({ data: [['C°', 'T', 'Min', 'Max'], [0, 0, 0, 0]] })
                         }
@@ -80,7 +95,7 @@ class AuditMeter extends Component {
     }
 
     render() {
-        //    console.log('Temperature :',this.state)
+            console.log('Temperature :',this.state)
 
         const styles = {
             size: {

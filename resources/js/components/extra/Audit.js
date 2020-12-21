@@ -20,10 +20,12 @@ export default class AuditMeter extends Component {
 
     render() {
 
+        console.log('audit',this.props.data.data[0])
+
         {
             this.props.data.data != false ? (
 
-                this.data = this.props.data.data
+                this.data = this.props.data.data[0]
 
             ) : (
 

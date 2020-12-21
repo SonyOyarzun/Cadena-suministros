@@ -82,9 +82,9 @@ class Meter extends Component {
 
         getMeter().then(metadata => {
 
-            console.log('getMeter ', metadata[1][1])
+            console.log('getMeter ', metadata)
 
-            create(this.asset, metadata[1][1], this.keysCreate, this.state.config)
+            create(this.asset, metadata, this.keysCreate, this.state.config)
                 .then(response => {
                     console.log('start create response ', response)
                     this.setState({ transaction: response, asset: response.id })

@@ -28,7 +28,7 @@ export default class Lineal extends Component {
         //console.log('canal :',this.channel)
         Echo.private(this.channel)
             .listen('MeterEvent', (response) => {
-                console.log('echo :', response.data[0])
+          //      console.log('echo :', response.data[0])
                 //       this.setState({ data: response.data[0] })
 
                 let array = []
@@ -39,8 +39,8 @@ export default class Lineal extends Component {
     
                     row[index] = [content.fecha, content.temp[1], content.temp[2], content.temp[3]],
     
-                    array.push(row),
-                    console.log('row:', row)
+                    array.push(row)
+                // ,   console.log('row:', row)
                 ))
     
                 this.setState({ data: array })
@@ -53,7 +53,7 @@ export default class Lineal extends Component {
     componentDidMount() {
 
         getMeter().then(response => {
-            console.log('Lineal data :', response)
+       //     console.log('Lineal data :', response)
 
             let array = []
             let row = []
@@ -63,8 +63,8 @@ export default class Lineal extends Component {
 
                 row[index] = [content.fecha, content.temp[1], content.temp[2], content.temp[3]],
 
-                array.push(row),
-                console.log('row:', row)
+                array.push(row)
+           // ,    console.log('row:', row)
             ))
 
             this.setState({ data: array })
@@ -78,7 +78,7 @@ export default class Lineal extends Component {
 
     render() {
 
-        console.log('hhh:', this.state.data)
+     //   console.log('hhh:', this.state.data)
 
         return (
             <>
