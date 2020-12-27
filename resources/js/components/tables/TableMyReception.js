@@ -30,6 +30,7 @@ class TableMyReception extends Component {
       alert: '',
       type: '',
       show: false,
+      showSnack: false,
       message: '',
     }
     this.getData = this.getData.bind(this); //permitira enviar elevento getData a componente hijo
@@ -50,6 +51,7 @@ class TableMyReception extends Component {
   }
 
   onTagsChange(event, values) {
+    this.setState({showSnack:false})
     this.setState({ userSend: values })
     //  console.log('userSend onChange', this.state.userSend)
   }
@@ -60,6 +62,7 @@ class TableMyReception extends Component {
   }
 
   sendID(id) {
+    this.setState({showSnack:false})
     this.setState({show:true, message: id})
   }
 
@@ -68,6 +71,7 @@ class TableMyReception extends Component {
     const save = (id_transaction, asset, to) => {
       render(<></>, document.getElementById('message'));
       render(<Load />, document.getElementById('load'));
+      this.setState({showSnack:false})
       const data = {
         transaction: id_transaction,
         asset: asset,
@@ -75,20 +79,25 @@ class TableMyReception extends Component {
       }
 
       reSendChain(data).then((response) => {
+
         console.log(response);
-        this.setState({ alert: response.message, type: response.type })
+        this.setState({ alert: response.message, type: response.type})
 
         setTimeout(() => {
           render(<></>, document.getElementById('load'));
           this.getData()
+          this.setState({showSnack:true})
         }, 5000);
-
+  
 
       }, (response) => {
         console.log(response);
         this.setState({ alert: response.message, type: response.type })
         render(<></>, document.getElementById('load'));
-      });
+
+      }).finally(() => {
+        this.setState({showSnack:false})
+      })
     }
 
     let columns = [
@@ -178,8 +187,8 @@ class TableMyReception extends Component {
     } else {
       return (
         <>
-          {this.state.alert != '' &&
-            <SnackBar alert={this.state.alert} type={this.state.type} />
+          {this.state.showSnack != false &&
+            <SnackBar show={this.state.showSnack} alert={this.state.alert} type={this.state.type} />
           }
           <MDBRow fluid style={styles.border}>
             <MDBCol size="4">
