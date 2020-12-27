@@ -59,7 +59,7 @@ function Transfer(props) {
 
 
   useEffect(() => {
-
+  //  setShowSnack(false)
     meter()
 
   });
@@ -143,7 +143,7 @@ function Transfer(props) {
 
           setTimeout(() => {
             setShowSnack(false)
-          }, 5000);
+          }, 10000);
 
         })
 
