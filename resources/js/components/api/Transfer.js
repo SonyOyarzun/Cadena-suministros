@@ -49,7 +49,8 @@ function Transfer(props) {
   const meter = () => {
 
     getMeter().then(response => {
-      setCommentary('Temperatura: ' + response[response.length - 1][1])
+  //    console.log('temperatura message',response)
+      setCommentary('Temperatura: ' + response[response.length - 1].temp[1])
     })
 
   }
@@ -197,7 +198,7 @@ function Transfer(props) {
       save(txCreatedID, response.id, asset, userSend.id)
     }).catch(response => {
       console.log('error transfer', response)
-
+      setShow(true)
     }).then(() => {
 
     }).finally(() => {
@@ -208,6 +209,7 @@ function Transfer(props) {
         setPrevent(false)
         handleClose()
         render(<></>, document.getElementById('load'));
+        setShow(false)
       }, 10000);
 
     })
