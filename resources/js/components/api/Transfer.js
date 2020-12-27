@@ -83,6 +83,7 @@ function Transfer(props) {
         console.log('receiveChain :', response)
         setAlert(response.message)
         setType(response.type)
+        setShowSnack(true)
 
         setTimeout(() => {
           props.getData()
@@ -125,7 +126,6 @@ function Transfer(props) {
         getTransaction(paramsTransaction),
       ])
         .then(responseArr => {
-          setShowSnack(true)
           console.log('send', responseArr[0])
           console.log('receive', responseArr[1])
           console.log('config', responseArr[2])
@@ -140,7 +140,11 @@ function Transfer(props) {
           setPrevent(false);
         })
         .finally(() => {
-          setShowSnack(false)
+
+          setTimeout(() => {
+            setShowSnack(false)
+          }, 5000);
+
         })
 
     } else {
@@ -221,7 +225,7 @@ function Transfer(props) {
 
   }
 
-
+console.log('showSnack',showSnack)
 
   return (
     <div>
