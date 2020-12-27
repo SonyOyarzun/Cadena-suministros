@@ -19,6 +19,7 @@ function Create(props) {
   console.log('props ', props)
   const [alert, setAlert] = useState('');
   const [type, setType] = useState('');
+  const [show, setShow] = useState(false);
 
   const process = () => {
     axios.all([
@@ -68,7 +69,7 @@ function Create(props) {
 
   const createTransaction = (user, config) => {
     render(<Load />, document.getElementById('load'));
-
+    setShow(false)
     const keys = {
       publicKey: user.publicKey,
       privateKey: user.privateKey,
@@ -99,6 +100,7 @@ function Create(props) {
               productReply(transaction).then(response => {
                 console.log('product Reply :', response)
                 props.updateData()
+                setShow(true)
                 props.clean()
               })
             })
@@ -106,9 +108,9 @@ function Create(props) {
               console.log('error create :', response)
             })
             .finally(() => {
-
               setTimeout(() => {
                 render(<></>, document.getElementById('load'));
+                setShow(false)
               }, 10000);
 
             })
@@ -116,6 +118,7 @@ function Create(props) {
 
         } else {
           render(<></>, document.getElementById('load'));
+          setShow(false)
           props.updateData()
         }
 
@@ -127,14 +130,15 @@ function Create(props) {
       setAlert('Debe ingresar productos y destinatario')
       setType('warning')
       render(<></>, document.getElementById('load'));
+      setShow(false)
     }
 
   }
 
   return (
     <div>
-      {alert != '' &&
-        <SnackBar alert={alert} type={type} />
+      {show != false &&
+        <SnackBar show={show} alert={alert} type={type} />
       }
       <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={process}>
         <MDBIcon icon="paper-plane" />

@@ -30,8 +30,9 @@ export default function CustomizedSnackbars(props) {
 
   useEffect( ()=>{
 
-   setOpen(true)
 
+   setOpen(props.show)
+  
     
  },[props]);
 
