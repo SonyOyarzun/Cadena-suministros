@@ -41,6 +41,7 @@ export default function Terminate(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
+  const [showSnack, setShowSnack] = useState(false);
 
   const [message, setMessage] = useState('');
 
@@ -121,6 +122,7 @@ export default function Terminate(props) {
 
   const terminate = () => {
     render(<Load />, document.getElementById('load'));
+    setShowSnack(true)
     if (document.getElementById('commentary').value.trim().length > 0) {
 
       const BURN_ADDRESS = 'BurnBurnBurnBurnBurnBurnBurnBurnBurnBurnBurn'
@@ -173,6 +175,7 @@ export default function Terminate(props) {
             setType('error')
           }).finally(() => {
             render(<></>, document.getElementById('load'));
+            setShowSnack(false)
           })
 
         })
@@ -180,6 +183,7 @@ export default function Terminate(props) {
       })
 
     } else {
+      setShowSnack(true)
       setAlert('Debe ingresar Observacion')
       setType('error')
     }
@@ -191,7 +195,7 @@ export default function Terminate(props) {
     render(<Load />, document.getElementById('load'));
     setPrevent(true)
     setButtonMessage('Cargando...')
-
+    setShowSnack(false)
 
     const params = {
       "attribute": document.getElementById('id').value,
@@ -201,9 +205,11 @@ export default function Terminate(props) {
       console.log('productos :', response)
       if (response.type != 'error') {
         setProducts(response)
+        setShowSnack(false)
       } else {
         setAlert(response.message)
         setType(response.type)
+        setShowSnack(true)
       }
 
     }).catch(response => {
@@ -212,6 +218,7 @@ export default function Terminate(props) {
       console.log("Error " + response)
     }).finally(() => {
       setPrevent(false);
+      setShowSnack(false)
       setButtonMessage('Buscar');
       render(<></>, document.getElementById('load'));
     })
@@ -220,7 +227,7 @@ export default function Terminate(props) {
   }
 
   const handleClick = (id) => {
-
+    setShowSnack(false)
     handleShow()
     setMessage(id)
 
@@ -305,8 +312,8 @@ export default function Terminate(props) {
   return (
     <MDBRow>
       <MDBCol md="12" lg="12" xl="12" className="mx-auto mt-3">
-        {alert != '' &&
-          <SnackBar alert={alert} type={type} />
+        {showSnack != false &&
+          <SnackBar show={showSnack} alert={alert} type={type} />
         }
         <MDBCard className={classes.root}>
 
