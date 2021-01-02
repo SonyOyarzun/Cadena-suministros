@@ -8,17 +8,17 @@
  */
 
 $uri = urldecode(
-    parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
+  parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
 );
 
 // This file allows us to emulate Apache's "mod_rewrite" functionality from the
 // built-in PHP web server. This provides a convenient way to test a Laravel
 // application without having installed a "real" web server software here.
-if ($uri !== '/' && file_exists(__DIR__.'/public'.$uri)) {
-    return false;
+if ($uri !== '/' && file_exists(__DIR__ . '/public' . $uri)) {
+  return false;
 }
 
-require_once __DIR__.'/public/index.php';
+require_once __DIR__ . '/public/index.php';
 
 
 
@@ -181,5 +181,15 @@ This may help if you are on windows:
   Enter the "Variable value". My is - C:\wamp\bin\apache\Apache2.2.17\conf\openssl.cnf
   Click "OK" and close all the windows and RESTART your computer.
   The OPENSSL should be correctly working.
+
+
+
+
+  //PUERTO OCUPADO POR SYSTEM
+  Para Windows 10 (aunque en todos los Windows creo que es el mismo procedimiento) ya por defecto el puerto 80 esta ocupado por el Servicio de publicación World Wide Web , lo que hay q hacer es liberar para así no cambiar el puerto de apache.
+
+Procedimiento:
+
+En ejecutar (tecla Windows + tecla r) digitamos: services.msc y buscamos Servicio de publicación World Wide Web (le damos click derecho y vamos a Propiedades) le cambiamos de Tipo de inicio AUTOMATICO a MANUAL y en Estado de servicio presionamos DETENER) así ya está libre nuestro puerto 80.
 
 */

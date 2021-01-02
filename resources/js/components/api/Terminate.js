@@ -13,7 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
-import { getTransaction, getAsset, searchAsset, getConfig, getUser, getChain, receiveChain, terminateChain } from "../tables/TableFunctions";
+import { getTransaction, getAsset, searchAsset, getConfig, getChain, receiveChain, terminateChain } from "../tables/TableFunctions";
+
+import {  getUser} from "../../access/UserFunctions";
 
 import { transfer } from '../api/CRAB'
 
@@ -91,7 +93,7 @@ export default function Terminate(props) {
         setUser(responseArr[0])
         setConfig(responseArr[1])
         setChain(responseArr[2])
-        //    console.log('user',responseArr[0],'config ',responseArr[1])
+            console.log('user',responseArr[0],'config ',responseArr[1])
       })
 
   }, []);
@@ -134,18 +136,32 @@ export default function Terminate(props) {
           "asset": transaction.id,
         }
 
-        getAsset(params).then(response => {
+        getAsset(params).then(responseAsset => {
 
-          console.log(transaction)
+
+          //inicio asset
+          console.log('transaction',transaction.id)
           const tx = chain.filter((e) => e.transaction == transaction.id)
-          const us = user.filter((e) => e.id == tx[0].to)
+
+         //inicio user
+
+         const userTo = {
+           id: tx[0].to
+         }
+
+         console.log('get user userTo',userTo) 
+
+         getUser(userTo).then(response => {
+          console.log('get user keys',response) 
+         // const us = user.filter((e) => e.id == tx[0].to)
+          const us = response
           console.log('tx', tx)
           console.log('user', us)
 
 
 
           const metadata = {
-            from: us[0].name,
+            from: us.name,
             to: 'FIN',
             commentary: document.getElementById('commentary').value,
             state: 'Terminado',
@@ -156,16 +172,16 @@ export default function Terminate(props) {
 
           const keys = {
             receivePublickey: BURN_ADDRESS,
-            sendPrivateKey: us[0].privateKey,
+            sendPrivateKey: us.privateKey,
           }
 
           console.log('keys', keys)
 
           console.log('response', response[0])
 
-          transfer(response[0], metadata, keys, config).then(response2 => {
+          transfer(responseAsset[0], metadata, keys, config).then(response2 => {
             console.log('terminate', response2)
-            save(response2.id, response2.asset.id, transaction.id, us[0].id)
+            save(response2.id, response2.asset.id, transaction.id, us.id)
             setAlert('Producto(s) de baja')
             setType('success')
 
@@ -177,6 +193,14 @@ export default function Terminate(props) {
             render(<></>, document.getElementById('load'));
             setShowSnack(false)
           })
+
+        //fin user
+  
+        })
+
+
+
+          //fin asset
 
         })
 

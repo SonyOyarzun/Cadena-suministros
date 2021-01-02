@@ -23,12 +23,39 @@ class UserController extends Controller
   {
     if (!isset($request->resp)) {
       $user = User::all();
+    
+      /*
+        $data = array();
+
+      foreach ($users as $data) {
+
+        if (!$ExtractPublicKey = file_get_contents('key/public.key_' . $data->email . '.key')) {
+          die('No se ha podido obtener la llave publica');
+        }
+        //extrae la llave privada del archivo creado
+        if (!$ExtractPrivateKey = file_get_contents('key/private.key_' . $data->email . '.key')) {
+          die('No se ha podido obtener la llave privada');
+        }
+
+        $user = [
+          "email" =>  $data->email,
+          "id" =>  $data->id,
+          "name" =>  $data->name,
+          "path" =>  $data->path,
+          "role" =>  $data->role,
+          "publicKey" => $ExtractPublicKey,
+          "privateKey" => $ExtractPrivateKey,
+        ];
+      }
+*/
+
     } else {
       $id = Auth::id();
       $user = User::query()
         ->where('id', '!=', $id)
         ->get();
     }
+ 
     return json_encode($user);
   }
 
@@ -56,13 +83,11 @@ class UserController extends Controller
 
         $user->publicKey = $ExtractPublicKey;
         $user->privateKey = $ExtractPrivateKey;
-
       } catch (\Throwable $th) {
 
         throw $th;
       }
       return json_encode($user);
-  
     }
   }
 
@@ -71,6 +96,7 @@ class UserController extends Controller
   {
 
     try {
+
       $user = User::findOrFail($request->id);
 
       //extrae la llave publica del archivo creado
@@ -85,14 +111,12 @@ class UserController extends Controller
 
       $user->publicKey = $ExtractPublicKey;
       $user->privateKey = $ExtractPrivateKey;
-
     } catch (\Throwable $th) {
 
       return $th->getMessage();
     }
 
     return json_encode($user);
- 
   }
 
   public function new(Request $request)

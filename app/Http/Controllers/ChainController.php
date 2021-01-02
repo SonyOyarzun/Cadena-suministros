@@ -120,12 +120,15 @@ class ChainController extends Controller
       $id = Auth::id();
       $chain = Chain::query()
         ->where('transaction', '=', $request->newTransaction)
-        ->update(['state' => 'Terminado']);
+        ->update([
+          'state' => 'Terminado',
+          'view' => 3
+        ]);
 
-     // dd($chain);
-    return var_dump($chain);
+      // dd($chain);
+    //  return var_dump($chain);
 
-    
+
 
       $api = Api_config::findOrFail(1);
 
