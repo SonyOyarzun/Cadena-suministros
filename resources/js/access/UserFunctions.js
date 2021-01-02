@@ -134,7 +134,7 @@ export const getProfile = () => {
             headers: { Authorization: `Bearer ${localStorage.usertoken}` }
         })
         .then(response => {
-            console.log(response)
+            console.log('my ',response)
             return response.data
         })
         .catch(err => {

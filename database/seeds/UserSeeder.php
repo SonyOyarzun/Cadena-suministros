@@ -13,7 +13,8 @@ class UserSeeder extends Seeder
     public function run()
     {
 
-    $route = 'public/key/public.key_';
+    $publicRoute = 'public/key/public.key_';
+    $privateRoute = 'public/key/private.key_';
 
        DB::table('users')->insert([
             'name' => 'Laboratorios de Niche',
@@ -25,8 +26,8 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        file_put_contents($route . 'admin@admin.com','5bAAdgeKRpaiQ75onTGaBjkGM6HZ9GiCD2Xhv3pA9Ksq');
-        file_put_contents($route . 'admin@admin.com','9YKU2mvEUe6DMYiCguef6knTwdCvjmykXXHB1VznYLAH');
+        file_put_contents($publicRoute . 'admin@admin.com.key','5bAAdgeKRpaiQ75onTGaBjkGM6HZ9GiCD2Xhv3pA9Ksq');
+        file_put_contents($privateRoute . 'admin@admin.com.key','9YKU2mvEUe6DMYiCguef6knTwdCvjmykXXHB1VznYLAH');
 
         DB::table('users')->insert([
             'name' => 'CC Chile',
@@ -38,8 +39,8 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        file_put_contents($route. 'ccchile@cadena.cl','H66ANcwb4W81iRHsMReHwJWnPcwyGZCAcWBQDbn6YuqL');
-        file_put_contents($route. 'ccchile@cadena.cl','2RjzmEEXWf51vmhdywNW4aqKjhSyHorYBP4Y2hX3sq4r');
+        file_put_contents($publicRoute. 'ccchile@cadena.cl.key','H66ANcwb4W81iRHsMReHwJWnPcwyGZCAcWBQDbn6YuqL');
+        file_put_contents($privateRoute. 'ccchile@cadena.cl.key','2RjzmEEXWf51vmhdywNW4aqKjhSyHorYBP4Y2hX3sq4r');
 
         DB::table('users')->insert([
             'name' => 'AC SUR',
@@ -51,8 +52,8 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        file_put_contents($route. 'acsur@cadena.cl','H3EaF1k3dntV7q6dHFayAFHCuiVZa8wSrHAztUUaBYaM');
-        file_put_contents($route . 'acsur@cadena.cl','9oaPQiy39SQZkNKwsYuA2V5XgUkpKPnr6oCiQ1PHxFzj');
+        file_put_contents($publicRoute. 'acsur@cadena.cl.key','H3EaF1k3dntV7q6dHFayAFHCuiVZa8wSrHAztUUaBYaM');
+        file_put_contents($privateRoute . 'acsur@cadena.cl.key','9oaPQiy39SQZkNKwsYuA2V5XgUkpKPnr6oCiQ1PHxFzj');
 
         DB::table('users')->insert([
             'name' => 'Consultorio',
@@ -64,8 +65,8 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        file_put_contents($route. 'consultorio@cadena.cl','3fEZQX2yasZTDp7R7a8eUuNaNB3W2xzqvVwT4yYHUqrd');
-        file_put_contents($route. 'consultorio@cadena.cl','FeinCmwNP764MPnnYtHVdof8QZqWFDtjcLpWgnXrH2jE');
+        file_put_contents($publicRoute. 'consultorio@cadena.cl.key','3fEZQX2yasZTDp7R7a8eUuNaNB3W2xzqvVwT4yYHUqrd');
+        file_put_contents($privateRoute. 'consultorio@cadena.cl.key','FeinCmwNP764MPnnYtHVdof8QZqWFDtjcLpWgnXrH2jE');
 
         DB::table('users')->insert([
             'name' => 'Dogges Chile',
@@ -77,8 +78,8 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        file_put_contents($route. 'central@dogges.cl','7Bj9SfW3hX6i82Lfzhwq5ywCn9WJBP3AYgNpSFSYgo7J');
-        file_put_contents($route. 'central@dogges.cl','E4VdFFQjTQCbweSSH1iBRSihHx5S6RC7JhXfcuBvFQdZ');
+        file_put_contents($publicRoute. 'central@dogges.cl.key','7Bj9SfW3hX6i82Lfzhwq5ywCn9WJBP3AYgNpSFSYgo7J');
+        file_put_contents($privateRoute. 'central@dogges.cl.key','E4VdFFQjTQCbweSSH1iBRSihHx5S6RC7JhXfcuBvFQdZ');
 
         DB::table('users')->insert([
             'name' => 'Dogges Brazil',
@@ -90,8 +91,8 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        file_put_contents($route . 'central@dogges.br','De5GL8AVfdAMNCnUvx1UZhNwJkbj1h2mkScQAYyhti4U');
-        file_put_contents($route . 'central@dogges.br','Ds1aoqNjmuqntvCuMDCiS9cBWH4Mdj7TTu69HqnobKRo');
+        file_put_contents($publicRoute . 'central@dogges.br.key','De5GL8AVfdAMNCnUvx1UZhNwJkbj1h2mkScQAYyhti4U');
+        file_put_contents($privateRoute . 'central@dogges.br.key','Ds1aoqNjmuqntvCuMDCiS9cBWH4Mdj7TTu69HqnobKRo');
 
     }
 }

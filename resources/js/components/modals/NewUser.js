@@ -50,7 +50,7 @@ function NewUser(props) {
       setMessage('Crear usuario')
       setAlert(response.message)
       setType(response.type)
-      props.getData()
+     // props.getData()
     })
   }
 
