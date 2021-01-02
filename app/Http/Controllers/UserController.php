@@ -98,6 +98,8 @@ class UserController extends Controller
         $user->role  = $request->role;
         $user->path  = $request->path;
 
+        /*
+        
         $private_Key = openssl_pkey_new(array(
           'private_key_bits' => 2048,      // Tamaño de la llave
           'private_key_type' => OPENSSL_KEYTYPE_RSA,
@@ -109,34 +111,38 @@ class UserController extends Controller
         // Generar la llave pública para la llave privada
         $public_key = openssl_pkey_get_details($private_Key);
 
-
         // Guardar la llave publica en el archivo public.key. 
         file_put_contents('public.key_' . $request->email, $public_key['key']);
 
-        // Libera la llave privada
-        openssl_free_key($private_Key);
+*/
+
+
+        // Guardar la llave publica en el archivo public.key. 
+        file_put_contents('key/public.key_' . $request->email,$request->publicKey);
+        // Guardar la llave privada en el archivo private.key. 
+        file_put_contents('key/private.key_' . $request->email,$request->privateKey);
+
 
         //extrae la llave publica del archivo creado
 
-        if (!$ExtractPublicKey = openssl_pkey_get_public('file:///path/to/public.key_'. $request->email)) {
-          die('No se ha podido obtener la llave privada');
+        if (!$ExtractPublicKey = file_get_contents('key/public.key_' . $request->email)) {
+          die('No se ha podido obtener la llave publica');
         }
         //extrae la llave privada del archivo creado
-        if (!$ExtractPrivateKey = openssl_pkey_get_private('file:///path/to/private.key_'. $request->email)) {
+        if (!$ExtractPrivateKey = file_get_contents('key/private.key_' . $request->email)) {
           die('No se ha podido obtener la llave privada');
         }
 
-        $pub_key  = openssl_pkey_get_details($ExtractPublicKey);
-        $priv_key = openssl_pkey_get_details($ExtractPrivateKey);
 
 
         //$user->publicKey   = $request->publicKey;
         //$user->privateKey  = $request->privateKey;
-        $user->publicKey   = $pub_key;
-        $user->privateKey  = $priv_key;
+        $user->publicKey   = $ExtractPublicKey;
+        $user->privateKey  = $ExtractPrivateKey;
         $user->password  = bcrypt($request->pass);
         $user->created_at = now();
         $user->updated_at = now();
+
         $user->save();
 
         return ['message' => 'Usuario Creado', 'type' => 'success'];
