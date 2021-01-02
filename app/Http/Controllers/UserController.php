@@ -98,28 +98,42 @@ class UserController extends Controller
         $user->role  = $request->role;
         $user->path  = $request->path;
 
-        $privateKey = openssl_pkey_new(array(
+        $private_Key = openssl_pkey_new(array(
           'private_key_bits' => 2048,      // Tamaño de la llave
           'private_key_type' => OPENSSL_KEYTYPE_RSA,
         ));
 
         // Guardar la llave privada en el archivo private.key. No compartir este archivo con nadie
-        openssl_pkey_export_to_file($privateKey, 'private.key_' . $request->email);
+        openssl_pkey_export_to_file($private_Key, 'private.key_' . $request->email);
 
         // Generar la llave pública para la llave privada
-        $public_key = openssl_pkey_get_details($privateKey);
+        $public_key = openssl_pkey_get_details($private_Key);
 
-        file_put_contents('public.key', $public_key['key']);
+
+        // Guardar la llave publica en el archivo public.key. 
+        file_put_contents('public.key_' . $request->email, $public_key['key']);
 
         // Libera la llave privada
-        openssl_free_key($privateKey);
+        openssl_free_key($private_Key);
 
+        //extrae la llave publica del archivo creado
+
+        if (!$ExtractPublicKey = openssl_pkey_get_public('file:///path/to/public.key_'. $request->email)) {
+          die('No se ha podido obtener la llave privada');
+        }
+        //extrae la llave privada del archivo creado
+        if (!$ExtractPrivateKey = openssl_pkey_get_private('file:///path/to/private.key_'. $request->email)) {
+          die('No se ha podido obtener la llave privada');
+        }
+
+        $pub_key  = openssl_pkey_get_details($ExtractPublicKey);
+        $priv_key = openssl_pkey_get_details($ExtractPrivateKey);
 
 
         //$user->publicKey   = $request->publicKey;
         //$user->privateKey  = $request->privateKey;
-        $user->publicKey   = $public_key;
-        $user->privateKey  = $privateKey;
+        $user->publicKey   = $pub_key;
+        $user->privateKey  = $priv_key;
         $user->password  = bcrypt($request->pass);
         $user->created_at = now();
         $user->updated_at = now();
