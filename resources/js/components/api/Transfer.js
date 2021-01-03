@@ -26,7 +26,7 @@ function Transfer(props) {
   const [showSnack, setShowSnack] = useState(false);
   const [message, setMessage] = useState('Realizar Recepción');
 
-  const [alert, setAlert] = useState('');
+ // const [alert, setAlert] = useState('');
   const [type, setType] = useState('');
 
   const [commentary, setCommentary] = useState('');
@@ -81,7 +81,7 @@ function Transfer(props) {
     receiveChain(data)
       .then((response) => {
         console.log('receiveChain :', response)
-        setAlert(response.message)
+        alert(response.message)
         setType(response.type)
         setShowSnack(true)
 
@@ -148,7 +148,7 @@ function Transfer(props) {
         })
 
     } else {
-      setAlert('Debe ingresar un comentario')
+      alert('Debe ingresar un comentario')
       setType('info')
     }
 
@@ -229,9 +229,7 @@ console.log('showSnack',showSnack)
 
   return (
     <div>
-      {showSnack != false &&
-        <SnackBar show={showSnack} alert={alert} type={type} />
-      }
+
       <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={handleShow}>
         <MDBIcon icon={icon} />
       </MDBBtn>

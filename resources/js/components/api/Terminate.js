@@ -55,7 +55,7 @@ export default function Terminate(props) {
   const [buttonMessage, setButtonMessage] = useState('Buscar');
   const [buttonMessage2, setButtonMessage2] = useState('Dar de Baja');
 
-  const [alert, setAlert] = useState('');
+ // const [alert, setAlert] = useState('');
   const [type, setType] = useState('');
 
   const [step, setStep] = useState([]);
@@ -111,11 +111,11 @@ export default function Terminate(props) {
 
     terminateChain(data)
       .then((response) => {
-        setAlert(response.message)
+        alert(response.message)
         setType(response.type)
       })
       .catch(response => {
-        setAlert(response.message)
+        alert(response.message)
         setType(response.type)
       })
 
@@ -182,13 +182,14 @@ export default function Terminate(props) {
           transfer(responseAsset[0], metadata, keys, config).then(response2 => {
             console.log('terminate', response2)
             save(response2.id, response2.asset.id, transaction.id, us.id)
-            setAlert('Producto(s) de baja')
-            setType('success')
+            alert('Producto(s) de baja')
+        //    setType('success')
 
           }).catch(response => {
             console.log('error terminate', response)
-            setAlert('No se puede dar de baja un producto seleccionado')
-            setType('error')
+          //  setAlert('No se puede dar de baja un producto seleccionado')
+          //  setType('error')
+          alert('No se puede dar de baja un producto seleccionado')
           }).finally(() => {
             render(<></>, document.getElementById('load'));
             setShowSnack(false)
@@ -208,7 +209,7 @@ export default function Terminate(props) {
 
     } else {
       setShowSnack(true)
-      setAlert('Debe ingresar Observacion')
+      alert('Debe ingresar Observacion')
       setType('error')
       render(<></>, document.getElementById('load'));
     }
@@ -232,13 +233,13 @@ export default function Terminate(props) {
         setProducts(response)
         setShowSnack(false)
       } else {
-        setAlert(response.message)
+        alert(response.message)
         setType(response.type)
         setShowSnack(true)
       }
 
     }).catch(response => {
-      setAlert(response.message)
+      alert(response.message)
       setType(response.type)
       console.log("Error " + response)
     }).finally(() => {
@@ -337,9 +338,6 @@ export default function Terminate(props) {
   return (
     <MDBRow>
       <MDBCol md="12" lg="12" xl="12" className="mx-auto mt-3">
-        {showSnack != false &&
-          <SnackBar show={showSnack} alert={alert} type={type} />
-        }
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>Busqueda de Productos</MDBCardHeader>

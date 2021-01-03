@@ -17,7 +17,7 @@ import { render } from 'react-dom';
 function Create(props) {
 
   console.log('props ', props)
-  const [alert, setAlert] = useState('');
+ // const [alert, setAlert] = useState('');
   const [type, setType] = useState('');
   const [show, setShow] = useState(false);
 
@@ -51,7 +51,7 @@ function Create(props) {
 
     newChain(data).then(response => {
       console.log('new chain :', response)
-      setAlert(response.message)
+      alert(response.message)
       setType(response.type)
     })
 
@@ -127,7 +127,7 @@ function Create(props) {
 
 
     } else {
-      setAlert('Debe ingresar productos y destinatario')
+      alert('Debe ingresar productos y destinatario')
       setType('warning')
       render(<></>, document.getElementById('load'));
       setShow(false)
@@ -137,9 +137,6 @@ function Create(props) {
 
   return (
     <div>
-      {show != false &&
-        <SnackBar show={show} alert={alert} type={type} />
-      }
       <MDBBtn className="btn btn-block" tag="a" size="sm" gradient="blue" onClick={process}>
         <MDBIcon icon="paper-plane" />
       </MDBBtn>

@@ -48,10 +48,6 @@ function PassUser(props) {
   return (
     <div>
 
-      {alert != '' &&
-        <SnackBar alert={alert} type={type} />
-      }
-
       <MDBBtn tag="a" size="sm" gradient="blue" onClick={handleShow}>
         <MDBIcon icon="key" />
       </MDBBtn>

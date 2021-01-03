@@ -21,7 +21,7 @@ function EditUser(props) {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('Actualizar')
 
-  const [alert, setAlert] = useState('');
+  //const [alert, setAlert] = useState('');
   const [type, setType] = useState('');
 
 
@@ -49,9 +49,7 @@ function EditUser(props) {
 
   return (
     <div>
-      {alert != '' &&
-        <SnackBar alert={alert} type={type} />
-      }
+     
       <MDBBtn tag="a" size="sm" gradient="blue" onClick={handleShow}>
         <MDBIcon far icon="edit" />
       </MDBBtn>

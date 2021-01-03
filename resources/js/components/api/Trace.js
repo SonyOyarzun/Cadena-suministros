@@ -45,7 +45,7 @@ function Trace(props) {
   const [prevent, setPrevent] = useState(false);
   const [buttonMessage, setButtonMessage] = useState('Buscar');
 
-  const [alert, setAlert] = useState('');
+  //const [alert, setAlert] = useState('');
   const [type, setType] = useState('');
 
   const { asset } = useParams();
@@ -107,15 +107,15 @@ function Trace(props) {
 
 
               } else {
-                setAlert('No encontrada')
+                alert('No encontrada')
               }
 
             } else {
-              setAlert('No encontrada')
+              alert('No encontrada')
             }
 
           } else {
-            setAlert('No encontrada')
+            alert('No encontrada')
           }
 
           if (responseArr[1].hasOwnProperty('asset')) {
@@ -125,10 +125,10 @@ function Trace(props) {
               setProducts(responseArr[1].asset.data.data)
 
             } else {
-              setAlert('No encontrada')
+              alert('No encontrada')
             }
           } else {
-            setAlert('No encontrada')
+            alert('No encontrada')
           }
 
           console.log('step: ', responseArr[0]);
@@ -141,7 +141,7 @@ function Trace(props) {
         })
 
     } else {
-      setAlert('Debe ingresar una ID')
+      alert('Debe ingresar una ID')
     }
 
   }
@@ -199,9 +199,6 @@ function Trace(props) {
   return (
     <MDBRow>
       <MDBCol md="12" lg="12" xl="12" >
-        {alert != '' &&
-          <SnackBar alert={alert} type={type} />
-        }
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>Trazabilidad de un Producto</MDBCardHeader>

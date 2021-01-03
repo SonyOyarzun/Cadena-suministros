@@ -47,7 +47,7 @@ export default function Search() {
   const [prevent, setPrevent] = useState(false);
   const [buttonMessage, setButtonMessage] = useState('Buscar');
 
-  const [alert, setAlert] = useState('');
+  //const [alert, setAlert] = useState('');
   const [type, setType] = useState('');
 
 
@@ -91,12 +91,12 @@ export default function Search() {
       if (response.type != 'error') {
         setProducts(response)
       } else {
-        setAlert(response.message)
+        alert(response.message)
         setType(response.type)
       }
 
     }).catch(response => {
-      setAlert(response.message)
+      alert(response.message)
       setType(response.type)
 
       console.log("Error " + response)
@@ -195,9 +195,6 @@ export default function Search() {
   return (
     <MDBRow>
       <MDBCol md="12" lg="12" xl="12" className="mx-auto mt-3">
-        {alert != '' &&
-          <SnackBar alert={alert} type={type} />
-        }
         <MDBCard className={classes.root}>
 
           <MDBCardHeader>Busqueda de Productos</MDBCardHeader>
