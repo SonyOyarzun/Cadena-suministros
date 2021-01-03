@@ -27,7 +27,6 @@ class TableMyReception extends Component {
       loading: true,
       users: [],
       userSend: [],
-      alert: '',
       type: '',
       show: false,
       showSnack: false,
@@ -81,7 +80,7 @@ class TableMyReception extends Component {
       reSendChain(data).then((response) => {
 
         console.log(response);
-        this.setState({ alert: response.message, type: response.type})
+        alert(response.message)
 
         setTimeout(() => {
           render(<></>, document.getElementById('load'));
@@ -92,7 +91,7 @@ class TableMyReception extends Component {
 
       }, (response) => {
         console.log(response);
-        this.setState({ alert: response.message, type: response.type })
+        alert(response.message)
         render(<></>, document.getElementById('load'));
 
       }).finally(() => {
@@ -187,9 +186,6 @@ class TableMyReception extends Component {
     } else {
       return (
         <>
-          {this.state.showSnack != false &&
-            <SnackBar show={this.state.showSnack} alert={this.state.alert} type={this.state.type} />
-          }
           <MDBRow fluid style={styles.border}>
             <MDBCol size="4">
               <Auto onTagsChange={this.onTagsChange} label={'Usuario a Enviar'} />
