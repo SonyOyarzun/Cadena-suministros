@@ -177,7 +177,7 @@ export default function Terminate(props) {
 
           console.log('keys', keys)
 
-          console.log('response', response[0])
+          console.log('response', responseAsset[0])
 
           transfer(responseAsset[0], metadata, keys, config).then(response2 => {
             console.log('terminate', response2)
@@ -210,6 +210,7 @@ export default function Terminate(props) {
       setShowSnack(true)
       setAlert('Debe ingresar Observacion')
       setType('error')
+      render(<></>, document.getElementById('load'));
     }
 
   }

@@ -234,7 +234,7 @@ function Profile(props) {
                                         title = 'Producto Rechazado por ' + data.toName
                                         break
                                     case 'Terminado':
-                                        src = '/img/cancel.png'
+                                        src = '/img/banned.png'
                                         title = 'Producto Terminado por ' + data.toName
                                         break
                                 }
