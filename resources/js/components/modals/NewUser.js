@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from 'react';
+import React, { Component, Fragment, useState , useEffect} from 'react';
 
 import ReactDOM from 'react-dom';
 import { newUser } from '../../access/UserFunctions';
@@ -20,11 +20,14 @@ function NewUser(props) {
   const handleShow = () => setShow(true);
 
   const BigchainDB = require('bigchaindb-driver')
-  const alice = new BigchainDB.Ed25519Keypair()
+
+
+
+  //const alice = new BigchainDB.Ed25519Keypair()
 
   //var keypair = new driver.Ed25519Keypair(bip39.mnemonicToSeed("yourString").slice(0, 32))
 
-  const [state, setState] = useState({ id: '', name: '', email: '', role: 'A', path: '', pass: '', confirmPass: '', privateKey: alice.privateKey, publicKey: alice.publicKey })
+  const [state, setState] = useState({ id: '', name: '', email: '', role: 'A', path: '', pass: '', confirmPass: ''})
 
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('Crear usuario')
@@ -32,11 +35,20 @@ function NewUser(props) {
   const [alert, setAlert] = useState('');
   const [type, setType] = useState('');
 
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setState(prevState => ({ ...prevState, [name]: value }));
   }
   //console.log('state ',state)
+
+  useEffect( ()=>{
+
+    let alice = new BigchainDB.Ed25519Keypair()
+    setState({privateKey: alice.privateKey, publicKey: alice.publicKey});
+
+ });
+ 
 
   const onSubmit = (e) => {
     e.preventDefault()
