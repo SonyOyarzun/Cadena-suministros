@@ -98,8 +98,8 @@ class ChainController extends Controller
       $objDemo->state       = $chain->state;
       $objDemo->toTransfer  = $userToTranfer->name;
       $objDemo->receiver    = $receiver->name;
-      $objDemo->logotype    = $api->logotype;
-      $objDemo->background  = $api->background;
+      $objDemo->logotype    =  asset('storage/images/' . $api->logotype);
+      $objDemo->background  = asset('storage/images/' . $api->background);
 
       Mail::to($receiver->email)->send(new DemoEmail($objDemo));
     } catch (\Throwable $th) {
@@ -126,7 +126,7 @@ class ChainController extends Controller
         ]);
 
       // dd($chain);
-    //  return var_dump($chain);
+      //  return var_dump($chain);
 
 
 
@@ -195,8 +195,6 @@ class ChainController extends Controller
         ->update([
           'view'  => 1,
         ]);
-
-
     } catch (\Throwable $th) {
       return ['message' => 'Error al Ver Notificacion', 'type' => 'error'];
     }
