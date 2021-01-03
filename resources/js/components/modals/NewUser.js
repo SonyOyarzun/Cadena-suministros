@@ -28,11 +28,12 @@ function NewUser(props) {
   //var keypair = new driver.Ed25519Keypair(bip39.mnemonicToSeed("yourString").slice(0, 32))
 
   const [state, setState] = useState({ id: '', name: '', email: '', role: 'A', path: '', pass: '', confirmPass: ''})
+  const [keys, setKeys] = useState({ privateKey: '', publicKey: ''})
 
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('Crear usuario')
 
-  const [alert, setAlert] = useState('');
+ // const [alert, setAlert] = useState('');
   const [type, setType] = useState('');
 
 
@@ -45,9 +46,9 @@ function NewUser(props) {
   useEffect( ()=>{
 
     let alice = new BigchainDB.Ed25519Keypair()
-    setState({privateKey: alice.privateKey, publicKey: alice.publicKey});
+    setKeys({privateKey: alice.privateKey, publicKey: alice.publicKey});
 
- });
+ },[message]);
  
 
   const onSubmit = (e) => {
@@ -56,12 +57,25 @@ function NewUser(props) {
     setLoading(true)
     setMessage('Cargando...')
 
+    const user = {
+      id: state.id, 
+      name: state.name, 
+      email:state.email, 
+      role: state.role, 
+      path: state.path, 
+      pass: state.pass, 
+      confirmPass: state.confirmPass, 
+      privateKey:keys.privateKey,
+      publicKey:keys.publicKey,
+    }
 
-    newUser(state).then(response => {
+
+    newUser(user).then(response => {
       setLoading(false)
       setMessage('Crear usuario')
-      setAlert(response.message)
-      setType(response.type)
+  //    setAlert(response.message)
+   //   setType(response.type)
+      alert(response.message)
      // props.getData()
     })
   }
@@ -69,9 +83,6 @@ function NewUser(props) {
 
   return (
     <div>
-      {alert != '' &&
-        <SnackBar alert={alert} type={type} />
-      }
       <MDBBtn color="primary" rounded onClick={handleShow}><MDBIcon icon="user-plus" /> Agregar Usuario</MDBBtn>
 
       <Modal show={show} onHide={handleClose}>

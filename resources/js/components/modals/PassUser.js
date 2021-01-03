@@ -39,8 +39,9 @@ function PassUser(props) {
     changePass(state).then(response => {
       setLoading(false)
       setMessage('Actualizar')
-      setAlert(response.message)
-      setType(response.type)
+     // setAlert(response.message)
+     // setType(response.type)
+     alert(response.message)
     })
   }
 

@@ -70,7 +70,8 @@ class Login extends Component {
         login(user).then(response => {
             console.log('login:', response)
             if (response != true) {
-                this.setState({ alert: response.message, type: response.type, show: true })
+             //   this.setState({ alert: response.message, type: response.type, show: true })
+             alert(response.message)
             }else{
                 this.setState({ show: false })
             }
@@ -81,9 +82,7 @@ class Login extends Component {
     render() {
         return (
             <div className="mx-auto col-12">
-                {this.state.show!=false &&
-                    <SnackBar alert={this.state.alert} type={this.state.type} />
-                }
+             
                 <form validate onSubmit={this.onSubmit} className="row">
                     <div className='col-sm-4'>
                         <input

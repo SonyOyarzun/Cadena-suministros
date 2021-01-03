@@ -17,7 +17,8 @@ const onSubmit = (e) => {
       id: props.id
   }
   deleteUser(data).then(response => {
-    render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
+    alert(response.message)
+  //  render(<SnackBar state={true} alert={response.message} type={response.type} />, document.getElementById('message'));
     props.getData()
   })
 

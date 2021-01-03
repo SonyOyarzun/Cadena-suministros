@@ -39,8 +39,9 @@ function EditUser(props) {
     editUser(state).then(response => {
       setLoading(false)
       setMessage('Actualizar')
-      setAlert(response.message)
-      setType(response.type)
+      //  setAlert(response.message)
+      //   setType(response.type)
+      alert(response.message)
       props.getData()
     })
   }

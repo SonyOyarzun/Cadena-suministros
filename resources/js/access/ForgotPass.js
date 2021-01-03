@@ -51,7 +51,8 @@ class ForgotPass extends Component {
         console.log('forgot user:', user)
 
         forgot(user).then(response => {
-            this.setState({ loading: false, message: 'Solicitar', alert: response.message, type: response.type, show: true })
+            this.setState({ loading: false, message: 'Solicitar', alert: response.message, type: response.type })
+            alert(response.message)
             console.log('forgot: ', response)
         })
 
@@ -60,9 +61,7 @@ class ForgotPass extends Component {
     render() {
         return (
             <div style={styles.custom} className="mx-auto mt-3">
-                {this.state.show!=false &&
-                    <SnackBar show={this.state.show} alert={this.state.alert} type={this.state.type} />
-                }
+        
                 <Card>
                     <Card.Body>
                         <Card.Title>Recuperar contraseña</Card.Title>

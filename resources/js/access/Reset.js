@@ -41,14 +41,15 @@ class Reset extends Component {
         this.setState({ loading: true , message: 'Cargando...'})
 
         const user = {
-            email: document.getElementById('email').value,
-            password: document.getElementById('password').value,
-            confirmPassword: document.getElementById('confirmPassword').value,
+            email: document.getElementById('email2').value,
+            password: document.getElementById('password2').value,
+            confirmPassword: document.getElementById('confirmPassword2').value,
             token: this.state.token,
         }
 
         reset(user).then(response => {
             this.setState({ loading: false, message: 'Restablecer', type: response.type, alert: response.message })
+            alert(response.message)
             console.log('state :', response)
         })
     }
@@ -57,18 +58,15 @@ class Reset extends Component {
         
         return (
             <div style={styles.custom} className="mx-auto mt-3">
-                {this.state.alert != '' &&
-                    <SnackBar alert={this.state.alert} type={this.state.type} />
-                }
                 <Card>
                     <Card.Body>
                         <Card.Title>Restablecer Contraseña</Card.Title>
                         <Card.Text>
                             <form Validate onSubmit={this.onSubmit}>
                                 <div className="form-group">
-                                    <label htmlFor="email">Mail</label>
+                                    <label htmlFor="email2">Mail</label>
                                     <input
-                                    id='email'
+                                    id='email2'
                                         type="email"
                                         className="form-control"
                                         name="Mail"
@@ -78,9 +76,9 @@ class Reset extends Component {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="password">Contraseña</label>
+                                    <label htmlFor="password2">Contraseña</label>
                                     <input
-                                    id='password'
+                                    id='password2'
                                         type="password"
                                         className="form-control"
                                         name="password"
@@ -89,9 +87,9 @@ class Reset extends Component {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="confirmPassword">Confirmar Contraseña</label>
+                                    <label htmlFor="confirmPassword2">Confirmar Contraseña</label>
                                     <input
-                                    id='confirmPassword'
+                                    id='confirmPassword2'
                                         type="password"
                                         className="form-control"
                                         name="confirmPassword"
