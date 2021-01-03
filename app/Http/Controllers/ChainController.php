@@ -195,6 +195,8 @@ class ChainController extends Controller
         ->update([
           'view'  => 1,
         ]);
+
+
     } catch (\Throwable $th) {
       return ['message' => 'Error al Ver Notificacion', 'type' => 'error'];
     }
