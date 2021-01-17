@@ -137,14 +137,15 @@ export default function Terminate(props) {
         }
 
         getAsset(params).then(responseAsset => {
-
+          console.log('getAsset',responseAsset)
+          console.log('getAssetFinal',responseAsset[responseAsset.length-1])
 
           //inicio asset
           console.log('transaction',transaction.id)
-          const tx = chain.filter((e) => e.transaction == transaction.id)
+          const tx = chain.filter((e) => e.transaction == responseAsset[responseAsset.length-1].id)
 
          //inicio user
-
+         console.log('user tx',tx)
          const userTo = {
            id: tx[0].to
          }
@@ -175,11 +176,10 @@ export default function Terminate(props) {
             sendPrivateKey: us.privateKey,
           }
 
-          console.log('keys', keys)
 
-          console.log('response', responseAsset[0])
+          console.log('responseAsset[0]', responseAsset)
 
-          transfer(responseAsset[0], metadata, keys, config).then(response2 => {
+          transfer(responseAsset[responseAsset.length-1], metadata, keys, config).then(response2 => {
             console.log('terminate', response2)
             save(response2.id, response2.asset.id, transaction.id, us.id)
             alert('Producto(s) de baja')
