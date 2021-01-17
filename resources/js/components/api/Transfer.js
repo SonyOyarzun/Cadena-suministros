@@ -143,7 +143,7 @@ function Transfer(props) {
 
           setTimeout(() => {
             setShowSnack(false)
-          }, 10000);
+          }, 15000);
 
         })
 

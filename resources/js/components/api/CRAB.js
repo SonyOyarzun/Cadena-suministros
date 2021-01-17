@@ -4,7 +4,7 @@ import { getConfig } from '../tables/TableFunctions'
 
 export const create = (data, metadata, keys, config) => {
 
-  console.log('data :',data,'metadata :',metadata,'keys :',keys,'config :',config,)
+  console.log('CREATE','data :',data,'metadata :',metadata,'keys :',keys,'config :',config)
   const BigchainDB = require('bigchaindb-driver')
   const tx = BigchainDB.Transaction.makeCreateTransaction(
 
@@ -40,7 +40,7 @@ export const create = (data, metadata, keys, config) => {
 }
 
 export const transfer = (transaction, metadata, keys, config) => {
-
+  console.log('TRANSFER','transaction :',transaction,'metadata :',metadata,'keys :',keys,'config :',config)
   const BigchainDB = require('bigchaindb-driver')
   const conn = new BigchainDB.Connection(config.path)
 

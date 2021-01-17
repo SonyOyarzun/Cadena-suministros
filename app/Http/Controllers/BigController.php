@@ -36,7 +36,7 @@ class BigController extends Controller
 			$api = Api_config::findOrFail(1);
 
 			$client = new Client();
-			$response = $client->request('GET', $api->path . '/transactions/' . $request->asset);
+			$response = $client->request('GET', $api->path . 'transactions/' . $request->asset);
 			$statusCode = $response->getStatusCode();
 			$body = $response->getBody()->getContents();
 		} catch (\Exception $e) {

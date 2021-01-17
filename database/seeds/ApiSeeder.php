@@ -24,13 +24,8 @@ class ApiSeeder extends Seeder
             'db_port'       => '27001',
 
             //API PRUEBAS
-            /*
-            'path'          => 'https://test.ipdb.io/api/v1/',
-            'transaction'   => 'transactions/',
-            'asset'         => 'assets/',
-            'api_port'      => '9984',
-            'db_port'       => '27001',
-*/
+      //      'path'          => 'https://test.ipdb.io/api/v1/',
+
 
             //CORREO
             'mailer'        => 'smtp',
