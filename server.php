@@ -192,4 +192,13 @@ Procedimiento:
 
 En ejecutar (tecla Windows + tecla r) digitamos: services.msc y buscamos Servicio de publicación World Wide Web (le damos click derecho y vamos a Propiedades) le cambiamos de Tipo de inicio AUTOMATICO a MANUAL y en Estado de servicio presionamos DETENER) así ya está libre nuestro puerto 80.
 
+
+
+
+//COMPOSE
+
+$ docker-compose up -d
+$ ./run_tests
+$ docker-compose down
+
 */

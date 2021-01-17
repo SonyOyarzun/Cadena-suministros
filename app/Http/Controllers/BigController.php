@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use App\Api_config;
 
 class BigController extends Controller
 {
@@ -15,8 +16,11 @@ class BigController extends Controller
 	{
 
 		try {
+
+			$api = Api_config::findOrFail(1);
+
 			$client = new Client();
-			$response = $client->request('GET', 'https://test.ipdb.io/api/v1/transactions?asset_id=' . $request->asset . '&operation=TRANSFER&last_tx=false');
+			$response = $client->request('GET', $api->path .'transactions?asset_id=' . $request->asset . '&operation=TRANSFER&last_tx=false');
 			$statusCode = $response->getStatusCode();
 			$body = $response->getBody()->getContents();
 		} catch (\Exception $e) {
@@ -29,8 +33,10 @@ class BigController extends Controller
 	{
 
 		try {
+			$api = Api_config::findOrFail(1);
+
 			$client = new Client();
-			$response = $client->request('GET', 'https://test.ipdb.io/api/v1/transactions/' . $request->asset);
+			$response = $client->request('GET', $api->path . '/transactions/' . $request->asset);
 			$statusCode = $response->getStatusCode();
 			$body = $response->getBody()->getContents();
 		} catch (\Exception $e) {
@@ -43,12 +49,13 @@ class BigController extends Controller
 	{
 
 		try {
+			$api = Api_config::findOrFail(1);
 
 			if (!isset($request->attribute)) {
 				return ['message'=>'Debe ingresar parametro','type'=>'error'];
 			  }else{
 				$client = new Client();
-				$response = $client->request('GET', 'https://test.ipdb.io/api/v1/assets/?search=' . $request->attribute);
+				$response = $client->request('GET', $api->path . 'assets/?search=' . $request->attribute);
 				$statusCode = $response->getStatusCode();
 				$body = $response->getBody()->getContents();
 			  }
@@ -64,8 +71,10 @@ class BigController extends Controller
 	{
 
 		try {
+			$api = Api_config::findOrFail(1);
+
 			$client = new Client();
-			$response = $client->request('GET', 'https://test.ipdb.io/api/v1/metadata?search=' . $request->asset . '&limit=1&last_tx=true');
+			$response = $client->request('GET', $api->path . 'metadata?search=' . $request->asset . '&limit=1&last_tx=true');
 			$statusCode = $response->getStatusCode();
 			$body = $response->getBody()->getContents();
 

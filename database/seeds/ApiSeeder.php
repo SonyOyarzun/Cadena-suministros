@@ -17,11 +17,20 @@ class ApiSeeder extends Seeder
             'id'            => 1,
 
             //API
+            'path'          => 'http://192.168.99.100:9984/api/v1/',
+            'transaction'   => 'transactions/',
+            'asset'         => 'assets/',
+            'api_port'      => '9984',
+            'db_port'       => '27001',
+
+            //API PRUEBAS
+            /*
             'path'          => 'https://test.ipdb.io/api/v1/',
             'transaction'   => 'transactions/',
             'asset'         => 'assets/',
             'api_port'      => '9984',
             'db_port'       => '27001',
+*/
 
             //CORREO
             'mailer'        => 'smtp',
