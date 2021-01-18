@@ -195,8 +195,8 @@ export default function Pdf(props) {
     let logo = new Image();
     let mark = new Image();
     //logo.src = "/storage/images/" + config.logotype;
-    logo.src = "/img/logo.png";
-    mark.src = "/img/icon-logo-bw.png";
+    logo.src = "/img/logo-oscuro.png";
+    mark.src = "/img/icon-oscuro.png";
 
 
     //PAGINA
