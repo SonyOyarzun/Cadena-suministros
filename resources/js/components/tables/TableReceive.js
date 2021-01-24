@@ -131,7 +131,7 @@ class TableReceive extends Component {
 
     //console.log('filter',this.state.user)
 
-    rows = rows.filter(e => e.state == "Enviado" && e.to == this.state.user.name)
+    rows = rows.filter(e => (e.state == "Enviado" || e.state == "Reenviado") && e.to == this.state.user.name)
 
 
     const data = {

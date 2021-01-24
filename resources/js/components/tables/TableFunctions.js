@@ -30,6 +30,20 @@ export const getChain = () => {
         })
 }
 
+export const getChain2 = () => {
+    return axios
+        .get('/chain/list2', {
+            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+            return []
+        })
+}
+
 export const newChain = (chain) => {
     return axios
         .post('/chain/new', chain, {

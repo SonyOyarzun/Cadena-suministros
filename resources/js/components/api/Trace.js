@@ -251,6 +251,7 @@ function Trace(props) {
                       </Typography>
                       <Typography style={{ textAlign: 'center' }}>{label.from} <i class="fas fa-angle-double-right"></i> {label.to}</Typography>
                       <Typography style={{ textAlign: 'center' }}>{label.commentary}</Typography>
+                      <Typography style={{ textAlign: 'center' }}>{'Producto :'+label.state}</Typography>
                     </Paper>
                   </TimelineContent>
                 </TimelineItem>

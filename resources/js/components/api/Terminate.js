@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { MDBDataTableV5, MDBDataTable, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardHeader, MDBCardBody, MDBCardFooter, MDBModalFooter, MDBIcon } from 'mdbreact';
 import { Container } from '@material-ui/core';
 
-import { getTransaction, getAsset, searchAsset, getConfig, getChain, receiveChain, terminateChain } from "../tables/TableFunctions";
+import { getTransaction, getAsset, searchAsset, getConfig, getChain2, receiveChain, terminateChain } from "../tables/TableFunctions";
 
 import {  getUser} from "../../access/UserFunctions";
 
@@ -87,13 +87,13 @@ export default function Terminate(props) {
     axios.all([
       getUser(),
       getConfig(),
-      getChain()
+      getChain2()
     ])
       .then(responseArr => {
         setUser(responseArr[0])
         setConfig(responseArr[1])
         setChain(responseArr[2])
-            console.log('user',responseArr[0],'config ',responseArr[1])
+            console.log('user',responseArr[0],'config ',responseArr[1],'chain ',responseArr[2])
       })
 
   }, []);
@@ -135,21 +135,32 @@ export default function Terminate(props) {
         const params = {
           "asset": transaction.id,
         }
+        console.log('params',params)
 
         getAsset(params).then(responseAsset => {
           console.log('getAsset',responseAsset)
           console.log('getAssetFinal',responseAsset[responseAsset.length-1])
-
+          console.log('chainFinal',chain)
           //inicio asset
           console.log('transaction',transaction.id)
           const tx = chain.filter((e) => e.transaction == responseAsset[responseAsset.length-1].id)
 
          //inicio user
          console.log('user tx',tx)
-         const userTo = {
-           id: tx[0].to
-         }
 
+         let userTo = {
+          id: tx[0].to
+        }
+
+         if(tx[0].state == 'Reenviado'){
+          userTo = {
+            id: tx[0].from
+          }
+ 
+         }
+ 
+         
+         
          console.log('get user userTo',userTo) 
 
          getUser(userTo).then(response => {

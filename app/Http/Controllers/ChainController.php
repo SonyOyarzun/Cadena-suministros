@@ -39,6 +39,25 @@ class ChainController extends Controller
     return $chains;
   }
 
+  public function chainList()
+  {
+    try {
+
+      $chains = Chain::addSelect([
+        'fromName' =>
+        User::select('name')
+          ->whereColumn('chain.from', 'users.id'),
+        'toName' =>
+        User::select('name')
+          ->whereColumn('chain.to', 'users.id'),
+      ])->orderBy('updated_at', 'DESC')->orderBy('state', 'DESC')->get();
+    } catch (\Throwable $th) {
+
+      return $th;
+    }
+    return $chains;
+  }
+
   public function create(Request $request)
   {
     try {
@@ -166,7 +185,7 @@ class ChainController extends Controller
         Chain::query()
           ->where('transaction', '=', $request->transaction)
           ->update([
-            'state'  => 'Enviado',
+            'state'  => 'Reenviado',
             'from'   => $id,
             'to'     => $request->to,
             'view'   => 0

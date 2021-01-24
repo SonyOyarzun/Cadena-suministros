@@ -129,6 +129,7 @@ Route::post('/api-editConfig', 'ApiController@editConfig');
 
 //rutas complemento de bigchain
 Route::get('/chain/list', 'ChainController@index');
+Route::get('/chain/list2', 'ChainController@chainList');
 Route::post('/chain/new', 'ChainController@create');
 Route::post('/chain/receive', 'ChainController@receive');
 Route::post('/chain/reSend', 'ChainController@reSend');
