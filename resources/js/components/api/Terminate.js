@@ -148,6 +148,13 @@ export default function Terminate(props) {
          //inicio user
          console.log('user tx',tx)
 
+         if(tx.length==0){
+          alert('No se puede dar de baja un producto seleccionado')
+          render(<></>, document.getElementById('load'));
+         }else{
+
+         
+
          let userTo = {
           id: tx[0].to
         }
@@ -206,10 +213,11 @@ export default function Terminate(props) {
             setShowSnack(false)
           })
 
+
         //fin user
   
         })
-
+      }
 
 
           //fin asset

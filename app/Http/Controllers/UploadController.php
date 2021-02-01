@@ -19,15 +19,16 @@ class UploadController extends Controller
 
 		try {
 
+			
 			$validation = $request->validate([
 				'uploadLogotype'  =>  'required|file|image|mimes:jpeg,png,gif,jpg|'
 			]);
 
-
+			
 			
 			$file = $validation['uploadLogotype'];
 
-
+			return $request;
 			// Generate a file name with extension
 			//	$fileName = 'profile-'.time().'.'.$file->getClientOriginalExtension();
 			$fileName = 'logo.' . $file->getClientOriginalExtension();

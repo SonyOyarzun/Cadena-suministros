@@ -33,9 +33,10 @@ function UploadFile(props) {
 
     const handleFileRead = (e) => {
         const content = fileReader.result;
+      //  console.log('content', content)
         setFile(document.getElementById(url).files[0].name)
-        console.log(content)
 
+        console.log('getElementById[0]', document.getElementById(url).files[0])
 
         let formData = new FormData();
         formData.append(url, document.getElementById(url).files[0]);
@@ -52,15 +53,17 @@ function UploadFile(props) {
             console.log('success', data);
         }.bind(this)).catch(function (data) {
             console.log('error', data);
-        }).finally(()=>{
-           if(confirm('Para reflejar cambios en la aplicacion, es necesario refrescar.')){
-               window.location.reload()
-           }
+        }).finally(() => {
+            if (confirm('Para reflejar cambios en la aplicacion, es necesario refrescar.')) {
+                window.location.reload()
+            }
         })
         // … do something with the 'content' …
     };
 
     const handleFileChosen = (file) => {
+
+        console.log('file', file)
         fileReader = new FileReader();
         fileReader.onloadend = handleFileRead;
         fileReader.readAsText(file);
@@ -73,12 +76,12 @@ function UploadFile(props) {
                 <Form>
                     <Form.File
                         className='fileUpload'
-                        label= {type}
-                        
+                        label={type}
+
                         id={url}
                         name={url}
                         onChange={e => handleFileChosen(e.target.files[0])}
-                        style={{cursor: 'pointer'}}
+                        style={{ cursor: 'pointer' }}
                     />
                 </Form>
             </Form.Group>
